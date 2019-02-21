@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - master
+      - feature/*
+      - refs/tags/*
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+
+resources:
+  repositories:
+    - repository: rsg
+      type: github
+      name: RocketSurgeonsGuild/AzureDevopsTemplates
+      ref: refs/tags/v0.4.5
+      endpoint: github
+
+variables:
+  Configuration: Release
+  Verbosity: Normal
+  DotNetVersion: "2.2.103"
+  CakeVersion: "0.32.1"
+  NuGetVersion: "4.9.2"
+  Coverage: "$(Agent.BuildDirectory)/c"
+  VstsCoverage: "$(Coverage)"
+  Artifacts: $(Build.ArtifactStagingDirectory)
+  VstsArtifacts: "$(Artifacts)"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+
+jobs:
+  - template: pipeline/cake.yml@rsg
+    parameters:
+      Configuration: $(Configuration)
+      Verbosity: $(Verbosity)
+      DotNetVersion: $(DotNetVersion)
+      CakeVersion: $(CakeVersion)
+      NuGetVersion: $(NuGetVersion)

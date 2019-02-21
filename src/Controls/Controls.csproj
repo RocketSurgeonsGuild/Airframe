@@ -1,0 +1,35 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+
+  <PropertyGroup>
+    <TargetFrameworks>Xamarin.iOS10;netstandard2.0;uap10.0.16299;Xamarin.Mac20;Xamarin.TVOS10;MonoAndroid81</TargetFrameworks>
+    <AssemblyName>Rocket.Surgery.ReactiveUI.Controls</AssemblyName>
+    <RootNamespace>Rocket.Surgery.ReactiveUI</RootNamespace>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Platforms\**\*.cs" />
+    <None Include="Platforms\**\*.cs" />
+    <PackageReference Include="ReactiveUI" />
+    <PackageReference Include="System.Reactive" Version="4.0.0" />
+    <PackageReference Include="System.Reactive.Compatibility" Version="4.0.0" />
+    <PackageReference Include="Splat" Version="6.*" />
+    <PackageReference Include="DynamicData" Version="6.7.*" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+    <Compile Include="Platforms\forms\**\*.cs" />
+    <PackageReference Include="ReactiveUI.XamForms" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Include="Platforms\forms\**\*.cs" />
+    <PackageReference Include="ReactiveUI.XamForms" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <Compile Include="Platforms\apple-common\**\*.cs" />
+    <Compile Include="Platforms\uikit\**\*.cs" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+<Project>
+  <ItemGroup>  
+    <PackageReference Include="ReactiveUI" />
+  </ItemGroup>
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('common.build.targets', '$(MSBuildThisFileDirectory)../'))" />
+</Project>
