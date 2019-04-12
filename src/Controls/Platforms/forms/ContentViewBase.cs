@@ -16,22 +16,36 @@ namespace Rocket.Surgery.ReactiveUI
         where TViewModel : class, IReactiveObject
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="ContentViewBase{TViewModel}"/> class.
+        /// </summary>
+        protected ContentViewBase()
+        {
+            Initialize();
+        }
+
+        /// <summary>
         /// Gets the subscription disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposable { get; } = new CompositeDisposable();
+        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.
         /// </summary>
-        protected virtual void SetupReactiveSubscriptions()
+        protected virtual void SetupSubscriptions()
         {
         }
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void SetupReactiveBindings()
+        protected virtual void BindControls()
         {
+        }
+
+        private void Initialize()
+        {
+            BindControls();
+            SetupSubscriptions();
         }
     }
 }

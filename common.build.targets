@@ -3,10 +3,12 @@
         <PackageReference Update="Microsoft.Extensions.Configuration" Version="2.1.0" />
         <PackageReference Update="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.0" />
         <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Update="ReactiveUI" Version="9.7.2" />
+        <PackageReference Update="ReactiveUI.XamForms" Version="9.7.2" />
         <PackageReference Update="System.Collections.Immutable" Version="1.5.0" />
         <PackageReference Update="System.Interactive.Async.Providers" Version="3.2.0" />
         <PackageReference Update="System.Interactive.Providers" Version="3.2.0" />
-        <PackageReference Update="System.Reactive" Version="4.1.1" />
+        <PackageReference Update="System.Reactive" Version="4.0.0" />
         <PackageReference Update="System.Reactive.Observable.Aliases" Version="4.1.1" />
         <PackageReference Update="System.Reflection.Emit.Lightweight" Version="4.3.0" />
     </ItemGroup>
@@ -20,7 +22,6 @@
         <PackageReference Update="FluentAssertions" Version="5.4.2" />
         <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.8.0" />
         <PackageReference Update="NSubstitute" Version="3.1.0" />
-        <PackageReference Update="ReactiveUI" Version="9.7.2" />
         <PackageReference Update="Rocket.Surgery.Extensions.Testing.Fixtures" Version="0.14.1" />
         <PackageReference Update="xunit" Version="2.4.0" />
         <PackageReference Update="xunit.runner.visualstudio" Version="2.4.0" />

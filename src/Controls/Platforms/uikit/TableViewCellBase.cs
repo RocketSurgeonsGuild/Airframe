@@ -2,7 +2,7 @@
 using ReactiveUI;
 using UIKit;
 
-namespace Rocket.Surgery.ReactiveUI.Controls
+namespace Rocket.Surgery.ReactiveUI
 {
     /// <summary>
     /// Base reactive <see cref="UITableViewCell"/>.
@@ -13,22 +13,36 @@ namespace Rocket.Surgery.ReactiveUI.Controls
         where TViewModel : class
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="TableViewCellBase{TViewModel}"/> class.
+        /// </summary>
+        protected TableViewCellBase()
+        {
+            Initialize();
+        }
+
+        /// <summary>
         /// Gets the subscription disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposable { get; } = new CompositeDisposable();
+        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.
         /// </summary>
-        protected virtual void SetupReactiveSubscriptions()
+        protected virtual void SetupSubscriptions()
         {
         }
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void SetupReactiveBindings()
+        protected virtual void BindControls()
         {
+        }
+
+        private void Initialize()
+        {
+            BindControls();
+            SetupSubscriptions();
         }
     }
 }

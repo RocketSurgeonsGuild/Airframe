@@ -38,14 +38,14 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// View Model lifecycle method that sets up reactive observables.
         /// </summary>
-        protected virtual void SetupReactiveObservables()
+        protected virtual void SetupObservables()
         {
         }
 
         /// <summary>
         /// View Model lifecycle method that sets up reactive subscriptions.
         /// </summary>
-        protected virtual void SetupReactiveSubscriptions()
+        protected virtual void SetupSubscriptions()
         {
         }
     }

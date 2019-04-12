@@ -2,33 +2,47 @@
 using ReactiveUI;
 using UIKit;
 
-namespace Rocket.Surgery.ReactiveUI.Controls
+namespace Rocket.Surgery.ReactiveUI
 {
     /// <summary>
     /// Base reactive <see cref="UITableView"/>.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveTableView{TViewModel}" />
-    public class TableViewBase<TViewModel> : ReactiveTableView<TViewModel>
+    public abstract class TableViewBase<TViewModel> : ReactiveTableView<TViewModel>
         where TViewModel : class
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="TableViewBase{TViewModel}"/> class.
+        /// </summary>
+        protected TableViewBase()
+        {
+            Initialize();
+        }
+
+        /// <summary>
         /// Gets the subscription disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposable { get; } = new CompositeDisposable();
+        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.
         /// </summary>
-        protected virtual void SetupReactiveSubscriptions()
+        protected virtual void SetupSubscriptions()
         {
         }
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void SetupReactiveBindings()
+        protected virtual void BindControls()
         {
+        }
+
+        private void Initialize()
+        {
+            BindControls();
+            SetupSubscriptions();
         }
     }
 }
