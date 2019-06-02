@@ -97,6 +97,11 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
+        /// Creates the user interface.
+        /// </summary>
+        protected abstract void CreateUserInterface();
+
+        /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
         protected virtual void BindControls()
@@ -105,10 +110,11 @@ namespace Rocket.Surgery.ReactiveUI
 
         private void Initialize()
         {
-            _isAppearing = new Subject<Unit>();
-            _isDisappearing = new Subject<Unit>();
-            _appeared = new Subject<Unit>();
-            _disappeared = new Subject<Unit>();
+            _appearing = new Subject<bool>();
+            _disappearing = new Subject<bool>();
+            _appeared = new Subject<bool>();
+            _disappeared = new Subject<bool>();
+            CreateUserInterface();
             BindControls();
             SetupSubscriptions();
         }

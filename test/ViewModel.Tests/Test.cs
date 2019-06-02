@@ -6,7 +6,15 @@ namespace Rocket.Surgery.ViewModel.Tests
     {
         public Test()
         {
-            var count = SubscriptionDisposables.Count;
+            var count = Bindings.Count;
+        }
+
+        protected override void SetupObservables()
+        {
+        }
+
+        protected override void RegisterObservers()
+        {
         }
     }
 }

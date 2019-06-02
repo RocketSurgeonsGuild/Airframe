@@ -21,9 +21,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// Gets the subscription disposable.
+        /// Gets the control bindings disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+        protected CompositeDisposable ControlBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.

@@ -31,22 +31,18 @@ namespace Rocket.Surgery.ReactiveUI
         public virtual bool IsBusy { get; }
 
         /// <summary>
-        /// Gets the subscription disposables.
+        /// Gets the binding disposables.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
 
         /// <summary>
-        /// View Model lifecycle method that sets up reactive observables.
+        /// View Model lifecycle method that sets up observable pipelines.
         /// </summary>
-        protected virtual void SetupObservables()
-        {
-        }
+        protected abstract void SetupObservables();
 
         /// <summary>
-        /// View Model lifecycle method that sets up reactive subscriptions.
+        /// View Model lifecycle method that registers observers to pipelines.
         /// </summary>
-        protected virtual void SetupSubscriptions()
-        {
-        }
+        protected abstract void RegisterObservers();
     }
 }
