@@ -6,7 +6,7 @@ namespace Rocket.Surgery.ReactiveUI
     /// <summary>
     /// Base ReactiveUI View Model.
     /// </summary>
-    public abstract class ViewModelBase : ReactiveObject, IViewModelBase
+    public abstract class ViewModelBase : ReactiveObject, IViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewModelBase"/> class.

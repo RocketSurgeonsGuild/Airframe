@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 
@@ -33,9 +34,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// Gets the subscription disposable.
+        /// Gets the bindings disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
@@ -59,7 +60,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<bool> IsDisappearing() => _appearing.AsObservable();
+        public virtual IObservable<bool> Disappearing() => _disappearing.AsObservable();
 
         /// <inheritdoc />
         public override void ViewWillAppear(bool animated)

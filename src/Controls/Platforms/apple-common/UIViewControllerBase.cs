@@ -33,9 +33,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// Gets the subscription disposable.
+        /// Gets the control binding disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+        protected CompositeDisposable ControlBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
@@ -116,6 +116,7 @@ namespace Rocket.Surgery.ReactiveUI
             _disappearing = new Subject<bool>();
             _appeared = new Subject<bool>();
             _disappeared = new Subject<bool>();
+
             CreateUserInterface();
             BindControls();
             SetupSubscriptions();

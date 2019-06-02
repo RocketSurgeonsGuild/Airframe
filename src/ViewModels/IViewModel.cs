@@ -5,7 +5,7 @@ namespace Rocket.Surgery.ReactiveUI
     /// <summary>
     /// Interface representation of a base ReactiveUI View Model.
     /// </summary>
-    public interface IViewModelBase : IReactiveObject
+    public interface IViewModel : IReactiveObject
     {
         /// <summary>
         /// Gets the alert <see cref="Interaction{TInput,TOutput}"/>.

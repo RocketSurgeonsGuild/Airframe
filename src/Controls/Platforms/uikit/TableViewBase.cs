@@ -35,9 +35,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void BindControls()
-        {
-        }
+        protected abstract void BindControls();
 
         private void Initialize()
         {

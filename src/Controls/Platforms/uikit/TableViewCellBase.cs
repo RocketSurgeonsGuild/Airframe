@@ -1,4 +1,5 @@
-﻿using System.Reactive.Disposables;
+﻿using System;
+using System.Reactive.Disposables;
 using ReactiveUI;
 using UIKit;
 
@@ -13,17 +14,27 @@ namespace Rocket.Surgery.ReactiveUI
         where TViewModel : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableViewCellBase{TViewModel}"/> class.
+        /// Initializes a new instance of the <see cref="TableViewCellBase{TViewModel}" /> class.
         /// </summary>
-        protected TableViewCellBase()
+        /// <param name="handle">The pointer.</param>
+        protected TableViewCellBase(IntPtr handle)
+            : base(handle)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Gets the subscription disposable.
+        /// Gets the control binding disposables.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+        protected CompositeDisposable ControlBindings { get; } = new CompositeDisposable();
+
+        /// <inheritdoc />
+        public override void UpdateConstraints()
+        {
+            SetupCellConstraints();
+
+            base.UpdateConstraints();
+        }
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.
@@ -35,14 +46,24 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void BindControls()
-        {
-        }
+        protected abstract void BindControls();
+
+        /// <summary>
+        /// Creates the cell interface.
+        /// </summary>
+        protected abstract void CreateCellInterface();
+
+        /// <summary>
+        /// Setups the cell constraints.
+        /// </summary>
+        protected abstract void SetupCellConstraints();
 
         private void Initialize()
         {
+            CreateCellInterface();
             BindControls();
             SetupSubscriptions();
+            SetNeedsUpdateConstraints();
         }
     }
 }
