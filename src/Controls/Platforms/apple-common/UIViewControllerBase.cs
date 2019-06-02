@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using Foundation;
@@ -19,17 +20,16 @@ namespace Rocket.Surgery.ReactiveUI
     public abstract class UIViewControllerBase<TViewModel> : ReactiveViewController<TViewModel>
         where TViewModel : class, IReactiveObject
     {
-        private ISubject<Unit> _appeared;
-        private ISubject<Unit> _disappeared;
-        private ISubject<Unit> _isAppearing;
-        private ISubject<Unit> _isDisappearing;
+        private ISubject<bool> _appeared;
+        private ISubject<bool> _disappeared;
+        private ISubject<bool> _appearing;
+        private ISubject<bool> _disappearing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIViewControllerBase{TViewModel}"/> class.
         /// </summary>
         protected UIViewControllerBase()
         {
-            Initialize();
         }
 
         /// <summary>
@@ -41,60 +41,64 @@ namespace Rocket.Surgery.ReactiveUI
         /// Gets an observable sequence when the view is appearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<Unit> IsAppearing() => _isAppearing;
+        public virtual IObservable<bool> Appearing() => _appearing.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<Unit> Appeared() => _appeared;
+        public virtual IObservable<bool> Appeared() => _appeared.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<Unit> Disappeared() => _disappeared;
+        public virtual IObservable<bool> Disappeared() => _disappeared.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<Unit> IsDisappearing() => _isAppearing;
+        public virtual IObservable<bool> IsDisappearing() => _appearing.AsObservable();
 
         /// <inheritdoc />
         public override void ViewWillAppear(bool animated)
         {
-            _isAppearing.OnNext(Unit.Default);
             base.ViewWillAppear(animated);
+            _appearing.OnNext(animated);
         }
 
         /// <inheritdoc />
         public override void ViewWillDisappear(bool animated)
         {
-            _isDisappearing.OnNext(Unit.Default);
             base.ViewWillDisappear(animated);
+            _disappearing.OnNext(animated);
         }
 
         /// <inheritdoc />
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            _appeared.OnNext(Unit.Default);
+            _appeared.OnNext(animated);
         }
 
         /// <inheritdoc />
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            _disappeared.OnNext(Unit.Default);
+            _disappeared.OnNext(animated);
+        }
+
+        /// <inheritdoc/>
+        public override void ViewDidLoad()
+        {
+            Initialize();
         }
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.
         /// </summary>
-        protected virtual void SetupSubscriptions()
-        {
-        }
+        protected abstract void SetupSubscriptions();
 
         /// <summary>
         /// Creates the user interface.
@@ -104,9 +108,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void BindControls()
-        {
-        }
+        protected abstract void BindControls();
 
         private void Initialize()
         {

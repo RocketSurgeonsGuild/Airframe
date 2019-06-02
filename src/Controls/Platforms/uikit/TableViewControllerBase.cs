@@ -20,17 +20,16 @@ namespace Rocket.Surgery.ReactiveUI
     public abstract class TableViewControllerBase<TViewModel> : ReactiveTableViewController<TViewModel>
         where TViewModel : class
     {
-        private ISubject<Unit> _appeared;
-        private ISubject<Unit> _disappeared;
-        private ISubject<Unit> _isAppearing;
-        private ISubject<Unit> _isDisappearing;
+        private ISubject<bool> _appeared;
+        private ISubject<bool> _disappeared;
+        private ISubject<bool> _appearing;
+        private ISubject<bool> _disappearing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TableViewControllerBase{TViewModel}"/> class.
         /// </summary>
         protected TableViewControllerBase()
         {
-            Initialize();
         }
 
         /// <summary>
@@ -38,56 +37,88 @@ namespace Rocket.Surgery.ReactiveUI
         /// </summary>
         protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
 
+        /// <summary>
+        /// Gets an observable sequence when the view is appearing.
+        /// </summary>
+        /// <returns>The appearing notification.</returns>
+        public virtual IObservable<bool> Appearing() => _appearing.AsObservable();
+
+        /// <summary>
+        /// Gets an observable sequence when the view is disappearing.
+        /// </summary>
+        /// <returns>The appearing notification.</returns>
+        public virtual IObservable<bool> Appeared() => _appeared.AsObservable();
+
+        /// <summary>
+        /// Gets an observable sequence when the view is appearing.
+        /// </summary>
+        /// <returns>The appearing notification.</returns>
+        public virtual IObservable<bool> Disappeared() => _disappeared.AsObservable();
+
+        /// <summary>
+        /// Gets an observable sequence when the view is disappearing.
+        /// </summary>
+        /// <returns>The appearing notification.</returns>
+        public virtual IObservable<bool> IsDisappearing() => _appearing.AsObservable();
+
         /// <inheritdoc />
         public override void ViewWillAppear(bool animated)
         {
-            _isAppearing.OnNext(Unit.Default);
             base.ViewWillAppear(animated);
+            _appearing.OnNext(animated);
         }
 
         /// <inheritdoc />
         public override void ViewWillDisappear(bool animated)
         {
-            _isDisappearing.OnNext(Unit.Default);
             base.ViewWillDisappear(animated);
+            _disappearing.OnNext(animated);
         }
 
         /// <inheritdoc />
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            _appeared.OnNext(Unit.Default);
+            _appeared.OnNext(animated);
         }
 
         /// <inheritdoc />
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            _disappeared.OnNext(Unit.Default);
+            _disappeared.OnNext(animated);
+        }
+
+        /// <inheritdoc/>
+        public override void ViewDidLoad()
+        {
+            Initialize();
         }
 
         /// <summary>
         /// View lifecycle method that sets up reactive subscriptions.
         /// </summary>
-        protected virtual void SetupSubscriptions()
-        {
-        }
+        protected abstract void SetupSubscriptions();
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void BindControls()
-        {
-        }
+        protected abstract void BindControls();
+
+        /// <summary>
+        /// Loads the table source.
+        /// </summary>
+        protected abstract void LoadTableSource();
 
         private void Initialize()
         {
-            _isAppearing = new Subject<Unit>();
-            _isDisappearing = new Subject<Unit>();
-            _appeared = new Subject<Unit>();
-            _disappeared = new Subject<Unit>();
+            _appearing = new Subject<bool>();
+            _disappearing = new Subject<bool>();
+            _appeared = new Subject<bool>();
+            _disappeared = new Subject<bool>();
             BindControls();
             SetupSubscriptions();
+            LoadTableSource();
         }
     }
 }
