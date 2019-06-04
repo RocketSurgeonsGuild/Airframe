@@ -25,6 +25,6 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// Gets a value indicating whether the view model is doing work.
         /// </summary>
-        bool IsBusy { get; }
+        bool IsLoading { get; }
     }
 }

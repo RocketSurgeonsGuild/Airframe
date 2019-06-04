@@ -28,7 +28,7 @@ namespace Rocket.Surgery.ReactiveUI
         public Interaction<string, bool> ErrorInteraction { get; }
 
         /// <inheritdoc />
-        public virtual bool IsBusy { get; }
+        public virtual bool IsLoading { get; }
 
         /// <summary>
         /// Gets the binding disposables.
