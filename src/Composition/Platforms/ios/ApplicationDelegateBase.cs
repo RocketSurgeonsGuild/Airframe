@@ -30,7 +30,7 @@ namespace Composition
         }
 
         /// <summary>
-        /// Builds the composition root.
+        /// Builds the application composition root.
         /// </summary>
         protected abstract void ComposeRoot();
     }
