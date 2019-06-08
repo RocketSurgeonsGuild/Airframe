@@ -3,14 +3,17 @@
         <PackageReference Update="Microsoft.Extensions.Configuration" Version="2.1.0" />
         <PackageReference Update="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.0" />
         <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Update="DynamicData" Version="6.7.1.2534" />
         <PackageReference Update="ReactiveUI" Version="9.7.2" />
         <PackageReference Update="ReactiveUI.XamForms" Version="9.7.2" />
+        <PackageReference Update="Splat" Version="7.2.1" />
         <PackageReference Update="System.Collections.Immutable" Version="1.5.0" />
         <PackageReference Update="System.Interactive.Async.Providers" Version="3.2.0" />
         <PackageReference Update="System.Interactive.Providers" Version="3.2.0" />
         <PackageReference Update="System.Reactive" Version="4.0.0" />
         <PackageReference Update="System.Reactive.Observable.Aliases" Version="4.1.1" />
         <PackageReference Update="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+        <PackageReference Update="Toast.iOS" Version="1.2.0" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Rocket.Surgery.Build.Metadata" Version="3.2.0" PrivateAssets="All" />

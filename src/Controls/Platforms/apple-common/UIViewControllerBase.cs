@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Disposables;
@@ -30,6 +30,10 @@ namespace Rocket.Surgery.ReactiveUI
         /// </summary>
         protected UIViewControllerBase()
         {
+            _appearing = new Subject<bool>();
+            _disappearing = new Subject<bool>();
+            _appeared = new Subject<bool>();
+            _disappeared = new Subject<bool>();
         }
 
         /// <summary>
@@ -92,16 +96,28 @@ namespace Rocket.Surgery.ReactiveUI
         /// <inheritdoc/>
         public override void ViewDidLoad()
         {
+            base.ViewDidLoad();
+
             Initialize();
+            CreateUserInterface();
+            BindControls();
+            RegisterObservers();
         }
 
         /// <summary>
-        /// View lifecycle method that sets up reactive subscriptions.
+        /// View lifecycle method that initializes the view controller.
         /// </summary>
-        protected abstract void SetupSubscriptions();
+        protected virtual void Initialize()
+        {
+        }
 
         /// <summary>
-        /// Creates the user interface.
+        /// View lifecycle method that registers observers via subscriptions.
+        /// </summary>
+        protected abstract void RegisterObservers();
+
+        /// <summary>
+        /// View lifecycle method that creates the user interface.
         /// </summary>
         protected abstract void CreateUserInterface();
 
@@ -109,17 +125,5 @@ namespace Rocket.Surgery.ReactiveUI
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
         protected abstract void BindControls();
-
-        private void Initialize()
-        {
-            _appearing = new Subject<bool>();
-            _disappearing = new Subject<bool>();
-            _appeared = new Subject<bool>();
-            _disappeared = new Subject<bool>();
-
-            CreateUserInterface();
-            BindControls();
-            SetupSubscriptions();
-        }
     }
 }

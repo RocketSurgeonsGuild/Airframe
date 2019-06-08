@@ -37,11 +37,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// View lifecycle method that sets up reactive subscriptions.
+        /// View lifecycle method that registers observers via subscriptions.
         /// </summary>
-        protected virtual void SetupSubscriptions()
-        {
-        }
+        protected abstract void RegisterObservers();
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
@@ -62,7 +60,7 @@ namespace Rocket.Surgery.ReactiveUI
         {
             CreateCellInterface();
             BindControls();
-            SetupSubscriptions();
+            RegisterObservers();
             SetNeedsUpdateConstraints();
         }
     }

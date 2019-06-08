@@ -97,9 +97,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// View lifecycle method that sets up reactive subscriptions.
+        /// View lifecycle method that registers observers via subscriptions.
         /// </summary>
-        protected abstract void SetupSubscriptions();
+        protected abstract void RegisterObservers();
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
@@ -118,7 +118,7 @@ namespace Rocket.Surgery.ReactiveUI
             _appeared = new Subject<bool>();
             _disappeared = new Subject<bool>();
             BindControls();
-            SetupSubscriptions();
+            RegisterObservers();
             LoadTableSource();
         }
     }

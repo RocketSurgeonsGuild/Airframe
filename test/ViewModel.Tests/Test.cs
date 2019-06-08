@@ -9,11 +9,11 @@ namespace Rocket.Surgery.ViewModel.Tests
             var count = Bindings.Count;
         }
 
-        protected override void SetupObservables()
+        protected override void RegisterObservers()
         {
         }
 
-        protected override void RegisterObservers()
+        protected override void ComposeObservables()
         {
         }
     }
