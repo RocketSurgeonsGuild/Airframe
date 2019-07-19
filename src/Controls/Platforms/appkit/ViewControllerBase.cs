@@ -19,20 +19,20 @@ namespace Rocket.Surgery.ReactiveUI
     public abstract class ViewControllerBase<TViewModel> : ReactiveViewController<TViewModel>
         where TViewModel : class, IReactiveObject
     {
-        private ISubject<bool> _appeared;
-        private ISubject<bool> _disappeared;
-        private ISubject<bool> _appearing;
-        private ISubject<bool> _disappearing;
+        private readonly ISubject<Unit> _appeared;
+        private readonly ISubject<Unit> _disappeared;
+        private readonly ISubject<Unit> _appearing;
+        private readonly ISubject<Unit> _disappearing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewControllerBase{TViewModel}"/> class.
         /// </summary>
         protected ViewControllerBase()
         {
-            _appearing = new Subject<bool>();
-            _disappearing = new Subject<bool>();
-            _appeared = new Subject<bool>();
-            _disappeared = new Subject<bool>();
+            _appearing = new Subject<Unit>();
+            _disappearing = new Subject<Unit>();
+            _appeared = new Subject<Unit>();
+            _disappeared = new Subject<Unit>();
         }
 
         /// <summary>
@@ -44,52 +44,52 @@ namespace Rocket.Surgery.ReactiveUI
         /// Gets an observable sequence when the view is appearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<bool> Appearing() => _appearing.AsObservable();
+        public virtual IObservable<Unit> Appearing() => _appearing.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<bool> Appeared() => _appeared.AsObservable();
+        public virtual IObservable<Unit> Appeared() => _appeared.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<bool> Disappeared() => _disappeared.AsObservable();
+        public virtual IObservable<Unit> Disappeared() => _disappeared.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<bool> IsDisappearing() => _appearing.AsObservable();
+        public virtual IObservable<Unit> IsDisappearing() => _appearing.AsObservable();
 
         /// <inheritdoc />
-        public override void ViewWillAppear(bool animated)
+        public override void ViewWillAppear()
         {
-            base.ViewWillAppear(animated);
-            _appearing.OnNext(animated);
+            base.ViewWillAppear();
+            _appearing.OnNext(Unit.Default);
         }
 
         /// <inheritdoc />
-        public override void ViewWillDisappear(bool animated)
+        public override void ViewWillDisappear()
         {
-            base.ViewWillDisappear(animated);
-            _disappearing.OnNext(animated);
+            base.ViewWillDisappear();
+            _disappearing.OnNext(Unit.Default);
         }
 
         /// <inheritdoc />
-        public override void ViewDidAppear(bool animated)
+        public override void ViewDidAppear()
         {
-            base.ViewDidAppear(animated);
-            _appeared.OnNext(animated);
+            base.ViewDidAppear();
+            _appeared.OnNext(Unit.Default);
         }
 
         /// <inheritdoc />
-        public override void ViewDidDisappear(bool animated)
+        public override void ViewDidDisappear()
         {
-            base.ViewDidDisappear(animated);
-            _disappeared.OnNext(animated);
+            base.ViewDidDisappear();
+            _disappeared.OnNext(Unit.Default);
         }
 
         /// <inheritdoc/>
@@ -111,9 +111,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// View lifecycle method that registers observers via subscriptions.
+        /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected abstract void RegisterObservers();
+        protected abstract void BindControls();
 
         /// <summary>
         /// View lifecycle method that creates the user interface.
@@ -121,8 +121,8 @@ namespace Rocket.Surgery.ReactiveUI
         protected abstract void CreateUserInterface();
 
         /// <summary>
-        /// View lifecycle method that sets up reactive bindings.
+        /// View lifecycle method that registers observers via subscriptions.
         /// </summary>
-        protected abstract void BindControls();
+        protected abstract void RegisterObservers();
     }
 }

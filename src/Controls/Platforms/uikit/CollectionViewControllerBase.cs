@@ -26,7 +26,8 @@ namespace Rocket.Surgery.ReactiveUI
         /// Initializes a new instance of the <see cref="CollectionViewControllerBase{TViewModel}"/> class.
         /// </summary>
         /// <param name="withLayout">The ui collection view layout.</param>
-        protected CollectionViewControllerBase(UICollectionViewLayout withLayout) : base(withLayout)
+        protected CollectionViewControllerBase(UICollectionViewLayout withLayout)
+            : base(withLayout)
         {
         }
 
@@ -34,7 +35,8 @@ namespace Rocket.Surgery.ReactiveUI
         /// Initializes a new instance of the <see cref="CollectionViewControllerBase{TViewModel}"/> class.
         /// </summary>
         /// <param name="handle">The pointer.</param>
-        protected CollectionViewControllerBase(IntPtr handle) : base(handle)
+        protected CollectionViewControllerBase(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -42,7 +44,8 @@ namespace Rocket.Surgery.ReactiveUI
         /// Initializes a new instance of the <see cref="CollectionViewControllerBase{TViewModel}"/> class.
         /// </summary>
         /// <param name="t">The object flag.</param>
-        protected CollectionViewControllerBase(NSObjectFlag t) : base(t)
+        protected CollectionViewControllerBase(NSObjectFlag t)
+            : base(t)
         {
         }
 
@@ -50,7 +53,8 @@ namespace Rocket.Surgery.ReactiveUI
         /// Initializes a new instance of the <see cref="CollectionViewControllerBase{TViewModel}"/> class.
         /// </summary>
         /// <param name="coder">The coder.</param>
-        protected CollectionViewControllerBase(NSCoder coder) : base(coder)
+        protected CollectionViewControllerBase(NSCoder coder)
+            : base(coder)
         {
         }
 
@@ -59,7 +63,8 @@ namespace Rocket.Surgery.ReactiveUI
         /// </summary>
         /// <param name="nibName">The name.</param>
         /// <param name="bundle">The bundle.</param>
-        protected CollectionViewControllerBase(string nibName, NSBundle bundle) : base(nibName, bundle)
+        protected CollectionViewControllerBase(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
         {
         }
     }

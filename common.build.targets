@@ -1,5 +1,6 @@
 <Project>
     <ItemGroup>
+        <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.0-beta5.11" />
         <PackageReference Update="Microsoft.Extensions.Configuration" Version="2.1.0" />
         <PackageReference Update="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.0" />
         <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />

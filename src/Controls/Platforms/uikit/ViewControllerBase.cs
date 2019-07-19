@@ -1,25 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
-
 using Foundation;
 using ReactiveUI;
-using UIKit;
 
 namespace Rocket.Surgery.ReactiveUI
 {
     /// <summary>
-    /// Base reactive <see cref="UITableViewController"/>.
+    /// Base <see cref="ReactiveViewController" />.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-    /// <seealso cref="ReactiveTableViewController{TViewModel}" />
-    public abstract class TableViewControllerBase<TViewModel> : ReactiveTableViewController<TViewModel>
-        where TViewModel : class
+    /// <seealso cref="ReactiveViewController{TViewModel}" />
+    /// <seealso cref="ReactiveViewController" />
+    public abstract class ViewControllerBase<TViewModel> : ReactiveViewController<TViewModel>
+        where TViewModel : class, IReactiveObject
     {
         private ISubject<bool> _appeared;
         private ISubject<bool> _disappeared;
@@ -27,16 +25,20 @@ namespace Rocket.Surgery.ReactiveUI
         private ISubject<bool> _disappearing;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableViewControllerBase{TViewModel}"/> class.
+        /// Initializes a new instance of the <see cref="ViewControllerBase{TViewModel}"/> class.
         /// </summary>
-        protected TableViewControllerBase()
+        protected ViewControllerBase()
         {
+            _appearing = new Subject<bool>();
+            _disappearing = new Subject<bool>();
+            _appeared = new Subject<bool>();
+            _disappeared = new Subject<bool>();
         }
 
         /// <summary>
-        /// Gets the bindings disposable.
+        /// Gets the control binding disposable.
         /// </summary>
-        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
+        protected CompositeDisposable ControlBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
@@ -60,7 +62,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<bool> Disappearing() => _disappearing.AsObservable();
+        public virtual IObservable<bool> IsDisappearing() => _appearing.AsObservable();
 
         /// <inheritdoc />
         public override void ViewWillAppear(bool animated)
@@ -93,15 +95,12 @@ namespace Rocket.Surgery.ReactiveUI
         /// <inheritdoc/>
         public override void ViewDidLoad()
         {
-            _appearing = new Subject<bool>();
-            _disappearing = new Subject<bool>();
-            _appeared = new Subject<bool>();
-            _disappeared = new Subject<bool>();
+            base.ViewDidLoad();
+
             Initialize();
             CreateUserInterface();
             BindControls();
             RegisterObservers();
-            LoadTableSource();
         }
 
         /// <summary>
@@ -125,10 +124,5 @@ namespace Rocket.Surgery.ReactiveUI
         /// View lifecycle method that registers observers via subscriptions.
         /// </summary>
         protected abstract void RegisterObservers();
-
-        /// <summary>
-        /// Loads the table source.
-        /// </summary>
-        protected abstract void LoadTableSource();
     }
 }

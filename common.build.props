@@ -1,8 +1,9 @@
 <Project>
     <PropertyGroup>
-        <Company>Rocket Surgeons Guild</Company>
-        <Copyright>Copyright Rodney Littles, II © 2019</Copyright>
-        <Authors>RLittlesII</Authors>
-        <LangVersion>latest</LangVersion>
+      <Authors>RLittlesII</Authors>
+      <Company>Rocket Surgeons Guild</Company>
+      <Copyright>Copyright Rodney Littles, II © 2019</Copyright>
+      <LangVersion>latest</LangVersion>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
     </PropertyGroup>
 </Project>

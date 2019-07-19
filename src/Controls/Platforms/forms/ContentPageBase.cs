@@ -30,7 +30,7 @@ namespace Rocket.Surgery.ReactiveUI
             _isDisappearing = new Subject<Unit>();
             Initialize();
             BindControls();
-            SetupSubscriptions();
+            RegisterObservers();
         }
 
         /// <summary>

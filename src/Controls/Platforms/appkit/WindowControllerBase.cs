@@ -6,7 +6,6 @@ using ReactiveUI;
 
 namespace Rocket.Surgery.ReactiveUI
 {
-
     /// <summary>
     /// Base <see cref="NSWindowController"/>.
     /// </summary>

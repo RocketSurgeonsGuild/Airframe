@@ -1,22 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <AssemblyName>Rocket.Surgery.ReactiveUI.ViewModels</AssemblyName>
-        <RootNamespace>Rocket.Surgery.ReactiveUI</RootNamespace>
-        <LangVersion>latest</LangVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Rocket.Surgery.ReactiveUI.ViewModels</AssemblyName>
+    <RootNamespace>Rocket.Surgery.ReactiveUI</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <PackageId>Rocket.Surgery.ReactiveUI.ViewModels</PackageId>
+    <Description>ReactiveUI base view model abstractions.</Description>
+  </PropertyGroup>
 
   <ItemGroup>
-    <None Include="INetworkAware.cs" />
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="System.Reactive" Version="4.0.0" />
     <PackageReference Include="System.Reactive.Compatibility" Version="4.0.0" />
     <PackageReference Include="Splat" Version="6.*" />
     <PackageReference Include="DynamicData" Version="6.7.*" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
     <PackageReference Include="ReactiveUI.XamForms" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials" Version="0.2.*" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.2.*" />

@@ -15,26 +15,71 @@ resources:
     - repository: rsg
       type: github
       name: RocketSurgeonsGuild/AzureDevopsTemplates
-      ref: refs/tags/v0.4.5
+      ref: refs/tags/v0.7.12
       endpoint: github
 
 variables:
-  Configuration: Release
-  Verbosity: Normal
-  DotNetVersion: "2.2.103"
-  CakeVersion: "0.32.1"
-  NuGetVersion: "4.9.2"
-  Coverage: "$(Agent.BuildDirectory)/c"
-  VstsCoverage: "$(Coverage)"
-  Artifacts: $(Build.ArtifactStagingDirectory)
-  VstsArtifacts: "$(Artifacts)"
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  - group: rsg-bot
+  - name: CONFIGURATION
+    value: Release
+  - name: VERBOSITY
+    value: Normal
+  - name: COVERAGE
+    value: "$(Agent.BuildDirectory)/c"
+  - name: ARTIFACTS
+    value: $(Build.ArtifactStagingDirectory)
+  - name: DOTNET_SKIP_FIRST_TIME_EXPERIENCE
+    value: "true"
 
 jobs:
-  - template: pipeline/cake.yml@rsg
+  - job: GitVersion
+    pool:
+      vmImage: "VS2017-Win2016"
+    steps:
+      - template: gitversion/store.yml@rsg
+        parameters:
+          NuGetVersion: "5.2.0"
+
+  # - template: pipeline/nuke-job.yml@rsg
+  #   parameters:
+  #     name: 'macOS'
+  #     dependsOn: GitVersion
+  #     vmImage: "macOS-10.14"
+  #     Configuration: $(Configuration)
+  #     Verbosity: $(Verbosity)
+  #     DotNetVersion: "2.2.301"
+  #     DotNet3Version: "3.0.100-preview7-012821"
+  #     NuGetVersion: "5.2.0"
+
+  - template: pipeline/nuke-job.yml@rsg
     parameters:
+      name: 'Windows'
+      dependsOn: GitVersion
+      vmImage: "windows-2019"
       Configuration: $(Configuration)
       Verbosity: $(Verbosity)
-      DotNetVersion: $(DotNetVersion)
-      CakeVersion: $(CakeVersion)
-      NuGetVersion: $(NuGetVersion)
+      GitHub: true
+      GitHubPackages: false
+      DotNetVersion: "2.2.300"
+      DotNet3Version: "3.0.100-preview6-012264"
+      NuGetVersion: "5.2.0"
+      
+  - job: Publish
+    pool:
+      vmImage: "windows-2019"
+    dependsOn:
+      - Windows
+    steps:
+      - task: DownloadBuildArtifacts@0
+        displayName: "Download NuGet Packages"
+        inputs:
+          specificBuildWithTriggering: true
+          downloadType: single
+          artifactName: 'Nupkg - Windows'
+          downloadPath: $(Build.ArtifactStagingDirectory)/nuget/
+      - template: standard/nuget-push.yml@rsg
+        parameters:
+          Artifacts: "$(Build.ArtifactStagingDirectory)/"
+          NuGetVersion: "5.2.0"
+          Verbosity: $(Verbosity)
+          GitHubPackages: false

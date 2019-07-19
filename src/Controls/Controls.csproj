@@ -1,10 +1,13 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>Xamarin.iOS10;netstandard2.0;uap10.0.16299;Xamarin.Mac20;Xamarin.TVOS10;MonoAndroid81</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.Mac20</TargetFrameworks>
     <AssemblyName>Rocket.Surgery.ReactiveUI.Controls</AssemblyName>
     <RootNamespace>Rocket.Surgery.ReactiveUI</RootNamespace>
     <LangVersion>latest</LangVersion>
+    <PackageId>Rocket.Surgery.ReactiveUI.Controls</PackageId>
+    <Description>ReactiveUI base platform abstractions.</Description>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   
   <ItemGroup>
@@ -22,22 +25,11 @@
     <PackageReference Include="ReactiveUI.XamForms" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
-    <Compile Include="Platforms\forms\**\*.cs" />
-    <PackageReference Include="ReactiveUI.XamForms" />
-  </ItemGroup>
-
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <Compile Include="Platforms\apple-common\**\*.cs" />
     <Compile Include="Platforms\uikit\**\*.cs" />
     <Reference Include="System.Runtime.Serialization" />
     <PackageReference Include="Toast.iOS" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
-    <Compile Include="Platforms\apple-common\**\*.cs" />
-    <Compile Include="Platforms\appkit\**\*.cs" />
-    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
