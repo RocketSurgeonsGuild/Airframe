@@ -6,11 +6,11 @@ using ReactiveUI;
 namespace Rocket.Surgery.ReactiveUI
 {
     /// <summary>
-    /// Base <see cref="ReactiveImageView"/>.
+    /// Base UICollectionView.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-    /// <seealso cref="ReactiveImageView{TViewModel}" />
-    public abstract class ImageViewBase<TViewModel> : ReactiveImageView<TViewModel>
+    /// <seealso cref="ReactiveCollectionViewCell{TViewModel}" />
+    public abstract class CollectionViewCellBase<TViewModel> : ReactiveCollectionViewCell<TViewModel>
         where TViewModel : class, IReactiveObject
     {
     }

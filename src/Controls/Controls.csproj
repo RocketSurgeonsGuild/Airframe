@@ -39,4 +39,10 @@
     <Compile Include="Platforms\appkit\**\*.cs" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+    <Compile Include="Platforms\apple-common\**\*.cs" />
+    <Compile Include="Platforms\appkit\**\*.cs" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@ using ReactiveUI.XamForms;
 
 namespace Rocket.Surgery.ReactiveUI
 {
+#pragma warning disable CA2214 // Do not call overridable methods in constructors
     /// <summary>
     /// Base ReactiveUI <see cref="ReactiveContentPage{TViewModel}"/>.
     /// </summary>
@@ -25,7 +26,11 @@ namespace Rocket.Surgery.ReactiveUI
         /// </summary>
         protected ContentPageBase()
         {
+            _isAppearing = new Subject<Unit>();
+            _isDisappearing = new Subject<Unit>();
             Initialize();
+            BindControls();
+            SetupSubscriptions();
         }
 
         /// <summary>
@@ -60,9 +65,9 @@ namespace Rocket.Surgery.ReactiveUI
         }
 
         /// <summary>
-        /// View lifecycle method that sets up reactive subscriptions.
+        /// View lifecycle method that registers observers via subscriptions.
         /// </summary>
-        protected virtual void SetupSubscriptions()
+        protected virtual void RegisterObservers()
         {
         }
 
@@ -73,12 +78,12 @@ namespace Rocket.Surgery.ReactiveUI
         {
         }
 
-        private void Initialize()
+        /// <summary>
+        /// View lifecycle method that initializes the view.
+        /// </summary>
+        protected virtual void Initialize()
         {
-            _isAppearing = new Subject<Unit>();
-            _isDisappearing = new Subject<Unit>();
-            BindControls();
-            SetupSubscriptions();
         }
+#pragma warning restore CA2214 // Do not call overridable methods in constructors
     }
 }

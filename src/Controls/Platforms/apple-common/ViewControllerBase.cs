@@ -7,17 +7,16 @@ using System.Reactive.Subjects;
 using System.Text;
 using Foundation;
 using ReactiveUI;
-using UIKit;
 
 namespace Rocket.Surgery.ReactiveUI
 {
     /// <summary>
-    /// Base reactive <see cref="UIViewController" />.
+    /// Base <see cref="ReactiveViewController" />.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveViewController{TViewModel}" />
     /// <seealso cref="ReactiveViewController" />
-    public abstract class UIViewControllerBase<TViewModel> : ReactiveViewController<TViewModel>
+    public abstract class ViewControllerBase<TViewModel> : ReactiveViewController<TViewModel>
         where TViewModel : class, IReactiveObject
     {
         private ISubject<bool> _appeared;
@@ -26,9 +25,9 @@ namespace Rocket.Surgery.ReactiveUI
         private ISubject<bool> _disappearing;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UIViewControllerBase{TViewModel}"/> class.
+        /// Initializes a new instance of the <see cref="ViewControllerBase{TViewModel}"/> class.
         /// </summary>
-        protected UIViewControllerBase()
+        protected ViewControllerBase()
         {
             _appearing = new Subject<bool>();
             _disappearing = new Subject<bool>();

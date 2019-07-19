@@ -6,7 +6,7 @@ using ReactiveUI;
 namespace Rocket.Surgery.ReactiveUI
 {
     /// <summary>
-    /// Base <see cref="NSControl" />.
+    /// Base <see cref="ReactiveControl" />.
     /// </summary>
     /// <typeparam name="TVieModel">The view model type.</typeparam>
     public abstract class ControlBase<TVieModel> : ReactiveControl<TVieModel>
