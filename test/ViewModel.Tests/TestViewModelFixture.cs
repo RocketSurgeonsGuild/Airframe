@@ -4,13 +4,11 @@ namespace Rocket.Surgery.ViewModel.Tests
 {
     internal class TestViewModelFixture : ITestFixtureBuilder
     {
-        public static implicit operator Test(TestViewModelFixture fixture) => fixture.Build();
+        public static implicit operator TestViewModel(TestViewModelFixture fixture) => fixture.Build();
 
-        private Test Build()
+        private TestViewModel Build()
         {
-            var viewModel = new Test();
-            viewModel.AlertInteraction.RegisterHandler(_ => _.SetOutput(true));
-            viewModel.ConfirmationInteraction.RegisterHandler(_ => _.SetOutput(true));
+            var viewModel = new TestViewModel();
             viewModel.ErrorInteraction.RegisterHandler(_ => _.SetOutput(true));
             return viewModel;
         }

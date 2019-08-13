@@ -2,12 +2,14 @@ using Rocket.Surgery.ReactiveUI;
 
 namespace Rocket.Surgery.ViewModel.Tests
 {
-    internal class Test : ViewModelBase
+    internal class TestViewModel : ViewModelBase
     {
-        public Test()
+        public TestViewModel()
         {
-            var count = Bindings.Count;
+            var count = ViewModelBindings.Count;
         }
+
+        public override string Id => nameof(TestViewModel);
 
         protected override void RegisterObservers()
         {

@@ -39,22 +39,6 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
         public Test CreateViewModel() => new Test();
 
         /// <summary>
-        /// Benchmarks the alert registration.
-        /// </summary>
-        /// <returns></returns>
-        [Benchmark]
-        public IDisposable RegisterAlert() =>
-            _base.AlertInteraction.RegisterHandler(input => { });
-
-        /// <summary>
-        /// Benchmarks the confirmation registration.
-        /// </summary>
-        /// <returns></returns>
-        [Benchmark]
-        public IDisposable RegisterConfirmation() =>
-            _base.ConfirmationInteraction.RegisterHandler(input => { });
-
-        /// <summary>
         /// Benchmarks the error registration.
         /// </summary>
         /// <returns></returns>

@@ -6,39 +6,17 @@ namespace Rocket.Surgery.ViewModel.Tests
 {
     public sealed class ViewModelTests
     {
-        public class TheAlertInteraction
+        public class TheIdProperty
         {
             [Fact]
-            public void Should_Return_True()
+            public void Should_Return_Id()
             {
-                // Given
-                var actual = false;
-                Test sut =
+                // Given, When
+                TestViewModel sut =
                     new TestViewModelFixture();
 
-                // When
-                sut.AlertInteraction.Handle("Hello World!").Subscribe(x => actual = x);
-
                 // Then
-                actual.Should().BeTrue();
-            }
-        }
-
-        public class TheConfirmInteraction
-        {
-            [Fact]
-            public void Should_Return_True()
-            {
-                // Given
-                var actual = false;
-                Test sut =
-                    new TestViewModelFixture();
-
-                // When
-                sut.ConfirmationInteraction.Handle("Hello World!").Subscribe(x => actual = x);
-
-                // Then
-                actual.Should().BeTrue();
+                sut.Id.Should().Be(nameof(TestViewModel));
             }
         }
 
@@ -49,7 +27,7 @@ namespace Rocket.Surgery.ViewModel.Tests
             {
                 // Given
                 var actual = false;
-                Test sut =
+                TestViewModel sut =
                     new TestViewModelFixture();
 
                 // When

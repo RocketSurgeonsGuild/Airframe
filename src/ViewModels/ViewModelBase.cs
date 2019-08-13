@@ -14,29 +14,24 @@ namespace Rocket.Surgery.ReactiveUI
         /// </summary>
         protected ViewModelBase()
         {
-            AlertInteraction = new Interaction<string, bool>();
-            ConfirmationInteraction = new Interaction<string, bool>();
             ErrorInteraction = new Interaction<string, bool>();
             ComposeObservables();
             RegisterObservers();
         }
 
         /// <inheritdoc />
-        public Interaction<string, bool> AlertInteraction { get; }
-
-        /// <inheritdoc />
-        public Interaction<string, bool> ConfirmationInteraction { get; }
-
-        /// <inheritdoc />
-        public Interaction<string, bool> ErrorInteraction { get; }
+        public virtual string Id { get; }
 
         /// <inheritdoc />
         public virtual bool IsLoading { get; }
 
+        /// <inheritdoc />
+        public Interaction<string, bool> ErrorInteraction { get; }
+
         /// <summary>
         /// Gets the binding disposables.
         /// </summary>
-        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
+        protected CompositeDisposable ViewModelBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// View Model lifecycle method that composes observable pipelines.

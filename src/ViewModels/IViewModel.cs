@@ -8,23 +8,18 @@ namespace Rocket.Surgery.ReactiveUI
     public interface IViewModel : IReactiveObject
     {
         /// <summary>
-        /// Gets the alert <see cref="Interaction{TInput,TOutput}"/>.
+        /// Gets the view model id.
         /// </summary>
-        Interaction<string, bool> AlertInteraction { get; }
-
-        /// <summary>
-        /// Gets the confirmation <see cref="Interaction{TInput,TOutput}"/>.
-        /// </summary>
-        Interaction<string, bool> ConfirmationInteraction { get; }
-
-        /// <summary>
-        /// Gets the error <see cref="Interaction{TInput,TOutput}"/>.
-        /// </summary>
-        Interaction<string, bool> ErrorInteraction { get; }
+        string Id { get; }
 
         /// <summary>
         /// Gets a value indicating whether the view model is doing work.
         /// </summary>
         bool IsLoading { get; }
+
+        /// <summary>
+        /// Gets the error <see cref="Interaction{TInput,TOutput}"/>.
+        /// </summary>
+        Interaction<string, bool> ErrorInteraction { get; }
     }
 }

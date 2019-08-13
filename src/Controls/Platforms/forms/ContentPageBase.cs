@@ -18,8 +18,8 @@ namespace Rocket.Surgery.ReactiveUI
     public abstract class ContentPageBase<TViewModel> : ReactiveContentPage<TViewModel>
         where TViewModel : class, IReactiveObject
     {
-        private ISubject<Unit> _isAppearing;
-        private ISubject<Unit> _isDisappearing;
+        private readonly ISubject<Unit> _isAppearing;
+        private readonly ISubject<Unit> _isDisappearing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentPageBase{TViewModel}"/> class.
@@ -36,7 +36,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// Gets the subscription disposable.
         /// </summary>
-        protected CompositeDisposable SubscriptionDisposables { get; } = new CompositeDisposable();
+        protected CompositeDisposable ViewBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
