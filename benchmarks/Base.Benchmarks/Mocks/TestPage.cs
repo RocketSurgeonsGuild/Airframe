@@ -1,4 +1,4 @@
-﻿using Rocket.Surgery.ReactiveUI;
+﻿using Rocket.Surgery.ReactiveUI.Forms;
 
 namespace Rocket.Surgery.ReactiveUI.Benchmarks
 {

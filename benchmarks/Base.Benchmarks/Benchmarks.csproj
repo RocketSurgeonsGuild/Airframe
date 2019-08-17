@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Controls\Controls.csproj" />
+    <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
     <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>

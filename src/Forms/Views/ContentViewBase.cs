@@ -5,7 +5,7 @@ using System.Text;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.ReactiveUI.Forms
 {
 #pragma warning disable CA2214 // Do not call overridable methods in constructors
     /// <summary>

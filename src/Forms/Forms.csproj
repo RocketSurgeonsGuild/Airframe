@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>Rocket.Surgery.ReactiveUI.Forms</AssemblyName>
+    <RootNamespace>Rocket.Surgery.ReactiveUI.Forms</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <PackageId>Rocket.Surgery.ReactiveUI.Forms</PackageId>
+    <Description>ReactiveUI base abstractions for Xamarin Forms.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Effects\" />
+    <Folder Include="Behaviors\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI.XamForms" />
+  </ItemGroup>
+
+</Project>

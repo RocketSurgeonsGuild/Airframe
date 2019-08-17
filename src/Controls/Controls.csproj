@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.Mac20</TargetFrameworks>
     <AssemblyName>Rocket.Surgery.ReactiveUI.Controls</AssemblyName>
-    <RootNamespace>Rocket.Surgery.ReactiveUI</RootNamespace>
+    <RootNamespace>Rocket.Surgery.ReactiveUI.Controls</RootNamespace>
     <LangVersion>latest</LangVersion>
     <PackageId>Rocket.Surgery.ReactiveUI.Controls</PackageId>
     <Description>ReactiveUI base platform abstractions.</Description>
@@ -20,11 +20,6 @@
     <PackageReference Include="System.Reactive.Compatibility" Version="4.0.0" />
   </ItemGroup>
   
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
-    <Compile Include="Platforms\forms\**\*.cs" />
-    <PackageReference Include="ReactiveUI.XamForms" />
-  </ItemGroup>
-
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <Compile Include="Platforms\apple-common\**\*.cs" />
     <Compile Include="Platforms\uikit\**\*.cs" />
