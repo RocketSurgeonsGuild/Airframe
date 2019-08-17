@@ -8,7 +8,7 @@ using Rocket.Surgery.Nuke.MsBuild;
 
 [CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
-class Build : MSBuild
+class Build : MsBuild
 {
     /// <summary>
     /// Support plugins are available for:

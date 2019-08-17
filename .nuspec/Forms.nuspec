@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+    <metadata minClientVersion="5.1.0">
+        <id>Rocket.Surgery.ReactiveUI.Forms</id>
+        <version>$version$</version>
+        <authors>RLittlesII</authors>
+        <owners >Rocket Surgeons Guild</owners>
+        <copyright>Copyright Rodney Littles, II © 2019</copyright>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>ReactiveUI base abstractions for Xamarin Forms.</description>
+        <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
+        <tags>ReactiveUI Xamarin.Forms MVVM</tags>
+    </metadata>
+    <files>
+        <file src="..\src\Forms\bin\**\*.dll" target="lib\netstandard2.0" />
+        <file src="..\src\Forms\bin\**\*.pdb" target="lib\netstandard2.0" />
+    </files>
+</package>

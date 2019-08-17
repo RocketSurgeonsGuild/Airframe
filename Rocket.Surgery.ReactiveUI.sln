@@ -35,7 +35,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{001008
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = ".build", ".build\.build.csproj", "{AF9A8311-F8F8-465D-9708-7633A9BD936B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms", "src\Forms\Forms.csproj", "{94F40576-6748-40AB-A541-ED6A45035796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms", "src\Forms\Forms.csproj", "{94F40576-6748-40AB-A541-ED6A45035796}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF56E4B-1F2D-4839-B857-9C878FC2F55B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuspec\Forms.nuspec = .nuspec\Forms.nuspec
+		.nuspec\ViewModels.nuspec = .nuspec\ViewModels.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersion.CommandLine.DotNetCore" Version="5.0.0-beta5.51" />
-    <PackageReference Include="Rocket.Surgery.Nuke.MsBuild" Version="0.3.3" />
+    <PackageReference Include="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
+    <PackageReference Include="Rocket.Surgery.Nuke.MsBuild" Version="0.3.8" />
     <PackageReference Include="xunit.runner.console" Version="2.4.0" />
-    <PackageReference Include="NuGet.CommandLine" Version="4.7.1" />
-    <PackageReference Include="Nuke.Common" Version="0.21.1" />
+    <PackageReference Include="NuGet.CommandLine" Version="5.1.0" />
+    <PackageReference Include="Nuke.Common" Version="0.21.2" />
   </ItemGroup>
 
   <ItemGroup>
