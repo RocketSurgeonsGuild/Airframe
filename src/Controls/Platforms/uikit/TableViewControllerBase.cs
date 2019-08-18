@@ -19,7 +19,7 @@ namespace Rocket.Surgery.ReactiveUI
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveTableViewController{TViewModel}" />
     public abstract class TableViewControllerBase<TViewModel> : ReactiveTableViewController<TViewModel>
-        where TViewModel : class
+        where TViewModel : class, IReactiveObject
     {
         private ISubject<bool> _appeared;
         private ISubject<bool> _disappeared;
@@ -36,7 +36,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// Gets the bindings disposable.
         /// </summary>
-        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
+        protected CompositeDisposable ViewBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.

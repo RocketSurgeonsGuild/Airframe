@@ -38,7 +38,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// Gets the control binding disposable.
         /// </summary>
-        protected CompositeDisposable ControlBindings { get; } = new CompositeDisposable();
+        protected CompositeDisposable ViewBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.

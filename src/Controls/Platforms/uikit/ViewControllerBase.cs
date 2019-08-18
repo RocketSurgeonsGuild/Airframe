@@ -19,10 +19,10 @@ namespace Rocket.Surgery.ReactiveUI
     public abstract class ViewControllerBase<TViewModel> : ReactiveViewController<TViewModel>
         where TViewModel : class, IReactiveObject
     {
-        private ISubject<bool> _appeared;
-        private ISubject<bool> _disappeared;
-        private ISubject<bool> _appearing;
-        private ISubject<bool> _disappearing;
+        private readonly ISubject<bool> _appeared;
+        private readonly ISubject<bool> _disappeared;
+        private readonly ISubject<bool> _appearing;
+        private readonly ISubject<bool> _disappearing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewControllerBase{TViewModel}"/> class.
@@ -38,7 +38,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// Gets the control binding disposable.
         /// </summary>
-        protected CompositeDisposable ControlBindings { get; } = new CompositeDisposable();
+        protected CompositeDisposable ViewBindings { get; } = new CompositeDisposable();
 
         /// <summary>
         /// Gets an observable sequence when the view is appearing.
