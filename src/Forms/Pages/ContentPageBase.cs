@@ -42,13 +42,13 @@ namespace Rocket.Surgery.ReactiveUI.Forms
         /// Gets an observable sequence when the view is appearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<Unit> IsAppearing() => _isAppearing;
+        protected virtual IObservable<Unit> IsAppearing => _isAppearing;
 
         /// <summary>
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        public virtual IObservable<Unit> IsDisappearing() => _isAppearing;
+        protected virtual IObservable<Unit> IsDisappearing => _isAppearing;
 
         /// <inheritdoc />
         protected override void OnAppearing()

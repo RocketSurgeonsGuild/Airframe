@@ -6,7 +6,7 @@ namespace Rocket.Surgery.ViewModel.Tests
     {
         public TestViewModel()
         {
-            var count = ViewModelBindings.Count;
+            var count = Subscriptions.Count;
         }
 
         public override string Id => nameof(TestViewModel);

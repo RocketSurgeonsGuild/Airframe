@@ -15,6 +15,9 @@ namespace Rocket.Surgery.ReactiveUI
         protected ViewModelBase()
         {
             ErrorInteraction = new Interaction<string, bool>();
+            Subscriptions = new CompositeDisposable();
+
+            Initialize();
             ComposeObservables();
             RegisterObservers();
         }
@@ -31,7 +34,14 @@ namespace Rocket.Surgery.ReactiveUI
         /// <summary>
         /// Gets the binding disposables.
         /// </summary>
-        protected CompositeDisposable ViewModelBindings { get; } = new CompositeDisposable();
+        protected CompositeDisposable Subscriptions { get; }
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        protected virtual void Initialize()
+        {
+        }
 
         /// <summary>
         /// View Model lifecycle method that composes observable pipelines.
