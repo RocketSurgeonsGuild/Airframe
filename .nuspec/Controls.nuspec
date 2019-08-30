@@ -17,9 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\src\Controls\bin\$configuration$\netstandard2.0\Rocket.Surgery.ReactiveUI.dll" target="lib\netstandard2.0" />
-    <file src="..\src\Controls\bin\$configuration$\netstandard2.0\Rocket.Surgery.ReactiveUI.pdb" target="lib\netstandard2.0" />
-
     <file src="..\src\Controls\bin\$configuration$\xamarin.ios10\Rocket.Surgery.ReactiveUI.dll" target="lib\xamarin.ios10" />
     <file src="..\src\Controls\bin\$configuration$\xamarin.ios10\Rocket.Surgery.ReactiveUI.pdb" target="lib\xamarin.ios10" />
 
