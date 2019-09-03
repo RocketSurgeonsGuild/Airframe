@@ -30,12 +30,14 @@ namespace Rocket.Surgery.ReactiveUI
         /// <returns>The source observable.</returns>
         public static IObservable<T> NotifyUser<T>(this IObservable<T> sender, string title, string informativeText)
         {
-            var notification = new NSUserNotification();
-            notification.Title = title;
-            notification.InformativeText = informativeText;
-            notification.DeliveryDate = (NSDate)DateTime.Now;
-            notification.SoundName = NSUserNotification.NSUserNotificationDefaultSoundName;
-            notification.HasActionButton = true;
+            var notification = new NSUserNotification
+            {
+                Title = title,
+                InformativeText = informativeText,
+                DeliveryDate = (NSDate)DateTime.Now,
+                SoundName = NSUserNotification.NSUserNotificationDefaultSoundName,
+                HasActionButton = true
+            };
 
             UserNotificationCenter.ScheduleNotification(notification);
             return sender;
