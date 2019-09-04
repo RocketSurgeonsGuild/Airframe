@@ -11,14 +11,14 @@
 
   <ItemGroup>
     <PackageReference Include="ReactiveUI" />
-    <PackageReference Include="System.Reactive" Version="4.0.0" />
-    <PackageReference Include="System.Reactive.Compatibility" Version="4.0.0" />
+    <PackageReference Include="System.Reactive" Version="4.*" />
+    <PackageReference Include="System.Reactive.Compatibility" Version="4.*" />
     <PackageReference Include="Splat" Version="6.*" />
     <PackageReference Include="DynamicData" Version="6.7.*" />
     <PackageReference Include="ReactiveUI.XamForms" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.1.*" />
+    <PackageReference Include="Xamarin.Essentials" />
   </ItemGroup>
 
 </Project>
