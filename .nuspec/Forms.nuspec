@@ -12,7 +12,7 @@
     <tags>ReactiveUI Xamarin.Forms MVVM</tags>
     <dependencies>
       <group>
-        <dependency id="ReactiveUI" version="9.7.2" />
+        <dependency id="ReactiveUI.XamForms" version="9.7.2" />
       </group>
     </dependencies>
   </metadata>
