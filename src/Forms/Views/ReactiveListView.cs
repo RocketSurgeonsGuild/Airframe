@@ -89,7 +89,6 @@ namespace Rocket.Surgery.ReactiveUI.Forms
         /// <summary>
         /// Gets an observable sequence of the item tapped from the <see cref="ListView"/>.
         /// </summary>
-        /// <typeparam name="T">The view model type.</typeparam>
         /// <returns>An observable sequence of items selected.</returns>
         public IObservable<object> ListViewItemTapped() =>
             Observable

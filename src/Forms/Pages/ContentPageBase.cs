@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
@@ -15,6 +16,7 @@ namespace Rocket.Surgery.ReactiveUI.Forms
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveContentPage{TViewModel}" />
+    [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class ContentPageBase<TViewModel> : ReactiveContentPage<TViewModel>
         where TViewModel : class, IReactiveObject
     {

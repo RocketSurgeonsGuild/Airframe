@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rocket.Surgery.ReactiveUI.Forms</name>
+    </assembly>
+    <members>
+        <member name="T:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase">
+            <summary>
+            Base application abstraction.
+            </summary>
+            <seealso cref="T:Xamarin.Forms.Application" />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase"/> class.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase.#ctor(System.Action{Splat.IMutableDependencyResolver})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase" /> class.
+            </summary>
+            <param name="configurator">The configurator.</param>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase.ComposeApplicationRoot">
+            <summary>
+            Composes the applications composition root.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ApplicationBase.ComposeApplicationRoot(System.Action{Splat.IMutableDependencyResolver})">
+            <summary>
+            Composes the applications composition root.
+            </summary>
+            <param name="configurator">The configurator.</param>
+        </member>
+        <member name="T:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1">
+            <summary>
+            Base ReactiveUI <see cref="T:ReactiveUI.XamForms.ReactiveContentPage`1"/>.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <seealso cref="T:ReactiveUI.XamForms.ReactiveContentPage`1" />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1"/> class.
+            </summary>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.ViewBindings">
+            <summary>
+            Gets the view bindings disposable.
+            </summary>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.IsAppearing">
+            <summary>
+            Gets an observable sequence when the view is appearing.
+            </summary>
+            <returns>The appearing notification.</returns>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.IsDisappearing">
+            <summary>
+            Gets an observable sequence when the view is disappearing.
+            </summary>
+            <returns>The appearing notification.</returns>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.OnAppearing">
+            <inheritdoc />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.OnDisappearing">
+            <inheritdoc />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.RegisterObservers">
+            <summary>
+            View lifecycle method that registers observers via subscriptions.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.BindControls">
+            <summary>
+            View lifecycle method that sets up reactive bindings.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentPageBase`1.Initialize">
+            <summary>
+            View lifecycle method that initializes the view.
+            </summary>
+        </member>
+        <member name="T:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1">
+            <summary>
+            Base ReactiveUI <see cref="T:ReactiveUI.XamForms.ReactiveContentView`1"/>.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <seealso cref="T:ReactiveUI.XamForms.ReactiveContentView`1" />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1"/> class.
+            </summary>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1.ViewBindings">
+            <summary>
+            Gets the view bindings disposable.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1.RegisterObservers">
+            <summary>
+            View lifecycle method that registers observers via subscriptions.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1.BindControls">
+            <summary>
+            View lifecycle method that sets up reactive bindings.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ContentViewBase`1.Initialize">
+            <summary>
+            View lifecycle method that initializes the view.
+            </summary>
+        </member>
+        <member name="T:Rocket.Surgery.ReactiveUI.Forms.ListViewBase`1">
+            <summary>
+            Base ReactiveUI <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1" />.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <seealso cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1" />
+            <seealso cref="T:Xamarin.Forms.ListView" />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ListViewBase`1.#ctor(System.Type,Xamarin.Forms.ListViewCachingStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ListViewBase`1"/> class.
+            </summary>
+            <param name="cellType">Type of the cell.</param>
+            <param name="listViewCachingStrategy">The list view caching strategy.</param>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ListViewBase`1.ListViewItemAppearing">
+            <summary>
+            Gets the an observable sequence of item appearing events.
+            </summary>
+            <value>The ListView item appearing.</value>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ListViewBase`1.ListViewItemDisappearing">
+            <summary>
+            Gets the an observable sequence of item disappearing events.
+            </summary>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ListViewBase`1.ViewBindings">
+            <summary>
+            Gets the view bindings disposable.
+            </summary>
+        </member>
+        <member name="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1">
+            <summary>
+            This is a <see cref="T:Xamarin.Forms.ListView"/> that has extends <see cref="T:ReactiveUI.IViewFor"/>.
+            (i.e. you can call RaiseAndSetIfChanged).
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <seealso cref="T:Xamarin.Forms.ListView" />
+            <seealso cref="T:ReactiveUI.IViewFor`1" />
+        </member>
+        <member name="F:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ViewModelProperty">
+            <summary>
+            The view model bindable property.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.#ctor(System.Type,Xamarin.Forms.ListViewCachingStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1"/> class.
+            </summary>
+            <param name="cellType">Type of the cell.</param>
+            <param name="listViewCachingStrategy">The list view caching strategy.</param>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.#ctor(System.Func{System.Object},Xamarin.Forms.ListViewCachingStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1"/> class.
+            </summary>
+            <param name="loadTemplate">The load template.</param>
+            <param name="listViewCachingStrategy">The list view caching strategy.</param>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.#ctor(Xamarin.Forms.ListViewCachingStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1"/> class.
+            </summary>
+            <param name="listViewCachingStrategy">The list view caching strategy.</param>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ReactiveUI#IViewFor#ViewModel">
+            <summary>
+            Gets or sets the ViewModel corresponding to this specific View. This should be
+            a DependencyProperty if you're using XAML.
+            </summary>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ViewModel">
+            <summary>
+            Gets or sets the ViewModel corresponding to this specific View. This should be
+            a DependencyProperty if you're using XAML.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ListViewItemTapped``1">
+            <summary>
+            Gets an observable sequence of the item tapped from the <see cref="T:Xamarin.Forms.ListView"/>.
+            </summary>
+            <typeparam name="T">The view model type.</typeparam>
+            <returns>An observable sequence of items selected.</returns>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ListViewItemTapped">
+            <summary>
+            Gets an observable sequence of the item tapped from the <see cref="T:Xamarin.Forms.ListView"/>.
+            </summary>
+            <typeparam name="T">The view model type.</typeparam>
+            <returns>An observable sequence of items selected.</returns>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ListViewItemSelected``1">
+            <summary>
+            Gets an observable sequence of the item selected from the <see cref="T:Xamarin.Forms.ListView"/>.
+            </summary>
+            <typeparam name="T">The view model type.</typeparam>
+            <returns>An observable sequence of items selected.</returns>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ListViewItemSelected">
+            <summary>
+            Gets an observable sequence of the item selected from the <see cref="T:Xamarin.Forms.ListView"/>.
+            </summary>
+            <returns>An observable sequence of items selected.</returns>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.OnBindingContextChanged">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

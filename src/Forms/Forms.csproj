@@ -9,6 +9,10 @@
     <Description>ReactiveUI base abstractions for Xamarin Forms.</Description>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>Rocket.Surgery.ReactiveUI.Forms.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Effects\" />
     <Folder Include="Behaviors\" />
