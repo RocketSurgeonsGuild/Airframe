@@ -202,7 +202,6 @@
             <summary>
             Gets an observable sequence of the item tapped from the <see cref="T:Xamarin.Forms.ListView"/>.
             </summary>
-            <typeparam name="T">The view model type.</typeparam>
             <returns>An observable sequence of items selected.</returns>
         </member>
         <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView`1.ListViewItemSelected``1">
