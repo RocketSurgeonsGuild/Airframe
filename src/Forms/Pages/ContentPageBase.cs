@@ -34,7 +34,7 @@ namespace Rocket.Surgery.ReactiveUI.Forms
         }
 
         /// <summary>
-        /// Gets the subscription disposable.
+        /// Gets the view bindings disposable.
         /// </summary>
         protected CompositeDisposable ViewBindings { get; } = new CompositeDisposable();
 
