@@ -17,7 +17,7 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
         /// </summary>
         /// <returns></returns>
         [Benchmark(Baseline = true)]
-        public ReactiveListView<Test> CreateReactiveContentPage() => new ReactiveListView<Test>(typeof(TestContentView));
+        public ReactiveListView CreateReactiveContentPage() => new ReactiveListView(typeof(TestContentView));
 
         /// <summary>
         /// Creates the content view.
@@ -25,12 +25,5 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
         /// <returns></returns>
         [Benchmark]
         public ListView CreateListView() => new ListView();
-
-        /// <summary>
-        /// Creates the test content page.
-        /// </summary>
-        /// <returns></returns>
-        [Benchmark]
-        public TestReactiveListView CreateTestReactiveListView() => new TestReactiveListView(typeof(TestContentView));
     }
 }
