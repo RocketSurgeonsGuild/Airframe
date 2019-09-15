@@ -16,21 +16,26 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
         public void ViewModelBase() => BenchmarkRunner.Run<ViewModelBaseBenchmark>();
 
         /// <summary>
-        /// BaseContentPage benchmarks.
+        /// ContentPageBase benchmarks.
         /// </summary>
         [Fact]
         public void ContentPageBase() => BenchmarkRunner.Run<ContentPageBaseBenchmark>();
 
         /// <summary>
-        /// BaseContentPage benchmarks.
+        /// ContentViewBase benchmarks.
         /// </summary>
         [Fact]
         public void ContentViewBase() => BenchmarkRunner.Run<ContentViewBaseBenchmark>();
 
         /// <summary>
-        /// BaseContentPage benchmarks.
+        /// ReactiveListView benchmarks.
         /// </summary>
         [Fact]
-        public void ListViewBase() => BenchmarkRunner.Run<ListViewBaseBenchmark>();
-    }
+        public void ListViewBase() => BenchmarkRunner.Run<ListViewBenchmark>();
+
+        /// <summary>
+        /// ViewCellBase benchmarks.
+        /// </summary>
+        [Fact]
+        public void ViewCellBase() => BenchmarkRunner.Run< ViewCellBaseBenchmark>();}
 }

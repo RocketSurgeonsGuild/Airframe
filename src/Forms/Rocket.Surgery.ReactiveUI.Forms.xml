@@ -116,10 +116,9 @@
         </member>
         <member name="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView">
             <summary>
-            This is a <see cref="T:Xamarin.Forms.ListView"/> that has extends <see cref="T:ReactiveUI.IViewFor"/>.
+            This is a <see cref="T:Xamarin.Forms.ListView"/> that provides observable sequences around events.
             (i.e. you can call RaiseAndSetIfChanged).
             </summary>
-            <typeparam name="TViewModel">The type of the view model.</typeparam>
             <seealso cref="T:Xamarin.Forms.ListView" />
             <seealso cref="T:ReactiveUI.IViewFor`1" />
         </member>
@@ -142,6 +141,11 @@
             Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView"/> class.
             </summary>
             <param name="listViewCachingStrategy">The list view caching strategy.</param>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView"/> class.
+            </summary>
         </member>
         <member name="M:Rocket.Surgery.ReactiveUI.Forms.ReactiveListView.ListViewItemAppearing``1">
             <summary>
@@ -184,6 +188,49 @@
             Gets an observable sequence of the item selected from the <see cref="T:Xamarin.Forms.ListView"/>.
             </summary>
             <returns>An observable sequence of items selected.</returns>
+        </member>
+        <member name="T:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1">
+            <summary>
+            Base ReactiveUI <see cref="T:ReactiveUI.XamForms.ReactiveViewCell`1"/>.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <seealso cref="T:ReactiveUI.XamForms.ReactiveViewCell`1" />
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1"/> class.
+            </summary>
+        </member>
+        <member name="P:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.ViewCellBindings">
+            <summary>
+            Gets the view cell bindings.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.BindControls">
+            <summary>
+            View lifecycle method that sets up reactive bindings.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.Initialize">
+            <summary>
+            View lifecycle method that initializes the view.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.RegisterObservers">
+            <summary>
+            View lifecycle method that registers observers via subscriptions.
+            </summary>
+        </member>
+        <member name="M:Rocket.Surgery.ReactiveUI.Forms.ViewCellBase`1.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         </member>
     </members>
 </doc>

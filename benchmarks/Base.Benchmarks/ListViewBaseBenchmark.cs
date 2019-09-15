@@ -10,7 +10,7 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
     [CoreJob]
     [MemoryDiagnoser]
     [MarkdownExporterAttribute.GitHub]
-    public class ListViewBaseBenchmark
+    public class ListViewBenchmark
     {
         /// <summary>
         /// Creates the reactive list view.
