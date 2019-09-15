@@ -13,14 +13,21 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
     public class ListViewBaseBenchmark
     {
         /// <summary>
-        /// Creates the reactive content page.
+        /// Creates the reactive list view.
         /// </summary>
         /// <returns></returns>
         [Benchmark(Baseline = true)]
-        public ReactiveListView CreateReactiveContentPage() => new ReactiveListView(typeof(TestContentView));
+        public ReactiveListView CreateReactiveListView() => new ReactiveListView();
 
         /// <summary>
-        /// Creates the content view.
+        /// Creates the reactive content page.
+        /// </summary>
+        /// <returns></returns>
+        [Benchmark]
+        public ReactiveListView CreateReactiveListViewWithDataTemplate() => new ReactiveListView(typeof(TestContentView));
+
+        /// <summary>
+        /// Creates the list view.
         /// </summary>
         /// <returns></returns>
         [Benchmark]

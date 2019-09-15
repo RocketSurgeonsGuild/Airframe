@@ -47,6 +47,13 @@ namespace Rocket.Surgery.ReactiveUI.Forms
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ReactiveListView"/> class.
+        /// </summary>
+        public ReactiveListView()
+        {
+        }
+
+        /// <summary>
         /// Gets the an observable sequence of item appearing events.
         /// </summary>
         /// <typeparam name="TViewModel">The type of the view model.</typeparam>
