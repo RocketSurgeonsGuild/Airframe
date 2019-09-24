@@ -59,7 +59,7 @@ jobs:
       Configuration: $(Configuration)
       Verbosity: $(Verbosity)
       GitHub: true
-      GitHubPackages: false
+      GitHubPackages: true
       DotNetVersion: "2.2.300"
       DotNet3Version: "3.0.100-preview6-012264"
       NuGetVersion: "5.2.0"
@@ -82,4 +82,4 @@ jobs:
           Artifacts: "$(Build.ArtifactStagingDirectory)/"
           NuGetVersion: "5.2.0"
           Verbosity: $(Verbosity)
-          GitHubPackages: false
+          GitHubPackages: true
