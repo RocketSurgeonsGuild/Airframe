@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ReactiveUI base view model abstractions.</description>
     <projectUrl>https://github.com/RocketSurgeonsGuild/ReactiveUI.Abstractions.git</projectUrl>
+    <repository type="git" url="https://github.com/RocketSurgeonsGuild/ReactiveUI.Abstractions"/>
     <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
     <tags>ReactiveUI Xamarin MVVM</tags>
     <dependencies>
