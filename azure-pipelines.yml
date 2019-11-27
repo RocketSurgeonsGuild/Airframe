@@ -42,6 +42,7 @@ jobs:
       Configuration: $(Configuration)
       Verbosity: $(Verbosity)
       GitHubPackages: true
+      EnableReleaseNotes: false
       DotNetSdk:
         - "2.2.x"
         - "3.0.x"
