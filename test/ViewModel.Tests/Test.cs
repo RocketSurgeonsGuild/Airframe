@@ -1,4 +1,4 @@
-using Rocket.Surgery.ReactiveUI;
+using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.ViewModel.Tests
 {

@@ -2,17 +2,17 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.Mac20</TargetFrameworks>
-    <AssemblyName>Rocket.Surgery.ReactiveUI</AssemblyName>
-    <RootNamespace>Rocket.Surgery.ReactiveUI</RootNamespace>
+    <AssemblyName>Rocket.Surgery.Airframe</AssemblyName>
+    <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Rocket.Surgery.ReactiveUI</PackageId>
+    <PackageId>Rocket.Surgery.Airframe</PackageId>
     <Description>ReactiveUI base platform abstractions.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>Rocket.Surgery.ReactiveUI.xml</DocumentationFile>
+    <DocumentationFile>Rocket.Surgery.Airframe.xml</DocumentationFile>
   </PropertyGroup>
   
   <ItemGroup>

@@ -7,7 +7,7 @@ using ReactiveUI;
 using ReactiveUI.XamForms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Forms
+namespace Rocket.Surgery.Airframe.Forms
 {
     /// <summary>
     /// Base ReactiveUI <see cref="ReactiveViewCell{TViewModel}"/>.

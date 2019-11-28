@@ -5,7 +5,7 @@ using Foundation;
 using ReactiveUI;
 using UIKit;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Base <see cref="ReactiveCollectionViewController"/>.

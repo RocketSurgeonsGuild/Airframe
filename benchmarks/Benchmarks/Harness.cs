@@ -2,7 +2,7 @@ using System;
 using BenchmarkDotNet.Running;
 using Xunit;
 
-namespace Rocket.Surgery.ReactiveUI.Benchmarks
+namespace Rocket.Surgery.Airframe.Benchmarks
 {
     public class Harness
     {

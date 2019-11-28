@@ -5,7 +5,7 @@ using Autofac;
 using Autofac.Core;
 using ReactiveUI;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Builds a composition root.

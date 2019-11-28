@@ -5,7 +5,7 @@ using Rocket.Surgery.Xamarin.Essentials;
 using Rocket.Surgery.Xamarin.Essentials.Abstractions;
 using Xamarin.Essentials;
 
-namespace Rocket.Surgery.ReactiveUI.ViewModels
+namespace Rocket.Surgery.Airframe.ViewModels
 {
     /// <summary>
     /// Interface representing an element that subscribes to network connectivity changes.

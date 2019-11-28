@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Text;
 using BenchmarkDotNet.Attributes;
-using ReactiveUI.XamForms;
+using Rocket.Surgery.Airframe.Forms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Benchmarks
+namespace Rocket.Surgery.Airframe.Benchmarks
 {
     [CoreJob]
     [MemoryDiagnoser]
     [MarkdownExporterAttribute.GitHub]
-    public class ContentPageBaseBenchmark
+    public class ApplicationBaseBenchmark
     {
         /// <summary>
         /// Creates the reactive content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark(Baseline = true)]
-        public ReactiveContentPage<Test> CreateReactiveContentPage() => new ReactiveContentPage<Test>();
+        public Application Application() => new Application();
 
         /// <summary>
         /// Creates the content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public ContentPage CreateContentPage() => new ContentPage();
+        public TestApplication TestApplication() => new TestApplication();
 
 
         /// <summary>
@@ -32,6 +32,6 @@ namespace Rocket.Surgery.ReactiveUI.Benchmarks
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public TestPage CreateTestContentPage() => new TestPage();
+        public TestApplication TestApplicationWithConfigurator() => new TestApplication(locator => { });
     }
 }

@@ -7,8 +7,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <NoWarn>1701;1702;NU1701</NoWarn>
-    <AssemblyName>Rocket.Surgery.ReactiveUI.Benchmarks</AssemblyName>
-    <RootNamespace>Rocket.Surgery.ReactiveUI.Benchmarks</RootNamespace>
+    <AssemblyName>Rocket.Surgery.Airframe.Benchmarks</AssemblyName>
+    <RootNamespace>Rocket.Surgery.Airframe.Benchmarks</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

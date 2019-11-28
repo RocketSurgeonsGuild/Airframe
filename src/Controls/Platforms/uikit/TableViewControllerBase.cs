@@ -11,7 +11,7 @@ using Foundation;
 using ReactiveUI;
 using UIKit;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Base reactive <see cref="UITableViewController"/>.

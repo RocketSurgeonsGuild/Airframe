@@ -1,74 +1,74 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Rocket.Surgery.ReactiveUI.ViewModels</name>
+        <name>Rocket.Surgery.Airframe.ViewModels</name>
     </assembly>
     <members>
-        <member name="T:Rocket.Surgery.ReactiveUI.ViewModels.INetworkAware">
+        <member name="T:Rocket.Surgery.Airframe.ViewModels.INetworkAware">
             <summary>
             Interface representing an element that subscribes to network connectivity changes.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.ViewModels.INetworkAware.Connectivity">
+        <member name="P:Rocket.Surgery.Airframe.ViewModels.INetworkAware.Connectivity">
             <summary>
             Gets the connectivity.
             </summary>
         </member>
-        <member name="T:Rocket.Surgery.ReactiveUI.IViewModel">
+        <member name="T:Rocket.Surgery.Airframe.IViewModel">
             <summary>
             Interface representation of a base ReactiveUI View Model.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.IViewModel.Id">
+        <member name="P:Rocket.Surgery.Airframe.IViewModel.Id">
             <summary>
             Gets the view model id.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.IViewModel.IsLoading">
+        <member name="P:Rocket.Surgery.Airframe.IViewModel.IsLoading">
             <summary>
             Gets a value indicating whether the view model is doing work.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.IViewModel.ErrorInteraction">
+        <member name="P:Rocket.Surgery.Airframe.IViewModel.ErrorInteraction">
             <summary>
             Gets the error <see cref="T:ReactiveUI.Interaction`2"/>.
             </summary>
         </member>
-        <member name="T:Rocket.Surgery.ReactiveUI.ViewModelBase">
+        <member name="T:Rocket.Surgery.Airframe.ViewModelBase">
             <summary>
             Base ReactiveUI View Model.
             </summary>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.ViewModelBase.#ctor">
+        <member name="M:Rocket.Surgery.Airframe.ViewModelBase.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.ViewModelBase"/> class.
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.Airframe.ViewModelBase"/> class.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.ViewModelBase.Id">
+        <member name="P:Rocket.Surgery.Airframe.ViewModelBase.Id">
             <inheritdoc />
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.ViewModelBase.IsLoading">
+        <member name="P:Rocket.Surgery.Airframe.ViewModelBase.IsLoading">
             <inheritdoc />
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.ViewModelBase.ErrorInteraction">
+        <member name="P:Rocket.Surgery.Airframe.ViewModelBase.ErrorInteraction">
             <inheritdoc />
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.ViewModelBase.Subscriptions">
+        <member name="P:Rocket.Surgery.Airframe.ViewModelBase.Subscriptions">
             <summary>
             Gets the binding disposables.
             </summary>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.ViewModelBase.Initialize">
+        <member name="M:Rocket.Surgery.Airframe.ViewModelBase.Initialize">
             <summary>
             Initializes this instance.
             </summary>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.ViewModelBase.ComposeObservables">
+        <member name="M:Rocket.Surgery.Airframe.ViewModelBase.ComposeObservables">
             <summary>
             View Model lifecycle method that composes observable pipelines.
             </summary>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.ViewModelBase.RegisterObservers">
+        <member name="M:Rocket.Surgery.Airframe.ViewModelBase.RegisterObservers">
             <summary>
             View Model lifecycle method that registers observers to pipelines.
             </summary>

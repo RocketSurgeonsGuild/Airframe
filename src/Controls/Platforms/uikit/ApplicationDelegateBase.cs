@@ -4,7 +4,7 @@ using System.Text;
 using Foundation;
 using UIKit;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Base application delegate implementation.

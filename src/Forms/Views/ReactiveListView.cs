@@ -5,7 +5,7 @@ using System.Text;
 using ReactiveUI;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Forms
+namespace Rocket.Surgery.Airframe.Forms
 {
     /// <summary>
     /// This is a <see cref="ListView"/> that provides observable sequences around events.

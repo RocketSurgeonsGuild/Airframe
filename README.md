@@ -1,4 +1,4 @@
-# ReactiveUI.Abstractions
+# Rocket.Surgery.Airframe
 A collection of abstract classes that extend ReactiveUI implementations
 
 # Status
@@ -21,9 +21,9 @@ A collection of abstract classes that extend ReactiveUI implementations
 <!-- nuget packages -->
 | Package | NuGet |
 | ------- | ----- |
-| Rocket.Surgery.ReactiveUI | [![nuget-version-badge]![nuget-downloads-badge]][nuget] |
-| Rocket.Surgery.ReactiveUI.Forms | [![forms-nuget-version-badge]![forms-nuget-downloads-badge]][forms-nuget] |
-| Rocket.Surgery.ReactiveUI.ViewModels | [![viewmodels-nuget-version-badge]![viewmodels-nuget-downloads-badge]][viewmodels-nuget] |
+| Rocket.Surgery.Airframe | [![nuget-version-badge]![nuget-downloads-badge]][nuget] |
+| Rocket.Surgery.Airframe.Forms | [![forms-nuget-version-badge]![forms-nuget-downloads-badge]][forms-nuget] |
+| Rocket.Surgery.Airframe.ViewModels | [![viewmodels-nuget-version-badge]![viewmodels-nuget-downloads-badge]][viewmodels-nuget] |
 <!-- nuget packages -->
 
 <!-- generated references -->
@@ -39,15 +39,15 @@ A collection of abstract classes that extend ReactiveUI implementations
 [azurepipelines-history]: https://dev.azure.com/RocketSurgeonsGuild/Libraries/_build/latest?definitionId=27&branchName=master
 [azurepipelines-history-badge]: https://buildstats.info/azurepipelines/chart/RocketSurgeonsGuild/Libraries/27?includeBuildsFromPullRequest=false "Azure Pipelines History"
 
-[nuget]: https://www.nuget.org/packages/Rocket.Surgery.ReactiveUI/
-[nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.ReactiveUI.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
-[nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.ReactiveUI.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
+[nuget]: https://www.nuget.org/packages/Rocket.Surgery.Airframe/
+[nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.Airframe.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
+[nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.Airframe.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
 
-[forms-nuget]: https://www.nuget.org/packages/Rocket.Surgery.ReactiveUI.Forms/
-[forms-nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.ReactiveUI.Forms.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
-[forms-nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.ReactiveUI.Forms.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
+[forms-nuget]: https://www.nuget.org/packages/Rocket.Surgery.Airframe.Forms/
+[forms-nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.Airframe.Forms.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
+[forms-nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.Airframe.Forms.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
 
-[viewmodels-nuget]: https://www.nuget.org/packages/Rocket.Surgery.ReactiveUI.ViewModels/
-[viewmodels-nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.ReactiveUI.ViewModels.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
-[viewmodels-nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.ReactiveUI.ViewModels.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
+[viewmodels-nuget]: https://www.nuget.org/packages/Rocket.Surgery.Airframe.ViewModels/
+[viewmodels-nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.Airframe.ViewModels.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
+[viewmodels-nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.Airframe.ViewModels.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
 <!-- generated references -->

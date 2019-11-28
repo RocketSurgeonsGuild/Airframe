@@ -1,73 +1,73 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Rocket.Surgery.ReactiveUI</name>
+        <name>Rocket.Surgery.Airframe</name>
     </assembly>
     <members>
-        <member name="T:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions">
+        <member name="T:Rocket.Surgery.Airframe.IReactiveObjectExtensions">
             <summary>
             Extension methods associated with the IReactiveObject interface.
             </summary>
             <remarks>https://github.com/reactiveui/ReactiveUI/blob/master/src/ReactiveUI/ReactiveObject/IReactiveObjectExtensions.cs .</remarks>
         </member>
-        <member name="T:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1">
+        <member name="T:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1">
             <summary>
             Contains the state information about the current status of a Reactive Object.
             </summary>
             <typeparam name="TSender">The type of the sender of the property changes.</typeparam>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.Changing">
+        <member name="P:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.Changing">
             <summary>
             Gets an observable for when a property is changing.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.Changed">
+        <member name="P:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.Changed">
             <summary>
             Gets an observable for when the property has changed.
             </summary>
         </member>
-        <member name="P:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.ThrownExceptions">
+        <member name="P:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.ThrownExceptions">
             <summary>
             Gets a observable when a exception is thrown.
             </summary>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.RaisePropertyChanging(System.String)">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.RaisePropertyChanging(System.String)">
             <summary>
             Raises a property changing event.
             </summary>
             <param name="propertyName">The name of the property that is changing.</param>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.RaisePropertyChanged(System.String)">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.RaisePropertyChanged(System.String)">
             <summary>
             Raises a property changed event.
             </summary>
             <param name="propertyName">The name of the property that has changed.</param>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.AreChangeNotificationsEnabled">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.AreChangeNotificationsEnabled">
             <summary>
             Indicates if we are currently sending change notifications.
             </summary>
             <returns>If change notifications are being sent.</returns>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.SuppressChangeNotifications">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.SuppressChangeNotifications">
             <summary>
             Suppress change notifications until the return value is disposed.
             </summary>
             <returns>A IDisposable which when disposed will re-enable change notifications.</returns>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.AreChangeNotificationsDelayed">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.AreChangeNotificationsDelayed">
             <summary>
             Are change notifications currently delayed. Used for Observables change notifications only.
             </summary>
             <returns>If the change notifications are delayed.</returns>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1.DelayChangeNotifications">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1.DelayChangeNotifications">
             <summary>
             Delay change notifications until the return value is disposed.
             </summary>
             <returns>A IDisposable which when disposed will re-enable change notifications.</returns>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.RaiseAndSetIfChanged``2(``0,``1@,``1,System.String)">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.RaiseAndSetIfChanged``2(``0,``1@,``1,System.String)">
             <summary>
             RaiseAndSetIfChanged fully implements a Setter for a read-write
             property on a ReactiveObject, using CallerMemberName to raise the notification
@@ -83,7 +83,7 @@
             automatically provided through the CallerMemberName attribute.</param>
             <returns>The newly set value, normally discarded.</returns>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.RaisePropertyChanged``1(``0,System.String)">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.RaisePropertyChanged``1(``0,System.String)">
             <summary>
             Use this method in your ReactiveObject classes when creating custom
             properties where raiseAndSetIfChanged doesn't suffice.
@@ -95,7 +95,7 @@
             Leave <c>null</c> to let the runtime set to caller member name.
             </param>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.RaisePropertyChanging``1(``0,System.String)">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.RaisePropertyChanging``1(``0,System.String)">
             <summary>
             Use this method in your ReactiveObject classes when creating custom
             properties where raiseAndSetIfChanged doesn't suffice.
@@ -107,26 +107,26 @@
             Leave <c>null</c> to let the runtime set to caller member name.
             </param>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.Dedup``1(System.Collections.Generic.IList{ReactiveUI.IReactivePropertyChangedEventArgs{``0}})">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.Dedup``1(System.Collections.Generic.IList{ReactiveUI.IReactivePropertyChangedEventArgs{``0}})">
             <summary>
             Filter a list of change notifications, returning the last change for each PropertyName in original order.
             </summary>
         </member>
-        <member name="T:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.ExtensionState`1">
+        <member name="T:Rocket.Surgery.Airframe.IReactiveObjectExtensions.ExtensionState`1">
             <summary>
             Maintains the state of the extension for an <see cref="T:ReactiveUI.IReactiveObject"/>.
             </summary>
             <typeparam name="TSender">The type of the sender.</typeparam>
             <remarks>https://github.com/reactiveui/ReactiveUI/blob/5359fd8c7ae5fd48896a16c718cd9adc00335cc8/src/ReactiveUI/ReactiveObject/IReactiveObjectExtensions.cs#L243-L402 .</remarks>
-            <seealso cref="T:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState`1" />
+            <seealso cref="T:Rocket.Surgery.Airframe.IReactiveObjectExtensions.IExtensionState`1" />
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.ExtensionState`1.#ctor(`0)">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.ExtensionState`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.ExtensionState`1"/> class.
+            Initializes a new instance of the <see cref="T:Rocket.Surgery.Airframe.IReactiveObjectExtensions.ExtensionState`1"/> class.
             </summary>
             <param name="sender">The sender.</param>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.ExtensionState`1.SuppressChangeNotifications">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.ExtensionState`1.SuppressChangeNotifications">
             <summary>
             When this method is called, an object will not fire change
             notifications (neither traditional nor Observable notifications)
@@ -137,7 +137,7 @@
             <returns>An object that, when disposed, reenables change
             notifications.</returns>
         </member>
-        <member name="M:Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.ExtensionState`1.DelayChangeNotifications">
+        <member name="M:Rocket.Surgery.Airframe.IReactiveObjectExtensions.ExtensionState`1.DelayChangeNotifications">
             <summary>
             When this method is called, an object will not dispatch change
             Observable notifications until the return value is disposed.

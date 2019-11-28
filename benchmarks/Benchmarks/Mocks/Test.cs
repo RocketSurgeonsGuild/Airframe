@@ -1,6 +1,6 @@
-﻿using Rocket.Surgery.ReactiveUI;
+﻿using Rocket.Surgery.Airframe;
 
-namespace Rocket.Surgery.ReactiveUI.Benchmarks
+namespace Rocket.Surgery.Airframe.Benchmarks
 {
     public class Test : ViewModelBase
     {

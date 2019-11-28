@@ -6,7 +6,7 @@ using System.Text;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 
-namespace Rocket.Surgery.ReactiveUI.Forms
+namespace Rocket.Surgery.Airframe.Forms
 {
     /// <summary>
     /// Base ReactiveUI <see cref="ReactiveContentView{TViewModel}"/>.

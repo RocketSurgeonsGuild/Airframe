@@ -1,7 +1,7 @@
 ﻿using System.Reactive.Disposables;
 using ReactiveUI;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
 #pragma warning disable CA2214 // Do not call overridable methods in constructors
     /// <summary>

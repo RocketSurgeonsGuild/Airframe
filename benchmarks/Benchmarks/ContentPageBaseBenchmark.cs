@@ -5,32 +5,33 @@ using BenchmarkDotNet.Attributes;
 using ReactiveUI.XamForms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Benchmarks
+namespace Rocket.Surgery.Airframe.Benchmarks
 {
     [CoreJob]
     [MemoryDiagnoser]
     [MarkdownExporterAttribute.GitHub]
-    public class ViewCellBaseBenchmark
+    public class ContentPageBaseBenchmark
     {
         /// <summary>
         /// Creates the reactive content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark(Baseline = true)]
-        public ReactiveViewCell<Test> CreateReactiveViewCell() => new ReactiveViewCell<Test>();
+        public ReactiveContentPage<Test> CreateReactiveContentPage() => new ReactiveContentPage<Test>();
 
         /// <summary>
-        /// Creates the content view.
+        /// Creates the content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public ViewCell CreateViewCell() => new ViewCell();
+        public ContentPage CreateContentPage() => new ContentPage();
+
 
         /// <summary>
         /// Creates the test content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public TestViewCell CreateTestViewCell() => new TestViewCell();
+        public TestPage CreateTestContentPage() => new TestPage();
     }
 }

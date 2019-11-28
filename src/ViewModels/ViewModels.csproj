@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Rocket.Surgery.ReactiveUI.ViewModels</AssemblyName>
-    <RootNamespace>Rocket.Surgery.ReactiveUI.ViewModels</RootNamespace>
+    <AssemblyName>Rocket.Surgery.Airframe.ViewModels</AssemblyName>
+    <RootNamespace>Rocket.Surgery.Airframe.ViewModels</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Rocket.Surgery.ReactiveUI.ViewModels</PackageId>
+    <PackageId>Rocket.Surgery.Airframe.ViewModels</PackageId>
     <Description>ReactiveUI base view model abstractions.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>Rocket.Surgery.ReactiveUI.ViewModels.xml</DocumentationFile>
+    <DocumentationFile>Rocket.Surgery.Airframe.ViewModels.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

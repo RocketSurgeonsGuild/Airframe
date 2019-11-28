@@ -177,7 +177,7 @@ namespace Rocket.Surgery.ReactiveUI
         /// </summary>
         /// <typeparam name="TSender">The type of the sender.</typeparam>
         /// <remarks>https://github.com/reactiveui/ReactiveUI/blob/5359fd8c7ae5fd48896a16c718cd9adc00335cc8/src/ReactiveUI/ReactiveObject/IReactiveObjectExtensions.cs#L243-L402 .</remarks>
-        /// <seealso cref="Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions.IExtensionState{TSender}" />
+        /// <seealso cref="IExtensionState{TSender}" />
         internal class ExtensionState<TSender> : IExtensionState<TSender>
             where TSender : IReactiveObject
         {

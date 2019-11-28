@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
   <metadata>
-    <id>Rocket.Surgery.ReactiveUI.Forms</id>
+    <id>Rocket.Surgery.Airframe.Forms</id>
     <version>$version$</version>
     <authors>RLittlesII</authors>
     <owners >Rocket Surgeons Guild</owners>
@@ -19,7 +19,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\src\Forms\bin\$configuration$\netstandard2.0\Rocket.Surgery.ReactiveUI.Forms.dll" target="lib\netstandard2.0" />
-    <file src="..\src\Forms\bin\$configuration$\netstandard2.0\Rocket.Surgery.ReactiveUI.Forms.pdb" target="lib\netstandard2.0" />
+    <file src="..\src\Forms\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Forms.dll" target="lib\netstandard2.0" />
+    <file src="..\src\Forms\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Forms.pdb" target="lib\netstandard2.0" />
   </files>
 </package>

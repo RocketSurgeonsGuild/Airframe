@@ -8,10 +8,12 @@ using AppKit;
 using CoreGraphics;
 using Foundation;
 using ReactiveUI;
+using Rocket.Surgery.ReactiveUI;
+using IReactiveObjectExtensions = Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions;
 using PropertyChangingEventArgs = ReactiveUI.PropertyChangingEventArgs;
 using PropertyChangingEventHandler = ReactiveUI.PropertyChangingEventHandler;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// An <see cref="NSPopover"/> with the power of an <see cref="IReactiveObject"/>.

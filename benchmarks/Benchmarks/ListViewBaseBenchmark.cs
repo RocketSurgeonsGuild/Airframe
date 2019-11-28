@@ -2,36 +2,35 @@
 using System.Collections.Generic;
 using System.Text;
 using BenchmarkDotNet.Attributes;
-using Rocket.Surgery.ReactiveUI.Forms;
+using Rocket.Surgery.Airframe.Forms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Benchmarks
+namespace Rocket.Surgery.Airframe.Benchmarks
 {
     [CoreJob]
     [MemoryDiagnoser]
     [MarkdownExporterAttribute.GitHub]
-    public class ApplicationBaseBenchmark
+    public class ListViewBenchmark
     {
+        /// <summary>
+        /// Creates the reactive list view.
+        /// </summary>
+        /// <returns></returns>
+        [Benchmark(Baseline = true)]
+        public ReactiveListView CreateReactiveListView() => new ReactiveListView();
+
         /// <summary>
         /// Creates the reactive content page.
         /// </summary>
         /// <returns></returns>
-        [Benchmark(Baseline = true)]
-        public Application Application() => new Application();
+        [Benchmark]
+        public ReactiveListView CreateReactiveListViewWithDataTemplate() => new ReactiveListView(typeof(TestContentView));
 
         /// <summary>
-        /// Creates the content page.
+        /// Creates the list view.
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public TestApplication TestApplication() => new TestApplication();
-
-
-        /// <summary>
-        /// Creates the test content page.
-        /// </summary>
-        /// <returns></returns>
-        [Benchmark]
-        public TestApplication TestApplicationWithConfigurator() => new TestApplication(locator => { });
+        public ListView CreateListView() => new ListView();
     }
 }

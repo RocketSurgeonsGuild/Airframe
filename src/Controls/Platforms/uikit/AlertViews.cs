@@ -2,7 +2,7 @@ using System;
 using GlobalToast;
 using UIKit;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Alerts.

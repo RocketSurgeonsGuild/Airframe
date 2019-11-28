@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyName>Rocket.Surgery.ReactiveUI.Forms</AssemblyName>
-    <RootNamespace>Rocket.Surgery.ReactiveUI.Forms</RootNamespace>
+    <AssemblyName>Rocket.Surgery.Airframe.Forms</AssemblyName>
+    <RootNamespace>Rocket.Surgery.Airframe.Forms</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Rocket.Surgery.ReactiveUI.Forms</PackageId>
+    <PackageId>Rocket.Surgery.Airframe.Forms</PackageId>
     <Description>ReactiveUI base abstractions for Xamarin Forms.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>Rocket.Surgery.ReactiveUI.Forms.xml</DocumentationFile>
+    <DocumentationFile>Rocket.Surgery.Airframe.Forms.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

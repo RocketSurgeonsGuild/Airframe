@@ -2,7 +2,7 @@ using BenchmarkDotNet.Attributes;
 using ReactiveUI.XamForms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Benchmarks
+namespace Rocket.Surgery.Airframe.Benchmarks
 {
     [CoreJob]
     [MemoryDiagnoser]

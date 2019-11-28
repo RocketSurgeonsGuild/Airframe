@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Interface representation of a base ReactiveUI View Model.

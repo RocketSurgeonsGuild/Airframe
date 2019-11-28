@@ -8,7 +8,7 @@ using System.Text;
 using Foundation;
 using ReactiveUI;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Base <see cref="ReactiveViewController" />.

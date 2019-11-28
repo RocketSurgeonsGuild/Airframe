@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.0</TargetFramework>
         <IsPackable>false</IsPackable>
-        <AssemblyName>Rocket.Surgery.ViewModel.Tests</AssemblyName>
-        <RootNamespace>Rocket.Surgery.ViewModel.Tests</RootNamespace>
+        <AssemblyName>Rocket.Surgery.Airframe.ViewModel.Tests</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.ViewModel.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -5,7 +5,7 @@ using System.Text;
 using Splat;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.ReactiveUI.Forms
+namespace Rocket.Surgery.Airframe.Forms
 {
     /// <summary>
     /// Base application abstraction.

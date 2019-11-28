@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using Foundation;
 using static AppKit.NSApplication;
 
-namespace Rocket.Surgery.ReactiveUI
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Observable extensions for user notification.
