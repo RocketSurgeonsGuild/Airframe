@@ -8,8 +8,8 @@
     <copyright>Copyright Rodney Littles, II © 2019</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ReactiveUI base abstractions for Xamarin.</description>
-    <projectUrl>https://github.com/RocketSurgeonsGuild/ReactiveUI.Abstractions.git</projectUrl>
-    <repository type="git" url="https://github.com/RocketSurgeonsGuild/ReactiveUI.Abstractions"/>
+    <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
+    <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
     <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
     <tags>ReactiveUI Xamarin MVVM</tags>
     <dependencies>

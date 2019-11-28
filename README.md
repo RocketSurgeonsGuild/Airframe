@@ -27,14 +27,14 @@ A collection of abstract classes that extend ReactiveUI implementations
 <!-- nuget packages -->
 
 <!-- generated references -->
-[github-release]: https://github.com/RocketSurgeonsGuild/ReactiveUI.Abstractions/releases/latest
-[github-release-badge]: https://img.shields.io/github/release/RocketSurgeonsGuild/ReactiveUI.Abstractions.svg?logo=github&style=flat "Latest Release"
-[github-license]: https://github.com/RocketSurgeonsGuild/ReactiveUI.Abstractions/blob/master/LICENSE
-[github-license-badge]: https://img.shields.io/github/license/RocketSurgeonsGuild/ReactiveUI.Abstractions.svg?style=flat "License"
-[codecov]: https://codecov.io/gh/RocketSurgeonsGuild/ReactiveUI.Abstractions
-[codecov-badge]: https://img.shields.io/codecov/c/github/RocketSurgeonsGuild/ReactiveUI.Abstractions.svg?color=E03997&label=codecov&logo=codecov&logoColor=E03997&style=flat "Code Coverage"
+[github-release]: https://github.com/RocketSurgeonsGuild/Rocket.Surgery.Airframe/releases/latest
+[github-release-badge]: https://img.shields.io/github/release/RocketSurgeonsGuild/Rocket.Surgery.Airframe.svg?logo=github&style=flat "Latest Release"
+[github-license]: https://github.com/RocketSurgeonsGuild/Rocket.Surgery.Airframe/blob/master/LICENSE
+[github-license-badge]: https://img.shields.io/github/license/RocketSurgeonsGuild/Rocket.Surgery.Airframe.svg?style=flat "License"
+[codecov]: https://codecov.io/gh/RocketSurgeonsGuild/Rocket.Surgery.Airframe
+[codecov-badge]: https://img.shields.io/codecov/c/github/RocketSurgeonsGuild/Rocket.Surgery.Airframe.svg?color=E03997&label=codecov&logo=codecov&logoColor=E03997&style=flat "Code Coverage"
 
-[azurepipelines]: https://dev.azure.com/RocketSurgeonsGuild/Libraries/_apis/build/status/RSG.ReactiveUI.Abstractions?branchName=master
+[azurepipelines]: https://dev.azure.com/RocketSurgeonsGuild/Libraries/_apis/build/status/RSG.Airframe?branchName=master
 [azurepipelines-badge]: https://img.shields.io/azure-devops/build/RocketSurgeonsGuild/Libraries/27.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines Status"
 [azurepipelines-history]: https://dev.azure.com/RocketSurgeonsGuild/Libraries/_build/latest?definitionId=27&branchName=master
 [azurepipelines-history-badge]: https://buildstats.info/azurepipelines/chart/RocketSurgeonsGuild/Libraries/27?includeBuildsFromPullRequest=false "Azure Pipelines History"
