@@ -19,12 +19,6 @@ class RocketSurgeryReactiveUI : MsBuild, IMsBuild
     /// </summary>
 
     public static int Main() => Execute<RocketSurgeryReactiveUI>(x => x.Default);
-    Target Default => _ => _
-        .DependsOn(Restore)
-        .DependsOn(Build)
-        .DependsOn(Test)
-        .DependsOn(Pack)
-    ;
 
     public new Target Restore => _ => _.With(this, MsBuild.Restore);
 
@@ -33,4 +27,10 @@ class RocketSurgeryReactiveUI : MsBuild, IMsBuild
     public new Target Test => _ => _.With(this, MsBuild.Test);
 
     public new Target Pack => _ => _.With(this, MsBuild.Pack);
+
+    Target Default => _ => _
+        .DependsOn(Restore)
+        .DependsOn(Build)
+        .DependsOn(Test)
+        .DependsOn(Pack);
 }

@@ -1,4 +1,4 @@
-# Rocket.Surgery.Airframe
+# Airframe
 A collection of abstract classes that extend ReactiveUI implementations
 
 # Status

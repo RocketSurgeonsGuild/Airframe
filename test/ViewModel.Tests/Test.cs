@@ -1,6 +1,6 @@
 using Rocket.Surgery.Airframe;
 
-namespace Rocket.Surgery.ViewModel.Tests
+namespace Rocket.Surgery.Airframe.ViewModel.Tests
 {
     internal class TestViewModel : ViewModelBase
     {

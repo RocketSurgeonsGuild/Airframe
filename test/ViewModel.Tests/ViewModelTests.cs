@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Rocket.Surgery.ViewModel.Tests
+namespace Rocket.Surgery.Airframe.ViewModel.Tests
 {
     public sealed class ViewModelTests
     {
