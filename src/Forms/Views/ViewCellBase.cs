@@ -42,16 +42,16 @@ namespace Rocket.Surgery.Airframe.Forms
         }
 
         /// <summary>
-        /// View lifecycle method that sets up reactive bindings.
+        /// View lifecycle method that initializes the view.
         /// </summary>
-        protected virtual void BindControls()
+        protected virtual void Initialize()
         {
         }
 
         /// <summary>
-        /// View lifecycle method that initializes the view.
+        /// View lifecycle method that sets up reactive bindings.
         /// </summary>
-        protected virtual void Initialize()
+        protected virtual void BindControls()
         {
         }
 

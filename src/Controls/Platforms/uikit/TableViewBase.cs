@@ -1,4 +1,5 @@
-﻿using System.Reactive.Disposables;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Disposables;
 using ReactiveUI;
 using UIKit;
 
@@ -9,6 +10,7 @@ namespace Rocket.Surgery.Airframe
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveTableView{TViewModel}" />
+    [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class TableViewBase<TViewModel> : ReactiveTableView<TViewModel>
         where TViewModel : class, IReactiveObject
     {
@@ -18,6 +20,8 @@ namespace Rocket.Surgery.Airframe
         protected TableViewBase()
         {
             Initialize();
+            BindControls();
+            RegisterObservers();
         }
 
         /// <summary>
@@ -26,19 +30,20 @@ namespace Rocket.Surgery.Airframe
         protected CompositeDisposable ViewBindings { get; } = new CompositeDisposable();
 
         /// <summary>
-        /// View lifecycle method that registers observers via subscriptions.
+        /// View lifecycle method that initializes the view controller.
         /// </summary>
-        protected abstract void RegisterObservers();
+        protected virtual void Initialize()
+        {
+        }
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
         protected abstract void BindControls();
 
-        private void Initialize()
-        {
-            BindControls();
-            RegisterObservers();
-        }
+        /// <summary>
+        /// View lifecycle method that registers observers via subscriptions.
+        /// </summary>
+        protected abstract void RegisterObservers();
     }
 }

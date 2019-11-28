@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Disposables;
 using ReactiveUI;
 using UIKit;
@@ -10,6 +11,7 @@ namespace Rocket.Surgery.Airframe
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveTableViewCell{TViewModel}" />
+    [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class TableViewCellBase<TViewModel> : ReactiveTableViewCell<TViewModel>
         where TViewModel : class, IReactiveObject
     {
@@ -21,6 +23,10 @@ namespace Rocket.Surgery.Airframe
             : base(handle)
         {
             Initialize();
+            CreateCellInterface();
+            BindControls();
+            RegisterObservers();
+            SetNeedsUpdateConstraints();
         }
 
         /// <summary>
@@ -37,9 +43,11 @@ namespace Rocket.Surgery.Airframe
         }
 
         /// <summary>
-        /// View lifecycle method that registers observers via subscriptions.
+        /// View lifecycle method that initializes the view controller.
         /// </summary>
-        protected abstract void RegisterObservers();
+        protected virtual void Initialize()
+        {
+        }
 
         /// <summary>
         /// View lifecycle method that sets up reactive bindings.
@@ -56,12 +64,9 @@ namespace Rocket.Surgery.Airframe
         /// </summary>
         protected abstract void SetupCellConstraints();
 
-        private void Initialize()
-        {
-            CreateCellInterface();
-            BindControls();
-            RegisterObservers();
-            SetNeedsUpdateConstraints();
-        }
+        /// <summary>
+        /// View lifecycle method that registers observers via subscriptions.
+        /// </summary>
+        protected abstract void RegisterObservers();
     }
 }
