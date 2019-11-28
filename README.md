@@ -27,12 +27,12 @@ A collection of abstract classes that extend ReactiveUI implementations
 <!-- nuget packages -->
 
 <!-- generated references -->
-[github-release]: https://github.com/RocketSurgeonsGuild/Rocket.Surgery.Airframe/releases/latest
-[github-release-badge]: https://img.shields.io/github/release/RocketSurgeonsGuild/Rocket.Surgery.Airframe.svg?logo=github&style=flat "Latest Release"
-[github-license]: https://github.com/RocketSurgeonsGuild/Rocket.Surgery.Airframe/blob/master/LICENSE
-[github-license-badge]: https://img.shields.io/github/license/RocketSurgeonsGuild/Rocket.Surgery.Airframe.svg?style=flat "License"
-[codecov]: https://codecov.io/gh/RocketSurgeonsGuild/Rocket.Surgery.Airframe
-[codecov-badge]: https://img.shields.io/codecov/c/github/RocketSurgeonsGuild/Rocket.Surgery.Airframe.svg?color=E03997&label=codecov&logo=codecov&logoColor=E03997&style=flat "Code Coverage"
+[github-release]: https://github.com/RocketSurgeonsGuild/Airframe/releases/latest
+[github-release-badge]: https://img.shields.io/github/release/RocketSurgeonsGuild/Airframe.svg?logo=github&style=flat "Latest Release"
+[github-license]: https://github.com/RocketSurgeonsGuild/Airframe/blob/master/LICENSE
+[github-license-badge]: https://img.shields.io/github/license/RocketSurgeonsGuild/Airframe.svg?style=flat "License"
+[codecov]: https://codecov.io/gh/RocketSurgeonsGuild/Airframe
+[codecov-badge]: https://img.shields.io/codecov/c/github/RocketSurgeonsGuild/Airframe.svg?color=E03997&label=codecov&logo=codecov&logoColor=E03997&style=flat "Code Coverage"
 
 [azurepipelines]: https://dev.azure.com/RocketSurgeonsGuild/Libraries/_apis/build/status/RSG.Airframe?branchName=master
 [azurepipelines-badge]: https://img.shields.io/azure-devops/build/RocketSurgeonsGuild/Libraries/27.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines Status"
