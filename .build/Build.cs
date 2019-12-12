@@ -8,7 +8,7 @@ using Rocket.Surgery.Nuke.MsBuild;
 
 [CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
-class RocketSurgeryReactiveUI : MsBuild, IMsBuild
+class Airframe : MsBuild, IMsBuild
 {
     /// <summary>
     /// Support plugins are available for:
@@ -18,7 +18,7 @@ class RocketSurgeryReactiveUI : MsBuild, IMsBuild
     ///   - Microsoft VSCode           https://nuke.build/vscode
     /// </summary>
 
-    public static int Main() => Execute<RocketSurgeryReactiveUI>(x => x.Default);
+    public static int Main() => Execute<Airframe>(x => x.Default);
 
     public new Target Restore => _ => _.With(this, MsBuild.Restore);
 
