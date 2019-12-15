@@ -10,8 +10,6 @@ using Foundation;
 using ReactiveUI;
 using Rocket.Surgery.ReactiveUI;
 using IReactiveObjectExtensions = Rocket.Surgery.ReactiveUI.IReactiveObjectExtensions;
-using PropertyChangingEventArgs = ReactiveUI.PropertyChangingEventArgs;
-using PropertyChangingEventHandler = ReactiveUI.PropertyChangingEventHandler;
 
 namespace Rocket.Surgery.Airframe
 {
