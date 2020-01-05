@@ -5,8 +5,10 @@
         <PackageReference Update="DynamicData" Version="6.*" />
         <PackageReference Update="ReactiveUI" Version="10.*" />
         <PackageReference Update="ReactiveUI.XamForms" Version="10.*" />
+        <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
+        <PackageReference Update="RxUI.Plugins.Popup" Version="*" />
         <PackageReference Update="Splat" Version="9.*" />
         <PackageReference Update="System.Collections.Immutable" Version="1.5.0" />
         <PackageReference Update="System.Interactive.Async.Providers" Version="3.2.0" />

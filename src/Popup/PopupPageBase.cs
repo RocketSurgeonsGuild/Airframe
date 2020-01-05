@@ -1,32 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
-using System.Text;
 using ReactiveUI;
 using ReactiveUI.XamForms;
+using RxUI.Plugins.Popup;
 
-namespace Rocket.Surgery.Airframe.Forms
+namespace Rocket.Surgery.Airframe.Popup
 {
-#pragma warning disable CA2214 // Do not call overridable methods in constructors
     /// <summary>
-    /// Base ReactiveUI <see cref="ReactiveContentPage{TViewModel}"/>.
+    /// Base ReactiveUI <see cref="ReactivePopupPage{TViewModel}"/>.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveContentPage{TViewModel}" />
     [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
-    public abstract class ContentPageBase<TViewModel> : ReactiveContentPage<TViewModel>
+    public abstract class PopupPageBase<TViewModel> : ReactivePopupPage<TViewModel>
         where TViewModel : class, IReactiveObject
     {
         private readonly ISubject<Unit> _isAppearing;
         private readonly ISubject<Unit> _isDisappearing;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContentPageBase{TViewModel}"/> class.
+        /// Initializes a new instance of the <see cref="PopupPageBase{TViewModel}"/> class.
         /// </summary>
-        protected ContentPageBase()
+        protected PopupPageBase()
         {
             _isAppearing = new Subject<Unit>();
             _isDisappearing = new Subject<Unit>();
@@ -67,13 +65,6 @@ namespace Rocket.Surgery.Airframe.Forms
         }
 
         /// <summary>
-        /// View lifecycle method that registers observers via subscriptions.
-        /// </summary>
-        protected virtual void RegisterObservers()
-        {
-        }
-
-        /// <summary>
         /// View lifecycle method that sets up reactive bindings.
         /// </summary>
         protected virtual void BindControls()
@@ -86,6 +77,12 @@ namespace Rocket.Surgery.Airframe.Forms
         protected virtual void Initialize()
         {
         }
-#pragma warning restore CA2214 // Do not call overridable methods in constructors
+
+        /// <summary>
+        /// View lifecycle method that registers observers via subscriptions.
+        /// </summary>
+        protected virtual void RegisterObservers()
+        {
+        }
     }
 }

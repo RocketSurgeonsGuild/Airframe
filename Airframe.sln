@@ -39,11 +39,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Forms.nuspec = .nuspec\Forms.nuspec
 		.nuspec\ViewModels.nuspec = .nuspec\ViewModels.nuspec
 		.nuspec\Configuration.nuspec = .nuspec\Configuration.nuspec
+		.nuspec\Popup.nuspec = .nuspec\Popup.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "src\Configuration\Configuration.csproj", "{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".build", ".build\.build.csproj", "{8322904C-5A48-4A92-A5EA-2AF91F8C4595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Popup", "src\Popup\Popup.csproj", "{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +78,10 @@ Global
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +93,7 @@ Global
 		{94F40576-6748-40AB-A541-ED6A45035796} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595} = {001008EE-6848-47BA-9F6C-A89B0E74D737}
+		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F0DF64A-C8D5-41DF-B4C9-5C70526644DF}
