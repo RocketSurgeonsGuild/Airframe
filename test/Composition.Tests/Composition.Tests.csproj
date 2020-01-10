@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="FluentAssertions" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="ReactiveUI" />
+        <PackageReference Include="Rocket.Surgery.Extensions.Testing.Fixtures" />
+        <PackageReference Include="Splat" />
+        <PackageReference Include="Splat.DryIoc" />
+        <PackageReference Include="System.ComponentModel" />
+        <PackageReference Include="System.Reactive" />
+        <PackageReference Include="xunit" />
+        <PackageReference Include="xunit.runner.visualstudio" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Composition\Composition.csproj" />
+      <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Mock\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Mock\**" />
+      <Compile Remove="ApplicationBaseTests.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Mock\**" />
+    </ItemGroup>
+
+</Project>

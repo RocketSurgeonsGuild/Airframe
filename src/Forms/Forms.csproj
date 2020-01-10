@@ -9,8 +9,12 @@
     <Description>ReactiveUI base abstractions for Xamarin Forms.</Description>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>Rocket.Surgery.Airframe.Forms.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\Rocket.Surgery.Airframe.Forms.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\Rocket.Surgery.Airframe.Forms.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +24,10 @@
 
   <ItemGroup>
     <PackageReference Include="ReactiveUI.XamForms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Composition\Composition.csproj" />
   </ItemGroup>
 
 </Project>

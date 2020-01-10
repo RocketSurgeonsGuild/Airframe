@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
-using Autofac.Core;
+﻿using DryIoc;
 using ReactiveUI;
 
-namespace Rocket.Surgery.Airframe
+namespace Rocket.Surgery.Airframe.Composition
 {
     /// <summary>
     /// Builds a composition root.
     /// </summary>
     public sealed class CompositionBuilder
     {
-        private readonly ContainerBuilder _containerBuilder;
+        private readonly IContainer _container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionBuilder"/> class.
         /// </summary>
-        public CompositionBuilder()
+        /// <param name="container">The container instance.</param>
+        public CompositionBuilder(IContainer container = null)
         {
-            _containerBuilder = new ContainerBuilder();
+            _container = container ?? new Container();
         }
 
         /// <summary>
@@ -30,7 +27,7 @@ namespace Rocket.Surgery.Airframe
         public CompositionBuilder RegisterModule<TModule>()
             where TModule : IModule, new()
         {
-            _containerBuilder.RegisterModule<TModule>();
+            _container.RegisterModule<TModule>();
             return this;
         }
 
@@ -43,7 +40,7 @@ namespace Rocket.Surgery.Airframe
         public CompositionBuilder RegisterModule<TModule>(TModule module)
             where TModule : IModule
         {
-            _containerBuilder.RegisterModule(module);
+            _container.RegisterModule(module);
             return this;
         }
 
@@ -56,8 +53,9 @@ namespace Rocket.Surgery.Airframe
         /// The composition builder.
         /// </returns>
         public CompositionBuilder RegisterCommandBinders<TInterface, TClass>()
+            where TClass : class, TInterface
         {
-            _containerBuilder.RegisterType<TClass>().As<TInterface>().SingleInstance();
+            _container.Register<TInterface, TClass>(Reuse.Singleton);
             return this;
         }
 
@@ -68,10 +66,10 @@ namespace Rocket.Surgery.Airframe
         /// <typeparam name="TViewModel">The type of the view model.</typeparam>
         /// <returns>The composition builder.</returns>
         public CompositionBuilder RegisterView<TView, TViewModel>()
-            where TView : IViewFor
+            where TView : IViewFor<TViewModel>
             where TViewModel : class
         {
-            _containerBuilder.RegisterType<TView>().As<IViewFor<TViewModel>>();
+            _container.Register<IViewFor<TViewModel>, TView>();
             return this;
         }
 
@@ -83,7 +81,7 @@ namespace Rocket.Surgery.Airframe
         public CompositionBuilder RegisterViewModel<T>()
             where T : class
         {
-            _containerBuilder.RegisterType<T>().AsSelf();
+            _container.Register<T>();
             return this;
         }
 
@@ -91,6 +89,13 @@ namespace Rocket.Surgery.Airframe
         /// Compose the <see cref="IContainer"/>.
         /// </summary>
         /// <returns>The container.</returns>
-        public IContainer Compose() => _containerBuilder.Build();
+        public IContainer Compose() => _container.WithNoMoreRegistrationAllowed();
+
+        /// <summary>
+        /// Compose the <see cref="IContainer"/>.
+        /// </summary>
+        /// <param name="ignore">Ignore instead of throw.</param>
+        /// <returns>The container.</returns>
+        public IContainer Compose(bool ignore) => _container.WithNoMoreRegistrationAllowed(ignore);
     }
 }

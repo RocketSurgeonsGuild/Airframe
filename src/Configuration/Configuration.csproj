@@ -6,4 +6,12 @@
         <AssemblyName>Rocket.Surgery.Airframe.Configuration</AssemblyName>
     </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\Rocket.Surgery.Airframe.Configuration.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\Rocket.Surgery.Airframe.Configuration.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

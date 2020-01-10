@@ -9,6 +9,14 @@
         <Description>ReactiveUI base abstractions for Rg.Plugins.Popup</Description>
     </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\Rocket.Surgery.Airframe.Popup.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\Rocket.Surgery.Airframe.Popup.xml</DocumentationFile>
+  </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="ReactiveUI.XamForms" />
         <PackageReference Include="Rg.Plugins.Popup" />

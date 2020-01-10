@@ -1,15 +1,18 @@
 <Project>
     <ItemGroup>
         <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
-        <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Update="DryIoc" Version="4.0.*" />
         <PackageReference Update="DynamicData" Version="6.*" />
+        <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
         <PackageReference Update="ReactiveUI" Version="10.*" />
         <PackageReference Update="ReactiveUI.XamForms" Version="10.*" />
         <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
-        <PackageReference Update="RxUI.Plugins.Popup" Version="*" />
+        <PackageReference Update="RxUI.Plugins.Popup" Version="0.*" />
         <PackageReference Update="Splat" Version="9.*" />
+        <PackageReference Update="Splat.DryIoc" Version="9.*" />
+        <PackageReference Update="System.ComponentModel" Version="4.3.0" />
         <PackageReference Update="System.Collections.Immutable" Version="1.5.0" />
         <PackageReference Update="System.Interactive.Async.Providers" Version="3.2.0" />
         <PackageReference Update="System.Interactive.Providers" Version="3.2.0" />
@@ -26,11 +29,12 @@
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Update="coverlet.collector" Version="1.0.1" />
         <PackageReference Update="coverlet.msbuild" Version="2.3.0" />
         <PackageReference Update="FluentAssertions" Version="5.4.2" />
         <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.9.0" />
         <PackageReference Update="NSubstitute" Version="3.1.0" />
-        <PackageReference Update="Rocket.Surgery.Extensions.Testing.Fixtures" Version="1.0.0" />
+        <PackageReference Update="Rocket.Surgery.Extensions.Testing.Fixtures" Version="3.3.0" />
         <PackageReference Update="xunit" Version="2.4.0" />
         <PackageReference Update="xunit.runner.visualstudio" Version="2.4.0" />
         <PackageReference Update="XunitXml.TestLogger" Version="2.0.0" />
