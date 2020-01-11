@@ -18,11 +18,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" />
+    <PackageReference Include="DynamicData" />
     <PackageReference Include="System.Reactive" />
     <PackageReference Include="System.Reactive.Compatibility" />
     <PackageReference Include="Splat" />
-    <PackageReference Include="DynamicData" />
+    <PackageReference Include="ReactiveUI" />
     <PackageReference Include="ReactiveUI.XamForms" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials.Abstractions" />

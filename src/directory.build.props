@@ -4,9 +4,9 @@
         <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\analyzers.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="stylecop.analyzers" Version="1.1.1-beta.61" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="all" />
-        <PackageReference Include="Roslynator.Analyzers" Version="2.2.0" PrivateAssets="All" />
+        <PackageReference Include="stylecop.analyzers" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" />
+        <PackageReference Include="Roslynator.Analyzers" />
     </ItemGroup>
     <ItemGroup>
         <AdditionalFiles Include="$(MSBuildThisFileDirectory)..\stylecop.json" Link="stylecop.json" />

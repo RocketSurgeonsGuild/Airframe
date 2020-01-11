@@ -8,6 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="coverlet.collector" />
+      <PackageReference Include="coverlet.msbuild" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" />
       <PackageReference Include="ReactiveUI" />
       <PackageReference Include="System.Reactive" />

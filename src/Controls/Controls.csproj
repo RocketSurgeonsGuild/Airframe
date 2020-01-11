@@ -22,7 +22,6 @@
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="Splat" />
     <PackageReference Include="System.Reactive" />
-    <PackageReference Include="System.Reactive.Compatibility" />
     <Reference Include="netstandard" />
   </ItemGroup>
   
