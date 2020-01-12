@@ -5,6 +5,7 @@ using System.Reactive.Disposables;
 using System.Text;
 using ReactiveUI;
 using ReactiveUI.XamForms;
+using Splat;
 using Xamarin.Forms;
 
 namespace Rocket.Surgery.Airframe.Forms
@@ -15,7 +16,7 @@ namespace Rocket.Surgery.Airframe.Forms
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveViewCell{TViewModel}" />
     [SuppressMessage("Microsoft.Usage", "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
-    public abstract class ViewCellBase<TViewModel> : ReactiveViewCell<TViewModel>
+    public abstract class ViewCellBase<TViewModel> : ReactiveViewCell<TViewModel>, IEnableLogger
         where TViewModel : class, IReactiveObject
     {
         /// <summary>
@@ -23,10 +24,16 @@ namespace Rocket.Surgery.Airframe.Forms
         /// </summary>
         protected ViewCellBase()
         {
+            Logger = this.Log();
             Initialize();
             BindControls();
             RegisterObservers();
         }
+
+        /// <summary>
+        /// Gets or sets the <see cref="IFullLogger"/>.
+        /// </summary>
+        public IFullLogger Logger { get; protected set; }
 
         /// <summary>
         /// Gets the view cell bindings.

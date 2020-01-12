@@ -5,6 +5,7 @@ using System.Reactive.Disposables;
 using System.Text;
 using ReactiveUI;
 using ReactiveUI.XamForms;
+using Splat;
 
 namespace Rocket.Surgery.Airframe.Forms
 {
@@ -14,7 +15,7 @@ namespace Rocket.Surgery.Airframe.Forms
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveContentView{TViewModel}" />
     [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
-    public abstract class ContentViewBase<TViewModel> : ReactiveContentView<TViewModel>
+    public abstract class ContentViewBase<TViewModel> : ReactiveContentView<TViewModel>, IEnableLogger
         where TViewModel : class, IReactiveObject
     {
         /// <summary>
@@ -22,10 +23,16 @@ namespace Rocket.Surgery.Airframe.Forms
         /// </summary>
         protected ContentViewBase()
         {
+            Logger = this.Log();
             Initialize();
             BindControls();
             RegisterObservers();
         }
+
+        /// <summary>
+        /// Gets or sets the <see cref="IFullLogger"/>.
+        /// </summary>
+        public IFullLogger Logger { get; protected set; }
 
         /// <summary>
         /// Gets the view bindings disposable.
