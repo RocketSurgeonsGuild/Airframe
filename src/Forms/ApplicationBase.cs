@@ -5,6 +5,7 @@ using System.Text;
 using DryIoc;
 using Rocket.Surgery.Airframe.Composition;
 using Splat;
+using Splat.DryIoc;
 using Xamarin.Forms;
 
 namespace Rocket.Surgery.Airframe.Forms
@@ -64,6 +65,7 @@ namespace Rocket.Surgery.Airframe.Forms
             _platformRegistrar?.RegisterPlatformServices(_container);
             RegisterServices(_container);
             Container = _container.WithNoMoreRegistrationAllowed();
+            Container.UseDryIocDependencyResolver();
         }
 
         /// <summary>
