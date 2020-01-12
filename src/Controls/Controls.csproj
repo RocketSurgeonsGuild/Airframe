@@ -38,4 +38,8 @@
     <Compile Include="Platforms\appkit\**\*.cs" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
 </Project>
