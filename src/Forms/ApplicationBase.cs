@@ -64,8 +64,8 @@ namespace Rocket.Surgery.Airframe.Forms
             _container = CreateContainer();
             _platformRegistrar?.RegisterPlatformServices(_container);
             RegisterServices(_container);
+            _container.UseDryIocDependencyResolver();
             Container = _container.WithNoMoreRegistrationAllowed();
-            Container.UseDryIocDependencyResolver();
         }
 
         /// <summary>

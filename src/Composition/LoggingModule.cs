@@ -25,7 +25,7 @@ namespace Rocket.Surgery.Airframe.Composition
 
             registrar.RegisterInstance<Serilog.ILogger>(Log.Logger);
             registrar.Register<IFullLogger, SerilogFullLogger>(Reuse.Singleton);
-            registrar.RegisterDelegate(ctx => funcLogManager, reuse: Reuse.Singleton);
+            registrar.RegisterInstance<FuncLogManager>(funcLogManager);
         }
     }
 }
