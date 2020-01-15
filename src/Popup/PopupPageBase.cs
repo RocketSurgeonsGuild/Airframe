@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using ReactiveUI;
 using ReactiveUI.XamForms;
@@ -42,13 +43,13 @@ namespace Rocket.Surgery.Airframe.Popup
         /// Gets an observable sequence when the view is appearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        protected virtual IObservable<Unit> IsAppearing => _isAppearing;
+        protected virtual IObservable<Unit> IsAppearing => _isAppearing.AsObservable();
 
         /// <summary>
         /// Gets an observable sequence when the view is disappearing.
         /// </summary>
         /// <returns>The appearing notification.</returns>
-        protected virtual IObservable<Unit> IsDisappearing => _isAppearing;
+        protected virtual IObservable<Unit> IsDisappearing => _isDisappearing.AsObservable();
 
         /// <inheritdoc />
         protected override void OnAppearing()

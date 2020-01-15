@@ -31,10 +31,11 @@ namespace Rocket.Surgery.Airframe.Composition
         /// <inheritdoc />
         public override void Load(IRegistrator registrar)
         {
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo
-                .AppCenterCrashes(_appCenterSecret)
-                .CreateLogger();
+            Log.Logger =
+                new LoggerConfiguration()
+                    .WriteTo
+                    .AppCenterCrashes(_appCenterSecret)
+                    .CreateLogger();
 
             var funcLogManager = new FuncLogManager(type =>
             {
