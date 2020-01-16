@@ -21,6 +21,7 @@
     <PackageReference Include="DynamicData" />
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="Splat" />
+    <PackageReference Include="Splat.DryIoc" />
     <PackageReference Include="System.Reactive" />
     <Reference Include="netstandard" />
   </ItemGroup>
