@@ -1,4 +1,5 @@
 using Rocket.Surgery.Airframe;
+using Rocket.Surgery.Airframe.ViewModels;
 
 namespace Rocket.Surgery.Airframe.ViewModel.Tests
 {

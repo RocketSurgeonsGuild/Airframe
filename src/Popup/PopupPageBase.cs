@@ -7,6 +7,10 @@ using System.Reactive.Subjects;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using RxUI.Plugins.Popup;
+using Xamarin.Forms;
+
+[assembly: XmlnsPrefix("https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup", "popup")]
+[assembly: XmlnsDefinition("https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup", "Rocket.Surgery.Airframe.Popup")]
 
 namespace Rocket.Surgery.Airframe.Popup
 {
