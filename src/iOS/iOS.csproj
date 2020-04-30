@@ -1,0 +1,15 @@
+<Project Sdk="MSBuild.Sdk.Extras">
+
+    <PropertyGroup>
+        <TargetFramework>Xamarin.iOS10</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Airframe.iOS</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.iOS</RootNamespace>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="netstandard" />
+        <Reference Include="System.Runtime.Serialization" />
+    </ItemGroup>
+
+</Project>
