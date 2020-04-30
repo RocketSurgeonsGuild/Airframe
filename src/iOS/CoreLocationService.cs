@@ -6,7 +6,32 @@ using Foundation;
 
 namespace Rocket.Surgery.Airframe.iOS
 {
-    public class CoreLocationService
+    public interface ICoreLocationService
+    {
+        /// <summary>
+        /// Gets or sets the location update notifications.
+        /// </summary>
+        IObservable<CLLocationUpdatedEventArgs> LocationUpdated { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the monitoring failed.
+        /// </summary>
+        IObservable<CLRegionErrorEventArgs> MonitoringFailed { get; set; }
+
+        /// <summary>
+        /// Gets or sets an observable sequence of Visited events.
+        /// </summary>
+        IObservable<CLVisitedEventArgs> Visited { get; set; }
+        IObservable<NSErrorEventArgs> DeferredUpdatesFinished { get; set; }
+        IObservable<CLRegionStateDeterminedEventArgs> RegionStateDetermined { get; set; }
+        IObservable<CLRegionEventArgs> MonitoringRegion { get; set; }
+        IObservable<EventPattern<object>> LocationUpdatesResumed { get; set; }
+        IObservable<EventPattern<object>> LocationUpdatesPaused { get; set; }
+        IObservable<CLLocationsUpdatedEventArgs> LocationsUpdated { get; set; }
+        IObservable<CLAuthorizationChangedEventArgs> AuthorizationChanged { get; set; }
+    }
+
+    public class CoreLocationService : ICoreLocationService
     {
         private readonly Lazy<CLLocationManager> _locationManager = new Lazy<CLLocationManager>();
 
