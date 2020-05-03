@@ -1,0 +1,54 @@
+<Project Sdk="MSBuild.Sdk.Extras">
+
+    <PropertyGroup>
+        <TargetFramework>Xamarin.iOS10</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Airframe.Apple</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Apple</RootNamespace>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="netstandard" />
+        <Reference Include="System.Runtime.Serialization" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Location\ICoreLocationManager.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Location\CoreLocationManager.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Geofence\GeoRegion.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Notifications\LocationsUpdatedNotification.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Notifications\LocationUpdatedNotification.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Notifications\RegionChangedNotification.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Notifications\RegionErrorNotification.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Notifications\RegionState.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Notifications\VisitedNotification.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Location\CoreLocationService.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Location\ICoreLocationService.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Location\ILocationManager.cs">
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+</Project>

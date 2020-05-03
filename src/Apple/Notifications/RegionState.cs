@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.iOS.Notifications
+namespace Rocket.Surgery.Airframe.Apple.Notifications
 {
     /// <summary>
     /// Enumeration of Region State.

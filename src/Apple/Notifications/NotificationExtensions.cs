@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reactive;
 using CoreLocation;
+using Foundation;
 
-namespace Rocket.Surgery.Airframe.iOS.Notifications
+namespace Rocket.Surgery.Airframe.Apple.Notifications
 {
     public static class NotificationExtensions
     {
@@ -45,35 +48,67 @@ namespace Rocket.Surgery.Airframe.iOS.Notifications
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static LocationUpdatedNotification ToNotification(this CLLocationUpdatedEventArgs args) =>
+        public static LocationUpdatedNotification ToNotification(CLLocationUpdatedEventArgs args) =>
             new LocationUpdatedNotification
             {
-                Previous = new Location(args.OldLocation.Coordinate.Latitude, args.OldLocation.Coordinate.Longitude),
-                Current = new Location(args.OldLocation.Coordinate.Latitude, args.OldLocation.Coordinate.Longitude)
+                Previous = args.OldLocation.Coordinate.ToLocation(),
+                Current = args.NewLocation.Coordinate.ToLocation()
             };
 
         /// <summary>
-        /// Converts the <see cref="CLRegionEventArgs"/> to <see cref="RegionNotification"/>.
+        /// Converts the <see cref="CLRegionEventArgs"/> to <see cref="RegionChangedNotification"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static RegionNotification ToNotification(this CLRegionEventArgs args) =>
-            new RegionNotification
+        public static RegionChangedNotification ToNotification(this CLRegionEventArgs args) =>
+            new RegionChangedNotification
             {
                 Region = args.Region.ToGeoRegion()
             };
 
         /// <summary>
-        /// Converts the <see cref="CLRegionEventArgs"/> to <see cref="RegionNotification"/>.
+        /// Converts the <see cref="CLRegionStateDeterminedEventArgs"/> to <see cref="RegionChangedNotification"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static RegionStateDeterminedNotification ToNotification(this CLRegionStateDeterminedEventArgs args) =>
-            new RegionStateDeterminedNotification
+        public static RegionChangedNotification ToNotification(this CLRegionStateDeterminedEventArgs args) =>
+            new RegionChangedNotification
             {
                 Region = args.Region.ToGeoRegion(),
                 State = RegionStates[args.State]
             };
+
+        /// <summary>
+        /// Converts the <see cref="CLRegionStateDeterminedEventArgs"/> to <see cref="ErrorNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The notification.</returns>
+        public static ErrorNotification ToNotification(this NSErrorEventArgs args) =>
+            new ErrorNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLVisitedEventArgs"/> to <see cref="VisitedNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The notification.</returns>
+        public static VisitedNotification ToNotification(this CLVisitedEventArgs args) =>
+            new VisitedNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The notification.</returns>
+        public static RegionErrorNotification ToNotification(this CLRegionErrorEventArgs args) =>
+            new RegionErrorNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="obj">The object.</param>
+        /// <returns>The notification.</returns>
+        public static Unit ToNotification(this object obj) => Unit.Default;
 
         /// <summary>
         /// Converts a <see cref="CLRegion"/> to a <see cref="GeoRegion"/>.
@@ -82,13 +117,13 @@ namespace Rocket.Surgery.Airframe.iOS.Notifications
         /// <returns>The converted value.</returns>
         public static GeoRegion ToGeoRegion(this CLRegion region) =>
             new GeoRegion
-        {
-            Identifier = region.Identifier,
-            Center = region.Center.ToLocation(),
-            Radius = region.Radius,
-            NotifyOnEntry = region.NotifyOnEntry,
-            NotifyOnExit = region.NotifyOnExit
-        };
+            {
+                Identifier = region.Identifier,
+                Center = region.Center.ToLocation(),
+                Radius = region.Radius,
+                NotifyOnEntry = region.NotifyOnEntry,
+                NotifyOnExit = region.NotifyOnExit
+            };
 
         /// <summary>
         /// Converts the <see cref="CLLocationCoordinate2D"/> to a <see cref="Location"/>.

@@ -1,36 +1,32 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.iOS.Notifications
+namespace Rocket.Surgery.Airframe.Apple.Notifications
 {
     /// <summary>
-    /// Represents a geographical region.
+    /// Represents a latitude and longitude.
     /// </summary>
-    public class GeoRegion : IDisposable
+    public class Location : IDisposable
     {
         /// <summary>
-        /// Gets or sets the region identifier.
+        /// Initializes a new instance of the <see cref="Location"/> class.
         /// </summary>
-        public string Identifier { get; set; }
+        /// <param name="latitude">The latitude.</param>
+        /// <param name="longitude">The longitude.</param>
+        public Location(double latitude, double longitude)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+        }
 
         /// <summary>
-        /// Gets or sets the center.
+        /// Gets the latitude.
         /// </summary>
-        public Location Center { get; set; }
+        public double Latitude { get; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to notify on entry of the region.
+        /// Gets the longitude.
         /// </summary>
-        public bool NotifyOnEntry { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to notify on exiting the region.
-        /// </summary>
-        public bool NotifyOnExit { get; set; }
-
-        /// <summary>
-        /// Gets or sets the radius of the region.
-        /// </summary>
-        public double Radius { get; set; }
+        public double Longitude { get; }
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.

@@ -8,7 +8,6 @@
     <PackageId>Rocket.Surgery.Airframe</PackageId>
     <Description>ReactiveUI base platform abstractions.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">

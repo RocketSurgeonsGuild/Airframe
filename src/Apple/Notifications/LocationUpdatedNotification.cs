@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.iOS.Notifications
+namespace Rocket.Surgery.Airframe.Apple.Notifications
 {
     /// <summary>
     /// Notification of a <see cref="Location"/> update.

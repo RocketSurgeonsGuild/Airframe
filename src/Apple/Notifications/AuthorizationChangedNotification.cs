@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.iOS.Notifications
+namespace Rocket.Surgery.Airframe.Apple.Notifications
 {
     /// <summary>
     /// Event argument that notifies an authorization state change.

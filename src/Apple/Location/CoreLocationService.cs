@@ -3,63 +3,10 @@ using System.Reactive;
 using System.Reactive.Linq;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe.iOS.Notifications;
+using Rocket.Surgery.Airframe.Apple.Notifications;
 
-namespace Rocket.Surgery.Airframe.iOS
+namespace Rocket.Surgery.Airframe.Apple
 {
-    public interface ICoreLocationService
-    {
-        /// <summary>
-        /// Gets or sets the location update notifications.
-        /// </summary>
-        IObservable<LocationUpdatedNotification> LocationUpdated { get; }
-
-        /// <summary>
-        /// Gets or sets whether the monitoring failed.
-        /// </summary>
-        IObservable<CLRegionErrorEventArgs> MonitoringFailed { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence of Visited events.
-        /// </summary>
-        IObservable<CLVisitedEventArgs> Visited { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence of deferred update completions.
-        /// </summary>
-        IObservable<NSErrorEventArgs> DeferredUpdatesFinished { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence of notifications when region state is determined.
-        /// </summary>
-        IObservable<RegionStateDeterminedNotification> RegionStateDetermined { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence of regions being monitored.
-        /// </summary>
-        IObservable<RegionNotification> MonitoringRegion { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence notifying when location updates resume.
-        /// </summary>
-        public IObservable<Unit> LocationUpdatesResumed { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence notifying when location updates paused.
-        /// </summary>
-        public IObservable<Unit> LocationUpdatesPaused { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence notifying when location updates resume.
-        /// </summary>
-        IObservable<LocationsUpdatedNotification> LocationsUpdated { get; }
-
-        /// <summary>
-        /// Gets or sets an observable sequence notifying that authorization change.
-        /// </summary>
-        IObservable<AuthorizationChangedNotification> AuthorizationChanged { get; }
-    }
-
     public class CoreLocationService : ICoreLocationService
     {
         private readonly ILocationManager _locationManager;
@@ -82,86 +29,89 @@ namespace Rocket.Surgery.Airframe.iOS
                         },
                         x => _locationManager.AuthorizationChanged += x,
                         x => _locationManager.AuthorizationChanged -= x)
-                    .Select(args => args.ToNotification());
+                    .Select(NotificationExtensions.ToNotification);
 
             LocationsUpdated =
                 Observable
                     .FromEvent<EventHandler<CLLocationsUpdatedEventArgs>, CLLocationsUpdatedEventArgs>(
                         x => _locationManager.LocationsUpdated += x,
                         x => _locationManager.LocationsUpdated -= x)
-                    .Select(args => args.ToNotification());
+                    .Select(NotificationExtensions.ToNotification);
 
             LocationUpdated =
                 Observable
                     .FromEvent<EventHandler<CLLocationUpdatedEventArgs>, CLLocationUpdatedEventArgs>(
                         x => _locationManager.UpdatedLocation += x,
                         x => _locationManager.UpdatedLocation -= x)
-                    .Select(args => args.ToNotification());
+                    .Select(NotificationExtensions.ToNotification);
 
             LocationUpdatesPaused =
                 Observable
                     .FromEventPattern(
                         x => _locationManager.LocationUpdatesPaused += x,
                         x => _locationManager.LocationUpdatesPaused -= x)
-                    .Select(_ => Unit.Default);
+                    .Select(NotificationExtensions.ToNotification);
 
             LocationUpdatesResumed =
                 Observable
                     .FromEventPattern(
                         x => _locationManager.LocationUpdatesResumed += x,
                         x => _locationManager.LocationUpdatesResumed -= x)
-                    .Select(_ => Unit.Default);
+                    .Select(NotificationExtensions.ToNotification);
 
             MonitoringRegion =
                 Observable
                     .FromEvent<EventHandler<CLRegionEventArgs>, CLRegionEventArgs>(
                         x => _locationManager.DidStartMonitoringForRegion += x,
                         x => _locationManager.DidStartMonitoringForRegion -= x)
-                    .Select(args => args.ToNotification());
+                    .Select(NotificationExtensions.ToNotification);
 
             RegionStateDetermined =
                 Observable
                     .FromEvent<EventHandler<CLRegionStateDeterminedEventArgs>, CLRegionStateDeterminedEventArgs>(
                         x => _locationManager.DidDetermineState += x,
                         x => _locationManager.DidDetermineState -= x)
-                    .Select(x => x.ToNotification());
+                    .Select(NotificationExtensions.ToNotification);
 
             DeferredUpdatesFinished =
                 Observable
                     .FromEvent<EventHandler<NSErrorEventArgs>, NSErrorEventArgs>(
                         x => _locationManager.DeferredUpdatesFinished += x,
-                        x => _locationManager.DeferredUpdatesFinished -= x);
+                        x => _locationManager.DeferredUpdatesFinished -= x)
+                    .Select(NotificationExtensions.ToNotification);
 
             Visited =
                 Observable
                     .FromEvent<EventHandler<CLVisitedEventArgs>, CLVisitedEventArgs>(
                         x => _locationManager.DidVisit += x,
-                        x => _locationManager.DidVisit -= x);
+                        x => _locationManager.DidVisit -= x)
+                    .Select(NotificationExtensions.ToNotification);
 
             MonitoringFailed =
                 Observable
                     .FromEvent<EventHandler<CLRegionErrorEventArgs>, CLRegionErrorEventArgs>(
                         x => _locationManager.MonitoringFailed += x,
-                        x => _locationManager.MonitoringFailed -= x);
+                        x => _locationManager.MonitoringFailed -= x)
+                    .Select(NotificationExtensions.ToNotification);
         }
 
         /// <inheritdoc/>
         public IObservable<LocationUpdatedNotification> LocationUpdated { get; }
 
         /// <inheritdoc/>
-        public IObservable<CLRegionErrorEventArgs> MonitoringFailed { get; }
+        public IObservable<RegionErrorNotification> MonitoringFailed { get; }
 
         /// <inheritdoc/>
-        public IObservable<CLVisitedEventArgs> Visited { get; set; }
+        public IObservable<VisitedNotification> Visited { get; }
 
         /// <inheritdoc/>
-        public IObservable<NSErrorEventArgs> DeferredUpdatesFinished { get; }
+        public IObservable<ErrorNotification> DeferredUpdatesFinished { get; }
 
         /// <inheritdoc/>
-        public IObservable<RegionStateDeterminedNotification> RegionStateDetermined { get; }
+        public IObservable<RegionChangedNotification> RegionStateDetermined { get; }
 
         /// <inheritdoc/>
-        public IObservable<RegionNotification> MonitoringRegion { get; }
+        public IObservable<RegionChangedNotification> MonitoringRegion { get; }
 
         /// <inheritdoc/>
         public IObservable<Unit> LocationUpdatesResumed { get; }
