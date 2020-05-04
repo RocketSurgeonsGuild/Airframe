@@ -1,6 +1,6 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Apple.Notifications
+namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
     /// Represents a latitude and longitude.

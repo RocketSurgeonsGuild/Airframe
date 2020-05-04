@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reactive;
 using CoreLocation;
 using Foundation;
+using Rocket.Surgery.Airframe.Apple.Notifications;
 
-namespace Rocket.Surgery.Airframe.Apple.Notifications
+namespace Rocket.Surgery.Airframe.Apple
 {
     public static class NotificationExtensions
     {
@@ -34,6 +35,46 @@ namespace Rocket.Surgery.Airframe.Apple.Notifications
         /// <returns>The changed notification.</returns>
         public static AuthorizationChangedNotification ToNotification(this CLAuthorizationChangedEventArgs args) =>
             new AuthorizationChangedNotification { Status = AuthorizationStatuses[args.Status] };
+
+        /// <summary>
+        /// Converts the <see cref="CLAuthorizationChangedEventArgs"/> to an instance of <see cref="AuthorizationChangedNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The changed notification.</returns>
+        public static RegionBeaconsConstraintFailedNotification ToNotification(this CLRegionBeaconsConstraintFailedEventArgs args) =>
+            new RegionBeaconsConstraintFailedNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLRegionBeaconsRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The changed notification.</returns>
+        public static RegionBeaconRangedNotification ToNotification(this CLRegionBeaconsRangedEventArgs args) =>
+            new RegionBeaconRangedNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The changed notification.</returns>
+        public static RegionBeaconsConstraintRangedNotification ToNotification(this CLRegionBeaconsConstraintRangedEventArgs args) =>
+            new RegionBeaconsConstraintRangedNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLRegionBeaconsFailedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The changed notification.</returns>
+        public static RegionBeaconsFailedNotification ToNotification(this CLRegionBeaconsFailedEventArgs args) =>
+            new RegionBeaconsFailedNotification { };
+
+        /// <summary>
+        /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>The changed notification.</returns>
+        public static HeadingUpdatedNotification ToNotification(this CLHeadingUpdatedEventArgs args) =>
+            new HeadingUpdatedNotification { };
 
         /// <summary>
         /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedNotification"/>.
@@ -92,7 +133,13 @@ namespace Rocket.Surgery.Airframe.Apple.Notifications
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static VisitedNotification ToNotification(this CLVisitedEventArgs args) =>
-            new VisitedNotification { };
+            new VisitedNotification
+            {
+                ArrivalDate = args.Visit.ArrivalDate.ToLocalTime(),
+                Location = args.Visit.Coordinate.ToLocation(),
+                DepartureDate = args.Visit.DepartureDate.ToLocalTime(),
+                HorizontalAccuracy = args.Visit.HorizontalAccuracy
+            };
 
         /// <summary>
         /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorNotification"/>.
@@ -100,7 +147,10 @@ namespace Rocket.Surgery.Airframe.Apple.Notifications
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static RegionErrorNotification ToNotification(this CLRegionErrorEventArgs args) =>
-            new RegionErrorNotification { };
+            new RegionErrorNotification
+            {
+                Region = ToGeoRegion(args.Region)
+            };
 
         /// <summary>
         /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorNotification"/>.
@@ -131,5 +181,12 @@ namespace Rocket.Surgery.Airframe.Apple.Notifications
         /// <param name="location">The location.</param>
         /// <returns>The converted vale.</returns>
         public static Location ToLocation(this CLLocationCoordinate2D location) => new Location(location.Latitude, location.Longitude);
+
+        public static DateTime ToLocalTime(this NSDate nsDate)
+        {
+            DateTime referenceDate = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(2001, 1, 1, 0, 0, 0));
+
+            return referenceDate.AddSeconds(nsDate.SecondsSinceReferenceDate);
+        }
     }
 }

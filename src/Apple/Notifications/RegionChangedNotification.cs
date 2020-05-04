@@ -1,4 +1,6 @@
-namespace Rocket.Surgery.Airframe.Apple.Notifications
+using Rocket.Surgery.Airframe.Apple.Notifications;
+
+namespace Rocket.Surgery.Airframe.Apple
 {
     public class RegionChangedNotification
     {

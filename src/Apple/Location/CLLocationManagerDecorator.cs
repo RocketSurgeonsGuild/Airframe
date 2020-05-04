@@ -8,29 +8,29 @@ namespace Rocket.Surgery.Airframe.Apple
 {
     public class CLLocationManagerDecorator : ILocationManager, IDisposable
     {
-        private readonly Lazy<CLLocationManager> LocationManager;
+        private readonly Lazy<CLLocationManager> _locationManager;
 
         public CLLocationManagerDecorator([CanBeNull] CLLocationManager manager = null)
         {
-            LocationManager = new Lazy<CLLocationManager>(() => manager ?? new CLLocationManager());
-            LocationManager.Value.AuthorizationChanged += AuthorizationChanged;
-            LocationManager.Value.DeferredUpdatesFinished += DeferredUpdatesFinished;
-            LocationManager.Value.DidDetermineState += DidDetermineState;
-            LocationManager.Value.DidFailRangingBeacons += DidFailRangingBeacons;
-            LocationManager.Value.DidRangeBeacons += DidRangeBeacons;
-            LocationManager.Value.DidRangeBeaconsSatisfyingConstraint += DidRangeBeaconsSatisfyingConstraint;
-            LocationManager.Value.DidStartMonitoringForRegion += DidStartMonitoringForRegion;
-            LocationManager.Value.DidVisit += DidVisit;
-            LocationManager.Value.Failed += Failed;
-            LocationManager.Value.LocationUpdatesPaused += LocationUpdatesPaused;
-            LocationManager.Value.LocationUpdatesResumed += LocationUpdatesResumed;
-            LocationManager.Value.LocationsUpdated += LocationsUpdated;
-            LocationManager.Value.MonitoringFailed += MonitoringFailed;
-            LocationManager.Value.RangingBeaconsDidFailForRegion += RangingBeaconsDidFailForRegion;
-            LocationManager.Value.RegionEntered += RegionEntered;
-            LocationManager.Value.RegionLeft += RegionLeft;
-            LocationManager.Value.UpdatedHeading += UpdatedHeading;
-            LocationManager.Value.UpdatedLocation += UpdatedLocation;
+            _locationManager = new Lazy<CLLocationManager>(() => manager ?? new CLLocationManager());
+            _locationManager.Value.AuthorizationChanged += AuthorizationChanged;
+            _locationManager.Value.DeferredUpdatesFinished += DeferredUpdatesFinished;
+            _locationManager.Value.DidDetermineState += DidDetermineState;
+            _locationManager.Value.DidFailRangingBeacons += DidFailRangingBeacons;
+            _locationManager.Value.DidRangeBeacons += DidRangeBeacons;
+            _locationManager.Value.DidRangeBeaconsSatisfyingConstraint += DidRangeBeaconsSatisfyingConstraint;
+            _locationManager.Value.DidStartMonitoringForRegion += DidStartMonitoringForRegion;
+            _locationManager.Value.DidVisit += DidVisit;
+            _locationManager.Value.Failed += Failed;
+            _locationManager.Value.LocationUpdatesPaused += LocationUpdatesPaused;
+            _locationManager.Value.LocationUpdatesResumed += LocationUpdatesResumed;
+            _locationManager.Value.LocationsUpdated += LocationsUpdated;
+            _locationManager.Value.MonitoringFailed += MonitoringFailed;
+            _locationManager.Value.RangingBeaconsDidFailForRegion += RangingBeaconsDidFailForRegion;
+            _locationManager.Value.RegionEntered += RegionEntered;
+            _locationManager.Value.RegionLeft += RegionLeft;
+            _locationManager.Value.UpdatedHeading += UpdatedHeading;
+            _locationManager.Value.UpdatedLocation += UpdatedLocation;
         }
 
         /// <inheritdoc />
@@ -104,25 +104,25 @@ namespace Rocket.Surgery.Airframe.Apple
         {
             if (disposing)
             {
-                LocationManager.Value.AuthorizationChanged -= AuthorizationChanged;
-                LocationManager.Value.DeferredUpdatesFinished -= DeferredUpdatesFinished;
-                LocationManager.Value.DidDetermineState -= DidDetermineState;
-                LocationManager.Value.DidFailRangingBeacons -= DidFailRangingBeacons;
-                LocationManager.Value.DidRangeBeacons -= DidRangeBeacons;
-                LocationManager.Value.DidRangeBeaconsSatisfyingConstraint -= DidRangeBeaconsSatisfyingConstraint;
-                LocationManager.Value.DidStartMonitoringForRegion -= DidStartMonitoringForRegion;
-                LocationManager.Value.DidVisit -= DidVisit;
-                LocationManager.Value.Failed -= Failed;
-                LocationManager.Value.LocationUpdatesPaused -= LocationUpdatesPaused;
-                LocationManager.Value.LocationUpdatesResumed -= LocationUpdatesResumed;
-                LocationManager.Value.LocationsUpdated -= LocationsUpdated;
-                LocationManager.Value.MonitoringFailed -= MonitoringFailed;
-                LocationManager.Value.RangingBeaconsDidFailForRegion -= RangingBeaconsDidFailForRegion;
-                LocationManager.Value.RegionEntered -= RegionEntered;
-                LocationManager.Value.RegionLeft -= RegionLeft;
-                LocationManager.Value.UpdatedHeading -= UpdatedHeading;
-                LocationManager.Value.UpdatedLocation -= UpdatedLocation;
-                LocationManager.Value.Dispose();
+                _locationManager.Value.AuthorizationChanged -= AuthorizationChanged;
+                _locationManager.Value.DeferredUpdatesFinished -= DeferredUpdatesFinished;
+                _locationManager.Value.DidDetermineState -= DidDetermineState;
+                _locationManager.Value.DidFailRangingBeacons -= DidFailRangingBeacons;
+                _locationManager.Value.DidRangeBeacons -= DidRangeBeacons;
+                _locationManager.Value.DidRangeBeaconsSatisfyingConstraint -= DidRangeBeaconsSatisfyingConstraint;
+                _locationManager.Value.DidStartMonitoringForRegion -= DidStartMonitoringForRegion;
+                _locationManager.Value.DidVisit -= DidVisit;
+                _locationManager.Value.Failed -= Failed;
+                _locationManager.Value.LocationUpdatesPaused -= LocationUpdatesPaused;
+                _locationManager.Value.LocationUpdatesResumed -= LocationUpdatesResumed;
+                _locationManager.Value.LocationsUpdated -= LocationsUpdated;
+                _locationManager.Value.MonitoringFailed -= MonitoringFailed;
+                _locationManager.Value.RangingBeaconsDidFailForRegion -= RangingBeaconsDidFailForRegion;
+                _locationManager.Value.RegionEntered -= RegionEntered;
+                _locationManager.Value.RegionLeft -= RegionLeft;
+                _locationManager.Value.UpdatedHeading -= UpdatedHeading;
+                _locationManager.Value.UpdatedLocation -= UpdatedLocation;
+                _locationManager.Value.Dispose();
             }
         }
     }
