@@ -4,6 +4,14 @@ namespace Rocket.Surgery.Airframe.Apple
     {
         AccuracyBest,
 
-        
+        AccuracyHundredMeters,
+
+        AccuracyKilometer,
+
+        AccuracyNearestTenMeters,
+
+        AccuracyThreeKilometers,
+
+        AccuracyBestForNavigation
     }
 }
