@@ -5,7 +5,7 @@ using Rocket.Surgery.Airframe.Apple.Notifications;
 namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
-    /// Interface that represents a CLLocationManager.
+    /// Interface that represents a reactive CLLocationManager.
     /// </summary>
     public interface ICoreLocationManager // TODO: Depends on aggregating the platform events
     {

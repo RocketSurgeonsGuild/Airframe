@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
-    public class CLLocationManagerDecorator : ILocationManager, IDisposable
+    public class CLLocationManagerDecorator : ICLLocationManager, IDisposable
     {
         private readonly Lazy<CLLocationManager> _locationManager;
 

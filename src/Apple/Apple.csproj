@@ -13,12 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Location\ICoreLocationManager.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Location\CoreLocationManager.cs">
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Geofence\GeoRegion.cs">
         <SubType>Code</SubType>
       </Compile>
@@ -46,9 +40,11 @@
       <Compile Update="Location\ICoreLocationService.cs">
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Location\ILocationManager.cs">
+      <Compile Update="Location\ICLLocationManager.cs">
         <SubType>Code</SubType>
       </Compile>
+      <Compile Remove="Location\ICoreLocationManager.cs" />
+      <Compile Remove="Location\CoreLocationManager.cs" />
     </ItemGroup>
 
 </Project>

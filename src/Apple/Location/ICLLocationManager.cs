@@ -1,13 +1,14 @@
 using System;
 using CoreLocation;
 using Foundation;
+using ObjCRuntime;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
-    /// Interface representing a <see cref="CLLocationManager"/>.
+    /// Interface representing a <see cref="CLLocationManager"/> at the iOS platform level.
     /// </summary>
-    public interface ILocationManager
+    public interface ICLLocationManager
     {
         /// <summary>
         /// Event handler for authorization changes events.
@@ -98,5 +99,47 @@ namespace Rocket.Surgery.Airframe.Apple
         /// Event handler for
         /// </summary>
         event EventHandler<CLLocationUpdatedEventArgs> UpdatedLocation;
+
+        void DismissHeadingCalibrationDisplay();
+
+        bool IsMonitoringAvailable(Class regionClass);
+
+        void RequestAlwaysAuthorization();
+
+        void RequestLocation();
+
+        void RequestState(CLRegion region);
+
+        void RequestWhenInUseAuthorization();
+
+        void StartMonitoring(CLRegion region, double desiredAccuracy);
+
+        void StartMonitoring(CLRegion region);
+
+        void StartMonitoringSignificantLocationChanges();
+
+        void StartMonitoringVisits();
+
+        void StartRangingBeacons(CLBeaconRegion region);
+
+        void StartRangingBeacons(CLBeaconIdentityConstraint constraint);
+
+        void StartUpdatingHeading();
+
+        void StartUpdatingLocation();
+
+        void StopMonitoring(CLRegion region);
+
+        void StopMonitoringSignificantLocationChanges();
+
+        void StopMonitoringVisits();
+
+        void StopRangingBeacons(CLBeaconRegion region);
+
+        void StopRangingBeacons(CLBeaconIdentityConstraint constraint);
+
+        void StopUpdatingHeading();
+
+        void StopUpdatingLocation();
     }
 }

@@ -1,17 +1,41 @@
+using System;
+
 namespace Rocket.Surgery.Airframe.Apple
 {
+    /// <summary>
+    /// Enumeration of location accuracy.
+    /// </summary>
+    /// <remarks>https://stackoverflow.com/q/3411629/2088094</remarks>
     public enum LocationAccuracy
     {
-        AccuracyBest,
+        /// <summary>
+        /// Best Accuracy.
+        /// </summary>
+        AccuracyBest = -1,
 
-        AccuracyHundredMeters,
+        /// <summary>
+        /// Accuracy to one hundred meters.
+        /// </summary>
+        AccuracyHundredMeters = 100,
 
-        AccuracyKilometer,
+        /// <summary>
+        /// Accuracy to the kilometer.
+        /// </summary>
+        AccuracyKilometer = 1000,
 
-        AccuracyNearestTenMeters,
+        /// <summary>
+        /// Accuracy to the nearest ten meters.
+        /// </summary>
+        AccuracyNearestTenMeters = 10,
 
-        AccuracyThreeKilometers,
+        /// <summary>
+        /// Accuracy to three kilometers.
+        /// </summary>
+        AccuracyThreeKilometers = 3000,
 
-        AccuracyBestForNavigation
+        /// <summary>
+        /// Accuracy for Navigation.
+        /// </summary>
+        AccuracyBestForNavigation = -2
     }
 }
