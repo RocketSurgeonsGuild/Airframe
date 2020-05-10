@@ -15,7 +15,7 @@ resources:
     - repository: rsg
       type: github
       name: RocketSurgeonsGuild/AzureDevopsTemplates
-      ref: refs/tags/v0.11.3
+      ref: refs/tags/v0.12.0
       endpoint: github
 
 variables:
@@ -34,21 +34,56 @@ variables:
     value: 'ef5682ba-f998-4b0e-8a9e-2d9711c52f38'
 
 jobs:
-  - template: pipeline/nuke.yml@rsg
-    parameters:
-      name: 'macOS'
-      dependsOn: GitVersion
-      vmImage: "macOS-10.14"
-      Configuration: $(Configuration)
-      Verbosity: $(Verbosity)
-      GitHubPackages: true
-      EnableReleaseNotes: false
-      DotNetSdk:
-        - "2.2.x"
-        - "3.0.x"
-      NuGetVersion: "5.2.0"
-      PublishNuGetPackages: 'macOS'
-      Matrix:
+  - template: jobs/gitversion.yml@rsg
+
+  - job: Build
+    variables:
+      - group: rsg-bot
+    strategy:
+      matrix:
         macOS:
-          BuildName: "macOS"
-          ImageName: "macOS-latest"
+          BuildName: 'macOS'
+          ImageName: 'macOS-latest'
+    pool:
+      vmImage: $(ImageName)
+    steps:
+      - template: support/mono.yml@rsg
+      - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/tags/v') }}:
+          - template: support/download-release-notes.yml@rsg
+      - template: support/install-dotnet.yml@rsg
+        parameters:
+          DotNetSdk:
+            - '2.x'
+            - '3.x'
+          AuthNuGetFeeds:
+            - name: RocketSurgeonsGuild
+              source: https://nuget.pkg.github.com/RocketSurgeonsGuild/index.json
+              username: $(GitHub.UserName)
+              password: $(GitHub.Token)
+      - template: support/gitversion-hack.yml@rsg
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet tool restore'
+        inputs:
+          command: custom
+          custom: tool
+          arguments: 'restore'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet restore'
+        inputs:
+          command: restore
+          feedsToUse: config
+          nugetConfigPath: NuGet.config
+          verbosityRestore: Minimal
+
+      - bash: ./build.sh --configuration '$(Configuration)' --target-platform $(Target_Platform) --artifacts '$(Artifacts)' --verbosity '$(Verbosity)'
+        displayName: '⚙ Build'
+
+      - template: support/publish-artifacts.yml@rsg
+        parameters:
+          Artifacts: $(Artifacts)
+          Configuration: $(Configuration)
+          Coverage: $(Coverage)
+          Postfix: ' - $(BuildName)'
+          PublishVSTest: true
