@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Airframe.Timers</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Timers</RootNamespace>
+    </PropertyGroup>
+<ItemGroup>
+    <PackageReference Include="ReactiveUI" />
+</ItemGroup>
+</Project>
