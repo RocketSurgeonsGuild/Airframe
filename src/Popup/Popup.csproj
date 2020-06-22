@@ -18,6 +18,8 @@
   </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="ReactiveUI.XamForms" />
+        <PackageReference Include="ReactiveUI.Events.XamForms" />
         <PackageReference Include="Rg.Plugins.Popup" />
         <PackageReference Include="Sextant.Plugins.Popup" />
     </ItemGroup>

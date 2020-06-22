@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<popup:PopupPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:popup="https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup"
+                     x:Class="Rocket.Surgery.Airframe.Popup.Confirmation.ConfirmPopup"
+                     BackgroundInputTransparent="True"
+                     HasSystemPadding="False"
+                     CloseWhenBackgroundIsClicked="False"
+                     Padding="48, 288">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Indigo"
+              VerticalOptions="CenterAndExpand"
+              Padding="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64" />
+                <RowDefinition Height="120" />
+                <RowDefinition Height="64" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Title" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Black"/>
+            <Label x:Name="Message" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Black"/>
+            <Button x:Name="Confirm" Text="Confirm" Grid.Row="2" Grid.Column="0" BackgroundColor="Black" CornerRadius="5" />
+            <Button x:Name="Cancel" Text="Cancel" Grid.Row="2" Grid.Column="1" BackgroundColor="Black" CornerRadius="5" />
+        </Grid>
+    </ContentPage.Content>
+</popup:PopupPageBase>

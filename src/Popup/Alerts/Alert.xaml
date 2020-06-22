@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<popup:PopupPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:popup="https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup"
+                     x:Class="Rocket.Surgery.Airframe.Popup.Alerts.Alert"
+                     BackgroundInputTransparent="True"
+                     HasSystemPadding="False"
+                     CloseWhenBackgroundIsClicked="False"
+                     Padding="48, 288">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Indigo"
+                     VerticalOptions="CenterAndExpand"
+                     Padding="8">
+            <Label x:Name="Message" Text="{Binding Message}" BackgroundColor="Black" TextColor="Azure" HeightRequest="120"/>
+            <Button x:Name="Confirm" Text="{Binding Cancel}" BackgroundColor="Black" CornerRadius="5" HeightRequest="64" />
+        </StackLayout>
+    </ContentPage.Content>
+</popup:PopupPageBase>
