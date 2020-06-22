@@ -1,27 +1,27 @@
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
-    /// Enumeration representing possible states for the timer.
+    ///     Enumeration representing possible states for the timer.
     /// </summary>
     public enum TimerState
     {
         /// <summary>
-        /// Stopped.
+        ///     Stopped.
         /// </summary>
         Stopped,
 
         /// <summary>
-        /// Stopped.
+        ///     Stopped.
         /// </summary>
         Started,
 
         /// <summary>
-        /// Stopped.
+        ///     Stopped.
         /// </summary>
         Paused,
 
         /// <summary>
-        /// Stopped.
+        ///     Stopped.
         /// </summary>
         Resumed
     }

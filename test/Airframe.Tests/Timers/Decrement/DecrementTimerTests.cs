@@ -2,6 +2,7 @@ using System;
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
+using Rocket.Surgery.Airframe.Timers;
 using Xunit;
 
 namespace Timers.UnitTests.Decrement

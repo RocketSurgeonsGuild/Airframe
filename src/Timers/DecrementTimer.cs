@@ -8,7 +8,7 @@ using ReactiveUI;
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
-    /// A timer that starts at a certain point and counts down.
+    ///     A timer that starts at a certain point and counts down.
     /// </summary>
     public class DecrementTimer : TimerBase
     {
@@ -17,7 +17,7 @@ namespace Rocket.Surgery.Airframe.Timers
         private TimeSpan _resumeTime;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DecrementTimer"/> class.
+        ///     Initializes a new instance of the <see cref="DecrementTimer" /> class.
         /// </summary>
         /// <param name="scheduler">The scheduler.</param>
         public DecrementTimer(IScheduler scheduler)
@@ -26,12 +26,12 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <summary>
-        /// Gets a value indicating whether the timer is running.
+        ///     Gets a value indicating whether the timer is running.
         /// </summary>
         public bool IsRunning => _isRunning.Value;
 
         /// <summary>
-        /// Sets a timer.
+        ///     Sets a timer.
         /// </summary>
         /// <param name="startTime">The start time.</param>
         /// <param name="startImmediately">Whether to start the timer immediately.</param>
@@ -64,7 +64,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <summary>
-        /// Start the timer.
+        ///     Start the timer.
         /// </summary>
         /// <returns>A notification.</returns>
         public IObservable<Unit> Start()
@@ -74,7 +74,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <summary>
-        /// Pause the timer.
+        ///     Pause the timer.
         /// </summary>
         /// <returns>A notification.</returns>
         public IObservable<Unit> Pause()
@@ -84,7 +84,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <summary>
-        /// Resume the timer.
+        ///     Resume the timer.
         /// </summary>
         /// <returns>A notification.</returns>
         public IObservable<Unit> Resume()

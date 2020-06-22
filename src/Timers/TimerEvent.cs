@@ -1,9 +1,12 @@
 namespace Rocket.Surgery.Airframe.Timers
 {
+    /// <summary>
+    /// A timer changed notification.
+    /// </summary>
     public class TimerEvent
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimerEvent"/> class.
+        ///     Initializes a new instance of the <see cref="TimerEvent" /> class.
         /// </summary>
         /// <param name="state">The timer state.</param>
         public TimerEvent(TimerState state)
@@ -12,7 +15,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <summary>
-        /// Gets the timer state.
+        ///     Gets the timer state.
         /// </summary>
         public TimerState State { get; }
     }

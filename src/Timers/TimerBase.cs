@@ -8,12 +8,12 @@ namespace Rocket.Surgery.Airframe.Timers
 {
     public abstract class TimerBase : ReactiveObject, IDisposable
     {
-        protected readonly CompositeDisposable TimesUp = new CompositeDisposable();
         protected readonly Subject<bool> Running = new Subject<bool>();
         protected readonly IScheduler Scheduler;
+        protected readonly CompositeDisposable TimesUp = new CompositeDisposable();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimerBase"/> class.
+        ///     Initializes a new instance of the <see cref="TimerBase" /> class.
         /// </summary>
         /// <param name="scheduler">The scheduler.</param>
         protected TimerBase(IScheduler scheduler)
@@ -21,7 +21,7 @@ namespace Rocket.Surgery.Airframe.Timers
             Scheduler = scheduler;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public void Dispose()
         {
             Dispose(true);
@@ -29,7 +29,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <summary>
-        /// Disposes of resources.
+        ///     Disposes of resources.
         /// </summary>
         /// <param name="disposing">A value indicating whether it is disposing.</param>
         protected virtual void Dispose(bool disposing)
