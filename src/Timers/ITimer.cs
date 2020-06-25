@@ -42,4 +42,8 @@ namespace Rocket.Surgery.Airframe.Timers
             throw new NotImplementedException();
         }
     }
+
+    public class TimerContext
+    {
+    }
 }

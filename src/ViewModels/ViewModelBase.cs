@@ -7,7 +7,7 @@ namespace Rocket.Surgery.Airframe.ViewModels
     /// <summary>
     /// Base ReactiveUI View Model.
     /// </summary>
-    [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
+    [SuppressMessage("Microsoft.Usage", "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class ViewModelBase : ReactiveObject, IViewModel
     {
         /// <summary>
