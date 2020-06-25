@@ -11,17 +11,17 @@ namespace Rocket.Surgery.Airframe.Timers
         Stopped,
 
         /// <summary>
-        ///     Stopped.
+        ///     Started.
         /// </summary>
         Started,
 
         /// <summary>
-        ///     Stopped.
+        ///     Paused.
         /// </summary>
         Paused,
 
         /// <summary>
-        ///     Stopped.
+        ///     Resumed.
         /// </summary>
         Resumed
     }

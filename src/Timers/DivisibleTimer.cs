@@ -10,6 +10,8 @@ namespace Rocket.Surgery.Airframe.Timers
 
         public IObservable<TimeSpan> Interval { get; set; }
 
+        public IObservable<TimeSpan> Timer { get; set; }
+
         public void Start(double exercises, TimeSpan duration)
         {
             var intervalDuration = duration.TotalSeconds / exercises;
