@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <AssemblyName>Rocket.Surgery.Airframe.Data</AssemblyName>
-        <RootNamespace>Rocket.Surgery.Airframe.Data</RootNamespace>
     </PropertyGroup>
-
+    <ItemGroup>
+        <PackageReference Include="Refit" />
+    </ItemGroup>
 </Project>

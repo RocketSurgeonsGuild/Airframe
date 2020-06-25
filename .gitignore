@@ -334,3 +334,6 @@ ASALocalRun/
 
 # Rider
 .idea/
+
+# macOS
+.DS_Store

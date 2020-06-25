@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Rocket.Surgery.Airframe.Synthetic
 {
     /// <summary>
     /// Represents a Mock <see cref="IClient"/> implementation.
@@ -36,5 +37,20 @@ namespace Rocket.Surgery.Airframe.Data
         /// <inheritdoc/>
         public virtual Task Delete<T>(T entity)
             where T : Dto => Task.FromResult(entity);
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc/>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+            }
+        }
     }
 }

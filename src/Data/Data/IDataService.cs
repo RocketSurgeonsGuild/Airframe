@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using DynamicData;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Data
 {
     /// <summary>
     /// Interface representing a typed data service.

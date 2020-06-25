@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using Data;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Rocket.Surgery.Airframe.Synthetic
 {
+    /// <summary>
+    /// A coffee data transfer object.
+    /// </summary>
     public class CoffeeDto : Dto
     {
         /// <summary>

@@ -6,7 +6,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using DynamicData;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Data
 {
     /// <summary>
     /// Respresents a base <see cref="IDataService{T}"/> implementation.
@@ -41,12 +41,10 @@ namespace Rocket.Surgery.Airframe.Data
             {
                 _client.Post(dto).ToObservable().Subscribe();
 
-                using (var x = _semaphore.WaitAsync().ToObservable().Subscribe())
-                {
-                    SourceCache.AddOrUpdate(dto);
-                }
+                using var x = _semaphore.WaitAsync().ToObservable().Subscribe();
+                SourceCache.AddOrUpdate(dto);
 
-                return Disposable.Empty;
+                return x;
             });
 
         /// <inheritdoc />
@@ -86,12 +84,10 @@ namespace Rocket.Surgery.Airframe.Data
             {
                 _client.Delete(dto).ToObservable().Subscribe();
 
-                using (var x = _semaphore.WaitAsync().ToObservable().Subscribe())
-                {
-                    SourceCache.Remove(dto);
-                }
+                using var x = _semaphore.WaitAsync().ToObservable().Subscribe();
+                SourceCache.Remove(dto);
 
-                return Disposable.Empty;
+                return x;
             });
 
         /// <inheritdoc/>

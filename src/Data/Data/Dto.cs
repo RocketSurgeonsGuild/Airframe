@@ -1,6 +1,6 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Data
 {
     /// <summary>
     /// Represents a data transfer object.
