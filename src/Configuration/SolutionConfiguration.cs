@@ -12,6 +12,7 @@ namespace Rocket.Surgery.Airframe.Configuration
         /// <summary>
         /// Initializes a new instance of the <see cref="SolutionConfiguration"/> class.
         /// </summary>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
         protected SolutionConfiguration()
         {
             ConfigureEnvironment();
@@ -30,7 +31,7 @@ namespace Rocket.Surgery.Airframe.Configuration
         /// <summary>
         /// Gets or sets the appcenter configuration.
         /// </summary>
-        public Dictionary<string, string> AppCenter { get; set; }
+        public Dictionary<string, string> AppCenter { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Overrideable method to configure environment.

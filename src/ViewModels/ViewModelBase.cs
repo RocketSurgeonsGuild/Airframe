@@ -13,6 +13,7 @@ namespace Rocket.Surgery.Airframe.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewModelBase"/> class.
         /// </summary>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
         protected ViewModelBase()
         {
             ErrorInteraction = new Interaction<string, bool>();
@@ -24,7 +25,7 @@ namespace Rocket.Surgery.Airframe.ViewModels
         }
 
         /// <inheritdoc />
-        public virtual string Id { get; }
+        public virtual string? Id { get; }
 
         /// <inheritdoc />
         public virtual bool IsLoading { get; }

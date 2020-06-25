@@ -18,6 +18,7 @@ namespace Rocket.Surgery.Airframe.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentViewBase{TViewModel}"/> class.
         /// </summary>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
         protected ContentViewBase()
         {
             Logger = this.Log();

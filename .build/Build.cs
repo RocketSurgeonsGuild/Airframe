@@ -1,9 +1,6 @@
 using Nuke.Common;
 using Nuke.Common.Execution;
-using Nuke.Common.ProjectModel;
 using Rocket.Surgery.Nuke;
-using System.Collections.Generic;
-using System.Linq;
 using Rocket.Surgery.Nuke.MsBuild;
 
 [CheckBuildProjectConfigurations]
@@ -20,13 +17,13 @@ class Airframe : MsBuild, IMsBuild
 
     public static int Main() => Execute<Airframe>(x => x.Default);
 
-    public new Target Restore => _ => _.With(this, MsBuild.Restore);
+    public Target Restore => _ => _.With(this, MsBuild.Restore);
 
-    public new Target Build => _ => _.With(this, MsBuild.Build);
+    public Target Build => _ => _.With(this, MsBuild.Build);
 
-    public new Target Test => _ => _.With(this, MsBuild.Test);
+    public Target Test => _ => _.With(this, MsBuild.Test);
 
-    public new Target Pack => _ => _.With(this, MsBuild.Pack);
+    public Target Pack => _ => _.With(this, MsBuild.Pack);
 
     Target Default => _ => _
         .DependsOn(Restore)

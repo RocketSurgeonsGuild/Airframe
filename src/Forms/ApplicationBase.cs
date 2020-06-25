@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DryIoc;
-using JetBrains.Annotations;
 using Rocket.Surgery.Airframe.Composition;
 using Splat.DryIoc;
 using Xamarin.Forms;
@@ -17,7 +16,7 @@ namespace Rocket.Surgery.Airframe.Forms
     [SuppressMessage("Microsoft.Usage", "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class ApplicationBase : Application
     {
-        private readonly IPlatformRegistrar _platformRegistrar;
+        private readonly IPlatformRegistrar? _platformRegistrar;
         private IContainer _container;
 
         /// <summary>
@@ -32,7 +31,8 @@ namespace Rocket.Surgery.Airframe.Forms
         /// Initializes a new instance of the <see cref="ApplicationBase" /> class.
         /// </summary>
         /// <param name="platformRegistrar">The platformRegistrar.</param>
-        protected ApplicationBase([CanBeNull] IPlatformRegistrar platformRegistrar)
+        [SuppressMessage("ReSharper", "CS8618:NonNullableMember", Justification = "Consumers should be aware methods are for object construction.")]
+        protected ApplicationBase(IPlatformRegistrar? platformRegistrar)
         {
             _platformRegistrar = platformRegistrar;
             Initialize();

@@ -25,6 +25,7 @@ namespace Rocket.Surgery.Airframe.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentPageBase{TViewModel}"/> class.
         /// </summary>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
         protected ContentPageBase()
         {
             _isAppearing = new Subject<Unit>();

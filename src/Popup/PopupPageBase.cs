@@ -12,6 +12,7 @@ using Xamarin.Forms;
 [assembly: XmlnsPrefix("https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup", "popup")]
 [assembly: XmlnsDefinition("https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup", "Rocket.Surgery.Airframe.Popup")]
 
+[assembly: SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
 namespace Rocket.Surgery.Airframe.Popup
 {
     /// <summary>
@@ -19,7 +20,6 @@ namespace Rocket.Surgery.Airframe.Popup
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     /// <seealso cref="ReactiveContentPage{TViewModel}" />
-    [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class PopupPageBase<TViewModel> : ReactivePopupPage<TViewModel>
         where TViewModel : class, IReactiveObject
     {
@@ -29,6 +29,7 @@ namespace Rocket.Surgery.Airframe.Popup
         /// <summary>
         /// Initializes a new instance of the <see cref="PopupPageBase{TViewModel}"/> class.
         /// </summary>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
         protected PopupPageBase()
         {
             _isAppearing = new Subject<Unit>();

@@ -14,13 +14,13 @@ namespace Rocket.Surgery.Airframe.Composition
         {
             var funcLogManager = new FuncLogManager(type =>
             {
-                var actualLogger = global::Serilog.Log.ForContext(type);
+                var actualLogger = Log.ForContext(type);
                 return new SerilogFullLogger(actualLogger);
             });
 
-            registrar.RegisterInstance<Serilog.ILogger>(Log.Logger);
+            registrar.RegisterInstance(Log.Logger);
             registrar.Register<IFullLogger, SerilogFullLogger>(Reuse.Singleton);
-            registrar.RegisterInstance<FuncLogManager>(funcLogManager);
+            registrar.RegisterInstance(funcLogManager);
         }
     }
 }
