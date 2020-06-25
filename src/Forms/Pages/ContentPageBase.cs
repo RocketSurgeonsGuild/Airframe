@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using Splat;
 
 namespace Rocket.Surgery.Airframe.Forms
 {
-#pragma warning disable CA2214 // Do not call overridable methods in constructors
     /// <summary>
     /// Base ReactiveUI <see cref="ReactiveContentPage{TViewModel}"/>.
     /// </summary>
@@ -94,6 +91,5 @@ namespace Rocket.Surgery.Airframe.Forms
         protected virtual void Initialize()
         {
         }
-#pragma warning restore CA2214 // Do not call overridable methods in constructors
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DryIoc;
+using JetBrains.Annotations;
 using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Composition
@@ -14,7 +15,7 @@ namespace Rocket.Surgery.Airframe.Composition
         /// Initializes a new instance of the <see cref="CompositionBuilder"/> class.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public CompositionBuilder(IContainer container = null)
+        public CompositionBuilder([CanBeNull] IContainer container = null)
         {
             _container = container ?? new Container();
         }
@@ -37,7 +38,7 @@ namespace Rocket.Surgery.Airframe.Composition
         /// <typeparam name="TModule">The type of the module.</typeparam>
         /// <param name="module">The module.</param>
         /// <returns>The composition builder.</returns>
-        public CompositionBuilder RegisterModule<TModule>(TModule module)
+        public CompositionBuilder RegisterModule<TModule>([NotNull] TModule module)
             where TModule : IModule
         {
             _container.RegisterModule(module);

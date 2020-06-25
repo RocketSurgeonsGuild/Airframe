@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Rocket.Surgery.Xamarin.Essentials;
-using Rocket.Surgery.Xamarin.Essentials.Abstractions;
 using Xamarin.Essentials;
 
 namespace Rocket.Surgery.Airframe.ViewModels

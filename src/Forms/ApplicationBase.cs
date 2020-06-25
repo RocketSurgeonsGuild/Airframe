@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
 using DryIoc;
+using JetBrains.Annotations;
 using Rocket.Surgery.Airframe.Composition;
-using Splat;
 using Splat.DryIoc;
 using Xamarin.Forms;
 
@@ -35,7 +32,7 @@ namespace Rocket.Surgery.Airframe.Forms
         /// Initializes a new instance of the <see cref="ApplicationBase" /> class.
         /// </summary>
         /// <param name="platformRegistrar">The platformRegistrar.</param>
-        protected ApplicationBase(IPlatformRegistrar platformRegistrar)
+        protected ApplicationBase([CanBeNull] IPlatformRegistrar platformRegistrar)
         {
             _platformRegistrar = platformRegistrar;
             Initialize();

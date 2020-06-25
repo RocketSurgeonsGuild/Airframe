@@ -1,12 +1,13 @@
-﻿using System.Reactive.Disposables;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Disposables;
 using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.ViewModels
 {
-#pragma warning disable CA2214 // Do not call overridable methods in constructors
     /// <summary>
     /// Base ReactiveUI View Model.
     /// </summary>
+    [SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
     public abstract class ViewModelBase : ReactiveObject, IViewModel
     {
         /// <summary>
@@ -53,5 +54,4 @@ namespace Rocket.Surgery.Airframe.ViewModels
         /// </summary>
         protected abstract void RegisterObservers();
     }
-#pragma warning restore CA2214 // Do not call overridable methods in constructors
 }

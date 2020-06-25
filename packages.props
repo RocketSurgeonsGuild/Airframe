@@ -1,7 +1,12 @@
 <Project>
     <ItemGroup>
         <GlobalPackageReference Include="Rocket.Surgery.Build.Metadata" Version="3.3.11" PrivateAssets="All" />
+        <GlobalPackageReference Include="Rocket.Surgery.MSBuild.Metadata" Version="0.3.1" />
+        <GlobalPackageReference Include="Rocket.Surgery.MSBuild.SourceLink" Version="0.3.1" />
         <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+        <GlobalPackageReference Include="Rocket.Surgery.MSBuild.CI" Version="0.3.1" />
+        <GlobalPackageReference Include="Rocket.Surgery.MSBuild.GitVersion" Version="0.3.1" />
+        <GlobalPackageReference Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" Version="0.3.1" Condition="'$(MSBuildProjectName)'!='.build'" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Update="stylecop.analyzers" Version="1.1.1-beta.61" PrivateAssets="all" />
@@ -18,7 +23,7 @@
         <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
-        <PackageReference Update="RxUI.Plugins.Popup" Version="0.*" />
+        <PackageReference Update="RxUI.Plugins.Popup" Version="0.2.*" />
         <PackageReference Update="Serilog.Sinks.AppCenter.Crash" Version="1.*" />
         <PackageReference Update="Serilog.Sinks.Xamarin" Version="0.*" />
         <PackageReference Update="Splat" Version="9.*" />
