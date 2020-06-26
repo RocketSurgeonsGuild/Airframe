@@ -5,6 +5,9 @@ using DynamicData;
 
 namespace Data
 {
+    /// <summary>
+    /// Represents a service that can query the duck duck go api.
+    /// </summary>
     public class DuckDuckGoService : IDuckDuckGoService
     {
         private readonly IDuckDuckGoApi _duckDuckGoApi;
@@ -14,12 +17,17 @@ namespace Data
         /// <summary>
         /// Initializes a new instance of the <see cref="DuckDuckGoService"/> class.
         /// </summary>
-        /// <param name="duckDuckGoApi"></param>
+        /// <param name="duckDuckGoApi">The duck duck go api.</param>
         public DuckDuckGoService(IDuckDuckGoApi duckDuckGoApi)
         {
             _duckDuckGoApi = duckDuckGoApi;
         }
 
+        /// <inheritdoc/>
+        public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> QueryResults =>
+            _queryResults.Connect();
+
+        /// <inheritdoc/>
         public async Task Query(string query)
         {
             var results = await _duckDuckGoApi.Search(query).ConfigureAwait(false);
@@ -28,8 +36,5 @@ namespace Data
                 _queryResults.AddOrUpdate(relatedTopic);
             }
         }
-
-        public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> QueryResults =>
-            _queryResults.Connect();
     }
 }

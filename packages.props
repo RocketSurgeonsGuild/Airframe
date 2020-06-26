@@ -31,11 +31,10 @@
         <PackageReference Update="Splat.DryIoc" Version="9.*" />
         <PackageReference Update="Splat.Serilog" Version="9.*" />
         <PackageReference Update="System.ComponentModel" Version="4.3.0" />
-        <PackageReference Update="System.Collections.Immutable" Version="1.5.0" />
+        <PackageReference Update="System.Collections.Immutable" Version="1.*" />
         <PackageReference Update="System.Interactive.Async.Providers" Version="3.2.0" />
         <PackageReference Update="System.Interactive.Providers" Version="3.2.0" />
         <PackageReference Update="System.Reactive" Version="4.*" />
-        <PackageReference Update="System.Reactive.Compatibility" Version="4.2.*" />
         <PackageReference Update="System.Reactive.Observable.Aliases" Version="4.1.1" />
         <PackageReference Update="System.Reflection.Emit.Lightweight" Version="4.3.0" />
         <PackageReference Update="Toast.iOS" Version="1.2.0" />
@@ -48,8 +47,10 @@
         <PackageReference Update="coverlet.msbuild" Version="2.3.0" />
         <PackageReference Update="FluentAssertions" Version="5.4.2" />
         <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+        <PackageReference Update="Microsoft.Reactive.Testing" Version="4.*" />
         <PackageReference Update="NSubstitute" Version="3.1.0" />
         <PackageReference Update="Rocket.Surgery.Extensions.Testing.Fixtures" Version="3.3.0" />
+        <PackageReference Update="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="5.2.0" />
         <PackageReference Update="xunit" Version="2.4.0" />
         <PackageReference Update="xunit.runner.visualstudio" Version="2.4.0" />
         <PackageReference Update="XunitXml.TestLogger" Version="2.0.0" />

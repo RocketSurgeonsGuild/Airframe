@@ -20,7 +20,6 @@
   <ItemGroup>
     <PackageReference Include="DynamicData" />
     <PackageReference Include="System.Reactive" />
-    <PackageReference Include="System.Reactive.Compatibility" />
     <PackageReference Include="Splat" />
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="ReactiveUI.XamForms" />
