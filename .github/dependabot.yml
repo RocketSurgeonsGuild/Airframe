@@ -12,6 +12,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+      day: "tuesday"
+      time: "14:00"
     commit-message:
       prefix: "update:"
     assignees:
