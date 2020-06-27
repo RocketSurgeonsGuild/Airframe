@@ -40,7 +40,7 @@ jobs:
     parameters:
       GitHubPackages: true
       GitHubAuthVariableGroup: rsg-bot
-      PublishNuGetPackagesFromArtifact: 'NuGet - Windows'
+      PublishNuGetPackagesFromArtifact: 'NuGet - macOS'
 
   - job: Build
     
