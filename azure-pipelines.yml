@@ -77,14 +77,6 @@ jobs:
           custom: tool
           arguments: 'restore'
 
-      - task: DotNetCoreCLI@2
-        displayName: 'dotnet restore'
-        inputs:
-          command: restore
-          feedsToUse: config
-          nugetConfigPath: NuGet.config
-          verbosityRestore: Minimal
-
       - bash: ./build.sh --configuration '$(Configuration)' --target-platform $(Target_Platform) --artifacts '$(Artifacts)' --verbosity '$(Verbosity)'
         displayName: '⚙ Build'
 
