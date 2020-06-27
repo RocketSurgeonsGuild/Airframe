@@ -42,8 +42,6 @@ jobs:
       GitHubAuthVariableGroup: rsg-bot
       PublishNuGetPackagesFromArtifact: 'NuGet - Windows'
 
-  - template: jobs/gitversion.yml@rsg
-
   - job: Build
     
     variables:
@@ -71,8 +69,6 @@ jobs:
               source: https://nuget.pkg.github.com/RocketSurgeonsGuild/index.json
               username: $(GitHub.UserName)
               password: $(GitHub.Token)
-
-      - template: support/gitversion-hack.yml@rsg
 
       - task: DotNetCoreCLI@2
         displayName: 'dotnet tool restore'
