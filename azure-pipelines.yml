@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
       - master
+      - next
       - feature/*
       - refs/tags/*
 pr:
@@ -9,13 +10,14 @@ pr:
   branches:
     include:
       - master
+      - next
 
 resources:
   repositories:
     - repository: rsg
       type: github
       name: RocketSurgeonsGuild/AzureDevopsTemplates
-      ref: refs/tags/v0.12.0
+      ref: refs/tags/v0.13.0
       endpoint: github
 
 variables:
@@ -34,22 +36,31 @@ variables:
     value: 'ef5682ba-f998-4b0e-8a9e-2d9711c52f38'
 
 jobs:
+  - template: jobs/publish-release.yml@rsg
+    parameters:
+      GitHubPackages: true
+      GitHubAuthVariableGroup: rsg-bot
+      PublishNuGetPackagesFromArtifact: 'NuGet - Windows'
+
   - template: jobs/gitversion.yml@rsg
 
   - job: Build
+    
     variables:
       - group: rsg-bot
+
     strategy:
       matrix:
         macOS:
           BuildName: 'macOS'
           ImageName: 'macOS-latest'
+
     pool:
       vmImage: $(ImageName)
+
     steps:
       - template: support/mono.yml@rsg
-      - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/tags/v') }}:
-          - template: support/download-release-notes.yml@rsg
+
       - template: support/install-dotnet.yml@rsg
         parameters:
           DotNetSdk:
@@ -60,6 +71,7 @@ jobs:
               source: https://nuget.pkg.github.com/RocketSurgeonsGuild/index.json
               username: $(GitHub.UserName)
               password: $(GitHub.Token)
+
       - template: support/gitversion-hack.yml@rsg
 
       - task: DotNetCoreCLI@2
