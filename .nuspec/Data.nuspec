@@ -10,7 +10,7 @@
         <description>Airframe base abstractions for data.</description>
         <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
         <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
-        <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
+        <icon>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</icon>
         <tags>ReactiveUI Xamarin.Forms MVVM</tags>
         <dependencies>
             <group>
