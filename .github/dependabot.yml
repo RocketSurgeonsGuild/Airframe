@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: 'daily'
     assignees:
-      - 'david-driscoll'
+      - 'rlittlesii'
     open-pull-requests-limit: 100
 
   - package-ecosystem: 'npm'
@@ -13,7 +13,7 @@ updates:
     schedule:
       interval: 'daily'
     assignees:
-      - 'david-driscoll'
+      - 'rlittlesii'
     open-pull-requests-limit: 100
 
   - package-ecosystem: 'nuget'
@@ -21,7 +21,7 @@ updates:
     schedule:
       interval: 'daily'
     assignees:
-      - 'david-driscoll'
+      - 'rlittlesii'
     ignore:
       - dependency-name: Microsoft.Extensions.*
       - dependency-name: Microsoft.AspNetCore.*
