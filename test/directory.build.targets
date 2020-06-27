@@ -1,6 +1,7 @@
 <Project>
     <ItemGroup>
         <PackageReference Include="Rocket.Surgery.Extensions.Testing.Fixtures" />
+        <PackageReference Include="coverlet.collector" />
         <PackageReference Include="coverlet.msbuild" />
         <PackageReference Include="NSubstitute" />
         <PackageReference Include="FluentAssertions" />
@@ -8,5 +9,5 @@
         <PackageReference Include="xunit.runner.visualstudio" />
         <PackageReference Include="XunitXml.TestLogger" />
     </ItemGroup>
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('common.build.targets', '$(MSBuildThisFileDirectory)../'))" />
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.targets', '$(MSBuildThisFileDirectory)../'))" />
 </Project>

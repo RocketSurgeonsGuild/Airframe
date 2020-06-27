@@ -337,3 +337,6 @@ ASALocalRun/
 
 # macOS
 .DS_Store
+
+# Code Coverage
+coverage/

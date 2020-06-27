@@ -14,8 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{465CF782-8943-4AC4-8149-80EF65C5C66C}"
 	ProjectSection(SolutionItems) = preProject
 		analyzers.ruleset = analyzers.ruleset
-		common.build.props = common.build.props
-		common.build.targets = common.build.targets
+		directory.build.props = directory.build.props
+		directory.build.targets = directory.build.targets
 		global.json = global.json
 		NuGet.config = NuGet.config
 		README.md = README.md
