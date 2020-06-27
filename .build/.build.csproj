@@ -13,7 +13,7 @@
     <PackageReference Include="GitVersion.Tool" Version="5.1.1" ExcludeAssets="All" />
     <PackageReference Include="NuGet.CommandLine" Version="5.1.0" />
     <PackageReference Include="Nuke.Common" Version="0.23.3" />
-    <PackageReference Include="Rocket.Surgery.Nuke.MsBuild" Version="0.7.1" />
+    <PackageReference Include="Rocket.Surgery.Nuke.MsBuild" Version="0.13.6" />
     <PackageReference Include="ReportGenerator" Version="4.2.11" />
   </ItemGroup>
 
