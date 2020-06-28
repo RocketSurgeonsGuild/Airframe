@@ -1,6 +1,6 @@
 using Rocket.Surgery.Airframe.Timers;
 
-namespace Timers.UnitTests.Divisible
+namespace Airframe.Tests.Timers.Divisible
 {
     public class DivisibleTimerTests
     {

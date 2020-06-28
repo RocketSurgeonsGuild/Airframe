@@ -2,7 +2,7 @@ using System.Reactive.Concurrency;
 using Rocket.Surgery.Airframe.Timers;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 
-namespace Timers.UnitTests.Decrement
+namespace Airframe.Tests.Timers
 {
     internal class DecrementTimerFixture : ITestFixtureBuilder
     {

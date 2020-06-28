@@ -5,7 +5,7 @@ using ReactiveUI.Testing;
 using Rocket.Surgery.Airframe.Timers;
 using Xunit;
 
-namespace Timers.UnitTests.Decrement
+namespace Airframe.Tests.Timers
 {
     public sealed class DecrementTimerTests
     {

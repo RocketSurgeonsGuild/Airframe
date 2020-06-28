@@ -1,18 +1,13 @@
 using System;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using FluentAssertions;
-using Microsoft.Extensions.Logging;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using Rocket.Surgery.Airframe.Timers;
 using Rocket.Surgery.Extensions.Testing;
-using Serilog;
-using Serilog.Events;
-using Xunit;
 using Xunit.Abstractions;
 
-namespace Timers.UnitTests
+namespace Airframe.Tests.Timers
 {
     public class RoundTimerTests : AutoSubstituteTest
     {
