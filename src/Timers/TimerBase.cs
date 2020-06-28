@@ -6,12 +6,11 @@ using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Timers
 {
+    /// <summary>
+    /// Represents a base abstraction for a timer.
+    /// </summary>
     public abstract class TimerBase : ReactiveObject, IDisposable
     {
-        protected readonly Subject<bool> Running = new Subject<bool>();
-        protected readonly IScheduler Scheduler;
-        protected readonly CompositeDisposable TimesUp = new CompositeDisposable();
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="TimerBase" /> class.
         /// </summary>
@@ -20,6 +19,15 @@ namespace Rocket.Surgery.Airframe.Timers
         {
             Scheduler = scheduler;
         }
+
+        /// <inheritdoc />
+        protected Subject<bool> Running { get; } = new Subject<bool>();
+
+        /// <inheritdoc />
+        protected IScheduler Scheduler { get; }
+
+        /// <inheritdoc />
+        protected CompositeDisposable TimesUp { get; } = new CompositeDisposable();
 
         /// <inheritdoc />
         public void Dispose()

@@ -16,7 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{
 		analyzers.ruleset = analyzers.ruleset
 		directory.build.props = directory.build.props
 		directory.build.targets = directory.build.targets
-		global.json = global.json
 		NuGet.config = NuGet.config
 		README.md = README.md
 		stylecop.json = stylecop.json

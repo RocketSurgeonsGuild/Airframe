@@ -18,8 +18,7 @@ namespace Timers.UnitTests
     {
         public RoundTimerTests(ITestOutputHelper outputHelper)
             : base(outputHelper) { }
-
-        [Fact]
+        
         public void Test1()
         {
             // Given
