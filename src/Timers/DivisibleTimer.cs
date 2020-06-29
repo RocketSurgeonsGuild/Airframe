@@ -1,4 +1,5 @@
 using System;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
@@ -9,7 +10,19 @@ namespace Rocket.Surgery.Airframe.Timers
     /// </summary>
     public class DivisibleTimer
     {
+        private readonly IScheduler _scheduler;
         private readonly BehaviorSubject<bool> _pause = new BehaviorSubject<bool>(false);
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DivisibleTimer"/> class.
+        /// </summary>
+        /// <param name="scheduler">The scheduler.</param>
+        public DivisibleTimer(IScheduler scheduler)
+        {
+            _scheduler = scheduler;
+            Interval = Observable.Empty<TimeSpan>();
+            Timer = Observable.Empty<TimeSpan>();
+        }
 
         /// <summary>
         /// Gets the interval timer.
@@ -22,16 +35,30 @@ namespace Rocket.Surgery.Airframe.Timers
         public IObservable<TimeSpan> Timer { get; private set; }
 
         /// <summary>
+        /// Gets the interval time.
+        /// </summary>
+        public TimeSpan IntervalTime { get; private set; }
+
+        /// <summary>
         /// Started the timer.
         /// </summary>
         /// <param name="partition">The partition.</param>
         /// <param name="duration">The overall duration.</param>
-        public void Start(double partition, TimeSpan duration)
+        public void Start(long partition, TimeSpan duration)
         {
-            var intervalDuration = duration.TotalSeconds / partition;
-            var timespan = TimeSpan.FromSeconds(intervalDuration);
+            var refreshInterval = TimeSpan.FromMilliseconds(1000);
+            long count = Math.DivRem(duration.Ticks, partition, out var remainder);
 
-            Interval = Observable.Interval(timespan).Select(x => TimeSpan.FromSeconds(x));
+            TimeSpan remainderSpan = TimeSpan.FromSeconds(count);
+            var intervalDuration = 100;
+            var timeAsLong = Convert.ToInt64(intervalDuration);
+            var timespan = TimeSpan.FromSeconds(timeAsLong);
+
+            IntervalTime = remainderSpan;
+
+            Interval = Observable.Interval(remainderSpan, _scheduler)
+                .Scan(TimeSpan.Zero, (acc, value) => acc + remainderSpan)
+                .TakeUntil(x => x <= duration);
         }
 
         /// <summary>
