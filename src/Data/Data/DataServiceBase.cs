@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using DynamicData;
+using JetBrains.Annotations;
 
 namespace Data
 {
@@ -22,7 +23,7 @@ namespace Data
         /// Initializes a new instance of the <see cref="DataServiceBase{T}"/> class.
         /// </summary>
         /// <param name="client">The abstracted client.</param>
-        protected DataServiceBase(IClient client)
+        protected DataServiceBase([NotNull] IClient client)
         {
             _client = client;
         }
