@@ -71,7 +71,7 @@ jobs:
       - name: ☢️ nuke
         run: dotnet nuke
       - name: 🐿 Publish Coverage
-        uses: codecov/codecov-action@v1.0.7
+        uses: codecov/codecov-action@v1.0.10
         with:
           name: 'actions-${{ matrix.os }}'
           fail_ci_if_error: 'true'
