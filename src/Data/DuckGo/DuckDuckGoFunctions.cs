@@ -16,7 +16,8 @@ namespace Data
         /// </summary>
         /// <param name="searchResult">The search result.</param>
         /// <returns>The enumeration of quest results.</returns>
-        public static IEnumerable<DuckDuckGoQueryResult> AsResult(this DuckDuckGoSearchResult searchResult) => searchResult.RelatedTopics.Where(x => !string.IsNullOrEmpty(x.FirstUrl));
+        public static IEnumerable<DuckDuckGoQueryResult> AsResult(this DuckDuckGoSearchResult searchResult) =>
+            searchResult.RelatedTopics.Where(x => !string.IsNullOrEmpty(x.FirstUrl));
 
         /// <summary>
         /// Caches the list of <see cref="DuckDuckGoQueryResult"/>.
@@ -24,6 +25,7 @@ namespace Data
         /// <param name="result">The result.</param>
         /// <param name="cache">The cache.</param>
         /// <returns>A completion notification.</returns>
-        public static async Task Cache(this Task<IEnumerable<DuckDuckGoQueryResult>> result, SourceCache<DuckDuckGoQueryResult, string> cache) => cache.AddOrUpdate(await result.ConfigureAwait(false));
+        public static async Task Cache(this Task<IEnumerable<DuckDuckGoQueryResult>> result, SourceCache<DuckDuckGoQueryResult, string> cache) =>
+            cache.AddOrUpdate(await result.ConfigureAwait(false));
     }
 }

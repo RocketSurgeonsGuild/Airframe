@@ -23,7 +23,7 @@ namespace Data
 
         /// <inheritdoc/>
         public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> QueryResults =>
-            _queryResults.Connect();
+            _queryResults.Connect().RefCount();
 
         /// <inheritdoc/>
         public async Task Query(string query) =>
