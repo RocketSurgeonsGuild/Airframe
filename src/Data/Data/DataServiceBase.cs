@@ -69,14 +69,16 @@ namespace Data
         public virtual IObservable<Unit> Update(T dto) =>
             Observable.Create<Unit>(_ =>
             {
-                _client.Post(dto).ToObservable().Subscribe();
+                var clientSubscription = _client.Post(dto).ToObservable().Subscribe();
 
-                using (var x = _semaphore.WaitAsync().ToObservable().Subscribe())
+                using var x = _semaphore.WaitAsync().ToObservable().Subscribe();
+                SourceCache.AddOrUpdate(dto);
+
+                return Disposable.Create(() =>
                 {
-                    SourceCache.AddOrUpdate(dto);
-                }
-
-                return Disposable.Empty;
+                    x.Dispose();
+                    clientSubscription.Dispose();
+                });
             });
 
         /// <inheritdoc />
