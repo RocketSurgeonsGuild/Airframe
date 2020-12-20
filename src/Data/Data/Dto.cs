@@ -5,7 +5,7 @@ namespace Data
     /// <summary>
     /// Represents a data transfer object.
     /// </summary>
-    public abstract class Dto
+    public abstract class Dto : IDto
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Dto"/> class.

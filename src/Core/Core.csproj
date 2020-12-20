@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Airframe</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
+        <LangVersion>latest</LangVersion>
+        <PackageId>Rocket.Surgery.Airframe.Core</PackageId>
+        <Description>Abstractions and base implementations for Airframe.</Description>
+    </PropertyGroup>
+
+</Project>

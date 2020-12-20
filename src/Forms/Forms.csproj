@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Composition\Composition.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
 </Project>
