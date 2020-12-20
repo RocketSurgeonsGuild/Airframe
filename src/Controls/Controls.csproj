@@ -1,7 +1,7 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.22">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;Xamarin.Mac20</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20</TargetFrameworks>
     <AssemblyName>Rocket.Surgery.Airframe</AssemblyName>
     <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
     <LangVersion>latest</LangVersion>
@@ -26,14 +26,14 @@
     <Reference Include="netstandard" />
   </ItemGroup>
   
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
     <Compile Include="Platforms\apple-common\**\*.cs" />
     <Compile Include="Platforms\uikit\**\*.cs" />
     <Reference Include="System.Runtime.Serialization" />
     <PackageReference Include="Toast.iOS" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <Compile Include="Platforms\apple-common\**\*.cs" />
     <Compile Include="Platforms\appkit\**\*.cs" />
     <Reference Include="System.Runtime.Serialization" />
