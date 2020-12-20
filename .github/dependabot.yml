@@ -1,12 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-    assignees:
-      - 'rlittlesii'
-    open-pull-requests-limit: 5
 
   - package-ecosystem: 'nuget'
     directory: '/'
@@ -20,5 +13,4 @@ updates:
       - 'rlittlesii'
     ignore:
       - dependency-name: Microsoft.Extensions.*
-      - dependency-name: Microsoft.AspNetCore.*
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
