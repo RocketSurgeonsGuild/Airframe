@@ -8,12 +8,11 @@ A collection of abstract classes that extend ReactiveUI implementations
 [![codecov-badge]][codecov]
 <!-- badges -->
 
-
 <!-- history badges -->
-| Azure Pipelines |
-| --------------- |
-| [![azurepipelines-badge]][azurepipelines] |
-| [![azurepipelines-history-badge]][azurepipelines-history] |
+| GitHub Actions |
+| -------------- |
+| [![github-badge]][github] |
+| [![github-history-badge]][github] |
 <!-- history badges -->
 
 ### NuGet
@@ -39,6 +38,9 @@ A collection of abstract classes that extend ReactiveUI implementations
 [azurepipelines-history]: https://dev.azure.com/RocketSurgeonsGuild/Libraries/_build/latest?definitionId=27&branchName=master
 [azurepipelines-history-badge]: https://buildstats.info/azurepipelines/chart/RocketSurgeonsGuild/Libraries/27?includeBuildsFromPullRequest=false "Azure Pipelines History"
 
+[github]: https://github.com/RocketSurgeonsGuild/Airframe/actions?query=workflow%3Aci
+[github-badge]: https://img.shields.io/github/workflow/status/RocketSurgeonsGuild/Airframe/ci.svg?label=github&logo=github&color=b845fc&logoColor=b845fc&style=flat "GitHub Actions Status"
+[github-history-badge]: https://buildstats.info/github/chart/RocketSurgeonsGuild/Airframe?includeBuildsFromPullRequest=false "GitHub Actions History"
 [nuget]: https://www.nuget.org/packages/Rocket.Surgery.Airframe/
 [nuget-version-badge]: https://img.shields.io/nuget/v/Rocket.Surgery.Airframe.svg?color=004880&logo=nuget&style=flat-square "NuGet Version"
 [nuget-downloads-badge]: https://img.shields.io/nuget/dt/Rocket.Surgery.Airframe.svg?color=004880&logo=nuget&style=flat-square "NuGet Downloads"
