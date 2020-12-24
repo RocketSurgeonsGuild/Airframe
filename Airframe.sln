@@ -45,6 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Composition.nuspec = .nuspec\Composition.nuspec
 		.nuspec\Data.nuspec = .nuspec\Data.nuspec
 		.nuspec\Synthetic.nuspec = .nuspec\Synthetic.nuspec
+		.nuspec\Core.nuspec = .nuspec\Core.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "src\Configuration\Configuration.csproj", "{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}"
