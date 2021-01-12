@@ -36,7 +36,7 @@ namespace Airframe.Tests.Timers
         {
             // Given
             var testScheduler = new TestScheduler();
-            DecrementTimer sut = new DecrementTimerFixture().WithScheduler(testScheduler);
+            DecrementTimer sut = new DecrementTimerFixture().WithProvider(new SchedulerProviderMock(background:testScheduler));
             var timer = TimeSpan.Zero;
 
             // When
@@ -83,7 +83,7 @@ namespace Airframe.Tests.Timers
         {
             // Given
             var testScheduler = new TestScheduler();
-            DecrementTimer sut = new DecrementTimerFixture().WithScheduler(testScheduler);
+            DecrementTimer sut = new DecrementTimerFixture().WithProvider(new SchedulerProviderMock(background:testScheduler));
             var timer = TimeSpan.Zero;
 
             // When

@@ -3,6 +3,7 @@ using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Core;
 using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Timers
@@ -19,9 +20,9 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <summary>
         ///     Initializes a new instance of the <see cref="DecrementTimer" /> class.
         /// </summary>
-        /// <param name="scheduler">The scheduler.</param>
-        public DecrementTimer(IScheduler scheduler)
-            : base(scheduler)
+        /// <param name="schedulerProvider">The scheduler.</param>
+        public DecrementTimer(ISchedulerProvider schedulerProvider)
+            : base(schedulerProvider)
         {
         }
 
@@ -48,7 +49,7 @@ namespace Rocket.Surgery.Airframe.Timers
                 Observable
                     .Create<TimeSpan>(observer =>
                         Observable
-                            .Interval(refreshInterval, Scheduler)
+                            .Interval(refreshInterval, BackgroundThread)
                             .Scan(_resumeTime, (acc, value) => acc - refreshInterval)
                             .TakeUntil(x => x <= TimeSpan.FromSeconds(0))
                             .Do(x => _resumeTime = x, () => _resumeTime = startTime)

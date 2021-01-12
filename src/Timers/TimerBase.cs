@@ -2,6 +2,7 @@ using System;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
+using Core;
 using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Timers
@@ -14,17 +15,21 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <summary>
         ///     Initializes a new instance of the <see cref="TimerBase" /> class.
         /// </summary>
-        /// <param name="scheduler">The scheduler.</param>
-        protected TimerBase(IScheduler scheduler)
+        /// <param name="schedulerProvider">The scheduler.</param>
+        protected TimerBase(ISchedulerProvider schedulerProvider)
         {
-            Scheduler = scheduler;
+            MainThread = schedulerProvider.UserInterfaceThread;
+            BackgroundThread = schedulerProvider.BackgroundThread;
         }
 
         /// <inheritdoc />
         protected Subject<bool> Running { get; } = new Subject<bool>();
 
         /// <inheritdoc />
-        protected IScheduler Scheduler { get; }
+        protected IScheduler MainThread { get; }
+
+        /// <inheritdoc />
+        protected IScheduler BackgroundThread { get; }
 
         /// <inheritdoc />
         protected CompositeDisposable TimesUp { get; } = new CompositeDisposable();

@@ -47,18 +47,19 @@ namespace Rocket.Surgery.Airframe.Timers
         public void Start(long partition, TimeSpan duration)
         {
             var refreshInterval = TimeSpan.FromMilliseconds(1000);
-            long count = Math.DivRem(duration.Ticks, partition, out var remainder);
 
-            TimeSpan remainderSpan = TimeSpan.FromSeconds(count);
-            var intervalDuration = 100;
-            var timeAsLong = Convert.ToInt64(intervalDuration);
-            var timespan = TimeSpan.FromSeconds(timeAsLong);
+            long ticks = Math.DivRem(duration.Ticks, partition, out var remainder);
+
+            TimeSpan remainderSpan = TimeSpan.FromTicks(ticks);
 
             IntervalTime = remainderSpan;
 
-            Interval = Observable.Interval(remainderSpan, _scheduler)
-                .Scan(TimeSpan.Zero, (acc, value) => acc + remainderSpan)
-                .TakeUntil(x => x <= duration);
+            // TODO: [rlittlesii: January 11, 2021] Fix this math.  The interval should be
+            Interval =
+                Observable
+                    .Interval(refreshInterval, _scheduler)
+                    .Scan(TimeSpan.Zero, (acc, _) => acc + refreshInterval)
+                    .TakeUntil(x => x <= remainderSpan);
         }
 
         /// <summary>

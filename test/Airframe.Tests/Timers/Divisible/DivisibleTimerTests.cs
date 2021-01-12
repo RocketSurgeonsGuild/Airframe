@@ -1,4 +1,5 @@
 using System;
+using System.Reactive.Linq;
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using Rocket.Surgery.Airframe.Timers;
@@ -19,7 +20,7 @@ namespace Airframe.Tests.Timers.Divisible
             sut.Start(partition, duration);
 
             // Then
-            sut.IntervalTime.Should().Be(TimeSpan.FromSeconds(duration.Ticks/partition));
+            sut.IntervalTime.Should().Be(TimeSpan.FromTicks(Math.DivRem(duration.Ticks, partition, out var remainder)));
         }
 
         [Fact]
@@ -29,11 +30,11 @@ namespace Airframe.Tests.Timers.Divisible
             int count = 1;
             var testScheduler = new TestScheduler();
             DivisibleTimer sut = new DivisibleTimerFixture().WithScheduler(testScheduler);
-            sut.Interval.Subscribe(_ => count++);
+            sut.Interval.ObserveOn(testScheduler).Subscribe(_ => count++);
 
             // When
             sut.Start(4, TimeSpan.FromHours(1));
-            testScheduler.AdvanceBy(TimeSpan.FromHours(1).Ticks + 1);
+            testScheduler.AdvanceBy(TimeSpan.FromMinutes(15).Ticks + 1);
 
             // Then
             count.Should().Be(4);
