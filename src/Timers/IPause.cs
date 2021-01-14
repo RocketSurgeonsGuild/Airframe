@@ -1,7 +1,7 @@
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
-    /// Interface that defines a pausable timer.
+    /// Interface that defines a timer that can pause.
     /// </summary>
     public interface IPause
     {

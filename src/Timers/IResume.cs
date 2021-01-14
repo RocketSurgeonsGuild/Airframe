@@ -1,7 +1,7 @@
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
-    /// Interface representing a resumable timer.
+    /// Interface representing a timer that can resume.
     /// </summary>
     public interface IResume
     {

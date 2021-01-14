@@ -1,9 +1,9 @@
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
-    /// Indicates a timer has reset.
+    /// Indicates an interval event.
     /// </summary>
-    public class TimerResetEvent : TimerEvent
+    public class IntervalTimerEvent : TimerEvent
     {
     }
 }

@@ -2,24 +2,26 @@ using System;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Core;
+using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
     ///     A timer that partitions time base on a provided partition number..
     /// </summary>
-    public class DivisibleTimer
+    public class DivisibleTimer : TimerBase
     {
-        private readonly IScheduler _scheduler;
         private readonly BehaviorSubject<bool> _pause = new BehaviorSubject<bool>(false);
+        private DecrementTimer _currentTimer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DivisibleTimer"/> class.
         /// </summary>
-        /// <param name="scheduler">The scheduler.</param>
-        public DivisibleTimer(IScheduler scheduler)
+        /// <param name="schedulerProvider">The scheduler.</param>
+        public DivisibleTimer(ISchedulerProvider schedulerProvider)
+            : base(schedulerProvider)
         {
-            _scheduler = scheduler;
             Interval = Observable.Empty<TimeSpan>();
             Timer = Observable.Empty<TimeSpan>();
         }
@@ -44,22 +46,32 @@ namespace Rocket.Surgery.Airframe.Timers
         /// </summary>
         /// <param name="partition">The partition.</param>
         /// <param name="duration">The overall duration.</param>
-        public void Start(long partition, TimeSpan duration)
+        public void Start(int partition, TimeSpan duration)
         {
             var refreshInterval = TimeSpan.FromMilliseconds(1000);
 
             long ticks = Math.DivRem(duration.Ticks, partition, out var remainder);
 
-            TimeSpan remainderSpan = TimeSpan.FromTicks(ticks);
+            TimeSpan timePerPartition = TimeSpan.FromTicks(ticks);
 
-            IntervalTime = remainderSpan;
+            Timer =
+                Observable
+                    .Range(0, partition)
+                    .Select(_ =>
+                    {
+                        _currentTimer = new DecrementTimer(SchedulerProvider);
+                        return Observable.Empty<TimeSpan>();
+                    })
+                    .Concat();
+
+            IntervalTime = timePerPartition;
 
             // TODO: [rlittlesii: January 11, 2021] Fix this math.  The interval should be
             Interval =
                 Observable
-                    .Interval(refreshInterval, _scheduler)
+                    .Interval(refreshInterval, SchedulerProvider.BackgroundThread)
                     .Scan(TimeSpan.Zero, (acc, _) => acc + refreshInterval)
-                    .TakeUntil(x => x <= remainderSpan);
+                    .TakeUntil(x => x <= timePerPartition);
         }
 
         /// <summary>

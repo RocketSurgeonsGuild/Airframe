@@ -1,7 +1,7 @@
 namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
-    /// Interface that defines a restable timer.
+    /// Interface that defines a timer that can be reset.
     /// </summary>
     public interface IReset
     {

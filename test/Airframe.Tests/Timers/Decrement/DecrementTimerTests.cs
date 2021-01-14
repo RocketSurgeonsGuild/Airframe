@@ -3,12 +3,17 @@ using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using Rocket.Surgery.Airframe.Timers;
+using Rocket.Surgery.Extensions.Testing;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Airframe.Tests.Timers
 {
-    public sealed class DecrementTimerTests
+    public sealed class DecrementTimerTests  : AutoSubstituteTest
     {
+        public DecrementTimerTests(ITestOutputHelper outputHelper)
+            : base(outputHelper) { }
+
         [Fact]
         public void Should_Take()
         {
@@ -172,9 +177,9 @@ namespace Airframe.Tests.Timers
                 // Given
                 var testScheduler = new TestScheduler();
                 DecrementTimer sut = new DecrementTimerFixture().WithScheduler(testScheduler);
+                sut.Timer(TimeSpan.FromSeconds(3), false).Subscribe(_ =>{ });
 
                 // When
-                sut.Timer(TimeSpan.FromSeconds(3), false).Subscribe(x =>{ });
                 testScheduler.AdvanceByMs(2000);
 
                 // Then
@@ -187,10 +192,10 @@ namespace Airframe.Tests.Timers
                 // Given
                 var testScheduler = new TestScheduler();
                 DecrementTimer sut = new DecrementTimerFixture().WithScheduler(testScheduler);
+                sut.Timer(TimeSpan.FromSeconds(3)).Subscribe(_ =>{ });
+                sut.IsRunning.Should().BeTrue();
 
                 // When
-                sut.Timer(TimeSpan.FromSeconds(3)).Subscribe(x =>{ });
-                sut.IsRunning.Should().BeTrue();
                 sut.Pause().Subscribe();
 
                 // Then

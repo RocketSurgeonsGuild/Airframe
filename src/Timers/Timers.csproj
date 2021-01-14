@@ -5,10 +5,10 @@
         <AssemblyName>Rocket.Surgery.Airframe.Timers</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Timers</RootNamespace>
     </PropertyGroup>
-<ItemGroup>
-    <PackageReference Include="ReactiveUI" />
-</ItemGroup>
-<ItemGroup>
-  <ProjectReference Include="..\Core\Core.csproj" />
-</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="ReactiveUI" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core\Core.csproj" />
+    </ItemGroup>
 </Project>

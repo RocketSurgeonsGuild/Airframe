@@ -16,7 +16,7 @@ namespace Rocket.Surgery.Airframe.Timers
         private readonly Subject<(TimeSpan, TimeSpan)> _observerSubject = new Subject<(TimeSpan, TimeSpan)>();
 
         private readonly IObservable<IObservable<Unit>> _whatever =
-            Observable.Create<IObservable<Unit>>(observer => { return Disposable.Empty; });
+            Observable.Create<IObservable<Unit>>(observer => Disposable.Empty);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoundTimer"/> class.
@@ -36,20 +36,20 @@ namespace Rocket.Surgery.Airframe.Timers
                 .Select(x =>
                     Observable.Create<Unit>(_ =>
                     {
-                        Interval = Observable.Interval(x.Item1, _scheduler).Select(TimeSpan.FromTicks);
-                        Rest = Observable.Interval(x.Item2, _scheduler).Select(TimeSpan.FromTicks);
+                        On = Observable.Interval(x.Item1, _scheduler).Select(TimeSpan.FromTicks);
+                        Off = Observable.Interval(x.Item2, _scheduler).Select(TimeSpan.FromTicks);
                         return Disposable.Empty;
                     }));
 
-            Interval = Observable.Create<TimeSpan>(observer => Disposable.Empty);
-            Rest = Observable.Create<TimeSpan>(observer => Disposable.Empty);
+            On = Observable.Create<TimeSpan>(observer => Disposable.Empty);
+            Off = Observable.Create<TimeSpan>(observer => Disposable.Empty);
         }
 
         /// <inheritdoc />
-        public IObservable<TimeSpan> Interval { get; private set; }
+        public IObservable<TimeSpan> On { get; private set; }
 
         /// <inheritdoc />
-        public IObservable<TimeSpan> Rest { get; private set; }
+        public IObservable<TimeSpan> Off { get; private set; }
 
         /// <inheritdoc />
         public IObservable<Unit> SetTimer(TimeSpan workoutInterval, TimeSpan restInterval)

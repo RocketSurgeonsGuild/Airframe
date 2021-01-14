@@ -4,7 +4,7 @@ using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using Rocket.Surgery.Airframe.Timers;
 
-namespace Airframe.Tests.Timers.Divisible
+namespace Airframe.Tests.Timers
 {
     internal class DivisibleTimerFixture : IBuilder
     {
@@ -18,9 +18,8 @@ namespace Airframe.Tests.Timers.Divisible
 
         public static implicit operator DivisibleTimer(DivisibleTimerFixture fixture) => fixture.Build();
 
-        public DivisibleTimerFixture WithScheduler(IScheduler scheduler) => this.With(ref _scheduler, scheduler);
         public DivisibleTimerFixture WithProvider(ISchedulerProvider scheduler) => this.With(ref _schedulerProvider, scheduler);
 
-        private DivisibleTimer Build() => new DivisibleTimer(_scheduler);
+        private DivisibleTimer Build() => new DivisibleTimer(_schedulerProvider);
     }
 }

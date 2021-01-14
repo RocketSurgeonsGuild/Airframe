@@ -18,18 +18,14 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <param name="schedulerProvider">The scheduler.</param>
         protected TimerBase(ISchedulerProvider schedulerProvider)
         {
-            MainThread = schedulerProvider.UserInterfaceThread;
-            BackgroundThread = schedulerProvider.BackgroundThread;
+            SchedulerProvider = schedulerProvider;
         }
 
         /// <inheritdoc />
+        protected ISchedulerProvider SchedulerProvider { get; set; }
+
+        /// <inheritdoc />
         protected Subject<bool> Running { get; } = new Subject<bool>();
-
-        /// <inheritdoc />
-        protected IScheduler MainThread { get; }
-
-        /// <inheritdoc />
-        protected IScheduler BackgroundThread { get; }
 
         /// <inheritdoc />
         protected CompositeDisposable TimesUp { get; } = new CompositeDisposable();

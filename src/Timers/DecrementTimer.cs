@@ -49,7 +49,7 @@ namespace Rocket.Surgery.Airframe.Timers
                 Observable
                     .Create<TimeSpan>(observer =>
                         Observable
-                            .Interval(refreshInterval, BackgroundThread)
+                            .Interval(refreshInterval, SchedulerProvider.BackgroundThread)
                             .Scan(_resumeTime, (acc, value) => acc - refreshInterval)
                             .TakeUntil(x => x <= TimeSpan.FromSeconds(0))
                             .Do(x => _resumeTime = x, () => _resumeTime = startTime)

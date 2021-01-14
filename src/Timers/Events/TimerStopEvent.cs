@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Timers.Events
+namespace Rocket.Surgery.Airframe.Timers
 {
     /// <summary>
     /// Indicates a timer has stopped.
