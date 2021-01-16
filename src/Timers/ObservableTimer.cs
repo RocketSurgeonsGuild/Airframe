@@ -6,7 +6,7 @@ namespace Rocket.Surgery.Airframe.Timers
     /// <summary>
     /// Represents an <see cref="ITimer"/> that is observable.
     /// </summary>
-    public class ObservableTimer : ITimer
+    public class ObservableTimer
     {
         private Subject<TimeSpan> _timer = new Subject<TimeSpan>();
 

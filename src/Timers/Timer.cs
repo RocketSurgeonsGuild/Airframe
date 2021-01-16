@@ -3,13 +3,13 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Core;
+using ReactiveMarbles.PropertyChanged;
 using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Timers
 {
     public class Timer : ReactiveObject, ITimer, IDisposable
     {
-        private readonly ISchedulerProvider _schedulerProvider;
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
         private ObservableAsPropertyHelper<bool> _isRunning;
         private TimeSpan _duration;
@@ -20,34 +20,51 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <param name="schedulerProvider">The scheduler provider.</param>
         public Timer(ISchedulerProvider schedulerProvider)
         {
-            _schedulerProvider = schedulerProvider;
-
             _timerEvents
                 .Select(x => x is TimerStartEvent || x is TimerResumeEvent)
                 .ToProperty(this, nameof(IsRunning), out _isRunning)
                 .DisposeWith(Subscriptions);
 
-            this.WhenAnyValue(x => x.Duration)
-                .CombineLatest(_timerEvents, (duration, timerEvent) => (duration, timerEvent))
-                .Where(x => x.timerEvent is TimerStartEvent || x.timerEvent is TimerResumeEvent)
-                .Select(x => x.duration)
-                .Subscribe()
-                .DisposeWith(Subscriptions);
+            Elapsed =
+                _timerEvents
+                    .Where(x => x is TimerStartEvent || x is TimerResumeEvent)
+                    .CombineLatest(
+                        this.WhenPropertyValueChanges(x => x.Duration).Where(x => x != TimeSpan.Zero),
+                        (timerEvent, duration) => (timerEvent, duration))
+                    .Select(x =>
+                    {
+                        var resumeTime = x.duration;
+                        return Observable
+                            .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
+                            .SubscribeOn(schedulerProvider.BackgroundThread)
+                            .Scan(resumeTime, (acc, _) => acc - TimeSpans.RefreshInterval)
+                            .TakeUntil(elapsed => elapsed <= TimeSpan.Zero)
+                            .Do(elapsed => resumeTime = elapsed, () => resumeTime = x.duration);
+                    })
+                    .Switch();
         }
+
+        /// <summary>
+        /// Gets the elapsed time as an observable.
+        /// </summary>
+        public IObservable<TimeSpan> Elapsed { get; }
 
         /// <inheritdoc />
         public bool IsRunning => _isRunning.Value;
 
         /// <summary>
+        /// Gets the duration.
+        /// </summary>
+        public TimeSpan Duration
+        {
+            get => _duration;
+            private set => this.RaiseAndSetIfChanged(ref _duration, value);
+        }
+
+        /// <summary>
         /// Gets the subscriptions.
         /// </summary>
         protected CompositeDisposable Subscriptions { get; } = new();
-
-        private TimeSpan Duration
-        {
-            get => _duration;
-            set => this.RaiseAndSetIfChanged(ref _duration, value);
-        }
 
         /// <inheritdoc />
         public void Start() => _timerEvents.OnNext(new TimerStartEvent());
@@ -62,7 +79,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <inheritdoc/>
-        public IDisposable Subscribe(IObserver<TimeSpan> observer) => Disposable.Empty;
+        public IDisposable Subscribe(IObserver<TimeSpan> observer) => Elapsed.Where(x => x != TimeSpan.Zero).Subscribe(observer);
 
         /// <inheritdoc />
         public void Dispose()

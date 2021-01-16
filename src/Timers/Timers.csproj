@@ -6,7 +6,7 @@
         <RootNamespace>Rocket.Surgery.Airframe.Timers</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="ReactiveUI" />
+        <PackageReference Include="ReactiveMarbles.PropertyChanged" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Core\Core.csproj" />
