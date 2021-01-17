@@ -8,6 +8,9 @@ using ReactiveUI;
 
 namespace Rocket.Surgery.Airframe.Timers
 {
+    /// <summary>
+    /// Represents a default implementation of <see cref="ITimer"/>.
+    /// </summary>
     public class Timer : ReactiveObject, ITimer, IDisposable
     {
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
