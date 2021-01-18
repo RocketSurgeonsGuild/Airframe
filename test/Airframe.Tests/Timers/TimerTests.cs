@@ -12,6 +12,9 @@ namespace Airframe.Tests.Timers
 {
     public class TimerTests : TestBase
     {
+        const int InitialMilliseconds = 1000;
+        const int OneThousandMilliseconds = 1000;
+
         public TimerTests()
         {
             RxApp.DefaultExceptionHandler = BaseExceptionHandlerStub.Instance;
@@ -83,7 +86,7 @@ namespace Airframe.Tests.Timers
             var schedulerProvider = new SchedulerProviderMock(background: testScheduler);
             Timer sut = new TimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
-            sut.Set(TimeSpan.FromMinutes(25));
+            sut.Set(TimeSpan.FromMinutes(1));
 
             sut.Subscribe(x =>
             {
@@ -92,10 +95,66 @@ namespace Airframe.Tests.Timers
 
             // When
             sut.Start();
-            testScheduler.AdvanceByMs(20000);
+            testScheduler.AdvanceByMs(InitialMilliseconds);
 
             // Then
-            timer.Should().NotBe(TimeSpan.Zero);
+            timer.Should().Be(TimeSpan.FromSeconds(59));
+        }
+
+        
+        [Fact]
+        public void Should_Resume_Where_Stopped()
+        {
+            // Given
+            var testScheduler = new TestScheduler();
+            var schedulerProvider = new SchedulerProviderMock(background: testScheduler);
+            Timer sut = new TimerFixture().WithProvider(schedulerProvider);
+            var timer = TimeSpan.Zero;
+            sut.Set(TimeSpan.FromMinutes(1));
+
+            sut.Subscribe(x =>
+            {
+                timer = x;
+            });
+
+            sut.Start();
+            testScheduler.AdvanceByMs(InitialMilliseconds);
+            sut.Stop();
+            testScheduler.AdvanceByMs(OneThousandMilliseconds);
+            // When
+            sut.Start();
+
+            // Then
+            timer.Should().Be(TimeSpan.FromSeconds(59));
+        }
+        
+        
+        [Fact]
+        public void Should_Resume_After_Stopped()
+        {
+            // Given
+            var testScheduler = new TestScheduler();
+            var schedulerProvider = new SchedulerProviderMock(background: testScheduler);
+            Timer sut = new TimerFixture().WithProvider(schedulerProvider);
+            var timer = TimeSpan.Zero;
+            sut.Set(TimeSpan.FromMinutes(1));
+
+            sut.Subscribe(x =>
+            {
+                timer = x;
+            });
+
+            sut.Start();
+            testScheduler.AdvanceByMs(InitialMilliseconds);
+            sut.Stop();
+            testScheduler.AdvanceByMs(OneThousandMilliseconds);
+
+            // When
+            sut.Start();
+            testScheduler.AdvanceByMs(OneThousandMilliseconds);
+
+            // Then
+            timer.Should().Be(TimeSpan.FromSeconds(58));
         }
     }
 

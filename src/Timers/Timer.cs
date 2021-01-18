@@ -16,6 +16,7 @@ namespace Rocket.Surgery.Airframe.Timers
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
         private ObservableAsPropertyHelper<bool> _isRunning;
         private TimeSpan _duration;
+        private TimeSpan _resumeTime;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Timer"/> class.
@@ -24,25 +25,30 @@ namespace Rocket.Surgery.Airframe.Timers
         public Timer(ISchedulerProvider schedulerProvider)
         {
             _timerEvents
-                .Select(x => x is TimerStartEvent || x is TimerResumeEvent)
+                .Select(x => x is TimerStartEvent)
                 .ToProperty(this, nameof(IsRunning), out _isRunning)
                 .DisposeWith(Subscriptions);
 
+            this.WhenPropertyValueChanges(x => x.Duration)
+                .Where(x => x > TimeSpan.Zero)
+                .Take(1)
+                .Subscribe(x => _resumeTime = x);
+
             Elapsed =
                 _timerEvents
-                    .Where(x => x is TimerStartEvent || x is TimerResumeEvent)
                     .CombineLatest(
                         this.WhenPropertyValueChanges(x => x.Duration).Where(x => x != TimeSpan.Zero),
-                        (timerEvent, duration) => (timerEvent, duration))
+                        this.WhenPropertyValueChanges(x => x.IsRunning),
+                        (timerEvent, duration, isRunning) => (timerEvent, duration, isRunning))
                     .Select(x =>
                     {
-                        var resumeTime = x.duration;
-                        return Observable
-                            .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
-                            .SubscribeOn(schedulerProvider.BackgroundThread)
-                            .Scan(resumeTime, (acc, _) => acc - TimeSpans.RefreshInterval)
-                            .TakeUntil(elapsed => elapsed <= TimeSpan.Zero)
-                            .Do(elapsed => resumeTime = elapsed, () => resumeTime = x.duration);
+                        return x.isRunning
+                            ? Observable
+                                .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
+                                .Scan(_resumeTime, (acc, _) => acc - TimeSpans.RefreshInterval)
+                                .TakeUntil(elapsed => elapsed <= TimeSpan.Zero)
+                                .Do(elapsed => _resumeTime = elapsed, () => _resumeTime = x.duration)
+                            : Observable.Never<TimeSpan>();
                     })
                     .Switch();
         }
