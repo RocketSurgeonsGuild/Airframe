@@ -1,20 +1,12 @@
 using System;
-using System.Reactive.Concurrency;
 using Core;
 using FluentAssertions;
-using JetBrains.Annotations;
-using Microsoft.Extensions.Logging;
 using Microsoft.Reactive.Testing;
 using ReactiveUI;
 using ReactiveUI.Testing;
-using Rocket.Surgery.Airframe.Exceptions;
 using Rocket.Surgery.Airframe.Timers;
-using Rocket.Surgery.Extensions.Testing;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
-using Serilog;
-using Serilog.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Airframe.Tests.Timers
 {
@@ -119,12 +111,20 @@ namespace Airframe.Tests.Timers
         private Timer Build() => new Timer(_schedulerProvider);
     }
     
-    internal sealed class BaseExceptionHandlerStub : ExceptionHandlerBase
+    internal sealed class BaseExceptionHandlerStub : IObserver<Exception>
     {
         public static readonly BaseExceptionHandlerStub Instance = new BaseExceptionHandlerStub();
 
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
+        }
+
         /// <inheritdoc />
-        public override void OnNext(Exception exception) {}
+        public void OnNext(Exception exception) {}
     }
 
     public abstract class TestBase
