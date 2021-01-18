@@ -73,7 +73,7 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <summary>
         /// Gets the subscriptions.
         /// </summary>
-        protected CompositeDisposable Subscriptions { get; } = new();
+        protected CompositeDisposable Subscriptions { get; } = new CompositeDisposable();
 
         /// <inheritdoc />
         public void Start() => _timerEvents.OnNext(new TimerStartEvent());
