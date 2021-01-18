@@ -8,7 +8,7 @@ namespace Airframe.Tests.Timers
 {
     internal class DivisibleTimerFixture : IBuilder
     {
-        private ISchedulerProvider _schedulerProvider;
+        private ISchedulerProvider _schedulerProvider = new SchedulerProviderMock();
 
         public static implicit operator DivisibleTimer(DivisibleTimerFixture fixture) => fixture.Build();
 

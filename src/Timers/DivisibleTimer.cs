@@ -73,21 +73,5 @@ namespace Rocket.Surgery.Airframe.Timers
                     .Scan(TimeSpan.Zero, (acc, _) => acc + refreshInterval)
                     .TakeUntil(x => x <= timePerPartition);
         }
-
-        /// <summary>
-        /// Pauses the timer.
-        /// </summary>
-        public void Pause()
-        {
-            _pause.OnNext(true);
-        }
-
-        /// <summary>
-        /// Resumes the timer.
-        /// </summary>
-        public void Resume()
-        {
-            _pause.OnNext(false);
-        }
     }
 }

@@ -5,7 +5,7 @@ namespace Rocket.Surgery.Airframe.Timers
     /// <summary>
     /// Interface representing a base timer.
     /// </summary>
-    public interface ITimer : IObservable<TimeSpan>
+    public interface ITimer
     {
         /// <summary>
         /// Gets a value indicating whether this instance is running.
