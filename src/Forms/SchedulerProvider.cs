@@ -1,6 +1,6 @@
 using System.Reactive.Concurrency;
-using Core;
 using ReactiveUI;
+using Rocket.Surgery.Airframe.Scheduling;
 
 namespace Rocket.Surgery.Airframe.Forms
 {

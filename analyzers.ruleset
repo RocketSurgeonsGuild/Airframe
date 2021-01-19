@@ -144,7 +144,7 @@
     <Rule Id="SX1101" Action="Error" />
     <Rule Id="SX1309" Action="Error" />
     <Rule Id="SX1623" Action="None" />
-    <Rule Id="SA1000" Action="Error" />
+    <Rule Id="SA1000" Action="None" />
     <Rule Id="SA1001" Action="Error" />
     <Rule Id="SA1002" Action="Error" />
     <Rule Id="SA1003" Action="Error" />

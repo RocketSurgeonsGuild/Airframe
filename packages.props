@@ -29,9 +29,11 @@
         <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
         <PackageReference Update="DryIoc" Version="4.0.*" />
         <PackageReference Update="DynamicData" Version="6.*" />
+        <PackageReference Update="Microsoft.Reactive.Testing" Version="4.*" />
         <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
         <PackageReference Update="ReactiveUI" Version="10.*" />
         <PackageReference Update="ReactiveUI.XamForms" Version="10.*" />
+        <PackageReference Update="ReactiveMarbles.PropertyChanged" Version="1.4.1" />
         <PackageReference Update="Refit" Version="5.1.67" />
         <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
@@ -60,11 +62,12 @@
         <PackageReference Update="FluentAssertions" Version="5.4.2" />
         <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.9.0" />
         <PackageReference Update="Microsoft.Reactive.Testing" Version="4.*" />
-        <PackageReference Update="NSubstitute" Version="3.1.0" />
+        <PackageReference Update="NSubstitute" Version="4.2.2" />
+        <PackageReference Update="ReactiveUI.Testing" Version="11.*" />
         <PackageReference Update="Rocket.Surgery.Extensions.Testing.Fixtures" Version="3.3.0" />
         <PackageReference Update="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="5.2.0" />
-        <PackageReference Update="xunit" Version="2.4.0" />
-        <PackageReference Update="xunit.runner.visualstudio" Version="2.4.0" />
+        <PackageReference Update="xunit" Version="2.4.1" />
+        <PackageReference Update="xunit.runner.visualstudio" Version="2.4.1" />
         <PackageReference Update="XunitXml.TestLogger" Version="2.0.0" />
         <DotNetCliToolReference Update="dotnet-xunit" Version="2.3.1" />
     </ItemGroup>
