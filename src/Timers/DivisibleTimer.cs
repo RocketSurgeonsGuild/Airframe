@@ -1,9 +1,7 @@
 using System;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Core;
-using ReactiveUI;
+using Rocket.Surgery.Airframe.Scheduling;
 
 namespace Rocket.Surgery.Airframe.Timers
 {
@@ -13,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Timers
     public class DivisibleTimer : TimerBase
     {
         private readonly BehaviorSubject<bool> _pause = new BehaviorSubject<bool>(false);
-        private DecrementTimer _currentTimer;
+        private ObservableTimer _currentTimer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DivisibleTimer"/> class.
@@ -59,7 +57,7 @@ namespace Rocket.Surgery.Airframe.Timers
                     .Range(0, partition)
                     .Select(_ =>
                     {
-                        _currentTimer = new DecrementTimer(SchedulerProvider);
+                        _currentTimer = new ObservableTimer(SchedulerProvider);
                         return Observable.Empty<TimeSpan>();
                     })
                     .Concat();

@@ -1,4 +1,4 @@
-using Core;
+using Rocket.Surgery.Airframe.Scheduling;
 using Rocket.Surgery.Airframe.Timers;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 

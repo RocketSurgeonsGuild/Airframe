@@ -2,9 +2,9 @@ using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Core;
 using ReactiveMarbles.PropertyChanged;
 using ReactiveUI;
+using Rocket.Surgery.Airframe.Scheduling;
 
 namespace Rocket.Surgery.Airframe.Timers
 {
@@ -15,6 +15,7 @@ namespace Rocket.Surgery.Airframe.Timers
     {
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
         private readonly ObservableAsPropertyHelper<bool> _isRunning;
+        private readonly IObservable<TimeSpan> _elapsed;
         private TimeSpan _duration;
         private TimeSpan _resumeTime;
 
@@ -32,9 +33,10 @@ namespace Rocket.Surgery.Airframe.Timers
             this.WhenPropertyValueChanges(x => x.Duration)
                 .Where(x => x > TimeSpan.Zero)
                 .Take(1)
-                .Subscribe(x => _resumeTime = x);
+                .Subscribe(x => _resumeTime = x)
+                .DisposeWith(Subscriptions);
 
-            Elapsed =
+            _elapsed =
                 _timerEvents
                     .CombineLatest(
                         this.WhenPropertyValueChanges(x => x.Duration).Where(x => x != TimeSpan.Zero),
@@ -52,11 +54,6 @@ namespace Rocket.Surgery.Airframe.Timers
                     })
                     .Switch();
         }
-
-        /// <summary>
-        /// Gets the elapsed time as an observable.
-        /// </summary>
-        public IObservable<TimeSpan> Elapsed { get; }
 
         /// <inheritdoc />
         public bool IsRunning => _isRunning.Value;
@@ -88,7 +85,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <inheritdoc/>
-        public IDisposable Subscribe(IObserver<TimeSpan> observer) => Elapsed.Where(x => x != TimeSpan.Zero).Subscribe(observer);
+        public IDisposable Subscribe(IObserver<TimeSpan> observer) => _elapsed.Where(x => x >= TimeSpan.Zero).Subscribe(observer);
 
         /// <inheritdoc />
         public void Dispose()
