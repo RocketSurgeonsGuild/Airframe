@@ -42,16 +42,13 @@ namespace Rocket.Surgery.Airframe.Timers
                         this.WhenPropertyValueChanges(x => x.Duration).Where(x => x != TimeSpan.Zero),
                         this.WhenPropertyValueChanges(x => x.IsRunning),
                         (timerEvent, duration, isRunning) => (timerEvent, duration, isRunning))
-                    .Select(x =>
-                    {
-                        return x.isRunning
-                            ? Observable
-                                .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
-                                .Scan(_resumeTime, (acc, _) => acc - TimeSpans.RefreshInterval)
-                                .TakeUntil(elapsed => elapsed <= TimeSpan.Zero)
-                                .Do(elapsed => _resumeTime = elapsed, () => _resumeTime = x.duration)
-                            : Observable.Never<TimeSpan>();
-                    })
+                    .Select(x => x.isRunning
+                        ? Observable
+                            .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
+                            .Scan(_resumeTime, (acc, _) => acc - TimeSpans.RefreshInterval)
+                            .TakeUntil(elapsed => elapsed <= TimeSpan.Zero)
+                            .Do(elapsed => _resumeTime = elapsed, () => _resumeTime = x.duration)
+                        : Observable.Never<TimeSpan>())
                     .Switch();
         }
 
