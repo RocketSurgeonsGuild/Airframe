@@ -3,16 +3,22 @@ using Rocket.Surgery.Airframe.Apple.Notifications;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
-    public class RegionErrorNotification
+    public class RegionErrorEvent
     {
+        public RegionErrorEvent(NSError error, GeoRegion region)
+        {
+            Error = error;
+            Region = region;
+        }
+
         /// <summary>
         /// Gets or sets the exception.
         /// </summary>
-        public Exception Exception { get; set; }
+        public NSError Error { get; }
 
         /// <summary>
         /// Gets or sets the geo region.
         /// </summary>
-        public GeoRegion Region { get; set; }
+        public GeoRegion Region { get; }
     }
 }

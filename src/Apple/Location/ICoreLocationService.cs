@@ -8,17 +8,17 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets the location update notifications.
         /// </summary>
-        IObservable<LocationUpdatedNotification> LocationUpdated { get; }
+        IObservable<LocationUpdatedEvent> LocationUpdated { get; }
 
         /// <summary>
         /// Gets whether the monitoring failed.
         /// </summary>
-        IObservable<RegionErrorNotification> MonitoringFailed { get; }
+        IObservable<RegionErrorEvent> MonitoringFailed { get; }
 
         /// <summary>
         /// Gets an observable sequence of Visited events.
         /// </summary>
-        IObservable<VisitedNotification> Visited { get; }
+        IObservable<VisitedEvent> Visited { get; }
 
         /// <summary>
         /// Gets an observable sequence of deferred update completions.
@@ -28,12 +28,12 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of notifications when region state is determined.
         /// </summary>
-        IObservable<RegionChangedNotification> RegionStateDetermined { get; }
+        IObservable<RegionChangedEvent> RegionStateDetermined { get; }
 
         /// <summary>
         /// Gets an observable sequence of regions being monitored.
         /// </summary>
-        IObservable<RegionChangedNotification> MonitoringRegion { get; }
+        IObservable<RegionChangedEvent> MonitoringRegion { get; }
 
         /// <summary>
         /// Gets an observable sequence notifying when location updates resume.
@@ -48,11 +48,11 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence notifying when location updates resume.
         /// </summary>
-        IObservable<LocationsUpdatedNotification> LocationsUpdated { get; }
+        IObservable<LocationsUpdatedEvent> LocationsUpdated { get; }
 
         /// <summary>
         /// Gets an observable sequence notifying that authorization change.
         /// </summary>
-        IObservable<AuthorizationChangedNotification> AuthorizationChanged { get; }
+        IObservable<AuthorizationChangedEvent> AuthorizationChanged { get; }
     }
 }

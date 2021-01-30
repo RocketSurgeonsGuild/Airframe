@@ -1,6 +1,6 @@
 namespace Rocket.Surgery.Airframe.Apple
 {
-    public class RegionBeaconRangedNotification
+    public class RegionBeaconRangedEvent
     {
     }
 }

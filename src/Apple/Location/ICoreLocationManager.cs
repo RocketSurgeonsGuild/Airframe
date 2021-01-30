@@ -12,7 +12,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence notifying that authorization change.
         /// </summary>
-        IObservable<AuthorizationChangedNotification> AuthorizationChanged { get; }
+        IObservable<AuthorizationChangedEvent> AuthorizationChanged { get; }
 
         /// <summary>
         /// Gets an observable sequence of deferred update completions.
@@ -22,17 +22,17 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of notifications when region state is determined.
         /// </summary>
-        IObservable<RegionChangedNotification> DidDetermineState { get; }
+        IObservable<RegionChangedEvent> DidDetermineState { get; }
 
         /// <summary>
         /// Gets an observable sequence of region beacon failure notifications.
         /// </summary>
-        IObservable<RegionBeaconsConstraintFailedNotification> DidFailRangingBeacons { get; }
+        IObservable<RegionBeaconsConstraintFailedEvent> DidFailRangingBeacons { get; }
 
         /// <summary>
         /// Gets an observable sequence of ranged beacon notifications.
         /// </summary>
-        IObservable<RegionBeaconRangedNotification> DidRangeBeacons { get; }
+        IObservable<RegionBeaconRangedEvent> DidRangeBeacons { get; }
 
         /// <summary>
         /// Gets an observable sequence of beacon range constraint notifications.
@@ -42,12 +42,12 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of regions when the are started being monitored.
         /// </summary>
-        IObservable<RegionChangedNotification> DidStartMonitoringForRegion { get; }
+        IObservable<RegionChangedEvent> DidStartMonitoringForRegion { get; }
 
         /// <summary>
         /// Gets an observable sequence of regions visited.
         /// </summary>
-        IObservable<VisitedNotification> DidVisit { get; }
+        IObservable<VisitedEvent> DidVisit { get; }
 
         /// <summary>
         /// Gets an observable sequence of failure notifications.
@@ -67,12 +67,12 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence notifying when location updates resume.
         /// </summary>
-        IObservable<LocationsUpdatedNotification> LocationsUpdated { get; }
+        IObservable<LocationsUpdatedEvent> LocationsUpdated { get; }
 
         /// <summary>
         /// Gets whether the monitoring failed.
         /// </summary>
-        IObservable<RegionErrorNotification> MonitoringFailed { get; }
+        IObservable<RegionErrorEvent> MonitoringFailed { get; }
 
         /// <summary>
         /// Gets an observable sequence of failure notifications.
@@ -82,12 +82,12 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence notifying when a region has been entered.
         /// </summary>
-        IObservable<RegionChangedNotification> RegionEntered { get; }
+        IObservable<RegionChangedEvent> RegionEntered { get; }
 
         /// <summary>
         /// Gets an observable sequence notifying when a region has been exited.
         /// </summary>
-        IObservable<RegionChangedNotification> RegionExited { get; }
+        IObservable<RegionChangedEvent> RegionExited { get; }
 
         /// <summary>
         /// Gets an observable sequence of heading update notifications.
@@ -97,6 +97,6 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets the location update notifications.
         /// </summary>
-        IObservable<LocationUpdatedNotification> UpdatedLocation { get; }
+        IObservable<LocationUpdatedEvent> UpdatedLocation { get; }
     }
 }

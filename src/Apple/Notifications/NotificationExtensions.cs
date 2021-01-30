@@ -29,36 +29,36 @@ namespace Rocket.Surgery.Airframe.Apple
             };
 
         /// <summary>
-        /// Converts the <see cref="CLAuthorizationChangedEventArgs"/> to an instance of <see cref="AuthorizationChangedNotification"/>.
+        /// Converts the <see cref="CLAuthorizationChangedEventArgs"/> to an instance of <see cref="AuthorizationChangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static AuthorizationChangedNotification ToNotification(this CLAuthorizationChangedEventArgs args) =>
-            new AuthorizationChangedNotification { Status = AuthorizationStatuses[args.Status] };
+        public static AuthorizationChangedEvent ToNotification(this CLAuthorizationChangedEventArgs args) =>
+            new AuthorizationChangedEvent(AuthorizationStatuses[args.Status]);
 
         /// <summary>
-        /// Converts the <see cref="CLAuthorizationChangedEventArgs"/> to an instance of <see cref="AuthorizationChangedNotification"/>.
+        /// Converts the <see cref="CLAuthorizationChangedEventArgs"/> to an instance of <see cref="AuthorizationChangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static RegionBeaconsConstraintFailedNotification ToNotification(this CLRegionBeaconsConstraintFailedEventArgs args) =>
-            new RegionBeaconsConstraintFailedNotification { };
+        public static RegionBeaconsConstraintFailedEvent ToNotification(
+            this CLRegionBeaconsConstraintFailedEventArgs args) => new RegionBeaconsConstraintFailedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedNotification"/>.
+        /// Converts the <see cref="CLRegionBeaconsRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static RegionBeaconRangedNotification ToNotification(this CLRegionBeaconsRangedEventArgs args) =>
-            new RegionBeaconRangedNotification { };
+        public static RegionBeaconRangedEvent ToNotification(this CLRegionBeaconsRangedEventArgs args) =>
+            new RegionBeaconRangedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedNotification"/>.
+        /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
         public static RegionBeaconsConstraintRangedNotification ToNotification(this CLRegionBeaconsConstraintRangedEventArgs args) =>
-            new RegionBeaconsConstraintRangedNotification { };
+            new RegionBeaconsConstraintRangedNotification();
 
         /// <summary>
         /// Converts the <see cref="CLRegionBeaconsFailedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
@@ -66,58 +66,48 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
         public static RegionBeaconsFailedNotification ToNotification(this CLRegionBeaconsFailedEventArgs args) =>
-            new RegionBeaconsFailedNotification { };
+            new RegionBeaconsFailedNotification();
 
         /// <summary>
         /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static HeadingUpdatedNotification ToNotification(this CLHeadingUpdatedEventArgs args) =>
-            new HeadingUpdatedNotification { };
+        public static HeadingUpdatedEvent ToNotification(this CLHeadingUpdatedEventArgs args) =>
+            new HeadingUpdatedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedNotification"/>.
+        /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static LocationsUpdatedNotification ToNotification(this CLLocationsUpdatedEventArgs args) =>
-            new LocationsUpdatedNotification { Locations = args.Locations.Select(x => new Location(x.Coordinate.Latitude, x.Coordinate.Longitude)) };
+        public static LocationsUpdatedEvent ToNotification(this CLLocationsUpdatedEventArgs args) =>
+            new LocationsUpdatedEvent(args.Locations.Select(x => new Location(x.Coordinate.Latitude, x.Coordinate.Longitude)));
 
         /// <summary>
-        /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedNotification"/>.
+        /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static LocationUpdatedNotification ToNotification(CLLocationUpdatedEventArgs args) =>
-            new LocationUpdatedNotification
-            {
-                Previous = args.OldLocation.Coordinate.ToLocation(),
-                Current = args.NewLocation.Coordinate.ToLocation()
-            };
+        public static LocationUpdatedEvent ToNotification(CLLocationUpdatedEventArgs args) =>
+            new LocationUpdatedEvent(args.OldLocation.Coordinate.ToLocation(),
+                args.NewLocation.Coordinate.ToLocation());
 
         /// <summary>
-        /// Converts the <see cref="CLRegionEventArgs"/> to <see cref="RegionChangedNotification"/>.
+        /// Converts the <see cref="CLRegionEventArgs"/> to <see cref="RegionChangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static RegionChangedNotification ToNotification(this CLRegionEventArgs args) =>
-            new RegionChangedNotification
-            {
-                Region = args.Region.ToGeoRegion()
-            };
+        public static RegionChangedEvent ToNotification(this CLRegionEventArgs args) =>
+            new RegionChangedEvent(args.Region.ToGeoRegion());
 
         /// <summary>
-        /// Converts the <see cref="CLRegionStateDeterminedEventArgs"/> to <see cref="RegionChangedNotification"/>.
+        /// Converts the <see cref="CLRegionStateDeterminedEventArgs"/> to <see cref="RegionChangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static RegionChangedNotification ToNotification(this CLRegionStateDeterminedEventArgs args) =>
-            new RegionChangedNotification
-            {
-                Region = args.Region.ToGeoRegion(),
-                State = RegionStates[args.State]
-            };
+        public static RegionChangedEvent ToNotification(this CLRegionStateDeterminedEventArgs args) =>
+            new RegionChangedEvent(args.Region.ToGeoRegion(), RegionStates[args.State]);
 
         /// <summary>
         /// Converts the <see cref="CLRegionStateDeterminedEventArgs"/> to <see cref="ErrorNotification"/>.
@@ -128,32 +118,23 @@ namespace Rocket.Surgery.Airframe.Apple
             new ErrorNotification { };
 
         /// <summary>
-        /// Converts the <see cref="CLVisitedEventArgs"/> to <see cref="VisitedNotification"/>.
+        /// Converts the <see cref="CLVisitedEventArgs"/> to <see cref="VisitedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static VisitedNotification ToNotification(this CLVisitedEventArgs args) =>
-            new VisitedNotification
-            {
-                ArrivalDate = args.Visit.ArrivalDate.ToLocalTime(),
-                Location = args.Visit.Coordinate.ToLocation(),
-                DepartureDate = args.Visit.DepartureDate.ToLocalTime(),
-                HorizontalAccuracy = args.Visit.HorizontalAccuracy
-            };
+        public static VisitedEvent ToNotification(this CLVisitedEventArgs args) =>
+            new VisitedEvent(args.Visit);
 
         /// <summary>
-        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorNotification"/>.
+        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static RegionErrorNotification ToNotification(this CLRegionErrorEventArgs args) =>
-            new RegionErrorNotification
-            {
-                Region = ToGeoRegion(args.Region)
-            };
+        public static RegionErrorEvent ToNotification(this CLRegionErrorEventArgs args) =>
+            new RegionErrorEvent(args.Error,  ToGeoRegion(args.Region));
 
         /// <summary>
-        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorNotification"/>.
+        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="obj">The object.</param>

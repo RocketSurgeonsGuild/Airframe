@@ -96,22 +96,22 @@ namespace Rocket.Surgery.Airframe.Apple
         }
 
         /// <inheritdoc/>
-        public IObservable<LocationUpdatedNotification> LocationUpdated { get; }
+        public IObservable<LocationUpdatedEvent> LocationUpdated { get; }
 
         /// <inheritdoc/>
-        public IObservable<RegionErrorNotification> MonitoringFailed { get; }
+        public IObservable<RegionErrorEvent> MonitoringFailed { get; }
 
         /// <inheritdoc/>
-        public IObservable<VisitedNotification> Visited { get; }
+        public IObservable<VisitedEvent> Visited { get; }
 
         /// <inheritdoc/>
         public IObservable<ErrorNotification> DeferredUpdatesFinished { get; }
 
         /// <inheritdoc/>
-        public IObservable<RegionChangedNotification> RegionStateDetermined { get; }
+        public IObservable<RegionChangedEvent> RegionStateDetermined { get; }
 
         /// <inheritdoc/>
-        public IObservable<RegionChangedNotification> MonitoringRegion { get; }
+        public IObservable<RegionChangedEvent> MonitoringRegion { get; }
 
         /// <inheritdoc/>
         public IObservable<Unit> LocationUpdatesResumed { get; }
@@ -120,9 +120,9 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<Unit> LocationUpdatesPaused { get; }
 
         /// <inheritdoc/>
-        public IObservable<LocationsUpdatedNotification> LocationsUpdated { get; }
+        public IObservable<LocationsUpdatedEvent> LocationsUpdated { get; }
 
         /// <inheritdoc/>
-        public IObservable<AuthorizationChangedNotification> AuthorizationChanged { get; }
+        public IObservable<AuthorizationChangedEvent> AuthorizationChanged { get; }
     }
 }

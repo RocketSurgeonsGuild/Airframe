@@ -143,28 +143,28 @@ namespace Rocket.Surgery.Airframe.Apple
         }
 
         /// <inheritdoc />
-        public IObservable<AuthorizationChangedNotification> AuthorizationChanged { get; }
+        public IObservable<AuthorizationChangedEvent> AuthorizationChanged { get; }
 
         /// <inheritdoc />
         public IObservable<ErrorNotification> DeferredUpdatesFinished { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionChangedNotification> DidDetermineState { get; }
+        public IObservable<RegionChangedEvent> DidDetermineState { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionBeaconsConstraintFailedNotification> DidFailRangingBeacons { get; }
+        public IObservable<RegionBeaconsConstraintFailedEvent> DidFailRangingBeacons { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionBeaconRangedNotification> DidRangeBeacons { get; }
+        public IObservable<RegionBeaconRangedEvent> DidRangeBeacons { get; }
 
         /// <inheritdoc />
         public IObservable<RegionBeaconsConstraintRangedNotification> DidRangeBeaconsSatisfyingConstraint { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionChangedNotification> DidStartMonitoringForRegion { get; }
+        public IObservable<RegionChangedEvent> DidStartMonitoringForRegion { get; }
 
         /// <inheritdoc />
-        public IObservable<VisitedNotification> DidVisit { get; }
+        public IObservable<VisitedEvent> DidVisit { get; }
 
         /// <inheritdoc />
         public IObservable<ErrorNotification> Failed { get; }
@@ -176,24 +176,24 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<Unit> LocationUpdatesResumed { get; }
 
         /// <inheritdoc />
-        public IObservable<LocationsUpdatedNotification> LocationsUpdated { get; }
+        public IObservable<LocationsUpdatedEvent> LocationsUpdated { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionErrorNotification> MonitoringFailed { get; }
+        public IObservable<RegionErrorEvent> MonitoringFailed { get; }
 
         /// <inheritdoc />
         public IObservable<RegionBeaconsFailedNotification> RangingBeaconsDidFailForRegion { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionChangedNotification> RegionEntered { get; }
+        public IObservable<RegionChangedEvent> RegionEntered { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionChangedNotification> RegionExited { get; }
+        public IObservable<RegionChangedEvent> RegionExited { get; }
 
         /// <inheritdoc />
         public IObservable<HeadingUpdatedNotification> UpdatedHeading { get; }
 
         /// <inheritdoc />
-        public IObservable<LocationUpdatedNotification> UpdatedLocation { get; }
+        public IObservable<LocationUpdatedEvent> UpdatedLocation { get; }
     }
 }
