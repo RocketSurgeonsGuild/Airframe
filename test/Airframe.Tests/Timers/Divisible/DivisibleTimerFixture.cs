@@ -1,7 +1,4 @@
-using System.Reactive.Concurrency;
-using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
-using Rocket.Surgery.Airframe;
 using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Airframe.Timers;
 

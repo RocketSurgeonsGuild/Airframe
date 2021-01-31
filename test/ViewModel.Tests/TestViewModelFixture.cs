@@ -6,11 +6,6 @@ namespace Rocket.Surgery.Airframe.ViewModel.Tests
     {
         public static implicit operator TestViewModel(TestViewModelFixture fixture) => fixture.Build();
 
-        private TestViewModel Build()
-        {
-            var viewModel = new TestViewModel();
-            viewModel.ErrorInteraction.RegisterHandler(_ => _.SetOutput(true));
-            return viewModel;
-        }
+        private TestViewModel Build() => new TestViewModel();
     }
 }

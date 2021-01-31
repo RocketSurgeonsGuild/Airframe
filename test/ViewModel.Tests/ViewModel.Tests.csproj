@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj" />
+      <ProjectReference Include="..\Airframe.Tests\Airframe.Tests.csproj" />
     </ItemGroup>
 
 </Project>

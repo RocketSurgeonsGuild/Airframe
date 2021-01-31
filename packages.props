@@ -45,6 +45,7 @@
         <PackageReference Update="Shiny.Core" Version="1.2.0.*" />
         <PackageReference Update="Shiny.Locations" Version="1.2.0.*" />
         <PackageReference Update="Shiny.Notifications" Version="1.2.0.*" />
+        <PackageReference Update="Sextant" Version="2.*" />
         <PackageReference Update="Splat" Version="11.*" />
         <PackageReference Update="Splat.DryIoc" Version="11.*" />
         <PackageReference Update="Splat.Serilog" Version="11.*" />
