@@ -8,7 +8,7 @@ using Rocket.Surgery.Airframe.Apple.Notifications;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
-    public static class NotificationExtensions
+    public static class LocationEventExtensions
     {
         private static readonly Dictionary<CLAuthorizationStatus, AuthorizationStatus> AuthorizationStatuses =
             new Dictionary<CLAuthorizationStatus, AuthorizationStatus>
@@ -82,7 +82,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static LocationsUpdatedEvent ToNotification(this CLLocationsUpdatedEventArgs args) =>
-            new LocationsUpdatedEvent(args.Locations.Select(x => new Location(x.Coordinate.Latitude, x.Coordinate.Longitude)));
+            new LocationsUpdatedEvent(args.Locations.Select(x => new GeoLocation(x.Coordinate.Latitude, x.Coordinate.Longitude)));
 
         /// <summary>
         /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedEvent"/>.
@@ -157,11 +157,11 @@ namespace Rocket.Surgery.Airframe.Apple
             };
 
         /// <summary>
-        /// Converts the <see cref="CLLocationCoordinate2D"/> to a <see cref="Location"/>.
+        /// Converts the <see cref="CLLocationCoordinate2D"/> to a <see cref="GeoLocation"/>.
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>The converted vale.</returns>
-        public static Location ToLocation(this CLLocationCoordinate2D location) => new Location(location.Latitude, location.Longitude);
+        public static GeoLocation ToLocation(this CLLocationCoordinate2D location) => new GeoLocation(location.Latitude, location.Longitude);
 
         public static DateTime ToLocalTime(this NSDate nsDate)
         {

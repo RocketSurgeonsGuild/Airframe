@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using DynamicData;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Geofence
 {
+    /// <summary>
+    /// Represents a 
+    /// </summary>
     public class GeofenceStore : IGeofenceStore
     {
         private readonly SourceCache<GeofenceRegion, string> _sourceCache = new SourceCache<GeofenceRegion, string>(x => x.Identifier);
 
         /// <inheritdoc/>
-        public IObservable<IChangeSet<GeofenceRegion, string>> Get() => _sourceCache.Connect().RefCount().LimitSizeTo(20);
+        public IObservable<GeofenceRegion> Observe(string id) => _sourceCache.WatchValue(id);
 
         /// <inheritdoc/>
         public GeofenceRegion Get(string id)
@@ -20,31 +23,19 @@ namespace Rocket.Surgery.Airframe.Apple
                 return lookup.Value;
             }
 
-            return default;
+            return GeofenceRegion.Default;
         }
 
         /// <inheritdoc/>
-        public void Save(GeofenceRegion geoRegion)
-        {
-            _sourceCache.AddOrUpdate(geoRegion);
-        }
+        public void Save(GeofenceRegion geoRegion) => _sourceCache.AddOrUpdate(geoRegion);
 
         /// <inheritdoc/>
-        public void Save(IEnumerable<GeofenceRegion> geoRegion)
-        {
-            _sourceCache.AddOrUpdate(geoRegion);
-        }
+        public void Save(IEnumerable<GeofenceRegion> geoRegion) => _sourceCache.AddOrUpdate(geoRegion);
 
         /// <inheritdoc/>
-        public void Remove(string id)
-        {
-            _sourceCache.Remove(id);
-        }
+        public void Remove(string id) => _sourceCache.Remove(id);
 
         /// <inheritdoc/>
-        public void RemoveAll()
-        {
-            _sourceCache?.Clear();
-        }
+        public void RemoveAll() => _sourceCache.Clear();
     }
 }

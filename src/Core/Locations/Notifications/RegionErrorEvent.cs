@@ -1,5 +1,5 @@
 using System;
-using Rocket.Surgery.Airframe.Apple.Notifications;
+using Rocket.Surgery.Airframe.Geofence;
 
 namespace Rocket.Surgery.Airframe.Apple
 {

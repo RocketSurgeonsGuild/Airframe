@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Geofence
 {
     public interface IGeofenceNotificationStore
     {

@@ -25,7 +25,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets or sets the current location
         /// </summary>
-        public Location Location { get; set; } // This needs a full poco
+        public GeoLocation GeoLocation { get; set; } // This needs a full poco
 
         /// <summary>
         /// Gets or sets a value indicating whether location services are enabled.

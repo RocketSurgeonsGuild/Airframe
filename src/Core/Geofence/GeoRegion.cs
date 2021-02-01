@@ -1,6 +1,7 @@
 using System;
+using Rocket.Surgery.Airframe.Apple;
 
-namespace Rocket.Surgery.Airframe.Apple.Notifications
+namespace Rocket.Surgery.Airframe.Geofence
 {
     /// <summary>
     /// Represents a geographical region.
@@ -15,7 +16,7 @@ namespace Rocket.Surgery.Airframe.Apple.Notifications
         /// <summary>
         /// Gets or sets the center.
         /// </summary>
-        public Location Center { get; set; }
+        public GeoLocation Center { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to notify on entry of the region.

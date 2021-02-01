@@ -9,14 +9,14 @@ namespace Rocket.Surgery.Airframe.Apple
     {
         public VisitedEvent(CLVisit visit)
         {
-            Location = visit.Location;
+            GeoLocation = visit.Location;
             ArrivalDate = visit.ArrivalDate;
             DepartureDate = visit.DepartureDate;
             HorizontalAccuracy = visit.HorizontalAccuracy;
         }
 
         public DateTimeOffset ArrivalDate { get; }
-        public Location Location { get; }
+        public GeoLocation GeoLocation { get; }
         public DateTimeOffset DepartureDate { get; }
         public double HorizontalAccuracy { get; }
     }

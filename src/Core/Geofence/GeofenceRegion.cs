@@ -1,6 +1,6 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Geofence
 {
     public class GeofenceRegion : IEquatable<GeofenceRegion>
     {
@@ -8,14 +8,20 @@ namespace Rocket.Surgery.Airframe.Apple
         /// Initializes a new instance of the <see cref="GeofenceRegion"/> class.
         /// </summary>
         /// <param name="identifier">The region identifier.</param>
-        /// <param name="center">The center of the region.</param>
+        /// <param name="origin">The center of the region.</param>
         /// <param name="radius">The radius of the region.</param>
-        public GeofenceRegion(string identifier, Position center, double radius)
+        public GeofenceRegion(string identifier, Position origin, double radius)
         {
             Identifier = identifier;
-            Center = center;
+            Origin = origin;
             Radius = radius;
         }
+
+        public static GeofenceRegion Default { get; } = new GeofenceRegion(nameof(Default), Position.Default, 0);
+
+        public static bool operator ==(GeofenceRegion left, GeofenceRegion right) => Equals(left, right);
+
+        public static bool operator !=(GeofenceRegion left, GeofenceRegion right) => !Equals(left, right);
 
         /// <summary>
         /// Gets the identifier.
@@ -25,7 +31,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets the center.
         /// </summary>
-        public Position Center { get; }
+        public Position Origin { get; }
 
         /// <summary>
         /// Gets the radius.
@@ -46,10 +52,6 @@ namespace Rocket.Surgery.Airframe.Apple
         /// Gets or sets a value indicating whether the region should notify on exit.
         /// </summary>
         public bool NotifyOnExit { get; set; } = true;
-
-        public static bool operator ==(GeofenceRegion left, GeofenceRegion right) => Equals(left, right);
-
-        public static bool operator !=(GeofenceRegion left, GeofenceRegion right) => !Equals(left, right);
 
         /// <inheritdoc/>
         public override string ToString() => $"[Identifier: {Identifier}]";

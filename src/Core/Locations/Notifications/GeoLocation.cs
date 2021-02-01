@@ -5,14 +5,14 @@ namespace Rocket.Surgery.Airframe.Apple
     /// <summary>
     /// Represents a latitude and longitude.
     /// </summary>
-    public class Location : IDisposable
+    public class GeoLocation : IDisposable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Location"/> class.
+        /// Initializes a new instance of the <see cref="GeoLocation"/> class.
         /// </summary>
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
-        public Location(double latitude, double longitude)
+        public GeoLocation(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;

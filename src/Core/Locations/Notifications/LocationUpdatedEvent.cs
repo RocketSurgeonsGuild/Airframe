@@ -1,11 +1,11 @@
 namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
-    /// Notification of a <see cref="Location"/> update.
+    /// Notification of a <see cref="GeoLocation"/> update.
     /// </summary>
     public class LocationUpdatedEvent
     {
-        public LocationUpdatedEvent(Location previous, Location current)
+        public LocationUpdatedEvent(GeoLocation previous, GeoLocation current)
         {
             Previous = previous;
             Current = current;
@@ -14,11 +14,11 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets or sets the previous location.
         /// </summary>
-        public Location Previous { get; }
+        public GeoLocation Previous { get; }
 
         /// <summary>
         /// Gets or sets the current location.
         /// </summary>
-        public Location Current { get; }
+        public GeoLocation Current { get; }
     }
 }
