@@ -1,13 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DryIoc;
-using Rocket.Surgery.Airframe.Composition;
 using Splat.DryIoc;
 using Xamarin.Forms;
 
-[assembly: XmlnsPrefix("https://schemas.rocketsurgeonsguild.com/xaml/airframe/forms", "airframe")]
-[assembly: XmlnsDefinition("https://schemas.rocketsurgeonsguild.com/xaml/airframe/forms", "Rocket.Surgery.Airframe.Forms")]
-
-namespace Rocket.Surgery.Airframe.Forms
+namespace Rocket.Surgery.Airframe.Composition
 {
     /// <summary>
     /// Base application abstraction.

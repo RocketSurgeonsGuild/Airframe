@@ -7,6 +7,10 @@ using System.Reactive.Subjects;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using Splat;
+using Xamarin.Forms;
+
+[assembly: XmlnsPrefix("https://schemas.rocketsurgeonsguild.com/xaml/airframe/forms", "airframe")]
+[assembly: XmlnsDefinition("https://schemas.rocketsurgeonsguild.com/xaml/airframe/forms", "Rocket.Surgery.Airframe.Forms")]
 
 namespace Rocket.Surgery.Airframe.Forms
 {
