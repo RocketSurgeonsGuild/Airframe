@@ -1,13 +1,12 @@
 using System;
 using System.Reactive;
-using Rocket.Surgery.Airframe.Apple.Notifications;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
     /// Interface that represents a reactive CLLocationManager.
     /// </summary>
-    public interface ICoreLocationManager // TODO: Depends on aggregating the platform events
+    public interface ICoreLocationManager
     {
         /// <summary>
         /// Gets an observable sequence notifying that authorization change.
@@ -92,7 +91,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of heading update notifications.
         /// </summary>
-        IObservable<HeadingUpdatedNotification> UpdatedHeading { get; }
+        IObservable<HeadingUpdatedEvent> UpdatedHeading { get; }
 
         /// <summary>
         /// Gets the location update notifications.

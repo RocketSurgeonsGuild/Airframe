@@ -87,6 +87,108 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <inheritdoc />
         public event EventHandler<CLLocationUpdatedEventArgs> UpdatedLocation;
 
+        /// <inheritdoc />
+        public void DismissHeadingCalibrationDisplay()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public Boolean IsMonitoringAvailable(Class regionClass)
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void RequestAlwaysAuthorization()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void RequestLocation()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void RequestState(CLRegion region)
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void RequestWhenInUseAuthorization()
+        {
+            return default;
+        }
+
+        public void StartMonitoring(CLRegion region, Double desiredAccuracy)
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StartMonitoring(CLRegion region)
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StartMonitoringSignificantLocationChanges()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StartMonitoringVisits()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StartUpdatingHeading()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StartUpdatingLocation()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StopMonitoring(CLRegion region)
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StopMonitoringSignificantLocationChanges()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StopMonitoringVisits()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StopUpdatingHeading()
+        {
+            return default;
+        }
+
+        /// <inheritdoc />
+        public void StopUpdatingLocation() => _locationManager.Value.StopUpdatingLocation();
+
+        /// <inheritdoc />
+        public void StartMonitoring(CLRegion region, Double desiredAccuracy) =>
+            _locationManager.Value.StartMonitorying(region, desiredAccuracy);
+
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
