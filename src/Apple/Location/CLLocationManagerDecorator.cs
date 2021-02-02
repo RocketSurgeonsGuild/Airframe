@@ -3,10 +3,11 @@ using System.Threading;
 using CoreLocation;
 using Foundation;
 using JetBrains.Annotations;
+using Rocket.Surgery.Airframe.Geofence;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
-    public class CLLocationManagerDecorator : ICLLocationManager, IDisposable
+    public class CLLocationManagerDecorator : ICLLocationManager
     {
         private readonly Lazy<CLLocationManager> _locationManager;
 

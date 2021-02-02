@@ -1,9 +1,9 @@
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations
 {
     /// <summary>
     /// Enumeration of Authorization Status.
     /// </summary>
-    public enum AuthorizationStatus : int
+    public enum AuthorizationStatus
     {
         /// <summary>
         /// No Authorization Determined.

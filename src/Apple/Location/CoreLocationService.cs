@@ -3,7 +3,8 @@ using System.Reactive;
 using System.Reactive.Linq;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe.Apple.Notifications;
+using Rocket.Surgery.Airframe.Locations;
+using Rocket.Surgery.Airframe.Locations.Events;
 
 namespace Rocket.Surgery.Airframe.Apple
 {

@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Rocket.Surgery.Airframe.Apple;
+using Rocket.Surgery.Airframe.Locations;
+using Rocket.Surgery.Airframe.Locations.Events;
 
 namespace Rocket.Surgery.Airframe.Geofence
 {
+    /// <summary>
+    /// Interface representing a service that allows you to monitor <see cref="GeofenceRegion"/>.
+    /// </summary>
     public interface IGeofenceService
     {
         /// <summary>
@@ -24,13 +28,13 @@ namespace Rocket.Surgery.Airframe.Geofence
         /// <summary>
         /// Starts monitoring a region.
         /// </summary>
-        /// <param name="region"></param>
+        /// <param name="region">The region.</param>
         void StartMonitoring(GeofenceRegion region);
 
         /// <summary>
         /// Starts monitoring multiple regions.
         /// </summary>
-        /// <param name="regions"></param>
+        /// <param name="regions">The regions.</param>
         void StartMonitoring(IList<GeofenceRegion> regions);
 
         /// <summary>

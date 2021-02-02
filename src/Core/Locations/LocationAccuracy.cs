@@ -1,11 +1,9 @@
-using System;
-
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations
 {
     /// <summary>
     /// Enumeration of location accuracy.
     /// </summary>
-    /// <remarks>https://stackoverflow.com/q/3411629/2088094</remarks>
+    /// <remarks>https://stackoverflow.com/q/3411629/2088094.</remarks>
     public enum LocationAccuracy
     {
         /// <summary>

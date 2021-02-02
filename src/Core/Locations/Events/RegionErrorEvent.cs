@@ -1,7 +1,7 @@
 using System;
 using Rocket.Surgery.Airframe.Geofence;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations.Events
 {
     public class RegionErrorEvent
     {
@@ -14,7 +14,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets or sets the exception.
         /// </summary>
-        public NSError Error { get; }
+        public Exception Error { get; }
 
         /// <summary>
         /// Gets or sets the geo region.

@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations.Events
 {
     /// <summary>
     /// Notification of a <see cref="GeoLocation"/> update.

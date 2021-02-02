@@ -1,7 +1,8 @@
 using System;
 using System.Reactive;
+using Rocket.Surgery.Airframe.Locations.Events;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations
 {
     /// <summary>
     /// Interface that represents a reactive CLLocationManager.
@@ -16,7 +17,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of deferred update completions.
         /// </summary>
-        IObservable<ErrorNotification> DeferredUpdatesFinished { get; }
+        IObservable<ErrorEvent> DeferredUpdatesFinished { get; }
 
         /// <summary>
         /// Gets an observable sequence of notifications when region state is determined.
@@ -51,7 +52,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of failure notifications.
         /// </summary>
-        IObservable<ErrorNotification> Failed { get; }
+        IObservable<ErrorEvent> Failed { get; }
 
         /// <summary>
         /// Gets an observable sequence notifying when location updates paused.
@@ -76,7 +77,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Gets an observable sequence of failure notifications.
         /// </summary>
-        IObservable<RegionBeaconsFailedNotification> RangingBeaconsDidFailForRegion { get; }
+        IObservable<RegionBeaconsFailedEvent> RangingBeaconsDidFailForRegion { get; }
 
         /// <summary>
         /// Gets an observable sequence notifying when a region has been entered.

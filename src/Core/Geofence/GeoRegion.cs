@@ -1,5 +1,6 @@
 using System;
-using Rocket.Surgery.Airframe.Apple;
+using Rocket.Surgery.Airframe.Locations;
+using Rocket.Surgery.Airframe.Locations.Events;
 
 namespace Rocket.Surgery.Airframe.Geofence
 {

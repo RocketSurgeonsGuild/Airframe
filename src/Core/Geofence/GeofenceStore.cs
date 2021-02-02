@@ -5,7 +5,7 @@ using DynamicData;
 namespace Rocket.Surgery.Airframe.Geofence
 {
     /// <summary>
-    /// Represents a 
+    /// Represents a store for <see cref="GeofenceRegion"/> being monitored.
     /// </summary>
     public class GeofenceStore : IGeofenceStore
     {
@@ -18,12 +18,7 @@ namespace Rocket.Surgery.Airframe.Geofence
         public GeofenceRegion Get(string id)
         {
             var lookup = _sourceCache.Lookup(id);
-            if (lookup.HasValue)
-            {
-                return lookup.Value;
-            }
-
-            return GeofenceRegion.Default;
+            return lookup.HasValue ? lookup.Value : GeofenceRegion.Default;
         }
 
         /// <inheritdoc/>

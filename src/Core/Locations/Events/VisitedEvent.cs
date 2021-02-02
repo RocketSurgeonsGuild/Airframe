@@ -1,6 +1,6 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations.Events
 {
     /// <summary>
     /// Notification of a region being visited.

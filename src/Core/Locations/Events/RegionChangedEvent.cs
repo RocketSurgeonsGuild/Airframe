@@ -1,6 +1,6 @@
 using Rocket.Surgery.Airframe.Geofence;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe.Locations.Events
 {
     public class RegionChangedEvent
     {
