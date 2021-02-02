@@ -1,6 +1,6 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Geofence
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a region where a geofence exists.
@@ -20,6 +20,9 @@ namespace Rocket.Surgery.Airframe.Geofence
             Radius = radius;
         }
 
+        /// <summary>
+        /// Gets the default <see cref="GeoRegion"/>.
+        /// </summary>
         public static GeofenceRegion Default { get; } = new GeofenceRegion(nameof(Default), Position.Default, 0);
 
         /// <summary>

@@ -1,12 +1,23 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Returns the entire state of the current Core Location Manager.
     /// </summary>
     public class MonitorResult
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MonitorResult"/> class.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        /// <param name="lastChanged">The last changed datetime.</param>
+        public MonitorResult(MonitorState state, DateTimeOffset lastChanged)
+        {
+            State = state;
+            LastChanged = lastChanged;
+        }
+
         /// <summary>
         /// Gets the current state.
         /// </summary>

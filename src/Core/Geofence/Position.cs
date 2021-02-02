@@ -1,7 +1,10 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Geofence
+namespace Rocket.Surgery.Airframe
 {
+    /// <summary>
+    /// Represents a position on the earth.
+    /// </summary>
     public class Position : IEquatable<Position>
     {
         /// <summary>
@@ -25,6 +28,10 @@ namespace Rocket.Surgery.Airframe.Geofence
             Longitude = lng;
         }
 
+        /// <summary>
+        /// Gets the default position.
+        /// </summary>
+        public static Position Default { get; } = new Position(0, 0);
 
         /// <summary>
         /// Gets the latitude.
@@ -36,16 +43,15 @@ namespace Rocket.Surgery.Airframe.Geofence
         /// </summary>
         public double Longitude { get; }
 
-        public static Position Default { get; } = new Position(0, 0);
+        public static bool operator ==(Position? left, Position? right) => Equals(left, right);
+
+        public static bool operator !=(Position? left, Position? right) => !Equals(left, right);
 
         /// <inheritdoc/>
         public override string ToString() => $"Latitude: {Latitude} - Longitude: {Longitude}";
 
+        /// <inheritdoc/>
         public bool Equals(Position? other) => other != null && (Latitude, Longitude).Equals((other.Latitude, other.Longitude));
-
-        public static bool operator ==(Position? left, Position? right) => Equals(left, right);
-
-        public static bool operator !=(Position? left, Position? right) => !Equals(left, right);
 
         /// <inheritdoc/>
         public override bool Equals(object obj) => obj is Position pos && Equals(pos);

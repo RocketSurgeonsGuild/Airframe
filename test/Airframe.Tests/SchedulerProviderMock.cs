@@ -1,6 +1,6 @@
 using System.Reactive.Concurrency;
 using Microsoft.Reactive.Testing;
-using Rocket.Surgery.Airframe.Scheduling;
+using Rocket.Surgery.Airframe;
 
 namespace Airframe.Tests
 {

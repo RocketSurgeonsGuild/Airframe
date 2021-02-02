@@ -57,16 +57,16 @@ namespace Rocket.Surgery.Airframe.Apple
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static RegionBeaconsConstraintRangedNotification ToNotification(this CLRegionBeaconsConstraintRangedEventArgs args) =>
-            new RegionBeaconsConstraintRangedNotification();
+        public static RegionBeaconsConstraintRangedEvent ToNotification(this CLRegionBeaconsConstraintRangedEventArgs args) =>
+            new RegionBeaconsConstraintRangedEvent();
 
         /// <summary>
         /// Converts the <see cref="CLRegionBeaconsFailedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static RegionBeaconsFailedNotification ToNotification(this CLRegionBeaconsFailedEventArgs args) =>
-            new RegionBeaconsFailedNotification();
+        public static RegionBeaconsFailedEvent ToNotification(this CLRegionBeaconsFailedEventArgs args) =>
+            new RegionBeaconsFailedEvent();
 
         /// <summary>
         /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
@@ -114,8 +114,8 @@ namespace Rocket.Surgery.Airframe.Apple
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
-        public static ErrorNotification ToNotification(this NSErrorEventArgs args) =>
-            new ErrorNotification { };
+        public static ErrorEvent ToNotification(this NSErrorEventArgs args) =>
+            new ErrorEvent { };
 
         /// <summary>
         /// Converts the <see cref="CLVisitedEventArgs"/> to <see cref="VisitedEvent"/>.

@@ -1,7 +1,6 @@
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Rocket.Surgery.Airframe.Scheduling;
 
 namespace Rocket.Surgery.Airframe.Timers
 {

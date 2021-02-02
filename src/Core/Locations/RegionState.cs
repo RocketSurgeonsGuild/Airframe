@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Locations
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Enumeration of Region State.

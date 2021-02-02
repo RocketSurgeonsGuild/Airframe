@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Rocket.Surgery.Airframe.Geofence
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Interface representing a geofence store.

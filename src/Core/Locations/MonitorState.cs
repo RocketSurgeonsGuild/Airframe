@@ -1,6 +1,4 @@
-using Rocket.Surgery.Airframe.Apple.Notifications;
-
-namespace Rocket.Surgery.Airframe.Apple
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents the current state of the platform service configuration.
@@ -13,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public bool AllowingBackgroundLocationUpdates { get; set; }
 
         /// <summary>
-        /// Gets or sets the desired accuracy
+        /// Gets or sets the desired accuracy.
         /// </summary>
         public double DesiredAccuracy { get; set; }
 
@@ -23,9 +21,9 @@ namespace Rocket.Surgery.Airframe.Apple
         public double DistanceFilter { get; set; }
 
         /// <summary>
-        /// Gets or sets the current location
+        /// Gets or sets the current location.
         /// </summary>
-        public GeoLocation GeoLocation { get; set; } // This needs a full poco
+        public GeoLocation GeoLocation { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether location services are enabled.

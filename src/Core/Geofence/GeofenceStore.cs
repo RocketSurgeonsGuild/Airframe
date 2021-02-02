@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DynamicData;
 
-namespace Rocket.Surgery.Airframe.Geofence
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a store for <see cref="GeofenceRegion"/> being monitored.

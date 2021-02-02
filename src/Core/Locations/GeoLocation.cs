@@ -1,6 +1,6 @@
 using System;
 
-namespace Rocket.Surgery.Airframe.Locations
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a latitude and longitude.

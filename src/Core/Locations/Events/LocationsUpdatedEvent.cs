@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 
-namespace Rocket.Surgery.Airframe.Locations.Events
+namespace Rocket.Surgery.Airframe.Events
 {
+    /// <summary>
+    /// Represents a <see cref="GeoLocation"/> update event.
+    /// </summary>
     public class LocationsUpdatedEvent
     {
         /// <summary>

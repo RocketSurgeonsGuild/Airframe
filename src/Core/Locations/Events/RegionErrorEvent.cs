@@ -1,23 +1,30 @@
 using System;
-using Rocket.Surgery.Airframe.Geofence;
 
-namespace Rocket.Surgery.Airframe.Locations.Events
+namespace Rocket.Surgery.Airframe.Events
 {
+    /// <summary>
+    /// Represents a error for a region.
+    /// </summary>
     public class RegionErrorEvent
     {
-        public RegionErrorEvent(NSError error, GeoRegion region)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RegionErrorEvent"/> class.
+        /// </summary>
+        /// <param name="error">The error.</param>
+        /// <param name="region">The region.</param>
+        public RegionErrorEvent(Exception error, GeoRegion region)
         {
             Error = error;
             Region = region;
         }
 
         /// <summary>
-        /// Gets or sets the exception.
+        /// Gets the exception.
         /// </summary>
         public Exception Error { get; }
 
         /// <summary>
-        /// Gets or sets the geo region.
+        /// Gets the geo region.
         /// </summary>
         public GeoRegion Region { get; }
     }

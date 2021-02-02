@@ -1,6 +1,9 @@
-namespace Rocket.Surgery.Airframe.Locations.Events
+namespace Rocket.Surgery.Airframe.Events
 {
-    public class RegionBeaconsConstraintRangedNotification
+    /// <summary>
+    /// Represents a beacon constraint event.
+    /// </summary>
+    public class RegionBeaconsConstraintRangedEvent
     {
     }
 }

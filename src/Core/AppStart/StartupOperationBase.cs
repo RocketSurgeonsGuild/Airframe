@@ -1,8 +1,7 @@
 using System;
 using System.Reactive;
-using System.Reactive.Linq;
 
-namespace Rocket.Surgery.Airframe.AppStart
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a base startup operation.

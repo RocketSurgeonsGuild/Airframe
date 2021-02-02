@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Rocket.Surgery.Airframe.Locations;
-using Rocket.Surgery.Airframe.Locations.Events;
 
-namespace Rocket.Surgery.Airframe.Geofence
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Interface representing a service that allows you to monitor <see cref="GeofenceRegion"/>.

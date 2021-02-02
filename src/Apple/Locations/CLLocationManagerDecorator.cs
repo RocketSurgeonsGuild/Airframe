@@ -11,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Apple
     {
         private readonly Lazy<CLLocationManager> _locationManager;
 
-        public CLLocationManagerDecorator([CanBeNull] CLLocationManager manager = null)
+        public CLLocationManagerDecorator([CanBeNull] CLLocationManager manager = default)
         {
             _locationManager = new Lazy<CLLocationManager>(() => manager ?? new CLLocationManager());
             _locationManager.Value.AuthorizationChanged += AuthorizationChanged;
@@ -89,99 +89,55 @@ namespace Rocket.Surgery.Airframe.Apple
         public event EventHandler<CLLocationUpdatedEventArgs> UpdatedLocation;
 
         /// <inheritdoc />
-        public void DismissHeadingCalibrationDisplay()
-        {
-            return default;
-        }
+        public void DismissHeadingCalibrationDisplay() => _locationManager.Value.DismissHeadingCalibrationDisplay();
 
         /// <inheritdoc />
-        public Boolean IsMonitoringAvailable(Class regionClass)
-        {
-            return default;
-        }
+        public bool IsMonitoringAvailable(Class regionClass) =>
+            _locationManager.Value.IsMonitoringAvailable(regionClass);
 
         /// <inheritdoc />
-        public void RequestAlwaysAuthorization()
-        {
-            return default;
-        }
+        public void RequestAlwaysAuthorization() => _locationManager.Value.RequestAlwaysAuthorization();
 
         /// <inheritdoc />
-        public void RequestLocation()
-        {
-            return default;
-        }
+        public void RequestLocation() => _locationManager.Value.RequestLocation();
 
         /// <inheritdoc />
-        public void RequestState(CLRegion region)
-        {
-            return default;
-        }
+        public void RequestState(CLRegion region) => _locationManager.Value.RequestState(region);
 
         /// <inheritdoc />
-        public void RequestWhenInUseAuthorization()
-        {
-            return default;
-        }
+        public void RequestWhenInUseAuthorization() => _locationManager.Value.RequestWhenInUseAuthorization();
 
-        public void StartMonitoring(CLRegion region, Double desiredAccuracy)
-        {
-            return default;
-        }
+        public void StartMonitoring(CLRegion region, Double desiredAccuracy) =>
+            _locationManager.Value.StartMonitoring(region, desiredAccuracy);
 
         /// <inheritdoc />
-        public void StartMonitoring(CLRegion region)
-        {
-            return default;
-        }
+        public void StartMonitoring(CLRegion region) => _locationManager.Value.StartMonitoring(region);
 
         /// <inheritdoc />
-        public void StartMonitoringSignificantLocationChanges()
-        {
-            return default;
-        }
+        public void StartMonitoringSignificantLocationChanges() =>
+            _locationManager.Value.StartMonitoringSignificantLocationChanges();
 
         /// <inheritdoc />
-        public void StartMonitoringVisits()
-        {
-            return default;
-        }
+        public void StartMonitoringVisits() => _locationManager.Value.StartMonitoringVisits();
 
         /// <inheritdoc />
-        public void StartUpdatingHeading()
-        {
-            return default;
-        }
+        public void StartUpdatingHeading() => _locationManager.Value.StartUpdatingHeading();
 
         /// <inheritdoc />
-        public void StartUpdatingLocation()
-        {
-            return default;
-        }
+        public void StartUpdatingLocation() => _locationManager.Value.StartUpdatingLocation();
 
         /// <inheritdoc />
-        public void StopMonitoring(CLRegion region)
-        {
-            return default;
-        }
+        public void StopMonitoring(CLRegion region) => _locationManager.Value.StopMonitoring(region);
 
         /// <inheritdoc />
-        public void StopMonitoringSignificantLocationChanges()
-        {
-            return default;
-        }
+        public void StopMonitoringSignificantLocationChanges() =>
+            _locationManager.Value.StopMonitoringSignificantLocationChanges();
 
         /// <inheritdoc />
-        public void StopMonitoringVisits()
-        {
-            return default;
-        }
+        public void StopMonitoringVisits() => _locationManager.Value.StopMonitoringVisits();
 
         /// <inheritdoc />
-        public void StopUpdatingHeading()
-        {
-            return default;
-        }
+        public void StopUpdatingHeading() => _locationManager.Value.StopUpdatingHeading();
 
         /// <inheritdoc />
         public void StopUpdatingLocation() => _locationManager.Value.StopUpdatingLocation();

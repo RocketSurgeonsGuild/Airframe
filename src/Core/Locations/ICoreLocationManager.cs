@@ -1,8 +1,8 @@
 using System;
 using System.Reactive;
-using Rocket.Surgery.Airframe.Locations.Events;
+using Rocket.Surgery.Airframe.Events;
 
-namespace Rocket.Surgery.Airframe.Locations
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Interface that represents a reactive CLLocationManager.
@@ -37,7 +37,7 @@ namespace Rocket.Surgery.Airframe.Locations
         /// <summary>
         /// Gets an observable sequence of beacon range constraint notifications.
         /// </summary>
-        IObservable<RegionBeaconsConstraintRangedNotification> DidRangeBeaconsSatisfyingConstraint { get; }
+        IObservable<RegionBeaconsConstraintRangedEvent> DidRangeBeaconsSatisfyingConstraint { get; }
 
         /// <summary>
         /// Gets an observable sequence of regions when the are started being monitored.

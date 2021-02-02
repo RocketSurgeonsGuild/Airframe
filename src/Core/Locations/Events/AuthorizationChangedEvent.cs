@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Locations.Events
+namespace Rocket.Surgery.Airframe.Events
 {
     /// <summary>
     /// Event argument that notifies an authorization state change.

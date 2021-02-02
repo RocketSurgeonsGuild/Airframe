@@ -4,7 +4,6 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using ReactiveMarbles.PropertyChanged;
 using ReactiveUI;
-using Rocket.Surgery.Airframe.Scheduling;
 
 namespace Rocket.Surgery.Airframe.Timers
 {

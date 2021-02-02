@@ -1,8 +1,6 @@
 using System;
-using Rocket.Surgery.Airframe.Locations;
-using Rocket.Surgery.Airframe.Locations.Events;
 
-namespace Rocket.Surgery.Airframe.Geofence
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a geographical region.

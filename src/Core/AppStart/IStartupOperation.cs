@@ -1,7 +1,7 @@
 using System;
 using System.Reactive;
 
-namespace Rocket.Surgery.Airframe.AppStart
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Interface representing a startup operation.
