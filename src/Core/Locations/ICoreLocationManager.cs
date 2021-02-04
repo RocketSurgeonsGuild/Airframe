@@ -1,6 +1,5 @@
 using System;
 using System.Reactive;
-using Rocket.Surgery.Airframe.Events;
 
 namespace Rocket.Surgery.Airframe
 {

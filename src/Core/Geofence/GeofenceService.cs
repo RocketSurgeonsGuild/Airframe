@@ -21,10 +21,7 @@ namespace Rocket.Surgery.Airframe
         public IObservable<GeofenceRegion> Exited { get; }
 
         /// <inheritdoc/>
-        public void StartMonitoring(GeofenceRegion region)
-        {
-            return default;
-        }
+        public void StartMonitoring(GeofenceRegion region) => _store.AddOrUpdate(region);
 
         /// <inheritdoc/>
         public void StartMonitoring(IList<GeofenceRegion> regions) => _store.AddOrUpdate(regions);

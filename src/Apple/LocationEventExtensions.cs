@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reactive;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe.Apple.Notifications;
+using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
-    public static class LocationEventExtensions
+    internal static class LocationEventExtensions
     {
         private static readonly Dictionary<CLAuthorizationStatus, AuthorizationStatus> AuthorizationStatuses =
             new Dictionary<CLAuthorizationStatus, AuthorizationStatus>
@@ -37,12 +37,12 @@ namespace Rocket.Surgery.Airframe.Apple
             new AuthorizationChangedEvent(AuthorizationStatuses[args.Status]);
 
         /// <summary>
-        /// Converts the <see cref="CLAuthorizationChangedEventArgs"/> to an instance of <see cref="AuthorizationChangedEvent"/>.
+        /// Converts the <see cref="CLRegionBeaconsConstraintFailedEventArgs"/> to an instance of <see cref="RegionBeaconsConstraintFailedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
-        public static RegionBeaconsConstraintFailedEvent ToNotification(
-            this CLRegionBeaconsConstraintFailedEventArgs args) => new RegionBeaconsConstraintFailedEvent();
+        public static RegionBeaconsConstraintFailedEvent ToNotification(this CLRegionBeaconsConstraintFailedEventArgs args) =>
+            new RegionBeaconsConstraintFailedEvent();
 
         /// <summary>
         /// Converts the <see cref="CLRegionBeaconsRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedEvent"/>.
@@ -53,7 +53,7 @@ namespace Rocket.Surgery.Airframe.Apple
             new RegionBeaconRangedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedEvent"/>.
+        /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconsConstraintRangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
@@ -61,7 +61,7 @@ namespace Rocket.Surgery.Airframe.Apple
             new RegionBeaconsConstraintRangedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsFailedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
+        /// Converts the <see cref="CLRegionBeaconsFailedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
@@ -69,7 +69,7 @@ namespace Rocket.Surgery.Airframe.Apple
             new RegionBeaconsFailedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedNotification"/>.
+        /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="HeadingUpdatedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
@@ -110,7 +110,7 @@ namespace Rocket.Surgery.Airframe.Apple
             new RegionChangedEvent(args.Region.ToGeoRegion(), RegionStates[args.State]);
 
         /// <summary>
-        /// Converts the <see cref="CLRegionStateDeterminedEventArgs"/> to <see cref="ErrorNotification"/>.
+        /// Converts the <see cref="NSErrorEventArgs"/> to <see cref="ErrorEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>

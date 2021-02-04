@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Events
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a beacon ranged event.

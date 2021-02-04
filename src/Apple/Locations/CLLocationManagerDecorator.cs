@@ -3,7 +3,7 @@ using System.Threading;
 using CoreLocation;
 using Foundation;
 using JetBrains.Annotations;
-using Rocket.Surgery.Airframe.Geofence;
+using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
@@ -107,6 +107,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <inheritdoc />
         public void RequestWhenInUseAuthorization() => _locationManager.Value.RequestWhenInUseAuthorization();
 
+        /// <inheritdoc />
         public void StartMonitoring(CLRegion region, Double desiredAccuracy) =>
             _locationManager.Value.StartMonitoring(region, desiredAccuracy);
 
@@ -119,6 +120,16 @@ namespace Rocket.Surgery.Airframe.Apple
 
         /// <inheritdoc />
         public void StartMonitoringVisits() => _locationManager.Value.StartMonitoringVisits();
+
+        public void StartRangingBeacons(CLBeaconRegion region)
+        {
+            return default;
+        }
+
+        public void StartRangingBeacons(CLBeaconIdentityConstraint constraint)
+        {
+            return default;
+        }
 
         /// <inheritdoc />
         public void StartUpdatingHeading() => _locationManager.Value.StartUpdatingHeading();
@@ -135,6 +146,16 @@ namespace Rocket.Surgery.Airframe.Apple
 
         /// <inheritdoc />
         public void StopMonitoringVisits() => _locationManager.Value.StopMonitoringVisits();
+
+        public void StopRangingBeacons(CLBeaconRegion region)
+        {
+            return default;
+        }
+
+        public void StopRangingBeacons(CLBeaconIdentityConstraint constraint)
+        {
+            return default;
+        }
 
         /// <inheritdoc />
         public void StopUpdatingHeading() => _locationManager.Value.StopUpdatingHeading();

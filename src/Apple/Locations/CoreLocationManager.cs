@@ -3,8 +3,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe.Locations;
-using Rocket.Surgery.Airframe.Locations.Events;
+using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
@@ -147,7 +146,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<AuthorizationChangedEvent> AuthorizationChanged { get; }
 
         /// <inheritdoc />
-        public IObservable<ErrorNotification> DeferredUpdatesFinished { get; }
+        public IObservable<ErrorEvent> DeferredUpdatesFinished { get; }
 
         /// <inheritdoc />
         public IObservable<RegionChangedEvent> DidDetermineState { get; }
@@ -159,7 +158,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<RegionBeaconRangedEvent> DidRangeBeacons { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionBeaconsConstraintRangedNotification> DidRangeBeaconsSatisfyingConstraint { get; }
+        public IObservable<RegionBeaconsConstraintRangedEvent> DidRangeBeaconsSatisfyingConstraint { get; }
 
         /// <inheritdoc />
         public IObservable<RegionChangedEvent> DidStartMonitoringForRegion { get; }
@@ -168,7 +167,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<VisitedEvent> DidVisit { get; }
 
         /// <inheritdoc />
-        public IObservable<ErrorNotification> Failed { get; }
+        public IObservable<ErrorEvent> Failed { get; }
 
         /// <inheritdoc />
         public IObservable<Unit> LocationUpdatesPaused { get; }
@@ -183,7 +182,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<RegionErrorEvent> MonitoringFailed { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionBeaconsFailedNotification> RangingBeaconsDidFailForRegion { get; }
+        public IObservable<RegionBeaconsFailedEvent> RangingBeaconsDidFailForRegion { get; }
 
         /// <inheritdoc />
         public IObservable<RegionChangedEvent> RegionEntered { get; }
@@ -192,7 +191,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<RegionChangedEvent> RegionExited { get; }
 
         /// <inheritdoc />
-        public IObservable<HeadingUpdatedNotification> UpdatedHeading { get; }
+        public IObservable<HeadingUpdatedEvent> UpdatedHeading { get; }
 
         /// <inheritdoc />
         public IObservable<LocationUpdatedEvent> UpdatedLocation { get; }

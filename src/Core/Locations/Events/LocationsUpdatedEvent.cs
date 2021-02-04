@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Rocket.Surgery.Airframe.Events
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents a <see cref="GeoLocation"/> update event.
