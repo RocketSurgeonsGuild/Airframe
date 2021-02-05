@@ -62,7 +62,7 @@ namespace Rocket.Surgery.Airframe.Apple
 
             LocationUpdatesPaused =
                 Observable
-                    .FromEvent<EventHandler<EventArgs>, EventArgs>(
+                    .FromEvent<EventHandler, EventArgs>(
                         handler =>
                         {
                             void Handler(object sender, EventArgs args) => handler(args);
@@ -74,7 +74,7 @@ namespace Rocket.Surgery.Airframe.Apple
 
             LocationUpdatesResumed =
                 Observable
-                    .FromEvent<EventHandler<EventArgs>, EventArgs>(
+                    .FromEvent<EventHandler, EventArgs>(
                         handler =>
                         {
                             void Handler(object sender, EventArgs args) => handler(args);

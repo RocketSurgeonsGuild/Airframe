@@ -123,7 +123,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static VisitedEvent ToNotification(this CLVisitedEventArgs args) =>
-            new VisitedEvent(args.Visit);
+            new VisitedEvent(args.Visit.Coordinate.ToLocation(), args.Visit.ArrivalDate, args.Visit.DepartureDate, args.Visit.HorizontalAccuracy);
 
         /// <summary>
         /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.

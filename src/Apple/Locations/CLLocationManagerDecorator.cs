@@ -1,5 +1,3 @@
-using System;
-using System.Threading;
 using CoreLocation;
 using Foundation;
 using JetBrains.Annotations;
@@ -11,7 +9,7 @@ namespace Rocket.Surgery.Airframe.Apple
     {
         private readonly Lazy<CLLocationManager> _locationManager;
 
-        public CLLocationManagerDecorator([CanBeNull] CLLocationManager manager = default)
+        public CLLocationManagerDecorator([CanBeNull] CLLocationManager manager = null)
         {
             _locationManager = new Lazy<CLLocationManager>(() => manager ?? new CLLocationManager());
             _locationManager.Value.AuthorizationChanged += AuthorizationChanged;
@@ -92,7 +90,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public void DismissHeadingCalibrationDisplay() => _locationManager.Value.DismissHeadingCalibrationDisplay();
 
         /// <inheritdoc />
-        public bool IsMonitoringAvailable(Class regionClass) =>
+        public bool IsMonitoringAvailable(Type regionClass) =>
             _locationManager.Value.IsMonitoringAvailable(regionClass);
 
         /// <inheritdoc />
@@ -108,7 +106,7 @@ namespace Rocket.Surgery.Airframe.Apple
         public void RequestWhenInUseAuthorization() => _locationManager.Value.RequestWhenInUseAuthorization();
 
         /// <inheritdoc />
-        public void StartMonitoring(CLRegion region, Double desiredAccuracy) =>
+        public void StartMonitoring(CLRegion region, double desiredAccuracy) =>
             _locationManager.Value.StartMonitoring(region, desiredAccuracy);
 
         /// <inheritdoc />
@@ -121,15 +119,11 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <inheritdoc />
         public void StartMonitoringVisits() => _locationManager.Value.StartMonitoringVisits();
 
-        public void StartRangingBeacons(CLBeaconRegion region)
-        {
-            return default;
-        }
+        /// <inheritdoc />
+        public void StartRangingBeacons(CLBeaconRegion region) => _locationManager.Value.StartRangingBeacons(region);
 
-        public void StartRangingBeacons(CLBeaconIdentityConstraint constraint)
-        {
-            return default;
-        }
+        /// <inheritdoc />
+        public void StartRangingBeacons(CLBeaconIdentityConstraint constraint) => _locationManager.Value.StartRangingBeacons(constraint);
 
         /// <inheritdoc />
         public void StartUpdatingHeading() => _locationManager.Value.StartUpdatingHeading();
@@ -147,25 +141,16 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <inheritdoc />
         public void StopMonitoringVisits() => _locationManager.Value.StopMonitoringVisits();
 
-        public void StopRangingBeacons(CLBeaconRegion region)
-        {
-            return default;
-        }
+        public void StopRangingBeacons(CLBeaconRegion region) => _locationManager.Value.StopRangingBeacons(region);
 
-        public void StopRangingBeacons(CLBeaconIdentityConstraint constraint)
-        {
-            return default;
-        }
+        public void StopRangingBeacons(CLBeaconIdentityConstraint constraint) =>
+            _locationManager.Value.StopRangingBeacons(constraint);
 
         /// <inheritdoc />
         public void StopUpdatingHeading() => _locationManager.Value.StopUpdatingHeading();
 
         /// <inheritdoc />
         public void StopUpdatingLocation() => _locationManager.Value.StopUpdatingLocation();
-
-        /// <inheritdoc />
-        public void StartMonitoring(CLRegion region, Double desiredAccuracy) =>
-            _locationManager.Value.StartMonitorying(region, desiredAccuracy);
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.

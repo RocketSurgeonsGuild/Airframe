@@ -1,7 +1,6 @@
 using System;
 using CoreLocation;
 using Foundation;
-using ObjCRuntime;
 using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
@@ -103,7 +102,7 @@ namespace Rocket.Surgery.Airframe.Apple
 
         void DismissHeadingCalibrationDisplay();
 
-        bool IsMonitoringAvailable(Class regionClass);
+        bool IsMonitoringAvailable(Type regionClass);
 
         void RequestAlwaysAuthorization();
 
@@ -121,10 +120,6 @@ namespace Rocket.Surgery.Airframe.Apple
 
         void StartMonitoringVisits();
 
-        void StartRangingBeacons(CLBeaconRegion region);
-
-        void StartRangingBeacons(CLBeaconIdentityConstraint constraint);
-
         void StartUpdatingHeading();
 
         void StartUpdatingLocation();
@@ -134,10 +129,6 @@ namespace Rocket.Surgery.Airframe.Apple
         void StopMonitoringSignificantLocationChanges();
 
         void StopMonitoringVisits();
-
-        void StopRangingBeacons(CLBeaconRegion region);
-
-        void StopRangingBeacons(CLBeaconIdentityConstraint constraint);
 
         void StopUpdatingHeading();
 
