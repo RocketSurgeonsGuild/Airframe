@@ -29,11 +29,6 @@ namespace Rocket.Surgery.Airframe
         IObservable<RegionBeaconsConstraintFailedEvent> DidFailRangingBeacons { get; }
 
         /// <summary>
-        /// Gets an observable sequence of ranged beacon notifications.
-        /// </summary>
-        IObservable<RegionBeaconRangedEvent> DidRangeBeacons { get; }
-
-        /// <summary>
         /// Gets an observable sequence of beacon range constraint notifications.
         /// </summary>
         IObservable<RegionBeaconsConstraintRangedEvent> DidRangeBeaconsSatisfyingConstraint { get; }
@@ -72,11 +67,6 @@ namespace Rocket.Surgery.Airframe
         /// Gets whether the monitoring failed.
         /// </summary>
         IObservable<RegionErrorEvent> MonitoringFailed { get; }
-
-        /// <summary>
-        /// Gets an observable sequence of failure notifications.
-        /// </summary>
-        IObservable<RegionBeaconsFailedEvent> RangingBeaconsDidFailForRegion { get; }
 
         /// <summary>
         /// Gets an observable sequence notifying when a region has been entered.

@@ -1,6 +1,8 @@
+using System;
 using CoreLocation;
 using Foundation;
 using JetBrains.Annotations;
+using ObjCRuntime;
 using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
@@ -16,7 +18,6 @@ namespace Rocket.Surgery.Airframe.Apple
             _locationManager.Value.DeferredUpdatesFinished += DeferredUpdatesFinished;
             _locationManager.Value.DidDetermineState += DidDetermineState;
             _locationManager.Value.DidFailRangingBeacons += DidFailRangingBeacons;
-            _locationManager.Value.DidRangeBeacons += DidRangeBeacons;
             _locationManager.Value.DidRangeBeaconsSatisfyingConstraint += DidRangeBeaconsSatisfyingConstraint;
             _locationManager.Value.DidStartMonitoringForRegion += DidStartMonitoringForRegion;
             _locationManager.Value.DidVisit += DidVisit;
@@ -25,7 +26,6 @@ namespace Rocket.Surgery.Airframe.Apple
             _locationManager.Value.LocationUpdatesResumed += LocationUpdatesResumed;
             _locationManager.Value.LocationsUpdated += LocationsUpdated;
             _locationManager.Value.MonitoringFailed += MonitoringFailed;
-            _locationManager.Value.RangingBeaconsDidFailForRegion += RangingBeaconsDidFailForRegion;
             _locationManager.Value.RegionEntered += RegionEntered;
             _locationManager.Value.RegionLeft += RegionLeft;
             _locationManager.Value.UpdatedHeading += UpdatedHeading;
@@ -43,9 +43,6 @@ namespace Rocket.Surgery.Airframe.Apple
 
         /// <inheritdoc />
         public event EventHandler<CLRegionBeaconsConstraintFailedEventArgs> DidFailRangingBeacons;
-
-        /// <inheritdoc />
-        public event EventHandler<CLRegionBeaconsRangedEventArgs> DidRangeBeacons;
 
         /// <inheritdoc />
         public event EventHandler<CLRegionBeaconsConstraintRangedEventArgs> DidRangeBeaconsSatisfyingConstraint;
@@ -72,9 +69,6 @@ namespace Rocket.Surgery.Airframe.Apple
         public event EventHandler<CLRegionErrorEventArgs> MonitoringFailed;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionBeaconsFailedEventArgs> RangingBeaconsDidFailForRegion;
-
-        /// <inheritdoc />
         public event EventHandler<CLRegionEventArgs> RegionEntered;
 
         /// <inheritdoc />
@@ -90,8 +84,10 @@ namespace Rocket.Surgery.Airframe.Apple
         public void DismissHeadingCalibrationDisplay() => _locationManager.Value.DismissHeadingCalibrationDisplay();
 
         /// <inheritdoc />
-        public bool IsMonitoringAvailable(Type regionClass) =>
-            _locationManager.Value.IsMonitoringAvailable(regionClass);
+        public bool IsMonitoringAvailable(Class regionClass) =>
+
+            // TODO: Rodney gets to fix this
+            CLLocationManager.IsMonitoringAvailable(regionClass);
 
         /// <inheritdoc />
         public void RequestAlwaysAuthorization() => _locationManager.Value.RequestAlwaysAuthorization();
@@ -107,7 +103,13 @@ namespace Rocket.Surgery.Airframe.Apple
 
         /// <inheritdoc />
         public void StartMonitoring(CLRegion region, double desiredAccuracy) =>
+
+            // TODO: Rodney gets to fix this
+#if XAMARIN_MAC
+            _locationManager.Value.StartMonitoring(region);
+#else
             _locationManager.Value.StartMonitoring(region, desiredAccuracy);
+#endif
 
         /// <inheritdoc />
         public void StartMonitoring(CLRegion region) => _locationManager.Value.StartMonitoring(region);
@@ -119,11 +121,16 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <inheritdoc />
         public void StartMonitoringVisits() => _locationManager.Value.StartMonitoringVisits();
 
+#if XAMARIN_IOS
+
         /// <inheritdoc />
         public void StartRangingBeacons(CLBeaconRegion region) => _locationManager.Value.StartRangingBeacons(region);
 
+#else
         /// <inheritdoc />
         public void StartRangingBeacons(CLBeaconIdentityConstraint constraint) => _locationManager.Value.StartRangingBeacons(constraint);
+
+#endif
 
         /// <inheritdoc />
         public void StartUpdatingHeading() => _locationManager.Value.StartUpdatingHeading();
@@ -140,11 +147,16 @@ namespace Rocket.Surgery.Airframe.Apple
 
         /// <inheritdoc />
         public void StopMonitoringVisits() => _locationManager.Value.StopMonitoringVisits();
+#if XAMARIN_IOS
 
         public void StopRangingBeacons(CLBeaconRegion region) => _locationManager.Value.StopRangingBeacons(region);
 
+#else
+
         public void StopRangingBeacons(CLBeaconIdentityConstraint constraint) =>
             _locationManager.Value.StopRangingBeacons(constraint);
+
+#endif
 
         /// <inheritdoc />
         public void StopUpdatingHeading() => _locationManager.Value.StopUpdatingHeading();
@@ -173,7 +185,6 @@ namespace Rocket.Surgery.Airframe.Apple
                 _locationManager.Value.DeferredUpdatesFinished -= DeferredUpdatesFinished;
                 _locationManager.Value.DidDetermineState -= DidDetermineState;
                 _locationManager.Value.DidFailRangingBeacons -= DidFailRangingBeacons;
-                _locationManager.Value.DidRangeBeacons -= DidRangeBeacons;
                 _locationManager.Value.DidRangeBeaconsSatisfyingConstraint -= DidRangeBeaconsSatisfyingConstraint;
                 _locationManager.Value.DidStartMonitoringForRegion -= DidStartMonitoringForRegion;
                 _locationManager.Value.DidVisit -= DidVisit;
@@ -182,7 +193,6 @@ namespace Rocket.Surgery.Airframe.Apple
                 _locationManager.Value.LocationUpdatesResumed -= LocationUpdatesResumed;
                 _locationManager.Value.LocationsUpdated -= LocationsUpdated;
                 _locationManager.Value.MonitoringFailed -= MonitoringFailed;
-                _locationManager.Value.RangingBeaconsDidFailForRegion -= RangingBeaconsDidFailForRegion;
                 _locationManager.Value.RegionEntered -= RegionEntered;
                 _locationManager.Value.RegionLeft -= RegionLeft;
                 _locationManager.Value.UpdatedHeading -= UpdatedHeading;

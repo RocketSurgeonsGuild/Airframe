@@ -1,6 +1,7 @@
 using System;
 using CoreLocation;
 using Foundation;
+using ObjCRuntime;
 using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
@@ -29,11 +30,6 @@ namespace Rocket.Surgery.Airframe.Apple
         /// Event handler for did fail ranging beacons events.
         /// </summary>
         event EventHandler<CLRegionBeaconsConstraintFailedEventArgs> DidFailRangingBeacons;
-
-        /// <summary>
-        /// Event handler for did range beacon events.
-        /// </summary>
-        event EventHandler<CLRegionBeaconsRangedEventArgs> DidRangeBeacons;
 
         /// <summary>
         /// Event handler for did range beacons satisfy constraint events.
@@ -76,11 +72,6 @@ namespace Rocket.Surgery.Airframe.Apple
         event EventHandler<CLRegionErrorEventArgs> MonitoringFailed;
 
         /// <summary>
-        /// Event handler for region beacons failed events.
-        /// </summary>
-        event EventHandler<CLRegionBeaconsFailedEventArgs> RangingBeaconsDidFailForRegion;
-
-        /// <summary>
         /// Event handler for region entered.
         /// </summary>
         event EventHandler<CLRegionEventArgs> RegionEntered;
@@ -102,7 +93,7 @@ namespace Rocket.Surgery.Airframe.Apple
 
         void DismissHeadingCalibrationDisplay();
 
-        bool IsMonitoringAvailable(Type regionClass);
+        bool IsMonitoringAvailable(Class regionClass);
 
         void RequestAlwaysAuthorization();
 

@@ -45,28 +45,12 @@ namespace Rocket.Surgery.Airframe.Apple
             new RegionBeaconsConstraintFailedEvent();
 
         /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsRangedEventArgs"/> to an instance of <see cref="RegionBeaconRangedEvent"/>.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>The changed notification.</returns>
-        public static RegionBeaconRangedEvent ToNotification(this CLRegionBeaconsRangedEventArgs args) =>
-            new RegionBeaconRangedEvent();
-
-        /// <summary>
         /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconsConstraintRangedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>The changed notification.</returns>
         public static RegionBeaconsConstraintRangedEvent ToNotification(this CLRegionBeaconsConstraintRangedEventArgs args) =>
             new RegionBeaconsConstraintRangedEvent();
-
-        /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsFailedEventArgs"/> to an instance of <see cref="RegionBeaconsFailedEvent"/>.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>The changed notification.</returns>
-        public static RegionBeaconsFailedEvent ToNotification(this CLRegionBeaconsFailedEventArgs args) =>
-            new RegionBeaconsFailedEvent();
 
         /// <summary>
         /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="HeadingUpdatedEvent"/>.
@@ -90,7 +74,8 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static LocationUpdatedEvent ToNotification(CLLocationUpdatedEventArgs args) =>
-            new LocationUpdatedEvent(args.OldLocation.Coordinate.ToLocation(),
+            new LocationUpdatedEvent(
+                args.OldLocation.Coordinate.ToLocation(),
                 args.NewLocation.Coordinate.ToLocation());
 
         /// <summary>
@@ -123,7 +108,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static VisitedEvent ToNotification(this CLVisitedEventArgs args) =>
-            new VisitedEvent(args.Visit.Coordinate.ToLocation(), args.Visit.ArrivalDate, args.Visit.DepartureDate, args.Visit.HorizontalAccuracy);
+            new VisitedEvent(args.Visit.Coordinate.ToLocation(), args.Visit.ArrivalDate.ToLocalTime(), args.Visit.DepartureDate.ToLocalTime(), args.Visit.HorizontalAccuracy);
 
         /// <summary>
         /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.
@@ -131,12 +116,11 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static RegionErrorEvent ToNotification(this CLRegionErrorEventArgs args) =>
-            new RegionErrorEvent(args.Error,  ToGeoRegion(args.Region));
+            new RegionErrorEvent(/*args.Error*/new Exception(),  ToGeoRegion(args.Region));
 
         /// <summary>
         /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.
         /// </summary>
-        /// <param name="args">The arguments.</param>
         /// <param name="obj">The object.</param>
         /// <returns>The notification.</returns>
         public static Unit ToNotification(this object obj) => Unit.Default;
