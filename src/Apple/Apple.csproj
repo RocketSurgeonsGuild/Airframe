@@ -1,0 +1,19 @@
+<Project Sdk="MSBuild.Sdk.Extras/3.0.22">
+
+    <PropertyGroup>
+        <TargetFrameworks>xamarin.ios10;xamarin.mac20</TargetFrameworks>
+        <AssemblyName>Rocket.Surgery.Airframe.Apple</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Apple</RootNamespace>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="netstandard" />
+        <Reference Include="System.Runtime.Serialization" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core\Core.csproj" />
+    </ItemGroup>
+
+</Project>

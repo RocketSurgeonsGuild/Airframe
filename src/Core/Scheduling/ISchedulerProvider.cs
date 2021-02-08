@@ -1,6 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 
-namespace Rocket.Surgery.Airframe.Scheduling
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Interface representing a provider for <see cref="IScheduler"/> instances.

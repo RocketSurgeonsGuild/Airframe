@@ -8,13 +8,12 @@
     <PackageId>Rocket.Surgery.Airframe</PackageId>
     <Description>ReactiveUI base platform abstractions.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DocumentationFile>Rocket.Surgery.Airframe.xml</DocumentationFile>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
@@ -25,7 +24,7 @@
     <PackageReference Include="System.Reactive" />
     <Reference Include="netstandard" />
   </ItemGroup>
-  
+
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
     <Compile Include="Platforms\apple-common\**\*.cs" />
     <Compile Include="Platforms\uikit\**\*.cs" />

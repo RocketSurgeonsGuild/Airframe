@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace Rocket.Surgery.Airframe.AppStart
+namespace Rocket.Surgery.Airframe
 {
     /// <summary>
     /// Represents the application startup sequence.
