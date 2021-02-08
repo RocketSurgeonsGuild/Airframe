@@ -5,24 +5,13 @@
         <AssemblyName>Rocket.Surgery.Airframe.Synthetic</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Synthetic</RootNamespace>
     </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Refit" />
     </ItemGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\Data\Data.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Compile Update="Coffee\CoffeeClientMock.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Coffee\CoffeeDataService.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Coffee\CoffeeDto.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Coffee\ICoffeeDataService.cs">
-        <SubType>Code</SubType>
-      </Compile>
-    </ItemGroup>
+
 </Project>
