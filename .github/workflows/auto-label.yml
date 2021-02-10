@@ -1,0 +1,17 @@
+name: Sync Labels
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  auto_label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: auto label
+        uses: RocketSurgeonsGuild/actions/auto-label@auto-label
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
