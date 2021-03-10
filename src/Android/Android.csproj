@@ -1,0 +1,10 @@
+<Project Sdk="MSBuild.Sdk.Extras/3.0.22">
+
+    <PropertyGroup>
+        <TargetFramework>MonoAndroid10.0</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Airframe.Droid</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Droid</RootNamespace>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+</Project>
