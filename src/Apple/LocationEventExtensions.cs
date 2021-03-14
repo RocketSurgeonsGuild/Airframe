@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reactive;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
@@ -100,7 +99,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static ErrorEvent ToNotification(this NSErrorEventArgs args) =>
-            new ErrorEvent { };
+            new ErrorEvent();
 
         /// <summary>
         /// Converts the <see cref="CLVisitedEventArgs"/> to <see cref="VisitedEvent"/>.
@@ -116,7 +115,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static RegionErrorEvent ToNotification(this CLRegionErrorEventArgs args) =>
-            new RegionErrorEvent(/*args.Error*/new Exception(),  ToGeoRegion(args.Region));
+            new RegionErrorEvent(new Exception(args.Error.ToString()),  args.Region?.ToGeoRegion());
 
         /// <summary>
         /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.

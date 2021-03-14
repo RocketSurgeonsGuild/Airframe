@@ -12,7 +12,7 @@ namespace Rocket.Surgery.Airframe
         /// </summary>
         /// <param name="error">The error.</param>
         /// <param name="region">The region.</param>
-        public RegionErrorEvent(Exception error, GeoRegion region)
+        public RegionErrorEvent(Exception error, GeoRegion? region)
         {
             Error = error;
             Region = region;
@@ -26,6 +26,6 @@ namespace Rocket.Surgery.Airframe
         /// <summary>
         /// Gets the geo region.
         /// </summary>
-        public GeoRegion Region { get; }
+        public GeoRegion? Region { get; }
     }
 }

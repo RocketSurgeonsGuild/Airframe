@@ -1,10 +1,61 @@
-<Project Sdk="MSBuild.Sdk.Extras/3.0.22">
-
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <TargetFramework>MonoAndroid10.0</TargetFramework>
-        <AssemblyName>Rocket.Surgery.Airframe.Droid</AssemblyName>
-        <RootNamespace>Rocket.Surgery.Airframe.Droid</RootNamespace>
-        <LangVersion>latest</LangVersion>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProductVersion>8.0.30703</ProductVersion>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectGuid>{125016C9-31E7-47BC-8E6B-ABCBEC84785B}</ProjectGuid>
+        <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace> Rocket.Surgery.Airframe.Droid</RootNamespace>
+        <AssemblyName> Rocket.Surgery.Airframe.Droid</AssemblyName>
+        <FileAlignment>512</FileAlignment>
+        <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+        <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+        <AndroidClassParser>class-parse</AndroidClassParser>
+        <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Mono.Android" />
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Locations\FusedLocationProvider.cs" />
+        <Compile Include="Locations\ILocationCallbackService.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
+<!--    <PropertyGroup>-->
+<!--        <TargetFramework>MonoAndroid10.0</TargetFramework>-->
+<!--        <AssemblyName>Rocket.Surgery.Airframe.Droid</AssemblyName>-->
+<!--        <RootNamespace>Rocket.Surgery.Airframe.Droid</RootNamespace>-->
+<!--        <LangVersion>latest</LangVersion>-->
+<!--    </PropertyGroup>-->
 
+    <ItemGroup>
+        <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="60.1142.0" />
+        <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="60.1142.0" />
+        <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
+        <PackageReference Include="Xamarin.GooglePlayServices.Maps" Version="60.1142.0" />
+        <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="60.1142.0" />
+    </ItemGroup>
 </Project>

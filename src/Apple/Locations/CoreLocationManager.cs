@@ -3,7 +3,6 @@ using System.Reactive;
 using System.Reactive.Linq;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
