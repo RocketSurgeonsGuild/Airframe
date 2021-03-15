@@ -13,10 +13,7 @@ namespace Rocket.Surgery.Airframe.Configuration
         /// Initializes a new instance of the <see cref="SolutionConfiguration"/> class.
         /// </summary>
         [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
-        protected SolutionConfiguration()
-        {
-            ConfigureEnvironment();
-        }
+        protected SolutionConfiguration() => ConfigureEnvironment();
 
         /// <summary>
         /// Gets or sets the current environment configuration.
@@ -29,9 +26,9 @@ namespace Rocket.Surgery.Airframe.Configuration
         public bool UseMockData { get; set; }
 
         /// <summary>
-        /// Gets or sets the appcenter configuration.
+        /// Gets the app center configuration.
         /// </summary>
-        public Dictionary<string, string> AppCenter { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> AppCenter { get; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Overrideable method to configure environment.

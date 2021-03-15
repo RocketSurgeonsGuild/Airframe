@@ -91,38 +91,96 @@ namespace Rocket.Surgery.Airframe.Apple
         /// </summary>
         event EventHandler<CLLocationUpdatedEventArgs> UpdatedLocation;
 
+        /// <summary>
+        /// Dismisses the heading calibration display.
+        /// </summary>
         void DismissHeadingCalibrationDisplay();
 
+        /// <summary>
+        /// Request the current state.
+        /// </summary>
+        /// <param name="regionClass">The region class.</param>
+        /// <returns>A value indicating whether the <see cref="CLLocationManager"/> can monitor a region.</returns>
         bool IsMonitoringAvailable(Class regionClass);
 
-        void RequestAlwaysAuthorization();
-
+        /// <summary>
+        /// Request the current location.
+        /// </summary>
         void RequestLocation();
 
+        /// <summary>
+        /// Request the current state.
+        /// </summary>
+        /// <param name="region">The region.</param>
         void RequestState(CLRegion region);
 
+        /// <summary>
+        /// Request to use the location services when application is in use.
+        /// </summary>
+        void RequestAlwaysAuthorization();
+
+        /// <summary>
+        /// Request to use the location services when application is in use.
+        /// </summary>
         void RequestWhenInUseAuthorization();
 
+        /// <summary>
+        /// Starts monitoring a region.
+        /// </summary>
+        /// <param name="region">The region.</param>
+        /// <param name="desiredAccuracy">The requested accuracy.</param>
         void StartMonitoring(CLRegion region, double desiredAccuracy);
 
+        /// <summary>
+        /// Starts monitoring a region.
+        /// </summary>
+        /// <param name="region">The region.</param>
         void StartMonitoring(CLRegion region);
 
+        /// <summary>
+        /// Starts monitoring significant location changes.
+        /// </summary>
         void StartMonitoringSignificantLocationChanges();
 
+        /// <summary>
+        /// Starts monitoring visits.
+        /// </summary>
         void StartMonitoringVisits();
 
+        /// <summary>
+        /// Starts receiving updates on heading.
+        /// </summary>
         void StartUpdatingHeading();
 
+        /// <summary>
+        /// Starts receiving updates on location.
+        /// </summary>
         void StartUpdatingLocation();
 
+        /// <summary>
+        /// Stops monitoring the specified region.
+        /// </summary>
+        /// <param name="region">The region.</param>
         void StopMonitoring(CLRegion region);
 
+        /// <summary>
+        /// Stops receiving updates on significant location changes.
+        /// </summary>
         void StopMonitoringSignificantLocationChanges();
 
+        /// <summary>
+        /// Stops receiving updates on visits.
+        /// </summary>
         void StopMonitoringVisits();
 
+        /// <summary>
+        /// Stops receiving updates on heading.
+        /// </summary>
         void StopUpdatingHeading();
 
+        /// <summary>
+        /// Stops receiving updates on location.
+        /// </summary>
         void StopUpdatingLocation();
     }
 }

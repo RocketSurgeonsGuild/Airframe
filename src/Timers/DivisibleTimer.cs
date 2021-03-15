@@ -9,7 +9,6 @@ namespace Rocket.Surgery.Airframe.Timers
     /// </summary>
     public class DivisibleTimer : TimerBase
     {
-        private readonly BehaviorSubject<bool> _pause = new BehaviorSubject<bool>(false);
         private ObservableTimer _currentTimer;
 
         /// <summary>
