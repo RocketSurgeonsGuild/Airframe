@@ -13,7 +13,6 @@ namespace Rocket.Surgery.Airframe.Apple
     public class CoreLocationManager : ICoreLocationManager
     {
         private readonly Lazy<CLLocationManager> _locationManager = new Lazy<CLLocationManager>();
-        private ICoreLocationManager _coreLocationManagerImplementation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CoreLocationManager"/> class.
