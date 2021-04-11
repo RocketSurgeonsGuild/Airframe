@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Data.nuspec = .nuspec\Data.nuspec
 		.nuspec\Synthetic.nuspec = .nuspec\Synthetic.nuspec
 		.nuspec\Core.nuspec = .nuspec\Core.nuspec
+		.nuspec\Composition.Shiny.nuspec = .nuspec\Composition.Shiny.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "src\Configuration\Configuration.csproj", "{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}"
@@ -69,6 +70,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timers", "src\Timers\Timers.csproj", "{70DA205B-50E9-4F4D-B244-9C2E2B40A2EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Tests", "test\Airframe.Tests\Airframe.Tests.csproj", "{4C29DC6C-1251-4B3F-8F2C-447F24230E56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composition.Shiny", "src\Composition.Shiny\Composition.Shiny.csproj", "{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,6 +137,10 @@ Global
 		{4C29DC6C-1251-4B3F-8F2C-447F24230E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C29DC6C-1251-4B3F-8F2C-447F24230E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C29DC6C-1251-4B3F-8F2C-447F24230E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,6 +161,7 @@ Global
 		{89A9A8DA-80DD-4A27-A49C-AE2F3356B59D} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{70DA205B-50E9-4F4D-B244-9C2E2B40A2EE} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{4C29DC6C-1251-4B3F-8F2C-447F24230E56} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
+		{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F0DF64A-C8D5-41DF-B4C9-5C70526644DF}

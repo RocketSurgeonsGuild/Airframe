@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+    <metadata>
+        <id>Rocket.Surgery.Airframe.Composition.Shiny</id>
+        <version>$version$</version>
+        <authors>RLittlesII</authors>
+        <owners >Rocket Surgeons Guild</owners>
+        <copyright>Copyright Rodney Littles, II © 2019</copyright>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>ReactiveUI base abstractions for Xamarin.</description>
+        <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
+        <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
+        <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
+        <tags>ReactiveUI Xamarin MVVM</tags>
+        <dependencies>
+            <group>
+                <dependency id="Shiny" version="1.2.0.1755" />
+                <dependency id="Splat" version="11.*" />
+                <dependency id="Splat.Microsoft.Extensions.DependencyInjection" version="11.*" />
+                <dependency id="ReactiveUI" version="13.*" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+
+        <file src="..\src\Composition.Shiny\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Composition.Shiny.dll" target="lib\netstandard2.0" />
+        <file src="..\src\Composition.Shiny\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Composition.Shiny.pdb" target="lib\netstandard2.0" />
+
+    </files>
+</package>
