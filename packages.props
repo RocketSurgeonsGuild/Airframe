@@ -26,13 +26,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
         <PackageReference Update="DryIoc" Version="4.0.*" />
-        <PackageReference Update="DynamicData" Version="6.*" />
+        <PackageReference Update="DynamicData" Version="7.*" />
+        <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
+        <PackageReference Update="Microsoft.Extensions.Configuration" Version="3.1.10" />
+        <PackageReference Update="Microsoft.Extensions.Configuration.Json" Version="3.1.10" />
+        <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.10" />
         <PackageReference Update="Microsoft.Reactive.Testing" Version="4.*" />
         <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
-        <PackageReference Update="ReactiveUI" Version="10.*" />
-        <PackageReference Update="ReactiveUI.XamForms" Version="10.*" />
+        <PackageReference Update="ReactiveUI" Version="13.*" />
+        <PackageReference Update="ReactiveUI.XamForms" Version="13.*" />
         <PackageReference Update="ReactiveMarbles.PropertyChanged" Version="1.4.1" />
         <PackageReference Update="Refit" Version="5.1.67" />
         <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
@@ -41,15 +44,19 @@
         <PackageReference Update="RxUI.Plugins.Popup" Version="0.2.*" />
         <PackageReference Update="Serilog.Sinks.AppCenter.Crash" Version="1.*" />
         <PackageReference Update="Serilog.Sinks.Xamarin" Version="0.*" />
-        <PackageReference Update="Splat" Version="9.*" />
-        <PackageReference Update="Splat.DryIoc" Version="9.*" />
-        <PackageReference Update="Splat.Serilog" Version="9.*" />
+        <PackageReference Update="Shiny.Core" Version="1.2.0.1755" />
+        <PackageReference Update="Shiny.Locations" Version="1.2.0.1755" />
+        <PackageReference Update="Shiny.Notifications" Version="1.2.0.1755" />
+        <PackageReference Update="Splat" Version="11.*" />
+        <PackageReference Update="Splat.DryIoc" Version="11.*" />
+        <PackageReference Update="Splat.Serilog" Version="11.*" />
+        <PackageReference Update="Splat.Microsoft.Extensions.Logging" Version="11.*" />
+        <PackageReference Update="Splat.Microsoft.Extensions.DependencyInjection" Version="11.*" />
         <PackageReference Update="System.ComponentModel" Version="4.3.0" />
         <PackageReference Update="System.Collections.Immutable" Version="1.*" />
         <PackageReference Update="System.Interactive.Async.Providers" Version="3.2.0" />
         <PackageReference Update="System.Interactive.Providers" Version="3.2.0" />
-        <PackageReference Update="System.Reactive" Version="4.*" />
-        <PackageReference Update="System.Reactive.Observable.Aliases" Version="4.1.1" />
+        <PackageReference Update="System.Reactive" Version="5.*" />
         <PackageReference Update="System.Reflection.Emit.Lightweight" Version="4.3.0" />
         <PackageReference Update="Toast.iOS" Version="1.2.0" />
         <PackageReference Update="Xamarin.Forms" Version="4.8.*" />
