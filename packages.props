@@ -36,9 +36,10 @@
         <PackageReference Update="ReactiveUI.XamForms" Version="13.*" />
         <PackageReference Update="ReactiveMarbles.PropertyChanged" Version="1.4.1" />
         <PackageReference Update="Refit" Version="5.1.67" />
-        <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
+        <PackageReference Update="Rg.Plugins.Popup" Version="2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
+        <PackageReference Update="RxUI.Plugins.Popup" Version="0.*" />
         <PackageReference Update="Serilog.Sinks.AppCenter.Crash" Version="1.*" />
         <PackageReference Update="Serilog.Sinks.Xamarin" Version="0.*" />
         <PackageReference Update="Shiny.Core" Version="1.2.0.*" />
