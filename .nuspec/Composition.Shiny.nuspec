@@ -14,7 +14,7 @@
         <tags>ReactiveUI Xamarin MVVM</tags>
         <dependencies>
             <group>
-                <dependency id="Shiny" version="1.2.0.1755" />
+                <dependency id="Shiny.Core" version="1.2.0.1755" />
                 <dependency id="Splat" version="11.*" />
                 <dependency id="Splat.Microsoft.Extensions.DependencyInjection" version="11.*" />
                 <dependency id="ReactiveUI" version="13.*" />
