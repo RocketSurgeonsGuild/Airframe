@@ -26,27 +26,25 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Update="DryIoc" Version="4.0.*" />
         <PackageReference Update="DynamicData" Version="7.*" />
         <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
         <PackageReference Update="Microsoft.Extensions.Configuration" Version="3.1.10" />
         <PackageReference Update="Microsoft.Extensions.Configuration.Json" Version="3.1.10" />
         <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.10" />
-        <PackageReference Update="Microsoft.Reactive.Testing" Version="4.*" />
         <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
         <PackageReference Update="ReactiveUI" Version="13.*" />
         <PackageReference Update="ReactiveUI.XamForms" Version="13.*" />
         <PackageReference Update="ReactiveMarbles.PropertyChanged" Version="1.4.1" />
         <PackageReference Update="Refit" Version="5.1.67" />
-        <PackageReference Update="Rg.Plugins.Popup" Version="1.2.*" />
+        <PackageReference Update="Rg.Plugins.Popup" Version="2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
-        <PackageReference Update="RxUI.Plugins.Popup" Version="0.2.*" />
+        <PackageReference Update="RxUI.Plugins.Popup" Version="0.*" />
         <PackageReference Update="Serilog.Sinks.AppCenter.Crash" Version="1.*" />
         <PackageReference Update="Serilog.Sinks.Xamarin" Version="0.*" />
-        <PackageReference Update="Shiny.Core" Version="1.2.0.1755" />
-        <PackageReference Update="Shiny.Locations" Version="1.2.0.1755" />
-        <PackageReference Update="Shiny.Notifications" Version="1.2.0.1755" />
+        <PackageReference Update="Shiny.Core" Version="1.2.0.*" />
+        <PackageReference Update="Shiny.Locations" Version="1.2.0.*" />
+        <PackageReference Update="Shiny.Notifications" Version="1.2.0.*" />
         <PackageReference Update="Splat" Version="11.*" />
         <PackageReference Update="Splat.DryIoc" Version="11.*" />
         <PackageReference Update="Splat.Serilog" Version="11.*" />
@@ -68,7 +66,7 @@
         <PackageReference Update="coverlet.msbuild" Version="2.9.0" IncludeAssets="all" PrivateAssets="runtime;build;native;contentfiles;analyzers" />
         <PackageReference Update="FluentAssertions" Version="5.4.2" />
         <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-        <PackageReference Update="Microsoft.Reactive.Testing" Version="4.*" />
+        <PackageReference Update="Microsoft.Reactive.Testing" Version="5.*" />
         <PackageReference Update="NSubstitute" Version="4.2.2" />
         <PackageReference Update="ReactiveUI.Testing" Version="11.*" />
         <PackageReference Update="Rocket.Surgery.Extensions.Testing.Fixtures" Version="3.3.0" />
