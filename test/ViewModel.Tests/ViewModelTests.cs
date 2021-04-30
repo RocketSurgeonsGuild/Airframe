@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Xunit;
 
@@ -6,35 +5,17 @@ namespace Rocket.Surgery.Airframe.ViewModel.Tests
 {
     public sealed class ViewModelTests
     {
-        public class TheIdProperty
+        public class TheIsLoadingProperty
         {
             [Fact]
-            public void Should_Return_Id()
+            public void Should_Return_True()
             {
                 // Given, When
                 TestViewModel sut =
                     new TestViewModelFixture();
 
                 // Then
-                sut.Id.Should().Be(nameof(TestViewModel));
-            }
-        }
-
-        public class TheErrorInteraction
-        {
-            [Fact]
-            public void Should_Return_True()
-            {
-                // Given
-                var actual = false;
-                TestViewModel sut =
-                    new TestViewModelFixture();
-
-                // When
-                sut.ErrorInteraction.Handle("Hello World!").Subscribe(x => actual = x);
-
-                // Then
-                actual.Should().BeTrue();
+                sut.IsLoading.Should().Be(true);
             }
         }
     }

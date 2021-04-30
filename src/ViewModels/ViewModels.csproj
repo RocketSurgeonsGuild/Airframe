@@ -19,8 +19,9 @@
 
   <ItemGroup>
     <PackageReference Include="DynamicData" />
-    <PackageReference Include="System.Reactive" />
+    <PackageReference Include="Sextant" />
     <PackageReference Include="Splat" />
+    <PackageReference Include="System.Reactive" />
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="ReactiveUI.XamForms" />
     <PackageReference Include="Rocket.Surgery.Xamarin.Essentials" />

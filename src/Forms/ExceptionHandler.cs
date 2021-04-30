@@ -1,5 +1,3 @@
-using System.Reactive.Concurrency;
-using JetBrains.Annotations;
 using ReactiveUI;
 using Rocket.Surgery.Airframe.Exceptions;
 
