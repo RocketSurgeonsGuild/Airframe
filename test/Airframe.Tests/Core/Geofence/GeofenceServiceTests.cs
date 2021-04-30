@@ -1,7 +1,7 @@
 using Rocket.Surgery.Airframe;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 
-namespace Airframe.Tests.Core
+namespace Airframe.Tests.Core.Geofence
 {
     public class GeofenceServiceTests
     {
