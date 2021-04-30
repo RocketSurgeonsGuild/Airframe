@@ -1,19 +1,22 @@
 using System.Reactive.Concurrency;
 using Microsoft.Reactive.Testing;
 using Rocket.Surgery.Airframe;
+using Rocket.Surgery.Airframe.Forms;
+using Rocket.Surgery.Extensions.Testing.Fixtures;
 
 namespace Airframe.Tests
 {
-    internal class SchedulerProviderMock : ISchedulerProvider
+    internal class SchedulerProviderFixture : ITestFixtureBuilder
     {
-        public SchedulerProviderMock(IScheduler main = null, IScheduler background = null)
-        {
-            UserInterfaceThread = main ?? new TestScheduler();
-            BackgroundThread = background ?? new TestScheduler();
-        }
+        private IScheduler _mainThreadScheduler = new TestScheduler();
+        private IScheduler _backgroundThreadScheduler = new TestScheduler();
 
-        public IScheduler UserInterfaceThread { get; }
+        public SchedulerProviderFixture WithTestScheduler(IScheduler scheduler)
+            => this.With(ref _mainThreadScheduler, scheduler)
+               .With(ref _backgroundThreadScheduler, scheduler);
 
-        public IScheduler BackgroundThread { get; }
+        public static implicit operator SchedulerProvider(SchedulerProviderFixture fixture) => fixture.Build();
+
+        private SchedulerProvider Build() => new SchedulerProvider(_mainThreadScheduler, _backgroundThreadScheduler);
     }
 }

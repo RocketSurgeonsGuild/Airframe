@@ -30,7 +30,7 @@ namespace Airframe.Tests.Timers
             int count = 1;
             var testScheduler = new TestScheduler();
             DivisibleTimer sut =
-                new DivisibleTimerFixture().WithProvider(new SchedulerProviderMock(background: testScheduler));
+                new DivisibleTimerFixture().WithProvider(new SchedulerProviderFixture().WithTestScheduler(testScheduler));
             sut.Interval.ObserveOn(testScheduler).Subscribe(_ => count++);
 
             // When
