@@ -31,7 +31,7 @@ namespace Rocket.Surgery.Airframe.Shiny.Settings
                 .RefCount()
                 .OnItemAdded(setting => PersistSetting(setting, shinySettings))
                 .OnItemRemoved(setting => RemoveSetting(setting, shinySettings))
-                .WhenPropertyChanged(x => x.Value, false)
+                .WhenPropertyChanged(x => x.Value)
                 .Subscribe(value => PersistSetting(value.Sender, shinySettings))
                 .DisposeWith(_garbage);
 
