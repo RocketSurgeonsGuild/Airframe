@@ -10,6 +10,7 @@ namespace Airframe.Tests.Shiny.Settings
     public sealed class SettingsTests
     {
         private const string Key = "thing";
+
         [Fact]
         public void GivenDefaultValue_WhenGet_ThenReturnDefaultValue()
         {
@@ -74,7 +75,7 @@ namespace Airframe.Tests.Shiny.Settings
         public void GivenObservingChange_WhenSettingChanged_ThenChangeObserved()
         {
             // Given
-            int result = 0;
+            var result = 0;
             SettingsProvider sut = new SettingsProviderFixture();
             sut.Set(new Setting<int>(Key, 1));
             sut.Observe<int>(Key).Subscribe(_ => result = _.Value);
@@ -87,7 +88,7 @@ namespace Airframe.Tests.Shiny.Settings
         }
 
         [Fact]
-        public void GivenSetting_WhenSetting_ThenPersisted()
+        public void GivenSetting_WhenSet_ThenPersisted()
         {
             // Given
             var settings = Substitute.For<ISettings>();
