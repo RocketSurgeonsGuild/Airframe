@@ -14,18 +14,12 @@ namespace Rocket.Surgery.Airframe.Forms
         /// Initializes a new instance of the <see cref="ReactiveCollectionView"/> class.
         /// </summary>
         /// <param name="cellType">Type of the cell.</param>
-        public ReactiveCollectionView(Type cellType)
-        {
-            ItemTemplate = new DataTemplate(cellType);
-        }
+        public ReactiveCollectionView(Type cellType) => ItemTemplate = new DataTemplate(cellType);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactiveCollectionView"/> class.
         /// </summary>
         /// <param name="loadTemplate">The load template.</param>
-        public ReactiveCollectionView(Func<object> loadTemplate)
-        {
-            ItemTemplate = new DataTemplate(loadTemplate);
-        }
+        public ReactiveCollectionView(Func<object> loadTemplate) => ItemTemplate = new DataTemplate(loadTemplate);
     }
 }

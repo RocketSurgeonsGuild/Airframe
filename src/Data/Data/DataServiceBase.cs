@@ -23,10 +23,7 @@ namespace Data
         /// Initializes a new instance of the <see cref="DataServiceBase{T}"/> class.
         /// </summary>
         /// <param name="client">The abstracted client.</param>
-        protected DataServiceBase([NotNull] IClient client)
-        {
-            _client = client;
-        }
+        protected DataServiceBase([NotNull] IClient client) => _client = client;
 
         /// <inheritdoc />
         public virtual IObservable<IChangeSet<T, Guid>> ChangeSet => SourceCache.Connect().RefCount();
