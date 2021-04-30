@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Data.nuspec = .nuspec\Data.nuspec
 		.nuspec\Synthetic.nuspec = .nuspec\Synthetic.nuspec
 		.nuspec\Core.nuspec = .nuspec\Core.nuspec
-		.nuspec\Composition.Shiny.nuspec = .nuspec\Composition.Shiny.nuspec
+		.nuspec\Shiny.nuspec = .nuspec\Shiny.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "src\Configuration\Configuration.csproj", "{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}"
@@ -72,7 +72,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timers", "src\Timers\Timers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Tests", "test\Airframe.Tests\Airframe.Tests.csproj", "{4C29DC6C-1251-4B3F-8F2C-447F24230E56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composition.Shiny", "src\Composition.Shiny\Composition.Shiny.csproj", "{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny", "src\Shiny\Shiny.csproj", "{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

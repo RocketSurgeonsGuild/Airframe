@@ -6,7 +6,7 @@ using Shiny;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
 
-namespace Rocket.Surgery.Airframe.Composition.Shiny
+namespace Rocket.Surgery.Airframe.Shiny
 {
     /// <summary>
     /// Represents an <see cref="IShinyStartup"/> for application composition.
