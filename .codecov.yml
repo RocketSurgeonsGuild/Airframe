@@ -13,7 +13,7 @@ coverage:
         changes: no
 
 ignore:
-  - "test/**/*"  # ignore folders and all its contents        
+  - "test/"  # ignore folders and all its contents        
 
 comment:
     branch: master
