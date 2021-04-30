@@ -9,11 +9,10 @@ namespace Rocket.Surgery.Airframe
     public abstract class StartupOperationBase : IStartupOperation
     {
         /// <inheritdoc/>
-        IObservable<Unit> IStartupOperation.Start()
-        {
+        IObservable<Unit> IStartupOperation.Start() =>
+
             // Add logging.
-            return Start();
-        }
+            Start();
 
         /// <inheritdoc/>
         bool IStartupOperation.CanExecute() => CanExecute();

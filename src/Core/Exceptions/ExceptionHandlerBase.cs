@@ -16,10 +16,7 @@ namespace Rocket.Surgery.Airframe.Exceptions
         /// Initializes a new instance of the <see cref="ExceptionHandlerBase"/> class.
         /// </summary>
         /// <param name="scheduler">The main thread scheduler.</param>
-        protected ExceptionHandlerBase([NotNull] IScheduler scheduler)
-        {
-            _scheduler = scheduler;
-        }
+        protected ExceptionHandlerBase([NotNull] IScheduler scheduler) => _scheduler = scheduler;
 
         /// <inheritdoc/>
         void IObserver<Exception>.OnCompleted()

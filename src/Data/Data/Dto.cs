@@ -10,10 +10,7 @@ namespace Data
         /// <summary>
         /// Initializes a new instance of the <see cref="Dto"/> class.
         /// </summary>
-        protected Dto()
-        {
-            Id = Guid.NewGuid();
-        }
+        protected Dto() => Id = Guid.NewGuid();
 
         /// <summary>
         /// Gets or sets the unique identifier.

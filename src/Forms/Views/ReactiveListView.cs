@@ -18,10 +18,7 @@ namespace Rocket.Surgery.Airframe.Forms
         /// <param name="cellType">Type of the cell.</param>
         /// <param name="listViewCachingStrategy">The list view caching strategy.</param>
         public ReactiveListView(Type cellType, ListViewCachingStrategy listViewCachingStrategy = ListViewCachingStrategy.RecycleElement)
-            : base(listViewCachingStrategy)
-        {
-            ItemTemplate = new DataTemplate(cellType);
-        }
+            : base(listViewCachingStrategy) => ItemTemplate = new DataTemplate(cellType);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactiveListView"/> class.
@@ -29,10 +26,7 @@ namespace Rocket.Surgery.Airframe.Forms
         /// <param name="loadTemplate">The load template.</param>
         /// <param name="listViewCachingStrategy">The list view caching strategy.</param>
         public ReactiveListView(Func<object> loadTemplate, ListViewCachingStrategy listViewCachingStrategy = ListViewCachingStrategy.RecycleElement)
-            : base(listViewCachingStrategy)
-        {
-            ItemTemplate = new DataTemplate(loadTemplate);
-        }
+            : base(listViewCachingStrategy) => ItemTemplate = new DataTemplate(loadTemplate);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactiveListView"/> class.

@@ -23,8 +23,8 @@ namespace Rocket.Surgery.Airframe
         /// </value>
         object IViewFor.ViewModel
         {
-            get { return ViewModel; }
-            set { ViewModel = (TViewModel)value; }
+            get => ViewModel;
+            set => ViewModel = (TViewModel)value;
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Rocket.Surgery.Airframe
         /// </value>
         public TViewModel ViewModel
         {
-            get { return _viewModel; }
-            set { this.RaiseAndSetIfChanged(ref _viewModel, value); }
+            get => _viewModel;
+            set => this.RaiseAndSetIfChanged(ref _viewModel, value);
         }
     }
 }

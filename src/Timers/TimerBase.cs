@@ -15,10 +15,7 @@ namespace Rocket.Surgery.Airframe.Timers
         ///     Initializes a new instance of the <see cref="TimerBase" /> class.
         /// </summary>
         /// <param name="schedulerProvider">The scheduler.</param>
-        protected TimerBase(ISchedulerProvider schedulerProvider)
-        {
-            SchedulerProvider = schedulerProvider;
-        }
+        protected TimerBase(ISchedulerProvider schedulerProvider) => SchedulerProvider = schedulerProvider;
 
         /// <inheritdoc />
         protected ISchedulerProvider SchedulerProvider { get; set; }

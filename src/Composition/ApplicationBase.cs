@@ -47,10 +47,7 @@ namespace Rocket.Surgery.Airframe.Composition
         /// <summary>
         /// Initialize the <see cref="ApplicationBase"/>.
         /// </summary>
-        protected void Initialize()
-        {
-            ComposeApplicationRoot();
-        }
+        protected void Initialize() => ComposeApplicationRoot();
 
         /// <summary>
         /// Composes the applications composition root.

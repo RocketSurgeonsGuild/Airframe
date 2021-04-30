@@ -18,10 +18,7 @@ namespace Data
         /// Initializes a new instance of the <see cref="DuckDuckGoService"/> class.
         /// </summary>
         /// <param name="duckDuckGoApi">The duck duck go api.</param>
-        public DuckDuckGoService(IDuckDuckGoApi duckDuckGoApi)
-        {
-            _duckDuckGoApi = duckDuckGoApi;
-        }
+        public DuckDuckGoService(IDuckDuckGoApi duckDuckGoApi) => _duckDuckGoApi = duckDuckGoApi;
 
         /// <inheritdoc/>
         public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> QueryResults =>

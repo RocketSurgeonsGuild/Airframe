@@ -40,10 +40,7 @@ namespace Rocket.Surgery.Airframe.Forms
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-        }
+        public void Dispose() => Dispose(true);
 
         /// <summary>
         /// View lifecycle method that initializes the view.
