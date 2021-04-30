@@ -340,3 +340,4 @@ ASALocalRun/
 
 # Code Coverage
 coverage/
+test/**/coverage.json

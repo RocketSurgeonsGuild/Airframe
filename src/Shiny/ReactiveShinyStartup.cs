@@ -70,7 +70,7 @@ namespace Rocket.Surgery.Airframe.Shiny
         void IShinyStartup.ConfigureServices(IServiceCollection services)
         {
             ConfigureShiny(services);
-            ConfigureAppSettings(services, _configurationBuilder);
+            ConfigureAppSettings(_serviceCollection, _configurationBuilder);
             ConfigureServices(_serviceCollection);
         }
 
