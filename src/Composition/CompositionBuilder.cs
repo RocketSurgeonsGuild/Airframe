@@ -15,10 +15,8 @@ namespace Rocket.Surgery.Airframe.Composition
         /// Initializes a new instance of the <see cref="CompositionBuilder"/> class.
         /// </summary>
         /// <param name="container">The container instance.</param>
-        public CompositionBuilder(IContainer? container = null)
-        {
+        public CompositionBuilder(IContainer? container = null) =>
             _container = container ?? new Container();
-        }
 
         /// <summary>
         /// Loads the autofac module.

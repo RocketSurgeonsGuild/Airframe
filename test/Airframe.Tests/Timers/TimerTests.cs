@@ -21,14 +21,8 @@ namespace Airframe.Tests.Timers
 
     public abstract class TestBase
     {
-        protected TestBase()
-        {
-            Initialize();
-        }
+        protected TestBase() => Initialize();
 
-        private static void Initialize()
-        {
-            RxApp.DefaultExceptionHandler = BaseExceptionHandlerStub.Instance;
-        }
+        private static void Initialize() => RxApp.DefaultExceptionHandler = BaseExceptionHandlerStub.Instance;
     }
 }

@@ -13,7 +13,13 @@ namespace Rocket.Surgery.Airframe
         bool IsRunning { get; }
 
         /// <summary>
-        /// Starts the timer.
+        /// Starts the timer at the specified time.
+        /// </summary>
+        /// <param name="timeSpan">The time span.</param>
+        void Start(TimeSpan timeSpan);
+
+        /// <summary>
+        /// Starts the timer from it's current time.
         /// </summary>
         void Start();
 
@@ -21,11 +27,5 @@ namespace Rocket.Surgery.Airframe
         /// Stops the timer.
         /// </summary>
         void Stop();
-
-        /// <summary>
-        /// Sets the timer.
-        /// </summary>
-        /// <param name="timeSpan">The time span.</param>
-        void Set(TimeSpan timeSpan);
     }
 }
