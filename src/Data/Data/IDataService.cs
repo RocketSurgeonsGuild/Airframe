@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using DynamicData;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Interface representing a typed data service.
@@ -56,7 +56,6 @@ namespace Data
     /// <summary>
     /// Interface representing a non typed data service.
     /// </summary>
-    /// <typeparam name="T">The dto type.</typeparam>
     public interface IDataService
     {
         /// <summary>

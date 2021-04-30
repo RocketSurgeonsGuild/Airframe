@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Interface that represents a client connection.

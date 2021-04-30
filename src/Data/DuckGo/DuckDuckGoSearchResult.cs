@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Search results from query.

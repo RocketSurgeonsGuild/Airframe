@@ -7,13 +7,13 @@ using System.Threading;
 using DynamicData;
 using JetBrains.Annotations;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
-    /// Respresents a base <see cref="IDataService{T}"/> implementation.
+    /// Represents a base <see cref="IDataService{T}"/> implementation.
     /// </summary>
     /// <typeparam name="T">The data transfer object type.</typeparam>
-    public abstract class DataServiceBase<T> : IDataService<T>
+    public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
         where T : Dto
     {
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
@@ -99,6 +99,13 @@ namespace Data
         }
 
         /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc/>
         IObservable<Unit> IDataService.Create(object dto) => Create((T)dto);
 
         /// <inheritdoc/>
@@ -112,5 +119,19 @@ namespace Data
 
         /// <inheritdoc/>
         IObservable<Unit> IDataService.Delete(object dto) => Delete((T)dto);
+
+        /// <summary>
+        /// Disposes of resources when finalizing.
+        /// </summary>
+        /// <param name="disposing">A value indicating whether or not this instance is disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _semaphore.Dispose();
+                _client.Dispose();
+                SourceCache.Dispose();
+            }
+        }
     }
 }

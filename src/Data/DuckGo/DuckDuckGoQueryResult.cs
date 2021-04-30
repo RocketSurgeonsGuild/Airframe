@@ -1,4 +1,4 @@
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Result returned from the query.

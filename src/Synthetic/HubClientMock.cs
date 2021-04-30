@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Data;
+using Rocket.Surgery.Airframe.Data;
 
 namespace Rocket.Surgery.Airframe.Synthetic
 {

@@ -1,16 +1,15 @@
 using System;
-using System.Threading.Tasks;
+using System.Reactive.Linq;
 using DynamicData;
-using LanguageExt;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Represents a service that can query the duck duck go api.
     /// </summary>
     public class DuckDuckGoService : IDuckDuckGoService
     {
-        private readonly IDuckDuckGoApi _duckDuckGoApi;
+        private readonly IDuckDuckGoApiClient _duckDuckGoApiClient;
 
         private readonly SourceCache<DuckDuckGoQueryResult, string> _queryResults =
             new SourceCache<DuckDuckGoQueryResult, string>(x => x.FirstUrl);
@@ -18,18 +17,28 @@ namespace Data
         /// <summary>
         /// Initializes a new instance of the <see cref="DuckDuckGoService"/> class.
         /// </summary>
-        /// <param name="duckDuckGoApi">The duck duck go api.</param>
-        public DuckDuckGoService(IDuckDuckGoApi duckDuckGoApi) => _duckDuckGoApi = duckDuckGoApi;
+        /// <param name="duckDuckGoApiClient">The duck duck go api.</param>
+        public DuckDuckGoService(IDuckDuckGoApiClient duckDuckGoApiClient) => _duckDuckGoApiClient = duckDuckGoApiClient;
 
         /// <inheritdoc/>
-        public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> QueryResults =>
-            _queryResults.Connect().RefCount();
+        public IObservable<DuckDuckGoQueryResult> Query(string query) =>
+            Observable
+               .Create<DuckDuckGoQueryResult>(observer =>
+                    _duckDuckGoApiClient
+                       .Search(query)
+                       .Select(x => x.AsResult())
+                       .Cache(_queryResults)
+                       .SelectMany(x => x)
+                       .Subscribe(observer));
 
-        /// <inheritdoc/>
-        public async Task Query(string query) =>
-            await _duckDuckGoApi.Search(query)
-                                .Map(x => x.AsResult())
-                                .Cache(_queryResults)
-                                .ConfigureAwait(true);
+        public IObservable<DuckDuckGoQueryResult> Query(string query, bool clearCache) => 
+            Observable
+               .Create<DuckDuckGoQueryResult>(observer =>
+                    _duckDuckGoApiClient
+                       .Search(query)
+                       .Select(x => x.AsResult())
+                       .Cache(_queryResults)
+                       .SelectMany(x => x)
+                       .Subscribe(observer));;
     }
 }
