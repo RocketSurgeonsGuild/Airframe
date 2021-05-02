@@ -39,13 +39,13 @@
         <PackageReference Update="Rg.Plugins.Popup" Version="2.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials" Version="0.4.*" />
         <PackageReference Update="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.*" />
-        <PackageReference Update="RxUI.Plugins.Popup" Version="0.*" />
         <PackageReference Update="Serilog.Sinks.AppCenter.Crash" Version="1.*" />
         <PackageReference Update="Serilog.Sinks.Xamarin" Version="0.*" />
         <PackageReference Update="Shiny.Core" Version="1.2.0.*" />
         <PackageReference Update="Shiny.Locations" Version="1.2.0.*" />
         <PackageReference Update="Shiny.Notifications" Version="1.2.0.*" />
         <PackageReference Update="Sextant" Version="2.*" />
+        <PackageReference Update="Sextant.Plugins.Popup" Version="2.*" />
         <PackageReference Update="Splat" Version="11.*" />
         <PackageReference Update="Splat.DryIoc" Version="11.*" />
         <PackageReference Update="Splat.Serilog" Version="11.*" />

@@ -5,8 +5,8 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using ReactiveUI;
-using ReactiveUI.XamForms;
-using RxUI.Plugins.Popup;
+using Sextant;
+using Sextant.Plugins.Popup;
 using Xamarin.Forms;
 
 [assembly: XmlnsPrefix("https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup", "popup")]
@@ -16,12 +16,12 @@ using Xamarin.Forms;
 namespace Rocket.Surgery.Airframe.Popup
 {
     /// <summary>
-    /// Base ReactiveUI <see cref="ReactivePopupPage{TViewModel}"/>.
+    /// Base ReactiveUI <see cref="SextantPopupPage{TViewModel}"/>.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-    /// <seealso cref="ReactiveContentPage{TViewModel}" />
-    public abstract class PopupPageBase<TViewModel> : ReactivePopupPage<TViewModel>
-        where TViewModel : class, IReactiveObject
+    /// <seealso cref="SextantPopupPage{TViewModel}" />
+    public abstract class PopupPageBase<TViewModel> : SextantPopupPage<TViewModel>, IDisposable
+        where TViewModel : class, IReactiveObject, IViewModel
     {
         private readonly ISubject<Unit> _isAppearing;
         private readonly ISubject<Unit> _isDisappearing;
@@ -56,6 +56,13 @@ namespace Rocket.Surgery.Airframe.Popup
         /// <returns>The appearing notification.</returns>
         protected virtual IObservable<Unit> IsDisappearing => _isDisappearing.AsObservable();
 
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         /// <inheritdoc />
         protected override void OnAppearing()
         {
@@ -89,6 +96,18 @@ namespace Rocket.Surgery.Airframe.Popup
         /// </summary>
         protected virtual void RegisterObservers()
         {
+        }
+
+        /// <summary>
+        /// Disposes of the resources allocated for this instance.
+        /// </summary>
+        /// <param name="disposing">A value indicating whether or not the instance is disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ViewBindings.Dispose();
+            }
         }
     }
 }

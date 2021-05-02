@@ -31,7 +31,7 @@ namespace Rocket.Surgery.Airframe
         /// <summary>
         /// Gets or sets the exception.
         /// </summary>
-        public Exception Exception { get; set; }
+        public Exception? Exception { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the result of the request was successful.
