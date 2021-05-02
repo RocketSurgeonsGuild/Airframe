@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Base abstraction for hub clients.

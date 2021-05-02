@@ -1,4 +1,4 @@
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Icon for related topic(s) or external site(s).

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Data;
+using Rocket.Surgery.Airframe.Data;
 
 namespace Rocket.Surgery.Airframe.Synthetic
 {
@@ -14,7 +14,7 @@ namespace Rocket.Surgery.Airframe.Synthetic
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the spicies.
+        /// Gets or sets the species.
         /// </summary>
         public string Species { get; set; }
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Data;
+using Rocket.Surgery.Airframe.Data;
 
 namespace Rocket.Surgery.Airframe.Synthetic
 {
@@ -11,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Synthetic
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
     public abstract class ClientMock<T> : IClient
-        where T : Dto
+        where T : IDto
     {
         /// <summary>
         /// Gets or sets the list of items.
@@ -20,23 +20,23 @@ namespace Rocket.Surgery.Airframe.Synthetic
 
         /// <inheritdoc/>
         public virtual Task<T> Get<T>(Guid id)
-            where T : Dto => Task.FromResult((T)(object)Items.FirstOrDefault(x => x.Id == id));
+            where T : IDto => Task.FromResult((T)(object)Items.FirstOrDefault(x => x.Id == id));
 
         /// <inheritdoc/>
         public virtual Task<IEnumerable<T>> GetAll<T>()
-            where T : Dto => Task.FromResult((IEnumerable<T>)Items);
+            where T : IDto => Task.FromResult((IEnumerable<T>)Items);
 
         /// <inheritdoc/>
         public virtual Task<T> Post<T>(T entity)
-            where T : Dto => Task.FromResult(entity);
+            where T : IDto => Task.FromResult(entity);
 
         /// <inheritdoc/>
         public virtual Task Delete<T>(Guid id)
-            where T : Dto => Task.FromResult((T)(object)Items.FirstOrDefault(x => x.Id == id));
+            where T : IDto => Task.FromResult((T)(object)Items.FirstOrDefault(x => x.Id == id));
 
         /// <inheritdoc/>
         public virtual Task Delete<T>(T entity)
-            where T : Dto => Task.FromResult(entity);
+            where T : IDto => Task.FromResult(entity);
 
         /// <inheritdoc/>
         public void Dispose()

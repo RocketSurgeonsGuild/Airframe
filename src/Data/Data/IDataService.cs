@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using DynamicData;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Interface representing a typed data service.
@@ -11,7 +11,7 @@ namespace Data
     /// <typeparam name="T">The dto type.</typeparam>
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Typed and untyped.")]
     public interface IDataService<T> : IDataService
-        where T : Dto
+        where T : IDto
     {
         /// <summary>
         /// Gets the observable of change sets.
@@ -56,7 +56,6 @@ namespace Data
     /// <summary>
     /// Interface representing a non typed data service.
     /// </summary>
-    /// <typeparam name="T">The dto type.</typeparam>
     public interface IDataService
     {
         /// <summary>

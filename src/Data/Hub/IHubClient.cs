@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Interface representing a hub client.

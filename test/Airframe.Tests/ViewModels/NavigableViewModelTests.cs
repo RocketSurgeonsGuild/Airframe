@@ -4,7 +4,7 @@ using Sextant;
 using System;
 using Xunit;
 
-namespace Rocket.Surgery.Airframe.ViewModel.Tests
+namespace Airframe.Tests.ViewModels
 {
     public class NavigableViewModelTests : TestBase
     {

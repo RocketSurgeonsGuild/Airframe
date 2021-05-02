@@ -17,9 +17,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Data\Data.csproj" />
       <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
       <ProjectReference Include="..\..\src\Shiny\Shiny.csproj" />
       <ProjectReference Include="..\..\src\Timers\Timers.csproj" />
+      <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj" />
     </ItemGroup>
 
 </Project>

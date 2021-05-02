@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Interface that represents a client connection.
@@ -16,7 +16,7 @@ namespace Data
         /// <typeparam name="T">The item type.</typeparam>
         /// <returns>The item.</returns>
         Task<T> Get<T>(Guid id)
-            where T : Dto;
+            where T : IDto;
 
         /// <summary>
         /// Gets all items of the specified type.
@@ -24,7 +24,7 @@ namespace Data
         /// <typeparam name="T">The item type.</typeparam>
         /// <returns>The items.</returns>
         Task<IEnumerable<T>> GetAll<T>()
-            where T : Dto;
+            where T : IDto;
 
         /// <summary>
         /// Posts the specified entity.
@@ -33,7 +33,7 @@ namespace Data
         /// <typeparam name="T">The entity type.</typeparam>
         /// <returns>The return entity.</returns>
         Task<T> Post<T>(T entity)
-            where T : Dto;
+            where T : IDto;
 
         /// <summary>
         /// Delete the specified entity.
@@ -42,7 +42,7 @@ namespace Data
         /// <typeparam name="T">The entity type.</typeparam>
         /// <returns>A completion notification.</returns>
         Task Delete<T>(Guid id)
-            where T : Dto;
+            where T : IDto;
 
         /// <summary>
         /// Delete the specified entity.
@@ -51,6 +51,6 @@ namespace Data
         /// <typeparam name="T">The entity type.</typeparam>
         /// <returns>A completion notification.</returns>
         Task Delete<T>(T entity)
-            where T : Dto;
+            where T : IDto;
     }
 }
