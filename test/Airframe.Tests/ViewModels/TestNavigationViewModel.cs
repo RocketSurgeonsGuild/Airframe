@@ -5,7 +5,7 @@ using System;
 using System.Reactive;
 using System.Reactive.Disposables;
 
-namespace Rocket.Surgery.Airframe.ViewModel.Tests
+namespace Airframe.Tests.ViewModels
 {
     internal class TestNavigationViewModel : NavigableViewModelBase
     {

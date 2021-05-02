@@ -21,24 +21,23 @@ namespace Rocket.Surgery.Airframe.Data
         public DuckDuckGoService(IDuckDuckGoApiClient duckDuckGoApiClient) => _duckDuckGoApiClient = duckDuckGoApiClient;
 
         /// <inheritdoc/>
-        public IObservable<DuckDuckGoQueryResult> Query(string query) =>
-            Observable
-               .Create<DuckDuckGoQueryResult>(observer =>
+        public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> Query(string query) => Observable
+           .Create<IChangeSet<DuckDuckGoQueryResult, string>>(
+                observer =>
                     _duckDuckGoApiClient
                        .Search(query)
                        .Select(x => x.AsResult())
                        .Cache(_queryResults)
-                       .SelectMany(x => x)
                        .Subscribe(observer));
 
-        public IObservable<DuckDuckGoQueryResult> Query(string query, bool clearCache) => 
-            Observable
-               .Create<DuckDuckGoQueryResult>(observer =>
+        /// <inheritdoc/>
+        public IObservable<IChangeSet<DuckDuckGoQueryResult, string>> Query(string query, bool clearCache) => Observable
+           .Create<IChangeSet<DuckDuckGoQueryResult, string>>(
+                observer =>
                     _duckDuckGoApiClient
                        .Search(query)
                        .Select(x => x.AsResult())
-                       .Cache(_queryResults)
-                       .SelectMany(x => x)
-                       .Subscribe(observer));;
+                       .Cache(_queryResults, clearCache)
+                       .Subscribe(observer));
     }
 }

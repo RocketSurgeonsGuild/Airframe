@@ -1,4 +1,5 @@
 using System;
+using DynamicData;
 
 namespace Rocket.Surgery.Airframe.Data
 {
@@ -12,7 +13,7 @@ namespace Rocket.Surgery.Airframe.Data
         /// </summary>
         /// <param name="query">The query.</param>
         /// <returns>An observable of chang sets.</returns>
-        IObservable<DuckDuckGoQueryResult> Query(string query);
+        IObservable<IChangeSet<DuckDuckGoQueryResult, string>> Query(string query);
 
         /// <summary>
         /// Queries duck duck go.
@@ -20,6 +21,6 @@ namespace Rocket.Surgery.Airframe.Data
         /// <param name="query">The query.</param>
         /// <param name="clearCache">A value indicating whether to clear the cache.</param>
         /// <returns>An observable of chang sets.</returns>
-        IObservable<DuckDuckGoQueryResult> Query(string query, bool clearCache);
+        IObservable<IChangeSet<DuckDuckGoQueryResult, string>> Query(string query, bool clearCache);
     }
 }

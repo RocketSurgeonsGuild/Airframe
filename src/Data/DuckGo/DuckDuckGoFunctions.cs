@@ -26,15 +26,19 @@ namespace Rocket.Surgery.Airframe.Data
         /// <param name="cache">The cache.</param>
         /// <param name="clearCache">A value indicating whether to clear the cache.</param>
         /// <returns>A completion notification.</returns>
-        public static IObservable<IEnumerable<DuckDuckGoQueryResult>> Cache(this IObservable<IEnumerable<DuckDuckGoQueryResult>> result, SourceCache<DuckDuckGoQueryResult, string> cache, bool clearCache = false) =>
-            result
-               .Do(_ =>
+        public static IObservable<IChangeSet<DuckDuckGoQueryResult, string>> Cache(
+            this IObservable<IEnumerable<DuckDuckGoQueryResult>> result,
+            SourceCache<DuckDuckGoQueryResult, string> cache,
+            bool clearCache = false) => result
+           .Do(duckDuckGoQueryResults =>
                 {
                     if (clearCache)
                     {
                         cache.Clear();
                     }
+
+                    cache.AddOrUpdate(duckDuckGoQueryResults);
                 })
-               .Do(cache.AddOrUpdate);
+           .SelectMany(_ => cache.Connect().RefCount());
     }
 }

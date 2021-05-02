@@ -11,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Data
     /// <typeparam name="T">The dto type.</typeparam>
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Typed and untyped.")]
     public interface IDataService<T> : IDataService
-        where T : Dto
+        where T : IDto
     {
         /// <summary>
         /// Gets the observable of change sets.

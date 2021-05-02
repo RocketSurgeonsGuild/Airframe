@@ -14,7 +14,6 @@
       <DocumentationFile>bin\Release\Rocket.Surgery.Airframe.Data.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="LanguageExt.Core" Version="3.4.15" />
         <PackageReference Include="Refit" />
     </ItemGroup>
 </Project>

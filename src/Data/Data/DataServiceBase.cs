@@ -2,7 +2,6 @@ using System;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Threading;
 using DynamicData;
 using JetBrains.Annotations;
@@ -14,7 +13,7 @@ namespace Rocket.Surgery.Airframe.Data
     /// </summary>
     /// <typeparam name="T">The data transfer object type.</typeparam>
     public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
-        where T : Dto
+        where T : IDto
     {
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
         private readonly IClient _client;
@@ -37,57 +36,48 @@ namespace Rocket.Surgery.Airframe.Data
         public virtual IObservable<Unit> Create(T dto) =>
             Observable.Create<Unit>(_ =>
             {
-                _client.Post(dto).ToObservable().Subscribe();
+                var clientSubscription = Observable.FromAsync(() => _client.Post(dto)).Subscribe();
 
-                using var x = _semaphore.WaitAsync().ToObservable().Subscribe();
+                using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(_);
                 SourceCache.AddOrUpdate(dto);
 
-                return x;
+                return Disposable.Create(() => clientSubscription.Dispose());
             });
 
         /// <inheritdoc />
-        public virtual IObservable<T> Read() =>
-            _client
-                .GetAll<T>()
-                .ToObservable()
-                .SelectMany(x => x)
-                .Where(x => x != null)
-                .Do(_ => SourceCache.AddOrUpdate(_));
+        public virtual IObservable<T> Read() => Observable
+           .FromAsync(() => _client.GetAll<T>())
+           .SelectMany(x => x)
+           .Where(x => x != null)
+           .Do(_ => SourceCache.AddOrUpdate(_));
 
         /// <inheritdoc />
-        public virtual IObservable<T> Read(Guid id) =>
-            _client
-                .Get<T>(id)
-                .ToObservable()
-                .Where(x => x != null)
-                .Do(_ => SourceCache.AddOrUpdate(_));
+        public virtual IObservable<T> Read(Guid id) => Observable
+           .FromAsync(() => _client.Get<T>(id))
+           .Where(x => x != null)
+           .Do(_ => SourceCache.AddOrUpdate(_));
 
         /// <inheritdoc />
         public virtual IObservable<Unit> Update(T dto) =>
             Observable.Create<Unit>(_ =>
             {
-                var clientSubscription = _client.Post(dto).ToObservable().Subscribe();
+                var clientSubscription = Observable.FromAsync(() => _client.Post(dto)).Subscribe();
 
-                using var x = _semaphore.WaitAsync().ToObservable().Subscribe();
+                using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(_);
                 SourceCache.AddOrUpdate(dto);
 
-                return Disposable.Create(() =>
-                {
-                    x.Dispose();
-                    clientSubscription.Dispose();
-                });
+                return Disposable.Create(() => clientSubscription.Dispose());
             });
 
         /// <inheritdoc />
         public virtual IObservable<Unit> Delete(T dto) =>
             Observable.Create<Unit>(_ =>
             {
-                _client.Delete(dto).ToObservable().Subscribe();
-
-                using var x = _semaphore.WaitAsync().ToObservable().Subscribe();
+                var clientSubscription = Observable.FromAsync(() => _client.Delete(dto)).Subscribe();
+                using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(_);
                 SourceCache.Remove(dto);
 
-                return x;
+                return Disposable.Create(() => clientSubscription.Dispose());
             });
 
         /// <inheritdoc/>
@@ -109,10 +99,10 @@ namespace Rocket.Surgery.Airframe.Data
         IObservable<Unit> IDataService.Create(object dto) => Create((T)dto);
 
         /// <inheritdoc/>
-        IObservable<object> IDataService.Read() => Read();
+        IObservable<object> IDataService.Read() => Read().Select(x => x as object);
 
         /// <inheritdoc/>
-        IObservable<object> IDataService.Read(Guid id) => Read(id);
+        IObservable<object> IDataService.Read(Guid id) => Read(id).Select(x => x as object);
 
         /// <inheritdoc/>
         IObservable<Unit> IDataService.Update(object dto) => Update((T)dto);
