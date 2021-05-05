@@ -4,7 +4,7 @@ using System.Reactive;
 namespace Rocket.Surgery.Airframe.ViewModels
 {
     /// <summary>
-    /// Interface representing an view model that can be intialized.
+    /// Interface representing an view model that can be initialized.
     /// </summary>
     /// <typeparam name="TParam">The parameter type.</typeparam>
     /// <typeparam name="TResult">The result type.</typeparam>
@@ -19,7 +19,7 @@ namespace Rocket.Surgery.Airframe.ViewModels
     }
 
     /// <summary>
-    /// Interface representing an view model that can be intialized.
+    /// Interface representing an view model that can be initialized.
     /// </summary>
     public interface IInitializable
     {
@@ -31,7 +31,7 @@ namespace Rocket.Surgery.Airframe.ViewModels
     }
 
     /// <summary>
-    /// Interface representing an view model that can be intialized.
+    /// Interface representing an view model that can be initialized.
     /// </summary>
     /// <typeparam name="TParam">The parameter type.</typeparam>
     public interface IInitializable<in TParam>
