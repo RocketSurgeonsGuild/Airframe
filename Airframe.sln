@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controls", "src\Controls\Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{001008EE-6848-47BA-9F6C-A89B0E74D737}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
-		cakefile.cake = cakefile.cake
 		GitVersion.yml = GitVersion.yml
 	EndProjectSection
 EndProject
@@ -39,16 +37,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Controls.nuspec = .nuspec\Controls.nuspec
 		.nuspec\Forms.nuspec = .nuspec\Forms.nuspec
 		.nuspec\ViewModels.nuspec = .nuspec\ViewModels.nuspec
-		.nuspec\Configuration.nuspec = .nuspec\Configuration.nuspec
 		.nuspec\Popup.nuspec = .nuspec\Popup.nuspec
 		.nuspec\Composition.nuspec = .nuspec\Composition.nuspec
 		.nuspec\Data.nuspec = .nuspec\Data.nuspec
 		.nuspec\Synthetic.nuspec = .nuspec\Synthetic.nuspec
 		.nuspec\Core.nuspec = .nuspec\Core.nuspec
 		.nuspec\Shiny.nuspec = .nuspec\Shiny.nuspec
+		.nuspec\Timers.nuspec = .nuspec\Timers.nuspec
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "src\Configuration\Configuration.csproj", "{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".build", ".build\.build.csproj", "{8322904C-5A48-4A92-A5EA-2AF91F8C4595}"
 EndProject
@@ -90,10 +86,6 @@ Global
 		{94F40576-6748-40AB-A541-ED6A45035796}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F40576-6748-40AB-A541-ED6A45035796}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94F40576-6748-40AB-A541-ED6A45035796}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -144,7 +136,6 @@ Global
 		{CA4B6910-402D-40C3-99C6-8DF8E3ABF041} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{F717BFF2-0DD5-453D-AB60-1CA85D7FCB87} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{94F40576-6748-40AB-A541-ED6A45035796} = {BC256BE7-7896-4159-BB31-9F3D22860391}
-		{3EE25E1B-A9A2-4F0B-BED1-EDE2F3BD07BE} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{8322904C-5A48-4A92-A5EA-2AF91F8C4595} = {001008EE-6848-47BA-9F6C-A89B0E74D737}
 		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{36A9DAA0-FCD4-41A3-A046-C755937CA701} = {BC256BE7-7896-4159-BB31-9F3D22860391}

@@ -7,7 +7,7 @@ using System.Reactive.Linq;
 namespace Rocket.Surgery.Airframe.ViewModels
 {
     /// <summary>
-    /// Represents an view model that can be intialized.
+    /// Represents an view model that can be initialized.
     /// </summary>
     public abstract class InitializableViewModel : ViewModelBase, IInitializable
     {

@@ -4,19 +4,14 @@
         <id>Rocket.Surgery.Airframe.Composition</id>
         <version>$version$</version>
         <authors>RLittlesII</authors>
-        <owners >Rocket Surgeons Guild</owners>
-        <copyright>Copyright Rodney Littles, II © 2019</copyright>
+        <owners>Rocket Surgeons Guild</owners>
+        <copyright>Copyright Rodney Littles, II © 2021</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>ReactiveUI base abstractions for Xamarin.</description>
+        <description>Application composition for Xamarin.Forms applications using ReactiveUI and DryIoc</description>
         <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
         <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
         <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
         <tags>ReactiveUI Xamarin MVVM</tags>
-        <dependencies>
-            <group>
-                <dependency id="ReactiveUI" version="9.7.2" />
-            </group>
-        </dependencies>
     </metadata>
     <files>
 

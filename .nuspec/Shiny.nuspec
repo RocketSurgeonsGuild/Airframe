@@ -4,22 +4,14 @@
         <id>Rocket.Surgery.Airframe.Shiny</id>
         <version>$version$</version>
         <authors>RLittlesII</authors>
-        <owners >Rocket Surgeons Guild</owners>
-        <copyright>Copyright Rodney Littles, II © 2019</copyright>
+        <owners>Rocket Surgeons Guild</owners>
+        <copyright>Copyright Rodney Littles, II © 2021</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ReactiveUI base abstractions for Xamarin.</description>
         <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
         <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
         <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
-        <tags>ReactiveUI Xamarin MVVM</tags>
-        <dependencies>
-            <group>
-                <dependency id="Shiny.Core" version="1.2.0.1755" />
-                <dependency id="Splat" version="11.*" />
-                <dependency id="Splat.Microsoft.Extensions.DependencyInjection" version="11.*" />
-                <dependency id="ReactiveUI" version="13.*" />
-            </group>
-        </dependencies>
+        <tags>ReactiveUI Shiny</tags>
     </metadata>
     <files>
 

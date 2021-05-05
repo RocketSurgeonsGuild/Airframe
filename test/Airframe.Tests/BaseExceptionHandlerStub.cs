@@ -1,7 +1,6 @@
 using System;
-using ReactiveUI;
 
-namespace Airframe.Tests.Timers
+namespace Airframe.Tests
 {
     internal sealed class BaseExceptionHandlerStub : IObserver<Exception>
     {
@@ -17,12 +16,5 @@ namespace Airframe.Tests.Timers
 
         /// <inheritdoc />
         public void OnNext(Exception exception) {}
-    }
-
-    public abstract class TestBase
-    {
-        protected TestBase() => Initialize();
-
-        private static void Initialize() => RxApp.DefaultExceptionHandler = BaseExceptionHandlerStub.Instance;
     }
 }
