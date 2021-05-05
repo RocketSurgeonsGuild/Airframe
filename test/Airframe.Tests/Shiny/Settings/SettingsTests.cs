@@ -1,8 +1,12 @@
 using FluentAssertions;
 using NSubstitute;
+using ReactiveMarbles.PropertyChanged;
 using Rocket.Surgery.Airframe.Shiny.Settings;
 using Shiny.Settings;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Linq;
 using Xunit;
 
 namespace Airframe.Tests.Shiny.Settings

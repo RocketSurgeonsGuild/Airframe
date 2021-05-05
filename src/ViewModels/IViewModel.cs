@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Reactive;
-using ReactiveUI;
+﻿using ReactiveUI;
 using Xamarin.Forms;
 
 [assembly: XmlnsPrefix("https://schemas.rocketsurgeonsguild.com/xaml/airframe/viewmodels", "viewmodels")]
