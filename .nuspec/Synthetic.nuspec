@@ -4,19 +4,14 @@
         <id>Rocket.Surgery.Airframe.Synthetic</id>
         <version>$version$</version>
         <authors>RLittlesII</authors>
-        <owners >Rocket Surgeons Guild</owners>
-        <copyright>Copyright Rodney Littles, II © 2019</copyright>
+        <owners>Rocket Surgeons Guild</owners>
+        <copyright>Copyright Rodney Littles, II © 2021</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Airframe base data for demo, samples, and examples.</description>
         <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
         <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
         <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
-        <tags>ReactiveUI Xamarin.Forms MVVM</tags>
-        <dependencies>
-            <group>
-                <dependency id="ReactiveUI.XamForms" version="9.7.2" />
-            </group>
-        </dependencies>
+        <tags>DynamicData Fake</tags>
     </metadata>
     <files>
         <file src="..\src\Synthetic\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Synthetic.dll" target="lib\netstandard2.0" />

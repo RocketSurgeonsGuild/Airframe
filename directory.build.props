@@ -2,7 +2,7 @@
     <PropertyGroup>
       <Authors>RLittlesII</Authors>
       <Company>Rocket Surgeons Guild</Company>
-      <Copyright>Copyright Rodney Littles, II © 2019</Copyright>
+      <copyright>Copyright Rodney Littles, II © 2021</copyright>
       <LangVersion>latest</LangVersion>
       <nullable>enable</nullable>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
