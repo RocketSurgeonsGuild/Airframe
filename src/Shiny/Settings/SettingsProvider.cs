@@ -26,14 +26,17 @@ namespace Rocket.Surgery.Airframe.Shiny.Settings
 
             static void RemoveSetting(ISetting setting, ISettings settings) => settings.Remove(setting.Key);
 
-            _settingsCache
-                .DeferUntilLoaded()
-                .RefCount()
-                .OnItemAdded(setting => PersistSetting(setting, shinySettings))
-                .OnItemRemoved(setting => RemoveSetting(setting, shinySettings))
-                .WhenPropertyChanged(x => x.Value)
-                .Subscribe(value => PersistSetting(value.Sender, shinySettings))
-                .DisposeWith(_garbage);
+            var settingsChanged = _settingsCache
+               .DeferUntilLoaded()
+               .RefCount();
+
+            settingsChanged
+               .OnItemAdded(setting => PersistSetting(setting, shinySettings))
+               .OnItemRemoved(setting => RemoveSetting(setting, shinySettings))
+               .WhenPropertyChanged(x => x.Value)
+               .Where(x => x != null)
+               .Subscribe(value => PersistSetting(value.Sender, shinySettings))
+               .DisposeWith(_garbage);
 
             _settingsCache.DisposeWith(_garbage);
         }
@@ -59,8 +62,7 @@ namespace Rocket.Surgery.Airframe.Shiny.Settings
             _settingsCache
                 .Watch(key)
                 .Select(x => x.Current)
-                .Cast<ISetting<T>>()
-                .StartWith(Get<T>(key));
+                .Cast<ISetting<T>>();
 
         /// <inheritdoc />
         public void Set<T>(ISetting<T> setting) => _settingsCache.AddOrUpdate(setting);

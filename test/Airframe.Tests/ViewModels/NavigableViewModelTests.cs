@@ -1,4 +1,3 @@
-using Airframe.Tests.Timers;
 using FluentAssertions;
 using Sextant;
 using System;

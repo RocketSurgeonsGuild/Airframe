@@ -21,13 +21,9 @@ namespace Rocket.Surgery.Airframe
             _startupTasks = startupTasks;
 
         /// <inheritdoc/>
-        public bool IsComplete { get; private set; }
-
-        /// <inheritdoc/>
         public IObservable<Unit> Startup() => _startupTasks
             .Where(x => x.CanExecute())
             .Select(x => x.Start())
-            .Concat()
-            .Finally(() => IsComplete = true);
+            .Concat();
     }
 }

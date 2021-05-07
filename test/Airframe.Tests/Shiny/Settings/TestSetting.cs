@@ -2,8 +2,9 @@ using ReactiveUI;
 
 namespace Airframe.Tests.Shiny.Settings
 {
-    internal class TestSetting : ReactiveObject
+    internal class TestObject : ReactiveObject
     {
+        
         private string _name = string.Empty;
 
         public string Name

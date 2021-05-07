@@ -61,7 +61,8 @@ namespace Rocket.Surgery.Airframe.Timers
         public void Stop() => _timerEvents.OnNext(new TimerStopEvent());
 
         /// <inheritdoc/>
-        public IDisposable Subscribe(IObserver<TimeSpan> observer) => _elapsed.Where(x => x >= TimeSpan.Zero).Subscribe(observer);
+        public IDisposable Subscribe(IObserver<TimeSpan> observer) =>
+            _elapsed.Where(x => x >= TimeSpan.Zero).Subscribe(observer);
 
         /// <inheritdoc />
         public void Dispose() => _subscriptions.Dispose();
