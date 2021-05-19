@@ -13,5 +13,5 @@ jobs:
       - name: auto label
         uses: RocketSurgeonsGuild/actions/auto-label@auto-label
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
