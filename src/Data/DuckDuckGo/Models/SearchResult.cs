@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
 {
     /// <summary>
     /// Search results from query.
     /// </summary>
-    public class DuckDuckGoSearchResult
+    public class SearchResult
     {
         /// <summary>
         /// Gets or sets topic summary containing HTML.
@@ -50,7 +50,7 @@ namespace Rocket.Surgery.Airframe.Data
         /// <summary>
         /// Gets or sets array of internal links to related topics associated with Abstract.
         /// </summary>
-        public List<DuckDuckGoQueryResult> RelatedTopics { get; set; }
+        public IEnumerable<RelatedTopic> RelatedTopics { get; set; }
 
         /// <summary>
         /// Gets or sets response category, i.e. A (article), D (disambiguation), C (category), N (name), E (exclusive), or nothing.
@@ -75,11 +75,16 @@ namespace Rocket.Surgery.Airframe.Data
         /// <summary>
         /// Gets or sets array of external links associated with Abstract.
         /// </summary>
-        public List<DuckDuckGoQueryResult> Results { get; set; }
+        public IEnumerable<RelatedTopic> Results { get; set; }
 
         /// <summary>
         /// Gets or sets deep link to the expanded topic page in AbstractSource.
         /// </summary>
         public string AbstractUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the meta data.
+        /// </summary>
+        public Meta Meta { get; set; }
     }
 }

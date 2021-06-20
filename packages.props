@@ -47,7 +47,6 @@
         <PackageReference Update="Sextant" Version="2.*" />
         <PackageReference Update="Sextant.Plugins.Popup" Version="2.*" />
         <PackageReference Update="Splat" Version="11.*" />
-        <PackageReference Update="Splat.DryIoc" Version="11.*" />
         <PackageReference Update="Splat.Serilog" Version="11.*" />
         <PackageReference Update="Splat.Microsoft.Extensions.Logging" Version="11.*" />
         <PackageReference Update="Splat.Microsoft.Extensions.DependencyInjection" Version="11.*" />
