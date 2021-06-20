@@ -1,6 +1,7 @@
 using DynamicData;
 using FluentAssertions;
 using Rocket.Surgery.Airframe.Data;
+using Rocket.Surgery.Airframe.Data.DuckDuckGo;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
@@ -14,13 +15,13 @@ namespace Airframe.Tests.Data.DuckGo
         public void Should_Return_ChangeSet()
         {
             // Given
-            var sourceCache = new SourceCache<DuckDuckGoQueryResult, string>(x => x.FirstUrl);
+            var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
 
             // When
             Observable.Return(
-                new List<DuckDuckGoQueryResult>
+                new List<RelatedTopic>
                 {
-                    new DuckDuckGoQueryResult
+                    new RelatedTopic
                     {
                         FirstUrl = Guid.NewGuid().ToString(),
                         Result = "result",
@@ -40,20 +41,27 @@ namespace Airframe.Tests.Data.DuckGo
         public void Should_Return_Cached()
         {
             // Given
-            var sourceCache = new SourceCache<DuckDuckGoQueryResult, string>(x => x.FirstUrl);
+            var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
+            var firstResultGuid = Guid.NewGuid().ToString();
             sourceCache.AddOrUpdate(
-                new DuckDuckGoQueryResult
+                new RelatedTopic
                 {
-                    FirstUrl = Guid.NewGuid().ToString(),
+                    FirstUrl = firstResultGuid,
                     Result = "result one",
                     Text = "text"
                 });
 
             // When
             Observable.Return(
-                    new List<DuckDuckGoQueryResult>
+                    new List<RelatedTopic>
                     {
-                        new DuckDuckGoQueryResult
+                        new RelatedTopic
+                        {
+                            FirstUrl = firstResultGuid,
+                            Result = "result one",
+                            Text = "text"
+                        },
+                        new RelatedTopic
                         {
                             FirstUrl = Guid.NewGuid().ToString(),
                             Result = "result two",
@@ -73,9 +81,9 @@ namespace Airframe.Tests.Data.DuckGo
         public void Should_Clear_Cached()
         {
             // Given
-            var sourceCache = new SourceCache<DuckDuckGoQueryResult, string>(x => x.FirstUrl);
+            var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
             sourceCache.AddOrUpdate(
-                new DuckDuckGoQueryResult
+                new RelatedTopic()
                 {
                     FirstUrl = Guid.NewGuid().ToString(),
                     Result = "result one",
@@ -84,16 +92,16 @@ namespace Airframe.Tests.Data.DuckGo
 
             // When
             Observable.Return(
-                    new List<DuckDuckGoQueryResult>
+                    new List<RelatedTopic>
                     {
-                        new DuckDuckGoQueryResult
+                        new RelatedTopic
                         {
                             FirstUrl = Guid.NewGuid().ToString(),
                             Result = "result two",
                             Text = "text"
                         }
                     })
-               .Cache(sourceCache, true)
+               .Cache(sourceCache)
                .Bind(out var result)
                .Subscribe();
 
