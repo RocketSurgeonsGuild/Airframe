@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
-namespace Rocket.Surgery.Airframe.Data
+namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
 {
     /// <summary>
     /// Interface that defines a duck duck go api.
@@ -17,7 +16,7 @@ namespace Rocket.Surgery.Airframe.Data
         /// <param name="query">The query.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Get("/?q={query}&format=json")]
-        IObservable<IEnumerable<DuckDuckGoSearchResult>> Search(string query);
+        IObservable<SearchResult> Search(string query);
 
         /// <summary>
         /// Search the duck duck go api with the provided query.
@@ -26,6 +25,6 @@ namespace Rocket.Surgery.Airframe.Data
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Get("/?q={query}&format=json")]
-        IObservable<IEnumerable<DuckDuckGoSearchResult>> Search(string query, CancellationToken cancellationToken);
+        IObservable<SearchResult> Search(string query, CancellationToken cancellationToken);
     }
 }

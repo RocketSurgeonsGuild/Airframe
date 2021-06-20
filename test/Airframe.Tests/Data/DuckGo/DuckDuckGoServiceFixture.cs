@@ -1,5 +1,6 @@
 using NSubstitute;
 using Rocket.Surgery.Airframe.Data;
+using Rocket.Surgery.Airframe.Data.DuckDuckGo;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 
 namespace Airframe.Tests.Data.DuckGo
