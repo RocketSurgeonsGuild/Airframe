@@ -8,7 +8,7 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
         /// <summary>
         /// Gets or sets the first url.
         /// </summary>
-        public string FirstURL { get; set; }
+        public string FirstUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the icon.

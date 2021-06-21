@@ -32,7 +32,7 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
                        .Search(query)
                        .Catch(_queryException)
                        .Select(x => x.AsResult())
-                       .Cache(_queryResults)
+                       .Cache(_queryResults, false)
                        .Subscribe(observer));
 
         /// <inheritdoc/>
@@ -43,7 +43,7 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
                        .Search(query)
                        .Catch(_queryException)
                        .Select(x => x.AsResult())
-                       .Cache(_queryResults)
+                       .Cache(_queryResults, clearCache)
                        .Subscribe(observer));
 
         /// <inheritdoc/>
