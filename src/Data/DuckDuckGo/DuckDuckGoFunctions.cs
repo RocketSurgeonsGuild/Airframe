@@ -24,11 +24,31 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
         /// </summary>
         /// <param name="result">The result.</param>
         /// <param name="cache">The cache.</param>
+        /// <param name="clearCache">A value determining whether to clear the cache.</param>
         /// <returns>A completion notification.</returns>
         public static IObservable<IChangeSet<RelatedTopic, string>> Cache(
             this IObservable<IEnumerable<RelatedTopic>> result,
-            SourceCache<RelatedTopic, string> cache) => result
-           .Do(duckDuckGoQueryResults => cache.EditDiff(duckDuckGoQueryResults, (first, second) => first.FirstUrl == second.FirstUrl))
-           .SelectMany(_ => cache.Connect().RefCount());
+            SourceCache<RelatedTopic, string> cache,
+            bool clearCache) => result
+           .Do(UpdateCache(cache, clearCache))
+           .Select(_ => cache.Connect().RefCount())
+           .Switch();
+
+        private static Action<IEnumerable<RelatedTopic>> UpdateCache(SourceCache<RelatedTopic, string> cache, bool clearCache) => duckDuckGoQueryResults =>
+        {
+            if (clearCache)
+            {
+                cache
+                   .Edit(updater =>
+                        {
+                            updater.Clear();
+                            updater.AddOrUpdate(duckDuckGoQueryResults);
+                        });
+            }
+            else
+            {
+                cache.EditDiff(duckDuckGoQueryResults, (first, second) => first.FirstUrl == second.FirstUrl);
+            }
+        };
     }
 }

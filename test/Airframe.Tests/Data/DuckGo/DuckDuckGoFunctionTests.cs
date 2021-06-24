@@ -28,7 +28,7 @@ namespace Airframe.Tests.Data.DuckGo
                         Text = "text"
                     }
                 })
-               .Cache(sourceCache)
+               .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
 
@@ -68,7 +68,7 @@ namespace Airframe.Tests.Data.DuckGo
                             Text = "text"
                         }
                     })
-               .Cache(sourceCache)
+               .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
 
@@ -101,7 +101,7 @@ namespace Airframe.Tests.Data.DuckGo
                             Text = "text"
                         }
                     })
-               .Cache(sourceCache)
+               .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
 
