@@ -2,6 +2,7 @@ using System;
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
+using Rocket.Surgery.Airframe;
 using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Airframe.Timers;
 using Xunit;
@@ -71,7 +72,7 @@ namespace Airframe.Tests.Timers
             var timer = TimeSpan.Zero;
             sut.Start(TimeSpan.FromMinutes(1));
 
-            sut.Subscribe(x =>
+            ((IIncrement)sut).Subscribe(x =>
             {
                 timer = x;
             });

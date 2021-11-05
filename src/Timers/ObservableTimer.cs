@@ -9,7 +9,7 @@ namespace Rocket.Surgery.Airframe.Timers
     /// <summary>
     /// Represents a default implementation of <see cref="IObservableTimer"/>.
     /// </summary>
-    public sealed class ObservableTimer : ReactiveObject, IObservableTimer, IDisposable
+    public class ObservableTimer : ReactiveObject, IIncrement, IDecrement, IDisposable
     {
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
@@ -23,19 +23,24 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <param name="schedulerProvider">The scheduler provider.</param>
         public ObservableTimer(ISchedulerProvider schedulerProvider)
         {
-            var start = _timerEvents
-               .Select(x => x is TimerStartEvent);
+            var start =
+                _timerEvents
+                   .Select(x => x is TimerStartEvent);
+
+            // TODO: [rlittlesii: November 05, 2021] note
             start
                 .ToProperty(this, nameof(IsRunning), out _isRunning)
                 .DisposeWith(_subscriptions);
 
+            TimeStartEvents =
+                _timerEvents
+                   .OfType<TimerStartEvent>()
+                   .Select(x => x.Duration);
+
             _elapsed =
                 _timerEvents
                     .CombineLatest(
-                        _timerEvents
-                           .Where(x => x is TimerStartEvent)
-                           .Cast<TimerStartEvent>()
-                           .Select(x => x.Duration),
+                        TimeStartEvents,
                         start,
                         (_, duration, isRunning) => (duration, isRunning))
                     .Select(x => x.isRunning
@@ -51,6 +56,11 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <inheritdoc />
         public bool IsRunning => _isRunning.Value;
 
+        /// <summary>
+        /// Gets the <see cref="TimerStartEvent"/> stream.
+        /// </summary>
+        protected IObservable<TimeSpan> TimeStartEvents { get; }
+
         /// <inheritdoc />
         public void Start(TimeSpan timeSpan) => _timerEvents.OnNext(new TimerStartEvent(timeSpan));
 
@@ -62,6 +72,15 @@ namespace Rocket.Surgery.Airframe.Timers
 
         /// <inheritdoc/>
         public IDisposable Subscribe(IObserver<TimeSpan> observer) =>
+            _elapsed.Where(x => x >= TimeSpan.Zero).Subscribe(observer);
+
+        /// <inheritdoc/>
+        IDisposable IIncrement.Subscribe(IObserver<TimeSpan> observer) =>
+            Observable.Interval(TimeSpan.Zero)
+               .Scan(TimeSpan.Zero, (acc, _) => acc + TimeSpans.RefreshInterval).Subscribe(observer);
+
+        /// <inheritdoc/>
+        IDisposable IDecrement.Subscribe(IObserver<TimeSpan> observer) =>
             _elapsed.Where(x => x >= TimeSpan.Zero).Subscribe(observer);
 
         /// <inheritdoc />
