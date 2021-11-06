@@ -72,7 +72,7 @@ namespace Airframe.Tests.Timers
             var timer = TimeSpan.Zero;
             sut.Start(TimeSpan.FromMinutes(1));
 
-            ((IIncrement)sut).Subscribe(x =>
+            sut.Subscribe(x =>
             {
                 timer = x;
             });

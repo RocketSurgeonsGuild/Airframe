@@ -13,6 +13,6 @@ namespace Airframe.Tests.Timers
         public ObservableTimerFixture WithProvider(SchedulerProvider schedulerProvider) =>
             this.With(ref _schedulerProvider, schedulerProvider);
 
-        private ObservableTimer Build() => new ObservableTimer(_schedulerProvider);
+        private ObservableTimer Build() => new DecrementTimer(_schedulerProvider);
     }
 }
