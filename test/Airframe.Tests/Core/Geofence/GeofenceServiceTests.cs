@@ -5,7 +5,7 @@ namespace Airframe.Tests.Core.Geofence
 {
     public class GeofenceServiceTests
     {
-        
+
     }
 
     internal class GeofenceServiceFixture : ITestFixtureBuilder

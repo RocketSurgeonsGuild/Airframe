@@ -11,7 +11,7 @@ namespace Airframe.Tests.Shiny.Settings
         public static implicit operator SettingsProvider(SettingsProviderFixture providerFixture) => providerFixture.Build();
 
         public SettingsProviderFixture WithSettings(ISettings settings) => this.With(ref _settings, settings);
-        
+
         private SettingsProvider Build() => new SettingsProvider(_settings);
     }
 }
