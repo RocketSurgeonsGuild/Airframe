@@ -21,5 +21,5 @@ public class IncrementTimer : ObservableTimer, IIncrement
     protected override TimeSpan TimeAccumulator(TimeSpan accumulated) => accumulated + TimeSpans.RefreshInterval;
 
     /// <inheritdoc/>
-    protected override bool Elapse(TimeSpan elapsed) => elapsed <= TimeSpan.Zero;
+    protected override bool Elapse(TimeSpan elapsed) => false;
 }

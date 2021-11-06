@@ -9,7 +9,7 @@ namespace Rocket.Surgery.Airframe.Timers
     /// <summary>
     /// Represents a default implementation of <see cref="IObservableTimer"/>.
     /// </summary>
-    public abstract class ObservableTimer : ReactiveObject, ITimer, IObservable<TimeSpan>, IDisposable
+    public abstract class ObservableTimer : ReactiveObject, ITimer, IDisposable
     {
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
         private readonly ObservableAsPropertyHelper<bool> _isRunning;
@@ -22,36 +22,31 @@ namespace Rocket.Surgery.Airframe.Timers
         /// <param name="schedulerProvider">The scheduler provider.</param>
         protected ObservableTimer(ISchedulerProvider schedulerProvider)
         {
+            _timerEvents
+               .Select(x => x is TimerStartEvent)
+               .ToProperty(this, nameof(IsRunning), out _isRunning)
+               .DisposeWith(Garbage);
+
+            _elapsed =
                 _timerEvents
-                   .Select(x => x is TimerStartEvent)
-                .ToProperty(this, nameof(IsRunning), out _isRunning)
-                .DisposeWith(Garbage);
-
-                TimeStartEvents =
-                    _timerEvents
-                       .OfType<TimerStartEvent>()
-                       .Select(x => x.Duration);
-
-                _elapsed =
-                    _timerEvents
-                       .CombineLatest(TimeStartEvents, (timerEvent, duration) => (duration, isRunning: timerEvent is TimerStartEvent))
-                       .Select(x => x.isRunning
-                                ? Observable
-                                   .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
-                                   .Scan(x.duration, (duration, _) => Accumulator(duration))
-                                   .TakeUntil(Elapsed)
-                                   .Do(elapsed => _resumeTime = elapsed, () => _resumeTime = x.duration)
-                                : Observable.Return(_resumeTime))
-                       .Switch();
+                   .CombineLatest(
+                        _timerEvents
+                           .OfType<TimerStartEvent>()
+                           .Select(x => x.Duration),
+                        (timerEvent, duration) => (duration, isRunning: timerEvent is TimerStartEvent))
+                   .Select(
+                        x => x.isRunning
+                            ? Observable
+                               .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
+                               .Scan(x.duration, (duration, _) => Accumulator(duration))
+                               .TakeUntil(Elapsed)
+                               .Do(elapsed => _resumeTime = elapsed, () => _resumeTime = x.duration)
+                            : Observable.Return(_resumeTime))
+                   .Switch();
         }
 
         /// <inheritdoc />
         public bool IsRunning => _isRunning.Value;
-
-        /// <summary>
-        /// Gets the <see cref="TimerStartEvent"/> stream.
-        /// </summary>
-        protected IObservable<TimeSpan> TimeStartEvents { get; }
 
         /// <summary>
         /// Gets the garbage.
@@ -69,7 +64,7 @@ namespace Rocket.Surgery.Airframe.Timers
 
         /// <inheritdoc/>
         public IDisposable Subscribe(IObserver<TimeSpan> observer) =>
-            _elapsed.Where(x => x >= TimeSpan.Zero).Subscribe(observer);
+            _elapsed.Subscribe(observer);
 
         /// <inheritdoc />
         public void Dispose()
