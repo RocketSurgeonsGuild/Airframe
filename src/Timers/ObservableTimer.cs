@@ -14,7 +14,7 @@ namespace Rocket.Surgery.Airframe.Timers
         private readonly ISubject<TimerEvent> _timerEvents = new Subject<TimerEvent>();
         private readonly ObservableAsPropertyHelper<bool> _isRunning;
         private readonly IObservable<TimeSpan> _elapsed;
-        private TimeSpan _resumeTime;
+        private TimeSpan _resumeTime = TimeSpan.Zero;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableTimer"/> class.
