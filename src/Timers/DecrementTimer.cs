@@ -18,6 +18,9 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         /// <inheritdoc/>
-        protected override TimeSpan TimeAccumulator(TimeSpan accumulated, long delta) => accumulated - TimeSpans.RefreshInterval;
+        protected override TimeSpan TimeAccumulator(TimeSpan accumulated) => accumulated - TimeSpans.RefreshInterval;
+
+        /// <inheritdoc/>
+        protected override bool Elapse(TimeSpan elapsed) => elapsed <= TimeSpan.Zero;
     }
 }

@@ -39,7 +39,7 @@ namespace Rocket.Surgery.Airframe.Timers
                                 ? Observable
                                    .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
                                    .Scan(x.duration, (duration, _) => Accumulator(duration))
-                                   .TakeUntil(elapsed => elapsed <= TimeSpan.Zero)
+                                   .TakeUntil(Elapsed)
                                    .Do(elapsed => _resumeTime = elapsed, () => _resumeTime = x.duration)
                                 : Observable.Return(_resumeTime))
                        .Switch();
@@ -86,6 +86,13 @@ namespace Rocket.Surgery.Airframe.Timers
         protected abstract TimeSpan TimeAccumulator(TimeSpan accumulated);
 
         /// <summary>
+        /// Gets a value indicating whether the time has elapsed.
+        /// </summary>
+        /// <param name="elapsed">The elapsed time.</param>
+        /// <returns>Whether the time has elapsed.</returns>
+        protected abstract bool Elapse(TimeSpan elapsed);
+
+        /// <summary>
         /// Dispose.
         /// </summary>
         /// <param name="disposing">A value indicating whether or not you are disposing.</param>
@@ -98,5 +105,7 @@ namespace Rocket.Surgery.Airframe.Timers
         }
 
         private TimeSpan Accumulator(TimeSpan accumulated) => TimeAccumulator(accumulated);
+
+        private bool Elapsed(TimeSpan elapsed) => Elapse(elapsed);
     }
 }
