@@ -34,16 +34,16 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
            .Select(_ => cache.Connect().RefCount())
            .Switch();
 
-        private static Action<IEnumerable<RelatedTopic>> UpdateCache(SourceCache<RelatedTopic, string> cache, bool clearCache) => duckDuckGoQueryResults =>
+        private static Action<IEnumerable<RelatedTopic>> UpdateCache(ISourceCache<RelatedTopic, string> cache, bool clearCache) => duckDuckGoQueryResults =>
         {
             if (clearCache)
             {
                 cache
                    .Edit(updater =>
-                        {
-                            updater.Clear();
-                            updater.AddOrUpdate(duckDuckGoQueryResults);
-                        });
+                    {
+                        updater.Clear();
+                        updater.AddOrUpdate(duckDuckGoQueryResults);
+                    });
             }
             else
             {

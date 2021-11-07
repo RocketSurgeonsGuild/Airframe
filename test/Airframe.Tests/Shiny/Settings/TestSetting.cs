@@ -4,7 +4,7 @@ namespace Airframe.Tests.Shiny.Settings
 {
     internal class TestObject : ReactiveObject
     {
-        
+
         private string _name = string.Empty;
 
         public string Name

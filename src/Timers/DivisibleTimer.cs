@@ -54,7 +54,7 @@ namespace Rocket.Surgery.Airframe.Timers
                     .Range(0, partition)
                     .Select(_ =>
                     {
-                        _currentTimer = new ObservableTimer(SchedulerProvider);
+                        _currentTimer = new DecrementTimer(SchedulerProvider);
                         return Observable.Empty<TimeSpan>();
                     })
                     .Concat();

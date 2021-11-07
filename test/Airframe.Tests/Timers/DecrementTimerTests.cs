@@ -8,16 +8,16 @@ using Xunit;
 
 namespace Airframe.Tests.Timers
 {
-    public class ObservableTimerTests : TestBase
+    public class DecrementTimerTests : TestBase
     {
-        const int InitialMilliseconds = 1001;
-        const int OneThousandMilliseconds = 1000;
+        private const int InitialMilliseconds = 1001;
+        private const int OneThousandMilliseconds = 1000;
 
         [Fact]
         public void Should_Not_Be_Running_When_Constructed()
         {
             // Given, When
-            ObservableTimer sut = new ObservableTimerFixture();
+            DecrementTimer sut = new DecrementTimerFixture();
 
             // Then
             sut.IsRunning.Should().BeFalse();
@@ -29,7 +29,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             SchedulerProvider schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            ObservableTimer sut = new ObservableTimerFixture().WithProvider(schedulerProvider);
+            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
 
             // When
             sut.Start(TimeSpan.FromMinutes(25));
@@ -45,7 +45,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            ObservableTimer sut = new ObservableTimerFixture().WithProvider(schedulerProvider);
+            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
 
             sut.Subscribe(x =>
@@ -67,7 +67,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            ObservableTimer sut = new ObservableTimerFixture().WithProvider(schedulerProvider);
+            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
             sut.Start(TimeSpan.FromMinutes(1));
 
@@ -86,14 +86,14 @@ namespace Airframe.Tests.Timers
             // Then
             timer.Should().Be(TimeSpan.FromSeconds(59));
         }
-        
+
         [Fact]
         public void Should_Resume_After_Stopped()
         {
             // Given
             var testScheduler = new TestScheduler();
             var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            ObservableTimer sut = new ObservableTimerFixture().WithProvider(schedulerProvider);
+            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
 
             sut.Subscribe(x =>
