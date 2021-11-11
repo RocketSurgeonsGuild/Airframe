@@ -1,12 +1,8 @@
 using FluentAssertions;
 using NSubstitute;
-using ReactiveMarbles.PropertyChanged;
 using Rocket.Surgery.Airframe.Shiny.Settings;
-using Shiny.Settings;
+using Shiny.Stores;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
 using Xunit;
 
 namespace Airframe.Tests.Shiny.Settings
@@ -95,7 +91,7 @@ namespace Airframe.Tests.Shiny.Settings
         public void GivenSetting_WhenSet_ThenPersisted()
         {
             // Given
-            var settings = Substitute.For<ISettings>();
+            var settings = Substitute.For<IKeyValueStore>();
             SettingsProvider sut = new SettingsProviderFixture().WithSettings(settings);
             sut.Set(new Setting<int>(Key, 1));
 
@@ -110,7 +106,7 @@ namespace Airframe.Tests.Shiny.Settings
         public void GivenSetting_WhenChanged_ThenPersisted()
         {
             // Given
-            var settings = Substitute.For<ISettings>();
+            var settings = Substitute.For<IKeyValueStore>();
             SettingsProvider sut = new SettingsProviderFixture().WithSettings(settings);
             sut.Set(new Setting<int>(Key, 5));
             var setting = sut.Get<int>(Key);

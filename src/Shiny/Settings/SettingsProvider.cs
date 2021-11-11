@@ -4,12 +4,12 @@ using System.Reactive.Linq;
 using DynamicData;
 using ReactiveUI;
 using Rocket.Surgery.Airframe.Settings;
-using Shiny.Settings;
+using Shiny.Stores;
 
 namespace Rocket.Surgery.Airframe.Shiny.Settings
 {
     /// <summary>
-    /// Represents a <see cref="ISettingsProvider"/> for <see cref="ISettings"/>.
+    /// Represents a <see cref="ISettingsProvider"/> for <see cref="IKeyValueStore"/>.
     /// </summary>
     public sealed class SettingsProvider : ReactiveObject, ISettingsProvider, IDisposable
     {
@@ -20,11 +20,11 @@ namespace Rocket.Surgery.Airframe.Shiny.Settings
         /// Initializes a new instance of the <see cref="SettingsProvider"/> class.
         /// </summary>
         /// <param name="shinySettings">The shiny settings interface.</param>
-        public SettingsProvider(ISettings shinySettings)
+        public SettingsProvider(IKeyValueStore shinySettings)
         {
-            static void PersistSetting(ISetting setting, ISettings settings) => settings.Set(setting.Key, setting.Value);
+            static void PersistSetting(ISetting setting, IKeyValueStore settings) => settings.Set(setting.Key, setting.Value);
 
-            static void RemoveSetting(ISetting setting, ISettings settings) => settings.Remove(setting.Key);
+            static void RemoveSetting(ISetting setting, IKeyValueStore settings) => settings.Remove(setting.Key);
 
             var settingsChanged = _settingsCache
                .DeferUntilLoaded()
