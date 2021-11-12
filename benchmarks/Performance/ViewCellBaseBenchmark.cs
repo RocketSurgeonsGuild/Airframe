@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
 using ReactiveUI.XamForms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.Airframe.Benchmarks
+namespace Rocket.Surgery.Airframe.Performance
 {
-    [CoreJob]
+    [SimpleJob(RuntimeMoniker.NetCoreApp31)]
     [MemoryDiagnoser]
     [MarkdownExporterAttribute.GitHub]
     public class ViewCellBaseBenchmark

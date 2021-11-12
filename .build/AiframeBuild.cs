@@ -80,7 +80,7 @@ public partial class AirframeBuild : ICanBenchmark
     public Target Benchmark => _ => _.Inherit<ICanBenchmark>(x => x.Benchmark);
 }
 
-public interface IHaveBenchmarks : IHaveArtifacts
+public interface IHaveBenchmarks : IHaveArtifacts, IHaveSolution
 {
     /// <summary>
     /// The solution currently being build
