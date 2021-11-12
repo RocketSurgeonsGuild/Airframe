@@ -3,12 +3,19 @@ using Nuke.Airframe;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
+using Nuke.Common.IO;
+using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
+using Nuke.Common.Tools.BenchmarkDotNet;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.MSBuild;
+using Nuke.Common.ValueInjection;
 using Rocket.Surgery.Nuke;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.MsBuild;
+using System;
+using System.Linq;
 
 [PublicAPI]
 [CheckBuildProjectConfigurations]
@@ -17,7 +24,7 @@ using Rocket.Surgery.Nuke.MsBuild;
 [DotNetVerbosityMapping]
 [MSBuildVerbosityMapping]
 [NuGetVerbosityMapping]
-public partial class Solution : NukeBuild,
+public partial class AirframeBuild : NukeBuild,
                         ICanClean,
                         ICanRestoreWithMsBuild,
                         ICanTestWithDotNetCoreNoBuild,
@@ -37,7 +44,7 @@ public partial class Solution : NukeBuild,
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
     /// </summary>
-    public static int Main() => Execute<Solution>(x => x.Default);
+    public static int Main() => Execute<AirframeBuild>(x => x.Default);
 
     [OptionalGitRepository]
     public GitRepository? GitRepository { get; }
@@ -66,4 +73,47 @@ public partial class Solution : NukeBuild,
 
     [Parameter("Configuration to build")]
     public Configuration Configuration { get; } = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+}
+
+public partial class AirframeBuild : ICanBenchmark
+{
+    public Target Benchmark => _ => _.Inherit<ICanBenchmark>(x => x.Benchmark);
+}
+
+public interface IHaveBenchmarks : IHaveArtifacts
+{
+    /// <summary>
+    /// The solution currently being build
+    /// </summary>
+    [Parameter("The directory where artifacts are to be dropped", Name = "Benchmark")]
+    public Project BenchmarkProject => Solution.Projects.FirstOrDefault(x => x.Name.Contains("benchmark", StringComparison.OrdinalIgnoreCase)) ?? throw new InvalidOperationException();
+}
+
+public interface ICanBenchmark : ICan, IHaveBenchmarks, IHaveBenchmarkTarget
+{
+    /// <summary>
+    /// msbuild
+    /// </summary>
+    public Target Benchmark => _ => _
+       .Executes(
+            () => BenchmarkDotNetTasks.BenchmarkDotNet(
+                settings =>
+                    settings
+                       .SetAssemblyFile("")
+                       .EnableMemoryStats()
+                       .EnableThreadingStats()
+                       .EnableLogTimestamp()
+                       .SetArtifactsDirecory(ArtifactsDirectory)
+            ));
+}
+
+/// <summary>
+/// Defines the restore target
+/// </summary>
+public interface IHaveBenchmarkTarget : IHave
+{
+    /// <summary>
+    /// The Restore Target
+    /// </summary>
+    Target Benchmark { get; }
 }
