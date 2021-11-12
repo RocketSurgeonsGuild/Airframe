@@ -3,14 +3,11 @@ using Nuke.Airframe;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
-using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
-using Nuke.Common.Tools.BenchmarkDotNet;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.MSBuild;
-using Nuke.Common.ValueInjection;
 using Rocket.Surgery.Nuke;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.MsBuild;
@@ -30,6 +27,7 @@ public partial class AirframeBuild : NukeBuild,
                         ICanTestWithDotNetCoreNoBuild,
                         ICanPackWithMsBuild,
                         ICanUpdateReadme,
+                        ICanBenchmark,
                         IHaveDataCollector,
                         IHaveConfiguration<Configuration>,
                         IGenerateCodeCoverageReport,
@@ -49,6 +47,9 @@ public partial class AirframeBuild : NukeBuild,
     [OptionalGitRepository]
     public GitRepository? GitRepository { get; }
 
+    [ComputedGitVersion]
+    public GitVersion GitVersion { get; } = null!;
+
     private Target Default => _ => _
        .DependsOn(Restore)
        .DependsOn(Build)
@@ -57,27 +58,20 @@ public partial class AirframeBuild : NukeBuild,
 
     public Target Build => _ => _.Inherit<ICanBuildWithMsBuild>(x => x.NetBuild);
 
-    public Target Pack => _ => _.Inherit<ICanPackWithMsBuild>(x => x.NetPack)
+    public Target Pack => _ => _
+       .Inherit<ICanPackWithMsBuild>(x => x.NetPack)
        .DependsOn(Clean);
-
-    [ComputedGitVersion]
-    public GitVersion GitVersion { get; } = null!;
-
     public Target Clean => _ => _.Inherit<ICanClean>(x => x.Clean);
     public Target Restore => _ => _.Inherit<ICanRestoreWithMsBuild>(x => x.NetRestore);
     public Target Test => _ => _.Inherit<ICanTestWithDotNetCoreNoBuild>(x => x.CoreTest);
-
-    public Target BuildVersion => _ => _.Inherit<IHaveBuildVersion>(x => x.BuildVersion)
+    public Target Benchmarks => _ => _.Inherit<ICanBenchmark>(x => x.Benchmarks);
+    public Target BuildVersion => _ => _
+       .Inherit<IHaveBuildVersion>(x => x.BuildVersion)
        .Before(Default)
        .Before(Clean);
 
     [Parameter("Configuration to build")]
     public Configuration Configuration { get; } = IsLocalBuild ? Configuration.Debug : Configuration.Release;
-}
-
-public partial class AirframeBuild : ICanBenchmark
-{
-    public Target Benchmark => _ => _.Inherit<ICanBenchmark>(x => x.Benchmark);
 }
 
 public interface IHaveBenchmarks : IHaveArtifacts, IHaveSolution
@@ -86,7 +80,7 @@ public interface IHaveBenchmarks : IHaveArtifacts, IHaveSolution
     /// The solution currently being build
     /// </summary>
     [Parameter("The directory where artifacts are to be dropped", Name = "Benchmark")]
-    public Project BenchmarkProject => Solution.Projects.FirstOrDefault(x => x.Name.Contains("benchmark", StringComparison.OrdinalIgnoreCase)) ?? throw new InvalidOperationException();
+    public Project BenchmarkProject => Solution.AllProjects.FirstOrDefault(x => x.Name == "Performance") ?? throw new InvalidOperationException();
 }
 
 public interface ICanBenchmark : ICan, IHaveBenchmarks, IHaveBenchmarkTarget
@@ -94,16 +88,14 @@ public interface ICanBenchmark : ICan, IHaveBenchmarks, IHaveBenchmarkTarget
     /// <summary>
     /// msbuild
     /// </summary>
-    public Target Benchmark => _ => _
+    public Target Benchmarks => _ => _
        .Executes(
-            () => BenchmarkDotNetTasks.BenchmarkDotNet(
+            () => DotNetTasks.DotNetRun(
                 settings =>
                     settings
-                       .SetAssemblyFile("")
-                       .EnableMemoryStats()
-                       .EnableThreadingStats()
-                       .EnableLogTimestamp()
-                       .SetArtifactsDirecory(ArtifactsDirectory)
+                       .SetProjectFile(BenchmarkProject.Path)
+                       .SetConfiguration("release")
+                       .SetArgumentConfigurator(args => args.Add("--filter *"))
             ));
 }
 
@@ -115,5 +107,5 @@ public interface IHaveBenchmarkTarget : IHave
     /// <summary>
     /// The Restore Target
     /// </summary>
-    Target Benchmark { get; }
+    Target Benchmarks { get; }
 }
