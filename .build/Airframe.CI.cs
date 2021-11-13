@@ -26,6 +26,26 @@ using Rocket.Surgery.Nuke.GithubActions;
     ExcludedTargets = new[] { nameof(ICanClean.Clean), nameof(ICanRestoreWithDotNetCore.DotnetToolRestore) },
     Enhancements = new[] { nameof(Middleware) }
 )]
+[GitHubActionsSteps("release", GitHubActionsImage.MacOsLatest,
+    AutoGenerate = false,
+    On = new[] { GitHubActionsTrigger.PullRequest },
+    OnPushTags = new[] { "v*" },
+    OnPushBranches = new[] { "master", "next", "feature/*" },
+    OnPullRequestBranches = new[] { "master", "next" },
+    InvokedTargets = new[] { nameof(Default) },
+    NonEntryTargets = new[]
+    {
+        nameof(ICIEnvironment.CIEnvironment),
+        nameof(ITriggerCodeCoverageReports.Trigger_Code_Coverage_Reports),
+        nameof(ITriggerCodeCoverageReports.Generate_Code_Coverage_Report_Cobertura),
+        nameof(IGenerateCodeCoverageBadges.Generate_Code_Coverage_Badges),
+        nameof(IGenerateCodeCoverageReport.Generate_Code_Coverage_Report),
+        nameof(IGenerateCodeCoverageSummary.Generate_Code_Coverage_Summary),
+        nameof(Default)
+    },
+    ExcludedTargets = new[] { nameof(ICanClean.Clean), nameof(ICanRestoreWithDotNetCore.DotnetToolRestore) },
+    Enhancements = new[] { nameof(Middleware) }
+)]
 [PrintBuildVersion, PrintCIEnvironment, UploadLogs]
 public partial class AirframeBuild
 {
