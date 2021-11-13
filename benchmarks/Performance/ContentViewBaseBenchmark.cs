@@ -1,37 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
 using ReactiveUI.XamForms;
 using Xamarin.Forms;
 
-namespace Rocket.Surgery.Airframe.Benchmarks
+namespace Rocket.Surgery.Airframe.Performance
 {
-    [CoreJob]
+    [SimpleJob(RuntimeMoniker.NetCoreApp31)]
     [MemoryDiagnoser]
     [MarkdownExporterAttribute.GitHub]
-    public class ContentPageBaseBenchmark
+    public class ContentViewBaseBenchmark
     {
         /// <summary>
         /// Creates the reactive content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark(Baseline = true)]
-        public ReactiveContentPage<Test> CreateReactiveContentPage() => new ReactiveContentPage<Test>();
+        public ReactiveContentView<Test> CreateReactiveContentView() => new ReactiveContentView<Test>();
 
         /// <summary>
-        /// Creates the content page.
+        /// Creates the content view.
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public ContentPage CreateContentPage() => new ContentPage();
-
+        public ContentView CreateContentView() => new ContentView();
 
         /// <summary>
         /// Creates the test content page.
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public TestPage CreateTestContentPage() => new TestPage();
+        public TestContentView CreateTestContentView() => new TestContentView();
     }
 }

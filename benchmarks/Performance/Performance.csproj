@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <NoWarn>1701;1702;NU1701</NoWarn>
+        <AssemblyName>Performance</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Performance</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Controls\Controls.csproj" />
+        <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
+        <ProjectReference Include="..\..\src\Timers\Timers.csproj" />
+        <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj" />
+    </ItemGroup>
+</Project>

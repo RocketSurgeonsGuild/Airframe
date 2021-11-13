@@ -26,6 +26,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Update="BenchmarkDotNet" Version="0.13.1" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Update="DynamicData" Version="7.1.16" />
         <PackageReference Update="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
         <PackageReference Update="Microsoft.Extensions.Configuration" Version="3.1.10" />
