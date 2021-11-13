@@ -74,7 +74,6 @@ namespace Nuke.Airframe
                             .SetDefaultLoggers(LogsDirectory / "test.log")
                             .SetGitVersionEnvironment(GitVersion)
                             .EnableNoRestore()
-                            .SetLogger("trx")
                             .SetConfiguration(global::Configuration.Debug)
                             .SetNoBuild(true)
                             // DeterministicSourcePaths being true breaks coverlet!

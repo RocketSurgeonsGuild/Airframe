@@ -27,7 +27,6 @@ public partial class AirframeBuild : NukeBuild,
                         ICanTestWithDotNetCoreNoBuild,
                         ICanPackWithMsBuild,
                         ICanUpdateReadme,
-                        ICanBenchmark,
                         IHaveDataCollector,
                         IHaveConfiguration<Configuration>,
                         IGenerateCodeCoverageReport,
@@ -64,7 +63,6 @@ public partial class AirframeBuild : NukeBuild,
     public Target Clean => _ => _.Inherit<ICanClean>(x => x.Clean);
     public Target Restore => _ => _.Inherit<ICanRestoreWithMsBuild>(x => x.NetRestore);
     public Target Test => _ => _.Inherit<ICanTestWithDotNetCoreNoBuild>(x => x.CoreTest);
-    public Target Benchmarks => _ => _.Inherit<ICanBenchmark>(x => x.Benchmarks);
     public Target BuildVersion => _ => _
        .Inherit<IHaveBuildVersion>(x => x.BuildVersion)
        .Before(Default)
@@ -72,40 +70,4 @@ public partial class AirframeBuild : NukeBuild,
 
     [Parameter("Configuration to build")]
     public Configuration Configuration { get; } = IsLocalBuild ? Configuration.Debug : Configuration.Release;
-}
-
-public interface IHaveBenchmarks : IHaveArtifacts, IHaveSolution
-{
-    /// <summary>
-    /// The solution currently being build
-    /// </summary>
-    [Parameter("The directory where artifacts are to be dropped", Name = "Benchmark")]
-    public Project BenchmarkProject => Solution.AllProjects.FirstOrDefault(x => x.Name == "Performance") ?? throw new InvalidOperationException();
-}
-
-public interface ICanBenchmark : ICan, IHaveBenchmarks, IHaveBenchmarkTarget
-{
-    /// <summary>
-    /// msbuild
-    /// </summary>
-    public Target Benchmarks => _ => _
-       .Executes(
-            () => DotNetTasks.DotNetRun(
-                settings =>
-                    settings
-                       .SetProjectFile(BenchmarkProject.Path)
-                       .SetConfiguration("release")
-                       .SetArgumentConfigurator(args => args.Add("--filter *"))
-            ));
-}
-
-/// <summary>
-/// Defines the restore target
-/// </summary>
-public interface IHaveBenchmarkTarget : IHave
-{
-    /// <summary>
-    /// The Restore Target
-    /// </summary>
-    Target Benchmarks { get; }
 }
