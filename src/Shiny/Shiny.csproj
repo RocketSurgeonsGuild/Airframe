@@ -9,6 +9,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+        <PackageReference Include="Shiny" />
         <PackageReference Include="Shiny.Core" />
         <PackageReference Include="Shiny.Locations" />
         <PackageReference Include="Shiny.Notifications" />

@@ -11,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Shiny
     /// <summary>
     /// Represents an <see cref="IShinyStartup"/> for application composition.
     /// </summary>
-    public abstract class ReactiveShinyStartup : IShinyStartup
+    public abstract class ReactiveShinyStartup : ShinyStartup
     {
         private readonly IServiceCollection _serviceCollection;
         private readonly IConfigurationBuilder _configurationBuilder = new ConfigurationBuilder();
@@ -44,42 +44,28 @@ namespace Rocket.Surgery.Airframe.Shiny
         }
 
         /// <inheritdoc/>
-        void IShinyStartup.ConfigureApp(IServiceProvider provider)
+        public sealed override IServiceProvider CreateServiceProvider(IServiceCollection services)
         {
-            RegisterApplicationServices(provider);
-            ConfigureApp(provider);
-        }
-
-        /// <inheritdoc/>
-        IServiceProvider IShinyStartup.CreateServiceProvider(IServiceCollection services)
-        {
-            foreach (var service in services)
+            foreach (var serviceDescriptor in services)
             {
-                if (!_serviceCollection.Contains(service))
+                if (!_serviceCollection.Contains(serviceDescriptor))
                 {
-                    _serviceCollection.Add(service);
+                    _serviceCollection.Add(serviceDescriptor);
                 }
             }
 
             _serviceCollection.UseMicrosoftDependencyResolver();
-
             return _serviceCollection.BuildServiceProvider();
         }
 
         /// <inheritdoc/>
-        void IShinyStartup.ConfigureServices(IServiceCollection services)
+        public sealed override void ConfigureServices(IServiceCollection services, IPlatform platform)
         {
             ConfigureShiny(services);
             ConfigureAppSettings(_serviceCollection, _configurationBuilder);
             ConfigureServices(_serviceCollection);
-        }
 
-        /// <summary>
-        /// Configure the application with the given service provider.
-        /// </summary>
-        /// <param name="provider">The service provider.</param>
-        protected virtual void ConfigureApp(IServiceProvider provider)
-        {
+            RegisterApplicationServices();
         }
 
         /// <summary>
@@ -97,8 +83,7 @@ namespace Rocket.Surgery.Airframe.Shiny
         /// <summary>
         /// Register core services.
         /// </summary>
-        /// <param name="provider">The service provider.</param>
-        protected virtual void RegisterCoreServices(IServiceProvider provider)
+        protected virtual void RegisterCoreServices()
         {
         }
 
@@ -110,20 +95,18 @@ namespace Rocket.Surgery.Airframe.Shiny
         {
         }
 
-        private void RegisterApplicationServices(IServiceProvider serviceProvider)
+        private void RegisterApplicationServices()
         {
             Locator.CurrentMutable.InitializeSplat();
             Locator.CurrentMutable.InitializeReactiveUI(RegistrationNamespace.XamForms);
-            RegisterCoreServices(serviceProvider);
+            RegisterCoreServices();
         }
 
         private void ConfigureAppSettings(IServiceCollection services, IConfigurationBuilder configurationBuilder)
         {
-            configurationBuilder
-                .AddJsonFile("appsettings.json", optional: true)
-                .AddJsonFile("appsettings.dev.json", optional: true);
-
-            BuildConfiguration(configurationBuilder);
+            BuildConfiguration(configurationBuilder
+               .AddJsonFile("appsettings.json", optional: true)
+               .AddJsonFile("appsettings.dev.json", optional: true));
 
             services.AddSingleton<IConfiguration>(_ => configurationBuilder.AddConfiguration(_configuration).Build());
         }
