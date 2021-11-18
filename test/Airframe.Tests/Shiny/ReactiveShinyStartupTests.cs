@@ -5,23 +5,24 @@ using NSubstitute;
 using Shiny;
 using Xunit;
 
-namespace Airframe.Tests.Shiny;
-
-public class ReactiveShinyStartupTests
+namespace Airframe.Tests.Shiny
 {
-    [Fact]
-    public void Should_Register_Configuration()
+    public class ReactiveShinyStartupTests
     {
-        // Given
-        var configuration = Substitute.For<IConfiguration>();
-        var serviceCollection = new ServiceCollection();
-        var sut = new TestStartup(serviceCollection, configuration);
+        [Fact]
+        public void Should_Register_Configuration()
+        {
+            // Given
+            var configuration = Substitute.For<IConfiguration>();
+            var serviceCollection = new ServiceCollection();
+            var sut = new TestStartup(serviceCollection, configuration);
 
-        // When
-        sut.ConfigureServices(serviceCollection, Arg.Any<IPlatform>());
+            // When
+            sut.ConfigureServices(serviceCollection, Arg.Any<IPlatform>());
 
-        // Then
-        serviceCollection.Should().ContainSingle(x => x.ServiceType == typeof(IConfiguration));
+            // Then
+            serviceCollection.Should().ContainSingle(x => x.ServiceType == typeof(IConfiguration));
+        }
+
     }
-
 }
