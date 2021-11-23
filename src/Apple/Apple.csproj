@@ -1,4 +1,4 @@
-<Project Sdk="MSBuild.Sdk.Extras/3.0.22">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
 
     <PropertyGroup>
         <TargetFrameworks>xamarin.ios10;xamarin.mac20</TargetFrameworks>
