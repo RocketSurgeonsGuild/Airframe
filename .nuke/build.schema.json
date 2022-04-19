@@ -50,6 +50,17 @@
             "VSCode"
           ]
         },
+        "LintFiles": {
+          "type": "array",
+          "description": "The files to lint, if not given lints all files",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LintProfile": {
+          "type": "string",
+          "description": "The profile to use for linting"
+        },
         "NoLogo": {
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
@@ -88,10 +99,6 @@
               "Generate_Code_Coverage_Report",
               "Generate_Code_Coverage_Report_Cobertura",
               "Generate_Code_Coverage_Summary",
-              "GenerateCodeCoverageBadges",
-              "GenerateCodeCoverageReport",
-              "GenerateCodeCoverageReportCobertura",
-              "GenerateCodeCoverageSummary",
               "GenerateReadme",
               "Lint",
               "NetPack",
@@ -99,8 +106,7 @@
               "Pack",
               "Restore",
               "Test",
-              "Trigger_Code_Coverage_Reports",
-              "TriggerCodeCoverageReports"
+              "Trigger_Code_Coverage_Reports"
             ]
           }
         },
@@ -123,10 +129,6 @@
               "Generate_Code_Coverage_Report",
               "Generate_Code_Coverage_Report_Cobertura",
               "Generate_Code_Coverage_Summary",
-              "GenerateCodeCoverageBadges",
-              "GenerateCodeCoverageReport",
-              "GenerateCodeCoverageReportCobertura",
-              "GenerateCodeCoverageSummary",
               "GenerateReadme",
               "Lint",
               "NetPack",
@@ -134,8 +136,7 @@
               "Pack",
               "Restore",
               "Test",
-              "Trigger_Code_Coverage_Reports",
-              "TriggerCodeCoverageReports"
+              "Trigger_Code_Coverage_Reports"
             ]
           }
         },
