@@ -13,6 +13,7 @@ using Xamarin.Forms;
 [assembly: XmlnsDefinition("https://schemas.rocketsurgeonsguild.com/xaml/airframe/popup", "Rocket.Surgery.Airframe.Popup")]
 
 [assembly: SuppressMessage("Microsoft.Usage",  "CA2214:VirtualMemberCallInConstructor", Justification = "Consumers should be aware methods are for object construction.")]
+
 namespace Rocket.Surgery.Airframe.Popup
 {
     /// <summary>

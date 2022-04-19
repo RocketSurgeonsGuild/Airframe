@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
@@ -14,7 +15,9 @@ namespace Rocket.Surgery.Airframe.Shiny.Settings
     public sealed class SettingsProvider : ReactiveObject, ISettingsProvider, IDisposable
     {
         private readonly CompositeDisposable _garbage = new CompositeDisposable();
-        private readonly SourceCache<ISetting, string> _settingsCache = new SourceCache<ISetting, string>(x => x.Key);
+
+        [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Roslyn can't read DisposeWith")]
+        private readonly SourceCache<ISetting, string> _settingsCache;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsProvider"/> class.
@@ -25,6 +28,8 @@ namespace Rocket.Surgery.Airframe.Shiny.Settings
             static void PersistSetting(ISetting setting, IKeyValueStore settings) => settings.Set(setting.Key, setting.Value);
 
             static void RemoveSetting(ISetting setting, IKeyValueStore settings) => settings.Remove(setting.Key);
+
+            _settingsCache = new SourceCache<ISetting, string>(x => x.Key).DisposeWith(_garbage);
 
             var settingsChanged = _settingsCache
                .DeferUntilLoaded()

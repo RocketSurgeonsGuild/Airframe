@@ -14,6 +14,8 @@
       <DocumentationFile>bin\Release\Rocket.Surgery.Airframe.Data.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="DynamicData" />
+        <PackageReference Include="System.Reactive" />
         <PackageReference Include="Refit" />
     </ItemGroup>
 </Project>

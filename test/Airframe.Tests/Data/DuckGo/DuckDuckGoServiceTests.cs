@@ -1,7 +1,6 @@
 using DynamicData;
 using FluentAssertions;
 using NSubstitute;
-using Rocket.Surgery.Airframe.Data;
 using Rocket.Surgery.Airframe.Data.DuckDuckGo;
 using System;
 using System.Collections.Generic;
