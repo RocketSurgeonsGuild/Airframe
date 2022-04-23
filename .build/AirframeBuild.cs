@@ -21,6 +21,7 @@ using System.Linq;
 [DotNetVerbosityMapping]
 [MSBuildVerbosityMapping]
 [NuGetVerbosityMapping]
+[EnsureGitHooks(GitHook.CommitMsg)]
 public partial class AirframeBuild : NukeBuild,
                         ICanClean,
                         ICanRestoreWithMsBuild,
