@@ -19,14 +19,15 @@ name: ci
 on:
   push:
     branches:
-      - master
-      - next
+      - 'master'
+      - 'next'
+      - 'feature/*'
     tags:
-      - v*
+      - 'v*'
   pull_request:
     branches:
-      - master
-      - next
+      - 'master'
+      - 'next'
 
 jobs:
   Build:
@@ -40,23 +41,44 @@ jobs:
       - name: Fetch all history for all tags and branches
         run: |
           git fetch --prune
-      - name: 🔨 Use .NET Core 2.1 SDK
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '2.1.x'
-      - name: 🔨 Use .NET Core 2.2 SDK
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '2.2.x'
       - name: 🔨 Use .NET Core 3.1 SDK
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x'
+      - name: 🔨 Use .NET 6 SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
-      - name: ☢️ nuke
-        run: dotnet nuke
+      - name: 🎁 Restore
+        run: |
+          dotnet nuke Restore --skip
+      - name: ⚙ Build
+        run: |
+          dotnet nuke Build --skip
+      - name: 🚦 Test
+        run: |
+          dotnet nuke Test --skip
+      - name: Trigger Code Coverage Reports
+        run: |
+          dotnet nuke TriggerCodeCoverageReports --skip
+      - name: Generate Code Coverage Report Cobertura
+        run: |
+          dotnet nuke GenerateCodeCoverageReportCobertura --skip
+      - name: Generate Code Coverage Badges
+        run: |
+          dotnet nuke GenerateCodeCoverageBadges --skip
+      - name: Generate Code Coverage Summary
+        run: |
+          dotnet nuke GenerateCodeCoverageSummary --skip
+      - name: Generate Code Coverage Report
+        run: |
+          dotnet nuke GenerateCodeCoverageReport --skip
+      - name: 📦 Pack
+        run: |
+          dotnet nuke Pack --skip
       - name: 🐿 Publish Coverage
         uses: codecov/codecov-action@v1.1.0
         with:
@@ -86,3 +108,10 @@ jobs:
         with:
           name: 'nuget'
           path: 'artifacts/nuget/'
+  Publish:
+    needs:
+      - Build
+    secrets:
+      RSG_NUGET_API_KEY: '${{ secrets.RSG_NUGET_API_KEY }}'
+      RSG_AZURE_DEVOPS: '${{ secrets.RSG_AZURE_DEVOPS }}'
+    uses: RocketSurgeonsGuild/actions/.github/workflows/publish-nuget.yml@v0.3.0

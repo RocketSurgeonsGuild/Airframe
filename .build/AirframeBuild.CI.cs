@@ -7,7 +7,7 @@ using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.GithubActions;
 
 [GitHubActionsSteps("ci", GitHubActionsImage.MacOsLatest,
-    AutoGenerate = false,
+    AutoGenerate = true,
     On = new[] { GitHubActionsTrigger.Push },
     OnPushTags = new[] { "v*" },
     OnPushBranches = new[] { "master", "next", "feature/*" },
