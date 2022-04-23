@@ -1,40 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <RootNamespace></RootNamespace>
-    <IsPackable>False</IsPackable>
-    <NoWarn>CS0649;CS0169</NoWarn>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <RootNamespace></RootNamespace>
+        <IsPackable>False</IsPackable>
+        <NoWarn>CS0649;CS0169</NoWarn>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GitVersion.Tool" ExcludeAssets="All" />
-    <PackageReference Include="NuGet.CommandLine" />
-    <PackageReference Include="Nuke.Common" />
-    <PackageReference Include="Rocket.Surgery.Nuke" />
-    <PackageReference Include="ReportGenerator" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="GitVersion.Tool" ExcludeAssets="All"/>
+        <PackageReference Include="NuGet.CommandLine"/>
+        <PackageReference Include="Nuke.Common"/>
+        <PackageReference Include="Rocket.Surgery.Nuke"/>
+        <PackageReference Include="ReportGenerator"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <NukeMetadata Include="**\*.json" Exclude="bin\**;obj\**" />
-    <NukeExternalFiles Include="**\*.*.ext" Exclude="bin\**;obj\**" />
-    <None Remove="*.csproj.DotSettings;*.ref.*.txt" />
-    
-    <!-- Common build related files -->
-    <None Include="..\build.ps1" />
-    <None Include="..\build.sh" />
-    <None Include="..\.nuke" />
-    <None Include="..\.husky\**\*" />
-    <None Include="..\global.json" Condition="Exists('..\global.json')" />
-    <None Include="..\nuget.config" Condition="Exists('..\nuget.config')" />
-    <None Include="..\azure-pipelines.yml" Condition="Exists('..\azure-pipelines.yml')" />
-    <None Include="..\Jenkinsfile" Condition="Exists('..\Jenkinsfile')" />
-    <None Include="..\appveyor.yml" Condition="Exists('..\appveyor.yml')" />
-    <None Include="..\.travis.yml" Condition="Exists('..\.travis.yml')" />
-    <None Include="..\GitVersion.yml" Condition="Exists('..\GitVersion.yml')" />
-  </ItemGroup>
+    <ItemGroup>
+        <NukeMetadata Include="**\*.json" Exclude="bin\**;obj\**"/>
+        <NukeExternalFiles Include="**\*.*.ext" Exclude="bin\**;obj\**"/>
+        <None Remove="*.csproj.DotSettings;*.ref.*.txt"/>
 
-  <!-- <Import Project="../src/Airframe/build/Rocket.Surgery.Nuke.targets" /> -->
+        <!-- Common build related files -->
+        <None Include="..\build.ps1"/>
+        <None Include="..\build.sh"/>
+        <None Include="..\global.json" Condition="Exists('..\global.json')"/>
+        <None Include="..\azure-pipelines.yml" Condition="Exists('..\azure-pipelines.yml')"/>
+        <None Include="..\Jenkinsfile" Condition="Exists('..\Jenkinsfile')"/>
+        <None Include="..\appveyor.yml" Condition="Exists('..\appveyor.yml')"/>
+        <None Include="..\.travis.yml" Condition="Exists('..\.travis.yml')"/>
+        <None Include="..\GitVersion.yml" Condition="Exists('..\GitVersion.yml')"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\.husky\**\*.*" Link=".husky\%(RecursiveDir)%(Filename)%(Extension)"/>
+        <Content Include="..\.nuke\**\*.*" Link=".nuke\%(RecursiveDir)%(Filename)%(Extension)"/>
+    </ItemGroup>
+    <!-- <Import Project="../src/Airframe/build/Rocket.Surgery.Nuke.targets" /> -->
 </Project>
