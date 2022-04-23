@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Automatically adds branch prefix to the beginning of the first commit message.
+BRANCH=$(git branch | grep "*" | sed 's/* //'| sed -e 's/^[[:space:]]*//')
+echo "$BRANCH"
+
+BRANCH_PREFIX=$(git branch | grep "*" | sed 's|*\(.*\)/.*|\1|'| sed -e 's/^[[:space:]]*//')
+echo "$BRANCH_PREFIX"
+
+FIRST_COMMIT=$(git log master.."$BRANCH" --oneline | tail -1)
+echo "First Commit:$FIRST_COMMIT"
+
+if test -z "$FIRST_COMMIT"
+then
+  if ! head -1 "$1" | grep -qE "^(feature|fix|ci|chore|docs|test|style|enhancement)(\(.+?\))?: .{1,}$"; then
+    echo "$BRANCH_PREFIX:" $(cat "$1")  > "$1"
+    exit 0
+    else
+      echo "mysterious:" $(cat "$1")  > "$1"
+  fi
+fi
+
+#gh api "/repos/{owner}/{repo}/labels" -q ".[].name"
