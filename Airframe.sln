@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{
 		.gitignore = .gitignore
 		.editorconfig = .editorconfig
 		.codecov.yml = .codecov.yml
+		directory.packages.props = directory.packages.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controls", "src\Controls\Controls.csproj", "{F717BFF2-0DD5-453D-AB60-1CA85D7FCB87}"
