@@ -1,10 +1,10 @@
-using ReactiveUI.Testing;
 using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Airframe.Timers;
+using Rocket.Surgery.Extensions.Testing.Fixtures;
 
 namespace Airframe.Tests.Timers
 {
-    internal class DivisibleTimerFixture : IBuilder
+    internal class DivisibleTimerFixture : ITestFixtureBuilder
     {
         private SchedulerProvider _schedulerProvider = new SchedulerProviderFixture();
 

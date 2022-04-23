@@ -1,4 +1,21 @@
 <Project>
-    <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.0.52" />
-<!--    <Sdk Name="MSBuild.Sdk.Extras" Version="3.0.22" />-->
+  <ItemGroup>
+    <PackageReference
+            Include="Microsoft.NETFramework.ReferenceAssemblies"
+            IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive"
+            PrivateAssets="All"
+        />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive" PrivateAssets="All" />
+    <PackageReference Include="Rocket.Surgery.MSBuild.CI" IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive" PrivateAssets="All" />
+    <PackageReference Include="Rocket.Surgery.MSBuild.GitVersion" IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive" PrivateAssets="All" />
+    <PackageReference
+            Include="Rocket.Surgery.MSBuild.JetBrains.Annotations"
+            IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive"
+            PrivateAssets="All"
+            Condition="'$(MSBuildProjectName)'!='.build'"
+        />
+    <PackageReference Include="Rocket.Surgery.MSBuild.Metadata" IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive" PrivateAssets="All" />
+    <PackageReference Include="Rocket.Surgery.MSBuild.SourceLink" IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive" PrivateAssets="All" />
+    <PackageReference Include="Roslynator.Analyzers" IncludeAssets="analyzers;build;buildMultitargeting;buildTransitive" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

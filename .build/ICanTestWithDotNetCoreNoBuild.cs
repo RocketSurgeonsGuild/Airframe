@@ -47,10 +47,10 @@ namespace Nuke.Airframe
                 () =>
                 {
                     var runsettings = TestsDirectory / "coverlet.runsettings";
-                    if (!FileExists(runsettings))
+                    if (!runsettings.FileExists())
                     {
                         runsettings = NukeBuild.TemporaryDirectory / "default.runsettings";
-                        if (!FileExists(runsettings))
+                        if (!runsettings.FileExists())
                         {
                             using var tempFile = File.Open(runsettings, FileMode.CreateNew);
                             typeof(ICanTestWithDotNetCore)
@@ -75,13 +75,13 @@ namespace Nuke.Airframe
                             .SetGitVersionEnvironment(GitVersion)
                             .EnableNoRestore()
                             .SetConfiguration(global::Configuration.Debug)
-                            .SetNoBuild(true)
+                            .EnableNoBuild()
                             // DeterministicSourcePaths being true breaks coverlet!
                             .SetProperty("DeterministicSourcePaths", "false")
                             .SetResultsDirectory(TestResultsDirectory)
                             .When(
                                 !CollectCoverage,
-                                x => x.SetProperty((string) "CollectCoverage", "true")
+                                x => x.SetProperty("CollectCoverage", "true")
                                     .SetProperty("CoverageDirectory", CoverageDirectory)
                             )
                             .When(

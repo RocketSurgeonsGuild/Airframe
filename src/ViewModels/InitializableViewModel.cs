@@ -4,6 +4,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 
 [assembly: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Typed and untyped.")]
+
 namespace Rocket.Surgery.Airframe.ViewModels
 {
     /// <summary>
