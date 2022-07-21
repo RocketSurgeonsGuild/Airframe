@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rocket.Surgery.Airframe.Shiny;
 
-namespace Airframe.Tests.Shiny
+namespace Airframe.Shiny.Tests
 {
     internal class TestStartup : ReactiveShinyStartup
     {

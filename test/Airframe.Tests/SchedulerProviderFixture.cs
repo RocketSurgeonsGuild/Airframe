@@ -5,7 +5,7 @@ using Rocket.Surgery.Extensions.Testing.Fixtures;
 
 namespace Airframe.Tests
 {
-    internal class SchedulerProviderFixture : ITestFixtureBuilder
+    public class SchedulerProviderFixture : ITestFixtureBuilder
     {
         private IScheduler _mainThreadScheduler = new TestScheduler();
         private IScheduler _backgroundThreadScheduler = new TestScheduler();

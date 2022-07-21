@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Airframe.Tests.ViewModels
+namespace Airframe.ViewModels.Tests
 {
     public sealed class ViewModelTests
     {

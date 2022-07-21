@@ -1,6 +1,6 @@
 using ReactiveUI;
 
-namespace Airframe.Tests.Shiny.Settings
+namespace Airframe.Shiny.Tests.Settings
 {
     internal class TestObject : ReactiveObject
     {

@@ -3,6 +3,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using ReactiveUI;
+using Rocket.Surgery.Airframe.Timers.Events;
 
 namespace Rocket.Surgery.Airframe.Timers
 {

@@ -1,8 +1,9 @@
+using Airframe.Tests;
 using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Airframe.Timers;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 
-namespace Airframe.Tests.Timers
+namespace Airframe.Timers.Tests
 {
     internal class DivisibleTimerFixture : ITestFixtureBuilder
     {
