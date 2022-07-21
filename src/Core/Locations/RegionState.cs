@@ -11,7 +11,7 @@ namespace Rocket.Surgery.Airframe
         Unknown,
 
         /// <summary>
-        /// Inside
+        /// Inside.
         /// </summary>
         Inside,
 

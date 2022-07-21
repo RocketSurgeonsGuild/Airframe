@@ -30,13 +30,15 @@ namespace Airframe.Tests.ViewModels
         }
 
         public INavigationParameter NavigatedToParameter => _navigatedToParameter.Value;
+
         public INavigationParameter NavigatedFromParameter => _navigatedFromParameter.Value;
+
         public INavigationParameter NavigatingToParameter => _navigatingToParameter.Value;
 
         protected override IObservable<Unit> ExecuteInitialize()
         {
             Overriden = true;
-            
+
             return base.ExecuteInitialize();
         }
 

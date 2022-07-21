@@ -6,37 +6,37 @@ namespace Rocket.Surgery.Airframe.Synthetic
     public enum DrinkType
     {
         /// <summary>
-        /// Caffe Americano
+        /// Caffe Americano.
         /// </summary>
         Americano,
 
         /// <summary>
-        /// Drip Coffee
+        /// Drip Coffee.
         /// </summary>
         Brewed,
 
         /// <summary>
-        /// Cappuccino
+        /// Cappuccino.
         /// </summary>
         Cappuccino,
 
         /// <summary>
-        /// Espresso Shots
+        /// Espresso Shots.
         /// </summary>
         Espresso,
 
         /// <summary>
-        /// Flat White
+        /// Flat White.
         /// </summary>
         FlatWhite,
 
         /// <summary>
-        /// Caffe Latte
+        /// Caffe Latte.
         /// </summary>
         Latte,
 
         /// <summary>
-        /// Macchiato
+        /// Macchiato.
         /// </summary>
         Macchiato
     }

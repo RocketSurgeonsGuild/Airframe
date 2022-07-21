@@ -83,7 +83,6 @@ jobs:
         uses: codecov/codecov-action@v1.1.0
         with:
           name: 'actions-${{ matrix.os }}'
-          fail_ci_if_error: 'true'
       - name: 🏺 Publish logs
         if: always()
         uses: actions/upload-artifact@v2.2.1
