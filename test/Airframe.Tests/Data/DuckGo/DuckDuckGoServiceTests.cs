@@ -26,9 +26,9 @@ namespace Airframe.Tests.Data.DuckGo
                             {
                                 FirstUrl = Guid.NewGuid().ToString(),
                                 Result = "result one",
-                                Text = "text"
-                            }
-                        }
+                                Text = "text",
+                            },
+                        },
                     }));
             DuckDuckGoService sut = new DuckDuckGoServiceFixture().WithClient(client);
 
