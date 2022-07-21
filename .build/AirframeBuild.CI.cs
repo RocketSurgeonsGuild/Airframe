@@ -6,7 +6,7 @@ using Rocket.Surgery.Nuke.ContinuousIntegration;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.GithubActions;
 
-[GitHubActionsSteps("ci", GitHubActionsImage.MacOsLatest,
+[GitHubActionsSteps("ci", GitHubActionsImage.MacOs11,
     AutoGenerate = true,
     On = new[] { GitHubActionsTrigger.Push },
     OnPushTags = new[] { "v*" },
@@ -43,7 +43,7 @@ public partial class AirframeBuild
                 DotNetVersion = "3.1.x"
             },
             new SetupDotNetStep("Use .NET 6 SDK") {
-                DotNetVersion = "6.0.x"
+                DotNetVersion = "6.0.100"
             }
         });
 
