@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Airframe.Tests.Data.DuckGo
+namespace Airframe.Data.Tests.DuckGo
 {
     public class DuckDuckGoFunctionTests
     {
@@ -18,15 +18,16 @@ namespace Airframe.Tests.Data.DuckGo
 
             // When
             Observable.Return(
-                new List<RelatedTopic>
-                {
-                    new RelatedTopic
+                    new List<RelatedTopic>
                     {
-                        FirstUrl = Guid.NewGuid().ToString(),
-                        Result = "result",
-                        Text = "text"
+                        new()
+                        {
+                            FirstUrl = Guid.NewGuid().ToString(),
+                            Result = "result",
+                            Text = "text",
+                        },
                     }
-                })
+                )
                .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
@@ -36,6 +37,7 @@ namespace Airframe.Tests.Data.DuckGo
                .Should()
                .HaveCount(1);
         }
+
         [Fact]
         public void Should_Return_Cached()
         {
@@ -47,26 +49,28 @@ namespace Airframe.Tests.Data.DuckGo
                 {
                     FirstUrl = firstResultGuid,
                     Result = "result one",
-                    Text = "text"
-                });
+                    Text = "text",
+                }
+            );
 
             // When
             Observable.Return(
                     new List<RelatedTopic>
                     {
-                        new RelatedTopic
+                        new()
                         {
                             FirstUrl = firstResultGuid,
                             Result = "result one",
-                            Text = "text"
+                            Text = "text",
                         },
-                        new RelatedTopic
+                        new()
                         {
                             FirstUrl = Guid.NewGuid().ToString(),
                             Result = "result two",
-                            Text = "text"
-                        }
-                    })
+                            Text = "text",
+                        },
+                    }
+                )
                .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
@@ -76,30 +80,32 @@ namespace Airframe.Tests.Data.DuckGo
                .Should()
                .HaveCount(2);
         }
+
         [Fact]
         public void Should_Clear_Cached()
         {
             // Given
             var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
             sourceCache.AddOrUpdate(
-                new RelatedTopic()
+                new RelatedTopic
                 {
                     FirstUrl = Guid.NewGuid().ToString(),
                     Result = "result one",
-                    Text = "text"
+                    Text = "text",
                 });
 
             // When
             Observable.Return(
                     new List<RelatedTopic>
                     {
-                        new RelatedTopic
+                        new()
                         {
                             FirstUrl = Guid.NewGuid().ToString(),
                             Result = "result two",
-                            Text = "text"
-                        }
-                    })
+                            Text = "text",
+                        },
+                    }
+                )
                .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();

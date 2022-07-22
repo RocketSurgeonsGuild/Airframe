@@ -34,6 +34,7 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\.husky\**\*.*" Link=".husky\%(RecursiveDir)%(Filename)%(Extension)"/>
+        <Content Include="..\.github\**\*.*" Link=".github\%(RecursiveDir)%(Filename)%(Extension)"/>
         <Content Include="..\.nuke\**\*.*" Link=".nuke\%(RecursiveDir)%(Filename)%(Extension)"/>
     </ItemGroup>
     <!-- <Import Project="../src/Airframe/build/Rocket.Surgery.Nuke.targets" /> -->

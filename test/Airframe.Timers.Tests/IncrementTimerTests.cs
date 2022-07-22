@@ -1,14 +1,15 @@
-using System;
+using Airframe.Tests;
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Airframe.Timers;
+using System;
 using Xunit;
 
-namespace Airframe.Tests.Timers
+namespace Airframe.Timers.Tests
 {
-    public class DecrementTimerTests : TestBase
+    public class IncrementTimerTests : TestBase
     {
         private const int InitialMilliseconds = 1001;
         private const int OneThousandMilliseconds = 1000;
@@ -17,7 +18,7 @@ namespace Airframe.Tests.Timers
         public void Should_Not_Be_Running_When_Constructed()
         {
             // Given, When
-            DecrementTimer sut = new DecrementTimerFixture();
+            IncrementTimer sut = new IncrementTimerFixture();
 
             // Then
             sut.IsRunning.Should().BeFalse();
@@ -29,7 +30,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             SchedulerProvider schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
+            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
 
             // When
             sut.Start(TimeSpan.FromMinutes(25));
@@ -45,7 +46,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
+            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
 
             sut.Subscribe(x =>
@@ -54,11 +55,12 @@ namespace Airframe.Tests.Timers
             });
 
             // When
-            sut.Start(TimeSpan.FromMinutes(1));
+            sut.Start();
             testScheduler.AdvanceByMs(InitialMilliseconds);
+            testScheduler.AdvanceByMs(OneThousandMilliseconds);
 
             // Then
-            timer.Should().Be(TimeSpan.FromSeconds(59));
+            timer.Should().Be(TimeSpan.FromSeconds(2));
         }
 
         [Fact]
@@ -67,7 +69,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
+            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
             sut.Start(TimeSpan.FromMinutes(1));
 
@@ -76,15 +78,16 @@ namespace Airframe.Tests.Timers
                 timer = x;
             });
 
-            sut.Start(TimeSpan.FromMinutes(1));
+            sut.Start();
             testScheduler.AdvanceByMs(InitialMilliseconds);
             sut.Stop();
             testScheduler.AdvanceByMs(OneThousandMilliseconds);
+
             // When
             sut.Start();
 
             // Then
-            timer.Should().Be(TimeSpan.FromSeconds(59));
+            timer.Should().Be(TimeSpan.FromSeconds(1));
         }
 
         [Fact]
@@ -93,7 +96,7 @@ namespace Airframe.Tests.Timers
             // Given
             var testScheduler = new TestScheduler();
             var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
-            DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
+            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
 
             sut.Subscribe(x =>
@@ -101,7 +104,7 @@ namespace Airframe.Tests.Timers
                 timer = x;
             });
 
-            sut.Start(TimeSpan.FromMinutes(1));
+            sut.Start();
             testScheduler.AdvanceByMs(InitialMilliseconds);
             sut.Stop();
             testScheduler.AdvanceByMs(OneThousandMilliseconds);
@@ -111,7 +114,7 @@ namespace Airframe.Tests.Timers
             testScheduler.AdvanceByMs(OneThousandMilliseconds);
 
             // Then
-            timer.Should().Be(TimeSpan.FromSeconds(58));
+            timer.Should().Be(TimeSpan.FromSeconds(2));
         }
     }
 }

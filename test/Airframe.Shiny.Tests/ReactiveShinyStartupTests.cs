@@ -5,7 +5,7 @@ using NSubstitute;
 using Shiny;
 using Xunit;
 
-namespace Airframe.Tests.Shiny
+namespace Airframe.Shiny.Tests
 {
     public class ReactiveShinyStartupTests
     {

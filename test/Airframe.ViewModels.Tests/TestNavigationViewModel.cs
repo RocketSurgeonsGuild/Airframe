@@ -5,7 +5,7 @@ using System;
 using System.Reactive;
 using System.Reactive.Disposables;
 
-namespace Airframe.Tests.ViewModels
+namespace Airframe.ViewModels.Tests
 {
     internal class TestNavigationViewModel : NavigableViewModelBase
     {
@@ -30,13 +30,15 @@ namespace Airframe.Tests.ViewModels
         }
 
         public INavigationParameter NavigatedToParameter => _navigatedToParameter.Value;
+
         public INavigationParameter NavigatedFromParameter => _navigatedFromParameter.Value;
+
         public INavigationParameter NavigatingToParameter => _navigatingToParameter.Value;
 
         protected override IObservable<Unit> ExecuteInitialize()
         {
             Overriden = true;
-            
+
             return base.ExecuteInitialize();
         }
 

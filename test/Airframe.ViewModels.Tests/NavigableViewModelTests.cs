@@ -1,9 +1,10 @@
+using Airframe.Tests;
 using FluentAssertions;
 using Sextant;
 using System;
 using Xunit;
 
-namespace Airframe.Tests.ViewModels
+namespace Airframe.ViewModels.Tests
 {
     public class NavigableViewModelTests : TestBase
     {

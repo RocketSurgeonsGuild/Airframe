@@ -43,7 +43,7 @@ public partial class AirframeBuild
                 DotNetVersion = "3.1.x"
             },
             new SetupDotNetStep("Use .NET 6 SDK") {
-                DotNetVersion = "6.0.x"
+                DotNetVersion = "6.0.100"
             }
         });
 

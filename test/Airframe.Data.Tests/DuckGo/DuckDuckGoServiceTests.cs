@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Airframe.Tests.Data.DuckGo
+namespace Airframe.Data.Tests.DuckGo
 {
     public class DuckDuckGoServiceTests
     {
@@ -22,18 +22,18 @@ namespace Airframe.Tests.Data.DuckGo
                     {
                         RelatedTopics = new List<RelatedTopic>
                         {
-                            new RelatedTopic
+                            new()
                             {
                                 FirstUrl = Guid.NewGuid().ToString(),
                                 Result = "result one",
-                                Text = "text"
-                            }
-                        }
+                                Text = "text",
+                            },
+                        },
                     }));
             DuckDuckGoService sut = new DuckDuckGoServiceFixture().WithClient(client);
 
             // When
-            sut.Query("")
+            sut.Query(string.Empty)
                .Bind(out var results)
                .Subscribe();
 

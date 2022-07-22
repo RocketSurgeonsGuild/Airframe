@@ -5,22 +5,18 @@ using Shiny.Stores;
 using System;
 using Xunit;
 
-namespace Airframe.Tests.Shiny.Settings
+namespace Airframe.Shiny.Tests.Settings
 {
-    public sealed class SettingsTests
+    public sealed class SettingsProviderTests
     {
-        private const string Key = "thing";
-
         [Fact]
         public void GivenDefaultValue_WhenGet_ThenReturnDefaultValue()
         {
-            const int defaultValue = 1;
-
             // Given
             SettingsProvider sut = new SettingsProviderFixture();
 
             // When
-            var result = sut.Get(Key, defaultValue);
+            var result = sut.Get(Key, DefaultValue);
 
             // Then
             result
@@ -31,26 +27,24 @@ namespace Airframe.Tests.Shiny.Settings
             result
                 .Value
                 .Should()
-                .Be(defaultValue);
+                .Be(DefaultValue);
         }
 
         [Fact]
         public void GivenDefaultValue_WhenGet_ThenReturnValue()
         {
-            const int defaultValue = 1;
-
             // Given
             SettingsProvider sut = new SettingsProviderFixture();
             sut.Set(new Setting<int>(Key, 2));
 
             // When
-            var result = sut.Get(Key, defaultValue);
+            var result = sut.Get(Key, DefaultValue);
 
             // Then
             result
                .Value
                .Should()
-               .NotBe(defaultValue);
+               .NotBe(DefaultValue);
         }
 
         [Fact]
@@ -117,5 +111,53 @@ namespace Airframe.Tests.Shiny.Settings
             // Then
             settings.Received(1).Set(Key, 10);
         }
+
+        [Fact]
+        public void GivenSettings_WhenClear_ThenDoesNotContain()
+        {
+            // Given
+            var settings = Substitute.For<IKeyValueStore>();
+            SettingsProvider sut = new SettingsProviderFixture().WithSettings(settings);
+            sut.Get(Key, DefaultValue);
+
+            // When
+            sut.Clear();
+
+            // Then
+            settings.Contains(Key).Should().BeFalse();
+        }
+
+        [Fact]
+        public void GivenSettings_WhenContains_ThenContains()
+        {
+            // Given
+            var settings = Substitute.For<IKeyValueStore>();
+            SettingsProvider sut = new SettingsProviderFixture().WithSettings(settings);
+            sut.Get(Key, DefaultValue);
+
+            // When
+            var result = sut.Contains(Key);
+
+            // Then
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void GivenSettings_WhenRemoved_ThenRemoved()
+        {
+            // Given
+            var settings = Substitute.For<IKeyValueStore>();
+            SettingsProvider sut = new SettingsProviderFixture().WithSettings(settings);
+            sut.Get(Key, DefaultValue);
+
+            // When
+            sut.Remove(Key);
+
+            // Then
+            settings.Received().Remove(Key);
+        }
+
+        private const string Key = "thing";
+        private const int DefaultValue = 1;
     }
 }

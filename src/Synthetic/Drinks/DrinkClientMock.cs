@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Rocket.Surgery.Airframe.Data;
 
 namespace Rocket.Surgery.Airframe.Synthetic
 {

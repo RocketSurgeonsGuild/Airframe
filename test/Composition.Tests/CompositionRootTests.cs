@@ -16,7 +16,7 @@ namespace Composition.Tests
 
             // When
             var result = sut.RegisterView<TestView, TestViewModel>().Compose();
-            
+
             // Then
             result.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
         }
@@ -29,7 +29,7 @@ namespace Composition.Tests
 
             // When
             var result = sut.RegisterViewModel<TestViewModel>().Compose();
-            
+
             // Then
             result.Resolve<TestViewModel>().Should().NotBeNull();
         }
@@ -42,7 +42,7 @@ namespace Composition.Tests
 
             // When
             var result = sut.RegisterModule<TestModule>().Compose();
-            
+
             // Then
             result.Resolve<TestViewModel>().Should().NotBeNull();
             result.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
