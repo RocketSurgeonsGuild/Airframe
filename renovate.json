@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>RocketSurgeonsGuild/.github:renovate-config"
+  ],
+  "schedule": [
+    "after 3am on the first day of the month"
+  ],
+  "assignees": ["rlittlesii"],
+  "packageRules": [
+    {
+      "automerge": true,
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automergeStrategy": "squash"
+    }
+  ]
+}
