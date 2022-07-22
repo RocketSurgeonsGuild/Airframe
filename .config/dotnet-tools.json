@@ -19,7 +19,7 @@
           "commands": ["nuke"]
       },
       "codecov.tool": {
-          "version": "1.9.0",
+          "version": "1.13.0",
           "commands": ["codecov"]
       }
   }
