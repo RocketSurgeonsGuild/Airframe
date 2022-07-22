@@ -5,7 +5,7 @@ using Shiny.Stores;
 using System;
 using Xunit;
 
-namespace Airframe.Tests.Shiny.Settings
+namespace Airframe.Shiny.Tests.Settings
 {
     public sealed class SettingsProviderTests
     {

@@ -3,7 +3,7 @@ using Rocket.Surgery.Airframe.Shiny.Settings;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 using Shiny.Stores;
 
-namespace Airframe.Tests.Shiny.Settings
+namespace Airframe.Shiny.Tests.Settings
 {
     internal class SettingsProviderFixture : ITestFixtureBuilder
     {

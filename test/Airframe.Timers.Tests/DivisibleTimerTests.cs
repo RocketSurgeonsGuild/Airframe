@@ -1,11 +1,12 @@
-using System;
-using System.Reactive.Linq;
+using Airframe.Tests;
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using Rocket.Surgery.Airframe.Timers;
+using System;
+using System.Reactive.Linq;
 using Xunit;
 
-namespace Airframe.Tests.Timers
+namespace Airframe.Timers.Tests
 {
     public sealed class DivisibleTimerTests
     {

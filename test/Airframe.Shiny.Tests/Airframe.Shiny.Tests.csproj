@@ -1,4 +1,9 @@
-<Project>
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -10,5 +15,9 @@
         <PackageReference Include="coverlet.collector" />
     </ItemGroup>
 
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.props', '$(MSBuildThisFileDirectory)../'))" />
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Core\Core.csproj" />
+      <ProjectReference Include="..\..\src\Shiny\Shiny.csproj" />
+    </ItemGroup>
+
 </Project>
