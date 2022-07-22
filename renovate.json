@@ -3,6 +3,9 @@
   "extends": [
     "local>RocketSurgeonsGuild/.github:renovate-config"
   ],
+  "schedule": [
+    "after 3am on the first day of the month"
+  ],
   "assignees": ["rlittlesii"],
   "packageRules": [
     {
