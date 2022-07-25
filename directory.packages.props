@@ -79,6 +79,6 @@
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="7.1.2" />
         <PackageVersion Include="xunit" Version="2.4.1" />
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
-        <PackageVersion Include="XunitXml.TestLogger" Version="2.0.0" />
+        <PackageVersion Include="XunitXml.TestLogger" Version="2.1.45" />
     </ItemGroup>
 </Project>
