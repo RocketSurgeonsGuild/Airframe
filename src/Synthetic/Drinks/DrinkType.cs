@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Rocket.Surgery.Airframe.Synthetic
 {
     /// <summary>
     /// Enumeration representing espresso drink types.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1629:Documentation text should end with a period", Justification = "enum")]
     public enum DrinkType
     {
         /// <summary>
