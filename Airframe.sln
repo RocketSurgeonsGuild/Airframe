@@ -45,6 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Core.nuspec = .nuspec\Core.nuspec
 		.nuspec\Shiny.nuspec = .nuspec\Shiny.nuspec
 		.nuspec\Timers.nuspec = .nuspec\Timers.nuspec
+		.nuspec\MicrosoftDependencyInjection.nuspec = .nuspec\MicrosoftDependencyInjection.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".build", ".build\.build.csproj", "{8322904C-5A48-4A92-A5EA-2AF91F8C4595}"
@@ -72,6 +73,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{0AF062D9-82F6-4384-B01A-137DF8A880D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance", "benchmarks\Performance\Performance.csproj", "{F1D890A7-A606-4659-BC44-643B6D54B66C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftDependencyInjection", "src\MicrosoftDependencyInjection\MicrosoftDependencyInjection.csproj", "{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Shiny.Tests", "test\Airframe.Shiny.Tests\Airframe.Shiny.Tests.csproj", "{63623831-9DA6-4563-BC94-F9B4007CFE89}"
 EndProject
@@ -145,6 +148,10 @@ Global
 		{F1D890A7-A606-4659-BC44-643B6D54B66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1D890A7-A606-4659-BC44-643B6D54B66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1D890A7-A606-4659-BC44-643B6D54B66C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63623831-9DA6-4563-BC94-F9B4007CFE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63623831-9DA6-4563-BC94-F9B4007CFE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63623831-9DA6-4563-BC94-F9B4007CFE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -181,6 +188,7 @@ Global
 		{4C29DC6C-1251-4B3F-8F2C-447F24230E56} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{F1D890A7-A606-4659-BC44-643B6D54B66C} = {0AF062D9-82F6-4384-B01A-137DF8A880D1}
+		{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{63623831-9DA6-4563-BC94-F9B4007CFE89} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{5EC834CA-0341-465E-AE65-A6C181FF303B} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{903C1B9D-F4F8-4540-8F46-E8EB8F15EAA5} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
