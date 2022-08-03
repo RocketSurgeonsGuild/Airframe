@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageVersion Include="GitVersion.Tool" Version="5.3.6" />
+        <PackageVersion Include="GitVersion.Tool" Version="5.10.3" />
         <PackageVersion Include="JetBrains.ReSharper.CommandLineTools" Version="2020.3.4" />
         <PackageVersion Include="NuGet.CommandLine" Version="6.2.1" />
         <PackageVersion Include="Nuke.Common" Version="6.1.2" />
