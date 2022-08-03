@@ -73,7 +73,7 @@
         <PackageVersion Include="coverlet.collector" Version="3.1.2" />
         <PackageVersion Include="coverlet.msbuild" Version="3.1.2" IncludeAssets="all" PrivateAssets="runtime;build;native;contentfiles;analyzers" />
         <PackageVersion Include="FluentAssertions" Version="5.10.3" />
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="15.9.2" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
         <PackageVersion Include="Microsoft.Reactive.Testing" Version="5.0.0" />
         <PackageVersion Include="NSubstitute" Version="4.4.0" />
         <PackageVersion Include="ReactiveUI.Testing" Version="13.3.2" />
