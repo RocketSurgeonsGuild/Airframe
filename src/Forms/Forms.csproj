@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Rocket.Surgery.Airframe.Forms</AssemblyName>
-    <RootNamespace>Rocket.Surgery.Airframe.Forms</RootNamespace>
-    <LangVersion>latest</LangVersion>
-    <PackageId>Rocket.Surgery.Airframe.Forms</PackageId>
+      <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+      <PackageId>Rocket.Surgery.Airframe.Forms</PackageId>
+      <AssemblyName>Rocket.Surgery.Airframe.Forms</AssemblyName>
+      <RootNamespace>Rocket.Surgery.Airframe.Forms</RootNamespace>
+      <LangVersion>latest</LangVersion>
     <Description>ReactiveUI base abstractions for Xamarin Forms.</Description>
   </PropertyGroup>
 
