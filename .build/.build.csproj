@@ -32,6 +32,7 @@
         <None Include="..\.travis.yml" Condition="Exists('..\.travis.yml')"/>
         <None Include="..\GitVersion.yml" Condition="Exists('..\GitVersion.yml')"/>
     </ItemGroup>
+
     <ItemGroup>
         <Content Include="..\.husky\**\*.*" Link=".husky\%(RecursiveDir)%(Filename)%(Extension)"/>
         <Content Include="..\.github\**\*.*" Link=".github\%(RecursiveDir)%(Filename)%(Extension)"/>

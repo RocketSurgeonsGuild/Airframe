@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AssemblyName>Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection</RootNamespace>
