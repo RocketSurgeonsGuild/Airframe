@@ -34,7 +34,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.2
+        uses: actions/checkout@v3.0.2
         with:
           clean: 'false'
           fetch-depth: '0'
@@ -42,11 +42,11 @@ jobs:
         run: |
           git fetch --prune
       - name: 🔨 Use .NET Core 3.1 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '3.1.x'
       - name: 🔨 Use .NET 6 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '6.0.100'
       - name: 🎁 dotnet tool restore
@@ -80,30 +80,30 @@ jobs:
         run: |
           dotnet nuke Pack --skip
       - name: 🐿 Publish Coverage
-        uses: codecov/codecov-action@v1.5.2
+        uses: codecov/codecov-action@v3.1.0
         with:
           name: 'actions-${{ matrix.os }}'
       - name: 🏺 Publish logs
         if: always()
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: 'logs'
           path: 'artifacts/logs/'
       - name: 🏺 Publish coverage data
         if: always()
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: 'coverage'
           path: 'coverage/'
       - name: 🏺 Publish test data
         if: always()
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: 'test data'
           path: 'artifacts/test/'
       - name: 🏺 Publish NuGet Packages
         if: always()
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: 'nuget'
           path: 'artifacts/nuget/'
