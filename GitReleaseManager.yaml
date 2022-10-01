@@ -7,7 +7,7 @@ export:
   include-created-date-in-title: true
   created-date-string-format: MMMM dd, yyyy
   perform-regex-removal: true
-  regex-text: '([a-f\d]{40}\s|:boom:|:rocket:|:fire:|:blue_book:|:beetle:|:squirrel:|:raised_hand:|:sparkles:|:package:|:old_key:|:wastebasket:|:construction:)'
+  regex-text: '([a-f\d]{40}\s|:boom:|:rocket:|:fire:|:blue_book:|:beetle:|:squirrel:|:raised_hand:|:sparkles:|:package:|:old_key:|:wastebasket:|:construction:|:truck:)'
 issue-labels-include:
   - ':boom: breaking change'
   - ':rocket: feature'
@@ -22,6 +22,7 @@ issue-labels-include:
   - ':package: dependencies'
   - ':construction: deprecated'
   - ':wastebasket: removed'
+  - ':truck: private-dependencies'
 issue-labels-exclude:
   - ':family: duplicate'
   - ':grey_question: question'
