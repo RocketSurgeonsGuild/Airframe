@@ -1,6 +1,6 @@
 <Project>
     <ItemGroup>
-        <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" />
+        <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
         <PackageVersion Include="Rocket.Surgery.Build.Metadata" Version="3.3.11" PrivateAssets="All" />
         <PackageVersion Include="Rocket.Surgery.MSBuild.Metadata" Version="1.1.0" />
         <PackageVersion Include="Rocket.Surgery.MSBuild.SourceLink" Version="1.1.1" />
