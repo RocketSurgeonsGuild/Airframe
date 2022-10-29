@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DynamicData;
 
 namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
@@ -6,6 +7,7 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
     /// <summary>
     /// Interface representing a service that queries the <see cref="IDuckDuckGoApiClient"/>.
     /// </summary>
+    [SuppressMessage("Roslynator", "RCS1243:Duplicate word in a comment.", Justification = "Duck Duck Go")]
     public interface IDuckDuckGoService
     {
         /// <summary>

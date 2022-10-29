@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Linq;
 using DynamicData;
 
@@ -7,6 +8,7 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
     /// <summary>
     /// Represents a service that can query the duck duck go api.
     /// </summary>
+    [SuppressMessage("Roslynator", "RCS1243:Duplicate word in a comment.", Justification = "Duck Duck Go")]
     public class DuckDuckGoService : IDuckDuckGoService, IDisposable
     {
         private readonly IDuckDuckGoApiClient _duckDuckGoApiClient;

@@ -36,6 +36,15 @@ namespace Rocket.Surgery.Airframe.Data
             where T : IDto;
 
         /// <summary>
+        /// Posts the specified entity.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        /// <typeparam name="T">The entity type.</typeparam>
+        /// <returns>The return entity.</returns>
+        Task<T> Patch<T>(T entity)
+            where T : IDto;
+
+        /// <summary>
         /// Delete the specified entity.
         /// </summary>
         /// <param name="id">The identifier.</param>
