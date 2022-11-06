@@ -6,7 +6,7 @@ using Rocket.Surgery.Nuke.ContinuousIntegration;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.GithubActions;
 
-[GitHubActionsSteps("ci", GitHubActionsImage.MacOsLatest,
+[GitHubActionsSteps("ci", GitHubActionsImage.WindowsLatest,
     AutoGenerate = true,
     On = new[] { GitHubActionsTrigger.Push },
     OnPushTags = new[] { "v*" },
