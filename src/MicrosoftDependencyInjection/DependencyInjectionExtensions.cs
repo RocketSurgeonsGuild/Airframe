@@ -27,6 +27,67 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
+        /// Configures the <see cref="IOptions{TOptions}"/> for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <typeparam name="T">The option type.</typeparam>
+        /// <returns>The service collection with options registered.</returns>
+        public static IServiceCollection ConfigureSectionAsOptions<T>(this IServiceCollection serviceCollection)
+            where T : class => ConfigureSectionAsOptions<T>(serviceCollection, typeof(T).Name);
+
+        /// <summary>
+        /// Configures the <see cref="IOptions{TOptions}"/> for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="section">The app settings section.</param>
+        /// <typeparam name="T">The option type.</typeparam>
+        /// <returns>The service collection with options registered.</returns>
+        public static IServiceCollection ConfigureSectionAsOptions<T>(this IServiceCollection serviceCollection, string section)
+            where T : class
+        {
+            serviceCollection
+               .AddOptions<T>()
+               .Configure((T settings, IConfiguration config) => config.GetSection(section).Bind(settings));
+
+            return serviceCollection;
+        }
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection) =>
+            ConfigureAppSettings(
+                serviceCollection,
+                new ConfigurationBuilder()
+               .AddJsonFile("appsettings.json", optional: false)
+               .AddJsonFile("appsettings.dev.json", optional: true));
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="builder">The configuration builder.</param>
+        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, Action<IConfigurationBuilder> builder)
+        {
+            var configurationBuilder = new ConfigurationBuilder();
+            builder.Invoke(configurationBuilder);
+
+            return ConfigureAppSettings(serviceCollection, configurationBuilder);
+        }
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="configurationBuilder">The configuration builder.</param>
+        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, IConfigurationBuilder configurationBuilder) =>
+            ConfigureAppSettings(serviceCollection, configurationBuilder.Build());
+
+        /// <summary>
         /// Configures the app settings for the service collection.
         /// </summary>
         /// <param name="serviceCollection">The service collection.</param>
@@ -37,10 +98,32 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
             IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder()
-               .AddJsonFile("appsettings.json", optional: true)
+               .AddJsonFile("appsettings.json", optional: false)
                .AddJsonFile("appsettings.dev.json", optional: true);
 
             serviceCollection.AddSingleton<IConfiguration>(_ => builder.AddConfiguration(configuration).Build());
+
+            return serviceCollection;
+        }
+
+        /// <summary>
+        /// Registers an <see cref="IApplicationStartup"/> to the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="options">The startup options.</param>
+        /// <typeparam name="T">The startup type.</typeparam>
+        /// <returns>The service collection with startup dependencies registered.</returns>
+        public static IServiceCollection ConfigureSettings(
+            this IServiceCollection serviceCollection,
+            IConfiguration configuration,
+            Action<ConfigurationOption>? options = null)
+        {
+            if (options != null)
+            {
+                var startupOption = new ConfigurationOption(serviceCollection);
+                options.Invoke(startupOption);
+            }
 
             return serviceCollection;
         }
