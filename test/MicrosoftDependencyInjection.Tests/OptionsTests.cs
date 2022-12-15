@@ -1,8 +1,9 @@
 using FluentAssertions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System.Collections;
+using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.ComplexOptions;
+using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.DefaultOptions;
+using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.FlatOptions;
 
 namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests;
 
@@ -62,53 +63,72 @@ public class OptionsTests
         serviceProvider
            .GetService<IOptions<FlatSettings>>()!
            .Value
-           .Stuff
+           .Things
            .Should()
            .NotBeNull();
-}
 
-internal class DefaultOptionsTestData : IEnumerable<object[]>
-{
-    public DefaultOptionsTestData()
-    {
-        var serviceCollection = new ServiceCollection();
-        _buildServiceProvider = serviceCollection
-           .ConfigureAppSettings(builder => builder.AddJsonFile("defaultoptions.json", optional: false))
-           .ConfigureSectionAsOptions<TransientFaultHandlingOptions>()
-           .BuildServiceProvider();
-    }
+    [Theory]
+    [ClassData(typeof(AncestorOptionsTestData))]
+    public void GivenLevelSettings_WhenGetService_ThenOptionsNotNull(IServiceProvider serviceProvider) =>
 
-    /// <inheritdoc/>
-    public IEnumerator<object[]> GetEnumerator()
-    {
-        yield return new object[] { _buildServiceProvider };
-    }
+        // Given, When, Then
+        serviceProvider
+           .GetService<IOptions<LevelSettings>>()!
+           .Value
+           .Should()
+           .NotBeNull();
 
-    /// <inheritdoc/>
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    [Theory]
+    [ClassData(typeof(AncestorOptionsTestData))]
+    public void GivenLevelSettings_WhenGetService_ThenGenerationsNotNull(IServiceProvider serviceProvider) =>
 
-    private readonly IServiceProvider _buildServiceProvider;
-}
+        // Given, When, Then
+        serviceProvider
+           .GetService<IOptions<LevelSettings>>()!
+           .Value
+           .Generations
+           .Should()
+           .NotBeNull();
 
-internal class FlatOptionsTestData : IEnumerable<object[]>
-{
-    public FlatOptionsTestData()
-    {
-        var serviceCollection = new ServiceCollection();
-        _buildServiceProvider = serviceCollection
-           .ConfigureAppSettings(builder => builder.AddJsonFile("flatsettings.json", optional: false))
-           .ConfigureOptions<FlatSettings>()
-           .BuildServiceProvider();
-    }
+    [Theory]
+    [ClassData(typeof(AncestorOptionsTestData))]
+    public void GivenLevelSettings_WhenGetService_ThenParentNotNull(IServiceProvider serviceProvider) =>
 
-    /// <inheritdoc/>
-    public IEnumerator<object[]> GetEnumerator()
-    {
-        yield return new object[] { _buildServiceProvider };
-    }
+        // Given, When, Then
+        serviceProvider
+           .GetService<IOptions<LevelSettings>>()!
+           .Value
+           .Generations
+           .Parent
+           .Should()
+           .NotBeNull();
 
-    /// <inheritdoc/>
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    [Theory]
+    [ClassData(typeof(AncestorOptionsTestData))]
+    public void GivenLevelSettings_WhenGetService_ThenComplexNotNull(IServiceProvider serviceProvider) =>
 
-    private readonly IServiceProvider _buildServiceProvider;
+        // Given, When, Then
+        serviceProvider
+           .GetService<IOptions<LevelSettings>>()!
+           .Value
+           .Generations
+           .Parent
+           .Complex
+           .Should()
+           .NotBeNull();
+
+    [Theory]
+    [ClassData(typeof(AncestorOptionsTestData))]
+    public void GivenLevelSettings_WhenGetService_ThenThingNotNull(IServiceProvider serviceProvider) =>
+
+        // Given, When, Then
+        serviceProvider
+           .GetService<IOptions<LevelSettings>>()!
+           .Value
+           .Generations
+           .Parent
+           .Complex
+           .Thing
+           .Should()
+           .NotBeNull();
 }

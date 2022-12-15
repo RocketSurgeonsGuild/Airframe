@@ -1,0 +1,9 @@
+{
+  "generations": {
+    "parent": {
+      "complex": {
+        "thing": "stuff"
+      }
+    }
+  }
+}

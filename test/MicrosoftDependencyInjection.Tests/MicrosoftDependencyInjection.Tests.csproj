@@ -29,16 +29,20 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="DefaultOptions\defaultoptions.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="FlatOptions\flatsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
       <None Remove="appsettings.json" />
       <EmbeddedResource Include="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="defaultoptions.json" />
-      <EmbeddedResource Include="defaultoptions.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
       <None Remove="flatsettings.json" />
-      <EmbeddedResource Include="flatsettings.json">
+      <None Remove="ComplexOptions\multilevelsettings.json" />
+      <EmbeddedResource Include="ComplexOptions\multilevelsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>
