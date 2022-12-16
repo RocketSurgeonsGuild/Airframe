@@ -37,7 +37,7 @@
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.10" />
-        <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageVersion Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageVersion Include="ReactiveUI" Version="13.3.2" />
         <PackageVersion Include="ReactiveUI.XamForms" Version="13.3.2" />
         <PackageVersion Include="ReactiveMarbles.PropertyChanged" Version="2.0.27" />
