@@ -1,25 +1,26 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests;
-
-internal class ConfigurationOptionsTestData : TestClassData
+namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ConfigurationOptionsTestData"/> class.
-    /// </summary>
-    public ConfigurationOptionsTestData() => _buildServiceProvider = new ServiceCollection()
-       .ConfigureSettings(
-            builder => builder.AddJsonFile("ComplexOptions/multilevelsettings.json", optional: false),
-            option => option
-               .ConfigureOption<LevelSettings>())
-       .BuildServiceProvider();
-
-    /// <inheritdoc/>
-    protected override IEnumerator<object[]> Enumerator()
+    internal class ConfigurationOptionsTestData : TestClassData
     {
-        yield return new object[] { _buildServiceProvider };
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationOptionsTestData"/> class.
+        /// </summary>
+        public ConfigurationOptionsTestData() => _buildServiceProvider = new ServiceCollection()
+           .ConfigureSettings(
+                builder => builder.AddJsonFile("ComplexOptions/multilevelsettings.json", optional: false),
+                option => option
+                   .ConfigureOption<LevelSettings>())
+           .BuildServiceProvider();
 
-    private readonly ServiceProvider _buildServiceProvider;
+        /// <inheritdoc/>
+        protected override IEnumerator<object[]> Enumerator()
+        {
+            yield return new object[] { _buildServiceProvider };
+        }
+
+        private readonly ServiceProvider _buildServiceProvider;
+    }
 }

@@ -2,30 +2,31 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.FlatOptions;
 
-namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests;
-
-internal class MultipleConfigurationOptionsTestData : TestClassData
+namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MultipleConfigurationOptionsTestData"/> class.
-    /// </summary>
-    public MultipleConfigurationOptionsTestData() => _buildServiceProvider = new ServiceCollection()
-       .ConfigureSettings(
-            configuration => configuration
-               .AddJsonFile("DefaultOptions/defaultoptions.json", optional: false)
-               .AddJsonFile("FlatOptions/flatsettings.json", optional: false)
-               .AddJsonFile("ComplexOptions/multilevelsettings.json", optional: false),
-            options => options
-               .ConfigureOption<FlatSettings>()
-               .ConfigureSection<TransientFaultHandlingOptions>()
-               .ConfigureOption<LevelSettings>())
-       .BuildServiceProvider();
-
-    /// <inheritdoc/>
-    protected override IEnumerator<object[]> Enumerator()
+    internal class MultipleConfigurationOptionsTestData : TestClassData
     {
-        yield return new object[] { _buildServiceProvider };
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MultipleConfigurationOptionsTestData"/> class.
+        /// </summary>
+        public MultipleConfigurationOptionsTestData() => _buildServiceProvider = new ServiceCollection()
+           .ConfigureSettings(
+                configuration => configuration
+                   .AddJsonFile("DefaultOptions/defaultoptions.json", optional: false)
+                   .AddJsonFile("FlatOptions/flatsettings.json", optional: false)
+                   .AddJsonFile("ComplexOptions/multilevelsettings.json", optional: false),
+                options => options
+                   .ConfigureOption<FlatSettings>()
+                   .ConfigureSection<TransientFaultHandlingOptions>()
+                   .ConfigureOption<LevelSettings>())
+           .BuildServiceProvider();
 
-    private readonly ServiceProvider _buildServiceProvider;
+        /// <inheritdoc/>
+        protected override IEnumerator<object[]> Enumerator()
+        {
+            yield return new object[] { _buildServiceProvider };
+        }
+
+        private readonly ServiceProvider _buildServiceProvider;
+    }
 }

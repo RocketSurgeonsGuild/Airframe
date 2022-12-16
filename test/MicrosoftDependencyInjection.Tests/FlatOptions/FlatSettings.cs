@@ -1,8 +1,9 @@
-namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.FlatOptions;
-
-public class FlatSettings
+namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.FlatOptions
 {
-    public string Stuff { get; set; }
+    public class FlatSettings
+    {
+        public string Stuff { get; set; }
 
-    public string Things { get; set; }
+        public string Things { get; set; }
+    }
 }
