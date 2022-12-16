@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.ComplexOptions;
 using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.DefaultOptions;
 using Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.FlatOptions;
+using System;
 using Xunit;
 
 namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests

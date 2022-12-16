@@ -1,3 +1,5 @@
+using System;
+
 namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests
 {
     public sealed class TransientFaultHandlingOptions
