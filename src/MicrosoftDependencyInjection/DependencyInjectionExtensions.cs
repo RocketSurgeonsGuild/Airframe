@@ -11,19 +11,97 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
     public static class DependencyInjectionExtensions
     {
         /// <summary>
-        /// Configures the <see cref="IOptions{TOptions}"/> for the service collection.
+        /// Adds the <see cref="IPlatformInitializer"/> to the <see cref="IServiceCollection"/>.
         /// </summary>
         /// <param name="serviceCollection">The service collection.</param>
-        /// <typeparam name="T">The option type.</typeparam>
-        /// <returns>The service collection with options registered.</returns>
-        public static IServiceCollection ConfigureOptions<T>(this IServiceCollection serviceCollection)
-            where T : class
+        /// <param name="platformInitializer">The platform initializer.</param>
+        /// <returns>The service collection with platform dependencies registered.</returns>
+        public static IServiceCollection AddPlatform(this IServiceCollection serviceCollection, IPlatformInitializer platformInitializer) =>
+            platformInitializer.Initialize(serviceCollection);
+
+        /// <summary>
+        /// Adds the <see cref="IPlatformInitializer"/> to the <see cref="IServiceCollection"/>.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="target">The target that owns the platform initializer.</param>
+        /// <param name="startup">The startup.</param>
+        /// <typeparam name="TTarget">The target type.</typeparam>
+        /// <returns>The service collection with platform dependencies registered.</returns>
+        public static IServiceCollection AddPlatform<TTarget>(this IServiceCollection serviceCollection, TTarget target, Func<TTarget, IPlatformInitializer> startup) =>
+            startup(target).Initialize(serviceCollection);
+
+        /// <summary>
+        /// Registers an <see cref="IApplicationStartup"/> to the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="options">The startup options.</param>
+        /// <typeparam name="T">The startup type.</typeparam>
+        /// <returns>The service collection with startup dependencies registered.</returns>
+        public static IServiceCollection AddStartup<T>(this IServiceCollection serviceCollection, Action<StartupOption>? options = null)
+            where T : class, IApplicationStartup
         {
-            serviceCollection
-               .AddOptions<T>()
-               .Configure((T settings, IConfiguration config) => config.Bind(settings));
+            serviceCollection.AddTransient<IApplicationStartup, T>();
+
+            if (options != null)
+            {
+                var startupOption = new StartupOption(serviceCollection);
+                options.Invoke(startupOption);
+            }
 
             return serviceCollection;
+        }
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <returns>The service collection with configuration dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection) =>
+            ConfigureAppSettings(
+                serviceCollection,
+                new ConfigurationBuilder());
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="builder">The configuration builder.</param>
+        /// <returns>The service collection with configuration dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, Action<IConfigurationBuilder> builder)
+        {
+            var configurationBuilder = new ConfigurationBuilder();
+            builder.Invoke(configurationBuilder);
+
+            return ConfigureAppSettings(serviceCollection, configurationBuilder);
+        }
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="configurationBuilder">The configuration builder.</param>
+        /// <returns>The service collection with configuration dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, IConfigurationBuilder configurationBuilder) =>
+            ConfigureAppSettings(serviceCollection, configurationBuilder.Build());
+
+        /// <summary>
+        /// Configures the app settings for the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The service collection with configuration dependencies registered.</returns>
+        public static IServiceCollection ConfigureAppSettings(
+            this IServiceCollection serviceCollection,
+            IConfiguration configuration)
+        {
+            var builder = new ConfigurationBuilder();
+
+            return serviceCollection.AddSingleton<IConfiguration>(provider =>
+                {
+                    provider.GetService<Action<IConfigurationBuilder>>()?.Invoke(builder);
+
+                    return builder.AddConfiguration(configuration).Build();
+                });
         }
 
         /// <summary>
@@ -53,58 +131,19 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Configures the app settings for the service collection.
+        /// Configures the <see cref="IOptions{TOptions}"/> for the service collection.
         /// </summary>
         /// <param name="serviceCollection">The service collection.</param>
-        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
-        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection) =>
-            ConfigureAppSettings(
-                serviceCollection,
-                new ConfigurationBuilder());
-
-        /// <summary>
-        /// Configures the app settings for the service collection.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="builder">The configuration builder.</param>
-        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
-        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, Action<IConfigurationBuilder> builder)
+        /// <typeparam name="T">The option type.</typeparam>
+        /// <returns>The service collection with options registered.</returns>
+        public static IServiceCollection ConfigureOptions<T>(this IServiceCollection serviceCollection)
+            where T : class
         {
-            var configurationBuilder = new ConfigurationBuilder();
-            builder.Invoke(configurationBuilder);
+            serviceCollection
+               .AddOptions<T>()
+               .Configure((T settings, IConfiguration config) => config.Bind(settings));
 
-            return ConfigureAppSettings(serviceCollection, configurationBuilder);
-        }
-
-        /// <summary>
-        /// Configures the app settings for the service collection.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="configurationBuilder">The configuration builder.</param>
-        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
-        public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, IConfigurationBuilder configurationBuilder) =>
-            ConfigureAppSettings(serviceCollection, configurationBuilder.Build());
-
-        /// <summary>
-        /// Configures the app settings for the service collection.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="configuration">The configuration.</param>
-        /// <returns>The service collection with ReactiveUI dependencies registered.</returns>
-        public static IServiceCollection ConfigureAppSettings(
-            this IServiceCollection serviceCollection,
-            IConfiguration configuration)
-        {
-            var builder = new ConfigurationBuilder()
-               .AddJsonFile("appsettings.json", optional: false)
-               .AddJsonFile("appsettings.dev.json", optional: true);
-
-            return serviceCollection.AddSingleton<IConfiguration>(provider =>
-                {
-                    provider.GetService<Action<IConfigurationBuilder>>()?.Invoke(builder);
-
-                    return builder.AddConfiguration(configuration).Build();
-                });
+            return serviceCollection;
         }
 
         /// <summary>
@@ -162,47 +201,6 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
 
             var startupOption = new ConfigurationOptions(serviceCollection);
             options.Invoke(startupOption);
-
-            return serviceCollection;
-        }
-
-        /// <summary>
-        /// Adds the <see cref="IPlatformInitializer"/> to the <see cref="IServiceCollection"/>.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="platformInitializer">The platform initializer.</param>
-        /// <returns>The service collection with platform dependencies registered.</returns>
-        public static IServiceCollection AddPlatform(this IServiceCollection serviceCollection, IPlatformInitializer platformInitializer) =>
-            platformInitializer.Initialize(serviceCollection);
-
-        /// <summary>
-        /// Adds the <see cref="IPlatformInitializer"/> to the <see cref="IServiceCollection"/>.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="target">The target that owns the platform initializer.</param>
-        /// <param name="startup">The startup.</param>
-        /// <typeparam name="TTarget">The target type.</typeparam>
-        /// <returns>The service collection with platform dependencies registered.</returns>
-        public static IServiceCollection AddPlatform<TTarget>(this IServiceCollection serviceCollection, TTarget target, Func<TTarget, IPlatformInitializer> startup) =>
-            startup(target).Initialize(serviceCollection);
-
-        /// <summary>
-        /// Registers an <see cref="IApplicationStartup"/> to the service collection.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="options">The startup options.</param>
-        /// <typeparam name="T">The startup type.</typeparam>
-        /// <returns>The service collection with startup dependencies registered.</returns>
-        public static IServiceCollection AddStartup<T>(this IServiceCollection serviceCollection, Action<StartupOption>? options = null)
-            where T : class, IApplicationStartup
-        {
-            serviceCollection.AddTransient<IApplicationStartup, T>();
-
-            if (options != null)
-            {
-                var startupOption = new StartupOption(serviceCollection);
-                options.Invoke(startupOption);
-            }
 
             return serviceCollection;
         }
