@@ -5,8 +5,7 @@
       <PackageId>Rocket.Surgery.Airframe.ViewModels</PackageId>
       <AssemblyName>Rocket.Surgery.Airframe.ViewModels</AssemblyName>
       <RootNamespace>Rocket.Surgery.Airframe.ViewModels</RootNamespace>
-      <LangVersion>latest</LangVersion>
-    <Description>ReactiveUI base view model abstractions.</Description>
+    <Description>Reactive base view model abstractions.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

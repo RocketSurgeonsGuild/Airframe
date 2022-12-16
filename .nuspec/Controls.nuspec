@@ -7,11 +7,11 @@
     <owners>Rocket Surgeons Guild</owners>
     <copyright>Copyright Rodney Littles, II © 2021</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>ReactiveUI abstractions for Xamarin.Forms</description>
+    <description>Reactive abstractions for Xamarin.Forms</description>
     <projectUrl>https://github.com/RocketSurgeonsGuild/Airframe.git</projectUrl>
     <repository type="git" url="https://github.com/RocketSurgeonsGuild/Airframe"/>
     <iconUrl>https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png</iconUrl>
-    <tags>ReactiveUI Xamarin MVVM</tags>
+    <tags>Reactive Xamarin MVVM</tags>
   </metadata>
   <files>
     <file src="..\src\Controls\bin\$configuration$\xamarin.ios10\Rocket.Surgery.Airframe.dll" target="lib\xamarin.ios10" />

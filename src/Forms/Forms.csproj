@@ -5,8 +5,7 @@
       <PackageId>Rocket.Surgery.Airframe.Forms</PackageId>
       <AssemblyName>Rocket.Surgery.Airframe.Forms</AssemblyName>
       <RootNamespace>Rocket.Surgery.Airframe.Forms</RootNamespace>
-      <LangVersion>latest</LangVersion>
-    <Description>ReactiveUI base abstractions for Xamarin Forms.</Description>
+    <Description>Reactive base abstractions for Xamarin Forms.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

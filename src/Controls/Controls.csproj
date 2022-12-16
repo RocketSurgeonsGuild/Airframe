@@ -4,9 +4,8 @@
     <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20</TargetFrameworks>
     <AssemblyName>Rocket.Surgery.Airframe</AssemblyName>
     <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
-    <LangVersion>latest</LangVersion>
     <PackageId>Rocket.Surgery.Airframe</PackageId>
-    <Description>ReactiveUI base platform abstractions.</Description>
+    <Description>Reactive base platform abstractions.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

@@ -3,11 +3,11 @@
       <Authors>RLittlesII</Authors>
       <Company>Rocket Surgeons Guild</Company>
       <copyright>Copyright Rodney Littles, II © 2021</copyright>
-      <LangVersion>latest</LangVersion>
       <!-- <nullable>enable</nullable> -->
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
       <EnableNETAnalyzers>true</EnableNETAnalyzers>
       <NukeTelemetryVersion>1</NukeTelemetryVersion>
+      <LangVersion>10</LangVersion>
     </PropertyGroup>
 </Project>

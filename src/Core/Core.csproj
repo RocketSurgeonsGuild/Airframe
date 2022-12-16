@@ -5,7 +5,6 @@
         <PackageId>Rocket.Surgery.Airframe.Core</PackageId>
         <AssemblyName>Rocket.Surgery.Airframe.Core</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
-        <LangVersion>latest</LangVersion>
         <Description>Abstractions and base implementations for Airframe.</Description>
     </PropertyGroup>
 
