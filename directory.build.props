@@ -8,6 +8,6 @@
       <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
       <EnableNETAnalyzers>true</EnableNETAnalyzers>
       <NukeTelemetryVersion>1</NukeTelemetryVersion>
-      <LangVersion>10</LangVersion>
+      <LangVersion>preview</LangVersion>
     </PropertyGroup>
 </Project>
