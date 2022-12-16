@@ -60,9 +60,7 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
         public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection) =>
             ConfigureAppSettings(
                 serviceCollection,
-                new ConfigurationBuilder()
-               .AddJsonFile("appsettings.json", optional: false)
-               .AddJsonFile("appsettings.dev.json", optional: true));
+                new ConfigurationBuilder());
 
         /// <summary>
         /// Configures the app settings for the service collection.
@@ -101,7 +99,48 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
                .AddJsonFile("appsettings.json", optional: false)
                .AddJsonFile("appsettings.dev.json", optional: true);
 
-            serviceCollection.AddSingleton<IConfiguration>(_ => builder.AddConfiguration(configuration).Build());
+            return serviceCollection.AddSingleton<IConfiguration>(provider =>
+                {
+                    provider.GetService<Action<IConfigurationBuilder>>()?.Invoke(builder);
+
+                    return builder.AddConfiguration(configuration).Build();
+                });
+        }
+
+        /// <summary>
+        /// Registers a builder delegate for use in application configuration construction.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="configurationBuilder">The configuration builder.</param>
+        /// <returns>The service collection with startup dependencies registered.</returns>
+        public static IServiceCollection ConfigureBuilder(this IServiceCollection serviceCollection, Action<IConfigurationBuilder> configurationBuilder) =>
+            serviceCollection.AddSingleton<Action<IConfigurationBuilder>>(_ => configurationBuilder);
+
+        /// <summary>
+        /// Registers an <see cref="IApplicationStartup"/> to the service collection.
+        /// </summary>
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="configuration">The configuration builder.</param>
+        /// <param name="options">The startup options.</param>
+        /// <returns>The service collection with startup dependencies registered.</returns>
+        public static IServiceCollection ConfigureSettings(
+            this IServiceCollection serviceCollection,
+            Action<IConfigurationBuilder>? configuration,
+            Action<ConfigurationOptions>? options)
+        {
+            if (options == null)
+            {
+                return serviceCollection;
+            }
+
+            var configurationBuilder = new ConfigurationBuilder();
+
+            configuration?.Invoke(configurationBuilder);
+
+            ConfigureAppSettings(serviceCollection, configurationBuilder);
+
+            var startupOption = new ConfigurationOptions(serviceCollection);
+            options.Invoke(startupOption);
 
             return serviceCollection;
         }
@@ -110,20 +149,19 @@ namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
         /// Registers an <see cref="IApplicationStartup"/> to the service collection.
         /// </summary>
         /// <param name="serviceCollection">The service collection.</param>
-        /// <param name="configuration">The configuration.</param>
         /// <param name="options">The startup options.</param>
-        /// <typeparam name="T">The startup type.</typeparam>
         /// <returns>The service collection with startup dependencies registered.</returns>
-        public static IServiceCollection ConfigureSettings(
+        public static IServiceCollection ConfigureOptions(
             this IServiceCollection serviceCollection,
-            IConfiguration configuration,
-            Action<ConfigurationOption>? options = null)
+            Action<ConfigurationOptions>? options)
         {
-            if (options != null)
+            if (options == null)
             {
-                var startupOption = new ConfigurationOption(serviceCollection);
-                options.Invoke(startupOption);
+                return serviceCollection;
             }
+
+            var startupOption = new ConfigurationOptions(serviceCollection);
+            options.Invoke(startupOption);
 
             return serviceCollection;
         }
