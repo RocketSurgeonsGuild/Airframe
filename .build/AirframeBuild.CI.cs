@@ -40,7 +40,7 @@ public partial class AirframeBuild
                 Run = "git fetch --prune"
             },
             new SetupDotNetStep("Use .NET 6 SDK") {
-                DotNetVersion = "6.0.x"
+                DotNetVersion = "6.0.100"
             }
         });
 
