@@ -39,9 +39,6 @@ public partial class AirframeBuild
             new RunStep("Fetch all history for all tags and branches") {
                 Run = "git fetch --prune"
             },
-            new SetupDotNetStep("Use .NET Core 3.1 SDK") {
-                DotNetVersion = "3.1.x"
-            },
             new SetupDotNetStep("Use .NET 6 SDK") {
                 DotNetVersion = "6.0.100"
             }

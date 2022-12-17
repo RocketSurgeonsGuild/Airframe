@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Refit;
@@ -8,6 +9,9 @@ namespace Rocket.Surgery.Airframe.Data.DuckDuckGo
     /// <summary>
     /// Interface that defines a duck duck go api.
     /// </summary>
+    /// <remarks>https://api.duckduckgo.com</remarks>
+    [SuppressMessage("Roslynator", "RCS1243:Duplicate word in a comment.", Justification = "Duck Duck Go")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1629:Documentation text should end with a period", Justification = "Url")]
     public interface IDuckDuckGoApiClient
     {
         /// <summary>

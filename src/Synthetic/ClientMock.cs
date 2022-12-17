@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Rocket.Surgery.Airframe.Data;
 
@@ -20,7 +19,7 @@ namespace Rocket.Surgery.Airframe.Synthetic
 
         /// <inheritdoc/>
         public virtual Task<T> Get<T>(Guid id)
-            where T : IDto => Task.FromResult((T)(object)Items.FirstOrDefault(x => x.Id == id));
+            where T : IDto => Task.FromResult((T)(object)Items.Find(item => item.Id == id));
 
         /// <inheritdoc/>
         public virtual Task<IEnumerable<T>> GetAll<T>()
@@ -31,8 +30,12 @@ namespace Rocket.Surgery.Airframe.Synthetic
             where T : IDto => Task.FromResult(entity);
 
         /// <inheritdoc/>
+        public virtual Task<T> Patch<T>(T entity)
+            where T : IDto => Task.FromResult(entity);
+
+        /// <inheritdoc/>
         public virtual Task Delete<T>(Guid id)
-            where T : IDto => Task.FromResult((T)(object)Items.FirstOrDefault(x => x.Id == id));
+            where T : IDto => Task.FromResult((T)(object)Items.Find(x => x.Id == id));
 
         /// <inheritdoc/>
         public virtual Task Delete<T>(T entity)
