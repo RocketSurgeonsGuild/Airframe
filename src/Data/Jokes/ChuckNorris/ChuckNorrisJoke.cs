@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Rocket.Surgery.Airframe.Data.ChuckNorris
+namespace Rocket.Surgery.Airframe.Data
 {
     /// <summary>
     /// Represents a joke from https://api.chucknorris.io/.
