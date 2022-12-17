@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NSubstitute;
-using Rocket.Surgery.Airframe.Data.ChuckNorris;
+using Rocket.Surgery.Airframe.Data;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 using System;
 using System.Collections;
