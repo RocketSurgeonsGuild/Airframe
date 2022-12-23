@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Rocket.Surgery.Airframe.Core.Tests.AppStart
 {

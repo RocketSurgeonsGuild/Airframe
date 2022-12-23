@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <IsPackable>false</IsPackable>
         <AssemblyName>Rocket.Surgery.Airframe.Core.Tests</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Core.Tests</RootNamespace>

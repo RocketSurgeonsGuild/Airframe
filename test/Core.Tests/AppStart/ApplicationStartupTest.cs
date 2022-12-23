@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
+using System;
 using System.Reactive;
 using Xunit;
 
