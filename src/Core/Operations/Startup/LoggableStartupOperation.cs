@@ -25,10 +25,16 @@ namespace Rocket.Surgery.Airframe
         IObservable<Unit> IStartupOperation.Start() =>
 
             // Add logging.
-            Start().Finally(() => Logger.LogTrace("Completed {Operation}", GetType().Name));
+            Start().Finally(() => Logger.LogTrace("{StartupOperation}: Completed", GetType().Name));
 
         /// <inheritdoc/>
-        bool IStartupOperation.CanExecute()
+        IObservable<Unit> IOperation<Unit>.Execute() =>
+
+            // Add logging.
+            ((IStartupOperation)this).Start();
+
+        /// <inheritdoc/>
+        bool ICanExecute.CanExecute()
         {
             var canExecute = CanExecute();
             Logger.LogTrace("Can Execute: {CanExecute}", canExecute);
