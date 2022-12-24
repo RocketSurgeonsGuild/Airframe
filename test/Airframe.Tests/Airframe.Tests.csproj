@@ -3,6 +3,8 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <IsPackable>false</IsPackable>
+        <AssemblyName>Rocket.Surgery.Airframe.Tests</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

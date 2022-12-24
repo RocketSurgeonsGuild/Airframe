@@ -79,13 +79,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance", "benchmarks\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftDependencyInjection", "src\MicrosoftDependencyInjection\MicrosoftDependencyInjection.csproj", "{F8F14442-7FE5-41DE-8C57-3D9D0DDE246D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Shiny.Tests", "test\Airframe.Shiny.Tests\Airframe.Shiny.Tests.csproj", "{63623831-9DA6-4563-BC94-F9B4007CFE89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Tests", "test\Shiny.Tests\Shiny.Tests.csproj", "{63623831-9DA6-4563-BC94-F9B4007CFE89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Data.Tests", "test\Airframe.Data.Tests\Airframe.Data.Tests.csproj", "{5EC834CA-0341-465E-AE65-A6C181FF303B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Tests", "test\Data.Tests\Data.Tests.csproj", "{5EC834CA-0341-465E-AE65-A6C181FF303B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Timers.Tests", "test\Airframe.Timers.Tests\Airframe.Timers.Tests.csproj", "{903C1B9D-F4F8-4540-8F46-E8EB8F15EAA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timers.Tests", "test\Timers.Tests\Timers.Tests.csproj", "{903C1B9D-F4F8-4540-8F46-E8EB8F15EAA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.ViewModels.Tests", "test\Airframe.ViewModels.Tests\Airframe.ViewModels.Tests.csproj", "{64AEB8AB-619C-4AF3-BA3F-407A4FA9A305}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Tests", "test\ViewModels.Tests\ViewModels.Tests.csproj", "{64AEB8AB-619C-4AF3-BA3F-407A4FA9A305}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftDependencyInjection.Tests", "test\MicrosoftDependencyInjection.Tests\MicrosoftDependencyInjection.Tests.csproj", "{6C3C3C73-C46B-4BF2-8F78-F417135D5D3E}"
 EndProject
