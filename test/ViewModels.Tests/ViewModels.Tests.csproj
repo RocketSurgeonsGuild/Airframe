@@ -3,11 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <IsPackable>false</IsPackable>
+        <RootNamespace>Rocket.Surgery.Airframe.ViewModels.Tests</RootNamespace>
+        <AssemblyName>Rocket.Surgery.Airframe.ViewModels.Tests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
-      <ProjectReference Include="..\..\src\Timers\Timers.csproj" />
+      <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj" />
       <ProjectReference Include="..\Airframe.Tests\Airframe.Tests.csproj" />
     </ItemGroup>
 
