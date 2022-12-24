@@ -28,8 +28,8 @@ namespace Rocket.Surgery.Airframe.Core.Tests
                 );
             testScheduler.AdvanceByMs(1000);
 
+            // Then
             result.Should().BeNull();
-
             testScheduler.AdvanceByMs(2001);
             result.Should().NotBeNull();
         }
