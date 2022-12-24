@@ -4,7 +4,7 @@ using System.Reactive;
 namespace Rocket.Surgery.Airframe
 {
     /// <summary>
-    /// Future default interface implementations. Some call them mixins.
+    /// Future default interface implementations. Some call them mixins. I might call them obsolete.
     /// </summary>
     public static class ApplicationStartupExtensions
     {

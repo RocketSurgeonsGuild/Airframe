@@ -10,12 +10,14 @@ namespace Rocket.Surgery.Airframe
     {
         /// <inheritdoc/>
         IObservable<Unit> IStartupOperation.Start() =>
-
-            // Add logging.
             Start();
 
         /// <inheritdoc/>
-        bool IStartupOperation.CanExecute() => CanExecute();
+        IObservable<Unit> IOperation<Unit>.Execute() =>
+            Start();
+
+        /// <inheritdoc/>
+        bool ICanExecute.CanExecute() => CanExecute();
 
         /// <summary>
         /// Template method for the startup operation.

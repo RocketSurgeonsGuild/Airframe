@@ -4,7 +4,7 @@ using Rocket.Surgery.Extensions.Testing.Fixtures;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rocket.Surgery.Airframe.Core.Tests.AppStart
+namespace Rocket.Surgery.Airframe.Core.Tests
 {
     internal class ApplicationStartupFixture : ITestFixtureBuilder
     {

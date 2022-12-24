@@ -5,7 +5,7 @@ using System;
 using System.Reactive;
 using Xunit;
 
-namespace Rocket.Surgery.Airframe.Core.Tests.AppStart
+namespace Rocket.Surgery.Airframe.Core.Tests
 {
     public class ApplicationStartupTest
     {
