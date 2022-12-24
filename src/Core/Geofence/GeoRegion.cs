@@ -5,7 +5,7 @@ namespace Rocket.Surgery.Airframe
     /// <summary>
     /// Represents a geographical region.
     /// </summary>
-    public class GeoRegion : IDisposable
+    public class GeoRegion
     {
         /// <summary>
         /// Gets or sets the region identifier.
@@ -31,25 +31,5 @@ namespace Rocket.Surgery.Airframe
         /// Gets or sets the radius of the region.
         /// </summary>
         public double Radius { get; set; }
-
-        /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-            }
-        }
     }
 }
