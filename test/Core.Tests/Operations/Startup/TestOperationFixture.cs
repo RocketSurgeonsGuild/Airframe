@@ -10,8 +10,10 @@ namespace Rocket.Surgery.Airframe.Core.Tests
 
         public TestOperationFixture WithCanExecute(bool canExecute) => this.With(ref _canExecute, canExecute);
 
-        public IOperation AsOperation() => this.Build();
+        public IOperation AsOperation() => Build();
 
-        private TestOperation Build() => new TestOperation(_canExecute);
+        public IStartupOperation AsStartupOperation() => Build();
+
+        private TestOperation Build() => new(_canExecute);
     }
 }

@@ -61,5 +61,36 @@ namespace Rocket.Surgery.Airframe.Core.Tests
             // Then
             testOperation.Executed.Should().BeTrue();
         }
+
+        [Fact]
+        public void GivenScheduler_WhenStartup_ThenExecuted()
+        {
+            // Given
+            var testScheduler = new TestScheduler();
+            var testOperation = new TestOperation();
+            var sut = new ApplicationStartupFixture().WithStartupOperations(testOperation).AsInterface();
+            using var _ = sut.Startup(1, testScheduler).Subscribe();
+
+            // When
+            testScheduler.Start();
+
+            // Then
+            testOperation.Executed.Should().BeTrue();
+        }
+
+        [Fact]
+        public void GivenScheduler_WhenStartup_ThenNotExecuted()
+        {
+            // Given
+            var testScheduler = new TestScheduler();
+            var testOperation = new TestOperation();
+            var sut = new ApplicationStartupFixture().WithStartupOperations(testOperation).AsInterface();
+
+            // When
+            using var _ = sut.Startup(1, testScheduler).Subscribe();
+
+            // Then
+            testOperation.Executed.Should().BeFalse();
+        }
     }
 }
