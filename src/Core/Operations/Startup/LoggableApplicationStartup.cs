@@ -29,10 +29,11 @@ namespace Rocket.Surgery.Airframe
 
         /// <inheritdoc/>
         IObservable<Unit> IApplicationStartup.Startup(int concurrentOperations) => Startup(concurrentOperations)
-           .Finally(() => _logger.LogTrace("{Startup} completed", GetType().Name));
+           .Finally(() => _logger.LogTrace("Start Complete: {Startup}", GetType().Name));
 
         /// <inheritdoc/>
-        IObservable<Unit> IApplicationStartup.Startup(int concurrentOperations, IScheduler scheduler) => null;
+        IObservable<Unit> IApplicationStartup.Startup(int concurrentOperations, IScheduler scheduler) => Startup(concurrentOperations, scheduler)
+           .Finally(() => _logger.LogTrace("Start Complete: {Startup}", GetType().Name));
 
         /// <summary>
         /// Executes the provided <see cref="IStartupOperation"/>.
