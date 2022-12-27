@@ -16,6 +16,8 @@ namespace Rocket.Surgery.Airframe.Core.Tests
         public ApplicationStartupFixture WithStartupOperations(params StartupOperationBase[] startupOperations)
             => this.With(ref _startupOperations, startupOperations);
 
-        private ApplicationStartup Build() => new ApplicationStartup(_loggerFactory, _startupOperations);
+        public IApplicationStartup AsInterface() => Build();
+
+        private ApplicationStartup Build() => new(_loggerFactory, _startupOperations);
     }
 }

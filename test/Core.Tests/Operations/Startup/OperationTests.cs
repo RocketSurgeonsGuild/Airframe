@@ -20,13 +20,26 @@ namespace Rocket.Surgery.Airframe.Core.Tests
                .Be(canExecute);
 
         [Fact]
-        public void WhenExecute_ThenExecuted()
+        public void GivenOperation_WhenExecute_ThenExecuted()
         {
             // Given
             var operation = new TestOperationFixture().AsOperation();
 
             // When
             using var _ = operation.Execute().Subscribe();
+
+            // Then
+            operation.As<TestOperation>().Executed.Should().BeTrue();
+        }
+
+        [Fact]
+        public void GivenStartupOperation_WhenExecute_ThenExecuted()
+        {
+            // Given
+            var operation = new TestOperationFixture().AsStartupOperation();
+
+            // When
+            using var _ = operation.Start().Subscribe();
 
             // Then
             operation.As<TestOperation>().Executed.Should().BeTrue();
