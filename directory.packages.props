@@ -63,7 +63,7 @@
     <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
     <PackageVersion Include="Toast.iOS" Version="1.2.0" />
     <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2515" />
-    <PackageVersion Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageVersion Include="Xamarin.Essentials" Version="1.7.4" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="coverlet.collector" Version="3.2.0" />
