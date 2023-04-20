@@ -72,7 +72,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
     <PackageVersion Include="Microsoft.Reactive.Testing" Version="5.0.0" />
     <PackageVersion Include="NSubstitute" Version="4.4.0" />
-    <PackageVersion Include="ReactiveUI.Testing" Version="13.3.2" />
+    <PackageVersion Include="ReactiveUI.Testing" Version="18.4.34" />
     <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="7.1.4" />
     <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="7.1.4" />
     <PackageVersion Include="xunit" Version="2.4.2" />
