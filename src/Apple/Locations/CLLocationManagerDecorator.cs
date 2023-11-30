@@ -1,9 +1,7 @@
 using System;
 using CoreLocation;
 using Foundation;
-using JetBrains.Annotations;
 using ObjCRuntime;
-using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {

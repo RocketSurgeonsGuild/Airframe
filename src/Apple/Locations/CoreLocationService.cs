@@ -15,7 +15,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// Initializes a new instance of the <see cref="CoreLocationService"/> class.
         /// </summary>
         public CoreLocationService()
-            : this(new CLLocationManagerDecorator(new CLLocationManager()))
+            : this(new CLLocationManagerDecorator())
         {
         }
 

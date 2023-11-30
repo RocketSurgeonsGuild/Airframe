@@ -5,6 +5,7 @@
         <AssemblyName>Rocket.Surgery.Airframe.Apple</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Apple</RootNamespace>
         <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
