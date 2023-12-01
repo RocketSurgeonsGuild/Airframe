@@ -3,7 +3,6 @@ using System.Reactive;
 using System.Reactive.Linq;
 using CoreLocation;
 using Foundation;
-using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
@@ -12,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Apple
     /// </summary>
     public class CoreLocationManager : ICoreLocationManager
     {
-        private readonly Lazy<CLLocationManager> _locationManager = new Lazy<CLLocationManager>();
+        private readonly Lazy<CLLocationManager> _locationManager = new(() => new CLLocationManager());
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CoreLocationManager"/> class.

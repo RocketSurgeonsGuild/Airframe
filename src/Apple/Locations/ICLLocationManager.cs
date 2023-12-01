@@ -1,14 +1,15 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
-using Rocket.Surgery.Airframe;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
     /// Interface representing a <see cref="CLLocationManager"/> at the iOS platform level.
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Apple")]
     public interface ICLLocationManager
     {
         /// <summary>

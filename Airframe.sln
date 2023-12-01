@@ -49,6 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF5
 		.nuspec\Shiny.nuspec = .nuspec\Shiny.nuspec
 		.nuspec\Timers.nuspec = .nuspec\Timers.nuspec
 		.nuspec\MicrosoftDependencyInjection.nuspec = .nuspec\MicrosoftDependencyInjection.nuspec
+		.nuspec\Apple.nuspec = .nuspec\Apple.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".build", ".build\.build.csproj", "{8322904C-5A48-4A92-A5EA-2AF91F8C4595}"
