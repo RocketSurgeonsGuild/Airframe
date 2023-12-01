@@ -15,8 +15,10 @@
     </metadata>
     <files>
 
-        <file src="..\src\Apple\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Apple.dll" target="lib\netstandard2.0" />
-        <file src="..\src\Apple\bin\$configuration$\netstandard2.0\Rocket.Surgery.Airframe.Apple.pdb" target="lib\netstandard2.0" />
+        <file src="..\src\Apple\bin\$configuration$\xamarin.ios10\Rocket.Surgery.Airframe.Apple.dll" target="lib\xamarin.ios10" />
+        <file src="..\src\Apple\bin\$configuration$\xamarin.ios10\Rocket.Surgery.Airframe.Apple.pdb" target="lib\xamarin.ios10" />
+        <file src="..\src\Apple\bin\$configuration$\xamarin.mac20\Rocket.Surgery.Airframe.Apple.dll" target="lib\xamarin.mac20" />
+        <file src="..\src\Apple\bin\$configuration$\xamarin.mac20\Rocket.Surgery.Airframe.Apple.pdb" target="lib\xamarin.mac20" />
 
     </files>
 </package>
