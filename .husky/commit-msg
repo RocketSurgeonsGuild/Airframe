@@ -1,22 +1,32 @@
 #!/usr/bin/env bash
 # Automatically adds branch prefix to the beginning of the first commit message.
-BRANCH=$(git branch | grep "*" | sed 's/* //'| sed -e 's/^[[:space:]]*//')
-echo "$BRANCH"
 
-BRANCH_PREFIX=$(git branch | grep "*" | sed 's|*\(.*\)/.*|\1|'| sed -e 's/^[[:space:]]*//')
-echo "$BRANCH_PREFIX"
+# Get the current branch name
+BRANCH=$(git symbolic-ref --short HEAD)
+echo "Current Branch: $BRANCH"
 
-FIRST_COMMIT=$(git log master.."$BRANCH" --oneline | tail -1)
-echo "First Commit:$FIRST_COMMIT"
+# Extract the prefix from the branch name
+BRANCH_PREFIX=$(echo "$BRANCH" | cut -d'/' -f1)
+echo "Branch Prefix: $BRANCH_PREFIX"
 
-if test -z "$FIRST_COMMIT"
-then
-  if ! head -1 "$1" | grep -qE "^(feature|fix|ci|chore|docs|test|style|enhancement)(\(.+?\))?: .{1,}$"; then
-    echo "$BRANCH_PREFIX:" $(cat "$1")  > "$1"
-    exit 0
-    else
-      echo "mysterious:" $(cat "$1")  > "$1"
+# Define acceptable prefixes for commit messages
+acceptable_prefixes=("feature" "screen" "fix" "ci" "chore" "docs" "test" "style" "enhancement")
+
+# Get the first commit message
+FIRST_COMMIT=$(git log --format=%B --reverse main.."$BRANCH" | head -n 1)
+echo "First Commit: $FIRST_COMMIT"
+
+# Check if the first commit message already has an acceptable prefix
+has_acceptable_prefix=false
+for prefix in "${acceptable_prefixes[@]}"; do
+  if [[ "$FIRST_COMMIT" == "$prefix"* ]]; then
+    has_acceptable_prefix=true
+    break
   fi
-fi
+done
 
-#gh api "/repos/{owner}/{repo}/labels" -q ".[].name"
+if ! $has_acceptable_prefix; then
+  # Add the branch prefix as the first line of the commit message
+  sed -i.bak "1s/^/$BRANCH_PREFIX: /" "$1"
+  rm "$1.bak"
+fi
