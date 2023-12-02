@@ -14,7 +14,7 @@ namespace Rocket.Surgery.Airframe
         /// </summary>
         /// <param name="concurrentOperations">The maximum concurrent operations. </param>
         /// <returns>A completion notification.</returns>
-        IObservable<Unit> Startup(int concurrentOperations);
+        IObservable<Unit> Startup(int concurrentOperations = 1);
 
         /// <summary>
         /// Starts the application life cycle.
