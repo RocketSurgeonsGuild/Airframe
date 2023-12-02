@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
@@ -8,6 +9,7 @@ namespace Rocket.Surgery.Airframe.Apple
     /// <summary>
     /// Represents a <see cref="CLLocationManager"/>.
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Apple")]
     public sealed class CLLocationManagerDecorator : ICLLocationManager
     {
         private readonly Lazy<CLLocationManager> _locationManager;
@@ -15,10 +17,9 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <summary>
         /// Initializes a new instance of the <see cref="CLLocationManagerDecorator"/> class.
         /// </summary>
-        /// <param name="manager">The platform location manager.</param>
-        public CLLocationManagerDecorator(CLLocationManager? manager = null)
+        public CLLocationManagerDecorator()
         {
-            _locationManager = new Lazy<CLLocationManager>(() => manager ?? new CLLocationManager());
+            _locationManager = new Lazy<CLLocationManager>(() => new CLLocationManager());
             _locationManager.Value.AuthorizationChanged += AuthorizationChanged;
             _locationManager.Value.DeferredUpdatesFinished += DeferredUpdatesFinished;
             _locationManager.Value.DidDetermineState += DidDetermineState;
@@ -38,52 +39,52 @@ namespace Rocket.Surgery.Airframe.Apple
         }
 
         /// <inheritdoc />
-        public event EventHandler<CLAuthorizationChangedEventArgs> AuthorizationChanged;
+        public event EventHandler<CLAuthorizationChangedEventArgs>? AuthorizationChanged;
 
         /// <inheritdoc />
-        public event EventHandler<NSErrorEventArgs> DeferredUpdatesFinished;
+        public event EventHandler<NSErrorEventArgs>? DeferredUpdatesFinished;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionStateDeterminedEventArgs> DidDetermineState;
+        public event EventHandler<CLRegionStateDeterminedEventArgs>? DidDetermineState;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionBeaconsConstraintFailedEventArgs> DidFailRangingBeacons;
+        public event EventHandler<CLRegionBeaconsConstraintFailedEventArgs>? DidFailRangingBeacons;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionBeaconsConstraintRangedEventArgs> DidRangeBeaconsSatisfyingConstraint;
+        public event EventHandler<CLRegionBeaconsConstraintRangedEventArgs>? DidRangeBeaconsSatisfyingConstraint;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionEventArgs> DidStartMonitoringForRegion;
+        public event EventHandler<CLRegionEventArgs>? DidStartMonitoringForRegion;
 
         /// <inheritdoc />
-        public event EventHandler<CLVisitedEventArgs> DidVisit;
+        public event EventHandler<CLVisitedEventArgs>? DidVisit;
 
         /// <inheritdoc />
-        public event EventHandler<NSErrorEventArgs> Failed;
+        public event EventHandler<NSErrorEventArgs>? Failed;
 
         /// <inheritdoc />
-        public event EventHandler LocationUpdatesPaused;
+        public event EventHandler? LocationUpdatesPaused;
 
         /// <inheritdoc />
-        public event EventHandler LocationUpdatesResumed;
+        public event EventHandler? LocationUpdatesResumed;
 
         /// <inheritdoc />
-        public event EventHandler<CLLocationsUpdatedEventArgs> LocationsUpdated;
+        public event EventHandler<CLLocationsUpdatedEventArgs>? LocationsUpdated;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionErrorEventArgs> MonitoringFailed;
+        public event EventHandler<CLRegionErrorEventArgs>? MonitoringFailed;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionEventArgs> RegionEntered;
+        public event EventHandler<CLRegionEventArgs>? RegionEntered;
 
         /// <inheritdoc />
-        public event EventHandler<CLRegionEventArgs> RegionLeft;
+        public event EventHandler<CLRegionEventArgs>? RegionLeft;
 
         /// <inheritdoc />
-        public event EventHandler<CLHeadingUpdatedEventArgs> UpdatedHeading;
+        public event EventHandler<CLHeadingUpdatedEventArgs>? UpdatedHeading;
 
         /// <inheritdoc />
-        public event EventHandler<CLLocationUpdatedEventArgs> UpdatedLocation;
+        public event EventHandler<CLLocationUpdatedEventArgs>? UpdatedLocation;
 
         /// <inheritdoc />
         public void DismissHeadingCalibrationDisplay() => _locationManager.Value.DismissHeadingCalibrationDisplay();
@@ -110,10 +111,10 @@ namespace Rocket.Surgery.Airframe.Apple
         public void StartMonitoring(CLRegion region, double desiredAccuracy) =>
 
             // TODO: Rodney gets to fix this
-#if XAMARIN_MAC
-            _locationManager.Value.StartMonitoring(region);
-#else
+#if XAMARIN_IOS
             _locationManager.Value.StartMonitoring(region, desiredAccuracy);
+#else
+            _locationManager.Value.StartMonitoring(region);
 #endif
 
         /// <inheritdoc />

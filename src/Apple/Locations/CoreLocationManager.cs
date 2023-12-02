@@ -7,9 +7,9 @@ using Foundation;
 namespace Rocket.Surgery.Airframe.Apple
 {
     /// <summary>
-    /// Implementation of <see cref="ICoreLocationManager"/> on top of <see cref="CLLocationManager" />.
+    /// Implementation of <see cref="ICoreLocationService"/> on top of <see cref="CLLocationManager" />.
     /// </summary>
-    public class CoreLocationManager : ICoreLocationManager
+    public class CoreLocationManager : ICoreLocationService
     {
         private readonly Lazy<CLLocationManager> _locationManager = new(() => new CLLocationManager());
 
@@ -21,109 +21,111 @@ namespace Rocket.Surgery.Airframe.Apple
             AuthorizationChanged =
                 Observable
                     .FromEvent<EventHandler<CLAuthorizationChangedEventArgs>, CLAuthorizationChangedEventArgs>(
-                        x => _locationManager.Value.AuthorizationChanged += x,
-                        x => _locationManager.Value.AuthorizationChanged -= x)
+                        handler => _locationManager.Value.AuthorizationChanged += handler,
+                        handler => _locationManager.Value.AuthorizationChanged -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             DeferredUpdatesFinished =
                 Observable
                     .FromEvent<EventHandler<NSErrorEventArgs>, NSErrorEventArgs>(
-                    x => _locationManager.Value.DeferredUpdatesFinished += x,
-                    x => _locationManager.Value.DeferredUpdatesFinished -= x)
+                    handler => _locationManager.Value.DeferredUpdatesFinished += handler,
+                    handler => _locationManager.Value.DeferredUpdatesFinished -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             DidDetermineState =
                 Observable
                     .FromEvent<EventHandler<CLRegionStateDeterminedEventArgs>, CLRegionStateDeterminedEventArgs>(
-                        x => _locationManager.Value.DidDetermineState += x,
-                        x => _locationManager.Value.DidDetermineState -= x)
+                        handler => _locationManager.Value.DidDetermineState += handler,
+                        handler => _locationManager.Value.DidDetermineState -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             DidFailRangingBeacons =
                 Observable
                     .FromEvent<EventHandler<CLRegionBeaconsConstraintFailedEventArgs>,
                         CLRegionBeaconsConstraintFailedEventArgs>(
-                        x => _locationManager.Value.DidFailRangingBeacons += x,
-                        x => _locationManager.Value.DidFailRangingBeacons -= x)
+                        handler => _locationManager.Value.DidFailRangingBeacons += handler,
+                        handler => _locationManager.Value.DidFailRangingBeacons -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             DidRangeBeaconsSatisfyingConstraint =
                 Observable
                     .FromEvent<EventHandler<CLRegionBeaconsConstraintRangedEventArgs>, CLRegionBeaconsConstraintRangedEventArgs>(
-                        x => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint += x,
-                        x => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint -= x)
+                        handler => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint += handler,
+                        handler => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             DidStartMonitoringForRegion =
                 Observable
                     .FromEvent<EventHandler<CLRegionEventArgs>, CLRegionEventArgs>(
-                        x => _locationManager.Value.DidStartMonitoringForRegion += x,
-                        x => _locationManager.Value.DidStartMonitoringForRegion -= x)
+                        handler => _locationManager.Value.DidStartMonitoringForRegion += handler,
+                        handler => _locationManager.Value.DidStartMonitoringForRegion -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             DidVisit =
                 Observable
                     .FromEvent<EventHandler<CLVisitedEventArgs>, CLVisitedEventArgs>(
-                        x => _locationManager.Value.DidVisit += x, x => _locationManager.Value.DidVisit -= x)
+                        handler => _locationManager.Value.DidVisit += handler,
+                        handler => _locationManager.Value.DidVisit -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             Failed =
                 Observable
                     .FromEvent<EventHandler<NSErrorEventArgs>, NSErrorEventArgs>(
-                        x => _locationManager.Value.Failed += x, x => _locationManager.Value.Failed -= x)
+                        handler => _locationManager.Value.Failed += handler,
+                        handler => _locationManager.Value.Failed -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             LocationUpdatesPaused =
                 Observable
                     .FromEvent<EventHandler, Unit>(
-                        x => _locationManager.Value.LocationUpdatesPaused += x,
-                        x => _locationManager.Value.LocationUpdatesPaused -= x);
+                        handler => _locationManager.Value.LocationUpdatesPaused += handler,
+                        handler => _locationManager.Value.LocationUpdatesPaused -= handler);
 
             LocationUpdatesResumed =
                 Observable
                     .FromEvent<EventHandler, Unit>(
-                        x => _locationManager.Value.LocationUpdatesResumed += x,
-                        x => _locationManager.Value.LocationUpdatesResumed -= x);
+                        handler => _locationManager.Value.LocationUpdatesResumed += handler,
+                        handler => _locationManager.Value.LocationUpdatesResumed -= handler);
 
             LocationsUpdated =
                 Observable
                     .FromEvent<EventHandler<CLLocationsUpdatedEventArgs>, CLLocationsUpdatedEventArgs>(
-                        x => _locationManager.Value.LocationsUpdated += x,
-                        x => _locationManager.Value.LocationsUpdated -= x)
+                        handler => _locationManager.Value.LocationsUpdated += handler,
+                        handler => _locationManager.Value.LocationsUpdated -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             MonitoringFailed =
                 Observable
                     .FromEvent<EventHandler<CLRegionErrorEventArgs>, CLRegionErrorEventArgs>(
-                        x => _locationManager.Value.MonitoringFailed += x,
-                        x => _locationManager.Value.MonitoringFailed -= x)
+                        handler => _locationManager.Value.MonitoringFailed += handler,
+                        handler => _locationManager.Value.MonitoringFailed -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             RegionEntered =
                 Observable
                     .FromEvent<EventHandler<CLRegionEventArgs>, CLRegionEventArgs>(
-                        x => _locationManager.Value.RegionEntered += x,
-                        x => _locationManager.Value.RegionEntered -= x)
+                        handler => _locationManager.Value.RegionEntered += handler,
+                        handler => _locationManager.Value.RegionEntered -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             RegionExited =
                 Observable.FromEvent<EventHandler<CLRegionEventArgs>, CLRegionEventArgs>(
-                        x => _locationManager.Value.RegionLeft += x,
-                        x => _locationManager.Value.RegionLeft -= x)
+                        handler => _locationManager.Value.RegionLeft += handler,
+                        handler => _locationManager.Value.RegionLeft -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             UpdatedHeading =
                 Observable
                     .FromEvent<EventHandler<CLHeadingUpdatedEventArgs>, CLHeadingUpdatedEventArgs>(
-                        x => _locationManager.Value.UpdatedHeading += x,
-                        x => _locationManager.Value.UpdatedHeading -= x)
+                        handler => _locationManager.Value.UpdatedHeading += handler,
+                        handler => _locationManager.Value.UpdatedHeading -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
             UpdatedLocation =
                 Observable
                     .FromEvent<EventHandler<CLLocationUpdatedEventArgs>, CLLocationUpdatedEventArgs>(
-                        x => _locationManager.Value.UpdatedLocation += x,
-                        x => _locationManager.Value.UpdatedLocation -= x)
+                        handler => _locationManager.Value.UpdatedLocation += handler,
+                        handler => _locationManager.Value.UpdatedLocation -= handler)
                     .Select(LocationEventExtensions.ToNotification);
         }
 
