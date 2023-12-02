@@ -2,13 +2,11 @@ using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using Xunit;
 
 namespace Rocket.Surgery.Airframe.Core.Tests
 {
-    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1312:Variable names should begin with lower-case letter", Justification = "Discarded variable.")]
     public class ApplicationStartupTest
     {
         [Fact]
