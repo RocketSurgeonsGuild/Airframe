@@ -1,8 +1,8 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Rocket.Surgery.Airframe.Apple
 {
