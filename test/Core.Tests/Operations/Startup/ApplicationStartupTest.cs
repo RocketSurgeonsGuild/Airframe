@@ -2,11 +2,13 @@ using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive;
 using Xunit;
 
 namespace Rocket.Surgery.Airframe.Core.Tests
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1312:Variable names should begin with lower-case letter", Justification = "Discarded variable.")]
     public class ApplicationStartupTest
     {
         [Fact]
@@ -15,17 +17,19 @@ namespace Rocket.Surgery.Airframe.Core.Tests
             // Given
             Unit? result = null;
             var testScheduler = new TestScheduler();
-            ApplicationStartup sut = new ApplicationStartupFixture().WithStartupOperations(new ScheduledTestOperation(testScheduler, TimeSpan.FromSeconds(3)));
+            var sut =
+                new ApplicationStartupFixture()
+                   .WithStartupOperations(new ScheduledTestOperation(testScheduler, TimeSpan.FromSeconds(3)))
+                   .AsInterface();
 
             // When
-            sut.Startup()
-               .Subscribe(
-                    x =>
-                    {
-                        // Then
-                        result = x;
-                    }
-                );
+            using var _ =
+                sut.Startup()
+                   .Subscribe(unit =>
+                        {
+                            // Then
+                            result = unit;
+                        });
             testScheduler.AdvanceByMs(1000);
 
             // Then
@@ -39,7 +43,7 @@ namespace Rocket.Surgery.Airframe.Core.Tests
         {
             // Given
             var testOperation = new TestOperation(false);
-            ApplicationStartup sut = new ApplicationStartupFixture().WithStartupOperations(testOperation);
+            var sut = new ApplicationStartupFixture().WithStartupOperations(testOperation).AsInterface();
 
             // When
             using var _ = sut.Startup().Subscribe();
@@ -53,7 +57,7 @@ namespace Rocket.Surgery.Airframe.Core.Tests
         {
             // Given
             var testOperation = new TestOperation();
-            ApplicationStartup sut = new ApplicationStartupFixture().WithStartupOperations(testOperation);
+            var sut = new ApplicationStartupFixture().WithStartupOperations(testOperation).AsInterface();
 
             // When
             using var _ = sut.Startup().Subscribe();
