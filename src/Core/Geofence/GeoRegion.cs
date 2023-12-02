@@ -1,5 +1,3 @@
-using System;
-
 namespace Rocket.Surgery.Airframe
 {
     /// <summary>
