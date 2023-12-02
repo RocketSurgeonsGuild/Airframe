@@ -21,27 +21,27 @@ namespace Rocket.Surgery.Airframe
         /// <summary>
         /// Gets an observable sequence of notifications when region state is determined.
         /// </summary>
-        IObservable<RegionChangedEvent> DidDetermineState { get; }
+        IObservable<RegionChangedEvent> DeterminedState { get; }
 
         /// <summary>
         /// Gets an observable sequence of region beacon failure notifications.
         /// </summary>
-        IObservable<RegionBeaconsConstraintFailedEvent> DidFailRangingBeacons { get; }
+        IObservable<RegionBeaconsConstraintFailedEvent> FailedRangingBeacons { get; }
 
         /// <summary>
         /// Gets an observable sequence of beacon range constraint notifications.
         /// </summary>
-        IObservable<RegionBeaconsConstraintRangedEvent> DidRangeBeaconsSatisfyingConstraint { get; }
+        IObservable<RegionBeaconsConstraintRangedEvent> RangedBeaconsSatisfyingConstraint { get; }
 
         /// <summary>
         /// Gets an observable sequence of regions when the are started being monitored.
         /// </summary>
-        IObservable<RegionChangedEvent> DidStartMonitoringForRegion { get; }
+        IObservable<RegionChangedEvent> StartedMonitoringForRegion { get; }
 
         /// <summary>
         /// Gets an observable sequence of regions visited.
         /// </summary>
-        IObservable<VisitedEvent> DidVisit { get; }
+        IObservable<VisitedEvent> Visited { get; }
 
         /// <summary>
         /// Gets an observable sequence of failure notifications.

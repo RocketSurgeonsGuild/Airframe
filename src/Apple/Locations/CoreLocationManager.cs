@@ -32,14 +32,14 @@ namespace Rocket.Surgery.Airframe.Apple
                     handler => _locationManager.Value.DeferredUpdatesFinished -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
-            DidDetermineState =
+            DeterminedState =
                 Observable
                     .FromEvent<EventHandler<CLRegionStateDeterminedEventArgs>, CLRegionStateDeterminedEventArgs>(
                         handler => _locationManager.Value.DidDetermineState += handler,
                         handler => _locationManager.Value.DidDetermineState -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
-            DidFailRangingBeacons =
+            FailedRangingBeacons =
                 Observable
                     .FromEvent<EventHandler<CLRegionBeaconsConstraintFailedEventArgs>,
                         CLRegionBeaconsConstraintFailedEventArgs>(
@@ -47,21 +47,21 @@ namespace Rocket.Surgery.Airframe.Apple
                         handler => _locationManager.Value.DidFailRangingBeacons -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
-            DidRangeBeaconsSatisfyingConstraint =
+            RangedBeaconsSatisfyingConstraint =
                 Observable
                     .FromEvent<EventHandler<CLRegionBeaconsConstraintRangedEventArgs>, CLRegionBeaconsConstraintRangedEventArgs>(
                         handler => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint += handler,
                         handler => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
-            DidStartMonitoringForRegion =
+            StartedMonitoringForRegion =
                 Observable
                     .FromEvent<EventHandler<CLRegionEventArgs>, CLRegionEventArgs>(
                         handler => _locationManager.Value.DidStartMonitoringForRegion += handler,
                         handler => _locationManager.Value.DidStartMonitoringForRegion -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
-            DidVisit =
+            Visited =
                 Observable
                     .FromEvent<EventHandler<CLVisitedEventArgs>, CLVisitedEventArgs>(
                         handler => _locationManager.Value.DidVisit += handler,
@@ -136,19 +136,19 @@ namespace Rocket.Surgery.Airframe.Apple
         public IObservable<ErrorEvent> DeferredUpdatesFinished { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionChangedEvent> DidDetermineState { get; }
+        public IObservable<RegionChangedEvent> DeterminedState { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionBeaconsConstraintFailedEvent> DidFailRangingBeacons { get; }
+        public IObservable<RegionBeaconsConstraintFailedEvent> FailedRangingBeacons { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionBeaconsConstraintRangedEvent> DidRangeBeaconsSatisfyingConstraint { get; }
+        public IObservable<RegionBeaconsConstraintRangedEvent> RangedBeaconsSatisfyingConstraint { get; }
 
         /// <inheritdoc />
-        public IObservable<RegionChangedEvent> DidStartMonitoringForRegion { get; }
+        public IObservable<RegionChangedEvent> StartedMonitoringForRegion { get; }
 
         /// <inheritdoc />
-        public IObservable<VisitedEvent> DidVisit { get; }
+        public IObservable<VisitedEvent> Visited { get; }
 
         /// <inheritdoc />
         public IObservable<ErrorEvent> Failed { get; }
