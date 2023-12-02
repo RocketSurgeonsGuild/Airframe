@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Airframe.Data.Tests.DuckGo
+namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
 {
     public class DuckDuckGoFunctionTests
     {
@@ -14,10 +14,11 @@ namespace Airframe.Data.Tests.DuckGo
         public void Should_Return_ChangeSet()
         {
             // Given
-            var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
+            using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
 
             // When
-            Observable.Return(
+            using var disposable =
+                Observable.Return(
                     new List<RelatedTopic>
                     {
                         new()
@@ -26,8 +27,7 @@ namespace Airframe.Data.Tests.DuckGo
                             Result = "result",
                             Text = "text",
                         },
-                    }
-                )
+                    })
                .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
@@ -42,7 +42,7 @@ namespace Airframe.Data.Tests.DuckGo
         public void Should_Return_Cached()
         {
             // Given
-            var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
+            using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
             var firstResultGuid = Guid.NewGuid().ToString();
             sourceCache.AddOrUpdate(
                 new RelatedTopic
@@ -50,11 +50,11 @@ namespace Airframe.Data.Tests.DuckGo
                     FirstUrl = firstResultGuid,
                     Result = "result one",
                     Text = "text",
-                }
-            );
+                });
 
             // When
-            Observable.Return(
+            using var disposable =
+                Observable.Return(
                     new List<RelatedTopic>
                     {
                         new()
@@ -69,8 +69,7 @@ namespace Airframe.Data.Tests.DuckGo
                             Result = "result two",
                             Text = "text",
                         },
-                    }
-                )
+                    })
                .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
@@ -85,7 +84,7 @@ namespace Airframe.Data.Tests.DuckGo
         public void Should_Clear_Cached()
         {
             // Given
-            var sourceCache = new SourceCache<RelatedTopic, string>(x => x.FirstUrl);
+            using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
             sourceCache.AddOrUpdate(
                 new RelatedTopic
                 {
@@ -95,7 +94,8 @@ namespace Airframe.Data.Tests.DuckGo
                 });
 
             // When
-            Observable.Return(
+            using var disposable =
+                Observable.Return(
                     new List<RelatedTopic>
                     {
                         new()
@@ -104,8 +104,7 @@ namespace Airframe.Data.Tests.DuckGo
                             Result = "result two",
                             Text = "text",
                         },
-                    }
-                )
+                    })
                .Cache(sourceCache, true)
                .Bind(out var result)
                .Subscribe();
@@ -113,7 +112,7 @@ namespace Airframe.Data.Tests.DuckGo
             // Then
             result
                .Should()
-               .ContainSingle(x => x.Result == "result two");
+               .ContainSingle(topic => topic.Result == "result two");
         }
     }
 }

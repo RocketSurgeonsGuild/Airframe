@@ -1,6 +1,5 @@
 using FluentAssertions;
 using NSubstitute;
-using Rocket.Surgery.Airframe.Data;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 using System;
 using System.Collections;
@@ -9,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
 
-namespace Airframe.Data.Tests.Jokes.ChuckNorris
+namespace Rocket.Surgery.Airframe.Data.Tests.Jokes.ChuckNorris
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1312:Variable names should begin with lower-case letter", Justification = "Discarded variable.")]
     public class ChuckNorrisJokeServiceTests
@@ -113,11 +112,13 @@ namespace Airframe.Data.Tests.Jokes.ChuckNorris
         private readonly IEnumerable<string> _exclude = new[] { "One Fish", "Two Fish" };
         private readonly IEnumerable<string> _include = new[] { "Red Fish", "Blue Fish" };
 
+        /// <inheritdoc/>
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { _include, _exclude };
         }
 
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Airframe.Data.Tests.DuckGo
+namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
 {
     public class DuckDuckGoServiceTests
     {

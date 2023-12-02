@@ -1,11 +1,10 @@
-using Rocket.Surgery.Airframe.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
-namespace Airframe.Data.Tests.Jokes.ChuckNorris
+namespace Rocket.Surgery.Airframe.Data.Tests.Jokes.ChuckNorris
 {
     public class ChuckNorrisJokeApiClientMock : IChuckNorrisJokeApiClient
     {
