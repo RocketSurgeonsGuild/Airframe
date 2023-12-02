@@ -23,7 +23,7 @@
     <PackageVersion Include="Rocket.Surgery.Nuke" Version="0.18.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="BenchmarkDotNet" Version="0.13.9" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.10" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="DynamicData" Version="7.13.1" />
