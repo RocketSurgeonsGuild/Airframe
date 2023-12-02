@@ -9,7 +9,7 @@ namespace Rocket.Surgery.Airframe
     /// </summary>
     public class GeofenceService : IGeofenceService, IGeofenceStore
     {
-        private SourceCache<GeofenceRegion, string> _store = new SourceCache<GeofenceRegion, string>(x => x.Identifier);
+        private readonly SourceCache<GeofenceRegion, string> _store = new SourceCache<GeofenceRegion, string>(region => region.Identifier);
 
         /// <inheritdoc/>
         public IObservable<GeoLocation> Location { get; }

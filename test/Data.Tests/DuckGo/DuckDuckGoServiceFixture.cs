@@ -2,7 +2,7 @@ using NSubstitute;
 using Rocket.Surgery.Airframe.Data.DuckDuckGo;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 
-namespace Airframe.Data.Tests.DuckGo
+namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
 {
     internal class DuckDuckGoServiceFixture : ITestFixtureBuilder
     {
