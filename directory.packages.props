@@ -4,7 +4,7 @@
     <PackageVersion Include="Rocket.Surgery.Build.Metadata" Version="3.3.11" PrivateAssets="All" />
     <PackageVersion Include="Rocket.Surgery.MSBuild.Metadata" Version="1.1.0" />
     <PackageVersion Include="Rocket.Surgery.MSBuild.SourceLink" Version="1.1.5" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageVersion Include="Rocket.Surgery.MSBuild.CI" Version="1.1.5" />
     <PackageVersion Include="Rocket.Surgery.MSBuild.GitVersion" Version="1.1.5" />
     <PackageVersion Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" Version="1.1.5" Condition="'$(MSBuildProjectName)'!='.build'" />
