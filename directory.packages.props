@@ -20,7 +20,7 @@
     <PackageVersion Include="NuGet.CommandLine" Version="6.4.0" />
     <PackageVersion Include="Nuke.Common" Version="6.3.0" />
     <PackageVersion Include="ReportGenerator" Version="5.2.0" />
-    <PackageVersion Include="Rocket.Surgery.Nuke" Version="0.18.0" />
+    <PackageVersion Include="Rocket.Surgery.Nuke" Version="0.21.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.10" />
