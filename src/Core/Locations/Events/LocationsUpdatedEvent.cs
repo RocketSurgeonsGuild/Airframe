@@ -11,11 +11,11 @@ namespace Rocket.Surgery.Airframe
         /// Initializes a new instance of the <see cref="LocationsUpdatedEvent"/> class.
         /// </summary>
         /// <param name="locations">The locations.</param>
-        public LocationsUpdatedEvent(IEnumerable<GeoLocation> locations) => Locations = locations;
+        public LocationsUpdatedEvent(IEnumerable<IGpsLocation> locations) => Locations = locations;
 
         /// <summary>
         /// Gets the locations.
         /// </summary>
-        public IEnumerable<GeoLocation> Locations { get; }
+        public IEnumerable<IGpsLocation> Locations { get; }
     }
 }

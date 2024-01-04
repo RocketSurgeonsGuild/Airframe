@@ -39,21 +39,6 @@ namespace Rocket.Surgery.Airframe.Apple
                         handler => _locationManager.Value.DidDetermineState -= handler)
                     .Select(LocationEventExtensions.ToNotification);
 
-            FailedRangingBeacons =
-                Observable
-                    .FromEvent<EventHandler<CLRegionBeaconsConstraintFailedEventArgs>,
-                        CLRegionBeaconsConstraintFailedEventArgs>(
-                        handler => _locationManager.Value.DidFailRangingBeacons += handler,
-                        handler => _locationManager.Value.DidFailRangingBeacons -= handler)
-                    .Select(LocationEventExtensions.ToNotification);
-
-            RangedBeaconsSatisfyingConstraint =
-                Observable
-                    .FromEvent<EventHandler<CLRegionBeaconsConstraintRangedEventArgs>, CLRegionBeaconsConstraintRangedEventArgs>(
-                        handler => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint += handler,
-                        handler => _locationManager.Value.DidRangeBeaconsSatisfyingConstraint -= handler)
-                    .Select(LocationEventExtensions.ToNotification);
-
             StartedMonitoringForRegion =
                 Observable
                     .FromEvent<EventHandler<CLRegionEventArgs>, CLRegionEventArgs>(
@@ -137,12 +122,6 @@ namespace Rocket.Surgery.Airframe.Apple
 
         /// <inheritdoc />
         public IObservable<RegionChangedEvent> DeterminedState { get; }
-
-        /// <inheritdoc />
-        public IObservable<RegionBeaconsConstraintFailedEvent> FailedRangingBeacons { get; }
-
-        /// <inheritdoc />
-        public IObservable<RegionBeaconsConstraintRangedEvent> RangedBeaconsSatisfyingConstraint { get; }
 
         /// <inheritdoc />
         public IObservable<RegionChangedEvent> StartedMonitoringForRegion { get; }

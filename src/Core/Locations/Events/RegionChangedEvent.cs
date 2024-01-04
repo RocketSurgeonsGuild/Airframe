@@ -10,7 +10,7 @@ namespace Rocket.Surgery.Airframe
         /// </summary>
         /// <param name="region">The region.</param>
         /// <param name="state">The region state.</param>
-        public RegionChangedEvent(GeoRegion region, RegionState? state = default)
+        public RegionChangedEvent(GeoRegion region, RegionState? state = RegionState.Unknown)
         {
             Region = region;
             State = state;
