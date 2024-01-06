@@ -20,7 +20,7 @@ using System.Linq;
 [DotNetVerbosityMapping]
 [MSBuildVerbosityMapping]
 [NuGetVerbosityMapping]
-// [EnsureGitHooks(GitHook.CommitMsg)]
+[EnsureGitHooks(GitHook.CommitMsg)]
 public partial class AirframeBuild : NukeBuild,
                         ICanClean,
                         ICanRestoreWithMsBuild,
@@ -46,7 +46,7 @@ public partial class AirframeBuild : NukeBuild,
     [OptionalGitRepository]
     public GitRepository? GitRepository { get; }
 
-    [ComputedGitVersion]
+    [ComputedGitVersion(null)]
     public GitVersion GitVersion { get; } = null!;
 
     private Target Default => _ => _
