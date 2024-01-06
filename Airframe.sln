@@ -1,55 +1,39 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC256BE7-7896-4159-BB31-9F3D22860391}"
 	ProjectSection(SolutionItems) = preProject
-		src\directory.build.props = src\directory.build.props
-		src\directory.build.targets = src\directory.build.targets
+		src/directory.build.props = src/directory.build.props
+		src/directory.build.targets = src/directory.build.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{843C3844-BA79-40AE-B102-F5AFA0F4AD77}"
+	ProjectSection(SolutionItems) = preProject
+		test/directory.build.props = test/directory.build.props
+		test/directory.build.targets = test/directory.build.targets
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "src\ViewModels\ViewModels.csproj", "{CA4B6910-402D-40C3-99C6-8DF8E3ABF041}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{465CF782-8943-4AC4-8149-80EF65C5C66C}"
-	ProjectSection(SolutionItems) = preProject
-		analyzers.ruleset = analyzers.ruleset
-		directory.build.props = directory.build.props
-		directory.build.targets = directory.build.targets
-		NuGet.config = NuGet.config
-		README.md = README.md
-		stylecop.json = stylecop.json
-		.gitignore = .gitignore
-		.editorconfig = .editorconfig
-		.codecov.yml = .codecov.yml
-		directory.packages.props = directory.packages.props
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controls", "src\Controls\Controls.csproj", "{F717BFF2-0DD5-453D-AB60-1CA85D7FCB87}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{001008EE-6848-47BA-9F6C-A89B0E74D737}"
-	ProjectSection(SolutionItems) = preProject
-		GitVersion.yml = GitVersion.yml
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms", "src\Forms\Forms.csproj", "{94F40576-6748-40AB-A541-ED6A45035796}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF56E4B-1F2D-4839-B857-9C878FC2F55B}"
 	ProjectSection(SolutionItems) = preProject
-		.nuspec\Controls.nuspec = .nuspec\Controls.nuspec
-		.nuspec\Forms.nuspec = .nuspec\Forms.nuspec
-		.nuspec\ViewModels.nuspec = .nuspec\ViewModels.nuspec
-		.nuspec\Popup.nuspec = .nuspec\Popup.nuspec
-		.nuspec\Composition.nuspec = .nuspec\Composition.nuspec
-		.nuspec\Data.nuspec = .nuspec\Data.nuspec
-		.nuspec\Synthetic.nuspec = .nuspec\Synthetic.nuspec
-		.nuspec\Core.nuspec = .nuspec\Core.nuspec
-		.nuspec\Shiny.nuspec = .nuspec\Shiny.nuspec
-		.nuspec\Timers.nuspec = .nuspec\Timers.nuspec
-		.nuspec\MicrosoftDependencyInjection.nuspec = .nuspec\MicrosoftDependencyInjection.nuspec
-		.nuspec\Apple.nuspec = .nuspec\Apple.nuspec
+		.nuspec/Controls.nuspec = .nuspec/Controls.nuspec
+		.nuspec/Forms.nuspec = .nuspec/Forms.nuspec
+		.nuspec/ViewModels.nuspec = .nuspec/ViewModels.nuspec
+		.nuspec/Popup.nuspec = .nuspec/Popup.nuspec
+		.nuspec/Composition.nuspec = .nuspec/Composition.nuspec
+		.nuspec/Data.nuspec = .nuspec/Data.nuspec
+		.nuspec/Synthetic.nuspec = .nuspec/Synthetic.nuspec
+		.nuspec/Core.nuspec = .nuspec/Core.nuspec
+		.nuspec/Shiny.nuspec = .nuspec/Shiny.nuspec
+		.nuspec/Timers.nuspec = .nuspec/Timers.nuspec
+		.nuspec/MicrosoftDependencyInjection.nuspec = .nuspec/MicrosoftDependencyInjection.nuspec
+		.nuspec/Apple.nuspec = .nuspec/Apple.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".build", ".build\.build.csproj", "{8322904C-5A48-4A92-A5EA-2AF91F8C4595}"
@@ -75,6 +59,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny", "src\Shiny\Shiny.csproj", "{DCA948A5-DCE2-4F0E-B011-5BCC5D9C206F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{0AF062D9-82F6-4384-B01A-137DF8A880D1}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance", "benchmarks\Performance\Performance.csproj", "{F1D890A7-A606-4659-BC44-643B6D54B66C}"
 EndProject
@@ -91,6 +77,48 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftDependencyInjection.Tests", "test\MicrosoftDependencyInjection.Tests\MicrosoftDependencyInjection.Tests.csproj", "{6C3C3C73-C46B-4BF2-8F78-F417135D5D3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "test\Core.Tests\Core.Tests.csproj", "{A250A99B-0225-4B5D-9753-ED1DF770D61D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{786B1ADD-7D0E-448E-80C2-1EEDB7393342}"
+	ProjectSection(SolutionItems) = preProject
+		GitVersion.yml = GitVersion.yml
+		.config/dotnet-tools.json = .config/dotnet-tools.json
+		directory.build.props = directory.build.props
+		directory.packages.props = directory.packages.props
+		directory.build.targets = directory.build.targets
+		.editorconfig = .editorconfig
+		build.cmd = build.cmd
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		GitReleaseManager.yaml = GitReleaseManager.yaml
+		.codecov.yml = .codecov.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		.gitignore = .gitignore
+		NuGet.config = NuGet.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6813747B-13DB-4144-AB19-22C84E734517}"
+	ProjectSection(SolutionItems) = preProject
+		.github/labels.yml = .github/labels.yml
+		.github/release.yml = .github/release.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9FF05512-3C79-4FF9-8006-1313E2AF8A65}"
+	ProjectSection(SolutionItems) = preProject
+		.github/workflows/auto-label.yml = .github/workflows/auto-label.yml
+		.github/workflows/ci.yml = .github/workflows/ci.yml
+		.github/workflows/close-milestone.yml = .github/workflows/close-milestone.yml
+		.github/workflows/dependabot-merge.yml = .github/workflows/dependabot-merge.yml
+		.github/workflows/draft-release.yml = .github/workflows/draft-release.yml
+		.github/workflows/publish-nuget.yml = .github/workflows/publish-nuget.yml
+		.github/workflows/sync-labels.yml = .github/workflows/sync-labels.yml
+		.github/workflows/update-milestone.yml = .github/workflows/update-milestone.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{F9E0EBA5-5737-440E-8F30-20CCFC207E9E}"
+	ProjectSection(SolutionItems) = preProject
+		.husky/commit-msg = .husky/commit-msg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -192,7 +220,7 @@ Global
 		{CA4B6910-402D-40C3-99C6-8DF8E3ABF041} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{F717BFF2-0DD5-453D-AB60-1CA85D7FCB87} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{94F40576-6748-40AB-A541-ED6A45035796} = {BC256BE7-7896-4159-BB31-9F3D22860391}
-		{8322904C-5A48-4A92-A5EA-2AF91F8C4595} = {001008EE-6848-47BA-9F6C-A89B0E74D737}
+		{8322904C-5A48-4A92-A5EA-2AF91F8C4595} = {786B1ADD-7D0E-448E-80C2-1EEDB7393342}
 		{16FCCE0B-9C29-48D2-8CE7-0DC1D616B602} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{36A9DAA0-FCD4-41A3-A046-C755937CA701} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{D8A98936-BA4C-44A9-BD39-34DCBEF665C9} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
@@ -211,6 +239,9 @@ Global
 		{64AEB8AB-619C-4AF3-BA3F-407A4FA9A305} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{6C3C3C73-C46B-4BF2-8F78-F417135D5D3E} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{A250A99B-0225-4B5D-9753-ED1DF770D61D} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
+		{6813747B-13DB-4144-AB19-22C84E734517} = {786B1ADD-7D0E-448E-80C2-1EEDB7393342}
+		{9FF05512-3C79-4FF9-8006-1313E2AF8A65} = {6813747B-13DB-4144-AB19-22C84E734517}
+		{F9E0EBA5-5737-440E-8F30-20CCFC207E9E} = {786B1ADD-7D0E-448E-80C2-1EEDB7393342}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F0DF64A-C8D5-41DF-B4C9-5C70526644DF}

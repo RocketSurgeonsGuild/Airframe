@@ -5,10 +5,11 @@ using Rocket.Surgery.Nuke;
 using Rocket.Surgery.Nuke.ContinuousIntegration;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.GithubActions;
+using System;
 
 [GitHubActionsSteps("ci", GitHubActionsImage.MacOsLatest,
     AutoGenerate = true,
-    On = new[] { GitHubActionsTrigger.Push },
+    On = new[] { RocketSurgeonGitHubActionsTrigger.Push },
     OnPushTags = new[] { "v*" },
     OnPushBranches = new[] { "master", "next", "feature/*" },
     OnPullRequestBranches = new[] { "master", "next" },
@@ -16,22 +17,24 @@ using Rocket.Surgery.Nuke.GithubActions;
     NonEntryTargets = new[]
     {
         nameof(ICIEnvironment.CIEnvironment),
-        nameof(ITriggerCodeCoverageReports.Trigger_Code_Coverage_Reports),
-        nameof(ITriggerCodeCoverageReports.Generate_Code_Coverage_Report_Cobertura),
-        nameof(IGenerateCodeCoverageBadges.Generate_Code_Coverage_Badges),
-        nameof(IGenerateCodeCoverageReport.Generate_Code_Coverage_Report),
-        nameof(IGenerateCodeCoverageSummary.Generate_Code_Coverage_Summary),
+        nameof(ITriggerCodeCoverageReports.TriggerCodeCoverageReports),
+        nameof(ITriggerCodeCoverageReports.GenerateCodeCoverageReportCobertura),
+        nameof(IGenerateCodeCoverageBadges.GenerateCodeCoverageBadges),
+        nameof(IGenerateCodeCoverageReport.GenerateCodeCoverageReport),
+        nameof(IGenerateCodeCoverageSummary.GenerateCodeCoverageSummary),
         nameof(Default)
     },
     ExcludedTargets = new[] { nameof(ICanClean.Clean), nameof(ICanRestoreWithDotNetCore.DotnetToolRestore) },
     Enhancements = new[] { nameof(Middleware) }
 )]
 [PrintBuildVersion, PrintCIEnvironment, UploadLogs]
+[LocalBuildConventions]
+[ContinuousIntegrationConventions]
 public partial class AirframeBuild
 {
     public static RocketSurgeonGitHubActionsConfiguration Middleware(RocketSurgeonGitHubActionsConfiguration configuration)
     {
-        var buildJob = configuration.Jobs.Cast<RocketSurgeonsGithubActionsJob>().First(z => z.Name == "Build");
+        var buildJob = configuration.Jobs.Cast<RocketSurgeonsGithubActionsJob>().First(z => z.Name.Equals("Build", StringComparison.OrdinalIgnoreCase));
         var checkoutStep = buildJob.Steps.OfType<CheckoutStep>().Single();
         // For fetch all
         checkoutStep.FetchDepth = 0;
