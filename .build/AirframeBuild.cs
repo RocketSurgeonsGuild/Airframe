@@ -14,7 +14,6 @@ using System;
 using System.Linq;
 
 [PublicAPI]
-[CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
 [PackageIcon("https://raw.githubusercontent.com/RocketSurgeonsGuild/graphics/master/png/social-square-thrust-rounded.png")]
 [DotNetVerbosityMapping]
@@ -46,7 +45,7 @@ public partial class AirframeBuild : NukeBuild,
     [OptionalGitRepository]
     public GitRepository? GitRepository { get; }
 
-    [ComputedGitVersion(null)] public GitVersion GitVersion { get; } = null!;
+    [ComputedGitVersion] public GitVersion GitVersion { get; } = null!;
 
     private Target Default => _ => _
        .DependsOn(Restore)
