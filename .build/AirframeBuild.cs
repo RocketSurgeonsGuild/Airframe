@@ -46,8 +46,7 @@ public partial class AirframeBuild : NukeBuild,
     [OptionalGitRepository]
     public GitRepository? GitRepository { get; }
 
-    [ComputedGitVersion(null)]
-    public GitVersion GitVersion { get; } = null!;
+    [ComputedGitVersion(null)] public GitVersion GitVersion { get; } = null!;
 
     private Target Default => _ => _
        .DependsOn(Restore)
