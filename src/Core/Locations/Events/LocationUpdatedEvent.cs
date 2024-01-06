@@ -10,7 +10,7 @@ namespace Rocket.Surgery.Airframe
         /// </summary>
         /// <param name="previous">The previous.</param>
         /// <param name="current">The current.</param>
-        public LocationUpdatedEvent(GeoLocation previous, GeoLocation current)
+        public LocationUpdatedEvent(IGpsLocation? previous, IGpsLocation current)
         {
             Previous = previous;
             Current = current;
@@ -19,11 +19,11 @@ namespace Rocket.Surgery.Airframe
         /// <summary>
         /// Gets the previous location.
         /// </summary>
-        public GeoLocation Previous { get; }
+        public IGpsLocation? Previous { get; }
 
         /// <summary>
         /// Gets the current location.
         /// </summary>
-        public GeoLocation Current { get; }
+        public IGpsLocation Current { get; }
     }
 }

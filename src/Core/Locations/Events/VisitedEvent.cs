@@ -14,9 +14,9 @@ namespace Rocket.Surgery.Airframe
         /// <param name="arrivalDate">The arrival date.</param>
         /// <param name="departureDate">The departure date.</param>
         /// <param name="horizontalAccuracy">The accuracy.</param>
-        public VisitedEvent(GeoLocation location, DateTimeOffset arrivalDate, DateTimeOffset departureDate, double horizontalAccuracy)
+        public VisitedEvent(GeoCoordinate location, DateTimeOffset arrivalDate, DateTimeOffset departureDate, double horizontalAccuracy)
         {
-            GeoLocation = location;
+            Location = location;
             ArrivalDate = arrivalDate;
             DepartureDate = departureDate;
             HorizontalAccuracy = horizontalAccuracy;
@@ -30,7 +30,7 @@ namespace Rocket.Surgery.Airframe
         /// <summary>
         /// Gets the geo location.
         /// </summary>
-        public GeoLocation GeoLocation { get; }
+        public GeoCoordinate Location { get; }
 
         /// <summary>
         /// Gets the departure date.

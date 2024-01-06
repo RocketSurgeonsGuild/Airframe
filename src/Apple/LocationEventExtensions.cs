@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive;
 using CoreLocation;
 using Foundation;
 
@@ -36,22 +35,6 @@ namespace Rocket.Surgery.Airframe.Apple
             new(AuthorizationStatuses[args.Status]);
 
         /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsConstraintFailedEventArgs"/> to an instance of <see cref="RegionBeaconsConstraintFailedEvent"/>.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>The changed notification.</returns>
-        public static RegionBeaconsConstraintFailedEvent ToNotification(this CLRegionBeaconsConstraintFailedEventArgs args) =>
-            new();
-
-        /// <summary>
-        /// Converts the <see cref="CLRegionBeaconsConstraintRangedEventArgs"/> to an instance of <see cref="RegionBeaconsConstraintRangedEvent"/>.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>The changed notification.</returns>
-        public static RegionBeaconsConstraintRangedEvent ToNotification(this CLRegionBeaconsConstraintRangedEventArgs args) =>
-            new();
-
-        /// <summary>
         /// Converts the <see cref="CLHeadingUpdatedEventArgs"/> to an instance of <see cref="HeadingUpdatedEvent"/>.
         /// </summary>
         /// <param name="args">The arguments.</param>
@@ -65,7 +48,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static LocationsUpdatedEvent ToNotification(this CLLocationsUpdatedEventArgs args) =>
-            new(args.Locations.Select(x => new GeoLocation(x.Coordinate.Latitude, x.Coordinate.Longitude)));
+            new(args.Locations.Select(location => location.ToGpsLocation()));
 
         /// <summary>
         /// Converts the <see cref="CLLocationsUpdatedEventArgs"/> to <see cref="LocationsUpdatedEvent"/>.
@@ -74,8 +57,8 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <returns>The notification.</returns>
         public static LocationUpdatedEvent ToNotification(this CLLocationUpdatedEventArgs args) =>
             new(
-                args.OldLocation.Coordinate.ToLocation(),
-                args.NewLocation.Coordinate.ToLocation());
+                args.OldLocation.ToGpsLocation(),
+                args.NewLocation.ToGpsLocation());
 
         /// <summary>
         /// Converts the <see cref="CLRegionEventArgs"/> to <see cref="RegionChangedEvent"/>.
@@ -99,7 +82,7 @@ namespace Rocket.Surgery.Airframe.Apple
         /// <param name="args">The arguments.</param>
         /// <returns>The notification.</returns>
         public static ErrorEvent ToNotification(this NSErrorEventArgs args) =>
-            new() { };
+            new(new Exception(args.ToString()));
 
         /// <summary>
         /// Converts the <see cref="CLVisitedEventArgs"/> to <see cref="VisitedEvent"/>.
@@ -118,33 +101,25 @@ namespace Rocket.Surgery.Airframe.Apple
             new(/*args.Error*/new Exception(),  ToGeoRegion(args.Region));
 
         /// <summary>
-        /// Converts the <see cref="CLRegionErrorEventArgs"/> to <see cref="RegionErrorEvent"/>.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>The notification.</returns>
-        public static Unit ToNotification(this object obj) => Unit.Default;
-
-        /// <summary>
         /// Converts a <see cref="CLRegion"/> to a <see cref="GeoRegion"/>.
         /// </summary>
         /// <param name="region">The region.</param>
         /// <returns>The converted value.</returns>
-        public static GeoRegion ToGeoRegion(this CLRegion region) =>
-            new()
-            {
-                Identifier = region.Identifier,
-                Center = region.Center.ToLocation(),
-                Radius = region.Radius,
-                NotifyOnEntry = region.NotifyOnEntry,
-                NotifyOnExit = region.NotifyOnExit
-            };
+        public static GeoRegion ToGeoRegion(this CLRegion region) => new(
+            region.Identifier,
+            region.Center.ToLocation(),
+            region.Radius,
+            region.NotifyOnEntry,
+            region.NotifyOnExit);
 
         /// <summary>
         /// Converts the <see cref="CLLocationCoordinate2D"/> to a <see cref="GeoLocation"/>.
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns>The converted vale.</returns>
-        public static GeoLocation ToLocation(this CLLocationCoordinate2D location) => new(location.Latitude, location.Longitude);
+        public static GeoCoordinate ToLocation(this CLLocationCoordinate2D location) => new(location.Latitude, location.Longitude);
+
+        public static IGpsLocation ToGpsLocation(this CLLocation location) => new GpsLocation(location.Coordinate.Latitude, location.Coordinate.Longitude, location.Altitude, location.Course, location.CourseAccuracy, location.Speed, location.SpeedAccuracy, 0, location.Timestamp.ToLocalTime());
 
         public static DateTime ToLocalTime(this NSDate nsDate)
         {
