@@ -73,8 +73,8 @@
     <PackageVersion Include="Microsoft.Reactive.Testing" Version="5.0.0" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />
     <PackageVersion Include="ReactiveUI.Testing" Version="13.3.2" />
-    <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="7.1.4" />
-    <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="7.1.4" />
+    <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="7.1.5" />
+    <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="7.1.5" />
     <PackageVersion Include="xunit" Version="2.6.5" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
     <PackageVersion Include="XunitXml.TestLogger" Version="3.1.17" />
