@@ -3,6 +3,7 @@
   "extends": [
     "local>RocketSurgeonsGuild/.github:renovate-config"
   ],
+  "prConcurrentLimit": 8,
   "schedule": [
     "after 3am on the first day of the month"
   ],
