@@ -20,10 +20,10 @@ public class MonitorState
     /// </summary>
     public double DistanceFilter { get; set; }
 
-    /// <summary>
-    /// Gets or sets the current location.
-    /// </summary>
-    public GeoLocation GeoLocation { get; set; }
+        /// <summary>
+        /// Gets or sets the current location.
+        /// </summary>
+        public GeoCoordinate Location { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether location services are enabled.
