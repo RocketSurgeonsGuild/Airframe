@@ -8,6 +8,11 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <NukeTelemetryVersion>1</NukeTelemetryVersion>
+        <PackageIcon>images/packageicon.png</PackageIcon>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageProjectUrl>https://rocketsurgeonsguild.github.io/</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/RocketSurgeonsGuild/Airframe/blob/master/LICENSE</PackageLicenseUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 </Project>
