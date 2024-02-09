@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nuke.Common.CI.GitHubActions;
-using Rocket.Surgery.Nuke;
 using Rocket.Surgery.Nuke.ContinuousIntegration;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.GithubActions;
@@ -9,13 +8,13 @@ using System;
 
 [GitHubActionsSteps("ci", GitHubActionsImage.MacOsLatest,
     AutoGenerate = true,
-    On = new[] { RocketSurgeonGitHubActionsTrigger.Push },
-    OnPushTags = new[] { "v*" },
-    OnPushBranches = new[] { "master", "next", "feature/*" },
-    OnPullRequestBranches = new[] { "master", "next" },
-    InvokedTargets = new[] { nameof(Default) },
-    NonEntryTargets = new[]
-    {
+    On = [RocketSurgeonGitHubActionsTrigger.Push],
+    OnPushTags = ["v*"],
+    OnPushBranches = ["master", "next", "feature/*"],
+    OnPullRequestBranches = ["master", "next"],
+    InvokedTargets = [nameof(Default)],
+    NonEntryTargets =
+    [
         nameof(ICIEnvironment.CIEnvironment),
         nameof(ITriggerCodeCoverageReports.TriggerCodeCoverageReports),
         nameof(ITriggerCodeCoverageReports.GenerateCodeCoverageReportCobertura),
@@ -23,9 +22,9 @@ using System;
         nameof(IGenerateCodeCoverageReport.GenerateCodeCoverageReport),
         nameof(IGenerateCodeCoverageSummary.GenerateCodeCoverageSummary),
         nameof(Default)
-    },
-    ExcludedTargets = new[] { nameof(ICanClean.Clean), nameof(ICanRestoreWithDotNetCore.DotnetToolRestore) },
-    Enhancements = new[] { nameof(Middleware) }
+    ],
+    ExcludedTargets = [nameof(ICanClean.Clean), nameof(ICanRestoreWithDotNetCore.DotnetToolRestore)],
+    Enhancements = [nameof(Middleware)]
 )]
 [PrintBuildVersion, PrintCIEnvironment, UploadLogs]
 [LocalBuildConventions]
@@ -42,8 +41,8 @@ public partial class AirframeBuild
             new RunStep("Fetch all history for all tags and branches") {
                 Run = "git fetch --prune"
             },
-            new SetupDotNetStep("Use .NET 6 SDK") {
-                DotNetVersion = "6.0.100"
+            new SetupDotNetStep("Use .NET 8 SDK") {
+                DotNetVersion = "8.0.101"
             }
         });
 
