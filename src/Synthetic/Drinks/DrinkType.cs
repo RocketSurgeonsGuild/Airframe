@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Rocket.Surgery.Airframe.Synthetic
+namespace Rocket.Surgery.Airframe.Synthetic.Drinks
 {
     /// <summary>
     /// Enumeration representing espresso drink types.

@@ -1,7 +1,6 @@
 using DryIoc;
-using Rocket.Surgery.Airframe.Composition;
 
-namespace Composition.Tests;
+namespace Rocket.Surgery.Airframe.Composition.Tests;
 
 public class TestModule : DryIocModule
 {

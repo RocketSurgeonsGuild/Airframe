@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Composition.Tests;
+namespace Rocket.Surgery.Airframe.Composition.Tests;
 
 [PublicAPI]
 public class TestViewModel;

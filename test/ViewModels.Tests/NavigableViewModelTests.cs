@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Rocket.Surgery.Airframe.Navigation;
 using Rocket.Surgery.Airframe.Tests;
 using Xunit;
 
@@ -15,10 +16,10 @@ namespace Rocket.Surgery.Airframe.ViewModels.Tests
                 TestNavigationViewModel sut = new TestNavigationViewModelFixture();
 
                 // When
-                ( (INavigated)sut ).WhenNavigatedTo(new NavigationParameter()).Subscribe();
+                sut.As<INavigated>().OnNavigatedTo(new Arguments());
 
                 // Then
-                sut.NavigatedToParameter.Should().BeAssignableTo<INavigationParameter>();
+                sut.NavigatedToParameter.Should().BeAssignableTo<IArguments>();
             }
         }
 
@@ -31,14 +32,14 @@ namespace Rocket.Surgery.Airframe.ViewModels.Tests
                 TestNavigationViewModel sut = new TestNavigationViewModelFixture();
 
                 // When
-                ( (INavigated)sut ).WhenNavigatedFrom(new NavigationParameter()).Subscribe();
+                sut.As<INavigated>().OnNavigatedFrom(new Arguments());
 
                 // Then
-                sut.NavigatedFromParameter.Should().BeAssignableTo<INavigationParameter>();
+                sut.NavigatedFromParameter.Should().BeAssignableTo<IArguments>();
             }
         }
 
-        public class TheNavigatingToProperty
+        public class TheInitializeProperty
         {
             [Fact]
             public void Should_Have_Parameter()
@@ -47,26 +48,10 @@ namespace Rocket.Surgery.Airframe.ViewModels.Tests
                 TestNavigationViewModel sut = new TestNavigationViewModelFixture();
 
                 // When
-                ( (INavigating)sut ).WhenNavigatingTo(new NavigationParameter()).Subscribe();
+                sut.As<IInitialize>().OnInitialize(new Arguments());
 
                 // Then
-                sut.NavigatingToParameter.Should().BeAssignableTo<INavigationParameter>();
-            }
-        }
-
-        public class TheInitializeCommand
-        {
-            [Fact]
-            public void Should_Execute_Template()
-            {
-                // Given
-                TestNavigationViewModel sut = new TestNavigationViewModelFixture();
-
-                // When
-                sut.Initialize.Execute().Subscribe();
-
-                // Then
-                sut.Overriden.Should().BeTrue();
+                sut.InitializeParameter.Should().BeAssignableTo<IArguments>();
             }
         }
     }

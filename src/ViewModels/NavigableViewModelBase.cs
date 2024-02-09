@@ -10,13 +10,6 @@ namespace Rocket.Surgery.Airframe.ViewModels
     /// </summary>
     public abstract class NavigableViewModelBase : ViewModelBase, INavigated, IDestructible, IInitialize
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NavigableViewModelBase"/> class.
-        /// </summary>
-        protected NavigableViewModelBase()
-        {
-        }
-
         /// <inheritdoc/>
         void IInitialize.OnInitialize(IArguments arguments)
         {

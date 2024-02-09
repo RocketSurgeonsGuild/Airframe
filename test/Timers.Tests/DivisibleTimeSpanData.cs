@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace Airframe.Timers.Tests
+namespace Rocket.Surgery.Airframe.Timers.Tests
 {
     internal class DivisibleTimeSpanData : TheoryData
     {

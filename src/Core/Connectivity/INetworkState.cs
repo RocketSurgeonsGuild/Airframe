@@ -11,7 +11,7 @@ namespace Rocket.Surgery.Airframe.Connectivity
         /// <summary>
         /// Gets an observable sequence notifying if the device has connectivity.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A value indicating the is a signal.</returns>
         IObservable<bool> HasSignal() =>
             this
                .Select(changedEvent => changedEvent.HasSignal())

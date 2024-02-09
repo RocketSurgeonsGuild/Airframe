@@ -1,13 +1,12 @@
+using Airframe.Testing;
 using FluentAssertions;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
-using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Airframe.Tests;
-using Rocket.Surgery.Airframe.Timers;
 using System;
 using Xunit;
 
-namespace Airframe.Timers.Tests
+namespace Rocket.Surgery.Airframe.Timers.Tests
 {
     public class DecrementTimerTests : TestBase
     {
@@ -29,7 +28,7 @@ namespace Airframe.Timers.Tests
         {
             // Given
             var testScheduler = new TestScheduler();
-            SchedulerProvider schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
+            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
             DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
 
             // When
@@ -44,19 +43,15 @@ namespace Airframe.Timers.Tests
         public void Should_Advance_When_Started()
         {
             // Given
-            var testScheduler = new TestScheduler();
-            var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
+            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
             DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
 
-            sut.Subscribe(x =>
-            {
-                timer = x;
-            });
+            using var _ = sut.Subscribe(x => timer = x);
 
             // When
             sut.Start(TimeSpan.FromMinutes(1));
-            testScheduler.AdvanceByMs(InitialMilliseconds);
+            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
 
             // Then
             timer.Should().Be(TimeSpan.FromSeconds(59));
@@ -67,20 +62,18 @@ namespace Airframe.Timers.Tests
         {
             // Given
             var testScheduler = new TestScheduler();
-            var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
+            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
             DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
             sut.Start(TimeSpan.FromMinutes(1));
 
-            sut.Subscribe(x =>
-            {
-                timer = x;
-            });
+            using var _ = sut.Subscribe(x => timer = x);
 
             sut.Start(TimeSpan.FromMinutes(1));
             testScheduler.AdvanceByMs(InitialMilliseconds);
             sut.Stop();
             testScheduler.AdvanceByMs(OneThousandMilliseconds);
+
             // When
             sut.Start();
 
@@ -92,24 +85,20 @@ namespace Airframe.Timers.Tests
         public void Should_Resume_After_Stopped()
         {
             // Given
-            var testScheduler = new TestScheduler();
-            var schedulerProvider = new SchedulerProviderFixture().WithTestScheduler(testScheduler);
+            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
             DecrementTimer sut = new DecrementTimerFixture().WithProvider(schedulerProvider);
             var timer = TimeSpan.Zero;
 
-            sut.Subscribe(x =>
-            {
-                timer = x;
-            });
+            sut.Subscribe(x => timer = x);
 
             sut.Start(TimeSpan.FromMinutes(1));
-            testScheduler.AdvanceByMs(InitialMilliseconds);
+            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
             sut.Stop();
-            testScheduler.AdvanceByMs(OneThousandMilliseconds);
+            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
 
             // When
             sut.Start();
-            testScheduler.AdvanceByMs(OneThousandMilliseconds);
+            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
 
             // Then
             timer.Should().Be(TimeSpan.FromSeconds(58));

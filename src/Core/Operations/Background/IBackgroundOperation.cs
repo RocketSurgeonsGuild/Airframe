@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Rocket.Surgery.Airframe
+namespace Rocket.Surgery.Airframe.Background
 {
     /// <summary>
     /// Interface representing an operation to run in the background on a specific platform.

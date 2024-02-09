@@ -1,6 +1,6 @@
 using Rocket.Surgery.Airframe.Data;
 
-namespace Rocket.Surgery.Airframe.Synthetic
+namespace Rocket.Surgery.Airframe.Synthetic.Drinks
 {
     /// <summary>
     /// A coffee drink data transfer object.

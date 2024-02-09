@@ -1,9 +1,8 @@
 using DryIoc;
 using FluentAssertions;
-using Rocket.Surgery.Airframe.Composition;
 using Xunit;
 
-namespace Composition.Tests;
+namespace Rocket.Surgery.Airframe.Composition.Tests;
 
 public sealed class DryIocModuleTests
 {

@@ -4,13 +4,16 @@ using System.Linq;
 
 namespace Rocket.Surgery.Airframe.Connectivity
 {
+    /// <summary>
+    /// Class representing the <see cref="EventArgs"/> for network state changes.
+    /// </summary>
     public class NetworkStateChangedEvent : EventArgs
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NetworkStateChangedEvent"/> class.
         /// </summary>
-        /// <param name="access"></param>
-        /// <param name="connectionProfiles"></param>
+        /// <param name="access">The current network access.</param>
+        /// <param name="connectionProfiles">The connection profile.</param>
         public NetworkStateChangedEvent(NetworkAccess access, params ConnectionProfile[] connectionProfiles)
         {
             NetworkAccess = access;
@@ -21,20 +24,32 @@ namespace Rocket.Surgery.Airframe.Connectivity
         /// Initializes a new instance of the <see cref="NetworkStateChangedEvent"/> class.
         /// </summary>
         /// <param name="access">The current network access.</param>
-        /// <param name="connectionProfiles"></param>
+        /// <param name="connectionProfiles">The connection profile.</param>
         public NetworkStateChangedEvent(NetworkAccess access, IEnumerable<ConnectionProfile> connectionProfiles)
-            : this(access, connectionProfiles.ToArray()) { }
+            : this(access, connectionProfiles.ToArray())
+        {
+        }
 
+        /// <summary>
+        /// Gets the network access.
+        /// </summary>
         public NetworkAccess NetworkAccess { get; }
 
+        /// <summary>
+        /// Gets the connection profiles.
+        /// </summary>
         public IReadOnlyCollection<ConnectionProfile> ConnectionProfiles { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether there is a signal.
+        /// </summary>
+        /// <returns>A signal.</returns>
         public bool HasSignal() => HasValidProfile() && HasNetworkAccess();
 
         /// <summary>
         /// Determines if the signal is degraded.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Degraded signal.</returns>
         public bool Degraded() => NetworkAccess > NetworkAccess.None || ContainsProfile(ConnectionProfile.Unknown);
 
         /// <summary>

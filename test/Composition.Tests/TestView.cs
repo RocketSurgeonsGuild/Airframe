@@ -1,6 +1,6 @@
 using ReactiveUI;
 
-namespace Composition.Tests;
+namespace Rocket.Surgery.Airframe.Composition.Tests;
 
 public class TestView : IViewFor<TestViewModel>
 {

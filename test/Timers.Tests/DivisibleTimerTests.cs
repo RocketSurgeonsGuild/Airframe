@@ -1,12 +1,10 @@
+using Airframe.Testing;
 using FluentAssertions;
-using Microsoft.Reactive.Testing;
-using Rocket.Surgery.Airframe.Tests;
-using Rocket.Surgery.Airframe.Timers;
 using System;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Airframe.Timers.Tests
+namespace Rocket.Surgery.Airframe.Timers.Tests
 {
     public sealed class DivisibleTimerTests
     {
@@ -29,14 +27,14 @@ namespace Airframe.Timers.Tests
         {
             // Given
             int count = 1;
-            var testScheduler = new TestScheduler();
+            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
             DivisibleTimer sut =
-                new DivisibleTimerFixture().WithProvider(new SchedulerProviderFixture().WithTestScheduler(testScheduler));
-            sut.Interval.ObserveOn(testScheduler).Subscribe(_ => count++);
+                new DivisibleTimerFixture().WithProvider(schedulerProvider);
+            sut.Interval.ObserveOn(schedulerProvider.UserInterfaceTestScheduler).Subscribe(_ => count++);
 
             // When
             sut.Start(4, TimeSpan.FromHours(1));
-            testScheduler.AdvanceBy(TimeSpan.FromMinutes(30).Ticks);
+            schedulerProvider.UserInterfaceTestScheduler.AdvanceBy(TimeSpan.FromMinutes(30).Ticks);
 
             // Then
             count.Should().Be(4);

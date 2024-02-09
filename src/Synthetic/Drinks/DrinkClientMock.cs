@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Rocket.Surgery.Airframe.Data;
 
-namespace Rocket.Surgery.Airframe.Synthetic
+namespace Rocket.Surgery.Airframe.Synthetic.Drinks
 {
     /// <summary>
     /// Represents an <see cref="IClient"/> that returns <see cref="DrinkDto"/>.

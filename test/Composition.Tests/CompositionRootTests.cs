@@ -1,10 +1,9 @@
 using DryIoc;
 using FluentAssertions;
 using ReactiveUI;
-using Rocket.Surgery.Airframe.Composition;
 using Xunit;
 
-namespace Composition.Tests;
+namespace Rocket.Surgery.Airframe.Composition.Tests;
 
 public sealed class CompositionRootTests
 {
