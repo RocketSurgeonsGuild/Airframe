@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <PackageId>Rocket.Surgery.Airframe.Core</PackageId>
         <AssemblyName>Rocket.Surgery.Airframe.Core</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
-        <LangVersion>latest</LangVersion>
         <Description>Abstractions and base implementations for Airframe.</Description>
     </PropertyGroup>
     <ItemGroup>

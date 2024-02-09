@@ -1,5 +1,5 @@
 ﻿using System;
-using Xamarin.Essentials;
+using Rocket.Surgery.Airframe.Connectivity;
 
 namespace Rocket.Surgery.Airframe.ViewModels
 {
@@ -11,6 +11,6 @@ namespace Rocket.Surgery.Airframe.ViewModels
         /// <summary>
         /// Gets the connectivity.
         /// </summary>
-        IObservable<ConnectivityChangedEventArgs> Connectivity { get; }
+        IObservable<NetworkStateChangedEvent> Connectivity { get; }
     }
 }

@@ -1,6 +1,6 @@
 using Rocket.Surgery.Extensions.Testing.Fixtures;
 
-namespace Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests
 {
     internal class TestViewModelFixture : ITestFixtureBuilder
     {

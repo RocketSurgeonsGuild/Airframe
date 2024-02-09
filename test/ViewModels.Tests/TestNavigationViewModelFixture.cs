@@ -1,4 +1,4 @@
-namespace Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests
 {
     internal class TestNavigationViewModelFixture
     {

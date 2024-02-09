@@ -1,21 +1,41 @@
-using System.Reactive.Concurrency;
 using Microsoft.Reactive.Testing;
-using Rocket.Surgery.Airframe.Forms;
 using Rocket.Surgery.Extensions.Testing.Fixtures;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Concurrency;
 
-namespace Airframe.Tests
+namespace Rocket.Surgery.Airframe.Tests
 {
+    [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:Elements should appear in the correct order")]
     public class SchedulerProviderFixture : ITestFixtureBuilder
     {
+        public static implicit operator SchedulerProviderMock(SchedulerProviderFixture fixture) => fixture.Build();
+
+        public SchedulerProviderFixture WithTestScheduler(IScheduler scheduler) => this.With(ref _mainThreadScheduler, scheduler)
+           .With(ref _backgroundThreadScheduler, scheduler);
+
+        private SchedulerProviderMock Build() => new SchedulerProviderMock(_mainThreadScheduler, _backgroundThreadScheduler);
+
         private IScheduler _mainThreadScheduler = new TestScheduler();
         private IScheduler _backgroundThreadScheduler = new TestScheduler();
 
-        public SchedulerProviderFixture WithTestScheduler(IScheduler scheduler)
-            => this.With(ref _mainThreadScheduler, scheduler)
-               .With(ref _backgroundThreadScheduler, scheduler);
+        public class SchedulerProviderMock(IScheduler userInterfaceTestScheduler, IScheduler backgroundTestScheduler) : ISchedulerProvider
+        {
+            /// <inheritdoc/>
+            IScheduler ISchedulerProvider.UserInterfaceThread => UserInterfaceTestScheduler;
 
-        public static implicit operator SchedulerProvider(SchedulerProviderFixture fixture) => fixture.Build();
+            /// <inheritdoc/>
+            IScheduler ISchedulerProvider.BackgroundThread => BackgroundTestScheduler;
 
-        private SchedulerProvider Build() => new SchedulerProvider(_mainThreadScheduler, _backgroundThreadScheduler);
+            /// <summary>
+            /// Gets the test user interface scheduler.
+            /// </summary>
+            public TestScheduler UserInterfaceTestScheduler { get; } = userInterfaceTestScheduler as TestScheduler ?? throw new ArgumentOutOfRangeException(nameof(userInterfaceTestScheduler));
+
+            /// <summary>
+            /// Gets the test background scheduler.
+            /// </summary>
+            public TestScheduler BackgroundTestScheduler { get; } = backgroundTestScheduler as TestScheduler ?? throw new ArgumentOutOfRangeException(nameof(userInterfaceTestScheduler));
+        }
     }
 }

@@ -1,17 +1,16 @@
 using ReactiveUI;
-using Rocket.Surgery.Airframe.ViewModels;
-using Sextant;
+using Rocket.Surgery.Airframe.Navigation;
 using System;
 using System.Reactive;
 using System.Reactive.Disposables;
 
-namespace Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests
 {
     internal class TestNavigationViewModel : NavigableViewModelBase
     {
-        private readonly ObservableAsPropertyHelper<INavigationParameter> _navigatedToParameter;
-        private readonly ObservableAsPropertyHelper<INavigationParameter> _navigatedFromParameter;
-        private readonly ObservableAsPropertyHelper<INavigationParameter> _navigatingToParameter;
+        private readonly ObservableAsPropertyHelper<IArguments> _navigatedToParameter;
+        private readonly ObservableAsPropertyHelper<IArguments> _navigatedFromParameter;
+        private readonly ObservableAsPropertyHelper<IArguments> _navigatingToParameter;
         private bool _overriden;
 
         public TestNavigationViewModel()
@@ -24,16 +23,16 @@ namespace Airframe.ViewModels.Tests
                .ToProperty(this, nameof(NavigatedFromParameter), out _navigatedFromParameter)
                .DisposeWith(Garbage);
 
-            NavigatingTo
+            Initialize
                .ToProperty(this, nameof(NavigatingToParameter), out _navigatingToParameter)
                .DisposeWith(Garbage);
         }
 
-        public INavigationParameter NavigatedToParameter => _navigatedToParameter.Value;
+        public IArguments NavigatedToParameter => _navigatedToParameter.Value;
 
-        public INavigationParameter NavigatedFromParameter => _navigatedFromParameter.Value;
+        public IArguments NavigatedFromParameter => _navigatedFromParameter.Value;
 
-        public INavigationParameter NavigatingToParameter => _navigatingToParameter.Value;
+        public IArguments NavigatingToParameter => _navigatingToParameter.Value;
 
         protected override IObservable<Unit> ExecuteInitialize()
         {

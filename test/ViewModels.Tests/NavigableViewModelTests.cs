@@ -1,10 +1,8 @@
-using Airframe.Tests;
 using FluentAssertions;
-using Sextant;
-using System;
+using Rocket.Surgery.Airframe.Tests;
 using Xunit;
 
-namespace Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests
 {
     public class NavigableViewModelTests : TestBase
     {

@@ -1,14 +1,14 @@
 using DryIoc;
 using Rocket.Surgery.Airframe.Composition;
 
-namespace Composition.Tests
+namespace Composition.Tests;
+
+public class TestModule : DryIocModule
 {
-    public class TestModule : DryIocModule
+    /// <inheritdoc/>
+    public override void Load(IRegistrator registrar)
     {
-        public override void Load(IRegistrator registrar)
-        {
-            registrar.RegisterViewModel<TestViewModel>();
-            registrar.RegisterView<TestView, TestViewModel>();
-        }
+        registrar.RegisterViewModel<TestViewModel>();
+        registrar.RegisterView<TestView, TestViewModel>();
     }
 }
