@@ -9,6 +9,8 @@ namespace Airframe.Testing;
 [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:Elements should appear in the correct order")]
 public class SchedulerProviderFixture : ITestFixtureBuilder
 {
+    public SchedulerProviderFixture() => _mainThreadScheduler = _backgroundThreadScheduler = new TestScheduler();
+
     public static implicit operator SchedulerProviderMock(SchedulerProviderFixture fixture) => fixture.Build();
 
     public SchedulerProviderFixture WithUserInterfaceScheduler(IScheduler scheduler) => this.With(ref _mainThreadScheduler, scheduler);
@@ -21,6 +23,6 @@ public class SchedulerProviderFixture : ITestFixtureBuilder
 
     private SchedulerProviderMock Build() => new SchedulerProviderMock(_mainThreadScheduler, _backgroundThreadScheduler);
 
-    private IScheduler _mainThreadScheduler = new TestScheduler();
-    private IScheduler _backgroundThreadScheduler = new TestScheduler();
+    private IScheduler _mainThreadScheduler;
+    private IScheduler _backgroundThreadScheduler;
 }
