@@ -1,6 +1,7 @@
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using ReactiveMarbles.Extensions;
 using Rocket.Surgery.Airframe.Navigation;
 
 namespace Rocket.Surgery.Airframe.ViewModels;
@@ -10,6 +11,16 @@ namespace Rocket.Surgery.Airframe.ViewModels;
 /// </summary>
 public abstract class NavigableViewModelBase : ViewModelBase, INavigated, IDestructible, IInitialize
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NavigableViewModelBase"/> class.
+    /// </summary>
+    protected NavigableViewModelBase()
+    {
+        _initialize = new AsyncSubject<IArguments>().DisposeWith(Garbage);
+        _navigatedTo = new Subject<IArguments>().DisposeWith(Garbage);
+        _navigatedFrom = new Subject<IArguments>().DisposeWith(Garbage);
+    }
+
     /// <inheritdoc/>
     void IInitialize.OnInitialize(IArguments arguments)
     {
@@ -55,7 +66,9 @@ public abstract class NavigableViewModelBase : ViewModelBase, INavigated, IDestr
     {
     }
 
-    private readonly AsyncSubject<IArguments> _initialize = new AsyncSubject<IArguments>();
-    private readonly Subject<IArguments> _navigatedTo = new Subject<IArguments>();
-    private readonly Subject<IArguments> _navigatedFrom = new Subject<IArguments>();
+#pragma warning disable CA2213
+    private readonly AsyncSubject<IArguments> _initialize;
+    private readonly Subject<IArguments> _navigatedTo;
+    private readonly Subject<IArguments> _navigatedFrom;
+#pragma warning restore CA2213
 }
