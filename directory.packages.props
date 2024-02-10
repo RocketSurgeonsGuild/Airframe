@@ -40,17 +40,11 @@
     <PackageVersion Include="ReactiveMarbles.Mvvm" Version="1.0.46" />
     <PackageVersion Include="ReactiveMarbles.PropertyChanged" Version="2.0.27" />
     <PackageVersion Include="Refit" Version="5.2.4" />
-    <PackageVersion Include="Rg.Plugins.Popup" Version="2.1.0" />
+    
     <PackageVersion Include="Rocket.Surgery.Xamarin.Essentials" Version="0.4.1" />
     <PackageVersion Include="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.1" />
     <PackageVersion Include="Serilog.Sinks.AppCenter.Crash" Version="1.2.1" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
-    <PackageVersion Include="Shiny" Version="2.4.2.2996" />
-    <PackageVersion Include="Shiny.Core" Version="2.4.2.2996" />
-    <PackageVersion Include="Shiny.Locations" Version="2.4.2.2996" />
-    <PackageVersion Include="Shiny.Notifications" Version="2.4.2.2996" />
-    <PackageVersion Include="Sextant" Version="2.11.1" />
-    <PackageVersion Include="Sextant.Plugins.Popup" Version="2.11.1" />
     <PackageVersion Include="Splat" Version="11.1.1" />
     <PackageVersion Include="Splat.Serilog" Version="11.1.1" />
     <PackageVersion Include="Splat.DryIoc" Version="11.1.1" />
