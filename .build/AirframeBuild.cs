@@ -53,14 +53,11 @@ public partial class AirframeBuild : NukeBuild,
        .DependsOn(Test)
        .DependsOn(Pack);
 
-    public Target Clean => definition => definition.Inherit<ICanClean>(x => x.Clean);
-    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(x => x.CoreRestore);
-    public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(x => x.CoreBuild);
-
-    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(x => x.CoreTest);
-
-
-    public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(x => x.CorePack)
+    public Target Clean => definition => definition.Inherit<ICanClean>(canClean => canClean.Clean);
+    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.CoreRestore);
+    public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.CoreBuild);
+    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(dotNetCore => dotNetCore.CoreTest);
+    public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(dotNetCore => dotNetCore.CorePack)
        .DependsOn(Clean)
        .After(Test);
 
