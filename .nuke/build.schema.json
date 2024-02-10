@@ -101,6 +101,7 @@
               "GenerateCodeCoverageReportCobertura",
               "GenerateCodeCoverageSummary",
               "GenerateReadme",
+              "GitHubActions",
               "JetBrainsCleanupCode",
               "Lint",
               "LintGitAdd",
@@ -113,7 +114,8 @@
               "Restore",
               "ShipPublicApis",
               "Test",
-              "TriggerCodeCoverageReports"
+              "TriggerCodeCoverageReports",
+              "Workloads"
             ]
           }
         },
@@ -141,6 +143,7 @@
               "GenerateCodeCoverageReportCobertura",
               "GenerateCodeCoverageSummary",
               "GenerateReadme",
+              "GitHubActions",
               "JetBrainsCleanupCode",
               "Lint",
               "LintGitAdd",
@@ -153,7 +156,8 @@
               "Restore",
               "ShipPublicApis",
               "Test",
-              "TriggerCodeCoverageReports"
+              "TriggerCodeCoverageReports",
+              "Workloads"
             ]
           }
         },

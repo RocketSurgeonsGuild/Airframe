@@ -5,7 +5,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="stylecop.analyzers" />
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" />
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" />
         <PackageReference Include="Roslynator.Analyzers" />
     </ItemGroup>
     <ItemGroup>

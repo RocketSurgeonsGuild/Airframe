@@ -17,9 +17,10 @@ public sealed class DryIocModuleTests
 
             result.Resolve<TestModule>().Should().NotBeNull();
         }
-    [Fact]
-    public void Should_Resolve_Module_Registrations()
-    {
+
+        [Fact]
+        public void Should_Resolve_Module_Registrations()
+        {
             // Given
             IContainer sut = new Container();
 

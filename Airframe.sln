@@ -86,6 +86,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{786B1A
 		.gitignore = .gitignore
 		NuGet.config = NuGet.config
 		renovate.json = renovate.json
+		qodana.yaml = qodana.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6813747B-13DB-4144-AB19-22C84E734517}"
@@ -104,6 +105,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github/workflows/publish-nuget.yml = .github/workflows/publish-nuget.yml
 		.github/workflows/sync-labels.yml = .github/workflows/sync-labels.yml
 		.github/workflows/update-milestone.yml = .github/workflows/update-milestone.yml
+		.github/workflows/qodana.yml = .github/workflows/qodana.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{F9E0EBA5-5737-440E-8F30-20CCFC207E9E}"
