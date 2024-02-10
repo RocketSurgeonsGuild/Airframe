@@ -47,7 +47,7 @@
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
     <PackageVersion Include="Shiny" Version="2.4.2.2996" />
     <PackageVersion Include="Shiny.Core" Version="2.4.2.2996" />
-    <PackageVersion Include="Shiny.Locations" Version="2.4.2.2996" />
+    <PackageVersion Include="Shiny.Locations" Version="2.7.3" />
     <PackageVersion Include="Shiny.Notifications" Version="2.4.2.2996" />
     <PackageVersion Include="Sextant" Version="2.11.1" />
     <PackageVersion Include="Sextant.Plugins.Popup" Version="2.11.1" />
