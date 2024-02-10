@@ -1,75 +1,57 @@
-using Airframe.Tests;
 using FluentAssertions;
-using Sextant;
-using System;
+using Rocket.Surgery.Airframe.Navigation;
+using Rocket.Surgery.Airframe.Tests;
 using Xunit;
 
-namespace Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests;
+
+public class NavigableViewModelTests : TestBase
 {
-    public class NavigableViewModelTests : TestBase
+    public class TheNavigatedToProperty
     {
-        public class TheNavigatedToProperty
+        [Fact]
+        public void Should_Have_Parameter()
         {
-            [Fact]
-            public void Should_Have_Parameter()
-            {
-                // Given
-                TestNavigationViewModel sut = new TestNavigationViewModelFixture();
+            // Given
+            TestNavigationViewModel sut = new TestNavigationViewModelFixture();
 
-                // When
-                ( (INavigated)sut ).WhenNavigatedTo(new NavigationParameter()).Subscribe();
+            // When
+            sut.As<INavigated>().OnNavigatedTo(new Arguments());
 
-                // Then
-                sut.NavigatedToParameter.Should().BeAssignableTo<INavigationParameter>();
-            }
+            // Then
+            sut.NavigatedToParameter.Should().BeAssignableTo<IArguments>();
         }
+    }
 
-        public class TheNavigatedFromProperty
+    public class TheNavigatedFromProperty
+    {
+        [Fact]
+        public void Should_Have_Parameter()
         {
-            [Fact]
-            public void Should_Have_Parameter()
-            {
-                // Given
-                TestNavigationViewModel sut = new TestNavigationViewModelFixture();
+            // Given
+            TestNavigationViewModel sut = new TestNavigationViewModelFixture();
 
-                // When
-                ( (INavigated)sut ).WhenNavigatedFrom(new NavigationParameter()).Subscribe();
+            // When
+            sut.As<INavigated>().OnNavigatedFrom(new Arguments());
 
-                // Then
-                sut.NavigatedFromParameter.Should().BeAssignableTo<INavigationParameter>();
-            }
+            // Then
+            sut.NavigatedFromParameter.Should().BeAssignableTo<IArguments>();
         }
+    }
 
-        public class TheNavigatingToProperty
+    public class TheInitializeProperty
+    {
+        [Fact]
+        public void Should_Have_Parameter()
         {
-            [Fact]
-            public void Should_Have_Parameter()
-            {
-                // Given
-                TestNavigationViewModel sut = new TestNavigationViewModelFixture();
+            // Given
+            TestNavigationViewModel sut = new TestNavigationViewModelFixture();
 
-                // When
-                ( (INavigating)sut ).WhenNavigatingTo(new NavigationParameter()).Subscribe();
+            // When
+            sut.As<IInitialize>().OnInitialize(new Arguments());
 
-                // Then
-                sut.NavigatingToParameter.Should().BeAssignableTo<INavigationParameter>();
-            }
-        }
-
-        public class TheInitializeCommand
-        {
-            [Fact]
-            public void Should_Execute_Template()
-            {
-                // Given
-                TestNavigationViewModel sut = new TestNavigationViewModelFixture();
-
-                // When
-                sut.Initialize.Execute().Subscribe();
-
-                // Then
-                sut.Overriden.Should().BeTrue();
-            }
+            // Then
+            sut.InitializeParameter.Should().BeAssignableTo<IArguments>();
         }
     }
 }

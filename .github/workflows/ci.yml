@@ -55,13 +55,17 @@ jobs:
       - name: Fetch all history for all tags and branches
         run: |
           git fetch --prune
-      - name: 🔨 Use .NET 6 SDK
+      - name: 🔨 Use .NET 8 SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.100'
+          dotnet-version: '8.0.101'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
+      - name: Workloads
+        id: workloads
+        run: |
+          dotnet nuke Workloads --skip
       - name: 🎁 Restore
         id: restore
         run: |
@@ -78,6 +82,10 @@ jobs:
         id: pack
         run: |
           dotnet nuke Pack --skip
+      - name: Git Hub Actions
+        id: gitHubActions
+        run: |
+          dotnet nuke GitHubActions --skip
       - name: 🐿 Publish Coverage
         uses: codecov/codecov-action@v3.1.4
         with:

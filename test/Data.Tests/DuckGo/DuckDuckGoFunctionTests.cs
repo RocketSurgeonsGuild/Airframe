@@ -6,19 +6,19 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
-{
-    public class DuckDuckGoFunctionTests
-    {
-        [Fact]
-        public void Should_Return_ChangeSet()
-        {
-            // Given
-            using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
+namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo;
 
-            // When
-            using var disposable =
-                Observable.Return(
+public class DuckDuckGoFunctionTests
+{
+    [Fact]
+    public void Should_Return_ChangeSet()
+    {
+        // Given
+        using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
+
+        // When
+        using var disposable =
+            Observable.Return(
                     new List<RelatedTopic>
                     {
                         new()
@@ -32,29 +32,29 @@ namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
                .Bind(out var result)
                .Subscribe();
 
-            // Then
-            result
-               .Should()
-               .HaveCount(1);
-        }
+        // Then
+        result
+           .Should()
+           .HaveCount(1);
+    }
 
-        [Fact]
-        public void Should_Return_Cached()
-        {
-            // Given
-            using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
-            var firstResultGuid = Guid.NewGuid().ToString();
-            sourceCache.AddOrUpdate(
-                new RelatedTopic
-                {
-                    FirstUrl = firstResultGuid,
-                    Result = "result one",
-                    Text = "text",
-                });
+    [Fact]
+    public void Should_Return_Cached()
+    {
+        // Given
+        using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
+        var firstResultGuid = Guid.NewGuid().ToString();
+        sourceCache.AddOrUpdate(
+            new RelatedTopic
+            {
+                FirstUrl = firstResultGuid,
+                Result = "result one",
+                Text = "text",
+            });
 
-            // When
-            using var disposable =
-                Observable.Return(
+        // When
+        using var disposable =
+            Observable.Return(
                     new List<RelatedTopic>
                     {
                         new()
@@ -74,28 +74,28 @@ namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
                .Bind(out var result)
                .Subscribe();
 
-            // Then
-            result
-               .Should()
-               .HaveCount(2);
-        }
+        // Then
+        result
+           .Should()
+           .HaveCount(2);
+    }
 
-        [Fact]
-        public void Should_Clear_Cached()
-        {
-            // Given
-            using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
-            sourceCache.AddOrUpdate(
-                new RelatedTopic
-                {
-                    FirstUrl = Guid.NewGuid().ToString(),
-                    Result = "result one",
-                    Text = "text",
-                });
+    [Fact]
+    public void Should_Clear_Cached()
+    {
+        // Given
+        using var sourceCache = new SourceCache<RelatedTopic, string>(topic => topic.FirstUrl);
+        sourceCache.AddOrUpdate(
+            new RelatedTopic
+            {
+                FirstUrl = Guid.NewGuid().ToString(),
+                Result = "result one",
+                Text = "text",
+            });
 
-            // When
-            using var disposable =
-                Observable.Return(
+        // When
+        using var disposable =
+            Observable.Return(
                     new List<RelatedTopic>
                     {
                         new()
@@ -109,10 +109,9 @@ namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
                .Bind(out var result)
                .Subscribe();
 
-            // Then
-            result
-               .Should()
-               .ContainSingle(topic => topic.Result == "result two");
-        }
+        // Then
+        result
+           .Should()
+           .ContainSingle(topic => topic.Result == "result two");
     }
 }

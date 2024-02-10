@@ -1,14 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <AssemblyName>Rocket.Surgery.Airframe.Synthetic</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Synthetic</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Refit" />
-    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Data\Data.csproj" />

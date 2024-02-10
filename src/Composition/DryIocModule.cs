@@ -1,16 +1,15 @@
 using DryIoc;
 
-namespace Rocket.Surgery.Airframe.Composition
+namespace Rocket.Surgery.Airframe.Composition;
+
+/// <summary>
+/// Base abstraction for an <see cref="IModule"/>.
+/// </summary>
+public abstract class DryIocModule : IModule
 {
     /// <summary>
-    /// Base abstraction for an <see cref="IModule"/>.
+    /// Loads registrations to the <see cref="IRegistrator"/>.
     /// </summary>
-    public abstract class DryIocModule : IModule
-    {
-        /// <summary>
-        /// Loads registrations to the <see cref="IRegistrator"/>.
-        /// </summary>
-        /// <param name="registrar">The registrar.</param>
-        public abstract void Load(IRegistrator registrar);
-    }
+    /// <param name="registrar">The registrar.</param>
+    public abstract void Load(IRegistrator registrar);
 }

@@ -1,18 +1,17 @@
 using DryIoc;
 using FluentAssertions;
 using ReactiveUI;
-using Rocket.Surgery.Airframe.Composition;
 using Xunit;
 
-namespace Composition.Tests
+namespace Rocket.Surgery.Airframe.Composition.Tests;
+
+public sealed class IRegistrarExtensionTests
 {
-    public sealed class IRegistrarExtensionTests
+    public class TheRegisterViewMethod
     {
-        public class TheRegisterViewMethod
+        [Fact]
+        public void Should_Register_View_As_IViewFor()
         {
-            [Fact]
-            public void Should_Register_View_As_IViewFor()
-            {
                 // Given
                 IContainer sut = new Container();
 
@@ -22,13 +21,13 @@ namespace Composition.Tests
                 // Then
                 sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
             }
-        }
+    }
 
-        public class TheRegisterViewModelMethod
+    public class TheRegisterViewModelMethod
+    {
+        [Fact]
+        public void Should_Register_ViewModel()
         {
-            [Fact]
-            public void Should_Register_ViewModel()
-            {
                 // Given
                 IContainer sut = new Container();
 
@@ -38,13 +37,13 @@ namespace Composition.Tests
                 // Then
                 sut.Resolve<TestViewModel>().Should().NotBeNull();
             }
-        }
+    }
 
-        public class TheRegisterModuleMethod
+    public class TheRegisterModuleMethod
+    {
+        [Fact]
+        public void Should_Throw_When_Resolve_Module()
         {
-            [Fact]
-            public void Should_Throw_When_Resolve_Module()
-            {
                 // Given
                 IContainer sut = new Container();
                 sut.RegisterModule(new TestModule());
@@ -62,9 +61,9 @@ namespace Composition.Tests
                     .Be("UnableToResolveUnknownService");
             }
 
-            [Fact]
-            public void Should_Resolve_Module_Registrations()
-            {
+        [Fact]
+        public void Should_Resolve_Module_Registrations()
+        {
                 // Given
                 IContainer sut = new Container();
 
@@ -75,13 +74,13 @@ namespace Composition.Tests
                 sut.Resolve<TestViewModel>().Should().NotBeNull();
                 sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
             }
-        }
+    }
 
-        public class TheRegisterModuleGenericMethod
+    public class TheRegisterModuleGenericMethod
+    {
+        [Fact]
+        public void Should_Resolve_Module()
         {
-            [Fact]
-            public void Should_Resolve_Module()
-            {
                 // Given
                 IContainer sut = new Container();
 
@@ -92,9 +91,9 @@ namespace Composition.Tests
                 sut.Resolve<TestModule>().Should().NotBeNull();
             }
 
-            [Fact]
-            public void Should_Resolve_Module_Registrations()
-            {
+        [Fact]
+        public void Should_Resolve_Module_Registrations()
+        {
                 // Given
                 IContainer sut = new Container();
 
@@ -105,6 +104,5 @@ namespace Composition.Tests
                 sut.Resolve<TestViewModel>().Should().NotBeNull();
                 sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
             }
-        }
     }
 }

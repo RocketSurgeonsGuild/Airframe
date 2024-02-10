@@ -1,16 +1,14 @@
 ﻿using System;
-using Xamarin.Essentials;
 
-namespace Rocket.Surgery.Airframe.ViewModels
+namespace Rocket.Surgery.Airframe.ViewModels;
+
+/// <summary>
+/// Interface representing an element that subscribes to network connectivity changes.
+/// </summary>
+public interface INetworkAware
 {
     /// <summary>
-    /// Interface representing an element that subscribes to network connectivity changes.
+    /// Gets the connectivity.
     /// </summary>
-    public interface INetworkAware
-    {
-        /// <summary>
-        /// Gets the connectivity.
-        /// </summary>
-        IObservable<ConnectivityChangedEventArgs> Connectivity { get; }
-    }
+    IObservable<NetworkStateChangedEvent> Connectivity { get; }
 }

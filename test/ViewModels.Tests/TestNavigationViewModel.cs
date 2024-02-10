@@ -1,51 +1,41 @@
-using ReactiveUI;
-using Rocket.Surgery.Airframe.ViewModels;
-using Sextant;
-using System;
-using System.Reactive;
+using ReactiveMarbles.Mvvm;
+using Rocket.Surgery.Airframe.Navigation;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Disposables;
 
-namespace Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests;
+
+[SuppressMessage("Usage", "CA2213:Disposable fields should be disposed")]
+internal class TestNavigationViewModel : NavigableViewModelBase
 {
-    internal class TestNavigationViewModel : NavigableViewModelBase
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TestNavigationViewModel"/> class.
+    /// </summary>
+    public TestNavigationViewModel()
     {
-        private readonly ObservableAsPropertyHelper<INavigationParameter> _navigatedToParameter;
-        private readonly ObservableAsPropertyHelper<INavigationParameter> _navigatedFromParameter;
-        private readonly ObservableAsPropertyHelper<INavigationParameter> _navigatingToParameter;
-        private bool _overriden;
+        _initializeParameter =
+            Initialize
+               .AsValue(_ => RaisePropertyChanged(nameof(InitializeParameter)))
+               .DisposeWith(Garbage)!;
 
-        public TestNavigationViewModel()
-        {
+        _navigatedToParameter =
             NavigatedTo
-               .ToProperty(this, nameof(NavigatedToParameter), out _navigatedToParameter)
-               .DisposeWith(Garbage);
+               .AsValue(_ => RaisePropertyChanged(nameof(NavigatedToParameter)))
+               .DisposeWith(Garbage)!;
 
+        _navigatedFromParameter =
             NavigatedFrom
-               .ToProperty(this, nameof(NavigatedFromParameter), out _navigatedFromParameter)
-               .DisposeWith(Garbage);
-
-            NavigatingTo
-               .ToProperty(this, nameof(NavigatingToParameter), out _navigatingToParameter)
-               .DisposeWith(Garbage);
-        }
-
-        public INavigationParameter NavigatedToParameter => _navigatedToParameter.Value;
-
-        public INavigationParameter NavigatedFromParameter => _navigatedFromParameter.Value;
-
-        public INavigationParameter NavigatingToParameter => _navigatingToParameter.Value;
-
-        protected override IObservable<Unit> ExecuteInitialize()
-        {
-            Overriden = true;
-
-            return base.ExecuteInitialize();
-        }
-
-        public bool Overriden
-        {
-            get => _overriden;
-            set => this.RaiseAndSetIfChanged(ref _overriden, value);
-        }
+               .AsValue(_ => RaisePropertyChanged(nameof(NavigatedFromParameter)))
+               .DisposeWith(Garbage)!;
     }
+
+    public IArguments NavigatedToParameter => _navigatedToParameter.Value;
+
+    public IArguments NavigatedFromParameter => _navigatedFromParameter.Value;
+
+    public IArguments InitializeParameter => _initializeParameter.Value;
+
+    private readonly ValueBinder<IArguments> _initializeParameter;
+    private readonly ValueBinder<IArguments> _navigatedToParameter;
+    private readonly ValueBinder<IArguments> _navigatedFromParameter;
 }

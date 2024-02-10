@@ -1,22 +1,21 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Airframe.ViewModels.Tests
-{
-    public sealed class ViewModelTests
-    {
-        public class TheIsLoadingProperty
-        {
-            [Fact]
-            public void Should_Return_True()
-            {
-                // Given, When
-                TestViewModel sut =
-                    new TestViewModelFixture();
+namespace Rocket.Surgery.Airframe.ViewModels.Tests;
 
-                // Then
-                sut.IsLoading.Should().Be(true);
-            }
+public sealed class ViewModelTests
+{
+    public class TheIsLoadingProperty
+    {
+        [Fact]
+        public void Should_Return_True()
+        {
+            // Given, When
+            TestViewModel sut =
+                new TestViewModelFixture();
+
+            // Then
+            sut.IsLoading.Should().Be(true);
         }
     }
 }

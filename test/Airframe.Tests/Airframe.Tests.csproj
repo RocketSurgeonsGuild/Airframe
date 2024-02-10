@@ -1,18 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <IsPackable>false</IsPackable>
         <AssemblyName>Rocket.Surgery.Airframe.Tests</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Data\Data.csproj" />
-      <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
-      <ProjectReference Include="..\..\src\Shiny\Shiny.csproj" />
-      <ProjectReference Include="..\..\src\Timers\Timers.csproj" />
-      <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj" />
+        <ProjectReference Include="..\..\src\Data\Data.csproj"/>
+        <ProjectReference Include="..\..\src\Timers\Timers.csproj"/>
+        <ProjectReference Include="..\..\src\ViewModels\ViewModels.csproj"/>
     </ItemGroup>
 
 </Project>

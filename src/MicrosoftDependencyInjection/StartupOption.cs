@@ -1,32 +1,31 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection
+namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection;
+
+/// <summary>
+/// Represents a startup options configurator.
+/// </summary>
+public class StartupOption
 {
+    private readonly IServiceCollection _serviceCollection;
+
     /// <summary>
-    /// Represents a startup options configurator.
+    /// Initializes a new instance of the <see cref="StartupOption"/> class.
     /// </summary>
-    public class StartupOption
+    /// <param name="serviceCollection">The service collection.</param>
+    public StartupOption(IServiceCollection serviceCollection) =>
+        _serviceCollection = serviceCollection;
+
+    /// <summary>
+    /// Adds an <see cref="IStartupOperation"/> to the container.
+    /// </summary>
+    /// <typeparam name="T">The operation type.</typeparam>
+    /// <returns>The option configuration.</returns>
+    public StartupOption AddOperation<T>()
+        where T : class, IStartupOperation
     {
-        private readonly IServiceCollection _serviceCollection;
+        _serviceCollection.AddTransient<IStartupOperation, T>();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StartupOption"/> class.
-        /// </summary>
-        /// <param name="serviceCollection">The service collection.</param>
-        public StartupOption(IServiceCollection serviceCollection) =>
-            _serviceCollection = serviceCollection;
-
-        /// <summary>
-        /// Adds an <see cref="IStartupOperation"/> to the container.
-        /// </summary>
-        /// <typeparam name="T">The operation type.</typeparam>
-        /// <returns>The option configuration.</returns>
-        public StartupOption AddOperation<T>()
-            where T : class, IStartupOperation
-        {
-            _serviceCollection.AddTransient<IStartupOperation, T>();
-
-            return this;
-        }
+        return this;
     }
 }

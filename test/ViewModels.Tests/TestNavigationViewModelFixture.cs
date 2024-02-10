@@ -1,9 +1,8 @@
-namespace Airframe.ViewModels.Tests
-{
-    internal class TestNavigationViewModelFixture
-    {
-        public static implicit operator TestNavigationViewModel(TestNavigationViewModelFixture fixture) => fixture.Build();
+namespace Rocket.Surgery.Airframe.ViewModels.Tests;
 
-        private TestNavigationViewModel Build() => new TestNavigationViewModel();
-    }
+internal class TestNavigationViewModelFixture
+{
+    public static implicit operator TestNavigationViewModel(TestNavigationViewModelFixture fixture) => fixture.Build();
+
+    private TestNavigationViewModel Build() => new TestNavigationViewModel();
 }

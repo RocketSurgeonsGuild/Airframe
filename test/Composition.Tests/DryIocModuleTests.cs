@@ -1,15 +1,14 @@
 using DryIoc;
 using FluentAssertions;
-using Rocket.Surgery.Airframe.Composition;
 using Xunit;
 
-namespace Composition.Tests
+namespace Rocket.Surgery.Airframe.Composition.Tests;
+
+public sealed class DryIocModuleTests
 {
-    public sealed class DryIocModuleTests
+    [Fact]
+    public void Should_Resolve_Module()
     {
-        [Fact]
-        public void Should_Resolve_Module()
-        {
             // Given
             IContainer sut = new Container();
 
@@ -18,9 +17,9 @@ namespace Composition.Tests
 
             result.Resolve<TestModule>().Should().NotBeNull();
         }
-        [Fact]
-        public void Should_Resolve_Module_Registrations()
-        {
+    [Fact]
+    public void Should_Resolve_Module_Registrations()
+    {
             // Given
             IContainer sut = new Container();
 
@@ -29,5 +28,4 @@ namespace Composition.Tests
 
             result.Resolve<TestViewModel>().Should().NotBeNull();
         }
-    }
 }

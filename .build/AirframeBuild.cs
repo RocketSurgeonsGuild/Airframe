@@ -21,50 +21,56 @@ using System.Linq;
 [NuGetVerbosityMapping]
 [EnsureGitHooks(GitHook.CommitMsg)]
 public partial class AirframeBuild : NukeBuild,
-                        ICanClean,
-                        ICanRestoreWithMsBuild,
-                        ICanTestWithDotNetCoreNoBuild,
-                        ICanPackWithMsBuild,
-                        ICanUpdateReadme,
-                        IHaveDataCollector,
-                        IHaveConfiguration<Configuration>,
-                        IGenerateCodeCoverageReport,
-                        IGenerateCodeCoverageSummary,
-                        IGenerateCodeCoverageBadges,
-                        ICanLint
+                                     ICanRestoreWithDotNetCore,
+                                     ICanBuildWithDotNetCore,
+                                     ICanTestWithDotNetCore,
+                                     ICanPackWithDotNetCore,
+                                     IHaveDataCollector,
+                                     ICanClean,
+                                     ICanLintStagedFiles,
+                                     ICanDotNetFormat,
+                                     IHavePublicApis,
+                                     ICanUpdateReadme,
+                                     IGenerateCodeCoverageReport,
+                                     IGenerateCodeCoverageSummary,
+                                     IGenerateCodeCoverageBadges,
+                                     ICanRegenerateBuildConfiguration,
+                                     IHaveConfiguration<Configuration>
+
 {
     /// <summary>
-    /// Support plugins are available for:
-    /// - JetBrains ReSharper        https://nuke.build/resharper
-    /// - JetBrains Rider            https://nuke.build/rider
-    /// - Microsoft VisualStudio     https://nuke.build/visualstudio
-    /// - Microsoft VSCode           https://nuke.build/vscode
+    ///     Support plugins are available for:
+    ///     - JetBrains ReSharper        https://nuke.build/resharper
+    ///     - JetBrains Rider            https://nuke.build/rider
+    ///     - Microsoft VisualStudio     https://nuke.build/visualstudio
+    ///     - Microsoft VSCode           https://nuke.build/vscode
     /// </summary>
     public static int Main() => Execute<AirframeBuild>(x => x.Default);
 
-    [OptionalGitRepository]
-    public GitRepository? GitRepository { get; }
-
-    [ComputedGitVersion] public GitVersion GitVersion { get; } = null!;
-
-    private Target Default => _ => _
+    public Target Default => definition => definition
        .DependsOn(Restore)
        .DependsOn(Build)
        .DependsOn(Test)
        .DependsOn(Pack);
 
-    public Target Build => _ => _.Inherit<ICanBuildWithMsBuild>(x => x.NetBuild);
+    public Target Clean => definition => definition.Inherit<ICanClean>(canClean => canClean.Clean);
+    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.CoreRestore);
+    public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.CoreBuild);
+    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(dotNetCore => dotNetCore.CoreTest);
+    public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(dotNetCore => dotNetCore.CorePack)
+       .DependsOn(Clean)
+       .After(Test);
 
-    public Target Pack => _ => _
-       .Inherit<ICanPackWithMsBuild>(x => x.NetPack)
-       .DependsOn(Clean);
-    public Target Clean => _ => _.Inherit<ICanClean>(x => x.Clean);
-    public Target Restore => _ => _.Inherit<ICanRestoreWithMsBuild>(x => x.NetRestore);
-    public Target Test => _ => _.Inherit<ICanTestWithDotNetCoreNoBuild>(x => x.CoreTest);
-    public Target BuildVersion => _ => _
-       .Inherit<IHaveBuildVersion>(x => x.BuildVersion)
-       .Before(Default)
-       .Before(Clean);
+    [Solution(GenerateProjects = true)]
+    Solution Solution { get; } = null!;
+
+    Nuke.Common.ProjectModel.Solution IHaveSolution.Solution => Solution;
+
+    [OptionalGitRepository]
+    public GitRepository? GitRepository { get; }
+
+    [ComputedGitVersion]
+    public GitVersion GitVersion { get; } = null!;
 
     [Parameter("Configuration to build")]
     public Configuration Configuration { get; } = IsLocalBuild ? Configuration.Debug : Configuration.Release;

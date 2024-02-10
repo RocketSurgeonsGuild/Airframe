@@ -1,34 +1,33 @@
 using System;
 using System.Reactive;
 
-namespace Rocket.Surgery.Airframe
+namespace Rocket.Surgery.Airframe;
+
+/// <summary>
+/// Represents a base startup operation.
+/// </summary>
+public abstract class StartupOperationBase : IStartupOperation
 {
+    /// <inheritdoc/>
+    IObservable<Unit> IStartupOperation.Start() =>
+        Start();
+
+    /// <inheritdoc/>
+    IObservable<Unit> IOperation<Unit>.Execute() =>
+        Start();
+
+    /// <inheritdoc/>
+    bool ICanExecute.CanExecute() => CanExecute();
+
     /// <summary>
-    /// Represents a base startup operation.
+    /// Template method for the startup operation.
     /// </summary>
-    public abstract class StartupOperationBase : IStartupOperation
-    {
-        /// <inheritdoc/>
-        IObservable<Unit> IStartupOperation.Start() =>
-            Start();
+    /// <returns>A completion notification.</returns>
+    protected abstract IObservable<Unit> Start();
 
-        /// <inheritdoc/>
-        IObservable<Unit> IOperation<Unit>.Execute() =>
-            Start();
-
-        /// <inheritdoc/>
-        bool ICanExecute.CanExecute() => CanExecute();
-
-        /// <summary>
-        /// Template method for the startup operation.
-        /// </summary>
-        /// <returns>A completion notification.</returns>
-        protected abstract IObservable<Unit> Start();
-
-        /// <summary>
-        /// Template method for whether or not the startup operation will execute.
-        /// </summary>
-        /// <returns>A completion notification.</returns>
-        protected virtual bool CanExecute() => true;
-    }
+    /// <summary>
+    /// Template method for whether or not the startup operation will execute.
+    /// </summary>
+    /// <returns>A completion notification.</returns>
+    protected virtual bool CanExecute() => true;
 }

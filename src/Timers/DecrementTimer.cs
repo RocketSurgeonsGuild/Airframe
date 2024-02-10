@@ -1,26 +1,25 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Rocket.Surgery.Airframe.Timers
+namespace Rocket.Surgery.Airframe.Timers;
+
+/// <summary>
+/// Represents an <see cref="IDecrement"/> <see cref="ObservableTimer"/>.
+/// </summary>
+public class DecrementTimer : ObservableTimer, IDecrement
 {
     /// <summary>
-    /// Represents an <see cref="IDecrement"/> <see cref="ObservableTimer"/>.
+    /// Initializes a new instance of the <see cref="DecrementTimer"/> class.
     /// </summary>
-    public class DecrementTimer : ObservableTimer, IDecrement
+    /// <param name="schedulerProvider">The scheduler provider.</param>
+    public DecrementTimer([NotNull] ISchedulerProvider schedulerProvider)
+        : base(schedulerProvider)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DecrementTimer"/> class.
-        /// </summary>
-        /// <param name="schedulerProvider">The scheduler provider.</param>
-        public DecrementTimer([NotNull] ISchedulerProvider schedulerProvider)
-            : base(schedulerProvider)
-        {
-        }
-
-        /// <inheritdoc/>
-        protected override TimeSpan TimeAccumulator(TimeSpan accumulated) => accumulated - TimeSpans.RefreshInterval;
-
-        /// <inheritdoc/>
-        protected override bool Elapse(TimeSpan elapsed) => elapsed <= TimeSpan.Zero;
     }
+
+    /// <inheritdoc/>
+    protected override TimeSpan TimeAccumulator(TimeSpan accumulated) => accumulated - TimeSpans.RefreshInterval;
+
+    /// <inheritdoc/>
+    protected override bool Elapse(TimeSpan elapsed) => elapsed <= TimeSpan.Zero;
 }

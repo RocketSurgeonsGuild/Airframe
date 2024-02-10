@@ -1,19 +1,18 @@
 using Rocket.Surgery.Airframe.Data;
 
-namespace Rocket.Surgery.Airframe.Synthetic
+namespace Rocket.Surgery.Airframe.Synthetic.Drinks;
+
+/// <summary>
+/// Represents a coffee data service.
+/// </summary>
+public class DrinkDataService : DataServiceBase<DrinkDto>, IDrinkService
 {
     /// <summary>
-    /// Represents a coffee data service.
+    /// Initializes a new instance of the <see cref="DrinkDataService"/> class.
     /// </summary>
-    public class DrinkDataService : DataServiceBase<DrinkDto>, IDrinkService
+    /// <param name="client">The client.</param>
+    public DrinkDataService(IClient client)
+        : base(client)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DrinkDataService"/> class.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        public DrinkDataService(IClient client)
-            : base(client)
-        {
-        }
     }
 }

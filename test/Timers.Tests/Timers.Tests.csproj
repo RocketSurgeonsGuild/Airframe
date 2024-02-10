@@ -1,15 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <IsPackable>false</IsPackable>
         <RootNamespace>Rocket.Surgery.Airframe.Timers.Tests</RootNamespace>
         <AssemblyName>Rocket.Surgery.Airframe.Timers.Tests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Forms\Forms.csproj" />
       <ProjectReference Include="..\..\src\Timers\Timers.csproj" />
+      <ProjectReference Include="..\Airframe.Testing\Airframe.Testing.csproj" />
       <ProjectReference Include="..\Airframe.Tests\Airframe.Tests.csproj" />
     </ItemGroup>
 

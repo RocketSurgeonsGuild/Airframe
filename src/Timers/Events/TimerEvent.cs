@@ -1,9 +1,6 @@
-namespace Rocket.Surgery.Airframe.Timers.Events
-{
-    /// <summary>
-    /// A timer changed notification.
-    /// </summary>
-    public class TimerEvent
-    {
-    }
-}
+namespace Rocket.Surgery.Airframe.Timers.Events;
+
+/// <summary>
+/// A timer changed notification.
+/// </summary>
+public class TimerEvent;

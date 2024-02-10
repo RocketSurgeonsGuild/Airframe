@@ -1,11 +1,10 @@
 using ReactiveUI;
 
-namespace Airframe.Tests
-{
-    public abstract class TestBase
-    {
-        protected TestBase() => Initialize();
+namespace Rocket.Surgery.Airframe.Tests;
 
-        private static void Initialize() => RxApp.DefaultExceptionHandler = BaseExceptionHandlerStub.Instance;
-    }
+public abstract class TestBase
+{
+    protected TestBase() => Initialize();
+
+    private static void Initialize() => RxApp.DefaultExceptionHandler = NoExceptionHandlerStub.Instance;
 }
