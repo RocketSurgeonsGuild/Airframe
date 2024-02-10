@@ -6,14 +6,19 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="coverlet.msbuild" />
+        <PackageReference Include="FluentAssertions" />
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="Microsoft.Reactive.Testing"/>
-        <PackageReference Include="Rocket.Surgery.Extensions.Testing.NSubstitute"/>
+        <PackageReference Include="NSubstitute" />
         <PackageReference Include="ReactiveMarbles.Mvvm"/>
         <PackageReference Include="ReactiveUI.Testing"/>
+        <PackageReference Include="Rocket.Surgery.Extensions.Testing.NSubstitute"/>
+        <PackageReference Include="Rocket.Surgery.Extensions.Testing.Fixtures" />
         <PackageReference Include="xunit"/>
         <PackageReference Include="xunit.runner.visualstudio"/>
-        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="XunitXml.TestLogger" />
     </ItemGroup>
 
     <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.props', '$(MSBuildThisFileDirectory)../'))"/>
