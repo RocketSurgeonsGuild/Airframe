@@ -47,7 +47,7 @@ public partial class AirframeBuild
 
     public Target Workloads => definition => definition
        .Before(Restore)
-       .Executes(() => DotNetTasks.DotNetWorkloadInstall(configurator => configurator.AddWorkloadId("ios", "maccatalyst")));
+       .Executes(() => DotNetTasks.DotNetWorkloadInstall(configurator => configurator.AddWorkloadId("ios")));
 
     public static RocketSurgeonGitHubActionsConfiguration Middleware(RocketSurgeonGitHubActionsConfiguration configuration)
     {

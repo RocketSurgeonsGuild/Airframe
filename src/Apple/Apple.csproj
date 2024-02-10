@@ -1,7 +1,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.22">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+        <TargetFramework>net8.0-ios</TargetFramework>
         <AssemblyName>Rocket.Surgery.Airframe.Apple</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Apple</RootNamespace>
         <LangVersion>latest</LangVersion>
