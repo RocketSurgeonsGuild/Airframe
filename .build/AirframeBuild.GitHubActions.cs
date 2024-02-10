@@ -11,7 +11,7 @@ using static GitHubActionsTasks;
 
 [GitHubActionsSteps(
     "ci",
-    GitHubActionsImage.MacOsLatest,
+    GitHubActionsImage.WindowsLatest,
     AutoGenerate = true,
     On = [RocketSurgeonGitHubActionsTrigger.Push],
     OnPushTags = ["v*"],
