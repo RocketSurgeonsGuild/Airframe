@@ -16,22 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{843C3844-B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "src\ViewModels\ViewModels.csproj", "{CA4B6910-402D-40C3-99C6-8DF8E3ABF041}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{0FF56E4B-1F2D-4839-B857-9C878FC2F55B}"
-	ProjectSection(SolutionItems) = preProject
-		.nuspec/Controls.nuspec = .nuspec/Controls.nuspec
-		.nuspec/Forms.nuspec = .nuspec/Forms.nuspec
-		.nuspec/ViewModels.nuspec = .nuspec/ViewModels.nuspec
-		.nuspec/Popup.nuspec = .nuspec/Popup.nuspec
-		.nuspec/Composition.nuspec = .nuspec/Composition.nuspec
-		.nuspec/Data.nuspec = .nuspec/Data.nuspec
-		.nuspec/Synthetic.nuspec = .nuspec/Synthetic.nuspec
-		.nuspec/Core.nuspec = .nuspec/Core.nuspec
-		.nuspec/Shiny.nuspec = .nuspec/Shiny.nuspec
-		.nuspec/Timers.nuspec = .nuspec/Timers.nuspec
-		.nuspec/MicrosoftDependencyInjection.nuspec = .nuspec/MicrosoftDependencyInjection.nuspec
-		.nuspec/Apple.nuspec = .nuspec/Apple.nuspec
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".build", ".build\.build.csproj", "{8322904C-5A48-4A92-A5EA-2AF91F8C4595}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composition", "src\Composition\Composition.csproj", "{36A9DAA0-FCD4-41A3-A046-C755937CA701}"

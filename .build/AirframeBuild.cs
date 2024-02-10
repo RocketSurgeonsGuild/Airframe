@@ -45,7 +45,7 @@ public partial class AirframeBuild : NukeBuild,
     ///     - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///     - Microsoft VSCode           https://nuke.build/vscode
     /// </summary>
-    public static int Main() => Execute<AirframeBuild>(x => x.Default);
+    public static int Main() => Execute<AirframeBuild>(build => build.Default);
 
     public Target Default => definition => definition
        .DependsOn(Restore)

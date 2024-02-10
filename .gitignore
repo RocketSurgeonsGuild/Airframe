@@ -341,4 +341,4 @@ ASALocalRun/
 # Code Coverage
 coverage/
 test/**/coverage.json
-.nuke/temp/
+/.nuke/temp/

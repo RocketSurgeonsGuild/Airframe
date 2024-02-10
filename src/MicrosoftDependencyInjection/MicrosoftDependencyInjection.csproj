@@ -2,9 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
+        <PackageId>Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection</PackageId>
         <AssemblyName>Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection</RootNamespace>
+        <Description>Registration abstractions for Microsoft Extensions Dependency Injection.</Description>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
