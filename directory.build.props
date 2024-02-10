@@ -3,7 +3,9 @@
         <Authors>Rodney Littles II, Rocket Surgeons Guild contributors</Authors>
         <Company>Rocket Surgeons Guild</Company>
         <Copyright>Copyright Rocket Surgeons Guild © $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
+        <IncludeContentInPack>true</IncludeContentInPack>
         <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -11,8 +13,16 @@
         <PackageIcon>images/packageicon.png</PackageIcon>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageProjectUrl>https://rocketsurgeonsguild.github.io/</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/RocketSurgeonsGuild/Airframe/blob/master/LICENSE</PackageLicenseUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(SolutionDir)LICENSE" Pack="true" PackagePath="" />
+        <None
+                Include="$(MSBuildThisFileDirectory)/.nuke/temp/packageicon.png"
+                Condition="Exists('$(MSBuildThisFileDirectory)/.nuke/temp/packageicon.png')"
+                Pack="true"
+                PackagePath="/images/"
+                Visible="false"
+        />
+    </ItemGroup>
 </Project>
