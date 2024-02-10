@@ -2,8 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <PackageId>Rocket.Surgery.Airframe.Synthetic</PackageId>
         <AssemblyName>Rocket.Surgery.Airframe.Synthetic</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Synthetic</RootNamespace>
+        <Description>Airframe base data for demo, samples, and examples.</Description>
     </PropertyGroup>
 
     <ItemGroup>

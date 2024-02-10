@@ -1,20 +1,14 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.22">
-
     <PropertyGroup>
         <TargetFramework>net8.0-ios</TargetFramework>
+        <PackageId>Rocket.Surgery.Airframe.Apple</PackageId>
         <AssemblyName>Rocket.Surgery.Airframe.Apple</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Apple</RootNamespace>
-        <LangVersion>latest</LangVersion>
-        <Nullable>enable</Nullable>
+        <Description>Apple abstractions.</Description>
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="netstandard" />
-        <Reference Include="System.Runtime.Serialization" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\Core\Core.csproj"/>
     </ItemGroup>
 
 </Project>

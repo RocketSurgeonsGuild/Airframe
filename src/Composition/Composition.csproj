@@ -1,28 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Rocket.Surgery.Airframe.Composition</AssemblyName>
-    <RootNamespace>Rocket.Surgery.Airframe.Composition</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <PackageId>Rocket.Surgery.Airframe.Composition</PackageId>
+        <AssemblyName>Rocket.Surgery.Airframe.Composition</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Composition</RootNamespace>
+        <Description>Application composition for Xamarin.Forms applications using ReactiveUI and DryIoc</Description>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\Rocket.Surgery.Airframe.Composition.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\Rocket.Surgery.Airframe.Composition.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="ReactiveUI" />
-    <PackageReference Include="Serilog.Sinks.AppCenter.Crash" />
-    <PackageReference Include="Splat" />
-    <PackageReference Include="Splat.DryIoc" />
-    <PackageReference Include="Splat.Serilog" />
-    <PackageReference Include="System.ComponentModel" />
-    <PackageReference Include="System.Reactive" />
-    <PackageReference Include="Xamarin.Forms" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="ReactiveUI"/>
+        <PackageReference Include="Serilog.Sinks.AppCenter.Crash"/>
+        <PackageReference Include="Splat"/>
+        <PackageReference Include="Splat.DryIoc"/>
+        <PackageReference Include="Splat.Serilog"/>
+        <PackageReference Include="System.ComponentModel"/>
+        <PackageReference Include="System.Reactive"/>
+    </ItemGroup>
 
 </Project>
