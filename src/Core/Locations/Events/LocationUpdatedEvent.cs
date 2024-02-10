@@ -1,7 +1,7 @@
 namespace Rocket.Surgery.Airframe;
 
 /// <summary>
-/// Notification of a <see cref="GeoLocation"/> update.
+/// Notification of a <see cref="IGpsLocation"/> update.
 /// </summary>
 public class LocationUpdatedEvent
 {

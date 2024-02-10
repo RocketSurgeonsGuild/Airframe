@@ -30,6 +30,11 @@ public class GeoCoordinate : IEquatable<GeoCoordinate>
     }
 
     /// <summary>
+    /// Gets the default <see cref="GeoCoordinate"/>.
+    /// </summary>
+    public static GeoCoordinate Default { get; } = new GeoCoordinate(0, 0);
+
+    /// <summary>
     /// Gets the latitude of the coordinate.
     /// </summary>
     public double Latitude { get; }
@@ -38,7 +43,6 @@ public class GeoCoordinate : IEquatable<GeoCoordinate>
     /// Gets the longitude of the coordinate.
     /// </summary>
     public double Longitude { get; }
-        public static GeoCoordinate Default { get; } = new GeoCoordinate(0, 0);
 
     public static bool operator ==(GeoCoordinate? left, GeoCoordinate? right) => Equals(left, right);
 

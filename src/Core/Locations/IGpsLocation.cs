@@ -35,7 +35,7 @@ public interface IGpsLocation
     /// <summary>
     /// Gets the position of the reading.
     /// </summary>
-    GeoCoordinate Position { get; }
+    GeoCoordinate Coordinate { get; }
 
     /// <summary>
     /// Gets the position accuracy.
