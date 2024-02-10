@@ -51,7 +51,7 @@ public partial class AirframeBuild
 
     public static RocketSurgeonGitHubActionsConfiguration Middleware(RocketSurgeonGitHubActionsConfiguration configuration)
     {
-        var buildJob = configuration.Jobs.Cast<RocketSurgeonsGithubActionsJob>().First(z => z.Name.Equals("Build", StringComparison.OrdinalIgnoreCase));
+        var buildJob = configuration.Jobs.Cast<RocketSurgeonsGithubActionsJob>().First(z => z.Name.Equals("build", StringComparison.OrdinalIgnoreCase));
         var checkoutStep = buildJob.Steps.OfType<CheckoutStep>().Single();
         // For fetch all
         checkoutStep.FetchDepth = 0;
