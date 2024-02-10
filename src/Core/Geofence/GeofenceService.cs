@@ -12,7 +12,7 @@ public class GeofenceService : IGeofenceService, IGeofenceStore
     private readonly SourceCache<GeofenceRegion, string> _store = new SourceCache<GeofenceRegion, string>(region => region.Identifier);
 
     /// <inheritdoc/>
-    public IObservable<GeoLocation> Location { get; }
+    public IObservable<GeoCoordinate> Location { get; }
 
     /// <inheritdoc/>
     public IObservable<GeofenceRegion> Entered { get; }

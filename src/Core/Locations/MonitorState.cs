@@ -23,7 +23,7 @@ public class MonitorState
     /// <summary>
     /// Gets or sets the current location.
     /// </summary>
-    public GeoLocation GeoLocation { get; set; }
+    public GeoCoordinate Location { get; set; } = GeoCoordinate.Default;
 
     /// <summary>
     /// Gets or sets a value indicating whether location services are enabled.

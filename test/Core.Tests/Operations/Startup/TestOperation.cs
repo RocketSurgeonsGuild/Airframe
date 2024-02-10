@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -12,7 +13,8 @@ internal class TestOperation : StartupOperationBase
     /// Initializes a new instance of the <see cref="TestOperation"/> class.
     /// </summary>
     /// <param name="canExecute">Whether this instance can execute.</param>
-    public TestOperation(bool canExecute = true) => _canExecute = canExecute;
+    public TestOperation(bool canExecute = true)
+        : base(NullLoggerFactory.Instance) => _canExecute = canExecute;
 
     public bool Executed { get; protected set; }
 

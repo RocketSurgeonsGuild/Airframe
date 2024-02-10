@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Rocket.Surgery.Airframe;
 
 /// <summary>
-/// Represents a <see cref="GeoLocation"/> update event.
+/// Represents a <see cref="IGpsLocation"/> update event.
 /// </summary>
 public class LocationsUpdatedEvent
 {

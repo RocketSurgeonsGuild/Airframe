@@ -30,6 +30,11 @@ public class GeoCoordinate : IEquatable<GeoCoordinate>
     }
 
     /// <summary>
+    /// Gets the default <see cref="GeoCoordinate"/>.
+    /// </summary>
+    public static GeoCoordinate Default { get; } = new GeoCoordinate(0, 0);
+
+    /// <summary>
     /// Gets the latitude of the coordinate.
     /// </summary>
     public double Latitude { get; }

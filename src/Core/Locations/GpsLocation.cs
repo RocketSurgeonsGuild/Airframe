@@ -59,7 +59,7 @@ public class GpsLocation : IGpsLocation
         HeadingAccuracy = headingAccuracy;
         Speed = speed;
         SpeedAccuracy = speedAccuracy;
-        Position = position;
+        Coordinate = position;
         PositionAccuracy = positionAccuracy;
         Timestamp = timestamp;
     }
@@ -80,7 +80,7 @@ public class GpsLocation : IGpsLocation
     public double SpeedAccuracy { get; }
 
     /// <inheritdoc/>
-    public GeoCoordinate Position { get; }
+    public GeoCoordinate Coordinate { get; }
 
     /// <inheritdoc/>
     public double PositionAccuracy { get; }

@@ -11,7 +11,7 @@ public interface IGeofenceService
     /// <summary>
     /// Gets an observable sequence <see cref="Location"/> that have been exited.
     /// </summary>
-    IObservable<GeoLocation> Location { get; }
+    IObservable<GeoCoordinate> Location { get; }
 
     /// <summary>
     /// Gets an observable sequence <see cref="GeofenceRegion"/> that have been entered.
