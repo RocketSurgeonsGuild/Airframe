@@ -46,7 +46,7 @@
     <PackageVersion Include="Serilog.Sinks.AppCenter.Crash" Version="1.2.1" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
     <PackageVersion Include="Splat" Version="14.8.12" />
-    <PackageVersion Include="Splat.Serilog" Version="11.1.1" />
+    <PackageVersion Include="Splat.Serilog" Version="14.8.12" />
     <PackageVersion Include="Splat.DryIoc" Version="11.1.1" />
     <PackageVersion Include="Splat.Microsoft.Extensions.Logging" Version="14.8.12" />
     <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="11.1.1" />
