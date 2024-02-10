@@ -1,7 +1,6 @@
-namespace Rocket.Surgery.Airframe.ViewModels.Tests
+namespace Rocket.Surgery.Airframe.ViewModels.Tests;
+
+internal class TestViewModel : ViewModelBase
 {
-    internal class TestViewModel : ViewModelBase
-    {
-        public bool IsLoading { get; } = true;
-    }
+    public bool IsLoading { get; } = true;
 }

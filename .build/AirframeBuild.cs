@@ -53,18 +53,19 @@ public partial class AirframeBuild : NukeBuild,
        .DependsOn(Test)
        .DependsOn(Pack);
 
+    public Target Clean => definition => definition.Inherit<ICanClean>(x => x.Clean);
+    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(x => x.CoreRestore);
     public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(x => x.CoreBuild);
+
+    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(x => x.CoreTest);
+
 
     public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(x => x.CorePack)
        .DependsOn(Clean)
        .After(Test);
 
-    public Target Clean => definition => definition.Inherit<ICanClean>(x => x.Clean);
-    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(x => x.CoreRestore);
-    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(x => x.CoreTest);
-
     [Solution(GenerateProjects = true)]
-    private Solution Solution { get; } = null!;
+    Solution Solution { get; } = null!;
 
     Nuke.Common.ProjectModel.Solution IHaveSolution.Solution => Solution;
 

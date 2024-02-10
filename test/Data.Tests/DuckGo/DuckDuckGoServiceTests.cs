@@ -7,38 +7,37 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Xunit;
 
-namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo
+namespace Rocket.Surgery.Airframe.Data.Tests.DuckGo;
+
+public class DuckDuckGoServiceTests
 {
-    public class DuckDuckGoServiceTests
+    [Fact]
+    public void Should_Return_Query_Results()
     {
-        [Fact]
-        public void Should_Return_Query_Results()
-        {
-            // Given
-            var client = Substitute.For<IDuckDuckGoApiClient>();
-            client.Search(Arg.Any<string>()).Returns(
-                Observable.Return(
-                    new SearchResult
+        // Given
+        var client = Substitute.For<IDuckDuckGoApiClient>();
+        client.Search(Arg.Any<string>()).Returns(
+            Observable.Return(
+                new SearchResult
+                {
+                    RelatedTopics = new List<RelatedTopic>
                     {
-                        RelatedTopics = new List<RelatedTopic>
+                        new()
                         {
-                            new()
-                            {
-                                FirstUrl = Guid.NewGuid().ToString(),
-                                Result = "result one",
-                                Text = "text",
-                            },
+                            FirstUrl = Guid.NewGuid().ToString(),
+                            Result = "result one",
+                            Text = "text",
                         },
-                    }));
-            DuckDuckGoService sut = new DuckDuckGoServiceFixture().WithClient(client);
+                    },
+                }));
+        DuckDuckGoService sut = new DuckDuckGoServiceFixture().WithClient(client);
 
-            // When
-            sut.Query(string.Empty)
-               .Bind(out var results)
-               .Subscribe();
+        // When
+        sut.Query(string.Empty)
+           .Bind(out var results)
+           .Subscribe();
 
-            // Then
-            results.Should().NotBeEmpty();
-        }
+        // Then
+        results.Should().NotBeEmpty();
     }
 }

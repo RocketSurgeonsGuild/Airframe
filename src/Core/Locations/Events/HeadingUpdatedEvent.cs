@@ -1,9 +1,8 @@
-namespace Rocket.Surgery.Airframe
+namespace Rocket.Surgery.Airframe;
+
+/// <summary>
+/// Represents a heading update event.
+/// </summary>
+public class HeadingUpdatedEvent
 {
-    /// <summary>
-    /// Represents a heading update event.
-    /// </summary>
-    public class HeadingUpdatedEvent
-    {
-    }
 }

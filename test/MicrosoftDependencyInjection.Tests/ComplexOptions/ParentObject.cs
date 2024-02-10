@@ -1,7 +1,6 @@
-namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.ComplexOptions
+namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.ComplexOptions;
+
+public class ParentObject
 {
-    public class ParentObject
-    {
-        public ComplexObject Complex { get; set; }
-    }
+    public ComplexObject Complex { get; set; }
 }

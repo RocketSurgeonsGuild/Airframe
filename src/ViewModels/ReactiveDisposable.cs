@@ -2,35 +2,34 @@ using System;
 using System.Reactive.Disposables;
 using ReactiveUI;
 
-namespace Rocket.Surgery.Airframe.ViewModels
+namespace Rocket.Surgery.Airframe.ViewModels;
+
+/// <summary>
+/// Represents a base object for garbage collection.
+/// </summary>
+public abstract class ReactiveDisposable : ReactiveObject, IDisposable
 {
     /// <summary>
-    /// Represents a base object for garbage collection.
+    /// Gets the collection of disposables.
     /// </summary>
-    public abstract class ReactiveDisposable : ReactiveObject, IDisposable
+    protected CompositeDisposable Garbage { get; } = new CompositeDisposable();
+
+    /// <inheritdoc/>
+    public void Dispose()
     {
-        /// <summary>
-        /// Gets the collection of disposables.
-        /// </summary>
-        protected CompositeDisposable Garbage { get; } = new CompositeDisposable();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        /// <inheritdoc/>
-        public void Dispose()
+    /// <summary>
+    /// Disposes of the garbage.
+    /// </summary>
+    /// <param name="disposing">Whether the object is disposing.</param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Disposes of the garbage.
-        /// </summary>
-        /// <param name="disposing">Whether the object is disposing.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                Garbage.Dispose();
-            }
+            Garbage.Dispose();
         }
     }
 }

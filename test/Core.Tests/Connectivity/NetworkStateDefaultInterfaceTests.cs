@@ -1,17 +1,16 @@
 using FluentAssertions;
-using Rocket.Surgery.Airframe.Connectivity;
 using System;
 using Xunit;
 
 namespace Rocket.Surgery.Airframe.Core.Tests.Connectivity;
 
-public class ConnectivityInterfaceTests
+public class NetworkStateDefaultInterfaceTests
 {
     [Theory]
     [InlineData(NetworkAccess.Internet)]
     [InlineData(NetworkAccess.Local)]
     [InlineData(NetworkAccess.ConstrainedInternet)]
-    public void GivenImplementation_WhenConnectivityChanged_ThenHasSignal(NetworkAccess access)
+    public void GivenImplementation_WhenNetworkStateChanged_ThenHasSignal(NetworkAccess access)
     {
         // Given
         var sut = new NetworkStateMock();
@@ -19,7 +18,7 @@ public class ConnectivityInterfaceTests
         using var _ = sut.As<INetworkState>().HasSignal().Subscribe(actual => result = actual);
 
         // When
-        sut.Notify(new NetworkStateChangedEvent(access, ConnectionProfile.WiFi));
+        sut.Notify(new NetworkStateChangedEvent(access, NetworkConnection.WiFi));
 
         // Then
         result
@@ -34,7 +33,7 @@ public class ConnectivityInterfaceTests
     [Theory]
     [InlineData(NetworkAccess.None)]
     [InlineData(NetworkAccess.Unknown)]
-    public void GivenImplementation_WhenConnectivityChanged_ThenHasNoSignal(NetworkAccess access)
+    public void GivenImplementation_WhenNetworkStateChanged_ThenHasNoSignal(NetworkAccess access)
     {
         // Given
         var sut = new NetworkStateMock();
@@ -58,7 +57,7 @@ public class ConnectivityInterfaceTests
     [InlineData(NetworkAccess.Internet)]
     [InlineData(NetworkAccess.Local)]
     [InlineData(NetworkAccess.ConstrainedInternet)]
-    public void GivenImplementation_WhenConnectivityChanged_ThenSignalDegraded(NetworkAccess access)
+    public void GivenImplementation_WhenNetworkStateChanged_ThenSignalDegraded(NetworkAccess access)
     {
         // Given
         var sut = new NetworkStateMock();
@@ -81,7 +80,7 @@ public class ConnectivityInterfaceTests
     [Theory]
     [InlineData(NetworkAccess.None)]
     [InlineData(NetworkAccess.Unknown)]
-    public void GivenImplementation_WhenConnectivityChanged_ThenSignalNotDegraded(NetworkAccess access)
+    public void GivenImplementation_WhenNetworkStateChanged_ThenSignalNotDegraded(NetworkAccess access)
     {
         // Given
         var sut = new NetworkStateMock();

@@ -5,104 +5,103 @@ using Rocket.Surgery.Airframe.Tests;
 using System;
 using Xunit;
 
-namespace Rocket.Surgery.Airframe.Timers.Tests
+namespace Rocket.Surgery.Airframe.Timers.Tests;
+
+public class IncrementTimerTests : TestBase
 {
-    public class IncrementTimerTests : TestBase
+    private const int InitialMilliseconds = 1001;
+    private const int OneThousandMilliseconds = 1000;
+
+    [Fact]
+    public void Should_Not_Be_Running_When_Constructed()
     {
-        private const int InitialMilliseconds = 1001;
-        private const int OneThousandMilliseconds = 1000;
+        // Given, When
+        IncrementTimer sut = new IncrementTimerFixture();
 
-        [Fact]
-        public void Should_Not_Be_Running_When_Constructed()
+        // Then
+        sut.IsRunning.Should().BeFalse();
+    }
+
+    [Fact]
+    public void Should_Be_Running_When_Started()
+    {
+        // Given
+        SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
+        IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
+
+        // When
+        sut.Start(TimeSpan.FromMinutes(25));
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
+
+        // Then
+        sut.IsRunning.Should().BeTrue();
+    }
+
+    [Fact]
+    public void Should_Advance_When_Started()
+    {
+        // Given
+        SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
+        IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
+        var timer = TimeSpan.Zero;
+
+        sut.Subscribe(x =>
         {
-            // Given, When
-            IncrementTimer sut = new IncrementTimerFixture();
+            timer = x;
+        });
 
-            // Then
-            sut.IsRunning.Should().BeFalse();
-        }
+        // When
+        sut.Start();
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
 
-        [Fact]
-        public void Should_Be_Running_When_Started()
-        {
-            // Given
-            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
-            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
+        // Then
+        timer.Should().Be(TimeSpan.FromSeconds(2));
+    }
 
-            // When
-            sut.Start(TimeSpan.FromMinutes(25));
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
+    [Fact]
+    public void Should_Resume_Where_Stopped()
+    {
+        // Given
+        SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
+        IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
+        var timer = TimeSpan.Zero;
+        sut.Start(TimeSpan.FromMinutes(1));
 
-            // Then
-            sut.IsRunning.Should().BeTrue();
-        }
+        using var _ = sut.Subscribe(x => timer = x);
 
-        [Fact]
-        public void Should_Advance_When_Started()
-        {
-            // Given
-            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
-            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
-            var timer = TimeSpan.Zero;
+        sut.Start();
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
+        sut.Stop();
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
 
-            sut.Subscribe(x =>
-            {
-                timer = x;
-            });
+        // When
+        sut.Start();
 
-            // When
-            sut.Start();
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
+        // Then
+        timer.Should().Be(TimeSpan.FromSeconds(1));
+    }
 
-            // Then
-            timer.Should().Be(TimeSpan.FromSeconds(2));
-        }
+    [Fact]
+    public void Should_Resume_After_Stopped()
+    {
+        // Given
+        SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
+        IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
+        var timer = TimeSpan.Zero;
 
-        [Fact]
-        public void Should_Resume_Where_Stopped()
-        {
-            // Given
-            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
-            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
-            var timer = TimeSpan.Zero;
-            sut.Start(TimeSpan.FromMinutes(1));
+        sut.Subscribe(x => timer = x);
 
-            using var _ = sut.Subscribe(x => timer = x);
+        sut.Start();
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
+        sut.Stop();
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
 
-            sut.Start();
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
-            sut.Stop();
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
+        // When
+        sut.Start();
+        schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
 
-            // When
-            sut.Start();
-
-            // Then
-            timer.Should().Be(TimeSpan.FromSeconds(1));
-        }
-
-        [Fact]
-        public void Should_Resume_After_Stopped()
-        {
-            // Given
-            SchedulerProviderMock schedulerProvider = new SchedulerProviderFixture();
-            IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
-            var timer = TimeSpan.Zero;
-
-            sut.Subscribe(x => timer = x);
-
-            sut.Start();
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(InitialMilliseconds);
-            sut.Stop();
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
-
-            // When
-            sut.Start();
-            schedulerProvider.UserInterfaceTestScheduler.AdvanceByMs(OneThousandMilliseconds);
-
-            // Then
-            timer.Should().Be(TimeSpan.FromSeconds(2));
-        }
+        // Then
+        timer.Should().Be(TimeSpan.FromSeconds(2));
     }
 }

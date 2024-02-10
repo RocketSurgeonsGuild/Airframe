@@ -1,7 +1,6 @@
-namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.ComplexOptions
+namespace Rocket.Surgery.Airframe.Microsoft.Extensions.DependencyInjection.Tests.ComplexOptions;
+
+public class LevelSettings
 {
-    public class LevelSettings
-    {
-        public AncestorObject Generations { get; set; }
-    }
+    public AncestorObject Generations { get; set; }
 }

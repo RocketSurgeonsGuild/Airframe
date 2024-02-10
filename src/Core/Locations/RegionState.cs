@@ -1,23 +1,22 @@
-namespace Rocket.Surgery.Airframe
+namespace Rocket.Surgery.Airframe;
+
+/// <summary>
+/// Enumeration of Region State.
+/// </summary>
+public enum RegionState
 {
     /// <summary>
-    /// Enumeration of Region State.
+    /// Unknown State.
     /// </summary>
-    public enum RegionState
-    {
-        /// <summary>
-        /// Unknown State.
-        /// </summary>
-        Unknown,
+    Unknown,
 
-        /// <summary>
-        /// Inside.
-        /// </summary>
-        Inside,
+    /// <summary>
+    /// Inside.
+    /// </summary>
+    Inside,
 
-        /// <summary>
-        /// Outside.
-        /// </summary>
-        Outside,
-    }
+    /// <summary>
+    /// Outside.
+    /// </summary>
+    Outside,
 }
