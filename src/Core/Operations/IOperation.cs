@@ -6,9 +6,7 @@ namespace Rocket.Surgery.Airframe;
 /// <summary>
 /// Interface representing a base operation.
 /// </summary>
-public interface IOperation : IOperation<Unit>
-{
-}
+public interface IOperation : IOperation<Unit>;
 
 /// <summary>
 /// Interface representing a base operation.
