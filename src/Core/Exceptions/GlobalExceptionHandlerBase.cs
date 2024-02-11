@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reactive.Concurrency;
+using System.Reactive.Disposables;
 
 namespace Rocket.Surgery.Airframe.Exceptions;
 
@@ -24,7 +25,13 @@ public abstract class GlobalExceptionHandlerBase : IExceptionHandler
     void IObserver<Exception>.OnCompleted() => _scheduler.Schedule(() => OnCompleted());
 
     /// <inheritdoc/>
-    void IObserver<Exception>.OnError(Exception error) => _scheduler.Schedule(() => OnError(error));
+    void IObserver<Exception>.OnError(Exception error) => _scheduler.Schedule(
+        () => OnError(error),
+        (_, state) =>
+        {
+            state.Invoke();
+            return Disposable.Empty;
+        });
 
     /// <inheritdoc/>
     void IObserver<Exception>.OnNext(Exception value) => OnNext(value);
