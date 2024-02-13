@@ -18,7 +18,7 @@ public abstract class DisposableBase : IDisposable
     /// <summary>
     /// Gets the garbage disposables.
     /// </summary>
-    protected CompositeDisposable Garbage { get; } = new CompositeDisposable();
+    protected CompositeDisposable Garbage { get; } = new();
 
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

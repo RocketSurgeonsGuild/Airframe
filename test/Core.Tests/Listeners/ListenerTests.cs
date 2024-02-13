@@ -8,7 +8,7 @@ namespace Rocket.Surgery.Airframe.Core.Tests.Listeners;
 public class ListenerTests
 {
     [Fact]
-    public void GivenListening_When_ThenResultNotNull()
+    public void GivenListen_When_ThenResultNotNull()
     {
         // Given
         Unit? result = null;
@@ -23,7 +23,7 @@ public class ListenerTests
     }
 
     [Fact]
-    public void GivenListening_WhenIgnore_ThenResultNull()
+    public void GivenListen_WhenIgnore_ThenResultNull()
     {
         // Given
         Unit? result = null;
