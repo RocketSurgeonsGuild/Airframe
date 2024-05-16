@@ -342,3 +342,6 @@ ASALocalRun/
 coverage/
 test/**/coverage.json
 /.nuke/temp/
+
+# VSCode
+.mono
