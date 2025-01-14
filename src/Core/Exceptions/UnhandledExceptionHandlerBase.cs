@@ -19,13 +19,13 @@ public abstract class UnhandledExceptionHandlerBase : IUnhandledExceptionHandler
     {
         if (!CanHandle(exception))
         {
-            Logger.LogTrace(exception, "Cannot Handle: {Correlation}", correlationId);
+            Logger.LogTrace("Cannot Handle: {Correlation}", correlationId);
             return;
         }
 
-        Logger.LogTrace(exception, "Can Handle: {Correlation}", correlationId);
+        Logger.LogTrace("Can Handle: {Correlation}", correlationId);
         Handle(exception, correlationId);
-        Logger.LogTrace(exception, "Handled: {Correlation}", correlationId);
+        Logger.LogTrace("Handled: {Correlation}", correlationId);
     }
 
     /// <inheritdoc/>
