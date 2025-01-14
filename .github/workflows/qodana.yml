@@ -1,11 +1,11 @@
 name: Qodana
-on:
-  workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - master
-      - chore/qodana
+#on:
+#  workflow_dispatch:
+#  pull_request:
+#  push:
+#    branches:
+#      - master
+#      - chore/qodana
 
 jobs:
   qodana:
