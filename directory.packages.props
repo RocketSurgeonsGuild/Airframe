@@ -54,7 +54,7 @@
     <PackageVersion Include="System.Collections.Immutable" Version="1.7.1" />
     <PackageVersion Include="System.Interactive.Async.Providers" Version="6.0.1" />
     <PackageVersion Include="System.Interactive.Providers" Version="6.0.1" />
-    <PackageVersion Include="System.Reactive" Version="6.0.0" />
+    <PackageVersion Include="System.Reactive" Version="6.0.1" />
     <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
     <PackageVersion Include="Toast.iOS" Version="1.2.0" />
   </ItemGroup>
@@ -63,7 +63,7 @@
     <PackageVersion Include="coverlet.msbuild" Version="6.0.4" IncludeAssets="all" PrivateAssets="runtime;build;native;contentfiles;analyzers" />
     <PackageVersion Include="FluentAssertions" Version="6.12.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-    <PackageVersion Include="Microsoft.Reactive.Testing" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Reactive.Testing" Version="6.0.1" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />
     <PackageVersion Include="ReactiveUI.Testing" Version="19.5.41" />
     <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="8.0.3" />
