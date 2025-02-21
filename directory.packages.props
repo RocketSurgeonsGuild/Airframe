@@ -59,8 +59,8 @@
     <PackageVersion Include="Toast.iOS" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="coverlet.collector" Version="6.0.3" />
-    <PackageVersion Include="coverlet.msbuild" Version="6.0.3" IncludeAssets="all" PrivateAssets="runtime;build;native;contentfiles;analyzers" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="coverlet.msbuild" Version="6.0.4" IncludeAssets="all" PrivateAssets="runtime;build;native;contentfiles;analyzers" />
     <PackageVersion Include="FluentAssertions" Version="6.12.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageVersion Include="Microsoft.Reactive.Testing" Version="6.0.0" />
