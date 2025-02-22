@@ -1,6 +1,6 @@
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 
-namespace Rocket.Surgery.Airframe.Defaults.Tests;
+namespace Rocket.Surgery.Airframe.Defaults.Tests.Data;
 
 internal abstract class DefaultsSourceData
 {
