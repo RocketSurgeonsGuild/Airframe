@@ -14,6 +14,6 @@ public class DefaultsGenerator : IIncrementalGenerator
             IncrementalGeneratorInitializationContext incrementalContext) => incrementalContext.RegisterPostInitializationOutput(
             initializationContext => initializationContext.AddSource(
                 "DefaultAttribute.g.cs",
-                DefaultAttribute.Source()));
+                DefaultAttribute.Source));
     }
 }
