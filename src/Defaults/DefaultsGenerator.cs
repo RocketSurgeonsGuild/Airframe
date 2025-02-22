@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Rocket.Surgery.Airframe.Defaults;
 
@@ -61,6 +63,69 @@ public partial class DefaultsGenerator : IIncrementalGenerator
             // Find constructors that match the types found
             // Generate Default property
             // assign constructor
+            var className = SymbolEqualityComparer.Default.Equals(
+                namedTypeSymbol.ContainingSymbol,
+                namedTypeSymbol.ContainingNamespace)
+                ? namedTypeSymbol.Name
+                : namedTypeSymbol.ContainingSymbol.Name + "." + namedTypeSymbol.Name;
+
+            sourceProductionContext.AddSource(
+                $"{className}.Defaults.g.cs",
+                CompilationUnit()
+                   .WithMembers(GeneratePartialClassWithProperty(className, namedTypeSymbol))
+                   .NormalizeWhitespace()
+                   .ToFullString());
+        }
+
+        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(string className, INamedTypeSymbol namedTypeSymbol) => SingletonList<MemberDeclarationSyntax>(
+            BuildNamespace(namedTypeSymbol)
+               .WithMembers(
+                    SingletonList<MemberDeclarationSyntax>(
+                        ClassDeclaration(className)
+                           .WithModifiers(
+                                TokenList(
+                                    new[]
+                                    {
+                                        Token(SyntaxKind.PublicKeyword),
+                                        Token(SyntaxKind.PartialKeyword)
+                                    }))
+                           .WithMembers(
+                                SingletonList<MemberDeclarationSyntax>(
+                                    PropertyDeclaration(
+                                            IdentifierName(className),
+                                            Identifier("Default"))
+                                       .WithModifiers(
+                                            TokenList(
+                                                new[]
+                                                {
+                                                    Token(SyntaxKind.PublicKeyword),
+                                                    Token(SyntaxKind.StaticKeyword)
+                                                }))
+                                       .WithAccessorList(
+                                            AccessorList(
+                                                SingletonList<AccessorDeclarationSyntax>(
+                                                    AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                                                       .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))
+                                       .WithInitializer(
+                                            EqualsValueClause(
+                                                ObjectCreationExpression(IdentifierName(className))
+                                                   .WithArgumentList(ArgumentList())))
+                                       .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))));
+
+        NamespaceDeclarationSyntax BuildNamespace(ISymbol namedTypeSymbol)
+        {
+            var displayString = namedTypeSymbol.ContainingNamespace.ToDisplayString();
+            return NamespaceDeclaration(ParseName(displayString))
+               .WithNamespaceKeyword(
+                    Token(
+                        TriviaList(LineFeed),
+                        SyntaxKind.NamespaceKeyword,
+                        TriviaList(Space)))
+               .WithOpenBraceToken(
+                    Token(
+                        TriviaList(),
+                        SyntaxKind.OpenBraceToken,
+                        TriviaList(LineFeed)));
         }
     }
 }
