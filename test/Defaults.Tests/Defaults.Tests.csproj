@@ -30,4 +30,14 @@
       <ProjectReference Include="..\..\src\Defaults\Defaults.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="snapshots\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="DefaultGeneratorTests+Diagnostics.cs">
+        <DependentUpon>DefaultsGeneratorTests.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

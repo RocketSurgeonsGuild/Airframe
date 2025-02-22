@@ -1,9 +1,12 @@
-using Rocket.Surgery.Airframe.Defaults;
-
-[ReferenceDefault]
-public partial class Thing;
-
-public partial class Thing
+namespace Rocket.Surgery.Airframe.Defaults
 {
-    public static Thing Default { get; } = new Thing();
+    [ReferenceDefault]
+    public partial class Thing
+    {
+    }
+
+    public partial class Thing
+    {
+        public static Thing Default { get; } = new Thing();
+    }
 }
