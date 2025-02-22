@@ -9,7 +9,12 @@ namespace Rocket.Surgery.Airframe.Defaults
     [Conditional("CODEGEN")]
     internal class DefaultAttribute : Attribute
     {
-        public DefaultAttribute() => PropertyName = "Default";
+        public DefaultAttribute()
+            : this("Default")
+        {
+        }
+
+        public DefaultAttribute(string propertyName) => PropertyName = propertyName;
 
         public string PropertyName { get; set; }
     }
