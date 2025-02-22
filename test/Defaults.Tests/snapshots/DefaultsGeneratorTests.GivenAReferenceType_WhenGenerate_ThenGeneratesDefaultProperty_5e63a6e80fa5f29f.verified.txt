@@ -1,4 +1,4 @@
-{
+﻿{
   FinalDiagnostics: [],
   GeneratorDiagnostics: {
     Rocket.Surgery.Airframe.Defaults.DefaultsGenerator: []
