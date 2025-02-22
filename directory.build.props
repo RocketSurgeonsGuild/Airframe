@@ -3,6 +3,7 @@
         <Authors>Rodney Littles II, Rocket Surgeons Guild contributors</Authors>
         <Company>Rocket Surgeons Guild</Company>
         <Copyright>Copyright Rocket Surgeons Guild © $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
+        <ImplicitUsings>disable</ImplicitUsings>
         <IncludeContentInPack>true</IncludeContentInPack>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
