@@ -13,6 +13,20 @@ namespace Rocket.Surgery.Airframe.Defaults.Tests;
 public partial class DefaultsGeneratorTests
 {
     [Theory]
+    [MemberData(nameof(AccessibleConstructorData.Data), MemberType = typeof(AccessibleConstructorData))]
+    public async Task GivenClassWithAccessibleConstructor_WhenGenerate_ThenNoDiagnosticReported(GeneratorTestContext context)
+    {
+        // Given, When
+        var result = await context.GenerateAsync();
+
+        // Then
+        result
+           .Results
+           .Should()
+           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == Diagnostics.Defaults0001.Id));
+    }
+
+    [Theory]
     [MemberData(nameof(InaccessibleConstructorData.Data), MemberType = typeof(InaccessibleConstructorData))]
     public async Task GivenClassWithInaccessibleConstructor_WhenGenerate_ThenDiagnosticReported(GeneratorTestContext context)
     {
