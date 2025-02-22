@@ -39,11 +39,12 @@ internal static class CacheFunctions
         if (clearCache)
         {
             cache
-               .Edit(updater =>
-                {
-                    updater.Clear();
-                    updater.AddOrUpdate(results);
-                });
+               .Edit(
+                    updater =>
+                    {
+                        updater.Clear();
+                        updater.AddOrUpdate(results);
+                    });
         }
         else
         {

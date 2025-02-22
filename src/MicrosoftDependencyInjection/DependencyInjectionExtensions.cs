@@ -16,8 +16,8 @@ public static class DependencyInjectionExtensions
     /// <param name="serviceCollection">The service collection.</param>
     /// <param name="platformInitializer">The platform initializer.</param>
     /// <returns>The service collection with platform dependencies registered.</returns>
-    public static IServiceCollection AddPlatform(this IServiceCollection serviceCollection, IPlatformInitializer platformInitializer) =>
-        platformInitializer.Initialize(serviceCollection);
+    public static IServiceCollection AddPlatform(this IServiceCollection serviceCollection, IPlatformInitializer platformInitializer)
+        => platformInitializer.Initialize(serviceCollection);
 
     /// <summary>
     /// Adds the <see cref="IPlatformInitializer"/> to the <see cref="IServiceCollection"/>.
@@ -27,8 +27,10 @@ public static class DependencyInjectionExtensions
     /// <param name="startup">The startup.</param>
     /// <typeparam name="TTarget">The target type.</typeparam>
     /// <returns>The service collection with platform dependencies registered.</returns>
-    public static IServiceCollection AddPlatform<TTarget>(this IServiceCollection serviceCollection, TTarget target, Func<TTarget, IPlatformInitializer> startup) =>
-        startup(target).Initialize(serviceCollection);
+    public static IServiceCollection AddPlatform<TTarget>(
+        this IServiceCollection serviceCollection,
+        TTarget target,
+        Func<TTarget, IPlatformInitializer> startup) => startup(target).Initialize(serviceCollection);
 
     /// <summary>
     /// Registers an <see cref="IApplicationStartup"/> to the service collection.
@@ -56,10 +58,9 @@ public static class DependencyInjectionExtensions
     /// </summary>
     /// <param name="serviceCollection">The service collection.</param>
     /// <returns>The service collection with configuration dependencies registered.</returns>
-    public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection) =>
-        ConfigureAppSettings(
-            serviceCollection,
-            new ConfigurationBuilder());
+    public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection) => ConfigureAppSettings(
+        serviceCollection,
+        new ConfigurationBuilder());
 
     /// <summary>
     /// Configures the app settings for the service collection.
@@ -81,8 +82,8 @@ public static class DependencyInjectionExtensions
     /// <param name="serviceCollection">The service collection.</param>
     /// <param name="configurationBuilder">The configuration builder.</param>
     /// <returns>The service collection with configuration dependencies registered.</returns>
-    public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, IConfigurationBuilder configurationBuilder) =>
-        ConfigureAppSettings(serviceCollection, configurationBuilder.Build());
+    public static IServiceCollection ConfigureAppSettings(this IServiceCollection serviceCollection, IConfigurationBuilder configurationBuilder)
+        => ConfigureAppSettings(serviceCollection, configurationBuilder.Build());
 
     /// <summary>
     /// Configures the app settings for the service collection.
@@ -96,12 +97,13 @@ public static class DependencyInjectionExtensions
     {
         var builder = new ConfigurationBuilder();
 
-        return serviceCollection.AddSingleton<IConfiguration>(provider =>
-        {
-            provider.GetService<Action<IConfigurationBuilder>>()?.Invoke(builder);
+        return serviceCollection.AddSingleton<IConfiguration>(
+            provider =>
+            {
+                provider.GetService<Action<IConfigurationBuilder>>()?.Invoke(builder);
 
-            return builder.AddConfiguration(configuration).Build();
-        });
+                return builder.AddConfiguration(configuration).Build();
+            });
     }
 
     /// <summary>
@@ -152,8 +154,8 @@ public static class DependencyInjectionExtensions
     /// <param name="serviceCollection">The service collection.</param>
     /// <param name="configurationBuilder">The configuration builder.</param>
     /// <returns>The service collection with startup dependencies registered.</returns>
-    public static IServiceCollection ConfigureBuilder(this IServiceCollection serviceCollection, Action<IConfigurationBuilder> configurationBuilder) =>
-        serviceCollection.AddSingleton<Action<IConfigurationBuilder>>(_ => configurationBuilder);
+    public static IServiceCollection ConfigureBuilder(this IServiceCollection serviceCollection, Action<IConfigurationBuilder> configurationBuilder)
+        => serviceCollection.AddSingleton<Action<IConfigurationBuilder>>(_ => configurationBuilder);
 
     /// <summary>
     /// Registers an <see cref="IApplicationStartup"/> to the service collection.

@@ -39,11 +39,12 @@ public static class DuckDuckGoFunctions
         if (clearCache)
         {
             cache
-               .Edit(updater =>
-                {
-                    updater.Clear();
-                    updater.AddOrUpdate(duckDuckGoQueryResults);
-                });
+               .Edit(
+                    updater =>
+                    {
+                        updater.Clear();
+                        updater.AddOrUpdate(duckDuckGoQueryResults);
+                    });
         }
         else
         {

@@ -68,7 +68,7 @@ public static class ArgumentExtensions
         {
             if (string.Compare(kvp.Key, key, StringComparison.Ordinal) == 0)
             {
-                var success = TryGetValueInternal(kvp, typeof(T), out object valueAsObject);
+                var success = TryGetValueInternal(kvp, typeof(T), out var valueAsObject);
                 value = (T)valueAsObject;
                 return success;
             }
