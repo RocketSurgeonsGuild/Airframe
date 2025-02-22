@@ -25,7 +25,7 @@ public partial class DefaultsGenerator
 
     private static bool Report0001(INamedTypeSymbol classForFixture, SourceProductionContext productionContext)
     {
-        if (classForFixture.Constructors.Any(methodSymbol => methodSymbol.HasAccessibility(Accessibility.Private, Accessibility.Protected, Accessibility.Internal)))
+        if (classForFixture.Constructors.All(methodSymbol => methodSymbol.HasAccessibility(Accessibility.Private, Accessibility.Protected, Accessibility.Internal)))
         {
             ReportDiagnostic(productionContext, Diagnostics.Defaults0001, classForFixture.Locations);
             return true;
