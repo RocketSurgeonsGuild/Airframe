@@ -13,7 +13,7 @@ public class DefaultsGenerator : IIncrementalGenerator
         void RegisterDefaultAttribute(
             IncrementalGeneratorInitializationContext incrementalContext) => incrementalContext.RegisterPostInitializationOutput(
             initializationContext => initializationContext.AddSource(
-                "DefaultAttribute.g.cs",
+                "DefaultsAttribute.g.cs",
                 DefaultAttribute.Source));
     }
 }
