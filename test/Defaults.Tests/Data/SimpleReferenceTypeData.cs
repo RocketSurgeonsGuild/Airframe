@@ -19,7 +19,7 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
     ];
 
     // lang=csharp
-    public const string DefaultConstructor = """
+    private const string DefaultConstructor = """
                                   namespace Rocket.Surgery.Airframe.Defaults
                                   {
                                       [DefaultsAttribute]
@@ -33,7 +33,7 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
                                   """;
 
     // lang=csharp
-    public const string PropertyNameConstructor = """
+    private const string PropertyNameConstructor = """
                                   namespace Rocket.Surgery.Airframe.Defaults
                                   {
                                       [DefaultsAttribute(PropertyName = "None"]
@@ -45,11 +45,4 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
                                       }
                                   }
                                   """;
-}
-
-public partial class Thing
-{
-    public Thing()
-    {
-    }
 }

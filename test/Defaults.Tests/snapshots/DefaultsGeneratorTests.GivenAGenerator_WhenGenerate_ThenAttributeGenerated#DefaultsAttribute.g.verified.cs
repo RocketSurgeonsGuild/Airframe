@@ -1,4 +1,4 @@
-//HintName: Rocket.Surgery.Airframe.Defaults/Rocket.Surgery.Airframe.Defaults.DefaultsGenerator/DefaultsAttribute.g.cs
+﻿//HintName: Rocket.Surgery.Airframe.Defaults/Rocket.Surgery.Airframe.Defaults.DefaultsGenerator/DefaultsAttribute.g.cs
 #nullable enable
 using System;
 using System.Diagnostics;
