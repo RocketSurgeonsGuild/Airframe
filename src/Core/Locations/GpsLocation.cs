@@ -29,7 +29,15 @@ public class GpsLocation : IGpsLocation
         double speedAccuracy,
         double positionAccuracy,
         DateTimeOffset timestamp)
-        : this(new GeoCoordinate(latitude, longitude), altitude, heading, headingAccuracy, speed, speedAccuracy, positionAccuracy, timestamp)
+        : this(
+            new GeoCoordinate(latitude, longitude),
+            altitude,
+            heading,
+            headingAccuracy,
+            speed,
+            speedAccuracy,
+            positionAccuracy,
+            timestamp)
     {
     }
 

@@ -52,11 +52,12 @@ public class DivisibleTimer : TimerBase
         Timer =
             Observable
                .Range(0, partition)
-               .Select(_ =>
-                {
-                    _currentTimer = new DecrementTimer(SchedulerProvider);
-                    return Observable.Empty<TimeSpan>();
-                })
+               .Select(
+                    _ =>
+                    {
+                        _currentTimer = new DecrementTimer(SchedulerProvider);
+                        return Observable.Empty<TimeSpan>();
+                    })
                .Concat();
 
         IntervalTime = timePerPartition;

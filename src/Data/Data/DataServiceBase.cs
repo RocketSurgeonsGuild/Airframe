@@ -33,12 +33,12 @@ public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
     protected SourceCache<T, Guid> SourceCache { get; } = new SourceCache<T, Guid>(x => x.Id);
 
     /// <inheritdoc />
-    public virtual IObservable<Unit> Create(T dto) =>
-        Observable.Create<Unit>(_ =>
+    public virtual IObservable<Unit> Create(T dto) => Observable.Create<Unit>(
+        observer =>
         {
             var clientSubscription = Observable.FromAsync(() => _client.Post(dto)).Subscribe();
 
-            using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(_);
+            using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(observer);
             SourceCache.AddOrUpdate(dto);
 
             return Disposable.Create(() => clientSubscription.Dispose());
@@ -58,23 +58,23 @@ public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
        .Do(_ => SourceCache.AddOrUpdate(_));
 
     /// <inheritdoc />
-    public virtual IObservable<Unit> Update(T dto) =>
-        Observable.Create<Unit>(_ =>
+    public virtual IObservable<Unit> Update(T dto) => Observable.Create<Unit>(
+        observer =>
         {
             var clientSubscription = Observable.FromAsync(() => _client.Post(dto)).Subscribe();
 
-            using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(_);
+            using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(observer);
             SourceCache.AddOrUpdate(dto);
 
             return Disposable.Create(() => clientSubscription.Dispose());
         });
 
     /// <inheritdoc />
-    public virtual IObservable<Unit> Delete(T dto) =>
-        Observable.Create<Unit>(_ =>
+    public virtual IObservable<Unit> Delete(T dto) => Observable.Create<Unit>(
+        observer =>
         {
             var clientSubscription = Observable.FromAsync(() => _client.Delete(dto)).Subscribe();
-            using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(_);
+            using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(observer);
             SourceCache.Remove(dto);
 
             return Disposable.Create(() => clientSubscription.Dispose());

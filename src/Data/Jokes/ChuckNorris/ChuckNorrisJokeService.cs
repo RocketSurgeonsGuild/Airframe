@@ -10,9 +10,6 @@ namespace Rocket.Surgery.Airframe.Data;
 /// </summary>
 public class ChuckNorrisJokeService : IChuckNorrisJokeService
 {
-    private readonly IChuckNorrisJokeApiClient _chuckNorrisJokeApiClient;
-    private readonly SourceCache<ChuckNorrisJoke, string> _jokes = new SourceCache<ChuckNorrisJoke, string>(x => x.Id);
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ChuckNorrisJokeService"/> class.
     /// </summary>
@@ -21,11 +18,12 @@ public class ChuckNorrisJokeService : IChuckNorrisJokeService
 
     /// <inheritdoc/>
     public IObservable<ChuckNorrisJoke> Random() => Observable
-       .Create<ChuckNorrisJoke>(observer =>
-            _chuckNorrisJokeApiClient
-               .Random()
-               .Cache(_jokes)
-               .Subscribe(observer));
+       .Create<ChuckNorrisJoke>(
+            observer =>
+                _chuckNorrisJokeApiClient
+                   .Random()
+                   .Cache(_jokes)
+                   .Subscribe(observer));
 
     /// <inheritdoc/>
     public IObservable<ChuckNorrisJoke> Random(params string[] categories) => Observable.Create<ChuckNorrisJoke>(
@@ -57,4 +55,7 @@ public class ChuckNorrisJokeService : IChuckNorrisJokeService
                    .Search(query)
                    .Cache(_jokes, clearCache)
                    .Subscribe(observer));
+
+    private readonly IChuckNorrisJokeApiClient _chuckNorrisJokeApiClient;
+    private readonly SourceCache<ChuckNorrisJoke, string> _jokes = new SourceCache<ChuckNorrisJoke, string>(x => x.Id);
 }
