@@ -1,4 +1,6 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -69,48 +71,56 @@ public partial class DefaultsGenerator : IIncrementalGenerator
                 ? namedTypeSymbol.Name
                 : namedTypeSymbol.ContainingSymbol.Name + "." + namedTypeSymbol.Name;
 
+            var attributeData = generatorAttributeSyntaxContext.Attributes.First(data => data.AttributeClass.OriginalDefinition.ToString().Equals(DefaultsAttribute.AttributeName));
             sourceProductionContext.AddSource(
                 $"{className}.Defaults.g.cs",
                 CompilationUnit()
-                   .WithMembers(GeneratePartialClassWithProperty(className, namedTypeSymbol))
+                   .WithMembers(
+                        GeneratePartialClassWithProperty(
+                            className,
+                            namedTypeSymbol,
+                            attributeData))
                    .NormalizeWhitespace()
                    .ToFullString());
         }
 
-        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(string className, INamedTypeSymbol namedTypeSymbol) => SingletonList<MemberDeclarationSyntax>(
-            BuildNamespace(namedTypeSymbol)
-               .WithMembers(
-                    SingletonList<MemberDeclarationSyntax>(
-                        ClassDeclaration(className)
-                           .WithModifiers(
-                                TokenList(
-                                    new[]
-                                    {
-                                        Token(SyntaxKind.PublicKeyword),
-                                        Token(SyntaxKind.PartialKeyword)
-                                    }))
-                           .WithMembers(
-                                SingletonList<MemberDeclarationSyntax>(
-                                    PropertyDeclaration(
-                                            IdentifierName(className),
-                                            Identifier("Default"))
-                                       .WithModifiers(
-                                            TokenList(
-                                                new[]
-                                                {
-                                                    Token(SyntaxKind.PublicKeyword),
-                                                    Token(SyntaxKind.StaticKeyword)
-                                                }))
-                                       .WithAccessorList(
-                                            AccessorList(
-                                                SingletonList<AccessorDeclarationSyntax>(
-                                                    AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                                                       .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))
-                                       .WithInitializer(
-                                            EqualsValueClause(
-                                                ObjectCreationExpression(IdentifierName(className))
-                                                   .WithArgumentList(ArgumentList())))
-                                       .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))));
+        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(string className, INamedTypeSymbol namedTypeSymbol, AttributeData attribute)
+        {
+            return SingletonList<MemberDeclarationSyntax>(
+                BuildNamespace(namedTypeSymbol)
+                   .WithMembers(
+                        SingletonList<MemberDeclarationSyntax>(
+                            ClassDeclaration(className)
+                               .WithModifiers(
+                                    TokenList(
+                                        new[]
+                                        {
+                                            Token(SyntaxKind.PublicKeyword),
+                                            Token(SyntaxKind.PartialKeyword)
+                                        }))
+                               .WithMembers(
+                                    SingletonList<MemberDeclarationSyntax>(
+                                        PropertyDeclaration(
+                                                IdentifierName(className),
+                                                Identifier("Default"))
+                                           .WithModifiers(
+                                                TokenList(
+                                                    new[]
+                                                    {
+                                                        Token(SyntaxKind.PublicKeyword),
+                                                        Token(SyntaxKind.StaticKeyword)
+                                                    }))
+                                           .WithAccessorList(
+                                                AccessorList(
+                                                    SingletonList<AccessorDeclarationSyntax>(
+                                                        AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                                                           .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))
+                                           .WithInitializer(
+                                                EqualsValueClause(
+                                                    ObjectCreationExpression(IdentifierName(className))
+                                                       .WithArgumentList(ArgumentList())))
+                                           .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))));
+        }
 
         NamespaceDeclarationSyntax BuildNamespace(ISymbol namedTypeSymbol)
         {

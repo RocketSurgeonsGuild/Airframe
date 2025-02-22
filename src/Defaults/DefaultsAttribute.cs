@@ -26,4 +26,6 @@ internal static class DefaultsAttribute
                                                  }
                                              }
                                              """;
+
+    public const string AttributeName = "Rocket.Surgery.Airframe.Defaults.DefaultsAttribute";
 }
