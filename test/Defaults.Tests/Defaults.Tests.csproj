@@ -30,8 +30,4 @@
       <ProjectReference Include="..\..\src\Defaults\Defaults.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="snapshots\" />
-    </ItemGroup>
-
 </Project>
