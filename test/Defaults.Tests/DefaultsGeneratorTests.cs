@@ -1,7 +1,6 @@
-using Microsoft.Extensions.Logging;
-using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using VerifyXunit;
 
 namespace Rocket.Surgery.Airframe.Defaults.Tests;
@@ -15,7 +14,6 @@ public class DefaultsGeneratorTests
         var result = await GeneratorTestContextBuilder
            .Create()
            .WithGenerator<DefaultsGenerator>()
-           .AddReferences(typeof(ILogger<>))
            .AddReferences(typeof(List<>))
            .Build()
            .GenerateAsync();

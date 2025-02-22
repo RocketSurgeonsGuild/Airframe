@@ -1,4 +1,4 @@
-﻿{
+{
   FinalDiagnostics: [],
   GeneratorDiagnostics: {
     Rocket.Surgery.Airframe.Defaults.DefaultsGenerator: []
@@ -7,7 +7,6 @@
     DocumentationMode: Parse
   },
   References: [
-    Microsoft.Extensions.Logging.Abstractions.dll,
     mscorlib.dll,
     netstandard.dll,
     System.Core.dll,
