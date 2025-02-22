@@ -9,7 +9,7 @@ namespace Rocket.Surgery.Airframe.Defaults.Tests;
 public class DefaultsGeneratorTests
 {
     [Fact]
-    public async Task Given_When_Then()
+    public async Task GivenAGenerator_WhenGenerate_ThenGeneratesDefaultAttribute()
     {
         // Given, When
         var result = await GeneratorTestContextBuilder
