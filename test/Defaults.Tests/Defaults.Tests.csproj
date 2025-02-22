@@ -30,13 +30,4 @@
       <ProjectReference Include="..\..\src\Defaults\Defaults.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <None Update="DefaultGeneratorTests.GivenAutoFixture_WhenGenerate_ThenShouldGenerateAutoFixtureAttribute.received.txt">
-        <DependentUpon>DefaultsGeneratorTests.cs</DependentUpon>
-      </None>
-      <None Update="DefaultGeneratorTests.GivenAutoFixture_WhenGenerate_ThenShouldGenerateAutoFixtureAttribute.verified.txt">
-        <DependentUpon>DefaultsGeneratorTests.cs</DependentUpon>
-      </None>
-    </ItemGroup>
-
 </Project>
