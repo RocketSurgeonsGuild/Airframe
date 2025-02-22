@@ -1,12 +1,27 @@
+using FluentAssertions;
+using Rocket.Surgery.Airframe.Defaults.Tests.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
+using System.Linq;
 using VerifyXunit;
 
 namespace Rocket.Surgery.Airframe.Defaults.Tests;
 
-public class DefaultsGeneratorTests
+public partial class DefaultsGeneratorTests
 {
+    [Fact]
+    public void Given_When_Then()
+    {
+        // Given
+        const string NameOf = nameof(Rocket.Surgery.Airframe.Defaults.DefaultsAttribute);
+
+        // When
+
+        // Then
+        nameof(global::Rocket.Surgery.Airframe.Defaults.DefaultsAttribute).Should().Be("Rocket.Surgery.Airframe.Defaults.DefaultsAttribute");
+    }
+
     [Fact]
     public async Task GivenAGenerator_WhenGenerate_ThenGeneratesDefaultAttribute()
     {
@@ -24,11 +39,9 @@ public class DefaultsGeneratorTests
 
     [Theory]
     [MemberData(nameof(SimpleReferenceTypeData.Data), MemberType = typeof(SimpleReferenceTypeData))]
-    public async Task Given_When_Then(GeneratorTestContext context)
+    public async Task Given_WhenGenerate_Then(GeneratorTestContext context)
     {
-        // Given
-
-        // When
+        // Given, When
         var result = await context.GenerateAsync();
 
         // Then
