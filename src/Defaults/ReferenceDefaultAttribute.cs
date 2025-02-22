@@ -14,4 +14,3 @@ internal sealed class ReferenceDefaultAttribute : Attribute
 
     public string PropertyName { get; set; }
 }
-

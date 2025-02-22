@@ -21,4 +21,17 @@ public class DefaultsGeneratorTests
         // Then
         await Verifier.Verify(result).ScrubLines(text => text.Contains("System.CodeDom.Compiler.GeneratedCode"));
     }
+
+    [Theory]
+    [MemberData(nameof(SimpleReferenceTypeData.Data), MemberType = typeof(SimpleReferenceTypeData))]
+    public async Task Given_When_Then(GeneratorTestContext context)
+    {
+        // Given
+
+        // When
+        var result = await context.GenerateAsync();
+
+        // Then
+        await Verifier.Verify(result).HashParameters().UseParameters(context.Id);
+    }
 }
