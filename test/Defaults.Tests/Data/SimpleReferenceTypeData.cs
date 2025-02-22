@@ -23,7 +23,12 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
                                   namespace Rocket.Surgery.Airframe.Defaults
                                   {
                                       [DefaultsAttribute]
-                                      public partial class Thing { }
+                                      public partial class Thing
+                                      {
+                                          public Thing()
+                                          {
+                                          }
+                                      }
                                   }
                                   """;
 
@@ -32,7 +37,19 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
                                   namespace Rocket.Surgery.Airframe.Defaults
                                   {
                                       [DefaultsAttribute(PropertyName = "None"]
-                                      public partial class Thing { }
+                                      public partial class Thing
+                                      {
+                                          public Thing()
+                                          {
+                                          }
+                                      }
                                   }
                                   """;
+}
+
+public partial class Thing
+{
+    public Thing()
+    {
+    }
 }
