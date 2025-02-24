@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -9,7 +8,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Rocket.Surgery.Airframe.Defaults;
 
 [Generator]
-public partial class DefaultsGenerator : IIncrementalGenerator
+internal partial class DefaultsGenerator : IIncrementalGenerator
 {
     /// <inheritdoc/>
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -31,9 +30,7 @@ public partial class DefaultsGenerator : IIncrementalGenerator
         }
 
         void RegisterDefaultAttribute(IncrementalGeneratorInitializationContext incrementalContext) => incrementalContext.RegisterPostInitializationOutput(
-            initializationContext => initializationContext.AddSource(
-                "DefaultsAttribute.g.cs",
-                DefaultsAttribute.Source));
+            initializationContext => initializationContext.AddSource($"{nameof(DefaultsAttribute)}.g.cs", DefaultsAttribute.Source));
 
         void GenerateDefaults(SourceProductionContext productionContext, (GeneratorAttributeSyntaxContext SyntaxContext, Compilation Compilation) tuple)
         {
@@ -71,21 +68,22 @@ public partial class DefaultsGenerator : IIncrementalGenerator
                 ? namedTypeSymbol.Name
                 : namedTypeSymbol.ContainingSymbol.Name + "." + namedTypeSymbol.Name;
 
-            var attributeData = generatorAttributeSyntaxContext.Attributes.First(data => data.AttributeClass.OriginalDefinition.ToString().Equals(DefaultsAttribute.AttributeName));
-            sourceProductionContext.AddSource(
-                $"{className}.Defaults.g.cs",
-                CompilationUnit()
-                   .WithMembers(
-                        GeneratePartialClassWithProperty(
-                            className,
-                            namedTypeSymbol,
-                            attributeData))
-                   .NormalizeWhitespace()
-                   .ToFullString());
+            var attributeData =
+                generatorAttributeSyntaxContext
+                   .Attributes
+                   .First(data => data.AttributeClass?.OriginalDefinition.ToString().Equals(DefaultsAttribute.AttributeName) ?? false);
+
+            sourceProductionContext
+               .AddSource(
+                    $"{className}.Defaults.g.cs",
+                    CompilationUnit().WithMembers(GeneratePartialClassWithProperty(className, namedTypeSymbol, attributeData))
+                       .NormalizeWhitespace()
+                       .ToFullString());
         }
 
         SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(string className, INamedTypeSymbol namedTypeSymbol, AttributeData attribute)
         {
+            var propertyName = attribute.NamedArguments.FirstOrDefault(pair => pair.Key == "PropertyName").Value.Value?.ToString() ?? "Default";
             return SingletonList<MemberDeclarationSyntax>(
                 BuildNamespace(namedTypeSymbol)
                    .WithMembers(
@@ -93,26 +91,20 @@ public partial class DefaultsGenerator : IIncrementalGenerator
                             ClassDeclaration(className)
                                .WithModifiers(
                                     TokenList(
-                                        new[]
-                                        {
-                                            Token(SyntaxKind.PublicKeyword),
-                                            Token(SyntaxKind.PartialKeyword)
-                                        }))
+                                        Token(SyntaxKind.PublicKeyword),
+                                        Token(SyntaxKind.PartialKeyword)))
                                .WithMembers(
                                     SingletonList<MemberDeclarationSyntax>(
                                         PropertyDeclaration(
                                                 IdentifierName(className),
-                                                Identifier("Default"))
+                                                Identifier(propertyName))
                                            .WithModifiers(
                                                 TokenList(
-                                                    new[]
-                                                    {
-                                                        Token(SyntaxKind.PublicKeyword),
-                                                        Token(SyntaxKind.StaticKeyword)
-                                                    }))
+                                                    Token(SyntaxKind.PublicKeyword),
+                                                    Token(SyntaxKind.StaticKeyword)))
                                            .WithAccessorList(
                                                 AccessorList(
-                                                    SingletonList<AccessorDeclarationSyntax>(
+                                                    SingletonList(
                                                         AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
                                                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))
                                            .WithInitializer(
@@ -123,9 +115,7 @@ public partial class DefaultsGenerator : IIncrementalGenerator
         }
 
         NamespaceDeclarationSyntax BuildNamespace(ISymbol namedTypeSymbol)
-        {
-            var displayString = namedTypeSymbol.ContainingNamespace.ToDisplayString();
-            return NamespaceDeclaration(ParseName(displayString))
+            => NamespaceDeclaration(ParseName(namedTypeSymbol.ContainingNamespace.ToDisplayString()))
                .WithNamespaceKeyword(
                     Token(
                         TriviaList(LineFeed),
@@ -136,6 +126,5 @@ public partial class DefaultsGenerator : IIncrementalGenerator
                         TriviaList(),
                         SyntaxKind.OpenBraceToken,
                         TriviaList(LineFeed)));
-        }
     }
 }
