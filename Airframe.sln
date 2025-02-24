@@ -71,6 +71,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{786B1ADD-7
 		NuGet.config = NuGet.config
 		renovate.json = renovate.json
 		qodana.yaml = qodana.yaml
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6813747B-13DB-4144-AB19-22C84E734517}"
