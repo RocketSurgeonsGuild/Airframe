@@ -23,7 +23,7 @@ public partial class DefaultsGeneratorTests
         result
            .Results
            .Should()
-           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == Diagnostics.Defaults0001.Id));
+           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == Diagnostics.Rsad0001.Id));
     }
 
     [Theory]
@@ -37,6 +37,6 @@ public partial class DefaultsGeneratorTests
         result
            .Results
            .Should()
-           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == Diagnostics.Defaults0001.Id));
+           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == Diagnostics.Rsad0001.Id));
     }
 }
