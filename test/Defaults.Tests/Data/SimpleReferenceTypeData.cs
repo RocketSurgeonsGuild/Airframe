@@ -36,7 +36,7 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
     private const string PropertyNameConstructor = """
                                   namespace Rocket.Surgery.Airframe.Defaults
                                   {
-                                      [DefaultsAttribute(PropertyName = "None"]
+                                      [DefaultsAttribute(PropertyName = "None")]
                                       public partial class Thing
                                       {
                                           public Thing()
