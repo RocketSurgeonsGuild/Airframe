@@ -21,14 +21,11 @@ internal static class ModuleInitializer
         DerivePathInfo(
             (sourceFile, projectDirectory, type, method) =>
             {
-                static string GetTypeName(Type type)
-                {
-                    return type.IsNested ? $"{type.ReflectedType!.Name}.{type.Name}" : type.Name;
-                }
+                static string GetTypeName(Type type) => type.IsNested ? $"{type.ReflectedType!.Name}.{type.Name}" : type.Name;
 
                 var typeName = GetTypeName(type);
 
-                var path = Path.Combine(Path.GetDirectoryName(sourceFile)!, "snapshots");
+                var path = Path.Combine(Path.GetDirectoryName(sourceFile)!, "Verified");
                 return new(path, typeName, method.Name);
             });
     }
