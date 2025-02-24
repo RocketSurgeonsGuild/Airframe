@@ -1,18 +1,14 @@
-// <copyright file="Diagnostics.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using Microsoft.CodeAnalysis;
 
 namespace Rocket.Surgery.Airframe.Defaults;
 
-public static class Diagnostics
+internal static class Diagnostics
 {
     /// <summary>
-    ///     Diagnostic for unsupported classes with no constructors.
+    ///    Gets a diagnostic for unsupported classes with no constructors.
     /// </summary>
-    public static DiagnosticDescriptor Defaults0001 { get; } = new(
-        nameof(Defaults0001),
+    public static DiagnosticDescriptor Rsad0001 { get; } = new(
+        nameof(Rsad0001).ToUpperInvariant(),
         "Inaccessible constructor.",
         string.Empty,
         "Support",

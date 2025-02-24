@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Rocket.Surgery.Airframe.Defaults;
 
-public partial class DefaultsGenerator
+internal partial class DefaultsGenerator
 {
     private static INamedTypeSymbol? GetClassForFixture(GeneratorAttributeSyntaxContext syntaxContext)
     {
@@ -27,7 +27,7 @@ public partial class DefaultsGenerator
     {
         if (classForFixture.Constructors.All(methodSymbol => methodSymbol.HasAccessibility(Accessibility.Private, Accessibility.Protected, Accessibility.Internal)))
         {
-            ReportDiagnostic(productionContext, Diagnostics.Defaults0001, classForFixture.Locations);
+            ReportDiagnostic(productionContext, Diagnostics.Rsad0001, classForFixture.Locations);
             return true;
         }
 
