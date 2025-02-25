@@ -25,6 +25,7 @@ public partial class DefaultsGeneratorTests
 
     [Theory]
     [MemberData(nameof(SimpleReferenceTypeData.Data), MemberType = typeof(SimpleReferenceTypeData))]
+    [MemberData(nameof(PrimitivePropertyReferenceTypeData.Data), MemberType = typeof(PrimitivePropertyReferenceTypeData))]
     public async Task GivenAReferenceType_WhenGenerate_ThenGeneratesDefaultProperty(GeneratorTestContext context)
     {
         // Given, When
