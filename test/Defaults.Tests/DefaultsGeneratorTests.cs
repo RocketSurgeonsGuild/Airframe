@@ -34,4 +34,15 @@ public partial class DefaultsGeneratorTests
         // Then
         await Verifier.Verify(result).HashParameters().UseParameters(context.Id);
     }
+
+    [Theory]
+    [MemberData(nameof(NoAttributeData.Data), MemberType = typeof(NoAttributeData))]
+    public async Task GivenAReferenceType_WhenGenerate_ThenDoesNotGenerateDefaultProperty(GeneratorTestContext context)
+    {
+        // Given, When
+        var result = await context.GenerateAsync();
+
+        // Then
+        await Verifier.Verify(result).HashParameters().UseParameters(context.Id);
+    }
 }
