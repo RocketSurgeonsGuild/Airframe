@@ -76,19 +76,19 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             sourceProductionContext
                .AddSource(
                     $"{className}.Defaults.g.cs",
-                    CompilationUnit().WithMembers(GeneratePartialClassWithProperty(className, namedTypeSymbol, attributeData))
+                    CompilationUnit().WithMembers(GeneratePartialClassWithProperty(IdentifierName(className), namedTypeSymbol, attributeData, null))
                        .NormalizeWhitespace()
                        .ToFullString());
         }
 
-        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(string className, INamedTypeSymbol namedTypeSymbol, AttributeData attribute)
+        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(IdentifierNameSyntax className, INamedTypeSymbol namedTypeSymbol, AttributeData attribute, ArgumentListSyntax? argumentListSyntax)
         {
             var propertyName = attribute.NamedArguments.FirstOrDefault(pair => pair.Key == "PropertyName").Value.Value?.ToString() ?? "Default";
             return SingletonList<MemberDeclarationSyntax>(
                 BuildNamespace(namedTypeSymbol)
                    .WithMembers(
                         SingletonList<MemberDeclarationSyntax>(
-                            ClassDeclaration(className)
+                            ClassDeclaration(className.Identifier)
                                .WithModifiers(
                                     TokenList(
                                         Token(SyntaxKind.PublicKeyword),
@@ -96,7 +96,7 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                                .WithMembers(
                                     SingletonList<MemberDeclarationSyntax>(
                                         PropertyDeclaration(
-                                                IdentifierName(className),
+                                                className,
                                                 Identifier(propertyName))
                                            .WithModifiers(
                                                 TokenList(
@@ -109,8 +109,8 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                                                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))
                                            .WithInitializer(
                                                 EqualsValueClause(
-                                                    ObjectCreationExpression(IdentifierName(className))
-                                                       .WithArgumentList(ArgumentList())))
+                                                    ObjectCreationExpression(className)
+                                                       .WithArgumentList(argumentListSyntax ?? ArgumentList())))
                                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))));
         }
 
