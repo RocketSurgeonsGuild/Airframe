@@ -1,7 +1,4 @@
-namespace Rocket.Surgery.Airframe.Defaults
-{
-    public partial class Thing
-    {
-        public static Thing Default { get; } = new Thing();
-    }
-}
+namespace Rocket.Surgery.Airframe.Defaults;
+
+[ReferenceDefault]
+public partial class Thing;
