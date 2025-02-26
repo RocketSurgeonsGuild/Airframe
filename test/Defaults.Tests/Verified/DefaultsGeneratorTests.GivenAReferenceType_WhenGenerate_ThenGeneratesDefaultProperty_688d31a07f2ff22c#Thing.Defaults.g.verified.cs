@@ -3,6 +3,6 @@ namespace Rocket.Surgery.Airframe.Defaults
 {
     public partial class Thing
     {
-        public static Thing None { get; } = new Thing(default);
+        public static Thing Default { get; } = new Thing(default);
     }
 }
