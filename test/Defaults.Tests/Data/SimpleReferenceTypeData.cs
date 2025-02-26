@@ -7,7 +7,7 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
     public static TheoryData<GeneratorTestContext> Data =>
     [
         DefaultBuilder()
-           .AddSources(DefaultConstructor)
+           .AddSources(NoConstructor)
            .Build(),
         DefaultBuilder()
            .AddSources(PropertyNameConstructor)
@@ -15,7 +15,7 @@ internal class SimpleReferenceTypeData : DefaultsSourceData
     ];
 
     // lang=csharp
-    private const string DefaultConstructor = """
+    private const string NoConstructor = """
                                   namespace Rocket.Surgery.Airframe.Defaults
                                   {
                                       [DefaultsAttribute]

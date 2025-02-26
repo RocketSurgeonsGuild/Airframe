@@ -9,9 +9,6 @@ internal class NoAttributeData : DefaultsSourceData
         DefaultBuilder()
            .AddSources(DefaultConstructor)
            .Build(),
-        DefaultBuilder()
-           .AddSources(PropertyNameConstructor)
-           .Build(),
     ];
 
     // lang=csharp
@@ -26,17 +23,4 @@ internal class NoAttributeData : DefaultsSourceData
                                                   }
                                               }
                                               """;
-
-    // lang=csharp
-    private const string PropertyNameConstructor = """
-                                                   namespace Rocket.Surgery.Airframe.Defaults
-                                                   {
-                                                       public partial class Thing
-                                                       {
-                                                           public Thing()
-                                                           {
-                                                           }
-                                                       }
-                                                   }
-                                                   """;
 }

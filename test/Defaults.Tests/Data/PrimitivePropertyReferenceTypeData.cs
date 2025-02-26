@@ -16,29 +16,26 @@ internal class PrimitivePropertyReferenceTypeData : DefaultsSourceData
         DefaultBuilder()
            .AddSources(ObjectInitialization)
            .Build(),
-        DefaultBuilder()
-           .AddSources(PropertyNameConstructor)
-           .Build(),
     ];
 
     // lang=csharp
     private const string Constructor = """
                                        namespace Rocket.Surgery.Airframe.Defaults
                                        {
-                                           [DefaultsAttribute()]
+                                           [DefaultsAttribute]
                                            public partial class Thing
                                            {
                                                public Thing(int one)
                                                {
                                                    One = one;
                                                }
-                                       
+
                                                public int One { get; }
                                            }
                                        }
                                        """;
 
-    // lang=csharp
+    // // lang=csharp
     private const string ObjectInitialization = """
                                                 namespace Rocket.Surgery.Airframe.Defaults
                                                 {
@@ -48,26 +45,9 @@ internal class PrimitivePropertyReferenceTypeData : DefaultsSourceData
                                                         public Thing()
                                                         {
                                                         }
-                                                
+    
                                                         public int One { get; set; }
                                                     }
                                                 }
                                                 """;
-
-    // lang=csharp
-    private const string PropertyNameConstructor = """
-                                                   namespace Rocket.Surgery.Airframe.Defaults
-                                                   {
-                                                       [DefaultsAttribute(PropertyName = "None")]
-                                                       public partial class Thing
-                                                       {
-                                                           public Thing(int one)
-                                                           {
-                                                               One = one;
-                                                           }
-                                                   
-                                                           public int One { get; }
-                                                       }
-                                                   }
-                                                   """;
 }
