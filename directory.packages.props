@@ -68,8 +68,8 @@
     <PackageVersion Include="ReactiveUI.Testing" Version="19.5.41" />
     <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="8.0.18" />
     <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="8.0.18" />
-    <PackageVersion Include="xunit" Version="2.6.5" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
     <PackageVersion Include="XunitXml.TestLogger" Version="3.1.20" />
   </ItemGroup>
 </Project>
