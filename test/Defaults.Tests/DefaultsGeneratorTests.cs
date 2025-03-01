@@ -26,6 +26,7 @@ public partial class DefaultsGeneratorTests
     [Theory]
     [MemberData(nameof(SimpleReferenceTypeData.Data), MemberType = typeof(SimpleReferenceTypeData))]
     [MemberData(nameof(PrimitivePropertyReferenceTypeData.Data), MemberType = typeof(PrimitivePropertyReferenceTypeData))]
+    [MemberData(nameof(ReferencePropertyData.Data), MemberType = typeof(ReferencePropertyData))]
     public async Task GivenAReferenceType_WhenGenerate_ThenGeneratesDefaultProperty(GeneratorTestContext context)
     {
         // Given, When
@@ -38,6 +39,17 @@ public partial class DefaultsGeneratorTests
     [Theory]
     [MemberData(nameof(NoAttributeData.Data), MemberType = typeof(NoAttributeData))]
     public async Task GivenAReferenceType_WhenGenerate_ThenDoesNotGenerateDefaultProperty(GeneratorTestContext context)
+    {
+        // Given, When
+        var result = await context.GenerateAsync();
+
+        // Then
+        await Verifier.Verify(result).HashParameters().UseParameters(context.Id);
+    }
+
+    [Theory]
+    [MemberData(nameof(ReferencePropertyData.Data), MemberType = typeof(ReferencePropertyData))]
+    public async Task Iterating(GeneratorTestContext context)
     {
         // Given, When
         var result = await context.GenerateAsync();
