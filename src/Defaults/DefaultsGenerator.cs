@@ -86,12 +86,27 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             // ArgumentList with the Default for the Reference Type
             // ReferenceType.Default doesn't exist, Generate it? Diagnostic?
             var allConstructorParameters = constructor?.First()?.Parameters;
-            var constructorArguments = BuildConstructorWithArguments(allConstructorParameters);
+            var constructorArguments = BuildConstructorWithArguments(constructor?.First(), compilation);
+
+            var memberList = constructor?.First()
+              ?.Parameters.ToArray()
+               .SelectMany(
+                    parameterSymbol => compilation.GetTypeByMetadataName(parameterSymbol.Type.ToDisplayString())
+                      ?.GetMembers()
+                       .Where(symbol => symbol is IPropertySymbol && symbol.IsStatic)
+                       .ToList())
+               .Select(symbol => Argument(IdentifierName($"{symbol.ContainingType.Name}.{symbol.Name}")))
+               .ToList();
 
             sourceProductionContext
                .AddSource(
                     $"{className}.Defaults.g.cs",
-                    CompilationUnit().WithMembers(GeneratePartialClassWithProperty(IdentifierName(className), namedTypeSymbol, attributeData, constructorArguments))
+                    CompilationUnit().WithMembers(
+                            GeneratePartialClassWithProperty(
+                                IdentifierName(className),
+                                namedTypeSymbol,
+                                attributeData,
+                                constructorArguments))
                        .NormalizeWhitespace()
                        .ToFullString());
         }
@@ -147,8 +162,17 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             IdentifierNameSyntax className,
             ArgumentListSyntax? argumentListSyntax) => ObjectCreationExpression(className).WithArgumentList(argumentListSyntax ?? ArgumentList());
 
-        ArgumentListSyntax BuildConstructorWithArguments(
-            ImmutableArray<IParameterSymbol>? allConstructorParameters) => ArgumentList(
-            SeparatedList<ArgumentSyntax>([Argument(IdentifierName("Stuff.Default"))]));
+        ArgumentListSyntax BuildConstructorWithArguments(IMethodSymbol? constructor, Compilation compilation)
+        {
+            var memberList = constructor?.Parameters.ToArray()
+               .SelectMany(
+                    parameterSymbol => compilation.GetTypeByMetadataName(parameterSymbol.Type.ToDisplayString())
+                      ?.GetMembers()
+                       .Where(symbol => symbol is IPropertySymbol && symbol.IsStatic)
+                       .ToList())
+               .Select(symbol => Argument(IdentifierName($"{symbol.ContainingType.Name}.{symbol.Name}")))
+               .ToList();
+            return ArgumentList(SeparatedList(memberList));
+        }
     }
 }
