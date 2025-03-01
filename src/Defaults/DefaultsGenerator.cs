@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -73,15 +74,33 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                    .Attributes
                    .First(data => data.AttributeClass?.OriginalDefinition.ToString().Equals(DefaultsAttribute.AttributeName) ?? false);
 
+            // Property Information
+            // read only
+            // =>
+            // { get; }
+            // Constructor
+            // Multiple
+            var generatedNamedTypeSymbol = generatorAttributeSyntaxContext.TargetSymbol as INamedTypeSymbol;
+            var constructor = generatedNamedTypeSymbol?.Constructors.ToList();
+
+            // ArgumentList with the Default for the Reference Type
+            // ReferenceType.Default doesn't exist, Generate it? Diagnostic?
+            var allConstructorParameters = constructor?.First()?.Parameters;
+            var constructorArguments = BuildConstructorWithArguments(allConstructorParameters);
+
             sourceProductionContext
                .AddSource(
                     $"{className}.Defaults.g.cs",
-                    CompilationUnit().WithMembers(GeneratePartialClassWithProperty(IdentifierName(className), namedTypeSymbol, attributeData, null))
+                    CompilationUnit().WithMembers(GeneratePartialClassWithProperty(IdentifierName(className), namedTypeSymbol, attributeData, constructorArguments))
                        .NormalizeWhitespace()
                        .ToFullString());
         }
 
-        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(IdentifierNameSyntax className, INamedTypeSymbol namedTypeSymbol, AttributeData attribute, ArgumentListSyntax? argumentListSyntax)
+        SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(
+            IdentifierNameSyntax className,
+            INamedTypeSymbol namedTypeSymbol,
+            AttributeData attribute,
+            ArgumentListSyntax? argumentListSyntax)
         {
             var propertyName = attribute.NamedArguments.FirstOrDefault(pair => pair.Key == "PropertyName").Value.Value?.ToString() ?? "Default";
             return SingletonList<MemberDeclarationSyntax>(
@@ -107,10 +126,7 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                                                     SingletonList(
                                                         AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
                                                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))
-                                           .WithInitializer(
-                                                EqualsValueClause(
-                                                    ObjectCreationExpression(className)
-                                                       .WithArgumentList(argumentListSyntax ?? ArgumentList())))
+                                           .WithInitializer(EqualsValueClause(BuildObjectCreationExpression(className, argumentListSyntax)))
                                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)))))));
         }
 
@@ -126,5 +142,13 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                         TriviaList(),
                         SyntaxKind.OpenBraceToken,
                         TriviaList(LineFeed)));
+
+        ObjectCreationExpressionSyntax BuildObjectCreationExpression(
+            IdentifierNameSyntax className,
+            ArgumentListSyntax? argumentListSyntax) => ObjectCreationExpression(className).WithArgumentList(argumentListSyntax ?? ArgumentList());
+
+        ArgumentListSyntax BuildConstructorWithArguments(
+            ImmutableArray<IParameterSymbol>? allConstructorParameters) => ArgumentList(
+            SeparatedList<ArgumentSyntax>([Argument(IdentifierName("Stuff.Default"))]));
     }
 }
