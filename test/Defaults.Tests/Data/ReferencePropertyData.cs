@@ -27,16 +27,51 @@ internal class ReferencePropertyData : DefaultsSourceData
                                                    One = one;
                                                }
                                        
-                                               public Stuff One { get; }
+                                               public Stuff One { get; } = Stuff.Default;
                                            }
                                        }
                                        """;
 
     // lang=csharp
     private const string Stuff = """
-                                 public class Stuff
+                                 [DefaultsAttribute]
+                                 public partial class Stuff
                                  {
                                      public static Stuff Default { get; } = new Stuff();
+                                     
+                                     public Junk Junk { get; }
                                  }
                                  """;
+
+    // lang=csharp
+    private const string Junk = """
+                                [DefaultsAttribute]
+                                public partial class Junk
+                                {
+                                    public static Junk Default { get; } = new Junk(default, Reference.Default);
+                                }
+                                """;
+
+    // lang=csharp
+    private const string MultipleConstructors = """
+                                [DefaultsAttribute]
+                                public partial class Junk
+                                {
+                                    [DefaultsConstructorAttribute]
+                                    public Junk(int value);
+                                    public Junk(int value, Reference reference);
+                                    public static Junk Default { get; } = new Junk(default, Reference.Default);
+                                    
+                                [DefaultsEqualityAttribute]
+                                    public int Value { get; init; }
+                                    [DefaultsNotNullAttribute] // only if it's nullable.
+                                    public Reference? Reference { get; internal set; }
+                                [DefaultsEqualityAttribute]
+                                    public bool IsValid { get; set; }
+                                    public bool IsNotValid { get; private set; }
+                                }
+                                
+                                //if (new Junk(0, Reference.Default) == Junk.Default)
+                                //<ApplyDefaultsTo>MyNamespace.Junk;MyNamespace.Reference</ApplyDefaultsTo>
+                                """;
 }

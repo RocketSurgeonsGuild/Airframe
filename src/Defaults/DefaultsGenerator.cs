@@ -4,6 +4,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.CodeDom.Compiler;
+using System.Globalization;
+using System.IO;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Rocket.Surgery.Airframe.Defaults;
@@ -26,6 +29,30 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                     (node, _) => node.IsKind(SyntaxKind.ClassDeclaration),
                     (syntaxContext, _) => syntaxContext)
                .Combine(incrementalContext.CompilationProvider);
+               //.WithComparer()
+
+            using StringWriter writer = new(builder, CultureInfo.InvariantCulture);
+            using IndentedTextWriter textWriter = new IndentedTextWriter(writer, "  ");
+            textWriter.Indent++;
+            textWriter.WriteLineNoTabs(null!);
+            textWriter.Indent--;
+
+            //https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.cookbook.md
+            //https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.cookbook.md#use-an-indented-text-writer-not-syntaxnodes-for-generation
+            /*
+             // build/MyNuGetPackageName.props
+             <ItemGroup>
+                   <CompilerVisibleProperty Include="MyGenerator_EnableLogging" />
+                   <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="MyGenerator_EnableLogging" />
+               </ItemGroup>
+             */
+
+            /*
+             * Asembly1 .. Microsoft.CodeAnalysis.CSharp
+             * MyAnalyzer : DiagnosticAnalyzer | MySuppressors : DiagnosticSuppressor | MyGenerator : IIncrementalGenerator
+             * Assembly2 .. Microsoft.CodeAnalysis.CSharp.Workspaces
+             * MyCodeFixer : CodeFixProvider | MyCodeRefactoring : RefactoringProvider
+             */
 
             incrementalContext.RegisterSourceOutput(syntaxProvider, GenerateDefaults);
         }
