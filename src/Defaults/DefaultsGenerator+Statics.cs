@@ -27,7 +27,7 @@ internal partial class DefaultsGenerator
     {
         if (classForFixture.Constructors.All(methodSymbol => methodSymbol.HasAccessibility(Accessibility.Private, Accessibility.Protected, Accessibility.Internal)))
         {
-            ReportDiagnostic(productionContext, Diagnostics.Rsad0001, classForFixture.Locations);
+            ReportDiagnostic(productionContext, DiagnosticDescriptions.Rsad0001, classForFixture.Locations);
             return true;
         }
 
@@ -43,7 +43,7 @@ internal partial class DefaultsGenerator
     {
         foreach (var location in locations)
         {
-            productionContext.ReportDiagnostic(Diagnostic.Create(diagnosticDescriptor, location));
+            // productionContext.ReportDiagnostic(Diagnostic.Create(diagnosticDescriptor, location));
         }
     }
 }

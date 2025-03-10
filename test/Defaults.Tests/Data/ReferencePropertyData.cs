@@ -3,9 +3,11 @@
 // </copyright>
 
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Rocket.Surgery.Airframe.Defaults.Tests.Data;
 
+[SuppressMessage("Performance", "CA1823:Avoid unused private fields")]
 internal class ReferencePropertyData : DefaultsSourceData
 {
     public static TheoryData<GeneratorTestContext> Data =>

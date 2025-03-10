@@ -1,12 +1,8 @@
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.CodeDom.Compiler;
-using System.Globalization;
-using System.IO;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Rocket.Surgery.Airframe.Defaults;
@@ -29,16 +25,17 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                     (node, _) => node.IsKind(SyntaxKind.ClassDeclaration),
                     (syntaxContext, _) => syntaxContext)
                .Combine(incrementalContext.CompilationProvider);
-               //.WithComparer()
 
-            using StringWriter writer = new(builder, CultureInfo.InvariantCulture);
-            using IndentedTextWriter textWriter = new IndentedTextWriter(writer, "  ");
-            textWriter.Indent++;
-            textWriter.WriteLineNoTabs(null!);
-            textWriter.Indent--;
+            // .WithComparer()
 
-            //https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.cookbook.md
-            //https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.cookbook.md#use-an-indented-text-writer-not-syntaxnodes-for-generation
+            // using StringWriter writer = new(builder, CultureInfo.InvariantCulture);
+            // using IndentedTextWriter textWriter = new IndentedTextWriter(writer, "  ");
+            // textWriter.Indent++;
+            // textWriter.WriteLineNoTabs(null!);
+            // textWriter.Indent--;
+
+            // https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.cookbook.md
+            // https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.cookbook.md#use-an-indented-text-writer-not-syntaxnodes-for-generation
             /*
              // build/MyNuGetPackageName.props
              <ItemGroup>
@@ -68,11 +65,6 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             var attributeTarget = GetClassForFixture(syntaxContext);
 
             if (attributeTarget is null)
-            {
-                return;
-            }
-
-            if (Report0001(attributeTarget, productionContext))
             {
                 return;
             }
