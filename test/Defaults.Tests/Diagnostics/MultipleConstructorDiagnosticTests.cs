@@ -1,17 +1,32 @@
-// <copyright file="DefaultGeneratorTests+Diagnostics.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Testing;
+using Microsoft.CodeAnalysis.Testing.Verifiers;
+using Rocket.Surgery.Airframe.Defaults.Diagnostics;
 using Rocket.Surgery.Airframe.Defaults.Tests.Data;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
-namespace Rocket.Surgery.Airframe.Defaults.Tests;
+namespace Rocket.Surgery.Airframe.Defaults.Tests.Diagnostics;
 
-public partial class DefaultsGeneratorTests
+public class MultipleConstructorDiagnosticTests
 {
+    [Fact]
+    public void Given_When_Then()
+    {
+        // Given
+        var context = GeneratorTestContextBuilder
+           .Create()
+           .WithAnalyzer<MultipleConstructorDiagnostic>()
+           .Build();
+
+        // When
+
+        // Then
+    }
+
     [Theory]
     [MemberData(nameof(AccessibleConstructorData.Data), MemberType = typeof(AccessibleConstructorData))]
     public async Task GivenClassWithAccessibleConstructor_WhenGenerate_ThenNoDiagnosticReported(GeneratorTestContext context)
@@ -27,7 +42,8 @@ public partial class DefaultsGeneratorTests
     }
 
     [Theory]
-    [MemberData(nameof(InaccessibleConstructorData.Data), MemberType = typeof(InaccessibleConstructorData))]
+    // [MemberData(nameof(InaccessibleConstructorData.Data), MemberType = typeof(InaccessibleConstructorData))]
+    [MemberData(nameof(MultipleConstructorData.Data), MemberType = typeof(MultipleConstructorData))]
     public async Task GivenClassWithInaccessibleConstructor_WhenGenerate_ThenDiagnosticReported(GeneratorTestContext context)
     {
         // Given, When
