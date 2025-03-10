@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Rocket.Surgery.Airframe.Defaults;
 
-internal static class Diagnostics
+internal static class DiagnosticDescriptions
 {
     /// <summary>
     ///    Gets a diagnostic for unsupported classes with no constructors.
