@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Rocket.Surgery.Airframe.Defaults.Diagnostics;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class MultipleConstructorDiagnostic : DiagnosticAnalyzer
+public class Rsad0001 : DiagnosticAnalyzer
 {
     /// <inheritdoc/>
     public override void Initialize(AnalysisContext analysisContext)

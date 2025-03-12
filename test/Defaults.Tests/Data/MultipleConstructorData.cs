@@ -12,7 +12,7 @@ public class MultipleConstructorData
         GeneratorTestContextBuilder
            .Create()
            .WithGenerator<DefaultsGenerator>()
-           .WithGenerator<MultipleConstructorDiagnostic>()
+           .WithGenerator<Rsad0001>()
            .AddSources(MultipleConstructorsWithAttribute)
            .Build(),
 
