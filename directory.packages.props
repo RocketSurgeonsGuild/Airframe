@@ -3,11 +3,11 @@
         <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3"/>
         <PackageVersion Include="Rocket.Surgery.Build.Metadata" Version="3.3.11" PrivateAssets="All"/>
         <PackageVersion Include="Rocket.Surgery.MSBuild.Metadata" Version="1.1.0"/>
-        <PackageVersion Include="Rocket.Surgery.MSBuild.SourceLink" Version="1.1.5"/>
+        <PackageVersion Include="Rocket.Surgery.MSBuild.SourceLink" Version="1.2.1"/>
         <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
-        <PackageVersion Include="Rocket.Surgery.MSBuild.CI" Version="1.1.5"/>
-        <PackageVersion Include="Rocket.Surgery.MSBuild.GitVersion" Version="1.1.5"/>
-        <PackageVersion Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" Version="1.1.5" Condition="'$(MSBuildProjectName)'!='.build'"/>
+        <PackageVersion Include="Rocket.Surgery.MSBuild.CI" Version="1.2.1"/>
+        <PackageVersion Include="Rocket.Surgery.MSBuild.GitVersion" Version="1.2.1"/>
+        <PackageVersion Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" Version="1.2.1" Condition="'$(MSBuildProjectName)'!='.build'"/>
     </ItemGroup>
     <ItemGroup>
         <PackageVersion Include="stylecop.analyzers" Version="1.2.0-beta.556" PrivateAssets="all"/>
@@ -19,11 +19,11 @@
         <PackageVersion Include="JetBrains.ReSharper.CommandLineTools" Version="2023.3.6"/>
         <PackageVersion Include="NuGet.CommandLine" Version="6.8.0"/>
         <PackageVersion Include="Nuke.Common" Version="8.0.0"/>
-        <PackageVersion Include="ReportGenerator" Version="5.4.3"/>
+        <PackageVersion Include="ReportGenerator" Version="5.4.4"/>
         <PackageVersion Include="Rocket.Surgery.Nuke" Version="1.8.16"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageVersion Include="BenchmarkDotNet" Version="0.13.12"/>
+        <PackageVersion Include="BenchmarkDotNet" Version="0.14.0"/>
     </ItemGroup>
     <ItemGroup Label="CodeAnalysis">
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
