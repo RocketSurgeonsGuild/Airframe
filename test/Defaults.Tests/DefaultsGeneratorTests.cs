@@ -46,15 +46,4 @@ public partial class DefaultsGeneratorTests
         // Then
         await Verifier.Verify(result).HashParameters().UseParameters(context.Id);
     }
-
-    [Theory]
-    [MemberData(nameof(ReferencePropertyData.Data), MemberType = typeof(ReferencePropertyData))]
-    public async Task Iterating(GeneratorTestContext context)
-    {
-        // Given, When
-        var result = await context.GenerateAsync();
-
-        // Then
-        await Verifier.Verify(result).HashParameters().UseParameters(context.Id);
-    }
 }

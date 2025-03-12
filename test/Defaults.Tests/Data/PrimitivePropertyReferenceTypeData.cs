@@ -35,7 +35,7 @@ internal class PrimitivePropertyReferenceTypeData : DefaultsSourceData
                                        }
                                        """;
 
-    // // lang=csharp
+    // lang=csharp
     private const string ObjectInitialization = """
                                                 namespace Rocket.Surgery.Airframe.Defaults
                                                 {

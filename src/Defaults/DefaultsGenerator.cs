@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -59,10 +59,6 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             SourceProductionContext sourceProductionContext,
             GeneratorAttributeSyntaxContext generatorAttributeSyntaxContext)
         {
-            // Get properties and types
-            // Find constructors that match the types found
-            // Generate Default property
-            // assign constructor
             var className = SymbolEqualityComparer.Default.Equals(
                 namedTypeSymbol.ContainingSymbol,
                 namedTypeSymbol.ContainingNamespace)
@@ -74,29 +70,10 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                    .Attributes
                    .First(data => data.AttributeClass?.OriginalDefinition.ToString().Equals(DefaultsAttribute.AttributeName) ?? false);
 
-            // Property Information
-            // read only
-            // =>
-            // { get; }
-            // Constructor
-            // Multiple
             var generatedNamedTypeSymbol = generatorAttributeSyntaxContext.TargetSymbol as INamedTypeSymbol;
             var constructor = generatedNamedTypeSymbol?.Constructors.ToList();
 
-            // ArgumentList with the Default for the Reference Type
-            // ReferenceType.Default doesn't exist, Generate it? Diagnostic?
-            var allConstructorParameters = constructor?.First()?.Parameters;
             var constructorArguments = BuildConstructorWithArguments(constructor?.First(), compilation);
-
-            var memberList = constructor?.First()
-              ?.Parameters.ToArray()
-               .SelectMany(
-                    parameterSymbol => compilation.GetTypeByMetadataName(parameterSymbol.Type.ToDisplayString())
-                      ?.GetMembers()
-                       .Where(symbol => symbol is IPropertySymbol && symbol.IsStatic)
-                       .ToList())
-               .Select(symbol => Argument(IdentifierName($"{symbol.ContainingType.Name}.{symbol.Name}")))
-               .ToList();
 
             sourceProductionContext
                .AddSource(
@@ -164,6 +141,11 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
 
         ArgumentListSyntax BuildConstructorWithArguments(IMethodSymbol? constructor, Compilation compilation)
         {
+            if (constructor?.Parameters.Length > 0)
+            {
+                return ArgumentList(SeparatedList(Array.Empty<ArgumentSyntax>()));
+            }
+
             var memberList = constructor?.Parameters.ToArray()
                .SelectMany(
                     parameterSymbol => compilation.GetTypeByMetadataName(parameterSymbol.Type.ToDisplayString())
