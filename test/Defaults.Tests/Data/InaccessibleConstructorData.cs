@@ -10,37 +10,51 @@ internal class InaccessibleConstructorData : DefaultsSourceData
 {
     public static TheoryData<GeneratorTestContext> Data =>
     [
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(InternalConstructor)
            .Build(),
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(PrivateConstructor)
            .Build(),
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(ProtectedConstructor)
            .Build(),
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(ProtectedAndPrivateConstructor)
            .Build(),
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(InternalAndProtectedAndPrivateConstructor)
            .Build(),
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(InternalAndProtectedConstructor)
            .Build(),
-        DefaultBuilder()
+        Rsda0001()
            .AddSources(InternalAndPrivateConstructor)
            .Build(),
     ];
 
     // lang=csharp
-    public const string InternalConstructor = """
+    private const string InternalConstructor = """
+                                               namespace Rocket.Surgery.Airframe.Defaults
+                                               {
+                                                   [Defaults]
+                                                   public partial class Thing
+                                                   {
+                                                       internal Thing()
+                                                       {
+                                                       }
+                                                   }
+                                               }
+                                               """;
+
+    // lang=csharp
+    private const string PrivateConstructor = """
                                               namespace Rocket.Surgery.Airframe.Defaults
                                               {
                                                   [Defaults]
                                                   public partial class Thing
                                                   {
-                                                      internal Thing()
+                                                      private Thing()
                                                       {
                                                       }
                                                   }
@@ -48,104 +62,90 @@ internal class InaccessibleConstructorData : DefaultsSourceData
                                               """;
 
     // lang=csharp
-    public const string PrivateConstructor = """
-                                             namespace Rocket.Surgery.Airframe.Defaults
-                                             {
-                                                 [Defaults]
-                                                 public partial class Thing
-                                                 {
-                                                     private Thing()
-                                                     {
-                                                     }
-                                                 }
-                                             }
-                                             """;
+    private const string ProtectedConstructor = """
+                                                namespace Rocket.Surgery.Airframe.Defaults
+                                                {
+                                                    [Defaults]
+                                                    public partial class Thing
+                                                    {
+                                                        protected Thing()
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                """;
 
     // lang=csharp
-    public const string ProtectedConstructor = """
-                                               namespace Rocket.Surgery.Airframe.Defaults
-                                               {
-                                                   [Defaults]
-                                                   public partial class Thing
-                                                   {
-                                                       protected Thing()
-                                                       {
-                                                       }
-                                                   }
-                                               }
-                                               """;
+    private const string InternalAndProtectedAndPrivateConstructor = """
+                                                                     namespace Rocket.Surgery.Airframe.Defaults
+                                                                     {
+                                                                         [Defaults]
+                                                                         public partial class Thing
+                                                                         {
+                                                                             internal Thing()
+                                                                             {
+                                                                             }
+                                                                             protected Thing()
+                                                                             {
+                                                                             }
+                                                                             private Thing()
+                                                                             {
+                                                                             }
+                                                                         }
+                                                                     }
+                                                                     """;
 
     // lang=csharp
-    public const string InternalAndProtectedAndPrivateConstructor = """
-                                               namespace Rocket.Surgery.Airframe.Defaults
-                                               {
-                                                   [Defaults]
-                                                   public partial class Thing
-                                                   {
-                                                       internal Thing()
-                                                       {
-                                                       }
-                                                       protected Thing()
-                                                       {
-                                                       }
-                                                       private Thing()
-                                                       {
-                                                       }
-                                                   }
-                                               }
-                                               """;
+    private const string InternalAndProtectedConstructor = """
+                                                           namespace Rocket.Surgery.Airframe.Defaults
+                                                           {
+                                                               [Defaults]
+                                                               public partial class Thing
+                                                               {
+                                                                   internal Thing()
+                                                                   {
+                                                                   }
+                                                                   protected Thing()
+                                                                   {
+                                                                   }
+                                                                   private Thing()
+                                                                   {
+                                                                   }
+                                                               }
+                                                           }
+                                                           """;
 
     // lang=csharp
-    public const string InternalAndProtectedConstructor = """
-                                               namespace Rocket.Surgery.Airframe.Defaults
-                                               {
-                                                   [Defaults]
-                                                   public partial class Thing
-                                                   {
-                                                       internal Thing()
-                                                       {
-                                                       }
-                                                       protected Thing()
-                                                       {
-                                                       }
-                                                       private Thing()
-                                                       {
-                                                       }
-                                                   }
-                                               }
-                                               """;
+    private const string InternalAndPrivateConstructor = """
+                                                         namespace Rocket.Surgery.Airframe.Defaults
+                                                         {
+                                                             [Defaults]
+                                                             public partial class Thing
+                                                             {
+                                                                 internal Thing()
+                                                                 {
+                                                                 }
+                                                                 private Thing()
+                                                                 {
+                                                                 }
+                                                             }
+                                                         }
+                                                         """;
 
     // lang=csharp
-    public const string InternalAndPrivateConstructor = """
-                                               namespace Rocket.Surgery.Airframe.Defaults
-                                               {
-                                                   [Defaults]
-                                                   public partial class Thing
-                                                   {
-                                                       internal Thing()
-                                                       {
-                                                       }
-                                                       private Thing()
-                                                       {
-                                                       }
-                                                   }
-                                               }
-                                               """;
-
-    // lang=csharp
-    public const string ProtectedAndPrivateConstructor = """
-                                               namespace Rocket.Surgery.Airframe.Defaults
-                                               {
-                                                   [Defaults]
-                                                   public partial class Thing
-                                                   {
-                                                       protected Thing()
-                                                       {
-                                                       }
-                                                       private Thing()
-                                                       {
-                                                       }
-                                                   }
-                                               }
-                                               """;
+    private const string ProtectedAndPrivateConstructor = """
+                                                          namespace Rocket.Surgery.Airframe.Defaults
+                                                          {
+                                                              [Defaults]
+                                                              public partial class Thing
+                                                              {
+                                                                  protected Thing()
+                                                                  {
+                                                                  }
+                                                                  private Thing()
+                                                                  {
+                                                                  }
+                                                              }
+                                                          }
+                                                          """;
 }

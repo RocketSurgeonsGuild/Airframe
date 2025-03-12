@@ -45,11 +45,6 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                 return;
             }
 
-            if (Report0001(attributeTarget, productionContext))
-            {
-                return;
-            }
-
             GenerateDefaultProperty(attributeTarget, compilation, productionContext, syntaxContext);
         }
 
