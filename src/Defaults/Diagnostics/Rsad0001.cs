@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Rocket.Surgery.Airframe.Defaults.Generator;
 
 namespace Rocket.Surgery.Airframe.Defaults.Diagnostics;
 

@@ -1,4 +1,5 @@
 using Rocket.Surgery.Airframe.Defaults.Diagnostics;
+using Rocket.Surgery.Airframe.Defaults.Generator;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 
 namespace Rocket.Surgery.Airframe.Defaults.Tests.Data;
