@@ -42,8 +42,8 @@
         <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3"/>
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.10"/>
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageVersion Include="ReactiveUI" Version="19.5.41"/>
-        <PackageVersion Include="ReactiveUI.XamForms" Version="19.5.41"/>
+        <PackageVersion Include="ReactiveUI" Version="19.6.12"/>
+        <PackageVersion Include="ReactiveUI.XamForms" Version="19.6.12"/>
         <PackageVersion Include="ReactiveMarbles.Mvvm" Version="1.0.46"/>
         <PackageVersion Include="ReactiveMarbles.PropertyChanged" Version="2.0.27"/>
         <PackageVersion Include="Refit" Version="5.2.4"/>
@@ -73,7 +73,7 @@
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0"/>
         <PackageVersion Include="Microsoft.Reactive.Testing" Version="6.0.1"/>
         <PackageVersion Include="NSubstitute" Version="5.3.0"/>
-        <PackageVersion Include="ReactiveUI.Testing" Version="19.5.41"/>
+        <PackageVersion Include="ReactiveUI.Testing" Version="19.6.12"/>
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="9.0.4"/>
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="9.0.4"/>
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.SourceGenerators" Version="9.0.4"/>
