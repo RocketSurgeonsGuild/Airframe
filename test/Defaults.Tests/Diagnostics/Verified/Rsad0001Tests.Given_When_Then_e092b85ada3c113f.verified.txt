@@ -1,6 +1,17 @@
 ﻿{
   AnalyzerDiagnostics: {
-    Rocket.Surgery.Airframe.Defaults.Diagnostics.Rsad0001: []
+    Rocket.Surgery.Airframe.Defaults.Diagnostics.Rsad0001: [
+      {
+        Id: RSAD0001,
+        Title: Inaccessible constructor,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (5,8)-(7,9),
+        MessageFormat: ,
+        Message: ,
+        Category: Support
+      }
+    ]
   },
   FinalDiagnostics: [],
   ParseOptions: {
