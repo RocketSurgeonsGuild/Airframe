@@ -11,7 +11,11 @@ internal abstract class DefaultsSourceData
        .WithGenerator<DefaultsGenerator>()
        .IgnoreOutputFile("DefaultsAttribute.g.cs");
 
-    protected static GeneratorTestContextBuilder Rsda0001() => GeneratorTestContextBuilder
+    protected static GeneratorTestContextBuilder Rsad0001() => GeneratorTestContextBuilder
        .Create()
        .WithAnalyzer<Rsad0001>();
+
+    protected static GeneratorTestContextBuilder Rsad0002() => GeneratorTestContextBuilder
+       .Create()
+       .WithAnalyzer<Rsad0002>();
 }

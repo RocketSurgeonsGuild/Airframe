@@ -6,22 +6,13 @@ using System.Diagnostics.CodeAnalysis;
 namespace Rocket.Surgery.Airframe.Defaults.Tests.Data;
 
 [SuppressMessage("Performance", "CA1823:Avoid unused private fields")]
-public class MultipleConstructorData
+internal class MultipleConstructorData : DefaultsSourceData
 {
     public static TheoryData<GeneratorTestContext> Data =>
     [
-        GeneratorTestContextBuilder
-           .Create()
-           .WithGenerator<DefaultsGenerator>()
-           .WithGenerator<Rsad0001>()
+        Rsad0002()
            .AddSources(MultipleConstructorsWithAttribute)
            .Build(),
-
-        // GeneratorTestContextBuilder
-        //    .Create()
-        //    .WithGenerator<MultipleConstructorDiagnostic>()
-        //    .AddSources(MultipleConstructorsWithoutAttribute)
-        //    .Build()
     ];
 
     // lang=csharp
