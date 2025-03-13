@@ -5,12 +5,25 @@
 BRANCH=$(git symbolic-ref --short HEAD)
 echo "Current Branch: $BRANCH"
 
-# Extract the prefix from the branch name
-BRANCH_PREFIX=$(echo "$BRANCH" | cut -d'/' -f1)
-echo "Branch Prefix: $BRANCH_PREFIX"
-
 # Define acceptable prefixes for commit messages
 acceptable_prefixes=("feature" "screen" "fix" "ci" "chore" "docs" "test" "style" "enhancement")
+
+# Extract the correct prefix from the branch name
+BRANCH_PREFIX=""
+IFS='/' read -ra PARTS <<< "$BRANCH"
+for part in "${PARTS[@]}"; do
+  if [[ " ${acceptable_prefixes[*]} " == *" $part "* ]]; then
+    BRANCH_PREFIX=$part
+    break
+  fi
+done
+
+# Fallback if no known prefix is found
+if [[ -z "$BRANCH_PREFIX" ]]; then
+  BRANCH_PREFIX="${PARTS[0]}"
+fi
+
+echo "Branch Prefix: $BRANCH_PREFIX"
 
 # Get the first commit message
 FIRST_COMMIT=$(git log --format=%B --reverse main.."$BRANCH" | head -n 1)
@@ -25,8 +38,8 @@ for prefix in "${acceptable_prefixes[@]}"; do
   fi
 done
 
+# Modify commit message if needed
 if ! $has_acceptable_prefix; then
-  # Add the branch prefix as the first line of the commit message
   sed -i.bak "1s/^/$BRANCH_PREFIX: /" "$1"
   rm "$1.bak"
 fi
