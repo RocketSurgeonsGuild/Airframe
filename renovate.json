@@ -7,12 +7,30 @@
   "schedule": [
     "after 3am on the first day of the month"
   ],
-  "assignees": ["rlittlesii"],
+  "assignees": [
+    "rlittlesii"
+  ],
   "packageRules": [
     {
       "automerge": true,
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automergeStrategy": "squash"
+    },
+    {
+      "groupName": "Reactive",
+      "labels": [
+        ":truck: private-dependencies"
+      ],
+      "matchPackagePatterns": [
+        "^DynamicData",
+        "^Reactive",
+        "^System\\.Reactive"
+      ]
     }
   ]
 }
