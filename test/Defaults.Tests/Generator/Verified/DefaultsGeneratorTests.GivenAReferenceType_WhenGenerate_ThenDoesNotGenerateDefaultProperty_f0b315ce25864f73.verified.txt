@@ -13,7 +13,6 @@
     System.Core.dll,
     System.dll,
     System.Private.CoreLib.dll,
-    System.Private.CoreLib.dll,
     System.Runtime.dll
   ]
 }
