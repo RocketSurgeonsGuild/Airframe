@@ -79,6 +79,15 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
                        .ToFullString());
         }
 
+        string GenerateDefaultForClass(
+            IdentifierNameSyntax className,
+            INamedTypeSymbol namedTypeSymbol,
+            AttributeData attribute,
+            ArgumentListSyntax? argumentListSyntax)
+        {
+            return string.Empty;
+        }
+
         SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(
             IdentifierNameSyntax className,
             INamedTypeSymbol namedTypeSymbol,
