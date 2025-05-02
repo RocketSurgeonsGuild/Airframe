@@ -1,0 +1,18 @@
+﻿{
+  FinalDiagnostics: [],
+  GeneratorDiagnostics: {
+    Rocket.Surgery.Airframe.Defaults.Generator.DefaultsAttributeGenerator: [],
+    Rocket.Surgery.Airframe.Defaults.Generator.DefaultsGenerator: []
+  },
+  ParseOptions: {
+    DocumentationMode: Parse
+  },
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

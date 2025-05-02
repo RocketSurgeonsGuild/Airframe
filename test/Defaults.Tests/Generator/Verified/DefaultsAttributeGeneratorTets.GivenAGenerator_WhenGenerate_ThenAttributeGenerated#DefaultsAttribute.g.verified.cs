@@ -1,0 +1,15 @@
+//HintName: Rocket.Surgery.Airframe.Defaults/Rocket.Surgery.Airframe.Defaults.Generator.DefaultsAttributeGenerator/DefaultsAttribute.g.cs
+#nullable enable
+using System;
+using System.Diagnostics;
+
+namespace Rocket.Surgery.Airframe.Defaults
+{
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [Conditional("CODEGEN")]
+    internal class DefaultsAttribute : Attribute
+    {
+        public DefaultsAttribute()
+            : this("Default")
+        {
+        }

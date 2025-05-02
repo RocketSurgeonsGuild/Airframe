@@ -1,6 +1,9 @@
 using System;
+using System.CodeDom.Compiler;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -14,7 +17,13 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
     /// <inheritdoc/>
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+        RegisterDefaultAttribute(context);
         RegisterDefaultsGenerator(context);
+
+        void RegisterDefaultAttribute(IncrementalGeneratorInitializationContext incrementalContext) => incrementalContext.RegisterPostInitializationOutput(
+            initializationContext => initializationContext.AddSource(
+                $"Rocket.Surgery.Airframe.{nameof(DefaultsAttribute)}.g.cs",
+                DefaultsAttribute.Source));
 
         [SuppressMessage("ReSharper", "RedundantNameQualifier", Justification = "Source Generation")]
         void RegisterDefaultsGenerator(IncrementalGeneratorInitializationContext incrementalContext)
@@ -66,6 +75,12 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
 
             var constructorArguments = BuildConstructorWithArguments(constructor?.First(), compilation);
 
+            var source = GenerateDefaultForClass(
+                IdentifierName(className),
+                namedTypeSymbol,
+                attributeData,
+                constructorArguments);
+
             sourceProductionContext
                .AddSource(
                     $"{className}.Defaults.g.cs",
@@ -85,7 +100,25 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             AttributeData attribute,
             ArgumentListSyntax? argumentListSyntax)
         {
-            return string.Empty;
+            var writer = new IndentedTextWriter(new StringWriter(new StringBuilder()));
+
+            writer.WriteLine("using" + " " + namedTypeSymbol.OriginalDefinition.ContainingNamespace);
+
+            // lang=csharp
+            var source = """
+                         using Rocket.Surgery.Airframe.Defaults;
+
+                         namespace {0}
+                         {
+                            public partial class {1}
+                            {
+                                public static {1} {2} { get; } = new {1}();
+                            }
+                         }
+                         """;
+            var @class = writer.InnerWriter.ToString();
+
+            return @class;
         }
 
         SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(
