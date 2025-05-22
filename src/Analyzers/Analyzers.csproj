@@ -7,8 +7,8 @@
         <IsRoslynComponent>true</IsRoslynComponent>
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <GeneratedFolder>Generated</GeneratedFolder>
-        <AssemblyName>Rocket.Surgery.Aiframe.Analyzers</AssemblyName>
-        <RootNamespace>Rocket.Surgery.Aiframe.Analyzers</RootNamespace>
+        <AssemblyName>Rocket.Surgery.Airframe.Analyzers</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Analyzers</RootNamespace>
         <Description>Common analyzers for MVVM, Rx, and Airframe coding standards.</Description>
     </PropertyGroup>
     <ItemGroup>
