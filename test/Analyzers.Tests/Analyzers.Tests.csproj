@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <AssemblyName>Rocket.Surgery.Airframe.Analyzers.Tests</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Analyzers.Tests</RootNamespace>
     </PropertyGroup>
@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Analyzers\Analyzers.csproj" />
+      <ProjectReference Include="..\..\src\Analyzers\Analyzers.csproj" />
     </ItemGroup>
 
 </Project>
