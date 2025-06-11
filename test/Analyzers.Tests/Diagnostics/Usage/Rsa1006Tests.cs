@@ -12,7 +12,7 @@ using System.Windows.Input;
 using VerifyXunit;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
-namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics;
+namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Usage;
 
 public class Rsa1006Tests
 {

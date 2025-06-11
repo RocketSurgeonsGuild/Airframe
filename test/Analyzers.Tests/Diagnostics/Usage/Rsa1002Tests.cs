@@ -9,8 +9,9 @@ using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VerifyXunit;
+using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
-namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics;
+namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Usage;
 
 public class Rsa1002Tests
 {
@@ -29,7 +30,7 @@ public class Rsa1002Tests
         result
            .AnalyzerResults
            .Should()
-           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == Descriptions.RSA1002.Id));
+           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == RSA1002.Id));
     }
 
     [Theory]
@@ -47,7 +48,7 @@ public class Rsa1002Tests
         result
            .AnalyzerResults
            .Should()
-           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == Descriptions.RSA1002.Id));
+           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == RSA1002.Id));
     }
 
     [Theory]

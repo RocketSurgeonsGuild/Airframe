@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VerifyXunit;
 
-namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics;
+namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Usage;
 
 public class Rsa1001Tests
 {
