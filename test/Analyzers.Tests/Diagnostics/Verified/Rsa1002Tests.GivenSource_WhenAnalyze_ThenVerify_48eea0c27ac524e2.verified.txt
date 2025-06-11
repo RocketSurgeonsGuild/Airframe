@@ -1,0 +1,41 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Rsa1002: [
+      {
+        Id: RSA1002,
+        Title: Unsupported expression type.,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (11,25)-(11,35),
+        MessageFormat: Provide a well-formed lambda expression,
+        Message: Provide a well-formed lambda expression,
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: RSA1002,
+      Title: Unsupported expression type.,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (11,25)-(11,35),
+      MessageFormat: Provide a well-formed lambda expression,
+      Message: Provide a well-formed lambda expression,
+      Category: Usage
+    }
+  ],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
