@@ -1,0 +1,41 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Rsa1004: [
+      {
+        Id: RSA1004,
+        Title: Unsupported expression missing member access prefix.,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (9,70)-(9,75),
+        MessageFormat: Provide a well-formed lambda expression,
+        Message: Provide a well-formed lambda expression,
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: RSA1004,
+      Title: Unsupported expression missing member access prefix.,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (9,70)-(9,75),
+      MessageFormat: Provide a well-formed lambda expression,
+      Message: Provide a well-formed lambda expression,
+      Category: Usage
+    }
+  ],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
