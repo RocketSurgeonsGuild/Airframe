@@ -6,7 +6,7 @@
         Title: Unsupported expression type.,
         Severity: Error,
         WarningLevel: 0,
-        Location: Input0.cs: (11,25)-(11,35),
+        Location: Input0.cs: (10,25)-(10,35),
         MessageFormat: Provide a well-formed lambda expression,
         Message: Provide a well-formed lambda expression,
         Category: Usage
@@ -19,7 +19,7 @@
       Title: Unsupported expression type.,
       Severity: Error,
       WarningLevel: 0,
-      Location: Input0.cs: (11,25)-(11,35),
+      Location: Input0.cs: (10,25)-(10,35),
       MessageFormat: Provide a well-formed lambda expression,
       Message: Provide a well-formed lambda expression,
       Category: Usage

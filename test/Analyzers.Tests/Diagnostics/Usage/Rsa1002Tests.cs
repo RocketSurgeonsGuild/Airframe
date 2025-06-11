@@ -70,50 +70,58 @@ public class Rsa1002Tests
 
     private static class Rsa1002TestData
     {
-        internal const string Correct = @"
-using ReactiveUI;
-using System.Reactive;
-using System.Reactive.Linq;
+        internal const string Correct =
 
-namespace Sample
-{
-    public class BindToClosureExample : ReactiveObject
-    {
-        public BindToClosureExample() => Observable
-           .Return(Unit.Default)
-           .BindTo(this, x => x.Value);
+            // lang=csharp
+            """
+            using ReactiveUI;
+            using System.Reactive;
+            using System.Reactive.Linq;
 
-        public Unit Value
-        {
-            get => _value;
-            set => this.RaiseAndSetIfChanged(ref _value, value);
-        }
+            namespace Sample
+            {
+                public class BindToClosureExample : ReactiveObject
+                {
+                    public BindToClosureExample() => Observable
+                       .Return(Unit.Default)
+                       .BindTo(this, x => x.Value);
 
-        private Unit _value;
-    }
-}";
+                    public Unit Value
+                    {
+                        get => _value;
+                        set => this.RaiseAndSetIfChanged(ref _value, value);
+                    }
 
-        internal const string Incorrect = @"
-using ReactiveUI;
-using System.Reactive;
-using System.Reactive.Linq;
+                    private Unit _value;
+                }
+            }
+            """;
 
-namespace Sample
-{
-    public class BindToClosureExample : ReactiveObject
-    {
-        public BindToClosureExample() => Observable
-           .Return(Unit.Default)
-           .BindTo(this, x => Value);
+        internal const string Incorrect =
 
-        public Unit Value
-        {
-            get => _value;
-            set => this.RaiseAndSetIfChanged(ref _value, value);
-        }
+            // lang=csharp
+            """
+            using ReactiveUI;
+            using System.Reactive;
+            using System.Reactive.Linq;
 
-        private Unit _value;
-    }
-}";
+            namespace Sample
+            {
+                public class BindToClosureExample : ReactiveObject
+                {
+                    public BindToClosureExample() => Observable
+                       .Return(Unit.Default)
+                       .BindTo(this, x => Value);
+
+                    public Unit Value
+                    {
+                        get => _value;
+                        set => this.RaiseAndSetIfChanged(ref _value, value);
+                    }
+
+                    private Unit _value;
+                }
+            }
+            """;
     }
 }

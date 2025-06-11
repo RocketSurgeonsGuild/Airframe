@@ -6,7 +6,7 @@
         Title: Unsupported expression missing member access prefix.,
         Severity: Error,
         WarningLevel: 0,
-        Location: Input0.cs: (9,70)-(9,75),
+        Location: Input0.cs: (8,70)-(8,75),
         MessageFormat: Provide a well-formed lambda expression,
         Message: Provide a well-formed lambda expression,
         Category: Usage
@@ -19,7 +19,7 @@
       Title: Unsupported expression missing member access prefix.,
       Severity: Error,
       WarningLevel: 0,
-      Location: Input0.cs: (9,70)-(9,75),
+      Location: Input0.cs: (8,70)-(8,75),
       MessageFormat: Provide a well-formed lambda expression,
       Message: Provide a well-formed lambda expression,
       Category: Usage

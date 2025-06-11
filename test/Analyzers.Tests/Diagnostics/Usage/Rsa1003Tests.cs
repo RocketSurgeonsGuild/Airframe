@@ -74,49 +74,57 @@ public class Rsa1003Tests
 
     private static class Rsa1003TestData
     {
-        internal const string Correct = @"
-using ReactiveUI;
-using System.Reactive;
-using System.Reactive.Linq;
+        internal const string Correct =
 
-namespace Sample
-{
-    public class OutParameterAssignmentExample : ReactiveObject
-    {
-        public OutParameterAssignmentExample()
-        {
-                Observable
-                   .Return(Unit.Default)
-                   .ToProperty(this, nameof(Value), out _value);
-        }
+            // lang=csharp
+            """
+            using ReactiveUI;
+            using System.Reactive;
+            using System.Reactive.Linq;
 
-        public Unit Value => _value.Value;
+            namespace Sample
+            {
+                public class OutParameterAssignmentExample : ReactiveObject
+                {
+                    public OutParameterAssignmentExample()
+                    {
+                            Observable
+                               .Return(Unit.Default)
+                               .ToProperty(this, nameof(Value), out _value);
+                    }
 
-        private readonly ObservableAsPropertyHelper<Unit> _value = ObservableAsPropertyHelper<Unit>.Default();
-    }
-}";
+                    public Unit Value => _value.Value;
 
-        internal const string Incorrect = @"
-using ReactiveUI;
-using System.Reactive;
-using System.Reactive.Linq;
+                    private readonly ObservableAsPropertyHelper<Unit> _value = ObservableAsPropertyHelper<Unit>.Default();
+                }
+            }
+            """;
 
-namespace Sample
-{
-    public class OutParameterAssignmentExample : ReactiveObject
-    {
-        public OutParameterAssignmentExample()
-        {
-            var _ =
-                Observable
-                   .Return(Unit.Default)
-                   .ToProperty(this, x => x.Value);
-        }
+        internal const string Incorrect =
 
-        public Unit Value => _value.Value;
+            // lang=csharp
+            """
+            using ReactiveUI;
+            using System.Reactive;
+            using System.Reactive.Linq;
 
-        private readonly ObservableAsPropertyHelper<Unit> _value = ObservableAsPropertyHelper<Unit>.Default();
-    }
-}";
+            namespace Sample
+            {
+                public class OutParameterAssignmentExample : ReactiveObject
+                {
+                    public OutParameterAssignmentExample()
+                    {
+                        var _ =
+                            Observable
+                               .Return(Unit.Default)
+                               .ToProperty(this, x => x.Value);
+                    }
+
+                    public Unit Value => _value.Value;
+
+                    private readonly ObservableAsPropertyHelper<Unit> _value = ObservableAsPropertyHelper<Unit>.Default();
+                }
+            }
+            """;
     }
 }

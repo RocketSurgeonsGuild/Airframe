@@ -6,7 +6,7 @@
         Title: Out parameter assignment,
         Severity: Error,
         WarningLevel: 0,
-        Location: Input0.cs: (14,37)-(14,49),
+        Location: Input0.cs: (13,37)-(13,49),
         MessageFormat: Use the out parameter overload,
         Message: Use the out parameter overload,
         Category: Usage
@@ -19,7 +19,7 @@
       Title: Out parameter assignment,
       Severity: Error,
       WarningLevel: 0,
-      Location: Input0.cs: (14,37)-(14,49),
+      Location: Input0.cs: (13,37)-(13,49),
       MessageFormat: Use the out parameter overload,
       Message: Use the out parameter overload,
       Category: Usage

@@ -6,7 +6,7 @@
         Title: Use expression lambda overload,
         Severity: Warning,
         WarningLevel: 1,
-        Location: Input0.cs: (12,31)-(12,38),
+        Location: Input0.cs: (11,31)-(11,38),
         MessageFormat: Use expression lambda overload for property {0},
         Message: Use expression lambda overload for property Command,
         Category: Usage

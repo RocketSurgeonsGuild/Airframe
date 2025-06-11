@@ -78,93 +78,109 @@ public class Rsa1004Tests
 
     private static class Rsa1004TestData
     {
-        internal const string CorrectSingleProperty = @"
-using System;
-using System.Reactive;
-using ReactiveUI;
+        internal const string CorrectSingleProperty =
 
-namespace Sample
-{
-    public class WhenAnyValueClosureExample : ReactiveObject
-    {
-        public WhenAnyValueClosureExample() => this.WhenAnyValue(x => x.Value).Subscribe();
+            // lang=csharp
+            """
+            using System;
+            using System.Reactive;
+            using ReactiveUI;
 
-        public Unit Value
-        {
-            get => _value;
-            set => this.RaiseAndSetIfChanged(ref _value, value);
-        }
+            namespace Sample
+            {
+                public class WhenAnyValueClosureExample : ReactiveObject
+                {
+                    public WhenAnyValueClosureExample() => this.WhenAnyValue(x => x.Value).Subscribe();
 
-        private Unit _value;
-    }
-}";
+                    public Unit Value
+                    {
+                        get => _value;
+                        set => this.RaiseAndSetIfChanged(ref _value, value);
+                    }
 
-        internal const string IncorrectSingleProperty = @"
-using System;
-using System.Reactive;
-using ReactiveUI;
+                    private Unit _value;
+                }
+            }
+            """;
 
-namespace Sample
-{
-    public class WhenAnyValueClosureExample : ReactiveObject
-    {
-        public WhenAnyValueClosureExample() => this.WhenAnyValue(x => Value).Subscribe();
+        internal const string IncorrectSingleProperty =
 
-        public Unit Value
-        {
-            get => _value;
-            set => this.RaiseAndSetIfChanged(ref _value, value);
-        }
+            // lang=csharp
+            """
+            using System;
+            using System.Reactive;
+            using ReactiveUI;
 
-        private Unit _value;
-    }
-}";
+            namespace Sample
+            {
+                public class WhenAnyValueClosureExample : ReactiveObject
+                {
+                    public WhenAnyValueClosureExample() => this.WhenAnyValue(x => Value).Subscribe();
 
-        internal const string CorrectMultipleProperty = @"
-using System;
-using System.Reactive;
-using ReactiveUI;
+                    public Unit Value
+                    {
+                        get => _value;
+                        set => this.RaiseAndSetIfChanged(ref _value, value);
+                    }
 
-namespace Sample
-{
-    public class WhenAnyValueClosureExample : ReactiveObject
-    {
-        public WhenAnyValueClosureExample() => this.WhenAnyValue(x => x.Value, y => y.Value).Subscribe();
+                    private Unit _value;
+                }
+            }
+            """;
 
-        public Unit Value
-        {
-            get => _value;
-            set => this.RaiseAndSetIfChanged(ref _value, value);
-        }
+        internal const string CorrectMultipleProperty =
 
-        private Unit _value;
-    }
-}";
+            // lang=csharp
+            """
+            using System;
+            using System.Reactive;
+            using ReactiveUI;
 
-        internal const string IncorrectMultipleProperty = @"
-using System;
-using System.Reactive;
-using ReactiveUI;
+            namespace Sample
+            {
+                public class WhenAnyValueClosureExample : ReactiveObject
+                {
+                    public WhenAnyValueClosureExample() => this.WhenAnyValue(x => x.Value, y => y.Value).Subscribe();
 
-namespace Sample
-{
-    public class WhenAnyValueClosureExample : ReactiveObject
-    {
-        public WhenAnyValueClosureExample()
-        {
-            this.WhenAnyValue(x => Value, y => y.Value).Subscribe();
-            this.WhenAnyValue(x => x.Value, y => Value).Subscribe();
-            this.WhenAnyValue(x => Value, y => Value).Subscribe();
-        }
+                    public Unit Value
+                    {
+                        get => _value;
+                        set => this.RaiseAndSetIfChanged(ref _value, value);
+                    }
 
-        public Unit Value
-        {
-            get => _value;
-            set => this.RaiseAndSetIfChanged(ref _value, value);
-        }
+                    private Unit _value;
+                }
+            }
+            """;
 
-        private Unit _value;
-    }
-}";
+        internal const string IncorrectMultipleProperty =
+
+            // lang=csharp
+            """
+            using System;
+            using System.Reactive;
+            using ReactiveUI;
+
+            namespace Sample
+            {
+                public class WhenAnyValueClosureExample : ReactiveObject
+                {
+                    public WhenAnyValueClosureExample()
+                    {
+                        this.WhenAnyValue(x => Value, y => y.Value).Subscribe();
+                        this.WhenAnyValue(x => x.Value, y => Value).Subscribe();
+                        this.WhenAnyValue(x => Value, y => Value).Subscribe();
+                    }
+
+                    public Unit Value
+                    {
+                        get => _value;
+                        set => this.RaiseAndSetIfChanged(ref _value, value);
+                    }
+
+                    private Unit _value;
+                }
+            }
+            """;
     }
 }

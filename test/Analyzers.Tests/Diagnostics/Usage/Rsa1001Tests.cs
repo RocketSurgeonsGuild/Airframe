@@ -69,40 +69,48 @@ public class Rsa1001Tests
 
     private static class Rsa1001TestData
     {
-        internal const string Correct = @"
-    using ReactiveUI;
-    using System.Reactive;
-    using System.Reactive.Linq;
-    public class InvokeCommandTestData
-    {
-        public InvokeCommandTestData()
-        {
-            Command = ReactiveCommand.Create(() => { });
+        internal const string Correct =
 
-            Observable
-                .Return(Unit.Default)
-                .InvokeCommand(this, x => x.Command);
-        }
+            // lang=csharp
+            """
+                using ReactiveUI;
+                using System.Reactive;
+                using System.Reactive.Linq;
+                public class InvokeCommandTestData
+                {
+                    public InvokeCommandTestData()
+                    {
+                        Command = ReactiveCommand.Create(() => { });
 
-        public ReactiveCommand<Unit, Unit> Command { get; }
-    }";
+                        Observable
+                            .Return(Unit.Default)
+                            .InvokeCommand(this, x => x.Command);
+                    }
 
-        internal const string Incorrect = @"
-    using ReactiveUI;
-    using System.Reactive;
-    using System.Reactive.Linq;
-    public class InvokeCommandTestData
-    {
-        public InvokeCommandTestData()
-        {
-            Command = ReactiveCommand.Create(() => { });
+                    public ReactiveCommand<Unit, Unit> Command { get; }
+                }
+            """;
 
-            Observable
-                .Return(Unit.Default)
-                .InvokeCommand(Command);
-        }
+        internal const string Incorrect =
 
-        public ReactiveCommand<Unit, Unit> Command { get; }
-    }";
+            // lang=csharp
+            """
+                using ReactiveUI;
+                using System.Reactive;
+                using System.Reactive.Linq;
+                public class InvokeCommandTestData
+                {
+                    public InvokeCommandTestData()
+                    {
+                        Command = ReactiveCommand.Create(() => { });
+
+                        Observable
+                            .Return(Unit.Default)
+                            .InvokeCommand(Command);
+                    }
+
+                    public ReactiveCommand<Unit, Unit> Command { get; }
+                }
+            """;
     }
 }

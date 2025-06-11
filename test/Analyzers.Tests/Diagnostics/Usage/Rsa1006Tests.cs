@@ -78,39 +78,47 @@ public class Rsa1006Tests
 
     private static class Rsa1006TestData
     {
-        internal const string Correct = @"
-using System.Reactive;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using ReactiveUI;
+        internal const string Correct =
 
-namespace Sample
-{
-    public class MultipleUsesOfSubscribeOnExample : ReactiveObject
-    {
+            // lang=csharp
+            """
+            using System.Reactive;
+            using System.Reactive.Concurrency;
+            using System.Reactive.Linq;
+            using ReactiveUI;
 
-        public MultipleUsesOfSubscribeOnExample() => Observable
-                                                     .Return(Unit.Default)
-                                                     .SubscribeOn(TaskPoolScheduler.Default);
-    }
-}";
+            namespace Sample
+            {
+                public class MultipleUsesOfSubscribeOnExample : ReactiveObject
+                {
 
-        internal const string Incorrect = @"
-using System.Reactive;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using ReactiveUI;
+                    public MultipleUsesOfSubscribeOnExample() => Observable
+                                                                 .Return(Unit.Default)
+                                                                 .SubscribeOn(TaskPoolScheduler.Default);
+                }
+            }
+            """;
 
-namespace Sample
-{
-    public class MultipleUsesOfSubscribeOnExample : ReactiveObject
-    {
+        internal const string Incorrect =
 
-        public MultipleUsesOfSubscribeOnExample() => Observable
-                                                     .Return(Unit.Default)
-                                                     .SubscribeOn(TaskPoolScheduler.Default)
-                                                     .SubscribeOn(ImmediateScheduler.Instance);
-    }
-}";
+            // lang=csharp
+            """
+            using System.Reactive;
+            using System.Reactive.Concurrency;
+            using System.Reactive.Linq;
+            using ReactiveUI;
+
+            namespace Sample
+            {
+                public class MultipleUsesOfSubscribeOnExample : ReactiveObject
+                {
+
+                    public MultipleUsesOfSubscribeOnExample() => Observable
+                                                                 .Return(Unit.Default)
+                                                                 .SubscribeOn(TaskPoolScheduler.Default)
+                                                                 .SubscribeOn(ImmediateScheduler.Instance);
+                }
+            }
+            """;
     }
 }
