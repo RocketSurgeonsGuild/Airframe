@@ -9,7 +9,7 @@ using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 namespace Rocket.Surgery.Airframe.Analyzers;
 
 /// <summary>
-/// Represents <see cref="Descriptions.RSA1001"/>.
+/// Represents a diagnostic for <see cref="Descriptions.RSA1001"/>.
 /// </summary>
 public class Rsa1001 : Rsa1000
 {
