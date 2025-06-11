@@ -1,0 +1,61 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Performance.Rsa3001: [
+      {
+        Id: RSA3001,
+        Title: Subscription not disposed,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (14,16)-(14,22),
+        MessageFormat: Consider use of DisposeWith to clean up subscriptions,
+        Message: Consider use of DisposeWith to clean up subscriptions,
+        Category: Performance
+      },
+      {
+        Id: RSA3001,
+        Title: Subscription not disposed,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (18,16)-(18,29),
+        MessageFormat: Consider use of DisposeWith to clean up subscriptions,
+        Message: Consider use of DisposeWith to clean up subscriptions,
+        Category: Performance
+      },
+      {
+        Id: RSA3001,
+        Title: Subscription not disposed,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (22,16)-(22,25),
+        MessageFormat: Consider use of DisposeWith to clean up subscriptions,
+        Message: Consider use of DisposeWith to clean up subscriptions,
+        Category: Performance
+      },
+      {
+        Id: RSA3001,
+        Title: Subscription not disposed,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (26,16)-(26,26),
+        MessageFormat: Consider use of DisposeWith to clean up subscriptions,
+        Message: Consider use of DisposeWith to clean up subscriptions,
+        Category: Performance
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}

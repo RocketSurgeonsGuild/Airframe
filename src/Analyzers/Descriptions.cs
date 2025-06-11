@@ -54,12 +54,22 @@ internal class Descriptions
             Info,
             true);
 
-    public static DiagnosticDescriptor RSA1007 { get; } =
+    public static DiagnosticDescriptor RSA3001 { get; } =
         new(
-            "RSA1007",
+            "RSA3001",
             "Subscription not disposed",
             "Consider use of DisposeWith to clean up subscriptions",
-            CategoryMap.GetOrAdd(Usage, category => category.ToString()),
+            CategoryMap.GetOrAdd(Category.Performance, category => category.ToString()),
             Warning,
             true);
+
+    public static DiagnosticDescriptor RSA3002 { get; } =
+        new(
+            "RSA3001",
+            "Lambda expression can be made static",
+            "Lambda expression can be made static to prevent accidental variable capture",
+            CategoryMap.GetOrAdd(Category.Performance, category => category.ToString()),
+            Warning,
+            true,
+            "Lambda expressions that don't capture local variables or instance state can be marked as static.");
 }
