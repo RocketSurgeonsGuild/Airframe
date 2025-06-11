@@ -9,16 +9,21 @@ using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 namespace Rocket.Surgery.Airframe.Analyzers;
 
 /// <summary>
-/// Represents <see cref="Descriptions.RSA1002"/>.
+/// Represents <see cref="Descriptions.RSA1003"/>.
 /// </summary>
-public class Rsa1002 : Rsa1000
+public class Rsa1003 : Rsa1000
 {
     /// <inheritdoc/>
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [RSA1002, RSA1004];
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [RSA1003];
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
+        if (!context.Node.Parent.IsKind(SyntaxKind.EqualsValueClause))
+        {
+            return;
+        }
+
         var invocationExpression = (InvocationExpressionSyntax)context.Node;
 
         if (invocationExpression.Expression is not MemberAccessExpressionSyntax memberAccessExpressionSyntax)
@@ -26,7 +31,7 @@ public class Rsa1002 : Rsa1000
             return;
         }
 
-        if (memberAccessExpressionSyntax.Name.Identifier.Text != "BindTo" || memberAccessExpressionSyntax.Expression is not InvocationExpressionSyntax)
+        if (memberAccessExpressionSyntax.Name.Identifier.Text != "ToProperty" || memberAccessExpressionSyntax.Expression is not InvocationExpressionSyntax)
         {
             return;
         }
@@ -36,16 +41,15 @@ public class Rsa1002 : Rsa1000
                .ArgumentList
                .Arguments
                .Select(argument => argument.DescendantNodesAndTokens())
-               .SelectMany(token => token.Where(x => x.IsKind(SyntaxKind.SimpleLambdaExpression) || x.IsKind(SyntaxKind.SimpleMemberAccessExpression)))
+               .SelectMany(token => token.Where(x => x.IsKind(SyntaxKind.SimpleLambdaExpression)))
                .ToList();
 
-        if (tokens.Any(syntaxNodeOrToken => syntaxNodeOrToken.IsKind(SyntaxKind.SimpleLambdaExpression)) &&
-            tokens.Any(syntaxNodeOrToken => syntaxNodeOrToken.IsKind(SyntaxKind.SimpleMemberAccessExpression)))
+        if (!tokens.Any(x => x.IsKind(SyntaxKind.SimpleLambdaExpression)))
         {
             return;
         }
 
-        foreach (var diagnostic in tokens.Select(token => Diagnostic.Create(RSA1002, token.GetLocation(), token)))
+        foreach (var diagnostic in tokens.Select(token => Diagnostic.Create(RSA1003, token.GetLocation(), token)))
         {
             context.ReportDiagnostic(diagnostic);
         }

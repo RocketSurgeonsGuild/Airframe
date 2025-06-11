@@ -1,0 +1,41 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Rsa1003: [
+      {
+        Id: RSA1003,
+        Title: Out parameter assignment,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (14,37)-(14,49),
+        MessageFormat: Use the out parameter overload,
+        Message: Use the out parameter overload,
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: RSA1003,
+      Title: Out parameter assignment,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (14,37)-(14,49),
+      MessageFormat: Use the out parameter overload,
+      Message: Use the out parameter overload,
+      Category: Usage
+    }
+  ],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}

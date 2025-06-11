@@ -11,29 +11,13 @@ namespace Rocket.Surgery.Airframe.Analyzers;
 /// <summary>
 /// Represents <see cref="Descriptions.RSA1001"/>.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class Rsa1001 : DiagnosticAnalyzer
+public class Rsa1001 : Rsa1000
 {
-    /// <inheritdoc/>
-    public override void Initialize(AnalysisContext context)
-    {
-        context.EnableConcurrentExecution();
-        context.ConfigureGeneratedCodeAnalysis(
-            GeneratedCodeAnalysisFlags.Analyze
-          | GeneratedCodeAnalysisFlags.ReportDiagnostics);
-
-        context.RegisterSyntaxNodeAction(
-            action: Analyze,
-            syntaxKinds: new[]
-            {
-                SyntaxKind.InvocationExpression
-            });
-    }
-
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [RSA1001];
 
-    private static void Analyze(SyntaxNodeAnalysisContext context)
+    /// <inheritdoc/>
+    protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
         var invocationExpression = (InvocationExpressionSyntax)context.Node;
 
