@@ -1,6 +1,6 @@
 ### New Rules
 
-| Rule ID | Category | Severity | Notes                             |
-|---------|----------|----------|-----------------------------------|
-| RSA0005 | Usage    | Warning  | RSA0005_SchedulerNotProvided      |
-| RSA0006 | Usage    | Info     | RSA0006_MultipleUsesOfSubscribeOn |
+| Rule ID | Category    | Severity | Notes                          |
+|---------|-------------|----------|--------------------------------|
+| RSA1005 | Usage       | Warning  | RSA1005_SchedulerNotProvided   |
+| RSA3002 | Performance | Warning  | RSA3002_LambdaExpressionStatic |
