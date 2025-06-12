@@ -65,7 +65,7 @@ internal class Descriptions
 
     public static DiagnosticDescriptor RSA3002 { get; } =
         new(
-            "RSA3001",
+            "RSA3002",
             "Lambda expression can be made static",
             "Lambda expression can be made static to prevent accidental variable capture",
             CategoryMap.GetOrAdd(Category.Performance, category => category.ToString()),
