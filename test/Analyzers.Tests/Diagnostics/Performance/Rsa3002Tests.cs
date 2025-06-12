@@ -6,6 +6,7 @@ using ReactiveUI;
 using Rocket.Surgery.Airframe.Analyzers.Performance;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using Splat;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive;
@@ -73,6 +74,7 @@ public class Rsa3002Tests
                 typeof(ICommand),
                 typeof(ReactiveCommand),
                 typeof(IObservableCache<int, string>),
+                typeof(BindingList<int>),
                 typeof(IEnableLogger),
                 typeof(Expression<>),
                 typeof(CompositeDisposable))
@@ -116,6 +118,7 @@ public class Rsa3002Tests
             using System.Reactive;
             using System.Reactive.Disposables;
             using System.Reactive.Linq;
+            using DynamicData;
             using ReactiveUI;
 
             namespace Sample
@@ -124,32 +127,85 @@ public class Rsa3002Tests
                 {
                     public StaticLambdaExample()
                     {
-                        // Using instance properties - good
                         Observable
-                            .Return(Unit.Default)
-                            .Select(static _ => Value)
-                            .Subscribe();
+                           .Return(Unit.Default)
+                           .Select(static _ => _staticValue)
+                           .Subscribe();
                 
-                        // Using local variables - good
-                        var localValue = 42;
                         Observable
-                            .Return(Unit.Default)
-                            .Select(static _ => localValue)
-                            .Subscribe();
+                           .Return(Unit.Default)
+                           .Select(static _ => StaticValue)
+                           .Subscribe();
                 
-                        // Using parameters - good
-                        void Process(int param) =>
-                            Observable
-                                .Return(Unit.Default)
-                                .Select(static _ => param)
-                                .Subscribe();
-                                
+                        Observable
+                           .Return(Unit.Default)
+                           .Select(static _ => GetStaticValue())
+                           .Subscribe();
+                
+                        this.WhenAnyValue(static x => x.Life)
+                           .Where(static x => x > 0)
+                           .Subscribe(thing => SomeMethod(thing));
+                
+                        this.WhenAnyValue(static x => x.LifeChoices)
+                           .Subscribe(x => x.Choices.Question());
+                
+                        _sourceCache
+                           .Connect()
+                           .DeferUntilLoaded()
+                           .RefCount()
+                           .Filter(static life => life.Id > 0)
+                           .AutoRefresh(static life => life.Choices)
+                           .Bind(out var items)
+                           .Subscribe();
+                
                         Command = ReactiveCommand.Create(static () => { });
+                    }
+                
+                    public int Life
+                    {
+                        get => _life;
+                        set => this.RaiseAndSetIfChanged(ref _life, value);
+                    }
+                
+                    public Life LifeChoices
+                    {
+                        get => _lifeChoices;
+                        set => this.RaiseAndSetIfChanged(ref _lifeChoices, value);
                     }
                 
                     public ReactiveCommand<Unit, Unit> Command { get; }
                 
-                    public int Value { get; set; } = 42;
+                    public void SomeMethod(int thing)
+                    {
+                    }
+                
+                    public static int StaticValue { get; } = 100;
+                
+                    private static int GetStaticValue() => 200;
+                
+                    private static readonly int _staticValue = 42;
+                
+                    private int _life;
+                    private SourceCache<Life, int> _sourceCache = new SourceCache<Life, int>(static x => x.Id);
+                    private Life _lifeChoices = null!;
+                }
+                
+                public class Life : ReactiveObject
+                {
+                    public int Id { get; set; }
+                
+                    public Choices Choices
+                    {
+                        get => _choices;
+                        set => this.RaiseAndSetIfChanged(ref _choices, value);
+                    }
+                
+                    private Choices _choices;
+                }
+                
+                public class Choices : ReactiveObject
+                {
+                    public void Question() { }
                 }
             }
             """;
@@ -244,7 +300,6 @@ public class Rsa3002Tests
                            .RefCount()
                            .Filter(life => life.Id > 0)
                            .AutoRefresh(life => life.Choices)
-                           .WhereReasonsAre(ChangeReason.Refresh, ChangeReason.Update)
                            .Bind(out var items)
                            .Subscribe();
 
