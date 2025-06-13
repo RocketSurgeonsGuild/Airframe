@@ -1,0 +1,133 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Rsa1004: [
+      {
+        Id: RSA1004,
+        Title: Unsupported expression missing member access prefix.,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (10,35)-(10,40),
+        MessageFormat: Provide a well-formed lambda expression,
+        Message: Provide a well-formed lambda expression,
+        Category: Usage
+      },
+      {
+        Id: RSA1004,
+        Title: Unsupported expression missing member access prefix.,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (11,49)-(11,54),
+        MessageFormat: Provide a well-formed lambda expression,
+        Message: Provide a well-formed lambda expression,
+        Category: Usage
+      },
+      {
+        Id: RSA1004,
+        Title: Unsupported expression missing member access prefix.,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (12,35)-(12,40),
+        MessageFormat: Provide a well-formed lambda expression,
+        Message: Provide a well-formed lambda expression,
+        Category: Usage
+      },
+      {
+        Id: RSA1004,
+        Title: Unsupported expression missing member access prefix.,
+        Severity: Error,
+        WarningLevel: 0,
+        Location: Input0.cs: (12,47)-(12,52),
+        MessageFormat: Provide a well-formed lambda expression,
+        Message: Provide a well-formed lambda expression,
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: RSA1004,
+      Title: Unsupported expression missing member access prefix.,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (10,35)-(10,40),
+      MessageFormat: Provide a well-formed lambda expression,
+      Message: Provide a well-formed lambda expression,
+      Category: Usage
+    },
+    {
+      Id: CS0121,
+      Title: ,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (11,17)-(11,29),
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0121),
+      MessageFormat: The call is ambiguous between the following methods or properties: '{0}' and '{1}',
+      Message: The call is ambiguous between the following methods or properties: 'WhenAnyMixin.WhenAnyValue<TSender, TRet, T1>(TSender?, Expression<Func<TSender, T1>>, Func<T1, TRet>)' and 'WhenAnyMixin.WhenAnyValue<TSender, T1, T2>(TSender?, Expression<Func<TSender, T1>>, Expression<Func<TSender, T2>>)',
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry,
+        NotConfigurable
+      ]
+    },
+    {
+      Id: RSA1004,
+      Title: Unsupported expression missing member access prefix.,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (11,49)-(11,54),
+      MessageFormat: Provide a well-formed lambda expression,
+      Message: Provide a well-formed lambda expression,
+      Category: Usage
+    },
+    {
+      Id: CS0121,
+      Title: ,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (12,17)-(12,29),
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0121),
+      MessageFormat: The call is ambiguous between the following methods or properties: '{0}' and '{1}',
+      Message: The call is ambiguous between the following methods or properties: 'WhenAnyMixin.WhenAnyValue<TSender, TRet, T1>(TSender?, Expression<Func<TSender, T1>>, Func<T1, TRet>)' and 'WhenAnyMixin.WhenAnyValue<TSender, T1, T2>(TSender?, Expression<Func<TSender, T1>>, Expression<Func<TSender, T2>>)',
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry,
+        NotConfigurable
+      ]
+    },
+    {
+      Id: RSA1004,
+      Title: Unsupported expression missing member access prefix.,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (12,35)-(12,40),
+      MessageFormat: Provide a well-formed lambda expression,
+      Message: Provide a well-formed lambda expression,
+      Category: Usage
+    },
+    {
+      Id: RSA1004,
+      Title: Unsupported expression missing member access prefix.,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (12,47)-(12,52),
+      MessageFormat: Provide a well-formed lambda expression,
+      Message: Provide a well-formed lambda expression,
+      Category: Usage
+    }
+  ],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}

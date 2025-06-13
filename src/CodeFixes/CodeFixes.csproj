@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Aiframe.CodeFixes</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Aiframe.CodeFixes</RootNamespace>
+    </PropertyGroup>
+
+</Project>

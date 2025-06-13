@@ -1,0 +1,37 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Rsa1006: []
+  },
+  FinalDiagnostics: [
+    {
+      Id: CS0012,
+      Title: ,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: Input0.cs: (10,53)-(12,65),
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0012),
+      MessageFormat: The type '{0}' is defined in an assembly that is not referenced. You must add a reference to assembly '{1}'.,
+      Message: The type 'SynchronizationContext' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Threading, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry,
+        NotConfigurable
+      ]
+    }
+  ],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    System.ComponentModel.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}

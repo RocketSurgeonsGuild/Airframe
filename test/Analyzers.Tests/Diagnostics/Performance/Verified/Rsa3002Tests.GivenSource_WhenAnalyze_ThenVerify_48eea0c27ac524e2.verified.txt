@@ -1,0 +1,67 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Performance.Rsa3002: [
+      {
+        Id: RSA3002,
+        Title: Lambda expression can be made static,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (14,24)-(14,41),
+        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
+        Message: Lambda expression can be made static to prevent accidental variable capture,
+        Category: Performance
+      },
+      {
+        Id: RSA3002,
+        Title: Lambda expression can be made static,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (19,24)-(19,40),
+        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
+        Message: Lambda expression can be made static to prevent accidental variable capture,
+        Category: Performance
+      },
+      {
+        Id: RSA3002,
+        Title: Lambda expression can be made static,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (24,24)-(24,45),
+        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
+        Message: Lambda expression can be made static to prevent accidental variable capture,
+        Category: Performance
+      },
+      {
+        Id: RSA3002,
+        Title: Lambda expression can be made static,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (27,45)-(27,54),
+        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
+        Message: Lambda expression can be made static to prevent accidental variable capture,
+        Category: Performance
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    DynamicData.dll,
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.ComponentModel.TypeConverter.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
