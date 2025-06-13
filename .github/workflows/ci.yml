@@ -19,14 +19,14 @@ name: ci
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
       - 'next'
       - 'feature/*'
     tags:
       - 'v*'
   pull_request:
     branches:
-      - 'master'
+      - 'main'
       - 'next'
 permissions:
   actions: read

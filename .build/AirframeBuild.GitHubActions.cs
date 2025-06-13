@@ -15,8 +15,8 @@ using static GitHubActionsTasks;
     AutoGenerate = true,
     On = [RocketSurgeonGitHubActionsTrigger.Push],
     OnPushTags = ["v*"],
-    OnPushBranches = ["master", "next", "feature/*"],
-    OnPullRequestBranches = ["master", "next"],
+    OnPushBranches = ["main", "next", "feature/*"],
+    OnPullRequestBranches = ["main", "next"],
     InvokedTargets = [nameof(GitHubActions)],
     NonEntryTargets =
     [
