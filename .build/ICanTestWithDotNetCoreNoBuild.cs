@@ -13,8 +13,7 @@ using System.Linq;
 /// <summary>
 /// Defines a `dotnet test` test run with code coverage via coverlet
 /// </summary>
-public interface ICanTestWithDotNetCoreNoBuild : IHaveCollectCoverage,
-                                                 IHaveBuildTarget,
+public interface ICanTestWithDotNetCoreNoBuild : IHaveBuildTarget,
                                                  ITriggerCodeCoverageReports,
                                                  IComprehendTests,
                                                  IHaveTestArtifacts,
@@ -35,7 +34,7 @@ public interface ICanTestWithDotNetCoreNoBuild : IHaveCollectCoverage,
        .Executes(
             () =>
             {
-                FileSystemTasks.EnsureCleanDirectory(TestResultsDirectory);
+                FileSystem.EnsureCleanDirectory(TestResultsDirectory);
                 CoverageDirectory.GlobFiles("*.cobertura.xml", "*.opencover.xml", "*.json", "*.info")
                    .Where(x => Guid.TryParse(Path.GetFileName(x)?.Split('.')[0], out var _))
                    .ForEach(FileSystemTasks.DeleteFile);
