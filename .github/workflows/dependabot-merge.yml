@@ -70,7 +70,7 @@ jobs:
             )
         uses: peaceiris/actions-label-commenter@v1.10.0
         with:
-          github_token: ${{ secrets.RSG_BOT_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           config_file: .github/label-commenter-dependabot.yml
 
       - name: GitHub Automerge
