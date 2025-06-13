@@ -21,7 +21,6 @@ using static GitHubActionsTasks;
     NonEntryTargets =
     [
         nameof(ICIEnvironment.CIEnvironment),
-        nameof(ITriggerCodeCoverageReports.TriggerCodeCoverageReports),
         nameof(ITriggerCodeCoverageReports.GenerateCodeCoverageReportCobertura),
         nameof(IGenerateCodeCoverageBadges.GenerateCodeCoverageBadges),
         nameof(IGenerateCodeCoverageReport.GenerateCodeCoverageReport),
