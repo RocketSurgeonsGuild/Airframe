@@ -3,7 +3,7 @@ name: Publish Nuget
 on:
   push:
     branches:
-      - master
+      - main
   workflow_run:
     workflows: ['ci']
     types:
