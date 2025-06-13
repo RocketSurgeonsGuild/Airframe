@@ -25,9 +25,7 @@ public partial class AirframeBuild : NukeBuild,
                                      ICanBuildWithDotNetCore,
                                      ICanTestWithDotNetCore,
                                      ICanPackWithDotNetCore,
-                                     IHaveDataCollector,
                                      ICanClean,
-                                     ICanLintStagedFiles,
                                      ICanDotNetFormat,
                                      IHavePublicApis,
                                      ICanUpdateReadme,
@@ -54,10 +52,10 @@ public partial class AirframeBuild : NukeBuild,
        .DependsOn(Pack);
 
     public Target Clean => definition => definition.Inherit<ICanClean>(canClean => canClean.Clean);
-    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.CoreRestore);
-    public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.CoreBuild);
-    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(dotNetCore => dotNetCore.CoreTest);
-    public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(dotNetCore => dotNetCore.CorePack)
+    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.DotnetCoreRestore);
+    public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.DotnetCoreBuild);
+    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(dotNetCore => dotNetCore.DotnetCoreTest);
+    public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(dotNetCore => dotNetCore.DotnetCorePack)
        .DependsOn(Clean)
        .After(Test);
 
@@ -74,4 +72,6 @@ public partial class AirframeBuild : NukeBuild,
 
     [Parameter("Configuration to build")]
     public Configuration Configuration { get; } = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+
+    public Target Lint => definition => definition;
 }

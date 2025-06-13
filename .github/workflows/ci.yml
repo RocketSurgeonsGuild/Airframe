@@ -59,10 +59,14 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.101'
-      - name: 🎁 dotnet tool restore
+      - name: 🚒 dotnet workload restore
+        continue-on-error: true
+        run: |
+          dotnet workload restore
+      - name: ⚒️ dotnet tool restore
         run: |
           dotnet tool restore
-      - name: Workloads
+      - name: 🚒 Workloads
         id: workloads
         run: |
           dotnet nuke Workloads --skip
@@ -70,7 +74,7 @@ jobs:
         id: restore
         run: |
           dotnet nuke Restore --skip
-      - name: ⚙ Build
+      - name: ⚙️ Build
         id: build
         run: |
           dotnet nuke Build --skip
@@ -86,7 +90,7 @@ jobs:
         id: gitHubActions
         run: |
           dotnet nuke GitHubActions --skip
-      - name: 🐿 Publish Coverage
+      - name: 📫 Publish Coverage
         uses: codecov/codecov-action@v3.1.4
         with:
           name: 'actions-${{ matrix.os }}'
