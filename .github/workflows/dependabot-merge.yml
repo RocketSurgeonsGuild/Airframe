@@ -31,7 +31,7 @@ jobs:
         run: echo "$RUNNER_CONTEXT"
       - uses: actions/checkout@v4.1.1
         with:
-          ref: master
+          ref: main
       - name: Dependabot Commenter
         if: |
             (
