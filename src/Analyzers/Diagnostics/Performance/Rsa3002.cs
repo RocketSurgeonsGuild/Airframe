@@ -56,12 +56,16 @@ public class Rsa3002 : Rsa3000
             return;
         }
 
-        if (dataFlowAnalysis.CapturedInside.Any() || dataFlowAnalysis.CapturedOutside.Any())
+        if (dataFlowAnalysis.CapturedInside.Any() || dataFlowAnalysis.CapturedOutside.Any(CanBeCapturedOutside))
         {
             return;
         }
 
         context.ReportDiagnostic(Diagnostic.Create(RSA3002, lambdaExpression.GetLocation()));
+        bool CanBeCapturedOutside(
+            ISymbol symbol) => symbol is not IParameterSymbol &&
+            symbol is not IFieldSymbol { IsStatic: true, IsReadOnly: true } &&
+            symbol is not IPropertySymbol { IsStatic: true };
     }
 
     /// <inheritdoc/>

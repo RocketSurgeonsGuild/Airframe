@@ -54,6 +54,7 @@
     netstandard.dll,
     ReactiveUI.dll,
     Splat.dll,
+    System.ComponentModel.TypeConverter.dll,
     System.Core.dll,
     System.dll,
     System.Linq.Expressions.dll,

@@ -58,6 +58,29 @@ public class Rsa3002Tests
     }
 
     [Theory]
+    [InlineData(Rsa3002TestData.ExtraIncorrect)]
+    public async Task GivenExtraIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
+    {
+        // Given. When
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(source)
+           .WithAnalyzer<Rsa3002>()
+           .GenerateAsync();
+
+        // Then
+        result
+           .AnalyzerResults[typeof(Rsa3002)]
+           .Diagnostics
+           .Should()
+           .HaveCount(11)
+           .And
+           .Subject
+           .Should()
+           .OnlyContain(diagnostic => diagnostic.Id == RSA3002.Id);
+    }
+
+    [Theory]
     [InlineData(nameof(Rsa3002TestData.Correct), Rsa3002TestData.Correct)]
     [InlineData(nameof(Rsa3002TestData.Incorrect), Rsa3002TestData.Incorrect)]
     [InlineData(nameof(Rsa3002TestData.ExtraIncorrect), Rsa3002TestData.ExtraIncorrect)]
@@ -147,7 +170,7 @@ public class Rsa3002Tests
                            .Subscribe(thing => SomeMethod(thing));
                 
                         this.WhenAnyValue(static x => x.LifeChoices)
-                           .Subscribe(x => x.Choices.Question());
+                           .Subscribe(static x => x.Choices.Question());
                 
                         _sourceCache
                            .Connect()
