@@ -1,3 +1,3 @@
 # Cqrs
 
-Abstractions that represent a Command Query Responsibility Separation mediator approach.
+Abstractions that represent a Command Query Responsibility Segregation mediator approach.
