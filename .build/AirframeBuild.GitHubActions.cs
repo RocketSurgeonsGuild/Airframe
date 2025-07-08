@@ -38,16 +38,11 @@ public partial class AirframeBuild
 {
     public Target GitHubActions => definition => definition
        .OnlyWhenStatic(IsRunningOnGitHubActions)
-       .DependsOn(Workloads)
        .DependsOn(Restore)
        .DependsOn(Build)
        .DependsOn(Test)
        .DependsOn(Pack)
        .Executes();
-
-    public Target Workloads => definition => definition
-       .Before(Restore)
-       .Executes(() => DotNetTasks.DotNetWorkloadInstall(configurator => configurator.AddWorkloadId("ios")));
 
     public static RocketSurgeonGitHubActionsConfiguration Middleware(RocketSurgeonGitHubActionsConfiguration configuration)
     {
