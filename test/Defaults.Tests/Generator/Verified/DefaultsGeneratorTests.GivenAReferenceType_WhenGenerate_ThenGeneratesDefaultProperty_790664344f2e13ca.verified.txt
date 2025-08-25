@@ -1,4 +1,4 @@
-﻿{
+{
   FinalDiagnostics: [],
   GeneratorDiagnostics: {
     Rocket.Surgery.Airframe.Defaults.Generator.DefaultsAttributeGenerator: [],
@@ -12,7 +12,6 @@
     netstandard.dll,
     System.Core.dll,
     System.dll,
-    System.Private.CoreLib.dll,
     System.Private.CoreLib.dll,
     System.Runtime.dll
   ]
