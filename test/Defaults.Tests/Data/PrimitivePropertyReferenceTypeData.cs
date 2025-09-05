@@ -1,7 +1,3 @@
-// <copyright file="PrimitivePropertyReferenceTypeData.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 
 namespace Rocket.Surgery.Airframe.Defaults.Tests.Data;

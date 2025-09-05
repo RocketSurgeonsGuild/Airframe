@@ -1,7 +1,3 @@
-// <copyright file="Rsa1003Tests.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using ReactiveUI;
