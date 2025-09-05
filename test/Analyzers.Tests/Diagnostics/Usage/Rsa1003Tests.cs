@@ -4,7 +4,6 @@ using ReactiveUI;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using Splat;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive;
 using System.Threading.Tasks;

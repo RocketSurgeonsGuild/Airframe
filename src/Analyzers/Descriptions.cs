@@ -5,7 +5,7 @@ using static Rocket.Surgery.Airframe.Analyzers.Category;
 
 namespace Rocket.Surgery.Airframe.Analyzers;
 
-internal class Descriptions
+internal static class Descriptions
 {
     private static readonly ConcurrentDictionary<Category, string> CategoryMap = new();
 
