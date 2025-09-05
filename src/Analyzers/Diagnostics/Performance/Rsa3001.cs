@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
-namespace Rocket.Surgery.Airframe.Analyzers.Performance;
+namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 
 /// <summary>
 /// Represents a diagnostic for <see cref="Descriptions.RSA3001"/>.
@@ -43,5 +43,5 @@ public class Rsa3001 : Rsa3000
         context.ReportDiagnostic(Diagnostic.Create(RSA3001, memberAccessExpressionSyntax.Name.Identifier.GetLocation()));
     }
 
-    private readonly List<string> _subscriptionAccess = ["InvokeCommand", "HandledSubscribe", "SafeSubscribe", "SubscribeSafe", "ToProperty", "BindTo"];
+    private readonly List<string> _subscriptionAccess = ["InvokeCommand", "HandledSubscribe", "SafeSubscribe", "SubscribeSafe", "ToProperty", "BindTo", "AsValue"];
 }
