@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace Rocket.Surgery.Airframe.Analyzers;
+namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 
 /// <summary>
 /// Represents an RSA 1000 level analyzer.

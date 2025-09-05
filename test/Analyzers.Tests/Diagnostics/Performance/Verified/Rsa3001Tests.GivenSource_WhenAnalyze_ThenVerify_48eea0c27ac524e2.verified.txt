@@ -1,6 +1,6 @@
 ﻿{
   AnalyzerDiagnostics: {
-    Rocket.Surgery.Airframe.Analyzers.Performance.Rsa3001: [
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance.Rsa3001: [
       {
         Id: RSA3001,
         Title: Subscription not disposed,

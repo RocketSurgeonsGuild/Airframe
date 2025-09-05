@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
-namespace Rocket.Surgery.Airframe.Analyzers;
+namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 
 /// <summary>
 /// Represents a diagnostic for <see cref="Descriptions.RSA1003"/>.

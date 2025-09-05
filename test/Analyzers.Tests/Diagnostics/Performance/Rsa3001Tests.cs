@@ -1,7 +1,8 @@
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using ReactiveUI;
-using Rocket.Surgery.Airframe.Analyzers.Performance;
+using Rocket.Surgery.Airframe.Analyzers.Diagnostics;
+using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using Splat;
 using System.Linq;
