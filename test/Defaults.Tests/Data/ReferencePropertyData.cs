@@ -1,7 +1,3 @@
-// <copyright file="ReferencePropertyData.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Diagnostics.CodeAnalysis;
 
