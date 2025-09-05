@@ -1,6 +1,6 @@
 ﻿{
   AnalyzerDiagnostics: {
-    Rocket.Surgery.Airframe.Analyzers.Rsa1006: []
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1006: []
   },
   FinalDiagnostics: [
     {

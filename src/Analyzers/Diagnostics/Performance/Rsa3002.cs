@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
-namespace Rocket.Surgery.Airframe.Analyzers.Performance;
+namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 
 /// <summary>
 /// Represents a diagnostic for <see cref="Descriptions.RSA3002"/>.
@@ -62,10 +62,11 @@ public class Rsa3002 : Rsa3000
         }
 
         context.ReportDiagnostic(Diagnostic.Create(RSA3002, lambdaExpression.GetLocation()));
-        bool CanBeCapturedOutside(
-            ISymbol symbol) => symbol is not IParameterSymbol &&
-            symbol is not IFieldSymbol { IsStatic: true, IsReadOnly: true } &&
-            symbol is not IPropertySymbol { IsStatic: true };
+        bool CanBeCapturedOutside(ISymbol symbol) =>
+            symbol
+                is not IParameterSymbol
+                and not IFieldSymbol { IsStatic: true, IsReadOnly: true }
+                and not IPropertySymbol { IsStatic: true };
     }
 
     /// <inheritdoc/>
