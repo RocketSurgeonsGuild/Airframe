@@ -15,6 +15,7 @@ public class DefaultsGeneratorTests
         // Given, When
         var result = await GeneratorTestContextBuilder
            .Create()
+           .WithGenerator<DefaultsAttributeGenerator>()
            .WithGenerator<DefaultsGenerator>()
            .AddReferences(typeof(List<>))
            .Build()
