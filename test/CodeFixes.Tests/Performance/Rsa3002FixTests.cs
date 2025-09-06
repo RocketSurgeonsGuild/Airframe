@@ -19,7 +19,6 @@ using VerifyXunit;
 
 namespace Rocket.Surgery.Airframe.CodeFixes.Tests.Performance;
 
-// [SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters")]
 public class Rsa3002FixTests
 {
     [Theory]
