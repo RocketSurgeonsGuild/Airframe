@@ -11,6 +11,7 @@
         <RootNamespace>Rocket.Surgery.Airframe.CodeFixes</RootNamespace>
         <Description>Common code fixs for MVVM, Rx, and Airframe coding standards.</Description>
         <IsPackable>false</IsPackable>
+        <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.Common" PrivateAssets="all"/>
@@ -25,8 +26,5 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Analyzers\Analyzers.csproj" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Usage\" />
     </ItemGroup>
 </Project>
