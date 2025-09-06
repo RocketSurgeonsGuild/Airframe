@@ -8,14 +8,14 @@ using VerifyTests;
 using VerifyTests.DiffPlex;
 using static VerifyXunit.Verifier;
 
-namespace Rocket.Surgery.Airframe.Analyzers.Tests;
+namespace Rocket.Surgery.Airframe.CodeFixes.Tests;
 
 internal static class ModuleInitializer
 {
     [ModuleInitializer]
     public static void Initialize()
     {
-        VerifyGeneratorTextContext.Initialize(DiagnosticSeverity.Hidden);
+        VerifyGeneratorTextContext.Initialize(DiagnosticSeverity.Error);
         VerifyDiffPlex.Initialize(OutputType.Minimal);
         DiffRunner.Disabled = true;
 
