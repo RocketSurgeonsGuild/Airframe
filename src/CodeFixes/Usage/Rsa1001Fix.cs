@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Composition;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -15,6 +12,8 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Usage;
 /// <summary>
 /// Represents a code fix for <see cref="Descriptions.RSA1001"/>.
 /// </summary>
+[Shared]
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Rsa1001Fix))]
 public class Rsa1001Fix : CodeFixProvider
 {
     /// <inheritdoc/>
@@ -32,13 +31,13 @@ public class Rsa1001Fix : CodeFixProvider
         context.RegisterCodeFix(
             CodeAction.Create(
                 title: Title,
-                createChangedDocument: c => Fixup(context.Document, invocation, c),
-                equivalenceKey: Descriptions.RSA1001.Id + Descriptions.RSA1001.Title),
+                createChangedDocument: c => Fix(context.Document, invocation, c),
+                equivalenceKey: RSA1001.Id + RSA1001.Title),
             diagnostic);
     }
 
     /// <inheritdoc/>
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = [Descriptions.RSA1001.Id];
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } = [RSA1001.Id];
 
     /// <inheritdoc/>
     public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -85,11 +84,6 @@ public class Rsa1001Fix : CodeFixProvider
 
         return document.WithSyntaxRoot(changed);
     }
-
-    private Task<Document> Fixup(
-        Document document,
-        InvocationExpressionSyntax invocation,
-        CancellationToken cancellationToken) => Fix(document, invocation, cancellationToken);
 
     private const string Title = "Use lambda expression syntax";
 }

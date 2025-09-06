@@ -1,8 +1,5 @@
 using System.Collections.Immutable;
 using System.Composition;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -20,7 +17,7 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Performance;
 public class Rsa3001Fix : CodeFixProvider
 {
     /// <inheritdoc/>
-    public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } = [Descriptions.RSA3001.Id];
+    public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } = [RSA3001.Id];
 
     /// <inheritdoc/>
     public override async Task RegisterCodeFixesAsync(CodeFixContext context)
@@ -33,7 +30,7 @@ public class Rsa3001Fix : CodeFixProvider
             CodeAction.Create(
                 title: Title,
                 createChangedDocument: c => Fixup(root, context, c),
-                equivalenceKey: Descriptions.RSA3001.Id + Descriptions.RSA3001.Title),
+                equivalenceKey: RSA3001.Id + RSA3001.Title),
             diagnostic);
     }
 

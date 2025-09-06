@@ -1,8 +1,5 @@
 using System.Collections.Immutable;
 using System.Composition;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -21,7 +18,7 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Performance;
 public class Rsa3002Fix : CodeFixProvider
 {
     /// <inheritdoc/>
-    public sealed override ImmutableArray<string> FixableDiagnosticIds => [Descriptions.RSA3002.Id];
+    public sealed override ImmutableArray<string> FixableDiagnosticIds => [RSA3002.Id];
 
     /// <inheritdoc/>
     public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -55,7 +52,7 @@ public class Rsa3002Fix : CodeFixProvider
 
     private static async Task<Document> MakeLambdaStaticAsync(Document document, LambdaExpressionSyntax lambda, CancellationToken cancellationToken)
     {
-        var staticKeyword = SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space);
+        var staticKeyword = Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(Space);
 
         var newModifiers = lambda.Modifiers.Add(staticKeyword);
         var newLambda = lambda.WithModifiers(newModifiers)
