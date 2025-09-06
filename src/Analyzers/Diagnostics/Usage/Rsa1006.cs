@@ -23,12 +23,19 @@ public class Rsa1006 : Rsa1000
             return;
         }
 
-        foreach (var identifierName in invocationExpressionSyntax
-                    .DescendantNodes()
-                    .OfType<IdentifierNameSyntax>()
-                    .Where(identifierNameSyntax =>
-                         identifierNameSyntax.Identifier.Text == "SubscribeOn")
-                    .Skip(1))
+        var identifierNames =
+            invocationExpressionSyntax
+               .DescendantNodes()
+               .OfType<IdentifierNameSyntax>()
+               .Where(identifierNameSyntax => identifierNameSyntax.Identifier.Text == "SubscribeOn")
+               .ToArray();
+
+        if (identifierNames.Length <= 1)
+        {
+            return;
+        }
+
+        foreach (var identifierName in identifierNames)
         {
             context.ReportDiagnostic(Diagnostic.Create(RSA1006, identifierName.GetLocation()));
         }
