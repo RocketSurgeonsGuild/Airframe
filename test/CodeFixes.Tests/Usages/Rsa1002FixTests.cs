@@ -1,4 +1,3 @@
-using DynamicData;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using ReactiveUI;
@@ -6,7 +5,6 @@ using Rocket.Surgery.Airframe.Analyzers;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 using Rocket.Surgery.Airframe.CodeFixes.Usage;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
-using Splat;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reactive;

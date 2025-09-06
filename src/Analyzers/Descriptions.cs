@@ -10,7 +10,7 @@ internal static class Descriptions
     private static readonly ConcurrentDictionary<Category, string> CategoryMap = new();
 
     public static DiagnosticDescriptor RSA1001 { get; } =
-        new DiagnosticDescriptor(
+        new(
             "RSA1001",
             "Use expression lambda overload",
             "Use expression lambda overload for property {0}",
@@ -49,7 +49,7 @@ internal static class Descriptions
         new(
             "RSA1006",
             "Multiple attempts to subscribe on a thread scheduler",
-            "SubscribeOn only supports a single use per expression",
+            "SubscribeOn only supports a single use per pipeline",
             CategoryMap.GetOrAdd(Usage, category => category.ToString()),
             Info,
             true);
@@ -59,7 +59,7 @@ internal static class Descriptions
             "RSA3001",
             "Subscription not disposed",
             "Consider use of DisposeWith to clean up subscriptions",
-            CategoryMap.GetOrAdd(Category.Performance, category => category.ToString()),
+            CategoryMap.GetOrAdd(Performance, category => category.ToString()),
             Warning,
             true);
 
@@ -68,7 +68,7 @@ internal static class Descriptions
             "RSA3002",
             "Lambda expression can be made static",
             "Lambda expression can be made static to prevent accidental variable capture",
-            CategoryMap.GetOrAdd(Category.Performance, category => category.ToString()),
+            CategoryMap.GetOrAdd(Performance, category => category.ToString()),
             Warning,
             true,
             "Lambda expressions that don't capture local variables or instance state can be marked as static.");
