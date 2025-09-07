@@ -100,8 +100,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{F9E0EB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airframe.Testing", "test\Airframe.Testing\Airframe.Testing.csproj", "{03C0CB0E-CC59-4AF9-8999-C371EF6D6DF7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{96E19F20-46A6-470D-AD31-573F766B2C4C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Defaults.Tests", "test\Defaults.Tests\Defaults.Tests.csproj", "{BE3BE124-62FB-4205-8D73-C69A52E79AC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Defaults", "src\Defaults\Defaults.csproj", "{D0EB3737-178B-49AA-8919-7DB78496B127}"
@@ -113,6 +111,51 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFixes", "src\CodeFixes\CodeFixes.csproj", "{F1C2F6AF-C0D7-48A9-B477-B5F28618EEC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFixes.Tests", "test\CodeFixes.Tests\CodeFixes.Tests.csproj", "{BED8F7FF-DA71-491B-99D6-1C4CCC167C36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalysis", "src\CodeAnalysis\CodeAnalysis.csproj", "{41E34032-4A69-48E5-B3A6-F9DC52ACFF73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{1529762D-8BCE-4575-8039-CDD8BA0F98FD}"
+	ProjectSection(SolutionItems) = preProject
+		.config/dotnet-tools.json = .config/dotnet-tools.json
+		.editorconfig = .editorconfig
+		build.cmd = build.cmd
+		build.sh = build.sh
+		build.ps1 = build.ps1
+		GitReleaseManager.yaml = GitReleaseManager.yaml
+		qodana.yaml = qodana.yaml
+		.codecov.yml = .codecov.yml
+		GitVersion.yml = GitVersion.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		.gitignore = .gitignore
+		NuGet.config = NuGet.config
+		directory.build.props = directory.build.props
+		directory.packages.props = directory.packages.props
+		directory.build.targets = directory.build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6C7344F2-2941-4BD3-A6D3-3804A2922483}"
+	ProjectSection(SolutionItems) = preProject
+		.github/labels.yml = .github/labels.yml
+		.github/release.yml = .github/release.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{FA1FCE88-7E76-48F5-8824-9B46F9438AA0}"
+	ProjectSection(SolutionItems) = preProject
+		.github/workflows/draft-release.yml = .github/workflows/draft-release.yml
+		.github/workflows/publish-nuget.yml = .github/workflows/publish-nuget.yml
+		.github/workflows/dependabot-merge.yml = .github/workflows/dependabot-merge.yml
+		.github/workflows/sync-labels.yml = .github/workflows/sync-labels.yml
+		.github/workflows/close-milestone.yml = .github/workflows/close-milestone.yml
+		.github/workflows/update-milestone.yml = .github/workflows/update-milestone.yml
+		.github/workflows/auto-label.yml = .github/workflows/auto-label.yml
+		.github/workflows/ci.yml = .github/workflows/ci.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{E9EFC238-440D-47F5-A4FC-26DF25C63945}"
+	ProjectSection(SolutionItems) = preProject
+		.husky/commit-msg = .husky/commit-msg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -214,12 +257,17 @@ Global
 		{BED8F7FF-DA71-491B-99D6-1C4CCC167C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BED8F7FF-DA71-491B-99D6-1C4CCC167C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BED8F7FF-DA71-491B-99D6-1C4CCC167C36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41E34032-4A69-48E5-B3A6-F9DC52ACFF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E34032-4A69-48E5-B3A6-F9DC52ACFF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E34032-4A69-48E5-B3A6-F9DC52ACFF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E34032-4A69-48E5-B3A6-F9DC52ACFF73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CA4B6910-402D-40C3-99C6-8DF8E3ABF041} = {BC256BE7-7896-4159-BB31-9F3D22860391}
+		{8322904C-5A48-4A92-A5EA-2AF91F8C4595} = {1529762D-8BCE-4575-8039-CDD8BA0F98FD}
 		{36A9DAA0-FCD4-41A3-A046-C755937CA701} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{D8A98936-BA4C-44A9-BD39-34DCBEF665C9} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{D42E447B-522C-48E6-82A9-B24780BC7A35} = {BC256BE7-7896-4159-BB31-9F3D22860391}
@@ -237,15 +285,16 @@ Global
 		{A250A99B-0225-4B5D-9753-ED1DF770D61D} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{9FF05512-3C79-4FF9-8006-1313E2AF8A65} = {6813747B-13DB-4144-AB19-22C84E734517}
 		{03C0CB0E-CC59-4AF9-8999-C371EF6D6DF7} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
-		{8322904C-5A48-4A92-A5EA-2AF91F8C4595} = {96E19F20-46A6-470D-AD31-573F766B2C4C}
-		{6813747B-13DB-4144-AB19-22C84E734517} = {96E19F20-46A6-470D-AD31-573F766B2C4C}
-		{F9E0EBA5-5737-440E-8F30-20CCFC207E9E} = {96E19F20-46A6-470D-AD31-573F766B2C4C}
 		{BE3BE124-62FB-4205-8D73-C69A52E79AC9} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{D0EB3737-178B-49AA-8919-7DB78496B127} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{77D4304A-9706-4F70-8EDF-6AC3F62D777A} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{63074E63-854B-4A05-8F26-7E590BBCC194} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
 		{F1C2F6AF-C0D7-48A9-B477-B5F28618EEC6} = {BC256BE7-7896-4159-BB31-9F3D22860391}
 		{BED8F7FF-DA71-491B-99D6-1C4CCC167C36} = {843C3844-BA79-40AE-B102-F5AFA0F4AD77}
+		{41E34032-4A69-48E5-B3A6-F9DC52ACFF73} = {BC256BE7-7896-4159-BB31-9F3D22860391}
+		{6C7344F2-2941-4BD3-A6D3-3804A2922483} = {1529762D-8BCE-4575-8039-CDD8BA0F98FD}
+		{FA1FCE88-7E76-48F5-8824-9B46F9438AA0} = {6C7344F2-2941-4BD3-A6D3-3804A2922483}
+		{E9EFC238-440D-47F5-A4FC-26DF25C63945} = {1529762D-8BCE-4575-8039-CDD8BA0F98FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F0DF64A-C8D5-41DF-B4C9-5C70526644DF}

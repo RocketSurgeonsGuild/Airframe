@@ -12,7 +12,7 @@
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <NukeTelemetryVersion>1</NukeTelemetryVersion>
         <PackageIcon>images/packageicon.png</PackageIcon>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://rocketsurgeonsguild.github.io/</PackageProjectUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
     </PropertyGroup>
