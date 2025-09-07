@@ -3,7 +3,6 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using ReactiveUI;
-using Rocket.Surgery.Airframe.Analyzers.Diagnostics;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using Splat;

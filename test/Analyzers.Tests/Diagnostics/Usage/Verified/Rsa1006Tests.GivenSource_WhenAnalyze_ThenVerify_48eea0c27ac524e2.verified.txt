@@ -6,9 +6,19 @@
         Title: Multiple attempts to subscribe on a thread scheduler,
         Severity: Info,
         WarningLevel: 1,
+        Location: Input0.cs: (12,54)-(12,65),
+        MessageFormat: SubscribeOn only supports a single use per pipeline,
+        Message: SubscribeOn only supports a single use per pipeline,
+        Category: Usage
+      },
+      {
+        Id: RSA1006,
+        Title: Multiple attempts to subscribe on a thread scheduler,
+        Severity: Info,
+        WarningLevel: 1,
         Location: Input0.cs: (13,54)-(13,65),
-        MessageFormat: SubscribeOn only supports a single use per expression,
-        Message: SubscribeOn only supports a single use per expression,
+        MessageFormat: SubscribeOn only supports a single use per pipeline,
+        Message: SubscribeOn only supports a single use per pipeline,
         Category: Usage
       }
     ]
