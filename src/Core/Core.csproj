@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="ReactiveUI" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     </ItemGroup>
 </Project>

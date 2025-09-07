@@ -11,6 +11,7 @@
     <ItemGroup>
         <PackageReference Include="DynamicData"/>
         <PackageReference Include="System.Reactive"/>
+        <PackageReference Include="ReactiveUI" />
         <PackageReference Include="Refit"/>
     </ItemGroup>
 </Project>

@@ -1,13 +1,13 @@
 <Project>
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.props', '$(MSBuildThisFileDirectory)../'))" />
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.props', '$(MSBuildThisFileDirectory)../'))"/>
     <PropertyGroup>
         <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\analyzers.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="stylecop.analyzers" />
-        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" />
+        <PackageReference Include="stylecop.analyzers" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all"/>
     </ItemGroup>
     <ItemGroup>
-        <AdditionalFiles Include="$(MSBuildThisFileDirectory)..\stylecop.json" Link="stylecop.json" />
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)..\stylecop.json" Link="stylecop.json"/>
     </ItemGroup>
 </Project>

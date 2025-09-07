@@ -10,7 +10,7 @@
         <PackageVersion Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" Version="1.2.1" Condition="'$(MSBuildProjectName)'!='.build'"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageVersion Include="stylecop.analyzers" Version="1.2.0-beta.556" PrivateAssets="all"/>
+        <PackageVersion Include="stylecop.analyzers" Version="1.2.0-beta.556"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
         <PackageVersion Include="Roslynator.Analyzers" Version="4.14.0" PrivateAssets="All"/>
     </ItemGroup>

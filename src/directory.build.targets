@@ -1,7 +1,3 @@
 <Project>
-  <ItemGroup>  
-    <PackageReference Include="ReactiveUI" />
-    <PackageReference Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" />
-  </ItemGroup>
     <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.targets', '$(MSBuildThisFileDirectory)../'))" />
 </Project>
