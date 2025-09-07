@@ -10,7 +10,6 @@
         <AssemblyName>Rocket.Surgery.Airframe.CodeFixes</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.CodeFixes</RootNamespace>
         <Description>Common code fixs for MVVM, Rx, and Airframe coding standards.</Description>
-        <IsPackable>false</IsPackable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
