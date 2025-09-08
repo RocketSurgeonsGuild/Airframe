@@ -2,7 +2,7 @@ name: Create Milestone and Draft Release
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - '**/*.md'
 jobs:
