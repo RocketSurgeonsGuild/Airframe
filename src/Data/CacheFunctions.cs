@@ -39,8 +39,7 @@ internal static class CacheFunctions
         if (clearCache)
         {
             cache
-               .Edit(
-                    updater =>
+               .Edit(updater =>
                     {
                         updater.Clear();
                         updater.AddOrUpdate(results);

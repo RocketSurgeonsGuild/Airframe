@@ -18,16 +18,14 @@ public class ChuckNorrisJokeService : IChuckNorrisJokeService
 
     /// <inheritdoc/>
     public IObservable<ChuckNorrisJoke> Random() => Observable
-       .Create<ChuckNorrisJoke>(
-            observer =>
+       .Create<ChuckNorrisJoke>(observer =>
                 _chuckNorrisJokeApiClient
                    .Random()
                    .Cache(_jokes)
                    .Subscribe(observer));
 
     /// <inheritdoc/>
-    public IObservable<ChuckNorrisJoke> Random(params string[] categories) => Observable.Create<ChuckNorrisJoke>(
-        observer =>
+    public IObservable<ChuckNorrisJoke> Random(params string[] categories) => Observable.Create<ChuckNorrisJoke>(observer =>
         {
             var disposable = new CompositeDisposable();
 
@@ -49,8 +47,7 @@ public class ChuckNorrisJokeService : IChuckNorrisJokeService
 
     /// <inheritdoc/>
     public IObservable<IChangeSet<ChuckNorrisJoke, string>> Query(string query, bool clearCache) => Observable
-       .Create<IChangeSet<ChuckNorrisJoke, string>>(
-            observer =>
+       .Create<IChangeSet<ChuckNorrisJoke, string>>(observer =>
                 _chuckNorrisJokeApiClient
                    .Search(query)
                    .Cache(_jokes, clearCache)
