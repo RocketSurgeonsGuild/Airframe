@@ -1,5 +1,4 @@
 using System;
-using JetBrains.Annotations;
 
 namespace Rocket.Surgery.Airframe.Timers;
 
@@ -12,7 +11,7 @@ public class IncrementTimer : ObservableTimer, IIncrement
     /// Initializes a new instance of the <see cref="IncrementTimer"/> class.
     /// </summary>
     /// <param name="schedulerProvider">The scheduler provider.</param>
-    public IncrementTimer([NotNull] ISchedulerProvider schedulerProvider)
+    public IncrementTimer(ISchedulerProvider schedulerProvider)
         : base(schedulerProvider)
     {
     }

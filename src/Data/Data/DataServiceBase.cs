@@ -4,7 +4,6 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
 using DynamicData;
-using JetBrains.Annotations;
 
 namespace Rocket.Surgery.Airframe.Data;
 
@@ -22,7 +21,7 @@ public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
     /// Initializes a new instance of the <see cref="DataServiceBase{T}"/> class.
     /// </summary>
     /// <param name="client">The abstracted client.</param>
-    protected DataServiceBase([NotNull] IClient client) => _client = client;
+    protected DataServiceBase(IClient client) => _client = client;
 
     /// <inheritdoc />
     public virtual IObservable<IChangeSet<T, Guid>> ChangeSet => SourceCache.Connect().RefCount();
@@ -33,8 +32,7 @@ public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
     protected SourceCache<T, Guid> SourceCache { get; } = new SourceCache<T, Guid>(x => x.Id);
 
     /// <inheritdoc />
-    public virtual IObservable<Unit> Create(T dto) => Observable.Create<Unit>(
-        observer =>
+    public virtual IObservable<Unit> Create(T dto) => Observable.Create<Unit>(observer =>
         {
             var clientSubscription = Observable.FromAsync(() => _client.Post(dto)).Subscribe();
 
@@ -49,17 +47,16 @@ public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
        .FromAsync(() => _client.GetAll<T>())
        .SelectMany(x => x)
        .Where(x => x != null)
-       .Do(_ => SourceCache.AddOrUpdate(_));
+       .Do(dto => SourceCache.AddOrUpdate(dto));
 
     /// <inheritdoc />
     public virtual IObservable<T> Read(Guid id) => Observable
        .FromAsync(() => _client.Get<T>(id))
        .Where(x => x != null)
-       .Do(_ => SourceCache.AddOrUpdate(_));
+       .Do(dto => SourceCache.AddOrUpdate(dto));
 
     /// <inheritdoc />
-    public virtual IObservable<Unit> Update(T dto) => Observable.Create<Unit>(
-        observer =>
+    public virtual IObservable<Unit> Update(T dto) => Observable.Create<Unit>(observer =>
         {
             var clientSubscription = Observable.FromAsync(() => _client.Post(dto)).Subscribe();
 
@@ -70,8 +67,7 @@ public abstract class DataServiceBase<T> : IDataService<T>, IDisposable
         });
 
     /// <inheritdoc />
-    public virtual IObservable<Unit> Delete(T dto) => Observable.Create<Unit>(
-        observer =>
+    public virtual IObservable<Unit> Delete(T dto) => Observable.Create<Unit>(observer =>
         {
             var clientSubscription = Observable.FromAsync(() => _client.Delete(dto)).Subscribe();
             using var x = Observable.FromAsync(() => _semaphore.WaitAsync()).Subscribe(observer);

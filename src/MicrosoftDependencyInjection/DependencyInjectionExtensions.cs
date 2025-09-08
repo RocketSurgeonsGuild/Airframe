@@ -97,8 +97,7 @@ public static class DependencyInjectionExtensions
     {
         var builder = new ConfigurationBuilder();
 
-        return serviceCollection.AddSingleton<IConfiguration>(
-            provider =>
+        return serviceCollection.AddSingleton<IConfiguration>(provider =>
             {
                 provider.GetService<Action<IConfigurationBuilder>>()?.Invoke(builder);
 

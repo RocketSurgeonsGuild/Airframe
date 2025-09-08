@@ -10,7 +10,6 @@
         <AssemblyName>Rocket.Surgery.Airframe.Defaults</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Defaults</RootNamespace>
         <IsPackable>false</IsPackable>
-        <!--        <IncludeBuildOutput>false</IncludeBuildOutput>-->
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="$(GeneratedFolder)/**/*.cs"/>

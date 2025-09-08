@@ -3,15 +3,10 @@ using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.MSBuild;
-using Rocket.Surgery.Nuke;
 using Rocket.Surgery.Nuke.DotNetCore;
-using Rocket.Surgery.Nuke.MsBuild;
-using System;
-using System.Linq;
 
 [PublicAPI]
 [UnsetVisualStudioEnvironmentVariables]

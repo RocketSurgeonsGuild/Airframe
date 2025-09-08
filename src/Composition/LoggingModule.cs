@@ -12,8 +12,7 @@ public class LoggingModule : DryIocModule
     /// <inheritdoc />
     public override void Load(IRegistrator registrar)
     {
-        var funcLogManager = new FuncLogManager(
-            type =>
+        var funcLogManager = new FuncLogManager(type =>
             {
                 var actualLogger = Log.ForContext(type);
                 return new SerilogFullLogger(actualLogger);

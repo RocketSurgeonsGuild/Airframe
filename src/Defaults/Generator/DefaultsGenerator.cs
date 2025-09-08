@@ -30,14 +30,12 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             incrementalContext.RegisterSourceOutput(syntaxProvider, GenerateDefaults);
         }
 
-        void RegisterDefaultAttribute(IncrementalGeneratorInitializationContext incrementalContext) => incrementalContext.RegisterPostInitializationOutput(
-            initializationContext => initializationContext.AddSource($"{nameof(DefaultsAttribute)}.g.cs", DefaultsAttribute.Source));
+        void RegisterDefaultAttribute(IncrementalGeneratorInitializationContext incrementalContext) => incrementalContext.RegisterPostInitializationOutput(initializationContext => initializationContext.AddSource($"{nameof(DefaultsAttribute)}.g.cs", DefaultsAttribute.Source));
 
         void GenerateDefaults(SourceProductionContext productionContext, (GeneratorAttributeSyntaxContext SyntaxContext, Compilation Compilation) tuple)
         {
             var (syntaxContext, compilation) = tuple;
 
-            // does class have attribute
             var attributeTarget = GetClassForFixture(syntaxContext);
 
             if (attributeTarget is null)
@@ -142,8 +140,7 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
             }
 
             var memberList = constructor?.Parameters.ToArray()
-               .SelectMany(
-                    parameterSymbol => compilation.GetTypeByMetadataName(parameterSymbol.Type.ToDisplayString())
+               .SelectMany(parameterSymbol => compilation.GetTypeByMetadataName(parameterSymbol.Type.ToDisplayString())
                       ?.GetMembers()
                        .Where(symbol => symbol is IPropertySymbol && symbol.IsStatic)
                        .ToList())

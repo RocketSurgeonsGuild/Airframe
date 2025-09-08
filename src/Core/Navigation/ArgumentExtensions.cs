@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace Rocket.Surgery.Airframe.Navigation;
 
@@ -155,7 +154,6 @@ public static class ArgumentExtensions
         return success;
     }
 
-    [CanBeNull]
     private static object? GetDefault(Type type)
     {
         if (type.IsValueType)
