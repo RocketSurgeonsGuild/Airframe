@@ -1,15 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <NoPackageAnalysis>true</NoPackageAnalysis>
-        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-        <IsRoslynComponent>true</IsRoslynComponent>
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-        <GeneratedFolder>Generated</GeneratedFolder>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsPackable>false</IsPackable>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
         <AssemblyName>Rocket.Surgery.Airframe.Analyzers</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Analyzers</RootNamespace>
-        <Description>Common analyzers for MVVM, Rx, and Airframe coding standards.</Description>
+        <Description>Common analyzers for MVVM, MVU, Rx, and Airframe coding standards.</Description>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.Common" PrivateAssets="all"/>
@@ -23,8 +23,5 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Example\" />
     </ItemGroup>
 </Project>

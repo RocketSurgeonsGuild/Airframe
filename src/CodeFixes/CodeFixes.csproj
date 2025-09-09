@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <NoPackageAnalysis>true</NoPackageAnalysis>
-        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-        <IsRoslynComponent>true</IsRoslynComponent>
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-        <GeneratedFolder>Generated</GeneratedFolder>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsPackable>false</IsPackable>
+        <IsRoslynComponent>true</IsRoslynComponent>
         <AssemblyName>Rocket.Surgery.Airframe.CodeFixes</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.CodeFixes</RootNamespace>
         <Description>Common code fixs for MVVM, Rx, and Airframe coding standards.</Description>
