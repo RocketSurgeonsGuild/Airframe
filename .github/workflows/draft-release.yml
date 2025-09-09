@@ -26,12 +26,12 @@ jobs:
             9.0.x
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v4
+        uses: gittools/actions/gitversion/setup@v0.13.6
         with:
           versionSpec: '5.x'
 
       - name: Install GitReleaseManager
-        uses: gittools/actions/gitreleasemanager/setup@v4
+        uses: gittools/actions/gitreleasemanager/setup@v0.13.6
         with:
           versionSpec: '0.13.x'
 
