@@ -4,7 +4,10 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**/*.md'
+      - '**/*.md'  
+  pull_request:
+    branches:
+      - 'main'
 jobs:
   create_milestone_and_draft_release:
     runs-on: ubuntu-latest
