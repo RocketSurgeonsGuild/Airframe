@@ -7,8 +7,17 @@
         <IsPackable>true</IsPackable>
         <PackageId>Rocket.Surgery.Airframe.CodeAnalysis</PackageId>
         <PackageType>Analyzer</PackageType>
-        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Analyzers\Analyzers.csproj">
+            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+            <OutputItemType>Analyzer</OutputItemType>
+        </ProjectReference>
+        <ProjectReference Include="..\CodeFixes\CodeFixes.csproj">
+            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+            <OutputItemType>Analyzer</OutputItemType>
+        </ProjectReference>
+    </ItemGroup>
     <ItemGroup>
         <None Include="..\Analyzers\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.Analyzers.dll"
               Pack="true"
@@ -18,13 +27,5 @@
               Pack="true"
               PackagePath="analyzers\dotnet\cs\Rocket.Surgery.Airframe.CodeFixes.dll"
               Visible="false" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\Analyzers\Analyzers.csproj"/>
-        <ProjectReference Include="..\CodeFixes\CodeFixes.csproj"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Analyzer Include="..\Analyzers\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.Analyzers.dll" />
-        <Analyzer Include="..\CodeFixes\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.CodeFixes.dll" />
     </ItemGroup>
 </Project>
