@@ -29,7 +29,7 @@ public class Rsa3001Fix : CodeFixProvider
         context.RegisterCodeFix(
             CodeAction.Create(
                 title: Title,
-                createChangedDocument: c => Fixup(root, context, c),
+                createChangedDocument: c => Fixup(context, c),
                 equivalenceKey: RSA3001.Id + RSA3001.Title),
             diagnostic);
     }
@@ -37,15 +37,9 @@ public class Rsa3001Fix : CodeFixProvider
     /// <inheritdoc/>
     public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
-    private static Task<Document> Fixup(
-        SyntaxNode root,
-        CodeFixContext context,
-        CancellationToken cancellationToken)
+    private async Task<Document> Fixup(CodeFixContext context, CancellationToken cancellationToken)
     {
-        if (root == null)
-        {
-            return Task.FromResult(context.Document);
-        }
+        var root = await context.Document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false) ?? throw new Exception();
 
         var diagnosticParent =
             root.FindNode(context.Span)
@@ -96,7 +90,8 @@ public class Rsa3001Fix : CodeFixProvider
                                .WithCloseParenToken(Token(SyntaxKind.CloseParenToken))))
                .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
 
-        return Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(originalInvocationExpression, expressionStatementSyntax.Expression)));
+        var node = root.ReplaceNode(originalInvocationExpression, expressionStatementSyntax.Expression);
+        return context.Document.WithSyntaxRoot(node);
     }
 
     private const string Title = "Add DisposeWith to subscription";
