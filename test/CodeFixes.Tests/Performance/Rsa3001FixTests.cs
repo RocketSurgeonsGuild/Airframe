@@ -45,7 +45,7 @@ public class Rsa3001FixTests
            .Contain(testResult => testResult.Diagnostic.Descriptor == Descriptions.RSA3001);
     }
 
-    [Theory(Skip = "Verify output seems odd.")]
+    [Theory]
     [InlineData(nameof(Rsa3001FixTestData.Incorrect), Rsa3001FixTestData.Incorrect)]
     public async Task GivenSource_WhenCodeFix_ThenVerify(string name, string source)
     {
@@ -144,7 +144,6 @@ namespace Sample
 using System;
 using System.Reactive;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using ReactiveUI;
 
 namespace Sample
@@ -155,11 +154,11 @@ namespace Sample
         {
             Observable
                .Return(Unit.Default)
-               .BindTo(this, x => x.Unit);
+               .BindTo(this, unit => unit.Unit);
 
             Observable
                .Return(Unit.Default)
-               .InvokeCommand(this, x => x.Command);
+               .InvokeCommand(this, unit => unit.Command);
 
             Observable
                .Return(Unit.Default)

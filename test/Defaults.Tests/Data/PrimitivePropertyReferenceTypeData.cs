@@ -15,21 +15,22 @@ internal class PrimitivePropertyReferenceTypeData : DefaultsSourceData
     ];
 
     // lang=csharp
-    private const string Constructor = """
-                                       namespace Rocket.Surgery.Airframe.Defaults
-                                       {
-                                           [DefaultsAttribute]
-                                           public partial class Thing
-                                           {
-                                               public Thing(int one)
-                                               {
-                                                   One = one;
-                                               }
+    private const string Constructor =
+        """
+        namespace Rocket.Surgery.Airframe.Defaults
+        {
+            [DefaultsAttribute]
+            public partial class Thing
+            {
+                public Thing(int one)
+                {
+                    One = one;
+                }
 
-                                               public int One { get; }
-                                           }
-                                       }
-                                       """;
+                public int One { get; }
+            }
+        }
+        """;
 
     // lang=csharp
     private const string ObjectInitialization = """
