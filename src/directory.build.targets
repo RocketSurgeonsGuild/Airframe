@@ -1,3 +1,24 @@
 <Project>
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.targets', '$(MSBuildThisFileDirectory)../'))" />
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('directory.build.targets', '$(MSBuildThisFileDirectory)../'))"/>
+    <PropertyGroup>
+        <AnalyzersProjectPath>$(MSBuildThisFileDirectory)src\Analyzers\Analyzers.csproj</AnalyzersProjectPath>
+        <CodeFixesProjectPath>$(MSBuildThisFileDirectory)src\CodeFixes\CodeFixes.csproj</CodeFixesProjectPath>
+        <CodeAnalysisProjectPath>$(MSBuildThisFileDirectory)src\CodeAnalysis\CodeAnalysis.csproj</CodeAnalysisProjectPath>
+    </PropertyGroup>
+
+    <Target Name="EnsureAnalyzersBuiltFirst"
+            BeforeTargets="BeforeBuild"
+            Condition="'$(MSBuildProjectFullPath)' == '$(CodeFixesProjectPath)'">
+        <MSBuild Projects="$(AnalyzersProjectPath)"
+                 Targets="Build"
+                 Properties="Configuration=$(Configuration);Platform=$(Platform)"/>
+    </Target>
+
+    <Target Name="EnsureCodeFixesBuiltFirst"
+            BeforeTargets="BeforeBuild"
+            Condition="'$(MSBuildProjectFullPath)' == '$(CodeAnalysisProjectPath)'">
+        <MSBuild Projects="$(CodeFixesProjectPath)"
+                 Targets="Build"
+                 Properties="Configuration=$(Configuration);Platform=$(Platform)"/>
+    </Target>
 </Project>
