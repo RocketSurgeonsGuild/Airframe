@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -12,16 +12,14 @@
         <Description>Common analyzers for MVVM, MVU, Rx, and Airframe coding standards.</Description>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis.Common" PrivateAssets="all"/>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\AnalyzerReleases.Shipped.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
         <InternalsVisibleTo Include="Rocket.Surgery.Airframe.CodeFixes"/>
         <InternalsVisibleTo Include="Rocket.Surgery.Airframe.CodeFixes.Tests"/>
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
     </ItemGroup>
 </Project>
