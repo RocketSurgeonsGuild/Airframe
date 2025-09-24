@@ -10,17 +10,17 @@ public class DrinkDto : Dto
     /// <summary>
     /// Gets or sets the title.
     /// </summary>
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
     /// <summary>
     /// Gets or sets the description.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Gets or sets the image.
     /// </summary>
-    public string Image { get; set; }
+    public string? Image { get; set; }
 
     /// <summary>
     /// Gets or sets the price.

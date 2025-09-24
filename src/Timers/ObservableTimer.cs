@@ -35,8 +35,7 @@ public abstract class ObservableTimer : ReactiveObject, ITimer, IDisposable
                        .OfType<TimerStartEvent>()
                        .Select(x => x.Duration),
                     (timerEvent, duration) => (duration, isRunning: timerEvent is TimerStartEvent))
-               .Select(
-                    x => x.isRunning
+               .Select(x => x.isRunning
                         ? Observable
                            .Interval(TimeSpans.RefreshInterval, schedulerProvider.BackgroundThread)
                            .Scan(x.duration, (duration, _) => Accumulator(duration))

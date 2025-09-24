@@ -8,7 +8,7 @@ public class SrcOptions
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string Directory { get; set; }
+    public string? Directory { get; set; }
 
     /// <summary>
     /// Gets or sets the height.
@@ -28,12 +28,12 @@ public class SrcOptions
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string Language { get; set; }
+    public string? Language { get; set; }
 
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string MinAbstractLength { get; set; }
+    public string? MinAbstractLength { get; set; }
 
     /// <summary>
     /// Gets or sets the height.
@@ -48,7 +48,7 @@ public class SrcOptions
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string SkipEnd { get; set; }
+    public string? SkipEnd { get; set; }
 
     /// <summary>
     /// Gets or sets the height.
@@ -63,15 +63,15 @@ public class SrcOptions
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string SkipQr { get; set; }
+    public string? SkipQr { get; set; }
 
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string SourceSkip { get; set; }
+    public string? SourceSkip { get; set; }
 
     /// <summary>
     /// Gets or sets the height.
     /// </summary>
-    public string SrcInfo { get; set; }
+    public string? SrcInfo { get; set; }
 }

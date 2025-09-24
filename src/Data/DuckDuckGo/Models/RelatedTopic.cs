@@ -10,30 +10,30 @@ public class RelatedTopic
     /// <summary>
     /// Gets or sets the first url.
     /// </summary>
-    public string FirstUrl { get; set; }
+    public required string FirstUrl { get; set; }
 
     /// <summary>
     /// Gets or sets the icon.
     /// </summary>
-    public Icon Icon { get; set; }
+    public Icon? Icon { get; set; }
 
     /// <summary>
     /// Gets or sets the icon.
     /// </summary>
-    public string Result { get; set; }
+    public required string Result { get; set; }
 
     /// <summary>
     /// Gets or sets the icon.
     /// </summary>
-    public string Text { get; set; }
+    public required string Text { get; set; }
 
     /// <summary>
     /// Gets or sets the icon.
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the icon.
     /// </summary>
-    public IEnumerable<Topic> Topics { get; set; }
+    public IEnumerable<Topic> Topics { get; set; } = [];
 }
