@@ -6,7 +6,7 @@ namespace Rocket.Surgery.Airframe;
 /// <summary>
 /// Represents the application startup sequence.
 /// </summary>
-public sealed class ApplicationStartup : ApplicationStartupBase, IApplicationStartup
+public sealed class ApplicationStartup : ApplicationStartupBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApplicationStartup"/> class.

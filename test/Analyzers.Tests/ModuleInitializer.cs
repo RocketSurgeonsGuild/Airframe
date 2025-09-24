@@ -19,7 +19,7 @@ internal static class ModuleInitializer
         VerifyDiffPlex.Initialize(OutputType.Minimal);
         DiffRunner.Disabled = true;
 
-        DerivePathInfo((sourceFile, projectDirectory, type, method) =>
+        DerivePathInfo((sourceFile, _, type, method) =>
         {
             var typeName = GetTypeName(type);
 

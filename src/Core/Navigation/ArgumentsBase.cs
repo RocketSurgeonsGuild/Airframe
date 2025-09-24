@@ -143,7 +143,7 @@ public abstract class ArgumentsBase : IArguments
     /// <param name="key">The key for the value to be returned.</param>
     /// <param name="value">Value of the returned parameter if it exists.</param>
     /// <returns>Returns a value indicating if the value exists.</returns>
-    public bool TryGetValue<T>(string key, out T value) => _entries.TryGetValue(key, out value);
+    public bool TryGetValue<T>(string key, out T? value) => _entries.TryGetValue(key, out value);
 
     /// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

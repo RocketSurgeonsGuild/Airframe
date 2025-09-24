@@ -59,18 +59,18 @@ public static class ArgumentExtensions
     /// <param name="value">The value of parameter to return.</param>
     /// <returns>Success if value is found; otherwise returns <c>false</c>.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static bool TryGetValue<T>(this IEnumerable<KeyValuePair<string, object>> parameters, string key, out T value)
+    public static bool TryGetValue<T>(this IEnumerable<KeyValuePair<string, object>> parameters, string key, out T? value)
     {
-        var type = typeof(T);
-
         foreach (var kvp in parameters)
         {
-            if (string.Compare(kvp.Key, key, StringComparison.Ordinal) == 0)
+            if (!string.Equals(kvp.Key, key, StringComparison.Ordinal))
             {
-                var success = TryGetValueInternal(kvp, typeof(T), out var valueAsObject);
-                value = (T)valueAsObject;
-                return success;
+                continue;
             }
+
+            var success = TryGetValueInternal(kvp, typeof(T), out var valueAsObject);
+            value = (T)valueAsObject;
+            return success;
         }
 
         value = default;
@@ -154,13 +154,5 @@ public static class ArgumentExtensions
         return success;
     }
 
-    private static object? GetDefault(Type type)
-    {
-        if (type.IsValueType)
-        {
-            return Activator.CreateInstance(type);
-        }
-
-        return null;
-    }
+    private static object? GetDefault(Type type) => type.IsValueType ? Activator.CreateInstance(type) : null;
 }

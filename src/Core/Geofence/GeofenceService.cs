@@ -51,11 +51,6 @@ public class GeofenceService : IGeofenceService, IGeofenceStore
     public GeofenceRegion Get(string id)
     {
         var optional = _store.Lookup(id);
-        if (optional.HasValue)
-        {
-            return optional.Value;
-        }
-
-        return GeofenceRegion.Default;
+        return optional.HasValue ? optional.Value : GeofenceRegion.Default;
     }
 }

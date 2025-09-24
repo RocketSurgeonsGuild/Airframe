@@ -17,7 +17,7 @@ public class CoffeeClientMock : ClientMock<CoffeeDto>
         {
             Name = "Arusha",
             Species = Species.Arabica,
-            Regions = new[] { "Mount Meru, Tanzania", "Papua New Guinea" }
+            Regions = new[] { "Mount Meru, Tanzania", "Papua New Guinea" },
         },
         new CoffeeDto { Name = "Benguet", Species = Species.Arabica, Regions = new[] { Regions.Philippines } },
         new CoffeeDto { Name = "Bergendal", Species = Species.Arabica, Regions = new[] { Regions.Indonesia } },
@@ -26,27 +26,27 @@ public class CoffeeClientMock : ClientMock<CoffeeDto>
         {
             Name = "Blue Mountain",
             Species = Species.Arabica,
-            Regions = new[] { "Blue Mountains, Jamaica", "Kenya", "Hawaii", "Papu New Guinea", Regions.Cameroon }
+            Regions = new[] { "Blue Mountains, Jamaica", "Kenya", "Hawaii", "Papu New Guinea", Regions.Cameroon },
         },
         new CoffeeDto
         {
             Name = "Bourbon",
             Species = Species.Arabica,
-            Regions = new[] { "Reunion", "Rwanda", Regions.LatinAmerica }
+            Regions = new[] { "Reunion", "Rwanda", Regions.LatinAmerica },
         },
         new CoffeeDto
         {
             Name = "Catuai",
             Species = Species.Arabica,
-            Regions = new[] { Regions.LatinAmerica }
+            Regions = new[] { Regions.LatinAmerica },
         },
         new CoffeeDto
         {
             Name = "Catimor",
             Species = Species.Arabica,
-            Regions = new[] { Regions.LatinAmerica, Regions.Indonesia, Regions.India, Regions.China }
+            Regions = new[] { Regions.LatinAmerica, Regions.Indonesia, Regions.India, Regions.China },
         },
         new CoffeeDto { Name = "Caturra", Species = Species.Arabica, Regions = new[] { Regions.LatinAmerica } },
-        new CoffeeDto { Name = "Charrier", Species = Species.Charrieriana, Regions = new[] { Regions.Cameroon } }
+        new CoffeeDto { Name = "Charrier", Species = Species.Charrieriana, Regions = new[] { Regions.Cameroon } },
     };
 }

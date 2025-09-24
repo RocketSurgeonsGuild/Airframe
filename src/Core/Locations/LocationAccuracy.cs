@@ -34,5 +34,5 @@ public enum LocationAccuracy
     /// <summary>
     /// Accuracy for Navigation.
     /// </summary>
-    AccuracyBestForNavigation = -2
+    AccuracyBestForNavigation = -2,
 }

@@ -15,7 +15,7 @@ internal static class LocationEventExtensions
             { CLAuthorizationStatus.Restricted, AuthorizationStatus.Restricted },
             { CLAuthorizationStatus.Denied, AuthorizationStatus.Denied },
             { CLAuthorizationStatus.AuthorizedAlways, AuthorizationStatus.AuthorizedAlways },
-            { CLAuthorizationStatus.AuthorizedWhenInUse, AuthorizationStatus.AuthorizedWhenInUse }
+            { CLAuthorizationStatus.AuthorizedWhenInUse, AuthorizationStatus.AuthorizedWhenInUse },
         };
 
     private static readonly Dictionary<CLRegionState, RegionState> RegionStates =
@@ -23,7 +23,7 @@ internal static class LocationEventExtensions
         {
             { CLRegionState.Unknown, RegionState.Unknown },
             { CLRegionState.Inside, RegionState.Inside },
-            { CLRegionState.Outside, RegionState.Outside }
+            { CLRegionState.Outside, RegionState.Outside },
         };
 
     /// <summary>

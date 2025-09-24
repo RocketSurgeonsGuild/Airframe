@@ -28,5 +28,5 @@ public enum NetworkConnection
     /// <summary>
     /// A wireless connection.
     /// </summary>
-    WiFi = 4
+    WiFi = 4,
 }

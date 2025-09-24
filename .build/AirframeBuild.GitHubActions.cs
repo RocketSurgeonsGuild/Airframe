@@ -1,12 +1,12 @@
 using Nuke.Common;
-using Nuke.Common.Tools.DotNet;
-using System.Collections.Generic;
-using System.Linq;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.Tools.DotNet;
 using Rocket.Surgery.Nuke.ContinuousIntegration;
 using Rocket.Surgery.Nuke.DotNetCore;
 using Rocket.Surgery.Nuke.GithubActions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using static GitHubActionsTasks;
 
 [GitHubActionsSteps(

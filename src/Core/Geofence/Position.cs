@@ -54,7 +54,7 @@ public class Position : IEquatable<Position>
     public bool Equals(Position? other) => other != null && (Latitude, Longitude).Equals((other.Latitude, other.Longitude));
 
     /// <inheritdoc/>
-    public override bool Equals(object obj) => obj is Position pos && Equals(pos);
+    public override bool Equals(object? obj) => obj is Position pos && Equals(pos);
 
     /// <inheritdoc/>
     public override int GetHashCode() => (Latitude, Longitude).GetHashCode();

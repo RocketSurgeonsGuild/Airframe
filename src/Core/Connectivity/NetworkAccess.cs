@@ -28,5 +28,5 @@ public enum NetworkAccess
     /// <summary>
     /// Local and internet access.
     /// </summary>
-    Internet = 4
+    Internet = 4,
 }

@@ -6,5 +6,5 @@ internal enum Category
     Usage,
 
     // RSA3XXX
-    Performance
+    Performance,
 }

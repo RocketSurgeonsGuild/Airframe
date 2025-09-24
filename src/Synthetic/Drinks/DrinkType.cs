@@ -41,5 +41,5 @@ public enum DrinkType
     /// <summary>
     /// Macchiato.
     /// </summary>
-    Macchiato
+    Macchiato,
 }
