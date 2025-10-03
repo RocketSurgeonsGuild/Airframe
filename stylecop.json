@@ -28,7 +28,14 @@
       },
       "orderingRules": {
         "usingDirectivesPlacement": "outsideNamespace",
-        "systemUsingDirectivesFirst": true
+        "systemUsingDirectivesFirst": true,
+        "elementOrder": [
+          "kind",
+          "accessibility",
+          "constant",
+          "static",
+          "readonly"
+        ]
       }
     }
   }
