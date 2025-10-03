@@ -8,7 +8,7 @@ public class TestView : IViewFor<TestViewModel>
     object IViewFor.ViewModel
     {
         get => ViewModel;
-        set => ViewModel = (TestViewModel) value;
+        set => ViewModel = (TestViewModel)value;
     }
 
     /// <inheritdoc/>

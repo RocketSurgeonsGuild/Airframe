@@ -15,7 +15,7 @@ internal sealed class GlobalExceptionHandlerFixture : ITestFixtureBuilder
 
     public GlobalExceptionHandlerFixture WithHandlers(params IUnhandledExceptionHandler[] handlers) => this.With(ref _unhandledExceptionHandler, handlers);
 
-    public IExceptionHandler AsInterface() => this.Build();
+    public IExceptionHandler AsInterface() => Build();
 
     private GlobalExceptionHandler Build() => new(_scheduler, _unhandledExceptionHandler);
 

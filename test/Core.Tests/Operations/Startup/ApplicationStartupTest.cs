@@ -24,10 +24,8 @@ public class ApplicationStartupTest
         using var _ =
             sut.Startup()
                .Subscribe(unit =>
-                {
                     // Then
-                    result = unit;
-                });
+                    result = unit);
         testScheduler.AdvanceByMs(1000);
 
         // Then

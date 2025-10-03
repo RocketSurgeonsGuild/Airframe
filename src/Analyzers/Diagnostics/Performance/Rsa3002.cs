@@ -62,7 +62,7 @@ public class Rsa3002 : Rsa3000
         }
 
         context.ReportDiagnostic(Diagnostic.Create(RSA3002, lambdaExpression.GetLocation()));
-        bool CanBeCapturedOutside(ISymbol symbol) =>
+        static bool CanBeCapturedOutside(ISymbol symbol) =>
             symbol
                 is not IParameterSymbol
                 and not IFieldSymbol { IsStatic: true, IsReadOnly: true }

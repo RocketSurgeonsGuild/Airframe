@@ -9,24 +9,24 @@ public sealed class DryIocModuleTests
     [Fact]
     public void Should_Resolve_Module()
     {
-            // Given
-            IContainer sut = new Container();
+        // Given
+        IContainer sut = new Container();
 
-            // When
-            var result = sut.RegisterModule<TestModule>();
+        // When
+        var result = sut.RegisterModule<TestModule>();
 
-            result.Resolve<TestModule>().Should().NotBeNull();
-        }
+        result.Resolve<TestModule>().Should().NotBeNull();
+    }
 
-        [Fact]
-        public void Should_Resolve_Module_Registrations()
-        {
-            // Given
-            IContainer sut = new Container();
+    [Fact]
+    public void Should_Resolve_Module_Registrations()
+    {
+        // Given
+        IContainer sut = new Container();
 
-            // When
-            var result = sut.RegisterModule<TestModule>();
+        // When
+        var result = sut.RegisterModule<TestModule>();
 
-            result.Resolve<TestViewModel>().Should().NotBeNull();
-        }
+        result.Resolve<TestViewModel>().Should().NotBeNull();
+    }
 }

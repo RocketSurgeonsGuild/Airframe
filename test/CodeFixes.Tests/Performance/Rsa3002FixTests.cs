@@ -91,7 +91,7 @@ public class Rsa3002FixTestData : IEnumerable<object[]>
     }
 
     /// <inheritdoc/>
-    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     internal const string Incorrect =
 

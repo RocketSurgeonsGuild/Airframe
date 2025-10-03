@@ -52,12 +52,12 @@ public abstract class ArgumentsBase : IArguments
                 string value;
                 if (num4 >= 0)
                 {
-                    key = query.Substring(startIndex, num4 - startIndex);
+                    key = query[startIndex..num4];
                     value = query.Substring(num4 + 1, i - num4 - 1);
                 }
                 else
                 {
-                    value = query.Substring(startIndex, i - startIndex);
+                    value = query[startIndex..i];
                 }
 
                 if (key != null)

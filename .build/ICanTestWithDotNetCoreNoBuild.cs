@@ -72,7 +72,7 @@ public interface ICanTestWithDotNetCoreNoBuild : IHaveCollectCoverage,
                        .EnableNoRestore()
                        .SetConfiguration(global::Configuration.Debug)
                        .EnableNoBuild()
-                        // DeterministicSourcePaths being true breaks coverlet!
+                       // DeterministicSourcePaths being true breaks coverlet!
                        .SetProperty("DeterministicSourcePaths", "false")
                        .SetResultsDirectory(TestResultsDirectory)
                        .When(

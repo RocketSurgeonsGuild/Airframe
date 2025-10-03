@@ -12,15 +12,15 @@ public sealed class IRegistrarExtensionTests
         [Fact]
         public void Should_Register_View_As_IViewFor()
         {
-                // Given
-                IContainer sut = new Container();
+            // Given
+            IContainer sut = new Container();
 
-                // When
-                sut.RegisterView<TestView, TestViewModel>();
+            // When
+            sut.RegisterView<TestView, TestViewModel>();
 
-                // Then
-                sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
-            }
+            // Then
+            sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
+        }
     }
 
     public class TheRegisterViewModelMethod
@@ -28,15 +28,15 @@ public sealed class IRegistrarExtensionTests
         [Fact]
         public void Should_Register_ViewModel()
         {
-                // Given
-                IContainer sut = new Container();
+            // Given
+            IContainer sut = new Container();
 
-                // When
-                sut.RegisterViewModel<TestViewModel>();
+            // When
+            sut.RegisterViewModel<TestViewModel>();
 
-                // Then
-                sut.Resolve<TestViewModel>().Should().NotBeNull();
-            }
+            // Then
+            sut.Resolve<TestViewModel>().Should().NotBeNull();
+        }
     }
 
     public class TheRegisterModuleMethod
@@ -44,36 +44,36 @@ public sealed class IRegistrarExtensionTests
         [Fact]
         public void Should_Throw_When_Resolve_Module()
         {
-                // Given
-                IContainer sut = new Container();
-                sut.RegisterModule(new TestModule());
+            // Given
+            IContainer sut = new Container();
+            sut.RegisterModule(new TestModule());
 
-                // When
-                var result = Record.Exception(() => sut.Resolve<TestModule>().Should().BeNull());
+            // When
+            var result = Record.Exception(() => sut.Resolve<TestModule>().Should().BeNull());
 
-                // Then
-                result
-                    .Should()
-                    .BeOfType<ContainerException>()
-                    .Which
-                    .ErrorName
-                    .Should()
-                    .Be("UnableToResolveUnknownService");
-            }
+            // Then
+            result
+                .Should()
+                .BeOfType<ContainerException>()
+                .Which
+                .ErrorName
+                .Should()
+                .Be("UnableToResolveUnknownService");
+        }
 
         [Fact]
         public void Should_Resolve_Module_Registrations()
         {
-                // Given
-                IContainer sut = new Container();
+            // Given
+            IContainer sut = new Container();
 
-                // When
-                sut.RegisterModule(new TestModule());
+            // When
+            sut.RegisterModule(new TestModule());
 
-                // Then
-                sut.Resolve<TestViewModel>().Should().NotBeNull();
-                sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
-            }
+            // Then
+            sut.Resolve<TestViewModel>().Should().NotBeNull();
+            sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
+        }
     }
 
     public class TheRegisterModuleGenericMethod
@@ -81,28 +81,28 @@ public sealed class IRegistrarExtensionTests
         [Fact]
         public void Should_Resolve_Module()
         {
-                // Given
-                IContainer sut = new Container();
+            // Given
+            IContainer sut = new Container();
 
-                // When
-                sut.RegisterModule<TestModule>();
+            // When
+            sut.RegisterModule<TestModule>();
 
-                // Then
-                sut.Resolve<TestModule>().Should().NotBeNull();
-            }
+            // Then
+            sut.Resolve<TestModule>().Should().NotBeNull();
+        }
 
         [Fact]
         public void Should_Resolve_Module_Registrations()
         {
-                // Given
-                IContainer sut = new Container();
+            // Given
+            IContainer sut = new Container();
 
-                // When
-                sut.RegisterModule<TestModule>();
+            // When
+            sut.RegisterModule<TestModule>();
 
-                // Then
-                sut.Resolve<TestViewModel>().Should().NotBeNull();
-                sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
-            }
+            // Then
+            sut.Resolve<TestViewModel>().Should().NotBeNull();
+            sut.Resolve<IViewFor<TestViewModel>>().Should().BeOfType<TestView>();
+        }
     }
 }

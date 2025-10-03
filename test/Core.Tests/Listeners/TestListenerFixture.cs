@@ -10,5 +10,5 @@ internal class TestListenerFixture : ITestFixtureBuilder
 
     private TestListener Build() => new TestListener(_loggerFactory);
 
-    private ILoggerFactory _loggerFactory = NullLoggerFactory.Instance;
+    private readonly ILoggerFactory _loggerFactory = NullLoggerFactory.Instance;
 }

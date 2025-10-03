@@ -45,10 +45,7 @@ public class IncrementTimerTests : TestBase
         IncrementTimer sut = new IncrementTimerFixture().WithProvider(schedulerProvider);
         var timer = TimeSpan.Zero;
 
-        sut.Subscribe(x =>
-        {
-            timer = x;
-        });
+        sut.Subscribe(x => timer = x);
 
         // When
         sut.Start();
