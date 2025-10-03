@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
+	<!-- Enable member reordering -->
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_LINES/@EntryValue">False</s:Boolean>
+	
+	<!-- Type Member Layout Pattern -->
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpOrder/PatternsGroup/=CustomPattern/@EntryValue">
+		&lt;?xml version="1.0" encoding="utf-16"?&gt;
+		&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;
+		
+		  &lt;!-- Custom ordering: Constructors first, private fields last --&gt;
+		  &lt;TypePattern DisplayName="Custom Class Ordering" Priority="100"&gt;
+		    &lt;TypePattern.Match&gt;
+		      &lt;Or&gt;
+		        &lt;Kind Is="Class" /&gt;
+		        &lt;Kind Is="Struct" /&gt;
+		      &lt;/Or&gt;
+		    &lt;/TypePattern.Match&gt;
+		    
+		    &lt;!-- 1. Constructors (all access levels) --&gt;
+		    &lt;Entry DisplayName="Constructors"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;Kind Is="Constructor" /&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal Protected Private" /&gt;
+		        &lt;Static /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 2. Public/Internal/Protected constant fields --&gt;
+		    &lt;Entry DisplayName="Public Constant Fields"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Constant" /&gt;
+		          &lt;Or&gt;
+		            &lt;Access Is="Public" /&gt;
+		            &lt;Access Is="Internal" /&gt;
+		            &lt;Access Is="Protected" /&gt;
+		            &lt;Access Is="ProtectedInternal" /&gt;
+		          &lt;/Or&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal ProtectedInternal Protected" /&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 3. Public/Internal/Protected static fields --&gt;
+		    &lt;Entry DisplayName="Public Static Fields"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Field" /&gt;
+		          &lt;Static /&gt;
+		          &lt;Not&gt;
+		            &lt;Kind Is="Constant" /&gt;
+		          &lt;/Not&gt;
+		          &lt;Or&gt;
+		            &lt;Access Is="Public" /&gt;
+		            &lt;Access Is="Internal" /&gt;
+		            &lt;Access Is="Protected" /&gt;
+		            &lt;Access Is="ProtectedInternal" /&gt;
+		          &lt;/Or&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal ProtectedInternal Protected" /&gt;
+		        &lt;Readonly /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 4. Public/Internal/Protected instance fields --&gt;
+		    &lt;Entry DisplayName="Public Instance Fields"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Field" /&gt;
+		          &lt;Not&gt;
+		            &lt;Static /&gt;
+		          &lt;/Not&gt;
+		          &lt;Not&gt;
+		            &lt;Kind Is="Constant" /&gt;
+		          &lt;/Not&gt;
+		          &lt;Or&gt;
+		            &lt;Access Is="Public" /&gt;
+		            &lt;Access Is="Internal" /&gt;
+		            &lt;Access Is="Protected" /&gt;
+		            &lt;Access Is="ProtectedInternal" /&gt;
+		          &lt;/Or&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal ProtectedInternal Protected" /&gt;
+		        &lt;Readonly /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 5. Explicit Interface Implementations (treated as Public) --&gt;
+		    &lt;Entry DisplayName="Explicit Interface Implementations"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Or&gt;
+		            &lt;Kind Is="Property" /&gt;
+		            &lt;Kind Is="Method" /&gt;
+		            &lt;Kind Is="Event" /&gt;
+		          &lt;/Or&gt;
+		          &lt;ImplementsInterface /&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;ImplementsInterface Immediate="True" /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 6. Public/Internal/Protected Properties --&gt;
+		    &lt;Entry DisplayName="Public Properties"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Property" /&gt;
+		          &lt;Not&gt;
+		            &lt;ImplementsInterface /&gt;
+		          &lt;/Not&gt;
+		          &lt;Or&gt;
+		            &lt;Access Is="Public" /&gt;
+		            &lt;Access Is="Internal" /&gt;
+		            &lt;Access Is="Protected" /&gt;
+		            &lt;Access Is="ProtectedInternal" /&gt;
+		          &lt;/Or&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal ProtectedInternal Protected" /&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 7. Private Properties --&gt;
+		    &lt;Entry DisplayName="Private Properties"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Property" /&gt;
+		          &lt;Access Is="Private" /&gt;
+		          &lt;Not&gt;
+		            &lt;ImplementsInterface /&gt;
+		          &lt;/Not&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 8. Public/Internal/Protected Methods --&gt;
+		    &lt;Entry DisplayName="Public Methods"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Method" /&gt;
+		          &lt;Not&gt;
+		            &lt;ImplementsInterface /&gt;
+		          &lt;/Not&gt;
+		          &lt;Or&gt;
+		            &lt;Access Is="Public" /&gt;
+		            &lt;Access Is="Internal" /&gt;
+		            &lt;Access Is="Protected" /&gt;
+		            &lt;Access Is="ProtectedInternal" /&gt;
+		          &lt;/Or&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal ProtectedInternal Protected" /&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 9. Private Methods --&gt;
+		    &lt;Entry DisplayName="Private Methods"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Method" /&gt;
+		          &lt;Access Is="Private" /&gt;
+		          &lt;Not&gt;
+		            &lt;ImplementsInterface /&gt;
+		          &lt;/Not&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 10. Public/Internal/Protected Events --&gt;
+		    &lt;Entry DisplayName="Public Events"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Event" /&gt;
+		          &lt;Not&gt;
+		            &lt;ImplementsInterface /&gt;
+		          &lt;/Not&gt;
+		          &lt;Or&gt;
+		            &lt;Access Is="Public" /&gt;
+		            &lt;Access Is="Internal" /&gt;
+		            &lt;Access Is="Protected" /&gt;
+		            &lt;Access Is="ProtectedInternal" /&gt;
+		          &lt;/Or&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Access Order="Public Internal ProtectedInternal Protected" /&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 11. Private Events --&gt;
+		    &lt;Entry DisplayName="Private Events"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Event" /&gt;
+		          &lt;Access Is="Private" /&gt;
+		          &lt;Not&gt;
+		            &lt;ImplementsInterface /&gt;
+		          &lt;/Not&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Static /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 12. Private constant fields --&gt;
+		    &lt;Entry DisplayName="Private Constant Fields"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Constant" /&gt;
+		          &lt;Access Is="Private" /&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 13. Private static fields --&gt;
+		    &lt;Entry DisplayName="Private Static Fields"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Field" /&gt;
+		          &lt;Static /&gt;
+		          &lt;Access Is="Private" /&gt;
+		          &lt;Not&gt;
+		            &lt;Kind Is="Constant" /&gt;
+		          &lt;/Not&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Readonly /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		    &lt;!-- 14. Private instance fields --&gt;
+		    &lt;Entry DisplayName="Private Instance Fields"&gt;
+		      &lt;Entry.Match&gt;
+		        &lt;And&gt;
+		          &lt;Kind Is="Field" /&gt;
+		          &lt;Not&gt;
+		            &lt;Static /&gt;
+		          &lt;/Not&gt;
+		          &lt;Access Is="Private" /&gt;
+		          &lt;Not&gt;
+		            &lt;Kind Is="Constant" /&gt;
+		          &lt;/Not&gt;
+		        &lt;/And&gt;
+		      &lt;/Entry.Match&gt;
+		      &lt;Entry.SortBy&gt;
+		        &lt;Readonly /&gt;
+		        &lt;Name /&gt;
+		      &lt;/Entry.SortBy&gt;
+		    &lt;/Entry&gt;
+		    
+		  &lt;/TypePattern&gt;
+		  
+		&lt;/Patterns&gt;
+	</s:String>
+	
+	<!-- Enable the custom pattern -->
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpOrder/CustomPattern/@EntryValue">CustomPattern</s:String>
+	
+</wpf:ResourceDictionary>
