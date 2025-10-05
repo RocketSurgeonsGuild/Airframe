@@ -1,0 +1,43 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1007: [
+      {
+        Id: RSA1007,
+        Title: Use Invoke method for function calls,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (10,25)-(10,31),
+        Description: Functions should be called using the .Invoke() method rather than parentheses.,
+        MessageFormat: Use the Invoke() method to call functions instead of using parentheses: '{0}',
+        Message: Use the Invoke() method to call functions instead of using parentheses: 'func()',
+        Category: Usage
+      },
+      {
+        Id: RSA1007,
+        Title: Use Invoke method for function calls,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (19,25)-(19,43),
+        Description: Functions should be called using the .Invoke() method rather than parentheses.,
+        MessageFormat: Use the Invoke() method to call functions instead of using parentheses: '{0}',
+        Message: Use the Invoke() method to call functions instead of using parentheses: 'func(string.Empty)',
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    System.ComponentModel.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
