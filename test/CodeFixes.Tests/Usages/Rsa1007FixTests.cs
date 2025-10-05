@@ -15,15 +15,17 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Tests.Usages;
 
 public class Rsa1007FixTests
 {
-    [Fact]
-    public async Task Given_When_Then()
+    [Theory]
+    [InlineData(nameof(Incorrect), Incorrect)]
+    [InlineData(nameof(IncorrectWithParameter), IncorrectWithParameter)]
+    public async Task GivenSource_WhenCodeFix_ThenVerify(string name, string source)
     {
         // Given, When
         var result = await GeneratorTestContextBuilder
            .Create()
            .WithAnalyzer<Rsa1007>()
            .WithCodeFix<Rsa1007Fix>()
-           .AddSources(Incorrect)
+           .AddSources(source)
            .WithDiagnosticSeverity(DiagnosticSeverity.Error)
            .AddReferences(
                 typeof(Unit),
@@ -35,7 +37,7 @@ public class Rsa1007FixTests
            .GenerateAsync();
 
         // Then
-        await Verifier.Verify(result).HashParameters().DisableRequireUniquePrefix();
+        await Verifier.Verify(result).HashParameters().UseParameters(name).DisableRequireUniquePrefix();
     }
 
     internal const string Incorrect =
@@ -43,10 +45,6 @@ public class Rsa1007FixTests
         // lang=csharp
         """
         using System.Threading;
-        using System.Reactive;
-        using System.Reactive.Concurrency;
-        using System.Reactive.Linq;
-        using ReactiveUI;
 
         namespace Sample
         {
@@ -55,10 +53,20 @@ public class Rsa1007FixTests
                 public FunctionInvocation()
                 {
                     var func = () => string.Empty;
-            
+                        
                     var result = func();
                 }
             }
+        }
+        """;
+    internal const string IncorrectWithParameter =
+
+        // lang=csharp
+        """
+        using System.Threading;
+
+        namespace Sample
+        {
             public class FunctionWithParametersInvocation
             {
                 public FunctionWithParametersInvocation()

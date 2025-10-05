@@ -85,19 +85,27 @@ public class Rsa1007Tests
 
             // lang=csharp
             """
-            using System.Reactive;
-            using System.Reactive.Concurrency;
-            using System.Reactive.Linq;
-            using ReactiveUI;
+            using System.Threading;
 
             namespace Sample
             {
-                public class MultipleUsesOfSubscribeOnExample : ReactiveObject
+                public class FunctionInvocation
                 {
-
-                    public MultipleUsesOfSubscribeOnExample() => Observable
-                                                                 .Return(Unit.Default)
-                                                                 .SubscribeOn(TaskPoolScheduler.Default);
+                    public FunctionInvocation()
+                    {
+                        var func = () => string.Empty;
+                
+                        var result = func.Invoke();
+                    }
+                }
+                public class FunctionWithParametersInvocation
+                {
+                    public FunctionWithParametersInvocation()
+                    {
+                        var func = (string _) => string.Empty;
+                
+                        var result = func.Invoke(string.Empty);
+                    }
                 }
             }
             """;
@@ -107,10 +115,6 @@ public class Rsa1007Tests
             // lang=csharp
             """
             using System.Threading;
-            using System.Reactive;
-            using System.Reactive.Concurrency;
-            using System.Reactive.Linq;
-            using ReactiveUI;
 
             namespace Sample
             {
@@ -143,7 +147,7 @@ public class FunctionInvocation
     {
         var func = () => string.Empty;
 
-        var result = func();
+        var result = func.Invoke();
     }
 }
 public class FunctionWithParametersInvocation
@@ -152,6 +156,6 @@ public class FunctionWithParametersInvocation
     {
         var func = (string _) => string.Empty;
 
-        var result = func(string.Empty);
+        var result = func.Invoke(string.Empty);
     }
 }
