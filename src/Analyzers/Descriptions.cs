@@ -54,6 +54,15 @@ internal static class Descriptions
             Info,
             true);
 
+    public static DiagnosticDescriptor RSA1007 { get; } = new DiagnosticDescriptor(
+        "RSA1007",
+        "Use Invoke method for function calls",
+        "Use the Invoke() method to call functions instead of using parentheses: '{0}'",
+        CategoryMap.GetOrAdd(Usage, category => category.ToString()),
+        Warning,
+        true,
+        "Functions should be called using the .Invoke() method rather than parentheses.");
+
     public static DiagnosticDescriptor RSA3001 { get; } =
         new(
             "RSA3001",
