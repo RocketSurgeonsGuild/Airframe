@@ -52,7 +52,7 @@ public class Rsa1007Tests
         result
            .AnalyzerResults
            .Should()
-           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == RSA1006.Id));
+           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == RSA1007.Id));
     }
 
     [Theory]
