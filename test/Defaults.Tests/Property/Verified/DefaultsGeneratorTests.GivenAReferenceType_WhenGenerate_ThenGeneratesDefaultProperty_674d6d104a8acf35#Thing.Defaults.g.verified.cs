@@ -1,4 +1,4 @@
-﻿//HintName: Rocket.Surgery.Airframe.Defaults/Rocket.Surgery.Airframe.Defaults.Generator.DefaultsGenerator/Thing.Defaults.g.cs
+﻿//HintName: Rocket.Surgery.Airframe.Defaults/Rocket.Surgery.Airframe.Defaults.Property.DefaultsGenerator/Thing.Defaults.g.cs
 namespace Rocket.Surgery.Airframe.Defaults
 {
     public partial class Thing

@@ -1,7 +1,7 @@
 ﻿{
   FinalDiagnostics: [],
   GeneratorDiagnostics: {
-    Rocket.Surgery.Airframe.Defaults.Generator.DefaultsGenerator: []
+    Rocket.Surgery.Airframe.Defaults.Property.DefaultsGenerator: []
   },
   ParseOptions: {
     DocumentationMode: Parse
