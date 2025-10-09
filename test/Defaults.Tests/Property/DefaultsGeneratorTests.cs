@@ -1,11 +1,11 @@
-using Rocket.Surgery.Airframe.Defaults.Generator;
+using Rocket.Surgery.Airframe.Defaults.Property;
 using Rocket.Surgery.Airframe.Defaults.Tests.Data;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VerifyXunit;
 
-namespace Rocket.Surgery.Airframe.Defaults.Tests.Generator;
+namespace Rocket.Surgery.Airframe.Defaults.Tests.Property;
 
 public class DefaultsGeneratorTests
 {

@@ -1,7 +1,7 @@
 ﻿{
   FinalDiagnostics: [],
   GeneratorDiagnostics: {
-    Rocket.Surgery.Airframe.Defaults.Generator.DefaultsGenerator: []
+    Rocket.Surgery.Airframe.Defaults.Property.DefaultsGenerator: []
   },
   ParseOptions: {
     DocumentationMode: Parse
@@ -11,6 +11,7 @@
     netstandard.dll,
     System.Core.dll,
     System.dll,
+    System.Private.CoreLib.dll,
     System.Private.CoreLib.dll,
     System.Runtime.dll
   ]
