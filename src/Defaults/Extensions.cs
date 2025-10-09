@@ -8,6 +8,11 @@ namespace Rocket.Surgery.Airframe.Defaults;
 
 internal static class Extensions
 {
+    public static SyntaxList<MemberDeclarationSyntax> GeneratePartialClassWithProperty(
+        this INamedTypeSymbol namedTypeSymbol,
+        IdentifierNameSyntax className,
+        AttributeData attribute,
+        ArgumentListSyntax? argumentListSyntax)
     public static bool HasAccessibility(this IMethodSymbol symbol, params Accessibility[] accessibility)
         => accessibility.Contains(symbol.DeclaredAccessibility);
 
