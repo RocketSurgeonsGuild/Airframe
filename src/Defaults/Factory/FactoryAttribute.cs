@@ -13,7 +13,7 @@ internal static class FactoryAttribute
             [AttributeUsage(AttributeTargets.Constructor)]
             [Conditional("CODEGEN")]
         
-            internal class DefaultsFactoryAttribute : Attribute
+            internal class FactoryAttribute : Attribute
             {
                 public DefaultsFactoryAttribute()
                     : this("Create")
