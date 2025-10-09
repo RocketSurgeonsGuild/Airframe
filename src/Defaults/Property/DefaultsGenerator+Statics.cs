@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Rocket.Surgery.Airframe.Defaults.Generator;
+namespace Rocket.Surgery.Airframe.Defaults.Property;
 
 internal partial class DefaultsGenerator
 {

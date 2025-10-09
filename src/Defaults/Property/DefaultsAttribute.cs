@@ -1,4 +1,4 @@
-namespace Rocket.Surgery.Airframe.Defaults.Generator;
+namespace Rocket.Surgery.Airframe.Defaults.Property;
 
 internal static class DefaultsAttribute
 {

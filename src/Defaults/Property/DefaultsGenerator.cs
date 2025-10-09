@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Rocket.Surgery.Airframe.Defaults.Generator;
+namespace Rocket.Surgery.Airframe.Defaults.Property;
 
 [Generator]
 internal partial class DefaultsGenerator : IIncrementalGenerator
