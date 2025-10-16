@@ -1,26 +1,26 @@
 <Project>
     <ItemGroup>
         <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3"/>
-        <PackageVersion Include="Rocket.Surgery.Build.Metadata" Version="3.3.11" PrivateAssets="All"/>
+        <PackageVersion Include="Rocket.Surgery.Build.Metadata" Version="3.3.11"/>
         <PackageVersion Include="Rocket.Surgery.MSBuild.Metadata" Version="1.1.0"/>
         <PackageVersion Include="Rocket.Surgery.MSBuild.SourceLink" Version="1.2.1"/>
-        <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+        <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0"/>
         <PackageVersion Include="Rocket.Surgery.MSBuild.CI" Version="1.2.1"/>
         <PackageVersion Include="Rocket.Surgery.MSBuild.GitVersion" Version="1.2.1"/>
         <PackageVersion Include="Rocket.Surgery.MSBuild.JetBrains.Annotations" Version="1.2.1" Condition="'$(MSBuildProjectName)'!='.build'"/>
     </ItemGroup>
     <ItemGroup>
         <PackageVersion Include="stylecop.analyzers" Version="1.2.0-beta.556"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
-        <PackageVersion Include="Roslynator.Analyzers" Version="4.14.0" PrivateAssets="All"/>
+        <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0"/>
+        <PackageVersion Include="Roslynator.Analyzers" Version="4.8.0"/>
     </ItemGroup>
     <ItemGroup>
         <PackageVersion Include="GitVersion.Tool" Version="5.12.0"/>
         <PackageVersion Include="JetBrains.ReSharper.CommandLineTools" Version="2023.3.6"/>
         <PackageVersion Include="NuGet.CommandLine" Version="6.14.0"/>
-        <PackageVersion Include="Nuke.Common" Version="8.0.0"/>
+        <PackageVersion Include="Nuke.Common" Version="9.0.4"/>
         <PackageVersion Include="ReportGenerator" Version="5.4.12"/>
-        <PackageVersion Include="Rocket.Surgery.Nuke" Version="1.8.16"/>
+        <PackageVersion Include="Rocket.Surgery.Nuke" Version="2.9.11"/>
     </ItemGroup>
     <ItemGroup>
         <PackageVersion Include="BenchmarkDotNet" Version="0.15.4"/>
