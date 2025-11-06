@@ -15,9 +15,6 @@
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
     </ItemGroup>
     <ItemGroup>
-        <None Include="..\..\AnalyzerReleases.Shipped.md" Pack="true" PackagePath="\"/>
-    </ItemGroup>
-    <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
         <InternalsVisibleTo Include="Rocket.Surgery.Airframe.CodeFixes"/>
         <InternalsVisibleTo Include="Rocket.Surgery.Airframe.CodeFixes.Tests"/>

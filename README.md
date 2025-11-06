@@ -9,19 +9,19 @@ A collection of abstract classes that extend ReactiveUI implementations
 <!-- badges -->
 
 <!-- history badges -->
-| GitHub Actions |
-| -------------- |
-| [![github-badge]][github] |
+| GitHub Actions                    |
+|-----------------------------------|
+| [![github-badge]][github]         |
 | [![github-history-badge]][github] |
 <!-- history badges -->
 
 ### NuGet
 
 <!-- nuget packages -->
-| Package | NuGet |
-| ------- | ----- |
-| Rocket.Surgery.Airframe | [![nuget-version-badge]![nuget-downloads-badge]][nuget] |
-| Rocket.Surgery.Airframe.Forms | [![forms-nuget-version-badge]![forms-nuget-downloads-badge]][forms-nuget] |
+| Package                            | NuGet                                                                                    |
+|------------------------------------|------------------------------------------------------------------------------------------|
+| Rocket.Surgery.Airframe            | [![nuget-version-badge]![nuget-downloads-badge]][nuget]                                  |
+| Rocket.Surgery.Airframe.Forms      | [![forms-nuget-version-badge]![forms-nuget-downloads-badge]][forms-nuget]                |
 | Rocket.Surgery.Airframe.ViewModels | [![viewmodels-nuget-version-badge]![viewmodels-nuget-downloads-badge]][viewmodels-nuget] |
 <!-- nuget packages -->
 

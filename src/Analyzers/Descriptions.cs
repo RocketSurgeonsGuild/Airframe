@@ -45,6 +45,15 @@ internal static class Descriptions
             Error,
             true);
 
+    public static DiagnosticDescriptor RSA1005 { get; } = new(
+        id: "RSA1005",
+        title: "Consider specifying a scheduler for better control over execution timing",
+        messageFormat: "Method '{0}' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.",
+        CategoryMap.GetOrAdd(Usage, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Reactive Extension methods that have scheduler overloads should explicitly specify a scheduler for better testability and predictable behavior.");
+
     public static DiagnosticDescriptor RSA1006 { get; } =
         new(
             "RSA1006",
