@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -101,6 +102,7 @@ public class Rsa1005 : Rsa1000
             i.ContainingNamespace?.ToDisplayString() == "System.Reactive.Concurrency");
     }
 
+    [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1025:Code should not contain multiple whitespace in a row", Justification = "Looks better.")]
     private static Location GetMethodNameLocation(InvocationExpressionSyntax invocation) => invocation.Expression switch
     {
         MemberAccessExpressionSyntax memberAccess => memberAccess.Name.GetLocation(),
