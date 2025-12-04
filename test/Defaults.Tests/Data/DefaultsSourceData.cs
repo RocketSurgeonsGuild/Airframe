@@ -9,6 +9,7 @@ internal abstract class DefaultsSourceData
     protected static GeneratorTestContextBuilder DefaultBuilder() => GeneratorTestContextBuilder
        .Create()
        .WithGenerator<DefaultsGenerator>()
+       .AddReferences(typeof(Scriban.Template))
        .IgnoreOutputFile("DefaultsAttribute.g.cs");
 
     protected static GeneratorTestContextBuilder Rsad0001() => GeneratorTestContextBuilder

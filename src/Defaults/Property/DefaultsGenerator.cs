@@ -68,6 +68,13 @@ internal partial class DefaultsGenerator : IIncrementalGenerator
 
             var constructorArguments = BuildConstructorWithArguments(constructor?.First(), compilation);
 
+            var result = new
+            {
+                Class = className,
+                Property = attributeData.NamedArguments.FirstOrDefault(pair => pair.Key == "PropertyName").Value.Value?.ToString() ?? "Default",
+                Arguments = constructorArguments
+            }.Render(DefaultsTemplate.Template);
+
             sourceProductionContext
                .AddSource(
                     $"{className}.Defaults.g.cs",

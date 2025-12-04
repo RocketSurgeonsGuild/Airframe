@@ -15,6 +15,7 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="NSubstitute"/>
         <PackageReference Include="Rocket.Surgery.Extensions.Testing.SourceGenerators"/>
+        <PackageReference Include="Scriban" PrivateAssets="all" />
         <PackageReference Include="Verify"/>
         <PackageReference Include="Verify.DiffPlex"/>
         <PackageReference Include="Verify.SourceGenerators"/>
