@@ -9,6 +9,7 @@
   References: [
     mscorlib.dll,
     netstandard.dll,
+    Scriban.dll,
     System.Core.dll,
     System.dll,
     System.Private.CoreLib.dll,
