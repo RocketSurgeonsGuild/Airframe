@@ -33,8 +33,4 @@
         <ProjectReference Include="..\..\src\Defaults\Defaults.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Property\Verified\" />
-    </ItemGroup>
-
 </Project>
