@@ -49,6 +49,7 @@
         <PackageVersion Include="Refit" Version="5.2.4"/>
         <PackageVersion Include="Rocket.Surgery.Xamarin.Essentials" Version="0.4.1"/>
         <PackageVersion Include="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.1"/>
+        <PackageVersion Include="Scriban" Version="6.3.0" />
         <PackageVersion Include="Serilog.Sinks.AppCenter.Crash" Version="1.2.1"/>
         <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0"/>
         <PackageVersion Include="Splat" Version="14.8.12"/>
