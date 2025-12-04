@@ -15,4 +15,21 @@ internal static class Extensions
 
     public static bool IsDefaultsAttribute(this AttributeSyntax syntax)
         => ((IdentifierNameSyntax)syntax.Name).Identifier.ValueText is nameof(DefaultsAttribute) or "Defaults";
+
+    public static INamedTypeSymbol? GetClass(this GeneratorAttributeSyntaxContext syntaxContext)
+    {
+        var targetSymbol = syntaxContext.TargetSymbol as INamedTypeSymbol;
+
+        if (syntaxContext.Attributes[0].ConstructorArguments.Length == 0)
+        {
+            return targetSymbol;
+        }
+
+        if (syntaxContext.Attributes[0].ConstructorArguments[0].Value is INamedTypeSymbol namedTypeSymbol)
+        {
+            return namedTypeSymbol;
+        }
+
+        return null;
+    }
 }

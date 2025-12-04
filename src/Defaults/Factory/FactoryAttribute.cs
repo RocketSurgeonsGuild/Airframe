@@ -12,20 +12,19 @@ internal static class FactoryAttribute
             {{Defaults.CodeGenerationAttribute}}
             [AttributeUsage(AttributeTargets.Constructor)]
             [Conditional("CODEGEN")]
-        
             internal class FactoryAttribute : Attribute
             {
-                public DefaultsFactoryAttribute()
+                public FactoryAttribute()
                     : this("Create")
                 {
                 }
             
-                public DefaultsFactoryAttribute(string factoryName) => FactoryName = factoryName;
+                public FactoryAttribute(string factoryName) => FactoryName = factoryName;
             
                 public string FactoryName { get; set; }
             }
         }
         """;
 
-    public const string AttributeName = "Rocket.Surgery.Airframe.Defaults.DefaultsFactoryAttribute";
+    public const string AttributeName = "Rocket.Surgery.Airframe.Defaults.FactoryAttribute";
 }
