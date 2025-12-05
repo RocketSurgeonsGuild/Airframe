@@ -2,7 +2,6 @@ using DiffEngine;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using VerifyTests;
 using VerifyTests.DiffPlex;
 using static VerifyXunit.Verifier;
@@ -11,7 +10,8 @@ namespace Rocket.Surgery.Airframe.Defaults.Tests;
 
 internal static class ModuleInitializer
 {
-    [ModuleInitializer]
+    [global::System.Runtime.CompilerServices.ModuleInitializer]
+
     public static void Initialize()
     {
         VerifyGeneratorTextContext.Initialize();
