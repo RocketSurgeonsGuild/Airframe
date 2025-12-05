@@ -42,6 +42,7 @@
         <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.4"/>
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.32"/>
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.4"/>
+        <PackageVersion Include="Polyfill" Version="2.2.1"/>
         <PackageVersion Include="ReactiveUI" Version="19.6.12" PrivateAssets="All"/>
         <PackageVersion Include="ReactiveUI.XamForms" Version="19.6.12"/>
         <PackageVersion Include="ReactiveMarbles.Mvvm" Version="1.0.46"/>
