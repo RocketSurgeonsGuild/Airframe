@@ -12,5 +12,5 @@ public interface IPlatformInitializer
     /// </summary>
     /// <param name="serviceCollection">The service collection.</param>
     /// <returns>The service collection with platform dependencies registered.</returns>
-    public IServiceCollection Initialize(IServiceCollection serviceCollection);
+    IServiceCollection Initialize(IServiceCollection serviceCollection);
 }
