@@ -16,8 +16,8 @@ public static class DependencyInjectionExtensions
     /// <param name="serviceCollection">The service collection.</param>
     /// <param name="platformInitializer">The platform initializer.</param>
     /// <returns>The service collection with platform dependencies registered.</returns>
-    public static IServiceCollection AddPlatform(this IServiceCollection serviceCollection, IPlatformInitializer platformInitializer)
-        => platformInitializer.Initialize(serviceCollection);
+    public static IServiceCollection AddPlatform(this IServiceCollection serviceCollection, IDependencyModule<IServiceCollection> platformInitializer)
+        => platformInitializer.Register(serviceCollection);
 
     /// <summary>
     /// Adds the <see cref="IPlatformInitializer"/> to the <see cref="IServiceCollection"/>.
@@ -30,7 +30,7 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection AddPlatform<TTarget>(
         this IServiceCollection serviceCollection,
         TTarget target,
-        Func<TTarget, IPlatformInitializer> startup) => startup(target).Initialize(serviceCollection);
+        Func<TTarget, IDependencyModule<IServiceCollection>> startup) => startup(target).Register(serviceCollection);
 
     /// <summary>
     /// Registers an <see cref="IApplicationStartup"/> to the service collection.

@@ -7,9 +7,9 @@ namespace Rocket.Surgery.Airframe;
 public interface IDependencyModule<TContainer>
 {
     /// <summary>
-    /// Register dependencies against the <see cref="TRegistrar"/>.
+    /// Register dependencies against the <see cref="TContainer"/>.
     /// </summary>
-    /// <param name="registrar">The registrar.</param>
-    /// <returns>The <see cref="TRegistrar"/>.</returns>
-    TContainer Register(TContainer registrar);
+    /// <param name="container">The container.</param>
+    /// <returns>The <see cref="TContainer"/>.</returns>
+    TContainer Register(TContainer container);
 }
