@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -17,7 +16,7 @@ internal static class Extensions
     /// <param name="template">The template.</param>
     /// <typeparam name="T">The model type.</typeparam>
     /// <returns>A string rendered from the template and model.</returns>
-    public static string Render<T>(this T model, [StringSyntax("csharp")] string template) => Template.Parse(template).Render(model);
+    public static string Render<T>(this T model, string template) => Template.Parse(template).Render(model);
 
     public static bool HasAccessibility(this IMethodSymbol symbol, params Accessibility[] accessibility)
         => accessibility.Contains(symbol.DeclaredAccessibility);
