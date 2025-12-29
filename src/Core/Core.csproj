@@ -2,14 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <PackageId>Rocket.Surgery.Airframe.Core</PackageId>
-        <AssemblyName>Rocket.Surgery.Airframe.Core</AssemblyName>
+        <PackageId>Rocket.Surgery.Airframe</PackageId>
+        <AssemblyName>Rocket.Surgery.Airframe</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe</RootNamespace>
         <Description>Abstractions and base implementations for Airframe.</Description>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="DynamicData" />
         <PackageReference Include="ReactiveUI" />
+        <PackageReference Include="System.Reactive" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     </ItemGroup>
 </Project>
