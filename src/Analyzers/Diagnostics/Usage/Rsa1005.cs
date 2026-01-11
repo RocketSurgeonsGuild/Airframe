@@ -8,12 +8,13 @@ using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
 namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 
+/// <summary>
+/// Represents a diagnostic for <see cref="Descriptions.RSA1005"/>.
+/// </summary>
 public class Rsa1005 : Rsa1000
 {
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [RSA1005];
-
-    // Common Rx methods that have scheduler overloads
 
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context) => AnalyzeInvocation(context);
@@ -21,33 +22,36 @@ public class Rsa1005 : Rsa1000
     private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
-        var symbolInfo = ModelExtensions.GetSymbolInfo(context.SemanticModel, invocation);
+        var symbolInfo = context.SemanticModel.GetSymbolInfo(invocation);
 
         if (symbolInfo.Symbol is not IMethodSymbol method)
         {
             return;
         }
 
+        // Handle extension methods
+        var actualMethod = method.ReducedFrom ?? method;
+
         // Check if this is a method we care about
-        if (!SchedulerAwareMethods.Contains(method.Name))
+        if (!SchedulerAwareMethods.Contains(actualMethod.Name))
         {
             return;
         }
 
         // Check if the method is from System.Reactive namespace
-        if (!IsReactiveExtensionsMethod(method))
+        if (!IsReactiveExtensionsMethod(actualMethod))
         {
             return;
         }
 
         // Check if this method already has an IScheduler parameter
-        if (HasSchedulerParameter(method))
+        if (HasSchedulerParameter(actualMethod))
         {
             return;
         }
 
         // Check if there's an overload with IScheduler available
-        if (!HasSchedulerOverload(method, context.SemanticModel))
+        if (!HasSchedulerOverload(actualMethod))
         {
             return;
         }
@@ -55,7 +59,7 @@ public class Rsa1005 : Rsa1000
         var diagnostic = Diagnostic.Create(
             RSA1005,
             GetMethodNameLocation(invocation),
-            method.Name);
+            actualMethod.Name);
 
         context.ReportDiagnostic(diagnostic);
     }
@@ -69,20 +73,20 @@ public class Rsa1005 : Rsa1000
                 containingNamespace.StartsWith("System.Observable"));
     }
 
-    private static bool HasSchedulerParameter(IMethodSymbol method) => method.Parameters.Any(p => IsSchedulerType(p.Type));
+    private static bool HasSchedulerParameter(IMethodSymbol method) => method.Parameters.Any(parameterSymbol => IsSchedulerType(parameterSymbol.Type));
 
-    private static bool HasSchedulerOverload(IMethodSymbol method, SemanticModel semanticModel)
+    private static bool HasSchedulerOverload(IMethodSymbol method)
     {
         // Get all methods with the same name in the same type
         var allMethods = method.ContainingType.GetMembers(method.Name)
            .OfType<IMethodSymbol>()
-           .Where(m => m.IsStatic == method.IsStatic);
+           .Where(methodSymbol => methodSymbol.IsStatic == method.IsStatic);
 
         // Check if any overload has a scheduler parameter
         return allMethods.Any(m => HasSchedulerParameter(m));
     }
 
-    private static bool IsSchedulerType(ITypeSymbol type)
+    private static bool IsSchedulerType(ITypeSymbol? type)
     {
         if (type == null)
         {
@@ -125,11 +129,11 @@ public class Rsa1005 : Rsa1000
         "SubscribeOn",
         "TimeInterval",
         "Timestamp",
-        "TakeUntil", // time-based overload
-        "SkipUntil", // time-based overload
-        "StartWith", // scheduler overload exists
-        "Concat", // scheduler overload exists
-        "Merge", // scheduler overload exists
-        "Zip", // scheduler overload exists
-        "CombineLatest"); // scheduler overload exists
+        "TakeUntil",
+        "SkipUntil",
+        "StartWith",
+        "Concat",
+        "Merge",
+        "Zip",
+        "CombineLatest");
 }

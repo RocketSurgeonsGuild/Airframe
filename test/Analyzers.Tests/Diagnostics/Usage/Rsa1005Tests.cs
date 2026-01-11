@@ -1,11 +1,9 @@
 using FluentAssertions;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
-using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 using VerifyXunit;
 
@@ -22,13 +20,14 @@ public class Rsa1005Tests
            .Create()
            .AddSources(source)
            .WithAnalyzer<Rsa1005>()
+           .AddReferences(typeof(Unit), typeof(Expression<>))
            .GenerateAsync();
 
         // Then
         result
            .AnalyzerResults
            .Should()
-           .Contain(pair => pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == Descriptions.RSA1005.Id));
+           .Contain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == Descriptions.RSA1005.Id) && pair.Value.Diagnostics.All(diagnostic => diagnostic.Id == Descriptions.RSA1005.Id));
     }
 
     [Theory]
@@ -68,12 +67,4 @@ public class Rsa1005Tests
             }
             """;
     }
-}
-
-public class Rsa1005Example
-{
-    public Rsa1005Example() => Observable
-       .Return(Unit.Default)
-       .Throttle(TimeSpan.Zero)
-       .Subscribe();
 }
