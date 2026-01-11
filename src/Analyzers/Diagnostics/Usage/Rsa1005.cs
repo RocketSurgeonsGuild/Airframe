@@ -61,7 +61,8 @@ public class Rsa1005 : Rsa1000
         var containingNamespace = method.ContainingNamespace?.ToDisplayString();
         return containingNamespace != null &&
             (containingNamespace.StartsWith("System.Reactive") ||
-                containingNamespace.StartsWith("System.Observable"));
+                containingNamespace.StartsWith("System.Observable") ||
+                containingNamespace.StartsWith("DynamicData"));
     }
 
     private static bool HasSchedulerParameter(IMethodSymbol method) => method.Parameters.Any(parameterSymbol => IsSchedulerType(parameterSymbol.Type));

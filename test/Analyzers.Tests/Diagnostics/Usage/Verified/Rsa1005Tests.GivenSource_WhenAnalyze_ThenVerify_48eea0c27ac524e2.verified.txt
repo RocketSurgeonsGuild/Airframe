@@ -81,6 +81,7 @@
     }
   ],
   References: [
+    DynamicData.dll,
     mscorlib.dll,
     netstandard.dll,
     System.Core.dll,
