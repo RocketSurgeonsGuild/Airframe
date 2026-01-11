@@ -32,12 +32,6 @@ public class Rsa1005 : Rsa1000
         // Handle extension methods
         var actualMethod = method.ReducedFrom ?? method;
 
-        // Check if this is a method we care about
-        if (!SchedulerAwareMethods.Contains(actualMethod.Name))
-        {
-            return;
-        }
-
         // Check if the method is from System.Reactive namespace
         if (!IsReactiveExtensionsMethod(actualMethod))
         {
@@ -56,10 +50,7 @@ public class Rsa1005 : Rsa1000
             return;
         }
 
-        var diagnostic = Diagnostic.Create(
-            RSA1005,
-            GetMethodNameLocation(invocation),
-            actualMethod.Name);
+        var diagnostic = Diagnostic.Create(RSA1005, GetMethodNameLocation(invocation), actualMethod.Name);
 
         context.ReportDiagnostic(diagnostic);
     }
@@ -111,29 +102,6 @@ public class Rsa1005 : Rsa1000
     {
         MemberAccessExpressionSyntax memberAccess => memberAccess.Name.GetLocation(),
         IdentifierNameSyntax identifier           => identifier.GetLocation(),
-        _                                         => invocation.GetLocation()
+        var _                                     => invocation.GetLocation(),
     };
-
-    private static readonly ImmutableHashSet<string> SchedulerAwareMethods = ImmutableHashSet.Create(
-        "Throttle",
-        "Debounce",
-        "Sample",
-        "Buffer",
-        "Window",
-        "Delay",
-        "DelaySubscription",
-        "Timeout",
-        "Timer",
-        "Interval",
-        "ObserveOn",
-        "SubscribeOn",
-        "TimeInterval",
-        "Timestamp",
-        "TakeUntil",
-        "SkipUntil",
-        "StartWith",
-        "Concat",
-        "Merge",
-        "Zip",
-        "CombineLatest");
 }

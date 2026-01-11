@@ -32,6 +32,7 @@ public class Rsa1005Tests
 
     [Theory]
     [InlineData(nameof(Rsa1005TestData.Incorrect), Rsa1005TestData.Incorrect)]
+    [InlineData(nameof(Rsa1005TestData.Range), Rsa1005TestData.Range)]
     public async Task GivenSource_WhenAnalyze_ThenVerify(string name, string source)
     {
         // Given, When
@@ -48,6 +49,24 @@ public class Rsa1005Tests
 
     private static class Rsa1005TestData
     {
+        // lang=csharp
+        public const string Range = """
+            using System;
+            using System.Reactive;
+            using System.Reactive.Concurrency;
+            using System.Reactive.Linq;
+
+            namespace Foo.Bar;
+
+            public class Rsa1005Example
+            {
+                public Rsa1005Example() =>
+                    Observable
+                       .Range(0, 10)
+                       .Subscribe();
+            }
+            """;
+
         // lang=csharp
         public const string Incorrect = """
             using System;
