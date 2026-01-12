@@ -6,55 +6,25 @@
         Title: Consider specifying a scheduler for better control over execution timing,
         Severity: Info,
         WarningLevel: 1,
-        Location: Input0.cs: (11,12)-(11,17),
+        Location: Input0.cs: (22,16)-(22,29),
         Description: Reactive Extension methods that have scheduler overloads should explicitly specify a scheduler for better testability and predictable behavior.,
         MessageFormat: Method '{0}' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.,
-        Message: Method 'Range' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.,
+        Message: Method 'OtherOperator' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.,
         Category: Usage
       }
     ]
   },
   FinalDiagnostics: [
     {
-      Id: CS8019,
-      Title: Unnecessary using directive,
-      Severity: Hidden,
-      WarningLevel: 1,
-      Location: Input0.cs: (1,0)-(1,22),
-      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8019),
-      MessageFormat: Unnecessary using directive.,
-      Message: Unnecessary using directive.,
-      Category: Compiler,
-      CustomTags: [
-        Compiler,
-        Telemetry
-      ]
-    },
-    {
       Id: RSA1005,
       Title: Consider specifying a scheduler for better control over execution timing,
       Severity: Info,
       WarningLevel: 1,
-      Location: Input0.cs: (11,12)-(11,17),
+      Location: Input0.cs: (22,16)-(22,29),
       Description: Reactive Extension methods that have scheduler overloads should explicitly specify a scheduler for better testability and predictable behavior.,
       MessageFormat: Method '{0}' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.,
-      Message: Method 'Range' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.,
+      Message: Method 'OtherOperator' has an overload that accepts an IScheduler parameter. Consider using it for better testability and control over execution timing.,
       Category: Usage
-    },
-    {
-      Id: CS8019,
-      Title: Unnecessary using directive,
-      Severity: Hidden,
-      WarningLevel: 1,
-      Location: Input0.cs: (2,0)-(2,34),
-      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8019),
-      MessageFormat: Unnecessary using directive.,
-      Message: Unnecessary using directive.,
-      Category: Compiler,
-      CustomTags: [
-        Compiler,
-        Telemetry
-      ]
     }
   ],
   References: [

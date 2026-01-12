@@ -81,12 +81,15 @@
     }
   ],
   References: [
+    DynamicData.dll,
+    DynamicData.dll,
     mscorlib.dll,
     netstandard.dll,
     System.Core.dll,
     System.dll,
     System.Linq.Expressions.dll,
     System.Private.CoreLib.dll,
+    System.Reactive.dll,
     System.Reactive.dll,
     System.Runtime.dll
   ]
