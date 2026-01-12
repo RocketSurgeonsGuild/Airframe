@@ -1,6 +1,5 @@
 using DynamicData;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Linq;
@@ -14,12 +13,12 @@ namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Usage;
 public class Rsa1005Tests
 {
     [Theory]
-    // [InlineData(Rsa1005TestData.Incorrect)]
-    // [InlineData(Rsa1005TestData.Range)]
+    [InlineData(Rsa1005TestData.Incorrect)]
+    [InlineData(Rsa1005TestData.Range)]
     [InlineData(Rsa1005TestData.DynamicDataBatch)]
     [InlineData(Rsa1005TestData.DynamicDataBatchIf)]
     [InlineData(Rsa1005TestData.DynamicDataBatchInitial)]
-    // [InlineData(Rsa1005TestData.CustomMethodWithScheduler)]
+    [InlineData(Rsa1005TestData.CustomMethodWithScheduler)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given. When
@@ -31,7 +30,8 @@ public class Rsa1005Tests
                 typeof(Unit),
                 typeof(Expression<>),
                 typeof(SourceCache<,>),
-                typeof(DynamicData.Binding.ObservableCollectionExtended<>))
+                typeof(DynamicData.Binding.ObservableCollectionExtended<>),
+                typeof(System.Reactive.Linq.Observable))
            .GenerateAsync();
 
         // Then
@@ -59,8 +59,8 @@ public class Rsa1005Tests
                 typeof(Unit),
                 typeof(Expression<>),
                 typeof(SourceCache<,>),
-                typeof(DynamicData.Binding.ObservableCollectionExtended<>))
-           .WithDiagnosticSeverity(DiagnosticSeverity.Info)
+                typeof(DynamicData.Binding.ObservableCollectionExtended<>),
+                typeof(System.Reactive.Linq.Observable))
            .GenerateAsync();
 
         // Then
@@ -78,11 +78,12 @@ public class Rsa1005Tests
             using DynamicData;
 
             namespace Foo.Bar;
-            
+
             public class Rsa1005Example
             {
-                public Rsa1005Example(IObservable<IChangeSet<string, string>> changes) =>
+                public Rsa1005Example(ISourceCache<string, string> changes) =>
                     changes
+                       .Connect()
                        .Batch(TimeSpan.FromSeconds(1))
                        .Subscribe();
             }
@@ -97,12 +98,13 @@ public class Rsa1005Tests
             using DynamicData;
 
             namespace Foo.Bar;
-            
+
             public class Rsa1005Example
             {
-                public Rsa1005Example(IObservable<IChangeSet<string, string>> changes, IObservable<bool> canBatch) =>
+                public Rsa1005Example(ISourceCache<string, string> changes, IObservable<bool> canBatch) =>
                     changes
-                       .BatchIf(canBatch, TimeSpan.FromSeconds(1))
+                       .Connect()
+                       .BatchIf(canBatch, true, TimeSpan.FromSeconds(1))
                        .Subscribe();
             }
             """;
@@ -116,12 +118,13 @@ public class Rsa1005Tests
             using DynamicData;
 
             namespace Foo.Bar;
-            
+
             public class Rsa1005Example
             {
-                public Rsa1005Example(IObservable<IChangeSet<string, string>> changes) =>
+                public Rsa1005Example(ISourceCache<string, string> changes) =>
                     changes
-                       .Batch(TimeSpan.FromSeconds(1), 10)
+                       .Connect()
+                       .BufferInitial(TimeSpan.FromSeconds(1))
                        .Subscribe();
             }
             """;
@@ -133,7 +136,7 @@ public class Rsa1005Tests
             using System.Reactive.Concurrency;
             using System.Reactive.Linq;
 
-            namespace DynamicData;
+            namespace Foo.Bar;
             
             public static class ObservableExtensions
             {
