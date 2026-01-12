@@ -79,6 +79,12 @@ public class Rsa1005 : Rsa1000
 
     private static bool IsReactiveExtensionsMethod(IMethodSymbol method)
     {
+        // Check if the method has an IObservable<T> parameter
+        if (method.Parameters.Any(p => IsObservableType(p.Type)))
+        {
+            return true;
+        }
+
         // Check if the method is from System.Reactive namespaces
         var containingNamespace = method.ContainingNamespace?.ToDisplayString();
         if (containingNamespace == null)
@@ -90,6 +96,21 @@ public class Rsa1005 : Rsa1000
                containingNamespace.StartsWith("System.Observable") ||
                containingNamespace.StartsWith("DynamicData") ||
                method.ContainingAssembly.Name.Contains("DynamicData");
+    }
+
+    private static bool IsObservableType(ITypeSymbol? type)
+    {
+        if (type == null)
+        {
+            return false;
+        }
+
+        if (type.Name == "IObservable" && type.ContainingNamespace?.ToDisplayString() == "System")
+        {
+            return true;
+        }
+
+        return type.AllInterfaces.Any(i => i.Name == "IObservable" && i.ContainingNamespace?.ToDisplayString() == "System");
     }
 
     private static bool HasSchedulerParameter(IMethodSymbol method) => method.Parameters.Any(parameterSymbol => IsSchedulerType(parameterSymbol.Type));

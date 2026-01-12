@@ -19,6 +19,7 @@ public class Rsa1005Tests
     [InlineData(Rsa1005TestData.DynamicDataBatchIf)]
     [InlineData(Rsa1005TestData.DynamicDataBatchInitial)]
     [InlineData(Rsa1005TestData.CustomMethodWithScheduler)]
+    [InlineData(Rsa1005TestData.MethodWithObservableParameterInOtherNamespace)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given. When
@@ -48,6 +49,7 @@ public class Rsa1005Tests
     [InlineData(nameof(Rsa1005TestData.DynamicDataBatchIf), Rsa1005TestData.DynamicDataBatchIf)]
     [InlineData(nameof(Rsa1005TestData.DynamicDataBatchInitial), Rsa1005TestData.DynamicDataBatchInitial)]
     [InlineData(nameof(Rsa1005TestData.CustomMethodWithScheduler), Rsa1005TestData.CustomMethodWithScheduler)]
+    [InlineData(nameof(Rsa1005TestData.MethodWithObservableParameterInOtherNamespace), Rsa1005TestData.MethodWithObservableParameterInOtherNamespace)]
     public async Task GivenSource_WhenAnalyze_ThenVerify(string name, string source)
     {
         // Given, When
@@ -187,6 +189,36 @@ public class Rsa1005Tests
                        .Return(Unit.Default)
                        .Throttle(TimeSpan.Zero)
                        .Subscribe();
+            }
+            """;
+
+        // lang=csharp
+        public const string MethodWithObservableParameterInOtherNamespace = """
+            using System;
+            using System.Reactive;
+            using System.Reactive.Concurrency;
+            using System.Reactive.Linq;
+
+            namespace OtherNamespace
+            {
+                public static class OtherExtensions
+                {
+                    public static IObservable<Unit> OtherOperator(this IObservable<Unit> source) => source;
+                    public static IObservable<Unit> OtherOperator(this IObservable<Unit> source, IScheduler scheduler) => source;
+                }
+            }
+
+            namespace Foo.Bar
+            {
+                using OtherNamespace;
+
+                public class Rsa1005Example
+                {
+                    public Rsa1005Example(IObservable<Unit> source) =>
+                        source
+                           .OtherOperator()
+                           .Subscribe();
+                }
             }
             """;
     }
