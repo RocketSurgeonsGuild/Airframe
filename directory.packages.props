@@ -15,7 +15,7 @@
         <PackageVersion Include="Roslynator.Analyzers" Version="4.15.0" PrivateAssets="All"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageVersion Include="GitVersion.Tool" Version="5.12.0"/>
+        <PackageVersion Include="GitVersion.Tool" Version="6.4.0"/>
         <PackageVersion Include="JetBrains.ReSharper.CommandLineTools" Version="2023.3.6"/>
         <PackageVersion Include="NuGet.CommandLine" Version="6.14.0"/>
         <PackageVersion Include="Nuke.Common" Version="8.0.0"/>
