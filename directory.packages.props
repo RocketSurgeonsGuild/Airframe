@@ -77,10 +77,10 @@
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.Fixtures" Version="9.0.5"/>
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="9.0.5"/>
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.SourceGenerators" Version="9.0.5"/>
-        <PackageVersion Include="Verify" Version="28.11.0"/>
+        <PackageVersion Include="Verify" Version="28.16.0"/>
         <PackageVersion Include="Verify.DiffPlex" Version="3.1.2"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
-        <PackageVersion Include="Verify.XUnit" Version="28.11.0"/>
+        <PackageVersion Include="Verify.XUnit" Version="28.16.0"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.abstractions" Version="2.0.3"/>
         <PackageVersion Include="xunit.analyzers" Version="1.24.0"/>
