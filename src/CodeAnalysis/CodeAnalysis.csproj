@@ -1,31 +1,38 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <Description>A set of analyzers and code fixes for common patterns found in Airframe based applications.</Description>
         <DevelopmentDependency>true</DevelopmentDependency>
-        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IncludeBuildOutput>true</IncludeBuildOutput>
         <IsPackable>true</IsPackable>
         <PackageId>Rocket.Surgery.Airframe.CodeAnalysis</PackageId>
-        <PackageType>Analyzer</PackageType>
+        <Version>1.0.0.6</Version>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <GeneratedFolder>Generated</GeneratedFolder>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <IsPackable>false</IsPackable>
+        <NoWarn>RS1022</NoWarn>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
     </PropertyGroup>
+
     <ItemGroup>
-        <ProjectReference Include="..\Analyzers\Analyzers.csproj">
-            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-            <OutputItemType>Analyzer</OutputItemType>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <ProjectReference Include="..\Analyzers\Analyzers.csproj" PrivateAssets="all">
+<!--            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>-->
         </ProjectReference>
-        <ProjectReference Include="..\CodeFixes\CodeFixes.csproj">
-            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-            <OutputItemType>Analyzer</OutputItemType>
+        <ProjectReference Include="..\CodeFixes\CodeFixes.csproj" PrivateAssets="all">
+<!--            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>-->
         </ProjectReference>
     </ItemGroup>
     <ItemGroup>
         <None Include="..\Analyzers\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.Analyzers.dll"
               Pack="true"
               PackagePath="analyzers\dotnet\cs\Rocket.Surgery.Airframe.Analyzers.dll"
-              Visible="false" />
+              Visible="false"/>
         <None Include="..\CodeFixes\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.CodeFixes.dll"
               Pack="true"
               PackagePath="analyzers\dotnet\cs\Rocket.Surgery.Airframe.CodeFixes.dll"
-              Visible="false" />
+              Visible="false"/>
     </ItemGroup>
 </Project>

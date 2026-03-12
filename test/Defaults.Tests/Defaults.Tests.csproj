@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
         <AssemblyName>Rocket.Surgery.Airframe.Defaults.Tests</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Defaults.Tests</RootNamespace>
     </PropertyGroup>
