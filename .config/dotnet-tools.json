@@ -7,7 +7,7 @@
           "commands": ["dotnet-outdated"]
       },
       "dotnet-reportgenerator-globaltool": {
-          "version": "5.5.1",
+          "version": "5.5.9",
           "commands": ["reportgenerator"]
       },
       "nuke.globaltool": {
