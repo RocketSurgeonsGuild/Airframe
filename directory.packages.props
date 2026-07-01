@@ -57,7 +57,7 @@
         <PackageVersion Include="Splat.Microsoft.Extensions.Logging" Version="14.8.12"/>
         <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.8.12"/>
         <PackageVersion Include="System.ComponentModel" Version="4.3.0"/>
-        <PackageVersion Include="System.Collections.Immutable" Version="1.7.1"/>
+        <PackageVersion Include="System.Collections.Immutable" Version="7.0.0"/>
         <PackageVersion Include="System.Interactive.Async.Providers" Version="6.0.3"/>
         <PackageVersion Include="System.Interactive.Providers" Version="6.0.3"/>
         <PackageVersion Include="System.Reactive" Version="6.0.1"/>
