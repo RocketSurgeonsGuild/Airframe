@@ -31,6 +31,9 @@ public class Rsa2004Tests
 
     [Theory]
     [InlineData(DesignTestData.InternalBeforePublic)]
+    [InlineData(DesignTestData.ProtectedBeforePublic)]
+    [InlineData(DesignTestData.ProtectedInternalBeforePublic)]
+    [InlineData(DesignTestData.PrivateProtectedBeforePublic)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given, When

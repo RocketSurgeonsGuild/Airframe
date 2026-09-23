@@ -31,6 +31,7 @@ public class Rsa2001Tests
 
     [Theory]
     [InlineData(DesignTestData.ConstructorAfterField)]
+    [InlineData(DesignTestData.FieldBeforeDestructor)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given, When

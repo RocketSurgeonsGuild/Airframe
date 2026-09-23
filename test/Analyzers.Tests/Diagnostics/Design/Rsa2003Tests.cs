@@ -32,6 +32,12 @@ public class Rsa2003Tests
     [Theory]
     [InlineData(DesignTestData.MethodBeforeProperty)]
     [InlineData(DesignTestData.NestedTypeBeforeMethod)]
+    [InlineData(DesignTestData.PropertyBeforeEventField)]
+    [InlineData(DesignTestData.PropertyBeforeEvent)]
+    [InlineData(DesignTestData.MethodBeforeIndexer)]
+    [InlineData(DesignTestData.DelegateBeforeOperator)]
+    [InlineData(DesignTestData.DelegateBeforeConversionOperator)]
+    [InlineData(DesignTestData.NestedTypeBeforeDelegate)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given, When

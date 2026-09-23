@@ -442,6 +442,31 @@ internal static class DesignTestData
         """;
 
     /// <summary>
+    /// An explicit interface implementation, which declares no accessibility modifier of its own
+    /// but ranks as public. <c>MemberRank.AccessOf</c>'s explicit-interface branch is otherwise
+    /// never reached, since every other sample's members declare their accessibility directly.
+    /// </summary>
+    // lang=csharp
+    public const string CorrectExplicitInterfaceImplementation =
+        """
+        using System;
+
+        namespace Sample
+        {
+            public class Example : IDisposable
+            {
+                public Example()
+                {
+                }
+
+                void IDisposable.Dispose()
+                {
+                }
+            }
+        }
+        """;
+
+    /// <summary>
     /// Gets the shapes every ordering rule must stay silent on.
     /// </summary>
     public static readonly string[] CorrectShapes =
@@ -453,8 +478,61 @@ internal static class DesignTestData
         CorrectNestedType,
         CorrectPartial,
         CorrectAttributedMembers,
-        UnorderedInterface
+        UnorderedInterface,
+        CorrectExplicitInterfaceImplementation
     ];
+
+    /// <summary>
+    /// A protected field declared before a public field, which RSA2004 owns. <c>Correct</c>
+    /// declares a protected member, but <c>MemberRank.Describe</c> only stringifies access for
+    /// members caught in a violation, so its "protected" arm is otherwise unreached.
+    /// </summary>
+    // lang=csharp
+    public const string ProtectedBeforePublic =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                protected int Protected = 1;
+                public int Public = 2;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A protected internal field declared before a public field, which RSA2004 owns. Covers the
+    /// protected-and-internal branch of <c>MemberRank.AccessOf</c> and Describe's matching arm.
+    /// </summary>
+    // lang=csharp
+    public const string ProtectedInternalBeforePublic =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                protected internal int ProtectedInternal = 1;
+                public int Public = 2;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A private protected field declared before a public field, which RSA2004 owns. Covers the
+    /// private-and-protected branch of <c>MemberRank.AccessOf</c> and Describe's matching arm.
+    /// </summary>
+    // lang=csharp
+    public const string PrivateProtectedBeforePublic =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                private protected int PrivateProtected = 1;
+                public int Public = 2;
+            }
+        }
+        """;
 
     /// <summary>
     /// A conditional block wrapping whole member declarations. RSA2012 owns this.
@@ -539,4 +617,150 @@ internal static class DesignTestData
         FieldBeforeConstant,
         MutableBeforeReadonly
     ];
+
+    /// <summary>
+    /// A destructor declared after a field, which RSA2001 owns just as it does a misplaced
+    /// constructor. <c>MemberRank.NameOf</c> and <c>LocationOf</c> switch on the concrete
+    /// declaration syntax, and only <see cref="Ordering"/>'s constructor, field, property and
+    /// method shapes are otherwise exercised, so a destructor never reaches either switch without
+    /// this sample.
+    /// </summary>
+    // lang=csharp
+    public const string FieldBeforeDestructor =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                private readonly int _value;
+
+                ~Example()
+                {
+                }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// An event field declared after a property, which RSA2003 owns. Covers
+    /// <c>EventFieldDeclarationSyntax</c> in <c>MemberRank.NameOf</c>/<c>LocationOf</c>.
+    /// </summary>
+    // lang=csharp
+    public const string PropertyBeforeEventField =
+        """
+        using System;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public int Value { get; set; }
+
+                public event EventHandler Changed;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A custom add/remove event declared after a property, which RSA2003 owns. Covers
+    /// <c>EventDeclarationSyntax</c>, distinct from the event field shape above.
+    /// </summary>
+    // lang=csharp
+    public const string PropertyBeforeEvent =
+        """
+        using System;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public int Value { get; set; }
+
+                public event EventHandler Changed
+                {
+                    add { }
+                    remove { }
+                }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// An indexer declared after a method, which RSA2003 owns. Covers
+    /// <c>IndexerDeclarationSyntax</c>.
+    /// </summary>
+    // lang=csharp
+    public const string MethodBeforeIndexer =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public void Method()
+                {
+                }
+
+                public int this[int index] => index;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// An operator overload declared after a delegate, which RSA2003 owns. Covers
+    /// <c>OperatorDeclarationSyntax</c>.
+    /// </summary>
+    // lang=csharp
+    public const string DelegateBeforeOperator =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public delegate void Handler();
+
+                public static Example operator +(Example left, Example right) => left;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A conversion operator declared after a delegate, which RSA2003 owns. Covers
+    /// <c>ConversionOperatorDeclarationSyntax</c>, distinct from the operator shape above even
+    /// though both rank as the same member kind.
+    /// </summary>
+    // lang=csharp
+    public const string DelegateBeforeConversionOperator =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public delegate void Handler();
+
+                public static implicit operator int(Example value) => 0;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A delegate declared after a nested type, which RSA2003 owns. <see cref="DelegateBeforeOperator"/>
+    /// and <see cref="DelegateBeforeConversionOperator"/> only ever place a delegate as the earlier,
+    /// correctly-ranked member, so neither reaches the <c>DelegateDeclarationSyntax</c> arm of
+    /// <c>MemberRank.LocationOf</c>; this sample puts the delegate on the violating side instead.
+    /// </summary>
+    // lang=csharp
+    public const string NestedTypeBeforeDelegate =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public class Nested
+                {
+                }
+
+                public delegate void Handler();
+            }
+        }
+        """;
 }
