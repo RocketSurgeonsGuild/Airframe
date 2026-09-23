@@ -60,6 +60,14 @@ internal static class LineChopper
     /// construct already chopped is not chopped again. The widest one wins, because breaking the
     /// outermost construct removes the most from the line.
     /// </summary>
+    /// <remarks>
+    /// Only the subtree whose span overlaps <paramref name="line"/> is walked. A candidate must
+    /// start on the line, so its span necessarily overlaps the line's span; any node whose span
+    /// does not overlap the line therefore contains no candidate, and neither does any node whose
+    /// span does not overlap it, since a child's span is always contained within its ancestors'.
+    /// Scoping the walk this way is a pure performance change: it visits the same candidates the
+    /// full-tree walk would have found, just without touching irrelevant subtrees.
+    /// </remarks>
     /// <param name="root">The syntax root.</param>
     /// <param name="text">The document text.</param>
     /// <param name="line">The line to shorten.</param>
@@ -68,7 +76,7 @@ internal static class LineChopper
     {
         SyntaxNode? widest = null;
 
-        foreach (var node in root.DescendantNodes(descendIntoTrivia: false))
+        foreach (var node in root.DescendantNodes(line.Span, descendIntoTrivia: false))
         {
             if (!IsChoppable(node) || !StartsOn(node, line) || SpansLines(node, text))
             {

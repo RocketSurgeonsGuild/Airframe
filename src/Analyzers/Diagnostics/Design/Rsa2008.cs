@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
@@ -21,14 +20,9 @@ public class Rsa2008 : Rsa2000
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
-        if (context.Node is not CompilationUnitSyntax compilationUnit)
-        {
-            return;
-        }
-
         var names = new HashSet<string>(StringComparer.Ordinal);
 
-        foreach (var type in TopLevelTypes.Of(compilationUnit))
+        foreach (var type in DocumentWalk.Of(context).TopLevelTypes)
         {
             // Types that share a name are one concept spelled several ways, such as IListener
             // beside IListener<T>, or the parts of a partial type. They belong in one file.

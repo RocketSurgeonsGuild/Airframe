@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -19,12 +18,7 @@ public class Rsa2010 : Rsa2000
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
-        var regions = context
-           .Node
-           .DescendantTrivia(descendIntoTrivia: true)
-           .Where(trivia => trivia.IsKind(SyntaxKind.RegionDirectiveTrivia));
-
-        foreach (var region in regions)
+        foreach (var region in DocumentWalk.Of(context).Regions)
         {
             context.ReportDiagnostic(Diagnostic.Create(RSA2010, region.GetLocation()));
         }

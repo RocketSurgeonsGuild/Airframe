@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Immutable;
 using System.IO;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
@@ -22,11 +20,6 @@ public class Rsa2009 : Rsa2000
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
-        if (context.Node is not CompilationUnitSyntax compilationUnit)
-        {
-            return;
-        }
-
         var path = context.Node.SyntaxTree.FilePath;
 
         // In memory compilations carry no path; there is nothing to match against.
@@ -35,11 +28,13 @@ public class Rsa2009 : Rsa2000
             return;
         }
 
-        var first = TopLevelTypes.Of(compilationUnit).FirstOrDefault();
-        if (first == null)
+        var topLevelTypes = DocumentWalk.Of(context).TopLevelTypes;
+        if (topLevelTypes.Count == 0)
         {
             return;
         }
+
+        var first = topLevelTypes[0];
 
         var fileName = Path.GetFileNameWithoutExtension(path);
         var expected = MemberRank.NameOf(first);
