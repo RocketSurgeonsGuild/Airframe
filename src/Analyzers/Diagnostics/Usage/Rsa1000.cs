@@ -7,7 +7,6 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 /// <summary>
 /// Represents an RSA 1000 level analyzer.
 /// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public abstract class Rsa1000 : DiagnosticAnalyzer
 {
     /// <inheritdoc/>
