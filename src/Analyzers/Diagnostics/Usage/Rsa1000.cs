@@ -7,15 +7,18 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 /// <summary>
 /// Represents an RSA 1000 level analyzer.
 /// </summary>
+/// <remarks>
+/// Generated code analysis is switched off. The rules in this band catch Rx and MVVM misuse,
+/// which is only meaningful in code an author wrote; a generator owns the shape of its own
+/// output, so reporting RSA1XXX on a <c>.g.cs</c> file would produce warnings nobody can act on.
+/// </remarks>
 public abstract class Rsa1000 : DiagnosticAnalyzer
 {
     /// <inheritdoc/>
     public sealed override void Initialize(AnalysisContext context)
     {
         context.EnableConcurrentExecution();
-        context.ConfigureGeneratedCodeAnalysis(
-            GeneratedCodeAnalysisFlags.Analyze
-          | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
         context.RegisterSyntaxNodeAction(action: Analyze, syntaxKinds: GetKind());
     }
