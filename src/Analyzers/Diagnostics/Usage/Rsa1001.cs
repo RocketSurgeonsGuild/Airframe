@@ -11,6 +11,7 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 /// <summary>
 /// Represents a diagnostic for <see cref="Descriptions.RSA1001"/>.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa1001 : Rsa1000
 {
     /// <inheritdoc/>

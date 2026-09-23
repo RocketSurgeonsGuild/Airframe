@@ -11,6 +11,7 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 /// <summary>
 /// Represents a diagnostic for <see cref="Descriptions.RSA3002"/>.
 /// </summary>
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa3002 : Rsa3000
 {
     /// <inheritdoc/>
