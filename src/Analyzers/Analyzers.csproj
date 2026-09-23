@@ -2,17 +2,25 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-        <IsPackable>false</IsPackable>
-        <IsRoslynComponent>true</IsRoslynComponent>
-        <NoPackageAnalysis>true</NoPackageAnalysis>
         <AssemblyName>Rocket.Surgery.Airframe.Analyzers</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Analyzers</RootNamespace>
         <Description>Common analyzers for MVVM, MVU, Rx, and Airframe coding standards.</Description>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <GeneratedFolder>Generated</GeneratedFolder>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <IsPackable>false</IsPackable>
+        <NoWarn>RS1022</NoWarn>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include=".\AnalyzerReleases.Shipped.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
     </ItemGroup>
     <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
