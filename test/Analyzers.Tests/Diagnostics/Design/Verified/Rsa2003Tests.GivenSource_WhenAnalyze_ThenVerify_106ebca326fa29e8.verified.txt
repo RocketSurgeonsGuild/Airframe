@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2003: [
+      {
+        Id: RSA2003,
+        Title: Members should be ordered by kind,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (8,19)-(8,27),
+        Description: Within a group, members are declared in the order fields, events, properties, indexers, methods, operators, nested types.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: 'Property' (public property) should appear before 'Method()' (public method),
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

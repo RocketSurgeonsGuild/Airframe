@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2004: [
+      {
+        Id: RSA2004,
+        Title: Members should be ordered by access,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (5,19)-(5,25),
+        Description: Within a kind, members are declared in the order public, internal, protected internal, protected, private protected, private.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: 'Public' (public field) should appear before 'Internal' (internal field),
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

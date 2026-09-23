@@ -1,0 +1,73 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2001: [
+      {
+        Id: RSA2001,
+        Title: Constructors should appear before other members,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (16,15)-(16,22),
+        Description: Constructors and destructors are declared at the top of a type, regardless of accessibility, so the ways a type can be created are the first thing a reader sees.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: 'Example()' (public constructor) should appear before '_value' (private field),
+        Category: Design
+      }
+    ]
+  },
+  CodeFixes: {
+    Rocket.Surgery.Airframe.CodeFixes.Design.MemberOrderFix: [
+      {
+        CodeActions: [
+          {
+            Title: Reorder members to match the layout,
+            Tags: null,
+            TextChanges: {
+              Input0.cs: [
+                {
+                  Length: 133,
+                  NewText:
+ublic Example()
+        {
+        }
+
+        public int Property { get; set; }
+
+        public void Method()
+        {
+        }
+
+        private int _value;
+                },
+                {
+                  Length: 35,
+                  NewText: void Helper
+                }
+              ]
+            }
+          }
+        ],
+        Diagnostic: {
+          Id: RSA2001,
+          Title: Constructors should appear before other members,
+          Severity: Warning,
+          WarningLevel: 1,
+          Location: Input0.cs: (16,15)-(16,22),
+          Description: Constructors and destructors are declared at the top of a type, regardless of accessibility, so the ways a type can be created are the first thing a reader sees.,
+          MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+          Message: 'Example()' (public constructor) should appear before '_value' (private field),
+          Category: Design
+        },
+        Document: Input0.cs
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

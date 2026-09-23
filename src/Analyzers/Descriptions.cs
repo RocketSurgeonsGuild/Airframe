@@ -72,6 +72,105 @@ internal static class Descriptions
         true,
         "Functions should be called using the .Invoke() method rather than parentheses.");
 
+    public static DiagnosticDescriptor RSA2001 { get; } = new(
+        id: "RSA2001",
+        title: "Constructors should appear before other members",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Constructors and destructors are declared at the top of a type, regardless of accessibility, so the ways a type can be created are the first thing a reader sees.");
+
+    public static DiagnosticDescriptor RSA2002 { get; } = new(
+        id: "RSA2002",
+        title: "Private members should appear after non-private members",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A type's public surface is declared before its implementation details, so a reader meets the contract before the machinery.");
+
+    public static DiagnosticDescriptor RSA2003 { get; } = new(
+        id: "RSA2003",
+        title: "Members should be ordered by kind",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Within a group, members are declared in the order fields, events, properties, indexers, methods, operators, nested types.");
+
+    public static DiagnosticDescriptor RSA2004 { get; } = new(
+        id: "RSA2004",
+        title: "Members should be ordered by access",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Within a kind, members are declared in the order public, internal, protected internal, protected, private protected, private.");
+
+    public static DiagnosticDescriptor RSA2005 { get; } = new(
+        id: "RSA2005",
+        title: "Static members should appear before instance members",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Within a kind and accessibility, static members are declared before instance members.");
+
+    public static DiagnosticDescriptor RSA2006 { get; } = new(
+        id: "RSA2006",
+        title: "Constant fields should appear before non-constant fields",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Constant fields are declared before other fields of the same accessibility.");
+
+    public static DiagnosticDescriptor RSA2007 { get; } = new(
+        id: "RSA2007",
+        title: "Readonly fields should appear before mutable fields",
+        messageFormat: "'{0}' ({1}) should appear before '{2}' ({3})",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Readonly fields are declared before mutable fields of the same accessibility, so a reader sees what cannot change first.");
+
+    public static DiagnosticDescriptor RSA2008 { get; } = new(
+        id: "RSA2008",
+        title: "File should contain a single type",
+        messageFormat: "Move '{0}' to its own file",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A file declares one top level type, so a type can be found from its file name alone.");
+
+    public static DiagnosticDescriptor RSA2009 { get; } = new(
+        id: "RSA2009",
+        title: "File name should match the first type name",
+        messageFormat: "File name '{0}' does not match the first type declared in it, '{1}'",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A file is named for the type it declares, so a type can be found from its file name alone.");
+
+    public static DiagnosticDescriptor RSA2010 { get; } = new(
+        id: "RSA2010",
+        title: "Do not use regions",
+        messageFormat: "Remove the region directive",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.");
+
+    public static DiagnosticDescriptor RSA2011 { get; } = new(
+        id: "RSA2011",
+        title: "Declare accessibility explicitly",
+        messageFormat: "Declare an accessibility modifier for '{0}'",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Accessibility is stated rather than inferred from the C# default, so the declared surface of a type is unambiguous.");
+
     public static DiagnosticDescriptor RSA3001 { get; } =
         new(
             "RSA3001",

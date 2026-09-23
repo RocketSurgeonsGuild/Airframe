@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2005: [
+      {
+        Id: RSA2005,
+        Title: Static members should appear before instance members,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (8,27)-(8,33),
+        Description: Within a kind and accessibility, static members are declared before instance members.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: 'Static()' (public static method) should appear before 'Instance()' (public method),
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

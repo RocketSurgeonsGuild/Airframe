@@ -1,0 +1,62 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2010: [
+      {
+        Id: RSA2010,
+        Title: Do not use regions,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (4,8)-(4,23),
+        Description: Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.,
+        MessageFormat: Remove the region directive,
+        Message: Remove the region directive,
+        Category: Design
+      }
+    ]
+  },
+  CodeFixes: {
+    Rocket.Surgery.Airframe.CodeFixes.Design.Rsa2010Fix: [
+      {
+        CodeActions: [
+          {
+            Title: Remove the region,
+            Tags: null,
+            TextChanges: {
+              Input0.cs: [
+                {
+                  Length: 24,
+                  NewText: 
+                },
+                {
+                  Length: 19,
+                  NewText: 
+                }
+              ]
+            }
+          }
+        ],
+        Diagnostic: {
+          Id: RSA2010,
+          Title: Do not use regions,
+          Severity: Warning,
+          WarningLevel: 1,
+          Location: Input0.cs: (4,8)-(4,23),
+          Description: Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.,
+          MessageFormat: Remove the region directive,
+          Message: Remove the region directive,
+          Category: Design
+        },
+        Document: Input0.cs
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}
