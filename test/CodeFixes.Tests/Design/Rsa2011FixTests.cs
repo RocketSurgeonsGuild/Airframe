@@ -22,7 +22,7 @@ public class Rsa2011FixTests
            .Create()
            .WithAnalyzer<Rsa2011>()
            .WithCodeFix<Rsa2011Fix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .WithDiagnosticSeverity(DiagnosticSeverity.Error)
            .GenerateAsync();
 
@@ -39,7 +39,7 @@ public class Rsa2011FixTests
            .Create()
            .WithAnalyzer<Rsa2011>()
            .WithCodeFix<Rsa2011Fix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .Build()
            .GenerateAsync();
 

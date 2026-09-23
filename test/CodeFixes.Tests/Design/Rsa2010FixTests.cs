@@ -19,7 +19,7 @@ public class Rsa2010FixTests
            .Create()
            .WithAnalyzer<Rsa2010>()
            .WithCodeFix<Rsa2010Fix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .WithDiagnosticSeverity(DiagnosticSeverity.Error)
            .GenerateAsync();
 

@@ -23,7 +23,7 @@ public class Rsa2013FixTests
            .Create()
            .WithAnalyzer<Rsa2013>()
            .WithCodeFix<Rsa2013Fix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .AddGlobalOption("max_line_length", "80")
            .WithDiagnosticSeverity(DiagnosticSeverity.Error)
            .GenerateAsync();
@@ -41,7 +41,7 @@ public class Rsa2013FixTests
            .Create()
            .WithAnalyzer<Rsa2013>()
            .WithCodeFix<Rsa2013Fix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .AddGlobalOption("max_line_length", "80")
            .Build()
            .GenerateAsync();

@@ -23,7 +23,7 @@ public class MemberOrderFixTests
            .Create()
            .WithAnalyzer<Rsa2001>()
            .WithCodeFix<MemberOrderFix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .WithDiagnosticSeverity(DiagnosticSeverity.Error)
            .GenerateAsync();
 
@@ -40,7 +40,7 @@ public class MemberOrderFixTests
            .Create()
            .WithAnalyzer<Rsa2001>()
            .WithCodeFix<MemberOrderFix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .Build()
            .GenerateAsync();
 
@@ -68,7 +68,7 @@ public class MemberOrderFixTests
            .Create()
            .WithAnalyzer<Rsa2001>()
            .WithCodeFix<MemberOrderFix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .Build()
            .GenerateAsync();
 
@@ -97,7 +97,7 @@ public class MemberOrderFixTests
            .Create()
            .WithAnalyzer<Rsa2001>()
            .WithCodeFix<MemberOrderFix>()
-           .AddSources(source)
+           .AddNormalizedSources(source)
            .Build()
            .GenerateAsync();
 
