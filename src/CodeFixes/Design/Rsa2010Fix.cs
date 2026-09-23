@@ -3,6 +3,7 @@ using System.Composition;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Rocket.Surgery.Airframe.Analyzers;
@@ -46,7 +47,7 @@ public class Rsa2010Fix : CodeFixProvider
             diagnostic);
     }
 
-    private static Task<Document> RemoveAsync(Document document, SyntaxNode root, RegionDirectiveTriviaSyntax region, CancellationToken cancellationToken)
+    private static async Task<Document> RemoveAsync(Document document, SyntaxNode root, RegionDirectiveTriviaSyntax region, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -57,10 +58,38 @@ public class Rsa2010Fix : CodeFixProvider
         var without = root.RemoveNodes(related, SyntaxRemoveOptions.KeepNoTrivia | SyntaxRemoveOptions.AddElasticMarker);
         if (without == null)
         {
-            return Task.FromResult(document);
+            return document;
         }
 
-        return Task.FromResult(document.WithSyntaxRoot(without.WithAdditionalAnnotations(Formatter.Annotation)));
+        // AddElasticMarker leaves the line break at the removal site for the formatter to
+        // synthesize. Left to an ambient formatting pass with no explicit options, that
+        // synthesis falls back to Environment.NewLine, so the same fix produces CRLF on Windows
+        // and LF on macOS/Linux for an identical, already-normalized document. Formatting here
+        // with the file's own line ending pinned keeps the result deterministic across hosts.
+        var formatting = document.Project.Solution.Options.WithChangedOption(FormattingOptions.NewLine, LanguageNames.CSharp, NewLineOf(root));
+
+        return await Formatter.FormatAsync(
+            document.WithSyntaxRoot(without.WithAdditionalAnnotations(Formatter.Annotation)),
+            Formatter.Annotation,
+            formatting,
+            cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Gets the line ending the file already uses, so removing a region does not introduce a
+    /// second convention into the file.
+    /// </summary>
+    private static string NewLineOf(SyntaxNode root)
+    {
+        foreach (var trivia in root.DescendantTrivia())
+        {
+            if (trivia.IsKind(SyntaxKind.EndOfLineTrivia))
+            {
+                return trivia.ToString();
+            }
+        }
+
+        return "\r\n";
     }
 
     private const string Title = "Remove the region";
