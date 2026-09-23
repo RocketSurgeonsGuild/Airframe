@@ -115,13 +115,26 @@ public class Rsa3001Tests
                            .ToProperty(this, nameof(Value), out _value)
                            .DisposeWith(Garbage);
 
+                        // Regression guard: bare calls whose name is a SUBSTRING of a tracked
+                        // method ("SafeSubscribe"/"SubscribeSafe" contain "Safe", "BindTo" contains
+                        // "Bind") but are not themselves disposal-relevant, so must not be flagged.
+                        Observable
+                           .Return(Unit.Default)
+                           .Do(_ => { })
+                           .Safe();
+
+                        Observable
+                           .Return(Unit.Default)
+                           .Do(_ => { })
+                           .Bind();
+
                         Command = ReactiveCommand.Create(() => { });
                     }
 
                     public ReactiveCommand<Unit, Unit> Command { get; }
 
                     public Unit Value => _value.Value;
-                
+
                     public Unit Unit
                     {
                         get => _unit;
@@ -132,6 +145,13 @@ public class Rsa3001Tests
 
                     private readonly ObservableAsPropertyHelper<Unit> _value;
                     private Unit _unit;
+                }
+
+                internal static class SubstringCollisionExtensions
+                {
+                    internal static void Safe(this IObservable<Unit> source) { }
+
+                    internal static void Bind(this IObservable<Unit> source) { }
                 }
             }
             """;
