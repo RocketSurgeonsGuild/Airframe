@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -35,7 +34,7 @@ public class Rsa3001 : Rsa3000
             return;
         }
 
-        if (!_subscriptionAccess.Any(methodName => methodName.Contains(memberAccessExpressionSyntax.Name.Identifier.Text)) ||
+        if (!_subscriptionAccess.Contains(memberAccessExpressionSyntax.Name.Identifier.Text) ||
             memberAccessExpressionSyntax.Expression is not InvocationExpressionSyntax)
         {
             return;
@@ -44,5 +43,7 @@ public class Rsa3001 : Rsa3000
         context.ReportDiagnostic(Diagnostic.Create(RSA3001, memberAccessExpressionSyntax.Name.Identifier.GetLocation()));
     }
 
-    private readonly List<string> _subscriptionAccess = ["InvokeCommand", "HandledSubscribe", "SafeSubscribe", "SubscribeSafe", "ToProperty", "BindTo", "AsValue"];
+    // Exact match only: a substring check here (e.g. matching "Value" against "AsValue") would
+    // false-positive on unrelated fluent calls that happen to share a substring with one of these.
+    private readonly HashSet<string> _subscriptionAccess = ["InvokeCommand", "HandledSubscribe", "SafeSubscribe", "SubscribeSafe", "Subscribe", "ToProperty", "BindTo", "AsValue"];
 }
