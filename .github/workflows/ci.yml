@@ -92,25 +92,25 @@ jobs:
           name: 'actions-${{ matrix.os }}'
       - name: 🏺 Publish logs
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'logs'
           path: 'artifacts/logs/'
       - name: 🏺 Publish coverage data
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'coverage'
           path: 'coverage/'
       - name: 🏺 Publish test data
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'test data'
           path: 'artifacts/test/'
       - name: 🏺 Publish NuGet Packages
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'nuget'
           path: 'artifacts/nuget/'
