@@ -3,36 +3,37 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <Description>A set of analyzers and code fixes for common patterns found in Airframe based applications.</Description>
         <DevelopmentDependency>true</DevelopmentDependency>
-        <IncludeBuildOutput>true</IncludeBuildOutput>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
         <IsPackable>true</IsPackable>
         <PackageId>Rocket.Surgery.Airframe.CodeAnalysis</PackageId>
-        <Version>1.0.0.6</Version>
+        <Version>1.0.0.9</Version>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <GeneratedFolder>Generated</GeneratedFolder>
-        <IsRoslynComponent>true</IsRoslynComponent>
-        <IsPackable>false</IsPackable>
         <NoWarn>RS1022</NoWarn>
         <NoPackageAnalysis>true</NoPackageAnalysis>
+        <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PackAnalyzerAssemblies</TargetsForTfmSpecificContentInPackage>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
-        <ProjectReference Include="..\Analyzers\Analyzers.csproj" PrivateAssets="all">
-<!--            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>-->
-        </ProjectReference>
-        <ProjectReference Include="..\CodeFixes\CodeFixes.csproj" PrivateAssets="all">
-<!--            <ReferenceOutputAssembly>true</ReferenceOutputAssembly>-->
-        </ProjectReference>
+        <ProjectReference Include="..\Analyzers\Analyzers.csproj" PrivateAssets="all" />
+        <ProjectReference Include="..\CodeFixes\CodeFixes.csproj" PrivateAssets="all" />
     </ItemGroup>
-    <ItemGroup>
-        <None Include="..\Analyzers\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.Analyzers.dll"
-              Pack="true"
-              PackagePath="analyzers\dotnet\cs\Rocket.Surgery.Airframe.Analyzers.dll"
-              Visible="false"/>
-        <None Include="..\CodeFixes\bin\$(Configuration)\netstandard2.0\Rocket.Surgery.Airframe.CodeFixes.dll"
-              Pack="true"
-              PackagePath="analyzers\dotnet\cs\Rocket.Surgery.Airframe.CodeFixes.dll"
-              Visible="false"/>
-    </ItemGroup>
+
+    <!--
+      Packs the analyzer and code fix assemblies produced by the referenced projects.
+      Paths are resolved from the build rather than hardcoded so the package always
+      picks up the assemblies for the configuration currently being built.
+    -->
+    <Target Name="PackAnalyzerAssemblies" DependsOnTargets="ResolveReferences">
+        <ItemGroup>
+            <_AnalyzerAssembly Include="@(ReferencePath->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+            <_AnalyzerSymbol Include="@(_AnalyzerAssembly->'%(RootDir)%(Directory)%(Filename).pdb')" Condition="Exists('%(RootDir)%(Directory)%(Filename).pdb')" />
+            <TfmSpecificPackageFile Include="@(_AnalyzerAssembly)" PackagePath="analyzers/dotnet/cs" />
+            <TfmSpecificPackageFile Include="@(_AnalyzerSymbol)" PackagePath="analyzers/dotnet/cs" />
+        </ItemGroup>
+        <Error Condition="'@(_AnalyzerAssembly)' == ''"
+               Text="No analyzer assemblies were resolved from project references; the package would ship empty." />
+    </Target>
 </Project>
