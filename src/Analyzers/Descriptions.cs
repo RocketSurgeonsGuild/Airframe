@@ -79,7 +79,7 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Design, category => category.ToString()),
         defaultSeverity: Warning,
         isEnabledByDefault: true,
-        description: "Constructors and destructors are declared at the top of a type, regardless of accessibility, so the ways a type can be created are the first thing a reader sees.");
+        description: "Constructors and destructors are declared first, whatever their accessibility, so the ways a type can be created lead the file.");
 
     public static DiagnosticDescriptor RSA2002 { get; } = new(
         id: "RSA2002",
@@ -160,7 +160,7 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Design, category => category.ToString()),
         defaultSeverity: Warning,
         isEnabledByDefault: true,
-        description: "Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.");
+        description: "Regions hide code rather than organize it, and a region directive travels with the member below it.");
 
     public static DiagnosticDescriptor RSA2011 { get; } = new(
         id: "RSA2011",
@@ -178,7 +178,16 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Design, category => category.ToString()),
         defaultSeverity: Warning,
         isEnabledByDefault: true,
-        description: "A directive that opens or closes around whole member declarations hides part of a type's surface from anyone reading one configuration, leaves the layout rules unable to see the members it excludes, and blocks the member reorder, which cannot move a member past it without changing which symbols compile it. Conditional compilation inside a member body is unaffected, since that is how multi targeting is expressed.");
+        description: "A directive wrapping member declarations hides part of a type's surface and stops the reorder.");
+
+    public static DiagnosticDescriptor RSA2013 { get; } = new(
+        id: "RSA2013",
+        title: "Line exceeds the maximum length",
+        messageFormat: "Line is {0} characters long; the maximum is {1}",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "Lines stay inside the margin set by the max_line_length editorconfig key. The rule is silent where that key is absent or off.");
 
     public static DiagnosticDescriptor RSA3001 { get; } =
         new(

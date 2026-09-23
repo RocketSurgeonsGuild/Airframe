@@ -7,7 +7,7 @@
         Severity: Warning,
         WarningLevel: 1,
         Location: Input0.cs: (4,8)-(4,21),
-        Description: Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.,
+        Description: Regions hide code rather than organize it, and a region directive travels with the member below it.,
         MessageFormat: Remove the region directive,
         Message: Remove the region directive,
         Category: Design
@@ -18,7 +18,7 @@
         Severity: Warning,
         WarningLevel: 1,
         Location: Input0.cs: (9,8)-(9,21),
-        Description: Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.,
+        Description: Regions hide code rather than organize it, and a region directive travels with the member below it.,
         MessageFormat: Remove the region directive,
         Message: Remove the region directive,
         Category: Design
@@ -52,7 +52,7 @@
           Severity: Warning,
           WarningLevel: 1,
           Location: Input0.cs: (4,8)-(4,21),
-          Description: Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.,
+          Description: Regions hide code rather than organize it, and a region directive travels with the member below it.,
           MessageFormat: Remove the region directive,
           Message: Remove the region directive,
           Category: Design
@@ -84,7 +84,7 @@
           Severity: Warning,
           WarningLevel: 1,
           Location: Input0.cs: (9,8)-(9,21),
-          Description: Regions hide code rather than organize it, and because a region directive lives in the leading trivia of the member that follows it, reordering members moves regions to places they do not belong.,
+          Description: Regions hide code rather than organize it, and a region directive travels with the member below it.,
           MessageFormat: Remove the region directive,
           Message: Remove the region directive,
           Category: Design

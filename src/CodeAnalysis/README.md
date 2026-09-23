@@ -76,6 +76,7 @@ author could satisfy.
 | RSA2010 | Do not use regions | SA1124 | yes |
 | RSA2011 | Declare accessibility explicitly | SA1400 | yes |
 | RSA2012 | Conditional compilation should not span member declarations | none | none |
+| RSA2013 | Line exceeds the maximum length | none | yes |
 
 RSA2008 accepts types that share a name, so `IListener` beside `IListener<T>` is not a violation.
 RSA2009 accepts a generic arity or a partial suffix, so `Thing{T}.cs`, ``Thing`1.cs`` and
@@ -107,6 +108,53 @@ public int Start() =>
     _manager.Value.StartMonitoring(region);
 #endif
 ```
+
+### RSA2013 and chop line
+
+RSA2013 reports any line past the margin. The limit comes from the `max_line_length` editorconfig
+key, the same key Rider and ReSharper read, so the margin the editor draws and the margin the build
+enforces are one number. **Where that key is absent, or set to `off`, the rule reports nothing**
+rather than inventing a limit.
+
+```ini
+[*.cs]
+max_line_length = 160
+```
+
+Its code fix is the equivalent of Rider's chop line. It breaks the outermost construct on the line
+that can carry a break:
+
+| Construct | Result |
+|-----------|--------|
+| Parameter list | one parameter per line |
+| Argument list | one argument per line |
+| Collection expression and object initializer | one element per line |
+| Expression body | break after the arrow |
+
+```csharp
+public static string Combine(string first, string second, string third, string fourth)
+```
+
+becomes
+
+```csharp
+public static string Combine(
+    string first,
+    string second,
+    string third,
+    string fourth)
+```
+
+Two things to know.
+
+**Roslyn's formatter does not wrap.** It normalises whitespace it is given but has no notion of a
+right margin, so `dotnet format` will never shorten a line by itself. This fix is that wrapping,
+and it is why RSA2013 is worth having rather than leaving the margin to the formatter.
+
+**One chop per pass.** A line long enough to need two breaks, such as a long signature whose body
+is also long, shortens on the first pass and is reported again on the next, so repeated runs
+converge. Nothing is offered for a line whose length is a string literal or a comment, because
+there is no break to insert that would not change the text.
 
 ### Using the ordering fix as a formatter
 
