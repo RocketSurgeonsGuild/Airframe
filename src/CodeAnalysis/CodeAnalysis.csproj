@@ -15,6 +15,16 @@
         <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PackAnalyzerAssemblies</TargetsForTfmSpecificContentInPackage>
     </PropertyGroup>
 
+    <!--
+      The CI pipeline packs with NoBuild after a separate build step. Resolving
+      references would otherwise invoke the Build target on the referenced projects,
+      which NoBuild forbids (NETSDK1085). Asking for their target paths instead
+      reuses the assemblies the earlier build already produced.
+    -->
+    <PropertyGroup Condition="'$(NoBuild)' == 'true'">
+        <BuildProjectReferences>false</BuildProjectReferences>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
         <ProjectReference Include="..\Analyzers\Analyzers.csproj" PrivateAssets="all" />
