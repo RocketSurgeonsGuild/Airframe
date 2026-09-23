@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2012: [
+      {
+        Id: RSA2012,
+        Title: Conditional compilation should not span member declarations,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (4,0)-(4,15),
+        Description: A directive that opens or closes around whole member declarations hides part of a type's surface from anyone reading one configuration, leaves the layout rules unable to see the members it excludes, and blocks the member reorder, which cannot move a member past it without changing which symbols compile it. Conditional compilation inside a member body is unaffected, since that is how multi targeting is expressed.,
+        MessageFormat: Move the conditional compilation inside the members it guards, or split '{0}' across per-target files,
+        Message: Move the conditional compilation inside the members it guards, or split 'Example' across per-target files,
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

@@ -171,6 +171,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "Accessibility is stated rather than inferred from the C# default, so the declared surface of a type is unambiguous.");
 
+    public static DiagnosticDescriptor RSA2012 { get; } = new(
+        id: "RSA2012",
+        title: "Conditional compilation should not span member declarations",
+        messageFormat: "Move the conditional compilation inside the members it guards, or split '{0}' across per-target files",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A directive that opens or closes around whole member declarations hides part of a type's surface from anyone reading one configuration, leaves the layout rules unable to see the members it excludes, and blocks the member reorder, which cannot move a member past it without changing which symbols compile it. Conditional compilation inside a member body is unaffected, since that is how multi targeting is expressed.");
+
     public static DiagnosticDescriptor RSA3001 { get; } =
         new(
             "RSA3001",

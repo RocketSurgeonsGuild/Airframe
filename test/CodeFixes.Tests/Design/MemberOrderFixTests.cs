@@ -60,6 +60,7 @@ public class MemberOrderFixTests
     [Theory]
     [InlineData(DirectiveSpanningMembers)]
     [InlineData(DirectiveClosingOnTypeBrace)]
+    [InlineData(PragmaSpanningMembers)]
     public async Task GivenDirectiveAcrossMembers_WhenCodeFix_ThenNoFixOffered(string source)
     {
         // Given, When
@@ -230,6 +231,28 @@ public class MemberOrderFixTests
         #if NEVER
                 private int _disabled;
         #endif
+                public Example()
+                {
+                }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A pragma pair wrapping fields. RSA2012 does not report this, but moving a member across it
+    /// would still change which warnings are suppressed, so the reorder declines all the same.
+    /// </summary>
+    // lang=csharp
+    internal const string PragmaSpanningMembers =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+        #pragma warning disable CA2213
+                private int _first;
+        #pragma warning restore CA2213
+
                 public Example()
                 {
                 }

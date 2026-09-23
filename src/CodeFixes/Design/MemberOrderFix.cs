@@ -64,8 +64,9 @@ public class MemberOrderFix : CodeFixProvider
         }
 
         // Reordering across a conditional block would move a member into or out of it and quietly
-        // change which symbols compile it. Report the diagnostic, but leave the edit to a human.
-        if (DirectivesSpanMembers(type))
+        // change which symbols compile it. RSA2012 reports that block in its own right; here the
+        // reorder simply steps aside and leaves the edit to a human.
+        if (DirectiveSpan.SpansMembers(type))
         {
             return;
         }
@@ -77,61 +78,6 @@ public class MemberOrderFix : CodeFixProvider
                 equivalenceKey: Title),
             diagnostic);
     }
-
-    /// <summary>
-    /// Determines whether a preprocessor directive crosses the boundary between the members of a
-    /// type.
-    /// </summary>
-    /// <remarks>
-    /// A directive pair that opens inside one member and closes inside another, or that closes on
-    /// the type's own brace, cannot survive a reorder: whichever member moves past it leaves or
-    /// joins the conditional block, so the code still compiles but no longer compiles under the
-    /// same symbols. A pair contained entirely within one member travels with that member and is
-    /// safe. A directive with no partner, such as a lone pragma, is treated as safe because it
-    /// moves with the member that carries it.
-    /// </remarks>
-    /// <param name="type">The type whose members would be reordered.</param>
-    /// <returns>A value indicating whether a directive spans members.</returns>
-    private static bool DirectivesSpanMembers(TypeDeclarationSyntax type)
-    {
-        if (!type.ContainsDirectives)
-        {
-            return false;
-        }
-
-        var owner = new Dictionary<DirectiveTriviaSyntax, int>();
-
-        for (var index = 0; index < type.Members.Count; index++)
-        {
-            foreach (var directive in DirectivesIn(type.Members[index]))
-            {
-                owner[directive] = index;
-            }
-        }
-
-        foreach (var directive in DirectivesIn(type))
-        {
-            // A directive that belongs to no member sits on the type's own braces, so any member
-            // that moves past it crosses it.
-            if (!owner.TryGetValue(directive, out var index))
-            {
-                return true;
-            }
-
-            foreach (var related in directive.GetRelatedDirectives())
-            {
-                if (!owner.TryGetValue(related, out var relatedIndex) || relatedIndex != index)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private static IEnumerable<DirectiveTriviaSyntax> DirectivesIn(SyntaxNode node) =>
-        node.DescendantNodes(descendIntoTrivia: true).OfType<DirectiveTriviaSyntax>();
 
     private static Task<Document> ReorderAsync(Document document, SyntaxNode root, TypeDeclarationSyntax type, CancellationToken cancellationToken)
     {

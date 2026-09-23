@@ -17,6 +17,7 @@
 | RSA2009 | Design      | Warning     | RSA2009_FileNameMatchesType                |
 | RSA2010 | Design      | Warning     | RSA2010_NoRegions                          |
 | RSA2011 | Design      | Warning     | RSA2011_ExplicitAccessibility              |
+| RSA2012 | Design      | Warning     | RSA2012_ConditionalCompilationSpansMembers |
 | RSA3002 | Performance | Warning     | RSA3002_LambdaExpressionStatic             |
 | RSA3003 | Performance | Information | RSA3003_Closure                            |
 | RSA3004 | Performance | Warning     | RSA3004_AutoRefreshOnTaskPool              |

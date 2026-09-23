@@ -457,6 +457,75 @@ internal static class DesignTestData
     ];
 
     /// <summary>
+    /// A conditional block wrapping whole member declarations. RSA2012 owns this.
+    /// </summary>
+    // lang=csharp
+    public const string DirectiveSpanningMembers =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+        #if XAMARIN_IOS
+                public void Start(int region)
+                {
+                }
+        #else
+                public void Start(string region)
+                {
+                }
+        #endif
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A pragma pair wrapping fields. It straddles members, so the reorder declines across it, but
+    /// it is not conditional compilation and RSA2012 leaves it alone.
+    /// </summary>
+    // lang=csharp
+    public const string PragmaSpanningMembers =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public Example()
+                {
+                }
+
+        #pragma warning disable CA2213
+                private int _first;
+                private int _second;
+        #pragma warning restore CA2213
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A conditional block inside one member body, which is how multi targeting is written and is
+    /// deliberately allowed.
+    /// </summary>
+    // lang=csharp
+    public const string DirectiveWithinMemberBody =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public int Start()
+                {
+        #if XAMARIN_IOS
+                    return 1;
+        #else
+                    return 2;
+        #endif
+                }
+            }
+        }
+        """;
+
+    /// <summary>
     /// Gets every ordering sample. A rule under test asserts it stays silent on the six that
     /// belong to its siblings.
     /// </summary>

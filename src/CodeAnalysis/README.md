@@ -75,10 +75,38 @@ author could satisfy.
 | RSA2009 | File name should match the first type name | SA1649 | none |
 | RSA2010 | Do not use regions | SA1124 | yes |
 | RSA2011 | Declare accessibility explicitly | SA1400 | yes |
+| RSA2012 | Conditional compilation should not span member declarations | none | none |
 
 RSA2008 accepts types that share a name, so `IListener` beside `IListener<T>` is not a violation.
 RSA2009 accepts a generic arity or a partial suffix, so `Thing{T}.cs`, ``Thing`1.cs`` and
 `Thing+Statics.cs` all name `Thing`.
+
+RSA2012 is about conditional compilation that wraps whole member declarations:
+
+```csharp
+#if XAMARIN_IOS
+    public void StartRangingBeacons(CLBeaconRegion region) => ...
+#else
+    public void StartRangingBeacons(CLBeaconIdentityConstraint constraint) => ...
+#endif
+```
+
+A block like this hides half a type's surface from anyone reading one configuration, leaves the
+layout rules unable to see the members it excludes, and stops the reorder, which cannot move a
+member past it without changing which symbols compile it. Move the directive inside the members it
+guards, or split the type across per-target files.
+
+**Conditional compilation inside a member body is not reported**, because that is how multi
+targeting is written:
+
+```csharp
+public int Start() =>
+#if XAMARIN_IOS
+    _manager.Value.StartMonitoring(region, accuracy);
+#else
+    _manager.Value.StartMonitoring(region);
+#endif
+```
 
 ### Using the ordering fix as a formatter
 
@@ -95,10 +123,12 @@ Two things to know about it.
 reported; it does not stop the fix ordering members by access when you invoke it for one of the
 other six. Tune these rules by severity individually, but enable or disable them as a group.
 
-**The fix declines when a preprocessor directive crosses a member boundary.** Reordering would move
-a member into or out of a conditional block and quietly change which symbols compile it, so the
-diagnostic is still reported and the edit is left to you. A directive pair contained entirely
-within one member travels with that member and does not block the fix.
+**The fix declines when a directive's meaning depends on where it sits among the members.** That
+covers a conditional block wrapping member declarations, which RSA2012 reports in its own right,
+and a `#pragma warning disable` written between two members, which RSA2012 does not report but
+which still starts suppressing from wherever it lands. In both cases the diagnostic stands and the
+edit is left to you. A directive pair contained within one member, or a pragma inside a member
+body, travels with that member and does not block the fix.
 
 ## Running alongside StyleCop
 
