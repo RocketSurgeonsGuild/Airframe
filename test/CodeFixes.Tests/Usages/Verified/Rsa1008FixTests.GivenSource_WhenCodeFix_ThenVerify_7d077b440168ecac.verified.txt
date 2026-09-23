@@ -1,0 +1,63 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1008: [
+      {
+        Id: RSA1008,
+        Title: Use RaiseAndSetIfChanged instead of direct field assignment,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (8,22)-(8,26),
+        Description: A ReactiveObject property setter that assigns its backing field directly bypasses change notification, so bound views and WhenAnyValue subscribers never see the update.,
+        MessageFormat: Property '{0}' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+        Message: Property 'Name' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+        Category: Usage
+      }
+    ]
+  },
+  CodeFixes: {
+    Rocket.Surgery.Airframe.CodeFixes.Usage.Rsa1008Fix: [
+      {
+        CodeActions: [
+          {
+            Title: Use RaiseAndSetIfChanged,
+            Tags: null,
+            TextChanges: {
+              Input0.cs: [
+                {
+                  Length: 13,
+                  NewText: this.RaiseAndSetIfChanged(ref _name, value)
+                }
+              ]
+            }
+          }
+        ],
+        Diagnostic: {
+          Id: RSA1008,
+          Title: Use RaiseAndSetIfChanged instead of direct field assignment,
+          Severity: Warning,
+          WarningLevel: 1,
+          Location: Input0.cs: (8,22)-(8,26),
+          Description: A ReactiveObject property setter that assigns its backing field directly bypasses change notification, so bound views and WhenAnyValue subscribers never see the update.,
+          MessageFormat: Property '{0}' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+          Message: Property 'Name' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+          Category: Usage
+        },
+        Document: Input0.cs
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}

@@ -1,0 +1,43 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1008: [
+      {
+        Id: RSA1008,
+        Title: Use RaiseAndSetIfChanged instead of direct field assignment,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (18,22)-(18,26),
+        Description: A ReactiveObject property setter that assigns its backing field directly bypasses change notification, so bound views and WhenAnyValue subscribers never see the update.,
+        MessageFormat: Property '{0}' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+        Message: Property 'Name' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+        Category: Usage
+      },
+      {
+        Id: RSA1008,
+        Title: Use RaiseAndSetIfChanged instead of direct field assignment,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (7,22)-(7,26),
+        Description: A ReactiveObject property setter that assigns its backing field directly bypasses change notification, so bound views and WhenAnyValue subscribers never see the update.,
+        MessageFormat: Property '{0}' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+        Message: Property 'Name' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified,
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}

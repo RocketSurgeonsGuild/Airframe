@@ -72,6 +72,15 @@ internal static class Descriptions
         true,
         "Functions should be called using the .Invoke() method rather than parentheses.");
 
+    public static DiagnosticDescriptor RSA1008 { get; } = new(
+        id: "RSA1008",
+        title: "Use RaiseAndSetIfChanged instead of direct field assignment",
+        messageFormat: "Property '{0}' assigns its backing field directly; use RaiseAndSetIfChanged so subscribers are notified",
+        CategoryMap.GetOrAdd(Usage, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A ReactiveObject property setter that assigns its backing field directly bypasses change notification, so bound views and WhenAnyValue subscribers never see the update.");
+
     public static DiagnosticDescriptor RSA3001 { get; } =
         new(
             "RSA3001",
@@ -90,4 +99,13 @@ internal static class Descriptions
             Warning,
             true,
             "Lambda expressions that don't capture local variables or instance state can be marked as static.");
+
+    public static DiagnosticDescriptor RSA3005 { get; } = new(
+        id: "RSA3005",
+        title: "Subscription disposed outside its WhenActivated scope",
+        messageFormat: "Subscription is disposed via '{0}', not the WhenActivated disposable '{1}'; it will outlive deactivation",
+        CategoryMap.GetOrAdd(Performance, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A subscription created inside a WhenActivated block should be disposed with that block's own disposable, not an outer one, or it survives past deactivation and re-subscribes on the next activation.");
 }

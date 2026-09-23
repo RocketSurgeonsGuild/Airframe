@@ -1,0 +1,33 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance.Rsa3005: [
+      {
+        Id: RSA3005,
+        Title: Subscription disposed outside its WhenActivated scope,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (17,20)-(17,31),
+        Description: A subscription created inside a WhenActivated block should be disposed with that block's own disposable, not an outer one, or it survives past deactivation and re-subscribes on the next activation.,
+        MessageFormat: Subscription is disposed via '{0}', not the WhenActivated disposable '{1}'; it will outlive deactivation,
+        Message: Subscription is disposed via '_wrongField', not the WhenActivated disposable 'd'; it will outlive deactivation,
+        Category: Performance
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    ReactiveUI.dll,
+    Splat.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
