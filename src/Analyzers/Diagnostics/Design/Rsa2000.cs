@@ -21,6 +21,13 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 /// every rule in this band is about how a type or a file is laid out. File scoped rules override
 /// <see cref="GetSyntaxKind"/> to return <see cref="SyntaxKind.CompilationUnit"/>.
 /// </para>
+/// <para>
+/// Interfaces and enumerations are deliberately absent from the default. Their members declare no
+/// accessibility, so ranking them by access would sort every member of an interface as though it
+/// were private and report an ordering no author could satisfy. The member ordering rules
+/// RSA2001 through RSA2007 therefore never apply to an interface or an enumeration. The file
+/// structure rules RSA2008 through RSA2011 do, because they register on the compilation unit.
+/// </para>
 /// </remarks>
 public abstract class Rsa2000 : DiagnosticAnalyzer
 {

@@ -11,6 +11,7 @@ public class Rsa2010FixTests
 {
     [Theory]
     [InlineData(nameof(Regions), Regions)]
+    [InlineData(nameof(NestedRegions), NestedRegions)]
     public async Task GivenSource_WhenCodeFix_ThenVerify(string name, string source)
     {
         // Given, When
@@ -37,6 +38,32 @@ public class Rsa2010FixTests
                 private void Helper()
                 {
                 }
+                #endregion
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A region inside a region. Each fix must take its own directive and its own partner, not the
+    /// nearest endregion.
+    /// </summary>
+    // lang=csharp
+    internal const string NestedRegions =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                #region Outer
+                private void First()
+                {
+                }
+
+                #region Inner
+                private void Second()
+                {
+                }
+                #endregion
                 #endregion
             }
         }

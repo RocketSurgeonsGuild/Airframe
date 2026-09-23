@@ -69,7 +69,7 @@ public class Rsa2009 : Rsa2000
     private static string Normalize(string fileName)
     {
         var end = fileName.IndexOfAny(Separators);
-        return end > 0 ? fileName.Substring(0, end) : fileName;
+        return end >= 0 ? fileName.Substring(0, end) : fileName;
     }
 
     private static readonly char[] Separators = ['{', '`', '+', '.'];

@@ -49,6 +49,7 @@ public class Rsa2011FixTests
         // Only the titles are asserted. When one document carries several diagnostics of the same
         // rule the harness renders every entry's TextChanges from the first applied fix, which is
         // the same quirk that leaves Rsa3002FixTests.GivenSource_WhenCodeFix_ThenVerify skipped.
+        // Tracked in https://github.com/RocketSurgeonsGuild/Airframe/issues/359.
         // The text each fix actually inserts is covered by the single diagnostic cases above.
         result
            .CodeFixResults[typeof(Rsa2011Fix)]

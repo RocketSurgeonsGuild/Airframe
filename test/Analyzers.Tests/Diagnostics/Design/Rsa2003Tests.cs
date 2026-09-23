@@ -31,6 +31,7 @@ public class Rsa2003Tests
 
     [Theory]
     [InlineData(DesignTestData.MethodBeforeProperty)]
+    [InlineData(DesignTestData.NestedTypeBeforeMethod)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given, When
@@ -91,5 +92,29 @@ public class Rsa2003Tests
 
         // Then
         await Verifier.Verify(result).HashParameters().UseParameters(name).DisableRequireUniquePrefix();
+    }
+
+    [Fact]
+    public async Task GivenOtherShapes_WhenAnalyze_ThenNoDiagnosticsReported()
+    {
+        // Given. Records, structs, generics, nested types, partial types, attributed members and
+        // interfaces. The ordering samples only ever exercise a flat class, so these cover the
+        // shapes MemberRank must also rank correctly.
+        foreach (var source in DesignTestData.CorrectShapes)
+        {
+            // When
+            var result = await GeneratorTestContextBuilder
+               .Create()
+               .AddSources(source)
+               .WithAnalyzer<Rsa2003>()
+               .GenerateAsync();
+
+            // Then
+            result
+               .AnalyzerResults[typeof(Rsa2003)]
+               .Diagnostics
+               .Should()
+               .NotContain(diagnostic => diagnostic.Id == RSA2003.Id);
+        }
     }
 }

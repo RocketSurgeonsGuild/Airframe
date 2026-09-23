@@ -274,6 +274,189 @@ internal static class DesignTestData
         """;
 
     /// <summary>
+    /// Shapes other than a flat class. Each is correctly ordered, so no ordering rule may fire on
+    /// any of them.
+    /// </summary>
+    // lang=csharp
+    public const string CorrectRecord =
+        """
+        namespace Sample
+        {
+            public record Example
+            {
+                public Example(int value) => Value = value;
+
+                public int Value { get; }
+
+                public void Method()
+                {
+                }
+
+                private int _cache;
+            }
+        }
+        """;
+
+    // lang=csharp
+    public const string CorrectStruct =
+        """
+        namespace Sample
+        {
+            public struct Example
+            {
+                public Example(int value) => _value = value;
+
+                public static readonly int Shared = 1;
+
+                public int Value => _value;
+
+                private readonly int _value;
+            }
+        }
+        """;
+
+    // lang=csharp
+    public const string CorrectGeneric =
+        """
+        namespace Sample
+        {
+            public class Example<T>
+            {
+                public Example(T value) => _value = value;
+
+                public T Value => _value;
+
+                private readonly T _value;
+            }
+        }
+        """;
+
+    // lang=csharp
+    public const string CorrectNestedType =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public Example()
+                {
+                }
+
+                public int Value { get; set; }
+
+                public class Nested
+                {
+                    public Nested()
+                    {
+                    }
+
+                    public int NestedValue { get; set; }
+
+                    private int _nested;
+                }
+
+                private int _value;
+            }
+        }
+        """;
+
+    // lang=csharp
+    public const string CorrectPartial =
+        """
+        namespace Sample
+        {
+            public partial class Example
+            {
+                public Example()
+                {
+                }
+
+                public int Value { get; set; }
+
+                private int _value;
+            }
+        }
+        """;
+
+    // lang=csharp
+    public const string CorrectAttributedMembers =
+        """
+        using System;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public Example()
+                {
+                }
+
+                [Obsolete("Use Value instead.")]
+                public int Legacy { get; set; }
+
+                public int Value { get; set; }
+
+                [Obsolete("Internal.")]
+                private int _value;
+            }
+        }
+        """;
+
+    /// <summary>
+    /// An interface whose members are in no particular order. RSA2001 through RSA2007 never apply
+    /// to interfaces, because interface members declare no accessibility.
+    /// </summary>
+    // lang=csharp
+    public const string UnorderedInterface =
+        """
+        namespace Sample
+        {
+            public interface IExample
+            {
+                void Method();
+
+                int Property { get; set; }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A nested type declared before the members it sits beside, which RSA2003 owns.
+    /// </summary>
+    // lang=csharp
+    public const string NestedTypeBeforeMethod =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public class Nested
+                {
+                }
+
+                public void Method()
+                {
+                }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// Gets the shapes every ordering rule must stay silent on.
+    /// </summary>
+    public static readonly string[] CorrectShapes =
+    [
+        Correct,
+        CorrectRecord,
+        CorrectStruct,
+        CorrectGeneric,
+        CorrectNestedType,
+        CorrectPartial,
+        CorrectAttributedMembers,
+        UnorderedInterface
+    ];
+
+    /// <summary>
     /// Gets every ordering sample. A rule under test asserts it stays silent on the six that
     /// belong to its siblings.
     /// </summary>

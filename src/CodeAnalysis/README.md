@@ -4,9 +4,9 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 
 ## Analyzers
 
-- MVVM patterns
-- ReactiveUI best practices
-- Airframe specific coding standards
+- **RSA1XXX Usage** — MVVM patterns and ReactiveUI best practices
+- **RSA2XXX Design** — member layout and file structure
+- **RSA3XXX Performance** — subscription lifetime and allocation
 
 ## Usage
 
@@ -30,3 +30,96 @@ To stage the adoption, set the rules you are not ready for to `none` or `suggest
 [*.cs]
 dotnet_diagnostic.RSA3002.severity = suggestion
 ```
+
+## RSA2XXX — Design
+
+Member layout and file structure. These rules describe a layout StyleCop cannot express, because
+SA1201 hard-codes fields before constructors.
+
+### Member ordering
+
+```
+constructors / destructor            (any access; static constructor first)
+
+non-private fields                   (public -> internal -> protected)
+                                     (static -> instance)
+                                     (const -> readonly -> mutable)
+non-private events, properties, indexers, methods, operators, nested types
+
+private fields
+private events, properties, indexers, methods, nested types
+```
+
+| Rule | Description | StyleCop equivalent |
+|------|-------------|---------------------|
+| RSA2001 | Constructors should appear before other members | none; SA1201 requires the opposite |
+| RSA2002 | Private members should appear after non-private members | none |
+| RSA2003 | Members should be ordered by kind | SA1201 |
+| RSA2004 | Members should be ordered by access | SA1202 |
+| RSA2005 | Static members should appear before instance members | SA1204 |
+| RSA2006 | Constant fields should appear before non-constant fields | SA1203 |
+| RSA2007 | Readonly fields should appear before mutable fields | SA1214 |
+
+Each rule owns one component of the comparison, so a misplaced member reports against exactly one
+rule and each concern gets its own severity.
+
+**These rules never apply to interfaces or enumerations.** Their members declare no accessibility,
+so ranking them by access would sort every member as though it were private and demand an order no
+author could satisfy.
+
+### File structure
+
+| Rule | Description | StyleCop equivalent | Code fix |
+|------|-------------|---------------------|----------|
+| RSA2008 | File should contain a single type | SA1402 | none |
+| RSA2009 | File name should match the first type name | SA1649 | none |
+| RSA2010 | Do not use regions | SA1124 | yes |
+| RSA2011 | Declare accessibility explicitly | SA1400 | yes |
+
+RSA2008 accepts types that share a name, so `IListener` beside `IListener<T>` is not a violation.
+RSA2009 accepts a generic arity or a partial suffix, so `Thing{T}.cs`, ``Thing`1.cs`` and
+`Thing+Statics.cs` all name `Thing`.
+
+### Using the ordering fix as a formatter
+
+The seven ordering rules share one code fix, because there is one sort. It supports Fix All, so
+`dotnet format` will apply it:
+
+```bash
+dotnet format analyzers --diagnostics RSA2001,RSA2002,RSA2003,RSA2004,RSA2005,RSA2006,RSA2007
+```
+
+Two things to know about it.
+
+**The fix always applies the whole layout.** Turning off RSA2004 stops the diagnostic being
+reported; it does not stop the fix ordering members by access when you invoke it for one of the
+other six. Tune these rules by severity individually, but enable or disable them as a group.
+
+**The fix declines when a preprocessor directive crosses a member boundary.** Reordering would move
+a member into or out of a conditional block and quietly change which symbols compile it, so the
+diagnostic is still reported and the edit is left to you. A directive pair contained entirely
+within one member travels with that member and does not block the fix.
+
+## Running alongside StyleCop
+
+RSA2003 through RSA2011 reimplement nine StyleCop rules. If you use both packages you will get two
+diagnostics for the same code. Adopting the RSA2XXX band means retiring its StyleCop counterparts:
+
+```ini
+[*.cs]
+dotnet_diagnostic.SA1201.severity = none   # RSA2003
+dotnet_diagnostic.SA1202.severity = none   # RSA2004
+dotnet_diagnostic.SA1203.severity = none   # RSA2006
+dotnet_diagnostic.SA1204.severity = none   # RSA2005
+dotnet_diagnostic.SA1214.severity = none   # RSA2007
+dotnet_diagnostic.SA1402.severity = none   # RSA2008
+dotnet_diagnostic.SA1649.severity = none   # RSA2009
+dotnet_diagnostic.SA1124.severity = none   # RSA2010
+dotnet_diagnostic.SA1400.severity = none   # RSA2011
+```
+
+RSA2001 and RSA2002 have no StyleCop counterpart, and RSA2001 requires the opposite of SA1201, so
+SA1201 must be off for the layout to be satisfiable at all.
+
+This package does not replace StyleCop. It absorbs nine of its rules; the rest of StyleCop still
+has a job.
