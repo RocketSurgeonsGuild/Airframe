@@ -8,6 +8,11 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 - **RSA2XXX Design** — member layout and file structure
 - **RSA3XXX Performance** — subscription lifetime and allocation
 
+Every rule has its own reference page — cause, how to fix, when to suppress — under
+[`docs/`](docs/README.md), styled after the [.NET compiler warning](https://github.com/dotnet/docs/blob/main/docs/csharp/language-reference/compiler-messages/cs0618.md)
+and [style rule](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0079)
+docs.
+
 ## .editorconfig options
 
 Every rule at its default severity, ready to paste into `.editorconfig` — delete the lines you
