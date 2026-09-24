@@ -1,12 +1,12 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Rocket.Surgery.Airframe.Analyzers;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Airframe.CodeFixes.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using VerifyXunit;
 
 namespace Rocket.Surgery.Airframe.CodeFixes.Tests.Design;

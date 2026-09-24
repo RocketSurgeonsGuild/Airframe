@@ -130,15 +130,18 @@ internal static class Abstractions
     {
         if (member.Parent is InterfaceDeclarationSyntax)
         {
-            // A default interface member carries its own body, and a static member is not part
-            // of the contract an implementer fulfils, so neither is required to document here.
+            // A default interface member carries its own body, so it is not part of the
+            // contract an implementer has to fulfil sight unseen. Static is not itself an
+            // exclusion: a C# 11 `static abstract` member (the generic-math pattern) has no
+            // body either and is still part of that contract, so it is included the same as an
+            // instance abstract member.
             return member switch
             {
-                MethodDeclarationSyntax declaration => declaration.Body == null && declaration.ExpressionBody == null && !declaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                PropertyDeclarationSyntax declaration => !HasAccessorBody(declaration) && !declaration.Modifiers.Any(SyntaxKind.StaticKeyword),
+                MethodDeclarationSyntax declaration => declaration.Body == null && declaration.ExpressionBody == null,
+                PropertyDeclarationSyntax declaration => !HasAccessorBody(declaration),
                 IndexerDeclarationSyntax declaration => !HasAccessorBody(declaration),
-                EventDeclarationSyntax declaration => !declaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                EventFieldDeclarationSyntax declaration => !declaration.Modifiers.Any(SyntaxKind.StaticKeyword),
+                EventDeclarationSyntax declaration => !HasAccessorBody(declaration),
+                EventFieldDeclarationSyntax => true,
                 _ => false
             };
         }

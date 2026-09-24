@@ -57,10 +57,12 @@ internal static class DocumentWalk
            .Where(member => !HasAccessibility(member))
            .ToList();
 
+        var options = context.Options.AnalyzerConfigOptionsProvider.GetOptions(compilationUnit.SyntaxTree);
+
         List<OverlongLine> overlongLines = [];
         int? limit = null;
 
-        if (TryGetLimit(context.Options.AnalyzerConfigOptionsProvider.GetOptions(compilationUnit.SyntaxTree), out var configuredLimit))
+        if (TryGetLimit(options, out var configuredLimit))
         {
             limit = configuredLimit;
 
@@ -77,20 +79,39 @@ internal static class DocumentWalk
             }
         }
 
-        var undocumentedAbstractions = compilationUnit
-           .DescendantNodes()
-           .OfType<MemberDeclarationSyntax>()
-           .Where(Abstractions.IsAbstraction)
-           .Where(member => !Abstractions.HasSummary(member))
-           .ToList();
+        // Gated on severity, unlike the walks above: RSA2015's half in particular drives a
+        // semantic query per type (FindImplementationForInterfaceMember over every interface
+        // member), so a consumer who has turned both documentation rules off should not pay for
+        // either walk just because some other RSA2XXX rule reached this compilation unit first.
+        var undocumentedAbstractions = IsDisabled(options, "RSA2014")
+            ? (IReadOnlyList<MemberDeclarationSyntax>)[]
+            : compilationUnit
+               .DescendantNodes()
+               .OfType<MemberDeclarationSyntax>()
+               .Where(Abstractions.IsAbstraction)
+               .Where(member => !Abstractions.HasSummary(member))
+               .ToList();
 
-        var undocumentedImplementers = Abstractions
-           .FindImplementers(compilationUnit, context.SemanticModel)
-           .Where(member => !Abstractions.HasInheritdoc(member))
-           .ToList();
+        var undocumentedImplementers = IsDisabled(options, "RSA2015")
+            ? (IReadOnlyList<MemberDeclarationSyntax>)[]
+            : Abstractions
+               .FindImplementers(compilationUnit, context.SemanticModel)
+               .Where(member => !Abstractions.HasInheritdoc(member))
+               .ToList();
 
         return new Result(topLevelTypes, regions, inaccessibleMembers, overlongLines, limit, undocumentedAbstractions, undocumentedImplementers);
     }
+
+    /// <summary>
+    /// Determines whether <paramref name="ruleId"/> has been turned off via
+    /// <c>dotnet_diagnostic.&lt;ruleId&gt;.severity</c>. A best-effort check against the one
+    /// mechanism a consumer is expected to use to disable an individual rule; it does not account
+    /// for a bulk category severity, a ruleset file, or a <c>#pragma</c>, so it only ever skips
+    /// work it is certain nothing needs.
+    /// </summary>
+    private static bool IsDisabled(AnalyzerConfigOptions options, string ruleId) =>
+        options.TryGetValue($"dotnet_diagnostic.{ruleId}.severity", out var severity) &&
+        string.Equals(severity, "none", StringComparison.OrdinalIgnoreCase);
 
     private static bool HasAccessibility(MemberDeclarationSyntax member) =>
         member.Modifiers.Any(SyntaxKind.PublicKeyword)

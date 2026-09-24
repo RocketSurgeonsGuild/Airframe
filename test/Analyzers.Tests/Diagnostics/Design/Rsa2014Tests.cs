@@ -1,9 +1,9 @@
+using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
-using System.Linq;
-using System.Threading.Tasks;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
 namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Design;
@@ -15,6 +15,8 @@ public class Rsa2014Tests
     [InlineData(DocumentedAbstractClass)]
     [InlineData(ConcreteClassWithoutDocs)]
     [InlineData(DefaultInterfaceMember)]
+    [InlineData(StaticDefaultInterfaceMember)]
+    [InlineData(DocumentedStaticAbstractInterfaceMember)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
         // Given, When
@@ -35,6 +37,7 @@ public class Rsa2014Tests
     [InlineData(UndocumentedInterface)]
     [InlineData(UndocumentedAbstractClass)]
     [InlineData(UndocumentedAbstractMember)]
+    [InlineData(UndocumentedStaticAbstractInterfaceMember)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given, When
@@ -154,6 +157,54 @@ public class Rsa2014Tests
             public interface IReader
             {
                 string Describe() => "reader";
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A <c>static</c> default interface member. What excludes a default member is having a body,
+    /// not being <c>static</c>, so this one is excluded the same as an instance default member.
+    /// </summary>
+    // lang=csharp
+    internal const string StaticDefaultInterfaceMember =
+        """
+        namespace Sample
+        {
+            /// <summary>Reads a value by key.</summary>
+            public interface IReader
+            {
+                static string Describe() => "reader";
+            }
+        }
+        """;
+
+    /// <summary>
+    /// A <c>static abstract</c> interface member (the generic-math pattern): no body, so it is
+    /// still part of the contract an implementer has to fulfil, and still needs a summary.
+    /// </summary>
+    // lang=csharp
+    internal const string DocumentedStaticAbstractInterfaceMember =
+        """
+        namespace Sample
+        {
+            /// <summary>Parses a value.</summary>
+            public interface IParsable
+            {
+                /// <summary>Parses <paramref name="value"/>.</summary>
+                static abstract IParsable Parse(string value);
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string UndocumentedStaticAbstractInterfaceMember =
+        """
+        namespace Sample
+        {
+            /// <summary>Parses a value.</summary>
+            public interface IParsable
+            {
+                static abstract IParsable Parse(string value);
             }
         }
         """;

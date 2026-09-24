@@ -165,7 +165,8 @@ public int Start() =>
 | RSA2015 | Provide `<inheritdoc/>` on members that implement or override an abstraction | none | none |
 
 RSA2014 reports on an interface or an abstract type declaration, and on every member either
-declares without a body: an interface member with no default implementation, or a member marked
+declares without a body: an interface member with no default implementation — a `static abstract`
+member (the generic-math pattern) included, since it has no body either — or a member marked
 `abstract` in an abstract class. Each one is a contract other code is written against, so it needs
 a `<summary>` a reader can act on without opening an implementation.
 
@@ -175,12 +176,16 @@ public interface IReader
 {
     /// <summary>Gets the value for <paramref name="key"/>.</summary>
     string Read(string key);
+
+    /// <summary>Parses <paramref name="value"/>.</summary>
+    static abstract IReader Parse(string value);
 }
 ```
 
-**A default interface member, a static interface member, and a concrete member of an abstract
-class are all excluded.** None of them is part of the contract an implementer has to fulfil sight
-unseen, so RSA2014 leaves them to whatever general documentation policy a project already runs.
+**A default interface member and a concrete member of an abstract class are both excluded.**
+Neither is part of the contract an implementer has to fulfil sight unseen, so RSA2014 leaves them
+to whatever general documentation policy a project already runs. A default interface member stays
+excluded whether or not it is `static`, since what excludes it is having a body, not being static.
 
 RSA2015 reports on a member that implements an interface member or overrides an abstract member,
 on whichever type directly declares it:

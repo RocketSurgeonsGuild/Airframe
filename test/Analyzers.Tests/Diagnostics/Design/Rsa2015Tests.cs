@@ -1,9 +1,9 @@
+using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
-using System.Linq;
-using System.Threading.Tasks;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
 namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Design;
@@ -35,6 +35,7 @@ public class Rsa2015Tests
 
     [Theory]
     [InlineData(ImplicitInterfaceImplementationWithoutInheritdoc)]
+    [InlineData(ExplicitInterfaceImplementationWithoutInheritdoc)]
     [InlineData(AbstractOverrideWithoutInheritdoc)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
@@ -105,6 +106,23 @@ public class Rsa2015Tests
             public class Reader : IReader
             {
                 /// <inheritdoc/>
+                string IReader.Read(string key) => key;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string ExplicitInterfaceImplementationWithoutInheritdoc =
+        """
+        namespace Sample
+        {
+            public interface IReader
+            {
+                string Read(string key);
+            }
+
+            public class Reader : IReader
+            {
                 string IReader.Read(string key) => key;
             }
         }
