@@ -43,6 +43,8 @@ dotnet_diagnostic.RSA2010.severity = warning      # Do not use regions
 dotnet_diagnostic.RSA2011.severity = warning      # Declare accessibility explicitly
 dotnet_diagnostic.RSA2012.severity = warning      # Conditional compilation should not span member declarations
 dotnet_diagnostic.RSA2013.severity = warning      # Line exceeds the maximum length
+dotnet_diagnostic.RSA2014.severity = warning      # Provide a summary for public abstractions
+dotnet_diagnostic.RSA2015.severity = warning      # Provide <inheritdoc/> on members that implement or override an abstraction
 
 # RSA3XXX — Performance
 dotnet_diagnostic.RSA3001.severity = warning      # Subscription not disposed; consider DisposeWith
@@ -155,6 +157,49 @@ public int Start() =>
 #endif
 ```
 
+### Documentation
+
+| Rule | Description | StyleCop equivalent | Code fix |
+|------|-------------|---------------------|----------|
+| RSA2014 | Provide a summary for public abstractions | SA1600 (broader scope) | none |
+| RSA2015 | Provide `<inheritdoc/>` on members that implement or override an abstraction | none | none |
+
+RSA2014 reports on an interface or an abstract type declaration, and on every member either
+declares without a body: an interface member with no default implementation, or a member marked
+`abstract` in an abstract class. Each one is a contract other code is written against, so it needs
+a `<summary>` a reader can act on without opening an implementation.
+
+```csharp
+/// <summary>Reads a value by key.</summary>
+public interface IReader
+{
+    /// <summary>Gets the value for <paramref name="key"/>.</summary>
+    string Read(string key);
+}
+```
+
+**A default interface member, a static interface member, and a concrete member of an abstract
+class are all excluded.** None of them is part of the contract an implementer has to fulfil sight
+unseen, so RSA2014 leaves them to whatever general documentation policy a project already runs.
+
+RSA2015 reports on a member that implements an interface member or overrides an abstract member,
+on whichever type directly declares it:
+
+```csharp
+public class Reader : IReader
+{
+    /// <inheritdoc/>
+    public string Read(string key) => key;
+}
+```
+
+**Inheriting an implementation from a base class does not itself require `<inheritdoc/>` at the
+derived class** — only the type that actually writes the member out needs the tag. A member that
+is itself `abstract`, re-declaring the contract rather than fulfilling it, is excluded; RSA2014
+owns documenting that one instead. RSA2015 does not currently check an event declared with the
+field-like `event Handler Changed;` shorthand; declare it with `event Handler Changed { add; remove; }`
+if it implements an interface event and needs the check.
+
 ### RSA2013 and chop line
 
 RSA2013 reports any line past the margin. The limit comes from the `max_line_length` editorconfig
@@ -204,8 +249,22 @@ there is no break to insert that would not change the text.
 
 ### Using the ordering fix as a formatter
 
-The seven ordering rules share one code fix, because there is one sort. It supports Fix All, so
-`dotnet format` will apply it:
+The seven ordering rules share one code fix, because there is one sort. Applying it also sorts the
+file's `using` directives — every regular using alphabetically, `using static` directives next,
+alias directives last — since a using list left out of order is the same kind of layout drift the
+member reorder already corrects. Whether a `System` namespace leads the regular group, and whether
+a blank line separates that group from the rest, come from the standard
+`dotnet_sort_system_directives_first` and `dotnet_separate_import_directive_groups` editorconfig
+keys — the same two keys Visual Studio and Rider read for the same purpose:
+
+```ini
+[*.cs]
+dotnet_sort_system_directives_first = true    # default; System.* leads the regular group
+dotnet_separate_import_directive_groups = false   # default; no blank line between groups
+```
+
+The static-then-alias tail is not governed by either key and stays fixed regardless. It supports
+Fix All, so `dotnet format` will apply it:
 
 ```bash
 dotnet format analyzers --diagnostics RSA2001,RSA2002,RSA2003,RSA2004,RSA2005,RSA2006,RSA2007

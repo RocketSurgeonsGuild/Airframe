@@ -4,6 +4,7 @@ using Rocket.Surgery.Airframe.Analyzers;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Airframe.CodeFixes.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using VerifyXunit;
@@ -16,6 +17,7 @@ public class MemberOrderFixTests
     [InlineData(nameof(ConstructorAfterField), ConstructorAfterField)]
     [InlineData(nameof(Unordered), Unordered)]
     [InlineData(nameof(DocumentedMembers), DocumentedMembers)]
+    [InlineData(nameof(UnsortedUsings), UnsortedUsings)]
     public async Task GivenSource_WhenCodeFix_ThenVerify(string name, string source)
     {
         // Given, When
@@ -55,6 +57,38 @@ public class MemberOrderFixTests
            .Descriptor
            .Should()
            .Be(Descriptions.RSA2001);
+    }
+
+    [Theory]
+    [InlineData(UnsortedUsings)]
+    public async Task GivenUnsortedUsings_WhenCodeFix_ThenUsingsSorted(string source)
+    {
+        // Given, When
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .WithAnalyzer<Rsa2001>()
+           .WithCodeFix<MemberOrderFix>()
+           .AddNormalizedSources(source)
+           .Build()
+           .GenerateAsync();
+
+        var resolvedFix = result.CodeFixResults[typeof(MemberOrderFix)].ResolvedFixes.Single();
+        var codeAction = resolvedFix.CodeActions[0];
+        var textChange = codeAction.TextChanges.Single().Value;
+        var originalText = await resolvedFix.Document.GetTextAsync();
+        var fixedText = originalText.WithChanges(textChange).ToString();
+
+        // Then. System namespaces first (alphabetically), then the static directive, then the alias.
+        var systemIndex = fixedText.IndexOf("using System;", StringComparison.Ordinal);
+        var collectionsIndex = fixedText.IndexOf("using System.Collections.Generic;", StringComparison.Ordinal);
+        var textIndex = fixedText.IndexOf("using System.Text;", StringComparison.Ordinal);
+        var staticIndex = fixedText.IndexOf("using static System.Math;", StringComparison.Ordinal);
+        var aliasIndex = fixedText.IndexOf("using X = System.Exception;", StringComparison.Ordinal);
+
+        systemIndex.Should().BeGreaterThanOrEqualTo(0).And.BeLessThan(collectionsIndex);
+        collectionsIndex.Should().BeLessThan(textIndex);
+        textIndex.Should().BeLessThan(staticIndex);
+        staticIndex.Should().BeLessThan(aliasIndex);
     }
 
     [Theory]
@@ -144,6 +178,33 @@ public class MemberOrderFixTests
                 public int Property { get; set; }
 
                 private int _value;
+
+                public Example()
+                {
+                }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// Usings out of order alongside a member ordering violation, so one fix pass resolves both:
+    /// <c>System</c> namespaces first, then other regular usings, both alphabetically; a
+    /// <c>using static</c> directive after them; the alias last.
+    /// </summary>
+    // lang=csharp
+    internal const string UnsortedUsings =
+        """
+        using System.Text;
+        using X = System.Exception;
+        using static System.Math;
+        using System.Collections.Generic;
+        using System;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private readonly int _value;
 
                 public Example()
                 {
