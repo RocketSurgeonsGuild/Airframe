@@ -32,6 +32,19 @@ jobs:
           run_id: ${{ github.event.id }}
           name: nuget
 
+      # Rocket.Surgery.Airframe.Apple is packed by the `build-apple` job, which uploads its own
+      # artifact because upload-artifact rejects a second upload under an existing name.
+      # if_no_artifact_found: warn — build-apple is skipped on runs that do not touch it.
+      - name: Download apple artifact
+        uses: dawidd6/action-download-artifact@v6
+        if: github.event.workflow_run.conclusion == 'success'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: ci.yml
+          run_id: ${{ github.event.id }}
+          name: nuget-apple
+          if_no_artifact_found: warn
+
       - name: nuget.org
         # continue-on-error: true
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && startsWith(github.event.workflow_run.head_branch, 'v') # this is the best approximation for a tag
