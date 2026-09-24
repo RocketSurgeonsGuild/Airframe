@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2010: [
+      {
+        Id: RSA2010,
+        Title: Do not use regions,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (4,8)-(4,23),
+        Description: Regions hide code rather than organize it, and a region directive travels with the member below it.,
+        MessageFormat: Remove the region directive,
+        Message: Remove the region directive,
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

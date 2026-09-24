@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2009: [
+      {
+        Id: RSA2009,
+        Title: File name should match the first type name,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (2,17)-(2,27),
+        Description: A file is named for the type it declares, so a type can be found from its file name alone.,
+        MessageFormat: File name '{0}' does not match the first type declared in it, '{1}',
+        Message: File name 'Input0' does not match the first type declared in it, 'Mismatched',
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

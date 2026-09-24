@@ -1,0 +1,37 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2011: [
+      {
+        Id: RSA2011,
+        Title: Declare accessibility explicitly,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (2,10)-(2,17),
+        Description: Accessibility is stated rather than inferred from the C# default, so the declared surface of a type is unambiguous.,
+        MessageFormat: Declare an accessibility modifier for '{0}',
+        Message: Declare an accessibility modifier for 'Example',
+        Category: Design
+      },
+      {
+        Id: RSA2011,
+        Title: Declare accessibility explicitly,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (4,13)-(4,19),
+        Description: Accessibility is stated rather than inferred from the C# default, so the declared surface of a type is unambiguous.,
+        MessageFormat: Declare an accessibility modifier for '{0}',
+        Message: Declare an accessibility modifier for 'Method()',
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}
