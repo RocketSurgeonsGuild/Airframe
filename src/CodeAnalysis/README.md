@@ -164,11 +164,14 @@ public int Start() =>
 | RSA2014 | Provide a summary for public abstractions | SA1600 (broader scope) | none |
 | RSA2015 | Provide `<inheritdoc/>` on members that implement or override an abstraction | none | none |
 
-RSA2014 reports on an interface or an abstract type declaration, and on every member either
+RSA2014 reports on an interface or an abstract type declaration, and on every member either of them
 declares without a body: an interface member with no default implementation — a `static abstract`
 member (the generic-math pattern) included, since it has no body either — or a member marked
 `abstract` in an abstract class. Each one is a contract other code is written against, so it needs
 a `<summary>` a reader can act on without opening an implementation.
+
+See [RSA2014](docs/RSA2014.md) and [RSA2015](docs/RSA2015.md) in the per-rule reference for the
+full cause/fix/suppress writeup.
 
 ```csharp
 /// <summary>Reads a value by key.</summary>

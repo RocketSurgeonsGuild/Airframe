@@ -39,6 +39,8 @@ Member layout and file structure.
 | [RSA2011](RSA2011.md) | Declare accessibility explicitly | Warning |
 | [RSA2012](RSA2012.md) | Conditional compilation should not span member declarations | Warning |
 | [RSA2013](RSA2013.md) | Line exceeds the maximum length | Warning |
+| [RSA2014](RSA2014.md) | Provide a summary for public abstractions | Warning |
+| [RSA2015](RSA2015.md) | Provide `<inheritdoc/>` on members that implement or override an abstraction | Warning |
 
 ## RSA3XXX — Performance
 
