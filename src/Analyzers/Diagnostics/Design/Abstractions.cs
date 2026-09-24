@@ -65,6 +65,15 @@ internal static class Abstractions
     {
         foreach (var type in compilationUnit.DescendantNodes().OfType<TypeDeclarationSyntax>())
         {
+            // A type with no base list cannot implement an interface or override anything, so
+            // there is nothing this type could require. Skip it before asking the semantic model
+            // for a symbol at all, since RequiredMembersOf's AllInterfaces walk is the expensive
+            // part of this analyzer and most types in a typical file have no base list.
+            if (type.BaseList is null)
+            {
+                continue;
+            }
+
             if (semanticModel.GetDeclaredSymbol(type) is not { } typeSymbol)
             {
                 continue;
