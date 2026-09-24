@@ -146,6 +146,12 @@ public class AllDesignRulesFixedTests
     /// member that also carries the RSA2002 violation) and one overlong line (RSA2013). A
     /// protected field is included alongside the internal and public ones so the final snapshot
     /// shows where protected access lands, not just internal and public.
+    ///
+    /// RSA2003's description documents the kind order as "fields, events, properties, indexers,
+    /// methods, operators, nested types" — the ordering samples elsewhere only ever exercise
+    /// fields, properties and methods, so a destructor, event, indexer, operator, delegate and
+    /// nested type are included here too, each the only member of its kind, so the final snapshot
+    /// shows every kind the description promises an order for actually landing in that order.
     /// </summary>
     // lang=csharp
     internal const string Messy =
@@ -157,6 +163,10 @@ public class AllDesignRulesFixedTests
                 private readonly int _value;
 
                 public Example()
+                {
+                }
+
+                ~Example()
                 {
                 }
 
@@ -182,7 +192,19 @@ public class AllDesignRulesFixedTests
 
                 public static readonly int StaticReadonlyField = 7;
 
+                public event System.EventHandler Changed;
+
+                public int this[int index] => index;
+
                 public void LongMethod(string firstParameter, string secondParameter, string thirdParameter)
+                {
+                }
+
+                public static Example operator +(Example left, Example right) => left;
+
+                public delegate void Handler();
+
+                public class Nested
                 {
                 }
             }

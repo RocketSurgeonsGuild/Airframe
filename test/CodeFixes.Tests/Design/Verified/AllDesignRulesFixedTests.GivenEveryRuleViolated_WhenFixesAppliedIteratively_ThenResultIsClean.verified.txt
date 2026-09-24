@@ -6,6 +6,10 @@
         {
         }
 
+        ~Example()
+        {
+        }
+
         public const int ConstField = 5;
 
         public static readonly int StaticReadonlyField = 7;
@@ -20,12 +24,24 @@
 
         protected int ProtectedField = 9;
 
+        public event System.EventHandler Changed;
+
         public int Property { get; set; }
+
+        public int this[int index] => index;
 
         public void LongMethod(
             string firstParameter,
             string secondParameter,
             string thirdParameter)
+        {
+        }
+
+        public static Example operator +(Example left, Example right) => left;
+
+        public delegate void Handler();
+
+        public class Nested
         {
         }
 
