@@ -51,19 +51,17 @@ public partial class AirframeBuild
        .Executes();
 
     /// <summary>
-    ///     Installs the ios workload. Only the <c>build-apple</c> job invokes this.
+    ///     Installs the ios workload. Only the <c>build-apple</c> job invokes this, and it dominates that job:
+    ///     21m16s of install around roughly one minute of actual restore, build and pack.
     /// </summary>
+    /// <remarks>
+    ///     Deliberately no --skip-manifest-update. It was tried and did not help — the install still took
+    ///     21m16s, longer than the entire pipeline before this split. Skipping the update pins resolution to
+    ///     the manifests baked into the pinned SDK, which is not obviously cheaper.
+    /// </remarks>
     public Target Workloads => definition => definition
        .Before(Restore)
-       .Executes(
-            () => DotNetTasks.DotNetWorkloadInstall(
-                configurator => configurator
-                               .AddWorkloadId("ios")
-                                // the manifests are pinned by the sdk version, so updating them on every run
-                                // costs minutes and changes nothing
-                               .SetSkipManifestUpdate(true)
-            )
-        );
+       .Executes(() => DotNetTasks.DotNetWorkloadInstall(configurator => configurator.AddWorkloadId("ios")));
 
     public static RocketSurgeonGitHubActionsConfiguration Middleware(RocketSurgeonGitHubActionsConfiguration configuration)
     {
