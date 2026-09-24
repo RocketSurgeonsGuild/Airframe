@@ -24,7 +24,7 @@
             TextChanges: {
               Input0.cs: [
                 {
-                  Length: 133,
+                  Length: 131,
                   NewText:
 ublic Example()
         {
@@ -36,11 +36,13 @@ ublic Example()
         {
         }
 
-        private int _value;
+        private void Helper()
+        {
+       
                 },
                 {
-                  Length: 35,
-                  NewText: void Helper
+                  Length: 46,
+                  NewText: 
                 }
               ]
             }

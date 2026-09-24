@@ -143,7 +143,9 @@ public class AllDesignRulesFixedTests
     /// <summary>
     /// One member-ordering chain that violates RSA2001 through RSA2007 exactly once each, plus a
     /// region (RSA2010), a member with no explicit accessibility (RSA2011, reusing the same
-    /// member that also carries the RSA2002 violation) and one overlong line (RSA2013).
+    /// member that also carries the RSA2002 violation) and one overlong line (RSA2013). A
+    /// protected field is included alongside the internal and public ones so the final snapshot
+    /// shows where protected access lands, not just internal and public.
     /// </summary>
     // lang=csharp
     internal const string Messy =
@@ -167,6 +169,8 @@ public class AllDesignRulesFixedTests
                 public int Property { get; set; }
 
                 internal int InternalField = 2;
+
+                protected int ProtectedField = 9;
 
                 public int PublicField = 3;
 

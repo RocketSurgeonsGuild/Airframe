@@ -49,17 +49,17 @@ internal static class DesignTestData
                 {
                 }
 
-                private const int PrivateConstant = 8;
-                private static readonly int PrivateStaticReadonly = 9;
-                private static int _privateStatic = 10;
-                private readonly int _privateReadonly = 11;
-                private int _privateMutable = 12;
-
                 private int PrivateProperty { get; set; }
 
                 private void Helper()
                 {
                 }
+
+                private const int PrivateConstant = 8;
+                private static readonly int PrivateStaticReadonly = 9;
+                private static int _privateStatic = 10;
+                private readonly int _privateReadonly = 11;
+                private int _privateMutable = 12;
             }
         }
         """;

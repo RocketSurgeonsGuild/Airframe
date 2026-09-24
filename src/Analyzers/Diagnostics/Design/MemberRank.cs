@@ -18,6 +18,9 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 ///   5. Static before instance.
 ///   6. Constant fields before non-constant fields.
 ///   7. Readonly fields before mutable fields.
+///   8. Within the private bucket, fields sink below every other kind instead of leading it: a
+///      private field is implementation detail backing the private members above it, not part of
+///      a surface those members are declared in service of, so it reads last rather than first.
 ///
 /// Both the analyzers and the reorder code fix compare through this type, so a reported violation
 /// and the fix that resolves it can never disagree.
@@ -54,6 +57,14 @@ internal readonly struct MemberRank : IComparable<MemberRank>
         var isStatic = isConst || modifiers.Any(SyntaxKind.StaticKeyword);
         var isReadonly = isConst || modifiers.Any(SyntaxKind.ReadOnlyKeyword);
         var isField = kind == KindField;
+
+        // A private field backs the private members declared above it; it is implementation
+        // detail, not a kind those members share equal footing with, so it sinks below all of
+        // them instead of leading the private bucket the way a non-private field leads its own.
+        if (bucket == 1 && isField)
+        {
+            kind = KindPrivateField;
+        }
 
         return new MemberRank(
             isConstructor ? 0 : 1,
@@ -213,7 +224,7 @@ internal readonly struct MemberRank : IComparable<MemberRank>
         {
             KindConstructor => "constructor",
             KindDestructor => "destructor",
-            KindField => "field",
+            KindField or KindPrivateField => "field",
             KindEvent => "event",
             KindProperty => "property",
             KindIndexer => "indexer",
@@ -224,8 +235,9 @@ internal readonly struct MemberRank : IComparable<MemberRank>
             _ => "member"
         };
 
+        var isField = _kind is KindField or KindPrivateField;
         var description = access;
-        if (_kind == KindField && _const == 0)
+        if (isField && _const == 0)
         {
             // const implies static, so naming both would be noise.
             return description + " const " + kind;
@@ -236,7 +248,7 @@ internal readonly struct MemberRank : IComparable<MemberRank>
             description += " static";
         }
 
-        if (_kind == KindField && _readonly == 0)
+        if (isField && _readonly == 0)
         {
             description += " readonly";
         }
@@ -334,6 +346,13 @@ internal readonly struct MemberRank : IComparable<MemberRank>
     private const int KindDelegate = 8;
     private const int KindNestedType = 9;
     private const int KindOther = 10;
+
+    /// <summary>
+    /// The display kind <see cref="Of"/> assigns a field declared in the private bucket, so it
+    /// sorts below every other private kind instead of leading them the way a non-private field
+    /// leads its own bucket. Deliberately greater than every other kind constant.
+    /// </summary>
+    private const int KindPrivateField = 11;
 
     private const int AccessPublic = 0;
     private const int AccessInternal = 1;

@@ -97,7 +97,7 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Design, category => category.ToString()),
         defaultSeverity: Warning,
         isEnabledByDefault: true,
-        description: "Within a group, members are declared in the order fields, events, properties, indexers, methods, operators, nested types.");
+        description: "Within a group, members are declared in the order fields, events, properties, indexers, methods, operators, nested types. Within the private group specifically, fields sink below every other kind instead of leading it, since a private field is implementation detail backing the members above it.");
 
     public static DiagnosticDescriptor RSA2004 { get; } = new(
         id: "RSA2004",

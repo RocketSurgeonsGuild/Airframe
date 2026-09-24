@@ -13,10 +13,10 @@ namespace Sample
         {
         }
 
-        private int _value;
-
         private void Helper()
         {
         }
+
+        private int _value;
     }
 }

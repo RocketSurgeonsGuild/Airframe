@@ -18,6 +18,8 @@
 
         internal int InternalField = 2;
 
+        protected int ProtectedField = 9;
+
         public int Property { get; set; }
 
         public void LongMethod(
@@ -27,10 +29,10 @@
         {
         }
 
-        private readonly int _value;
-
         private void Helper()
         {
         }
+
+        private readonly int _value;
     }
 }
