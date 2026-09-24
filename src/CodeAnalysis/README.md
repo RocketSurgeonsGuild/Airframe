@@ -8,6 +8,47 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 - **RSA2XXX Design** — member layout and file structure
 - **RSA3XXX Performance** — subscription lifetime and allocation
 
+## .editorconfig options
+
+Every rule at its default severity, ready to paste into `.editorconfig` — delete the lines you
+don't want to override:
+
+```ini
+[*.cs]
+# RSA1XXX — Usage
+dotnet_diagnostic.RSA1001.severity = warning      # Use expression lambda overload for a property
+dotnet_diagnostic.RSA1002.severity = error        # Provide a well-formed lambda expression
+dotnet_diagnostic.RSA1003.severity = error        # Use the out parameter overload
+dotnet_diagnostic.RSA1004.severity = error        # Provide a well-formed lambda expression (missing member access prefix)
+dotnet_diagnostic.RSA1005.severity = suggestion   # Specify a scheduler for better control over execution timing
+dotnet_diagnostic.RSA1006.severity = suggestion   # SubscribeOn only supports a single use per pipeline
+dotnet_diagnostic.RSA1007.severity = warning      # Use Invoke() instead of parentheses for function calls
+
+# RSA2XXX — Design
+dotnet_diagnostic.RSA2001.severity = warning      # Constructors should appear before other members
+dotnet_diagnostic.RSA2002.severity = warning      # Private members should appear after non-private members
+dotnet_diagnostic.RSA2003.severity = warning      # Members should be ordered by kind
+dotnet_diagnostic.RSA2004.severity = warning      # Members should be ordered by access
+dotnet_diagnostic.RSA2005.severity = warning      # Static members should appear before instance members
+dotnet_diagnostic.RSA2006.severity = warning      # Constant fields should appear before non-constant fields
+dotnet_diagnostic.RSA2007.severity = warning      # Readonly fields should appear before mutable fields
+dotnet_diagnostic.RSA2008.severity = warning      # File should contain a single type
+dotnet_diagnostic.RSA2009.severity = warning      # File name should match the first type name
+dotnet_diagnostic.RSA2010.severity = warning      # Do not use regions
+dotnet_diagnostic.RSA2011.severity = warning      # Declare accessibility explicitly
+dotnet_diagnostic.RSA2012.severity = warning      # Conditional compilation should not span member declarations
+dotnet_diagnostic.RSA2013.severity = warning      # Line exceeds the maximum length
+
+# RSA3XXX — Performance
+dotnet_diagnostic.RSA3001.severity = warning      # Subscription not disposed; consider DisposeWith
+dotnet_diagnostic.RSA3002.severity = warning      # Lambda expression can be made static
+
+# RSA2013's line-length margin — see "RSA2013 and chop line"
+max_line_length = 160
+```
+
+Valid severities: `error` | `warning` | `suggestion` | `silent` | `none`.
+
 ## Usage
 
 This package is a development dependency and does not add any runtime dependencies to your project.
