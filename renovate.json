@@ -31,6 +31,15 @@
         "^Reactive",
         "^System\\.Reactive"
       ]
+    },
+    {
+      "groupName": "Roslyn",
+      "labels": [
+        "roslyn"
+      ],
+      "matchPackagePatterns": [
+        "^Microsoft\\.CodeAnalysis"
+      ]
     }
   ]
 }
