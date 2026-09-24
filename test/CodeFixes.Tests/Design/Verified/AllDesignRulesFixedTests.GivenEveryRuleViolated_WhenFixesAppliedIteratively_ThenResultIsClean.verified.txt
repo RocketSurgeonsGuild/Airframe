@@ -1,0 +1,36 @@
+﻿namespace Sample
+{
+    public class Example
+    {
+        public Example()
+        {
+        }
+
+        public const int ConstField = 5;
+
+        public static readonly int StaticReadonlyField = 7;
+
+        public static int StaticField = 4;
+
+        public static int AnotherStaticField = 6;
+
+        public int PublicField = 3;
+
+        internal int InternalField = 2;
+
+        public int Property { get; set; }
+
+        public void LongMethod(
+            string firstParameter,
+            string secondParameter,
+            string thirdParameter)
+        {
+        }
+
+        private readonly int _value;
+
+        private void Helper()
+        {
+        }
+    }
+}
