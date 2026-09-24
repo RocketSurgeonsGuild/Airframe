@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2006: [
+      {
+        Id: RSA2006,
+        Title: Constant fields should appear before non-constant fields,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (5,26)-(5,34),
+        Description: Constant fields are declared before other fields of the same accessibility.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: 'Constant' (private const field) should appear before '_value' (private static field),
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

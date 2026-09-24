@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2002: [
+      {
+        Id: RSA2002,
+        Title: Private members should appear after non-private members,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (8,19)-(8,27),
+        Description: A type's public surface is declared before its implementation details, so a reader meets the contract before the machinery.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: 'Property' (public property) should appear before 'Helper()' (private method),
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

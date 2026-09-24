@@ -1,0 +1,66 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2013: [
+      {
+        Id: RSA2013,
+        Title: Line exceeds the maximum length,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (4,80)-(4,94),
+        Description: Lines stay inside the margin set by the max_line_length editorconfig key. The rule is silent where that key is absent or off.,
+        MessageFormat: Line is {0} characters long; the maximum is {1},
+        Message: Line is 94 characters long; the maximum is 80,
+        Category: Design
+      }
+    ]
+  },
+  CodeFixes: {
+    Rocket.Surgery.Airframe.CodeFixes.Design.Rsa2013Fix: [
+      {
+        CodeActions: [
+          {
+            Title: Chop line,
+            Tags: null,
+            TextChanges: {
+              Input0.cs: [
+                {
+                  Length: 33,
+                  NewText:
+            "-",
+            "alpha",
+            "bravo",
+            "charlie",
+           
+                }
+              ]
+            }
+          }
+        ],
+        Diagnostic: {
+          Id: RSA2013,
+          Title: Line exceeds the maximum length,
+          Severity: Warning,
+          WarningLevel: 1,
+          Location: Input0.cs: (4,80)-(4,94),
+          Description: Lines stay inside the margin set by the max_line_length editorconfig key. The rule is silent where that key is absent or off.,
+          MessageFormat: Line is {0} characters long; the maximum is {1},
+          Message: Line is 94 characters long; the maximum is 80,
+          Category: Design
+        },
+        Document: Input0.cs
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  GlobalOptions: {
+    max_line_length: 80
+  },
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}
