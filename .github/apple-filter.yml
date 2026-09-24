@@ -1,0 +1,16 @@
+# Consumed by the `changes` job in ci.yml (dorny/paths-filter) to decide whether the
+# `build-apple` job has to run. That job is the only one that installs the ios workload,
+# so keeping this list tight is what keeps the common pull request off the slow path.
+#
+# src/Core is listed because src/Apple/Apple.csproj has a ProjectReference to it.
+apple:
+  - 'src/Apple/**'
+  - 'src/Core/**'
+  - 'Apple.sln'
+  - 'directory.build.props'
+  - 'directory.build.targets'
+  - 'directory.packages.props'
+  - 'src/directory.build.props'
+  - 'src/directory.build.targets'
+  - '.build/**'
+  - '.github/apple-filter.yml'

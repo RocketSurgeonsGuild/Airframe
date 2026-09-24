@@ -43,14 +43,10 @@
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.32"/>
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.4"/>
         <PackageVersion Include="ReactiveUI" Version="19.6.12" PrivateAssets="All"/>
-        <PackageVersion Include="ReactiveUI.XamForms" Version="19.6.12"/>
         <PackageVersion Include="ReactiveMarbles.Mvvm" Version="1.0.46"/>
         <PackageVersion Include="ReactiveMarbles.PropertyChanged" Version="2.0.27"/>
         <PackageVersion Include="Refit" Version="5.2.4"/>
-        <PackageVersion Include="Rocket.Surgery.Xamarin.Essentials" Version="0.4.1"/>
-        <PackageVersion Include="Rocket.Surgery.Xamarin.Essentials.Abstractions" Version="0.4.1"/>
         <PackageVersion Include="Serilog.Sinks.AppCenter.Crash" Version="1.2.1"/>
-        <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0"/>
         <PackageVersion Include="Splat" Version="14.8.12"/>
         <PackageVersion Include="Splat.Serilog" Version="14.8.12"/>
         <PackageVersion Include="Splat.DryIoc" Version="14.8.12"/>
@@ -62,7 +58,6 @@
         <PackageVersion Include="System.Interactive.Providers" Version="6.0.3"/>
         <PackageVersion Include="System.Reactive" Version="6.0.1"/>
         <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="4.7.0"/>
-        <PackageVersion Include="Toast.iOS" Version="1.2.0"/>
     </ItemGroup>
     <ItemGroup>
         <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
