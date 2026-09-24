@@ -22,13 +22,41 @@
 
         internal int InternalField = 2;
 
+        protected internal int ProtectedInternalField = 10;
+
         protected int ProtectedField = 9;
+
+        private protected int PrivateProtectedField = 11;
 
         public event System.EventHandler Changed;
 
+        internal event System.EventHandler ChangedInternal;
+
+        protected internal event System.EventHandler ChangedProtectedInternal;
+
+        protected event System.EventHandler ChangedProtected;
+
+        private protected event System.EventHandler ChangedPrivateProtected;
+
         public int Property { get; set; }
 
+        internal int InternalProperty { get; set; }
+
+        protected internal int ProtectedInternalProperty { get; set; }
+
+        protected int ProtectedProperty { get; set; }
+
+        private protected int PrivateProtectedProperty { get; set; }
+
         public int this[int index] => index;
+
+        internal int this[string key] => 0;
+
+        protected internal int this[long index] => 0;
+
+        protected int this[char key] => 0;
+
+        private protected int this[double index] => 0;
 
         public void LongMethod(
             string firstParameter,
@@ -37,15 +65,67 @@
         {
         }
 
+        internal void MethodInternal()
+        {
+        }
+
+        protected internal void MethodProtectedInternal()
+        {
+        }
+
+        protected void MethodProtected()
+        {
+        }
+
+        private protected void MethodPrivateProtected()
+        {
+        }
+
         public static Example operator +(Example left, Example right) => left;
 
         public delegate void Handler();
+
+        internal delegate void HandlerInternal();
+
+        protected internal delegate void HandlerProtectedInternal();
+
+        protected delegate void HandlerProtected();
+
+        private protected delegate void HandlerPrivateProtected();
 
         public class Nested
         {
         }
 
+        internal class NestedInternal
+        {
+        }
+
+        protected internal class NestedProtectedInternal
+        {
+        }
+
+        protected class NestedProtected
+        {
+        }
+
+        private protected class NestedPrivateProtected
+        {
+        }
+
+        private event System.EventHandler ChangedPrivate;
+
+        private int PrivateProperty { get; set; }
+
+        private int this[bool flag] => 0;
+
         private void Helper()
+        {
+        }
+
+        private delegate void HandlerPrivate();
+
+        private class NestedPrivate
         {
         }
 

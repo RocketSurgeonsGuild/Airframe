@@ -141,17 +141,20 @@ public class AllDesignRulesFixedTests
     }
 
     /// <summary>
-    /// One member-ordering chain that violates RSA2001 through RSA2007 exactly once each, plus a
-    /// region (RSA2010), a member with no explicit accessibility (RSA2011, reusing the same
-    /// member that also carries the RSA2002 violation) and one overlong line (RSA2013). A
-    /// protected field is included alongside the internal and public ones so the final snapshot
-    /// shows where protected access lands, not just internal and public.
+    /// The full matrix: every access level RSA2004 orders (public, internal, protected internal,
+    /// protected, private protected, private) on every kind that can actually declare each of
+    /// them — field, event, property, indexer, method, delegate, nested type — plus a constructor,
+    /// a destructor and one operator (operators are always <c>public static</c> in C#, so access
+    /// can't vary there). Every RSA2001-2007 kind/access/static/const/readonly combination this
+    /// file can show, it shows, then runs the whole thing through the fixers.
     ///
-    /// RSA2003's description documents the kind order as "fields, events, properties, indexers,
-    /// methods, operators, nested types" — the ordering samples elsewhere only ever exercise
-    /// fields, properties and methods, so a destructor, event, indexer, operator, delegate and
-    /// nested type are included here too, each the only member of its kind, so the final snapshot
-    /// shows every kind the description promises an order for actually landing in that order.
+    /// Indexers can't be named apart the way other kinds can, so each access level's indexer takes
+    /// a different parameter type instead (int, string, long, char, double, bool) purely so the
+    /// six don't collide as overloads; the parameter type carries no meaning of its own.
+    ///
+    /// Region (RSA2010), missing accessibility (RSA2011, on the same private method that also
+    /// carries the RSA2002 violation) and one overlong line (RSA2013) are still exercised exactly
+    /// as before; none of the new members touch those three.
     /// </summary>
     // lang=csharp
     internal const string Messy =
@@ -180,7 +183,11 @@ public class AllDesignRulesFixedTests
 
                 internal int InternalField = 2;
 
+                protected internal int ProtectedInternalField = 10;
+
                 protected int ProtectedField = 9;
+
+                private protected int PrivateProtectedField = 11;
 
                 public int PublicField = 3;
 
@@ -194,9 +201,55 @@ public class AllDesignRulesFixedTests
 
                 public event System.EventHandler Changed;
 
+                internal event System.EventHandler ChangedInternal;
+
+                protected internal event System.EventHandler ChangedProtectedInternal;
+
+                protected event System.EventHandler ChangedProtected;
+
+                private protected event System.EventHandler ChangedPrivateProtected;
+
+                private event System.EventHandler ChangedPrivate;
+
+                internal int InternalProperty { get; set; }
+
+                protected internal int ProtectedInternalProperty { get; set; }
+
+                protected int ProtectedProperty { get; set; }
+
+                private protected int PrivateProtectedProperty { get; set; }
+
+                private int PrivateProperty { get; set; }
+
                 public int this[int index] => index;
 
+                internal int this[string key] => 0;
+
+                protected internal int this[long index] => 0;
+
+                protected int this[char key] => 0;
+
+                private protected int this[double index] => 0;
+
+                private int this[bool flag] => 0;
+
                 public void LongMethod(string firstParameter, string secondParameter, string thirdParameter)
+                {
+                }
+
+                internal void MethodInternal()
+                {
+                }
+
+                protected internal void MethodProtectedInternal()
+                {
+                }
+
+                protected void MethodProtected()
+                {
+                }
+
+                private protected void MethodPrivateProtected()
                 {
                 }
 
@@ -204,7 +257,37 @@ public class AllDesignRulesFixedTests
 
                 public delegate void Handler();
 
+                internal delegate void HandlerInternal();
+
+                protected internal delegate void HandlerProtectedInternal();
+
+                protected delegate void HandlerProtected();
+
+                private protected delegate void HandlerPrivateProtected();
+
+                private delegate void HandlerPrivate();
+
                 public class Nested
+                {
+                }
+
+                internal class NestedInternal
+                {
+                }
+
+                protected internal class NestedProtectedInternal
+                {
+                }
+
+                protected class NestedProtected
+                {
+                }
+
+                private protected class NestedPrivateProtected
+                {
+                }
+
+                private class NestedPrivate
                 {
                 }
             }
