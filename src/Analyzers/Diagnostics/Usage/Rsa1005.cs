@@ -123,6 +123,14 @@ public class Rsa1005 : Rsa1000
         return type.AllInterfaces.Any(i => i.Name == "IObservable" && i.ContainingNamespace?.ToDisplayString() == "System");
     }
 
+    private static bool IsDynamicDataMethod(IMethodSymbol method)
+    {
+        var containingNamespace = method.ContainingNamespace?.ToDisplayString();
+
+        return containingNamespace?.StartsWith("DynamicData") == true ||
+               method.ContainingAssembly.Name.Contains("DynamicData");
+    }
+
     private static bool HasSchedulerParameter(IMethodSymbol method) => method.Parameters.Any(parameterSymbol => IsSchedulerType(parameterSymbol.Type));
 
     private static bool HasSchedulerOverload(IMethodSymbol method)
