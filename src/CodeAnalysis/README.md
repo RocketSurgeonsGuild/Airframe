@@ -5,7 +5,7 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 ## Analyzers
 
 - **RSA1XXX Usage** — MVVM patterns and ReactiveUI best practices
-- **RSA2XXX Design** — member layout and file structure
+- **RSA2XXX Design** — member layout, file structure, and documentation
 - **RSA3XXX Performance** — subscription lifetime and allocation
 
 Every rule has its own reference page — cause, how to fix, when to suppress — under
@@ -43,6 +43,8 @@ dotnet_diagnostic.RSA2010.severity = warning      # Do not use regions
 dotnet_diagnostic.RSA2011.severity = warning      # Declare accessibility explicitly
 dotnet_diagnostic.RSA2012.severity = warning      # Conditional compilation should not span member declarations
 dotnet_diagnostic.RSA2013.severity = warning      # Line exceeds the maximum length
+dotnet_diagnostic.RSA2014.severity = warning      # Provide a summary for public abstractions
+dotnet_diagnostic.RSA2015.severity = warning      # Provide <inheritdoc/> on members that implement or override an abstraction
 
 # RSA3XXX — Performance
 dotnet_diagnostic.RSA3001.severity = warning      # Subscription not disposed; consider DisposeWith
@@ -79,8 +81,8 @@ dotnet_diagnostic.RSA3002.severity = suggestion
 
 ## RSA2XXX — Design
 
-Member layout and file structure. These rules describe a layout StyleCop cannot express, because
-SA1201 hard-codes fields before constructors.
+Member layout, file structure, and documentation. The layout rules describe an order StyleCop
+cannot express, because SA1201 hard-codes fields before constructors.
 
 ### Member ordering
 
@@ -96,15 +98,15 @@ private fields
 private events, properties, indexers, methods, nested types
 ```
 
-| Rule | Description | StyleCop equivalent |
-|------|-------------|---------------------|
-| RSA2001 | Constructors should appear before other members | none; SA1201 requires the opposite |
-| RSA2002 | Private members should appear after non-private members | none |
-| RSA2003 | Members should be ordered by kind | SA1201 |
-| RSA2004 | Members should be ordered by access | SA1202 |
-| RSA2005 | Static members should appear before instance members | SA1204 |
-| RSA2006 | Constant fields should appear before non-constant fields | SA1203 |
-| RSA2007 | Readonly fields should appear before mutable fields | SA1214 |
+| Rule    | Description                                              | StyleCop equivalent                |
+|---------|----------------------------------------------------------|------------------------------------|
+| RSA2001 | Constructors should appear before other members          | none; SA1201 requires the opposite |
+| RSA2002 | Private members should appear after non-private members  | none                               |
+| RSA2003 | Members should be ordered by kind                        | SA1201                             |
+| RSA2004 | Members should be ordered by access                      | SA1202                             |
+| RSA2005 | Static members should appear before instance members     | SA1204                             |
+| RSA2006 | Constant fields should appear before non-constant fields | SA1203                             |
+| RSA2007 | Readonly fields should appear before mutable fields      | SA1214                             |
 
 Each rule owns one component of the comparison, so a misplaced member reports against exactly one
 rule and each concern gets its own severity.
@@ -115,14 +117,14 @@ author could satisfy.
 
 ### File structure
 
-| Rule | Description | StyleCop equivalent | Code fix |
-|------|-------------|---------------------|----------|
-| RSA2008 | File should contain a single type | SA1402 | none |
-| RSA2009 | File name should match the first type name | SA1649 | none |
-| RSA2010 | Do not use regions | SA1124 | yes |
-| RSA2011 | Declare accessibility explicitly | SA1400 | yes |
-| RSA2012 | Conditional compilation should not span member declarations | none | none |
-| RSA2013 | Line exceeds the maximum length | none | yes |
+| Rule    | Description                                                 | StyleCop equivalent | Code fix |
+|---------|-------------------------------------------------------------|---------------------|----------|
+| RSA2008 | File should contain a single type                           | SA1402              | none     |
+| RSA2009 | File name should match the first type name                  | SA1649              | none     |
+| RSA2010 | Do not use regions                                          | SA1124              | yes      |
+| RSA2011 | Declare accessibility explicitly                            | SA1400              | yes      |
+| RSA2012 | Conditional compilation should not span member declarations | none                | none     |
+| RSA2013 | Line exceeds the maximum length                             | none                | yes      |
 
 RSA2008 accepts types that share a name, so `IListener` beside `IListener<T>` is not a violation.
 RSA2009 accepts a generic arity or a partial suffix, so `Thing{T}.cs`, ``Thing`1.cs`` and
@@ -170,12 +172,12 @@ max_line_length = 160
 Its code fix is the equivalent of Rider's chop line. It breaks the outermost construct on the line
 that can carry a break:
 
-| Construct | Result |
-|-----------|--------|
-| Parameter list | one parameter per line |
-| Argument list | one argument per line |
-| Collection expression and object initializer | one element per line |
-| Expression body | break after the arrow |
+| Construct                                    | Result                 |
+|----------------------------------------------|------------------------|
+| Parameter list                               | one parameter per line |
+| Argument list                                | one argument per line  |
+| Collection expression and object initializer | one element per line   |
+| Expression body                              | break after the arrow  |
 
 ```csharp
 public static string Combine(string first, string second, string third, string fourth)
@@ -204,8 +206,22 @@ there is no break to insert that would not change the text.
 
 ### Using the ordering fix as a formatter
 
-The seven ordering rules share one code fix, because there is one sort. It supports Fix All, so
-`dotnet format` will apply it:
+The seven ordering rules share one code fix, because there is one sort. Applying it also sorts the
+file's `using` directives — every regular using alphabetically, `using static` directives next,
+alias directives last — since a using list left out of order is the same kind of layout drift the
+member reorder already corrects. Whether a `System` namespace leads the regular group, and whether
+a blank line separates that group from the rest, come from the standard
+`dotnet_sort_system_directives_first` and `dotnet_separate_import_directive_groups` editorconfig
+keys — the same two keys Visual Studio and Rider read for the same purpose:
+
+```ini
+[*.cs]
+dotnet_sort_system_directives_first = true    # default; System.* leads the regular group
+dotnet_separate_import_directive_groups = false   # default; no blank line between groups
+```
+
+The static-then-alias tail is not governed by either key and stays fixed regardless. It supports
+Fix All, so `dotnet format` will apply it:
 
 ```bash
 dotnet format analyzers --diagnostics RSA2001,RSA2002,RSA2003,RSA2004,RSA2005,RSA2006,RSA2007
@@ -223,6 +239,57 @@ and a `#pragma warning disable` written between two members, which RSA2012 does 
 which still starts suppressing from wherever it lands. In both cases the diagnostic stands and the
 edit is left to you. A directive pair contained within one member, or a pragma inside a member
 body, travels with that member and does not block the fix.
+
+### Documentation
+
+| Rule    | Description                                                                  | StyleCop equivalent    | Code fix |
+|---------|------------------------------------------------------------------------------|------------------------|----------|
+| RSA2014 | Provide a summary for public abstractions                                    | SA1600 (broader scope) | none     |
+| RSA2015 | Provide `<inheritdoc/>` on members that implement or override an abstraction | none                   | none     |
+
+RSA2014 reports on an interface or an abstract type declaration, and on every member either of them
+declares without a body: an interface member with no default implementation — a `static abstract`
+member (the generic-math pattern) included, since it has no body either — or a member marked
+`abstract` in an abstract class. Each one is a contract other code is written against, so it needs
+a `<summary>` a reader can act on without opening an implementation.
+
+```csharp
+/// <summary>Reads a value by key.</summary>
+public interface IReader
+{
+    /// <summary>Gets the value for <paramref name="key"/>.</summary>
+    string Read(string key);
+
+    /// <summary>Parses <paramref name="value"/>.</summary>
+    static abstract IReader Parse(string value);
+}
+```
+
+**A default interface member and a concrete member of an abstract class are both excluded.**
+Neither is part of the contract an implementer has to fulfil sight unseen, so RSA2014 leaves them
+to whatever general documentation policy a project already runs. A default interface member stays
+excluded whether or not it is `static`, since what excludes it is having a body, not being static.
+
+RSA2015 reports on a member that implements an interface member or overrides an abstract member,
+on whichever type directly declares it:
+
+```csharp
+public class Reader : IReader
+{
+    /// <inheritdoc/>
+    public string Read(string key) => key;
+}
+```
+
+**Inheriting an implementation from a base class does not itself require `<inheritdoc/>` at the
+derived class** — only the type that actually writes the member out needs the tag. A member that
+is itself `abstract`, re-declaring the contract rather than fulfilling it, is excluded; RSA2014
+owns documenting that one instead. RSA2015 does not currently check an event declared with the
+field-like `event Handler Changed;` shorthand; declare it with `event Handler Changed { add; remove; }`
+if it implements an interface event and needs the check.
+
+See [RSA2014](docs/RSA2014.md) and [RSA2015](docs/RSA2015.md) in the per-rule reference for the
+full cause/fix/suppress writeup.
 
 ## Suppress a warning
 

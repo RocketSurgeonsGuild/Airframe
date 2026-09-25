@@ -19,6 +19,8 @@
 | RSA2011 | Design      | Warning     | RSA2011_ExplicitAccessibility              |
 | RSA2012 | Design      | Warning     | RSA2012_ConditionalCompilationSpansMembers |
 | RSA2013 | Design      | Warning     | RSA2013_LineTooLong                        |
+| RSA2014 | Design      | Warning     | RSA2014_MissingAbstractionSummary          |
+| RSA2015 | Design      | Warning     | RSA2015_MissingInheritdoc                  |
 | RSA3002 | Performance | Warning     | RSA3002_LambdaExpressionStatic             |
 | RSA3003 | Performance | Information | RSA3003_Closure                            |
 | RSA3004 | Performance | Warning     | RSA3004_AutoRefreshOnTaskPool              |

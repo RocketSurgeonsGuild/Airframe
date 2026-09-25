@@ -189,6 +189,24 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "Lines stay inside the margin set by the max_line_length editorconfig key. The rule is silent where that key is absent or off.");
 
+    public static DiagnosticDescriptor RSA2014 { get; } = new(
+        id: "RSA2014",
+        title: "Provide a summary for public abstractions",
+        messageFormat: "'{0}' has no XML documentation summary",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "An interface, an abstract type, and the abstract or interface members they declare are a contract other code is written against, so each carries a <summary> a reader can act on without opening an implementation.");
+
+    public static DiagnosticDescriptor RSA2015 { get; } = new(
+        id: "RSA2015",
+        title: "Provide <inheritdoc/> on members that implement or override an abstraction",
+        messageFormat: "'{0}' implements or overrides a documented member; add <inheritdoc/>",
+        CategoryMap.GetOrAdd(Design, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A member that implements an interface member or overrides an abstract member restates a contract documented once at its source, so it points back there with <inheritdoc/> instead of duplicating or omitting the documentation.");
+
     public static DiagnosticDescriptor RSA3001 { get; } =
         new(
             "RSA3001",
