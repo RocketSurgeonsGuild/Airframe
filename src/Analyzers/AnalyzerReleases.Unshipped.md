@@ -24,4 +24,4 @@
 | RSA3002 | Performance | Warning     | RSA3002_LambdaExpressionStatic             |
 | RSA3003 | Performance | Information | RSA3003_Closure                            |
 | RSA3004 | Performance | Warning     | RSA3004_AutoRefreshOnTaskPool              |
-| RSA3004 | Performance | Warning     | RSA3004_AutoRefreshAlreadyApplied          |
+| RSA3005 | Performance | Warning     | RSA3005_AutoRefreshAlreadyApplied          |
