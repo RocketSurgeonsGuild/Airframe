@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
 namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
@@ -15,10 +15,11 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 public class Rsa1010 : Rsa1000
 {
     /// <summary>
-    /// Upper bound on how far <see cref="GetChainInvocations"/> will walk backward through a
-    /// fluent chain (and any variable initializers it follows into). This is a defensive guard
-    /// against a pathological or self-referential chain in code that doesn't fully compile
-    /// (e.g. mid-edit); no legitimate fluent chain is expected to approach this depth.
+    /// Upper bound on how many statement-boundary hops <see cref="HasPrecedingObserveOn"/> will
+    /// follow (a variable's initializer, then that initializer's own variable, and so on). This
+    /// is a defensive guard against a pathological or self-referential chain in code that
+    /// doesn't fully compile (e.g. mid-edit); no legitimate fluent chain is expected to approach
+    /// this depth.
     /// </summary>
     private const int MaxChainWalkDepth = 64;
 
@@ -58,51 +59,67 @@ public class Rsa1010 : Rsa1000
     /// Determines whether an <c>ObserveOn</c> call appears anywhere earlier in the fluent chain
     /// leading into <paramref name="invocation"/> (the <c>Bind</c> call).
     /// </summary>
-    private static bool HasPrecedingObserveOn(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        GetChainInvocations(invocation, semanticModel)
-           .Any(chainInvocation =>
-                chainInvocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Name.Identifier.Text == "ObserveOn");
-
-    /// <summary>
-    /// Walks backward through a fluent invocation chain starting at <paramref name="invocation"/>,
-    /// yielding every invocation encountered (including <paramref name="invocation"/> itself).
-    /// </summary>
     /// <remarks>
-    /// When the walk bottoms out at a bare identifier (e.g. a local variable), it follows that
-    /// identifier to its declaring variable's initializer and keeps walking -- so a chain split
-    /// across a statement boundary, such as
+    /// The chain within a single statement is walked via <see cref="Rsa3005.GetChainInvocations"/>
+    /// -- shared rather than re-implemented, so RSA1010 and RSA3005 don't maintain two copies of
+    /// the same fluent-chain walk. When that walk bottoms out at a bare identifier (e.g. a local
+    /// variable), this follows the identifier to its declaring variable's initializer and keeps
+    /// walking from there -- so a chain split across a statement boundary, such as
     /// <c>var pipeline = source.ObserveOn(x); pipeline.Bind(items);</c>, is still recognized as
     /// having a preceding <c>ObserveOn</c>. This is intentionally not general dataflow/alias
-    /// analysis: only a single level of "identifier resolves to a local variable with a simple
-    /// initializer" indirection is followed. A variable reassigned after declaration, a value
-    /// that arrives via a method parameter, or a value returned from a helper method is not
-    /// tracked, so RSA1010 may still (rarely) miss an <c>ObserveOn</c> for those shapes.
+    /// analysis: only "identifier resolves to a local variable with a simple invocation
+    /// initializer" indirection is followed, one statement boundary at a time. A variable
+    /// reassigned after declaration, a value that arrives via a method parameter, or a value
+    /// returned from a helper method is not tracked, so RSA1010 may still (rarely) miss an
+    /// <c>ObserveOn</c> for those shapes.
     /// </remarks>
-    private static IEnumerable<InvocationExpressionSyntax> GetChainInvocations(ExpressionSyntax expression, SemanticModel semanticModel)
+    private static bool HasPrecedingObserveOn(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
     {
-        var current = expression;
-        var depth = 0;
+        var current = invocation;
 
-        while (depth++ < MaxChainWalkDepth)
+        for (var depth = 0; depth < MaxChainWalkDepth; depth++)
         {
-            switch (current)
+            if (IsObserveOnInvocation(current) || Rsa3005.GetChainInvocations(current).Any(IsObserveOnInvocation))
             {
-                case InvocationExpressionSyntax invocation:
-                    yield return invocation;
-                    current = invocation.Expression;
-                    continue;
+                return true;
+            }
 
-                case MemberAccessExpressionSyntax memberAccess:
-                    current = memberAccess.Expression;
-                    continue;
+            if (GetChainRoot(current) is not IdentifierNameSyntax identifier ||
+                TryGetInitializer(identifier, semanticModel) is not InvocationExpressionSyntax initializerInvocation)
+            {
+                return false;
+            }
 
-                case IdentifierNameSyntax identifier when TryGetInitializer(identifier, semanticModel) is { } initializer:
-                    current = initializer;
-                    continue;
+            current = initializerInvocation;
+        }
 
-                default:
-                    yield break;
+        return false;
+    }
+
+    private static bool IsObserveOnInvocation(InvocationExpressionSyntax invocation) =>
+        invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+        memberAccess.Name.Identifier.Text == "ObserveOn";
+
+    /// <summary>
+    /// Finds the expression a fluent chain bottoms out at -- the receiver that isn't itself part
+    /// of the member-access/invocation alternation <see cref="Rsa3005.GetChainInvocations"/> walks.
+    /// </summary>
+    private static ExpressionSyntax GetChainRoot(InvocationExpressionSyntax invocation)
+    {
+        var current = (ExpressionSyntax)invocation;
+
+        while (true)
+        {
+            current = current switch
+            {
+                InvocationExpressionSyntax currentInvocation => currentInvocation.Expression,
+                MemberAccessExpressionSyntax memberAccess => memberAccess.Expression,
+                var root => root,
+            };
+
+            if (current is not (InvocationExpressionSyntax or MemberAccessExpressionSyntax))
+            {
+                return current;
             }
         }
     }
