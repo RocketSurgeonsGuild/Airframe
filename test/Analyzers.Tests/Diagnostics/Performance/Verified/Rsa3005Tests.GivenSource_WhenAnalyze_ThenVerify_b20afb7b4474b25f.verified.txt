@@ -1,0 +1,108 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance.Rsa3005: [
+      {
+        Id: RSA3005,
+        Title: AutoRefresh already applied for this property,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (13,16)-(13,27),
+        Description: Applying AutoRefresh more than once for the same property within the same observable chain re-evaluates that property redundantly.,
+        MessageFormat: AutoRefresh is already applied for this property earlier in the chain,
+        Message: AutoRefresh is already applied for this property earlier in the chain,
+        Category: Performance
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.ObjectModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.ObjectModel, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.ObjectModel', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.Linq.Expressions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.Linq.Expressions, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.Linq.Expressions', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.ObjectModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.ObjectModel, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.ObjectModel', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.Linq.Expressions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.Linq.Expressions, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.Linq.Expressions', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: RSA3005,
+      Title: AutoRefresh already applied for this property,
+      Severity: Warning,
+      WarningLevel: 1,
+      Location: Input0.cs: (13,16)-(13,27),
+      Description: Applying AutoRefresh more than once for the same property within the same observable chain re-evaluates that property redundantly.,
+      MessageFormat: AutoRefresh is already applied for this property earlier in the chain,
+      Message: AutoRefresh is already applied for this property earlier in the chain,
+      Category: Performance
+    }
+  ],
+  References: [
+    DynamicData.dll,
+    DynamicData.dll,
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
