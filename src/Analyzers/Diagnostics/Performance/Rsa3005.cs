@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Operations;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
 namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
@@ -22,12 +23,12 @@ public class Rsa3005 : Rsa3000
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
 
-        if (!Rsa3004.TryGetAutoRefreshMethod(invocation, context.SemanticModel, out _))
+        if (!Rsa3004.TryGetAutoRefreshMethod(invocation, context.SemanticModel, out var method))
         {
             return;
         }
 
-        var propertyPath = GetSelectorPropertyPath(invocation.ArgumentList.Arguments.FirstOrDefault());
+        var propertyPath = GetSelectorPropertyPath(invocation, method, context.SemanticModel);
         if (propertyPath == null)
         {
             return;
@@ -35,12 +36,12 @@ public class Rsa3005 : Rsa3000
 
         foreach (var priorInvocation in GetChainInvocations(invocation))
         {
-            if (!Rsa3004.TryGetAutoRefreshMethod(priorInvocation, context.SemanticModel, out _))
+            if (!Rsa3004.TryGetAutoRefreshMethod(priorInvocation, context.SemanticModel, out var priorMethod))
             {
                 continue;
             }
 
-            var priorPropertyPath = GetSelectorPropertyPath(priorInvocation.ArgumentList.Arguments.FirstOrDefault());
+            var priorPropertyPath = GetSelectorPropertyPath(priorInvocation, priorMethod, context.SemanticModel);
             if (priorPropertyPath != null && priorPropertyPath == propertyPath)
             {
                 context.ReportDiagnostic(Diagnostic.Create(RSA3005, GetMethodNameLocation(invocation)));
@@ -77,11 +78,51 @@ public class Rsa3005 : Rsa3000
     }
 
     /// <summary>
-    /// Extract the trailing member-access path of an AutoRefresh selector lambda, ignoring the lambda's own
-    /// parameter name, e.g. both <c>x =&gt; x.Foo</c> and <c>y =&gt; y.Foo</c> normalize to <c>Foo</c>.
+    /// Locate the selector argument passed to an AutoRefresh call by semantic parameter binding (matching
+    /// <see cref="IArgumentOperation.Parameter"/> against the selector parameter), rather than positionally,
+    /// so named/reordered arguments (e.g. <c>AutoRefresh(scheduler: ..., propertyAccessor: x =&gt; x.Thing)</c>)
+    /// are still resolved. Then extract and normalize its trailing member-access path, ignoring the lambda's
+    /// own parameter name, e.g. both <c>x =&gt; x.Foo</c> and <c>y =&gt; y.Foo</c> normalize to <c>Foo</c>.
     /// </summary>
-    /// <param name="selectorArgument">The selector argument passed to AutoRefresh.</param>
+    /// <param name="invocation">The AutoRefresh invocation.</param>
+    /// <param name="method">The resolved AutoRefresh method symbol.</param>
+    /// <param name="semanticModel">The semantic model.</param>
     /// <returns>The normalized property path, or <see langword="null"/> when the selector cannot be confidently compared.</returns>
+    private static string? GetSelectorPropertyPath(InvocationExpressionSyntax invocation, IMethodSymbol method, SemanticModel semanticModel)
+    {
+        var selectorParameter = method.Parameters.FirstOrDefault(parameter => IsSelectorType(parameter.Type));
+        if (selectorParameter == null)
+        {
+            return null;
+        }
+
+        if (semanticModel.GetOperation(invocation) is not IInvocationOperation operation)
+        {
+            return null;
+        }
+
+        var selectorArgumentOperation = operation.Arguments.FirstOrDefault(argument =>
+            argument.Parameter?.OriginalDefinition.Equals(selectorParameter.OriginalDefinition, SymbolEqualityComparer.Default) == true &&
+            argument.ArgumentKind != ArgumentKind.DefaultValue);
+
+        if (selectorArgumentOperation?.Syntax is not ArgumentSyntax selectorArgument)
+        {
+            return null;
+        }
+
+        return GetSelectorPropertyPath(selectorArgument);
+    }
+
+    /// <summary>
+    /// Determine whether a parameter's type is the <c>Expression&lt;Func&lt;TObject, TProperty&gt;&gt;</c> shape
+    /// used by AutoRefresh's property-accessor selector.
+    /// </summary>
+    /// <param name="type">The parameter type.</param>
+    /// <returns><see langword="true"/> when the type is an <c>Expression&lt;T&gt;</c>.</returns>
+    private static bool IsSelectorType(ITypeSymbol? type) =>
+        type is INamedTypeSymbol { Name: "Expression", TypeArguments.Length: 1 } namedType &&
+        namedType.ContainingNamespace?.ToDisplayString() == "System.Linq.Expressions";
+
     private static string? GetSelectorPropertyPath(ArgumentSyntax? selectorArgument)
     {
         var parameterName = selectorArgument?.Expression switch
