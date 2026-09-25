@@ -80,6 +80,14 @@ public class Rsa1005 : Rsa1000
 
     private static bool IsReactiveExtensionsMethod(IMethodSymbol method)
     {
+        // RSA3004 owns DynamicData's AutoRefresh scheduler surface specifically; skip it here so a
+        // missing scheduler on AutoRefresh doesn't also double-report as RSA1005. Other DynamicData
+        // methods without a dedicated rule (Batch, BatchIf, BufferInitial, ...) still fall through below.
+        if (method.Name == "AutoRefresh" && IsDynamicDataMethod(method))
+        {
+            return false;
+        }
+
         // Check if the method has an IObservable<T> parameter
         if (method.Parameters.Any(p => IsObservableType(p.Type)))
         {
@@ -112,6 +120,14 @@ public class Rsa1005 : Rsa1000
         }
 
         return type.AllInterfaces.Any(i => i.Name == "IObservable" && i.ContainingNamespace?.ToDisplayString() == "System");
+    }
+
+    private static bool IsDynamicDataMethod(IMethodSymbol method)
+    {
+        var containingNamespace = method.ContainingNamespace?.ToDisplayString();
+
+        return containingNamespace?.StartsWith("DynamicData") == true ||
+               method.ContainingAssembly.Name.Contains("DynamicData");
     }
 
     private static bool HasSchedulerParameter(IMethodSymbol method) => method.Parameters.Any(parameterSymbol => IsSchedulerType(parameterSymbol.Type));

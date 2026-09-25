@@ -50,3 +50,6 @@ Subscription lifetime and allocation.
 |------|-------|-------------------|
 | [RSA3001](RSA3001.md) | Subscription not disposed | Warning |
 | [RSA3002](RSA3002.md) | Lambda expression can be made static | Warning |
+| [RSA3003](RSA3003.md) | Lambda expression captures state and allocates a closure | Suggestion |
+| [RSA3004](RSA3004.md) | Provide an explicit scheduler for AutoRefresh | Warning |
+| [RSA3005](RSA3005.md) | AutoRefresh already applied for this property | Warning |

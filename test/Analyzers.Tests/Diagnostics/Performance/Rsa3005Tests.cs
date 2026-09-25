@@ -16,6 +16,9 @@ public class Rsa3005Tests
     [Theory]
     [InlineData(Rsa3005TestData.SinglePropertyOnce)]
     [InlineData(Rsa3005TestData.DifferentProperties)]
+    [InlineData(Rsa3005TestData.ConditionalExpressionSelector)]
+    [InlineData(Rsa3005TestData.MethodCallSelector)]
+    [InlineData(Rsa3005TestData.UnrelatedPipelinesSamePropertyNeverMerged)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
         // Given. When
@@ -25,6 +28,7 @@ public class Rsa3005Tests
            .WithAnalyzer<Rsa3005>()
            .AddReferences(
                 typeof(Unit),
+                typeof(System.IServiceProvider),
                 typeof(System.ComponentModel.INotifyPropertyChanged),
                 typeof(Expression<>),
                 typeof(SourceCache<,>),
@@ -41,6 +45,10 @@ public class Rsa3005Tests
 
     [Theory]
     [InlineData(Rsa3005TestData.SamePropertyTwice)]
+    [InlineData(Rsa3005TestData.NestedPropertyPathTwice)]
+    [InlineData(Rsa3005TestData.NamedReorderedArgumentsSamePropertyTwice)]
+    [InlineData(Rsa3005TestData.InlineCombinatorSamePropertyTwice)]
+    [InlineData(Rsa3005TestData.VariablesCombinedLaterSamePropertyTwice)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given. When
@@ -50,6 +58,7 @@ public class Rsa3005Tests
            .WithAnalyzer<Rsa3005>()
            .AddReferences(
                 typeof(Unit),
+                typeof(System.IServiceProvider),
                 typeof(System.ComponentModel.INotifyPropertyChanged),
                 typeof(Expression<>),
                 typeof(SourceCache<,>),
@@ -69,6 +78,13 @@ public class Rsa3005Tests
     [InlineData(nameof(Rsa3005TestData.SinglePropertyOnce), Rsa3005TestData.SinglePropertyOnce)]
     [InlineData(nameof(Rsa3005TestData.DifferentProperties), Rsa3005TestData.DifferentProperties)]
     [InlineData(nameof(Rsa3005TestData.SamePropertyTwice), Rsa3005TestData.SamePropertyTwice)]
+    [InlineData(nameof(Rsa3005TestData.NestedPropertyPathTwice), Rsa3005TestData.NestedPropertyPathTwice)]
+    [InlineData(nameof(Rsa3005TestData.ConditionalExpressionSelector), Rsa3005TestData.ConditionalExpressionSelector)]
+    [InlineData(nameof(Rsa3005TestData.MethodCallSelector), Rsa3005TestData.MethodCallSelector)]
+    [InlineData(nameof(Rsa3005TestData.NamedReorderedArgumentsSamePropertyTwice), Rsa3005TestData.NamedReorderedArgumentsSamePropertyTwice)]
+    [InlineData(nameof(Rsa3005TestData.InlineCombinatorSamePropertyTwice), Rsa3005TestData.InlineCombinatorSamePropertyTwice)]
+    [InlineData(nameof(Rsa3005TestData.VariablesCombinedLaterSamePropertyTwice), Rsa3005TestData.VariablesCombinedLaterSamePropertyTwice)]
+    [InlineData(nameof(Rsa3005TestData.UnrelatedPipelinesSamePropertyNeverMerged), Rsa3005TestData.UnrelatedPipelinesSamePropertyNeverMerged)]
     public async Task GivenSource_WhenAnalyze_ThenVerify(string name, string source)
     {
         // Given, When
@@ -78,6 +94,7 @@ public class Rsa3005Tests
            .AddSources(source)
            .AddReferences(
                 typeof(Unit),
+                typeof(System.IServiceProvider),
                 typeof(System.ComponentModel.INotifyPropertyChanged),
                 typeof(Expression<>),
                 typeof(SourceCache<,>),
@@ -209,6 +226,315 @@ public class Rsa3005Tests
                            .AutoRefresh(x => x.Thing)
                            .AutoRefresh(x => x.Thing)
                            .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // Proves GetMemberPath's normalization walks the full member-access chain (not just the last
+        // segment), so a nested accessor repeated further down the chain is still recognized as a duplicate.
+        // lang=csharp
+        internal const string NestedPropertyPathTwice = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh(x => x.Foo.Bar)
+                           .AutoRefresh(x => x.Foo.Bar)
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    public SubItem Foo { get; set; } = new();
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+
+                public class SubItem
+                {
+                    public string Bar { get; set; } = string.Empty;
+                }
+            }
+            """;
+
+        // False-negative guard: a conditional-expression selector body isn't a plain member-access chain,
+        // so GetMemberPath can't confidently normalize it and must not report a duplicate even though both
+        // calls use the same source expression.
+        // lang=csharp
+        internal const string ConditionalExpressionSelector = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh(x => x.Flag ? x.Thing : x.OtherThing)
+                           .AutoRefresh(x => x.Flag ? x.Thing : x.OtherThing)
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    public bool Flag { get; set; }
+
+                    private string _thing = string.Empty;
+                    private string _otherThing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public string OtherThing
+                    {
+                        get => _otherThing;
+                        set
+                        {
+                            _otherThing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OtherThing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // False-negative guard: a method-call selector body isn't a plain member-access chain either, so it
+        // must not be treated as comparable — false negatives here are the intended, safer failure mode.
+        // lang=csharp
+        internal const string MethodCallSelector = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh(x => x.GetThing())
+                           .AutoRefresh(x => x.GetThing())
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public string GetThing() => Thing;
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // Proves the selector argument is now located by semantic parameter binding rather than syntactic
+        // position: both calls pass their arguments named and reordered, and the duplicate is still caught.
+        // lang=csharp
+        internal const string NamedReorderedArgumentsSamePropertyTwice = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Concurrency;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh(scheduler: TaskPoolScheduler.Default, propertyAccessor: x => x.Thing)
+                           .AutoRefresh(scheduler: TaskPoolScheduler.Default, propertyAccessor: x => x.Thing)
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // The review-followup case: the two AutoRefresh calls never share a fluent receiver chain - they are
+        // built against two different source caches and only ever meet as sibling arguments to
+        // Observable.Merge, which then re-combines their duplicated-property pipelines into one.
+        // lang=csharp
+        internal const string InlineCombinatorSamePropertyTwice = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cacheA, SourceCache<Item, string> cacheB) =>
+                        Observable.Merge(
+                            cacheA.Connect().AutoRefresh(x => x.Thing),
+                            cacheB.Connect().AutoRefresh(x => x.Thing))
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // The harder review-followup case: each AutoRefresh call is built in its own local-variable
+        // declaration statement, and the two are only combined in a later, separate statement. Detecting this
+        // requires following the local variables' data flow, not just the syntax tree around one invocation.
+        // lang=csharp
+        internal const string VariablesCombinedLaterSamePropertyTwice = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cacheA, SourceCache<Item, string> cacheB)
+                    {
+                        var a = cacheA.Connect().AutoRefresh(x => x.Thing);
+                        var b = cacheB.Connect().AutoRefresh(x => x.Thing);
+
+                        a.Merge(b).Subscribe();
+                    }
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // False-positive guard: two AutoRefresh calls on the same property, in two entirely independent
+        // pipelines that each subscribe on their own and are never combined with one another. Widening
+        // detection scope to catch the combinator cases above must not start flagging unrelated pipelines
+        // that merely happen to live in the same method.
+        // lang=csharp
+        internal const string UnrelatedPipelinesSamePropertyNeverMerged = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3005Example
+                {
+                    public Rsa3005Example(SourceCache<Item, string> cacheA, SourceCache<Item, string> cacheB)
+                    {
+                        cacheA.Connect().AutoRefresh(x => x.Thing).Subscribe();
+                        cacheB.Connect().AutoRefresh(x => x.Thing).Subscribe();
+                    }
                 }
 
                 public class Item : INotifyPropertyChanged

@@ -15,6 +15,7 @@ public class Rsa3004Tests
 {
     [Theory]
     [InlineData(Rsa3004TestData.Correct)]
+    [InlineData(Rsa3004TestData.CorrectNoSelectorOverload)]
     [InlineData(Rsa3004TestData.UnrelatedAutoRefresh)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
@@ -42,6 +43,7 @@ public class Rsa3004Tests
 
     [Theory]
     [InlineData(Rsa3004TestData.Incorrect)]
+    [InlineData(Rsa3004TestData.IncorrectNoSelectorOverload)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given. When
@@ -69,6 +71,8 @@ public class Rsa3004Tests
     [Theory]
     [InlineData(nameof(Rsa3004TestData.Correct), Rsa3004TestData.Correct)]
     [InlineData(nameof(Rsa3004TestData.Incorrect), Rsa3004TestData.Incorrect)]
+    [InlineData(nameof(Rsa3004TestData.CorrectNoSelectorOverload), Rsa3004TestData.CorrectNoSelectorOverload)]
+    [InlineData(nameof(Rsa3004TestData.IncorrectNoSelectorOverload), Rsa3004TestData.IncorrectNoSelectorOverload)]
     [InlineData(nameof(Rsa3004TestData.UnrelatedAutoRefresh), Rsa3004TestData.UnrelatedAutoRefresh)]
     public async Task GivenSource_WhenAnalyze_ThenVerify(string name, string source)
     {
@@ -148,6 +152,85 @@ public class Rsa3004Tests
                         cache
                            .Connect()
                            .AutoRefresh(x => x.Thing)
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // lang=csharp
+        internal const string CorrectNoSelectorOverload = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Concurrency;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3004Example
+                {
+                    public Rsa3004Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh(scheduler: TaskPoolScheduler.Default)
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
+                }
+            }
+            """;
+
+        // lang=csharp
+        internal const string IncorrectNoSelectorOverload = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa3004Example
+                {
+                    public Rsa3004Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh()
                            .Subscribe();
                 }
 
