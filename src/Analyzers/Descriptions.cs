@@ -72,6 +72,15 @@ internal static class Descriptions
         true,
         "Functions should be called using the .Invoke() method rather than parentheses.");
 
+    public static DiagnosticDescriptor RSA1010 { get; } = new(
+        id: "RSA1010",
+        title: "Bind DynamicData changesets on the UI thread",
+        messageFormat: "'{0}' should be preceded by ObserveOn to ensure the bound collection updates on the UI thread",
+        CategoryMap.GetOrAdd(Usage, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "DynamicData's Bind operator writes changeset updates directly into a UI-bound collection; without an ObserveOn call earlier in the chain, those updates can arrive off the UI thread and corrupt the bound collection.");
+
     public static DiagnosticDescriptor RSA2001 { get; } = new(
         id: "RSA2001",
         title: "Constructors should appear before other members",
