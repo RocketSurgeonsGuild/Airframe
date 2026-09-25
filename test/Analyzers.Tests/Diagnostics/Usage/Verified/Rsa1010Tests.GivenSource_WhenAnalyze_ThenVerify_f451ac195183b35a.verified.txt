@@ -1,0 +1,94 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1010: [
+      {
+        Id: RSA1010,
+        Title: Bind DynamicData changesets on the UI thread,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (14,12)-(14,16),
+        Description: DynamicData's Bind operator writes changeset updates directly into a UI-bound collection; without an ObserveOn call earlier in the chain, those updates can arrive off the UI thread and corrupt the bound collection.,
+        MessageFormat: '{0}' should be preceded by ObserveOn to ensure the bound collection updates on the UI thread,
+        Message: 'Bind' should be preceded by ObserveOn to ensure the bound collection updates on the UI thread,
+        Category: Usage
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.ObjectModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.ObjectModel, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.ObjectModel', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.ObjectModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.ObjectModel, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.ObjectModel', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: CS1701,
+      Title: Assuming assembly reference matches identity,
+      Severity: Warning,
+      WarningLevel: 2,
+      Location: : (0,0)-(0,0),
+      Description: The two assemblies differ in release and/or version number. For unification to occur, you must specify directives in the application's .config file, and you must provide the correct strong name of an assembly.,
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1701),
+      MessageFormat: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy,
+      Message: Assuming assembly reference 'System.ComponentModel.TypeConverter, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' used by 'DynamicData' matches identity 'System.ComponentModel.TypeConverter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' of 'System.ComponentModel.TypeConverter', you may need to supply runtime policy,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
+    },
+    {
+      Id: RSA1010,
+      Title: Bind DynamicData changesets on the UI thread,
+      Severity: Warning,
+      WarningLevel: 1,
+      Location: Input0.cs: (14,12)-(14,16),
+      Description: DynamicData's Bind operator writes changeset updates directly into a UI-bound collection; without an ObserveOn call earlier in the chain, those updates can arrive off the UI thread and corrupt the bound collection.,
+      MessageFormat: '{0}' should be preceded by ObserveOn to ensure the bound collection updates on the UI thread,
+      Message: 'Bind' should be preceded by ObserveOn to ensure the bound collection updates on the UI thread,
+      Category: Usage
+    }
+  ],
+  References: [
+    DynamicData.dll,
+    DynamicData.dll,
+    mscorlib.dll,
+    netstandard.dll,
+    System.ComponentModel.TypeConverter.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll,
+    System.Threading.dll
+  ]
+}
