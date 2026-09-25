@@ -1,5 +1,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
@@ -22,6 +23,19 @@ public abstract class Rsa1000 : DiagnosticAnalyzer
 
         context.RegisterSyntaxNodeAction(action: Analyze, syntaxKinds: GetKind());
     }
+
+    /// <summary>
+    /// Gets the location of an invocation's method name, for use as a diagnostic's reported span.
+    /// </summary>
+    /// <param name="invocation">The invocation expression.</param>
+    /// <returns>The location of the method name, falling back to the whole invocation when the
+    /// invoked expression isn't a member access or bare identifier.</returns>
+    protected static Location GetMethodNameLocation(InvocationExpressionSyntax invocation) => invocation.Expression switch
+    {
+        MemberAccessExpressionSyntax memberAccess => memberAccess.Name.GetLocation(),
+        IdentifierNameSyntax identifier => identifier.GetLocation(),
+        var _ => invocation.GetLocation(),
+    };
 
     /// <summary>
     /// Analyze the <see cref="SyntaxNodeAnalysisContext"/>.

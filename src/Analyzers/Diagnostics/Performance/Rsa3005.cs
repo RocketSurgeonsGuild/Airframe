@@ -17,6 +17,33 @@ public class Rsa3005 : Rsa3000
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [RSA3005];
 
+    /// <summary>
+    /// Walk the fluent chain an invocation is part of, yielding every invocation earlier in the same chain.
+    /// </summary>
+    /// <param name="invocation">The invocation to walk backward from.</param>
+    /// <returns>The invocations found earlier in the same fluent chain, closest first.</returns>
+    internal static IEnumerable<InvocationExpressionSyntax> GetChainInvocations(InvocationExpressionSyntax invocation)
+    {
+        SyntaxNode? current = invocation.Expression;
+
+        while (current != null)
+        {
+            switch (current)
+            {
+                case MemberAccessExpressionSyntax memberAccess:
+                    current = memberAccess.Expression;
+                    break;
+                case InvocationExpressionSyntax innerInvocation:
+                    yield return innerInvocation;
+                    current = innerInvocation.Expression;
+                    break;
+                default:
+                    current = null;
+                    break;
+            }
+        }
+    }
+
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
@@ -45,33 +72,6 @@ public class Rsa3005 : Rsa3000
             {
                 context.ReportDiagnostic(Diagnostic.Create(RSA3005, GetMethodNameLocation(invocation)));
                 return;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Walk the fluent chain an invocation is part of, yielding every invocation earlier in the same chain.
-    /// </summary>
-    /// <param name="invocation">The invocation to walk backward from.</param>
-    /// <returns>The invocations found earlier in the same fluent chain, closest first.</returns>
-    private static IEnumerable<InvocationExpressionSyntax> GetChainInvocations(InvocationExpressionSyntax invocation)
-    {
-        SyntaxNode? current = invocation.Expression;
-
-        while (current != null)
-        {
-            switch (current)
-            {
-                case MemberAccessExpressionSyntax memberAccess:
-                    current = memberAccess.Expression;
-                    break;
-                case InvocationExpressionSyntax innerInvocation:
-                    yield return innerInvocation;
-                    current = innerInvocation.Expression;
-                    break;
-                default:
-                    current = null;
-                    break;
             }
         }
     }
