@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Airframe.CodeFixes.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;

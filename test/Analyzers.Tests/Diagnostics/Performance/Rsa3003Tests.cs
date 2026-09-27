@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Linq;

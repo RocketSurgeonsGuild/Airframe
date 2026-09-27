@@ -1,9 +1,7 @@
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
-using System;
 using System.Linq;
 using System.Reflection;
 

@@ -5,14 +5,19 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Rocket.Surgery.Airframe.Analyzers;
 
+namespace Rocket.Surgery.Airframe.CodeFixes.Usage;
+
+/// <summary>
+/// Represents a code fix for <see cref="Descriptions.RSA1005"/>.
+/// </summary>
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Rsa1005Fix))]
 [Shared]
 public class Rsa1005Fix : CodeFixProvider
 {
     /// <inheritdoc/>
-    public sealed override ImmutableArray<string> FixableDiagnosticIds =>
-        ImmutableArray.Create("RSA1005");
+    public sealed override ImmutableArray<string> FixableDiagnosticIds => ["RSA1005"];
 
     /// <inheritdoc/>
     public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -55,14 +60,17 @@ public class Rsa1005Fix : CodeFixProvider
         }
     }
 
-    private async Task<Document> AddSchedulerParameter(Document document, InvocationExpressionSyntax invocation, string schedulerName, CancellationToken cancellationToken)
+    private async Task<Document> AddSchedulerParameter(
+        Document document,
+        InvocationExpressionSyntax invocation,
+        string schedulerName,
+        CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken);
         var argumentList = invocation.ArgumentList;
 
         // Add scheduler as the last argument
-        var schedulerArgument = SyntaxFactory.Argument(
-            SyntaxFactory.IdentifierName(schedulerName));
+        var schedulerArgument = SyntaxFactory.Argument(SyntaxFactory.IdentifierName(schedulerName));
 
         var newArgumentList = argumentList.Arguments.Count == 0
             ? argumentList.WithArguments(SyntaxFactory.SingletonSeparatedList(schedulerArgument))
