@@ -300,14 +300,25 @@ public class MemberOrderFix : CodeFixProvider
     }
 
     /// <summary>
-    /// Whether a member is a kind SA1516 exempts from the blank-line rule when two of them are
-    /// adjacent. Only <see cref="FieldDeclarationSyntax"/> is exempt: empirically confirmed against
-    /// the real StyleCopAnalyzers implementation (a probe of two adjacent single-line event field
-    /// declarations reports SA1516 on the second one), so <see cref="EventFieldDeclarationSyntax"/>
-    /// must not be added here without re-confirming that against the analyzer directly.
+    /// Whether a member is a kind this exemption applies to: a private field. SA1516 itself exempts
+    /// every single-line <see cref="FieldDeclarationSyntax"/> pair regardless of accessibility
+    /// (empirically confirmed — only <see cref="EventFieldDeclarationSyntax"/> is excluded, since a
+    /// probe of two adjacent single-line event fields reports SA1516 on the second one), but packing
+    /// fields together like this only reads well for private implementation-detail fields, so the
+    /// exemption is scoped to those. <c>private protected</c> counts as protected, not private, and
+    /// stays out.
     /// </summary>
     private static bool IsExemptField(MemberDeclarationSyntax member) =>
-        member is FieldDeclarationSyntax;
+        member is FieldDeclarationSyntax field && IsPrivateOnly(field.Modifiers);
+
+    /// <summary>
+    /// Whether the modifiers describe plain, unqualified private accessibility — explicit
+    /// <c>private</c> or no accessibility modifier at all (which defaults to private for a field).
+    /// </summary>
+    private static bool IsPrivateOnly(SyntaxTokenList modifiers) =>
+        !modifiers.Any(SyntaxKind.PublicKeyword) &&
+        !modifiers.Any(SyntaxKind.InternalKeyword) &&
+        !modifiers.Any(SyntaxKind.ProtectedKeyword);
 
     /// <summary>
     /// Whether a member's own span occupies a single source line. Deliberately conservative: when

@@ -80,6 +80,32 @@ public class MemberOrderFixFieldSeparatorTests
     }
 
     /// <summary>
+    /// Guard: two adjacent <c>public</c> fields must still be separated by a blank line. SA1516
+    /// itself would exempt this pair too, but the exemption is deliberately scoped to private
+    /// fields only — packing implementation-detail fields together reads fine, packing public API
+    /// surface does not.
+    /// </summary>
+    [Theory]
+    [InlineData(PublicFieldsBeforeConstructor)]
+    public async Task GivenAdjacentPublicFields_WhenCodeFixApplied_ThenBlankLineSeparatesThem(string source)
+    {
+        // Given, When
+        var fixedText = await ResolveFixedSourceAsync(source);
+
+        // Then
+        var expectedSeparatedFields = Normalize(
+            """
+                    public int First;
+
+                    public int Second;
+            """);
+
+        fixedText.Should().Contain(
+            expectedSeparatedFields,
+            "the field-field exemption is scoped to private fields, so adjacent public fields still get a separating blank line");
+    }
+
+    /// <summary>
     /// Guard: two adjacent private fields where the second carries an XML doc comment must still
     /// be separated by a blank line. Pins SA1514, which is not conditioned on member kind the way
     /// SA1516's field-field exemption is.
@@ -210,6 +236,27 @@ public class MemberOrderFixFieldSeparatorTests
                 public void Method()
                 {
                 }
+
+                public Example()
+                {
+                }
+            }
+        }
+        """;
+
+    /// <summary>
+    /// Two <c>public</c> fields with no blank line between them in the input, sitting ahead of a
+    /// misplaced constructor.
+    /// </summary>
+    // lang=csharp
+    internal const string PublicFieldsBeforeConstructor =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public int First;
+                public int Second;
 
                 public Example()
                 {
