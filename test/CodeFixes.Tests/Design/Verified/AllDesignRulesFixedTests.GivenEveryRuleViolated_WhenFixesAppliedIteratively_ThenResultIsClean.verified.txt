@@ -11,21 +11,13 @@
         }
 
         public const int ConstField = 5;
-
         public static readonly int StaticReadonlyField = 7;
-
         public static int StaticField = 4;
-
         public static int AnotherStaticField = 6;
-
         public int PublicField = 3;
-
         internal int InternalField = 2;
-
         protected internal int ProtectedInternalField = 10;
-
         protected int ProtectedField = 9;
-
         private protected int PrivateProtectedField = 11;
 
         public event System.EventHandler Changed;
