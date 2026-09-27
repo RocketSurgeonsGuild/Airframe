@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
