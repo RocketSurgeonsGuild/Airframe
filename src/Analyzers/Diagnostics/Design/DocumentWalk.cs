@@ -45,10 +45,33 @@ internal static class DocumentWalk
     {
         var topLevelTypes = TopLevelTypes.Of(compilationUnit).ToList();
 
-        var regions = compilationUnit
-           .DescendantTrivia(descendIntoTrivia: true)
-           .Where(trivia => trivia.IsKind(SyntaxKind.RegionDirectiveTrivia))
-           .ToList();
+        var options = context.Options.AnalyzerConfigOptionsProvider.GetOptions(compilationUnit.SyntaxTree);
+        var hasLimit = TryGetLimit(options, out var configuredLimit);
+
+        // One walk over every trivia in the tree collects both the #region directives (RSA2010)
+        // and, when a line-length limit is configured, the comment/doc-comment trivia RSA2013
+        // measures lines against, in source order — rather than two independent DescendantTrivia
+        // enumerations over the same document, which is exactly the redundant full pass this class
+        // exists to avoid. DescendantTrivia yields trivia depth-first in document order regardless
+        // of descendIntoTrivia, which RSA2013's backward walk below depends on. Deliberately not
+        // gating comment collection on disabled (#if/#endif-excluded) text: a comment written
+        // inside inactive code is DisabledTextTrivia, not comment trivia, so it is measured and
+        // reportable like any other disabled-region text — the same treatment #region and #pragma
+        // directives get.
+        List<SyntaxTrivia> regions = [];
+        List<SyntaxTrivia> commentTrivia = [];
+
+        foreach (var trivia in compilationUnit.DescendantTrivia(descendIntoTrivia: true))
+        {
+            if (trivia.IsKind(SyntaxKind.RegionDirectiveTrivia))
+            {
+                regions.Add(trivia);
+            }
+            else if (hasLimit && CommentTrivia.IsCommentOrDoc(trivia))
+            {
+                commentTrivia.Add(trivia);
+            }
+        }
 
         var inaccessibleMembers = compilationUnit
            .DescendantNodes()
@@ -57,27 +80,14 @@ internal static class DocumentWalk
            .Where(member => !HasAccessibility(member))
            .ToList();
 
-        var options = context.Options.AnalyzerConfigOptionsProvider.GetOptions(compilationUnit.SyntaxTree);
-
         List<OverlongLine> overlongLines = [];
         int? limit = null;
 
-        if (TryGetLimit(options, out var configuredLimit))
+        if (hasLimit)
         {
             limit = configuredLimit;
 
             var text = compilationUnit.SyntaxTree.GetText(context.CancellationToken);
-
-            // Every comment/doc-comment trivia in the tree, in source order, so each line below
-            // can walk backward through it instead of re-walking the whole tree. Deliberately not
-            // descending into disabled (#if/#endif-excluded) text: a comment written inside
-            // inactive code is DisabledTextTrivia, not comment trivia, so it is measured and
-            // reportable like any other disabled-region text — the same treatment #region and
-            // #pragma directives get.
-            var commentTrivia = compilationUnit
-               .DescendantTrivia()
-               .Where(CommentTrivia.IsCommentOrDoc)
-               .ToList();
 
             // The index of the last trivia (by source position) that has started before the
             // current line ends. Only ever advances, across the whole document, since trivia are
