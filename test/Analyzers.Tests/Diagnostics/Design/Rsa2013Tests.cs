@@ -58,15 +58,14 @@ public class Rsa2013Tests
     [InlineData(LongLine)]
     public async Task GivenNoConfiguredLimit_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
-        // Given, When. No max_line_length is supplied.
+        // Given, When
         var result = await GeneratorTestContextBuilder
            .Create()
            .AddSources(source)
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. The rule takes its limit from configuration rather than inventing one, so with
-        // nothing configured it has nothing to say.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -94,14 +93,7 @@ public class Rsa2013Tests
            .BeEmpty();
     }
 
-    // ---------------------------------------------------------------------------------------
-    // Bug #371: DocumentWalk.Compute used to measure every raw SourceText line with zero trivia
-    // awareness, so comment and XML-doc lines got measured as plain text and reported by
-    // RSA2013, and Rsa2013Fix declines all of them (nothing to chop), so the warning had no
-    // remedy but suppression. These four report NOTHING now that the walk excludes a line's
-    // trailing comment/doc-comment trivia from the measured length.
-    // ---------------------------------------------------------------------------------------
-
+    // Bug #371: comment and XML-doc trivia is excluded from the measured length.
     [Theory]
     [InlineData(LongXmlDocSummaryLine)]
     public async Task GivenLongXmlDocSummaryLine_WhenAnalyze_ThenNoDiagnosticsReported(string source)
@@ -114,8 +106,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. A `///` prose line that overruns the margin is documentation, not code, so it
-        // must not be reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -135,8 +126,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. A `//` line that is entirely comment has no code content, so it must not be
-        // reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -156,8 +146,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. The overlong line is an interior line of a delimited /* ... */ comment (not the
-        // opener), so it is still entirely comment and must not be reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -177,9 +166,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. Trailing whitespace after the comment's closing `*/` must not stop the walk
-        // from recognizing the comment as reaching the end of the line — the line is still
-        // entirely comment (plus trailing whitespace) and must not be reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -199,9 +186,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. A trailing comment RUN can be more than one trivia (`/* x */ // y`) — the walk
-        // must peel back through both, not just the last one, so a line that is entirely a
-        // comment run must not be reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -221,10 +206,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. The declaration's code content ("public string Value { get; set; }", 41 chars)
-        // is comfortably within the margin; only the trailing // comment pushes the raw line
-        // past 80. Excluding trailing comment trivia from the measured length means this must
-        // not be reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -244,9 +226,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. Trailing whitespace after a trailing block comment's `*/` must not stop the
-        // walk from finding it: the declaration's code content is comfortably within the
-        // margin, and must not be reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -266,20 +246,13 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. A trailing comment run of more than one trivia (`/* x */ // y`) after short code
-        // must be peeled back through entirely, not just its last trivia, so this must not be
-        // reported.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
            .Should()
            .BeEmpty();
     }
-
-    // ---------------------------------------------------------------------------------------
-    // Regression guards: these pin down that the fix does not over-reach — comment trivia is
-    // excluded from the measured length, but that is the ONLY thing excluded.
-    // ---------------------------------------------------------------------------------------
 
     [Theory]
     [InlineData(LongCodeWithTrailingComment)]
@@ -293,12 +266,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. The declaration's code content alone ("public static string Combine(string
-        // first, string second, string third, string fourth)", 94 chars) already exceeds the
-        // margin, before the trailing "// trailing note" comment is even considered. A
-        // developer must not be able to silence a genuinely overlong code line by appending a
-        // comment, so this must still report — and the reported length must be the CODE
-        // CONTENT length (94), not the raw line length including the comment (111).
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -322,10 +290,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. The `/* flag */` comment sits BEFORE code that keeps going after it on the same
-        // line, so it is not a trailing run — only a comment run reaching the end of the line is
-        // excluded. This must still report, and the reported length must be the full raw line
-        // length (91), not a length that has had the interior comment subtracted out.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -349,8 +314,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. String literals are deliberately out of scope for the comment-trivia carve-out
-        // — a long string-literal line must still be reported, in full.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -374,8 +338,7 @@ public class Rsa2013Tests
            .WithAnalyzer<Rsa2013>()
            .GenerateAsync();
 
-        // Then. Sanity guard: a doc-comment line within the margin, on a class whose code lines
-        // are all within the margin, reports nothing.
+        // Then
         result
            .AnalyzerResults[typeof(Rsa2013)]
            .Diagnostics
@@ -468,6 +431,9 @@ public class Rsa2013Tests
         }
         """;
 
+    /// <summary>
+    /// The overlong line is an interior line of a delimited <c>/* */</c> comment, not the opener.
+    /// </summary>
     // lang=csharp
     internal const string LongLineInsideBlockComment =
         """
@@ -483,9 +449,11 @@ public class Rsa2013Tests
         }
         """;
 
-    // Uses string concatenation rather than a raw string literal: trailing whitespace after the
-    // comment on the fourth line is the whole point of this fixture, and a raw string literal's
-    // dedent/trim behavior is not guaranteed to preserve it.
+    /// <summary>
+    /// Concatenated rather than a raw string literal: the trailing whitespace after the comment's
+    /// closing <c>*/</c> is the point of this fixture, and a raw literal's dedent is not guaranteed
+    /// to preserve it.
+    /// </summary>
     internal const string LongBlockCommentAloneWithTrailingWhitespace =
         "namespace Sample\n" +
         "{\n" +
@@ -496,11 +464,11 @@ public class Rsa2013Tests
         "    }\n" +
         "}";
 
-    // The FIRST comment in the run is the long one, deliberately, so that the prefix up to the
-    // start of the LAST trivia is already past the margin on its own. A run fixture where only
-    // the trailing trivia is long cannot distinguish this from the old single-trivia algorithm
-    // (which excluded exactly that last trivia and would have measured the same short prefix) —
-    // see GivenLongTwoCommentRunAloneOnOwnLine_WhenAnalyze_ThenNoDiagnosticsReported.
+    /// <summary>
+    /// The FIRST comment in the run is the long one, deliberately, so the prefix up to the start of
+    /// the LAST trivia is already past the margin on its own. A fixture where only the trailing
+    /// trivia were long would pass against the old single-trivia algorithm and guard nothing.
+    /// </summary>
     // lang=csharp
     internal const string LongTwoCommentRunAloneOnOwnLine =
         """
@@ -526,9 +494,11 @@ public class Rsa2013Tests
         }
         """;
 
-    // Uses string concatenation rather than a raw string literal, for the same reason as
-    // LongBlockCommentAloneWithTrailingWhitespace above: the trailing whitespace after the
-    // comment must survive exactly as written.
+    /// <summary>
+    /// Concatenated rather than a raw string literal, for the same reason as
+    /// <see cref="LongBlockCommentAloneWithTrailingWhitespace"/>: the trailing whitespace after the
+    /// comment must survive exactly as written.
+    /// </summary>
     internal const string LongTrailingBlockCommentWithTrailingWhitespace =
         "namespace Sample\n" +
         "{\n" +
@@ -538,10 +508,10 @@ public class Rsa2013Tests
         "    }\n" +
         "}";
 
-    // Same reasoning as LongTwoCommentRunAloneOnOwnLine above: the FIRST trivia in the run (the
-    // block comment) is the long one, so the prefix up to the start of the trailing "// y" is
-    // already past the margin — a fixture where only the trailing trivia were long would pass
-    // against the old single-trivia algorithm too and guard nothing.
+    /// <summary>
+    /// Same reasoning as <see cref="LongTwoCommentRunAloneOnOwnLine"/>: the FIRST trivia in the run
+    /// is the long one, so the prefix up to the trailing <c>// y</c> is already past the margin.
+    /// </summary>
     // lang=csharp
     internal const string LongTrailingTwoCommentRun =
         """
@@ -554,6 +524,11 @@ public class Rsa2013Tests
         }
         """;
 
+    /// <summary>
+    /// The declaration's code content alone is 94 characters, past the margin before the trailing
+    /// comment is even considered, and the raw line is 111. The reported length must be 94: a
+    /// developer must not be able to silence a genuinely overlong code line by appending a comment.
+    /// </summary>
     // lang=csharp
     internal const string LongCodeWithTrailingComment =
         """
@@ -569,6 +544,10 @@ public class Rsa2013Tests
         }
         """;
 
+    /// <summary>
+    /// The <c>/* flag */</c> comment sits before code that keeps going after it, so it is not a
+    /// trailing run and is not excluded. The reported length must be the full 91.
+    /// </summary>
     // lang=csharp
     internal const string LongMethodWithMidLineComment =
         """
@@ -583,6 +562,9 @@ public class Rsa2013Tests
         }
         """;
 
+    /// <summary>
+    /// String literals are deliberately out of scope for the comment-trivia carve-out.
+    /// </summary>
     // lang=csharp
     internal const string LongStringLiteral =
         """

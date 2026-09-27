@@ -12,8 +12,8 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Usage;
 /// <summary>
 /// Represents a code fix for <see cref="Descriptions.RSA1005"/>.
 /// </summary>
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Rsa1005Fix))]
 [Shared]
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Rsa1005Fix))]
 public class Rsa1005Fix : CodeFixProvider
 {
     /// <inheritdoc/>
