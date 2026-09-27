@@ -253,6 +253,7 @@ public class MemberOrderFix : CodeFixProvider
     {
         var separated = new List<MemberDeclarationSyntax>();
         var first = true;
+        MemberDeclarationSyntax? previous = null;
 
         foreach (var member in members)
         {
@@ -280,12 +281,68 @@ public class MemberOrderFix : CodeFixProvider
 
             var trimmed = SyntaxFactory.TriviaList(leading.Skip(index));
 
-            separated.Add(member.WithLeadingTrivia(first ? trimmed : trimmed.Insert(0, newLine)));
+            // SA1516 exempts consecutive single-line field declarations from the
+            // blank-line-between-members rule. Omit the separator only when that exemption clearly
+            // applies; every other case keeps inserting one, which is always SA1516-legal.
+            var omitBlankLine = !first &&
+                previous is not null &&
+                IsExemptField(previous) &&
+                IsExemptField(member) &&
+                IsSingleLine(previous) &&
+                !HasCommentOrDocTrivia(trimmed);
+
+            separated.Add(member.WithLeadingTrivia(first || omitBlankLine ? trimmed : trimmed.Insert(0, newLine)));
             first = false;
+            previous = member;
         }
 
         return SyntaxFactory.List(separated);
     }
+
+    /// <summary>
+    /// Whether a member is a kind this exemption applies to: a private field. SA1516 itself exempts
+    /// every single-line <see cref="FieldDeclarationSyntax"/> pair regardless of accessibility
+    /// (empirically confirmed — only <see cref="EventFieldDeclarationSyntax"/> is excluded, since a
+    /// probe of two adjacent single-line event fields reports SA1516 on the second one), but packing
+    /// fields together like this only reads well for private implementation-detail fields, so the
+    /// exemption is scoped to those. <c>private protected</c> counts as protected, not private, and
+    /// stays out.
+    /// </summary>
+    private static bool IsExemptField(MemberDeclarationSyntax member) =>
+        member is FieldDeclarationSyntax field && IsPrivateOnly(field.Modifiers);
+
+    /// <summary>
+    /// Whether the modifiers describe plain, unqualified private accessibility — explicit
+    /// <c>private</c> or no accessibility modifier at all (which defaults to private for a field).
+    /// </summary>
+    private static bool IsPrivateOnly(SyntaxTokenList modifiers) =>
+        !modifiers.Any(SyntaxKind.PublicKeyword) &&
+        !modifiers.Any(SyntaxKind.InternalKeyword) &&
+        !modifiers.Any(SyntaxKind.ProtectedKeyword);
+
+    /// <summary>
+    /// Whether a member's own span occupies a single source line. Deliberately conservative: when
+    /// the preceding member spans multiple lines, this returns false and the caller falls back to
+    /// inserting the blank line rather than guessing at SA1516's behavior for that shape.
+    /// </summary>
+    private static bool IsSingleLine(MemberDeclarationSyntax member)
+    {
+        var lineSpan = member.GetLocation().GetLineSpan();
+
+        return lineSpan.StartLinePosition.Line == lineSpan.EndLinePosition.Line;
+    }
+
+    /// <summary>
+    /// Whether the given (already blank-line-trimmed) leading trivia still carries a documentation
+    /// comment or a <c>//</c>/<c>/* */</c> comment, in which case SA1514/SA1515 still require the
+    /// blank line regardless of the field-field exemption.
+    /// </summary>
+    private static bool HasCommentOrDocTrivia(SyntaxTriviaList trivia) =>
+        trivia.Any(
+            trivium => trivium.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
+                trivium.IsKind(SyntaxKind.MultiLineCommentTrivia) ||
+                trivium.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia) ||
+                trivium.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia));
 
     /// <summary>
     /// Gets the line ending the type already uses, so a reorder does not introduce a second
