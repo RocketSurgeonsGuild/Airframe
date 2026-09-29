@@ -9,6 +9,24 @@ internal static class Descriptions
 {
     private static readonly ConcurrentDictionary<Category, string> CategoryMap = new();
 
+    public static DiagnosticDescriptor RSA0002 { get; } = new(
+        id: "RSA0002",
+        title: "Do not return a nullable collection",
+        messageFormat: "'{0}' returns a nullable collection; return an empty collection instead of null",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A public or protected member that returns a nullable collection type forces every caller across that boundary to null-check before it can enumerate. Return an empty collection - Array.Empty<T>(), Enumerable.Empty<T>(), or a collection expression - instead of null.");
+
+    public static DiagnosticDescriptor RSA0003 { get; } = new(
+        id: "RSA0003",
+        title: "Do not return a nullable task",
+        messageFormat: "'{0}' returns a nullable {1}; a task represents a completion and should never itself be null",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A public or protected member that declares a nullable Task, Task<T>, ValueTask, or ValueTask<T> return type forces every caller to null-check the task itself before awaiting it. Return Task.CompletedTask or Task.FromResult instead. This does not apply to Task<T?>, where only the completed result is nullable.");
+
     public static DiagnosticDescriptor RSA1001 { get; } =
         new(
             "RSA1001",

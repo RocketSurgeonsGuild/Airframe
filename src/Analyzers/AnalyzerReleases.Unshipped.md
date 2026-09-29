@@ -2,6 +2,8 @@
 
 | Rule ID | Category    | Severity    | Notes                                      |
 |---------|-------------|-------------|--------------------------------------------|
+| RSA0002 | Nullability | Warning     | RSA0002_NullableCollectionReturn           |
+| RSA0003 | Nullability | Warning     | RSA0003_NullableTaskReturn                 |
 | RSA1005 | Usage       | Warning     | RSA1005_SchedulerNotProvided               |
 | RSA1007 | Usage       | Warning     | RSA1005_UseInvokeFunction                  |
 | RSA1009 | Usage       | Warning     | RSA1009_AutoRefreshOnObservableClosureOnly |

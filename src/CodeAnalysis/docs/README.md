@@ -6,6 +6,17 @@ docs: cause, rule description, how to fix, when to suppress, and the suppression
 severities, `.editorconfig` defaults, and the broader guidance these pages link back to, see the
 [package README](../README.md).
 
+## RSA0XXX — Nullability
+
+Declaration-site nullability contracts the compiler's own nullable reference type analysis does
+not evaluate: it verifies that flow matches an annotation, never whether that annotation is itself
+a defective boundary contract.
+
+| Rule | Title | Default severity |
+|------|-------|-------------------|
+| [RSA0002](RSA0002.md) | Do not return a nullable collection | Warning |
+| [RSA0003](RSA0003.md) | Do not return a nullable task | Warning |
+
 ## RSA1XXX — Usage
 
 MVVM patterns and ReactiveUI best practices.

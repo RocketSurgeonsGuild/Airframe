@@ -4,6 +4,7 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 
 ## Analyzers
 
+- **RSA0XXX Nullability** — declaration-site nullability contracts the compiler's own nullable reference type analysis does not evaluate
 - **RSA1XXX Usage** — MVVM patterns and ReactiveUI best practices
 - **RSA2XXX Design** — member layout, file structure, and documentation
 - **RSA3XXX Performance** — subscription lifetime and allocation
@@ -20,6 +21,10 @@ don't want to override:
 
 ```ini
 [*.cs]
+# RSA0XXX — Nullability
+dotnet_diagnostic.RSA0002.severity = warning      # Do not return a nullable collection
+dotnet_diagnostic.RSA0003.severity = warning      # Do not return a nullable task
+
 # RSA1XXX — Usage
 dotnet_diagnostic.RSA1001.severity = warning      # Use expression lambda overload for a property
 dotnet_diagnostic.RSA1002.severity = error        # Provide a well-formed lambda expression
