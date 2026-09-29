@@ -24,6 +24,7 @@ don't want to override:
 # RSA0XXX — Nullability
 dotnet_diagnostic.RSA0002.severity = warning      # Do not return a nullable collection
 dotnet_diagnostic.RSA0003.severity = warning      # Do not return a nullable task
+dotnet_diagnostic.RSA0009.severity = none         # Nullable reference return on an abstraction member (disabled by default)
 
 # RSA1XXX — Usage
 dotnet_diagnostic.RSA1001.severity = warning      # Use expression lambda overload for a property

@@ -16,6 +16,7 @@ a defective boundary contract.
 |------|-------|-------------------|
 | [RSA0002](RSA0002.md) | Do not return a nullable collection | Warning |
 | [RSA0003](RSA0003.md) | Do not return a nullable task | Warning |
+| [RSA0009](RSA0009.md) | Do not declare a nullable reference return type on an abstraction member | Info (disabled by default) |
 
 ## RSA1XXX — Usage
 

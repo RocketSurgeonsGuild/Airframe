@@ -5,13 +5,13 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 
 /// <summary>
 /// Identifies members that sit on a public boundary and the declared shape of their return type.
-/// Shared by RSA0002 and RSA0003.
+/// Shared by RSA0002, RSA0003, and RSA0009.
 /// </summary>
 internal static class BoundaryMembers
 {
     /// <summary>
     /// Determines whether <paramref name="symbol"/> is reachable from outside its declaring type:
-    /// public, protected, or protected internal. RSA0002, RSA0003.
+    /// public, protected, or protected internal. RSA0002, RSA0003, RSA0009.
     /// </summary>
     /// <param name="symbol">The method or property symbol.</param>
     /// <returns>A value indicating whether the symbol is publicly or protectedly visible.</returns>
@@ -33,6 +33,25 @@ internal static class BoundaryMembers
     {
         IMethodSymbol method => method.IsOverride || method.ExplicitInterfaceImplementations.Length > 0,
         IPropertySymbol property => property.IsOverride || property.ExplicitInterfaceImplementations.Length > 0,
+        var _ => false
+    };
+
+    /// <summary>
+    /// Determines whether <paramref name="symbol"/> originates a return-type contract that an
+    /// override or an implementation must match: an abstract member (including a
+    /// <c>static abstract</c> interface member), an interface member with no default body (which
+    /// Roslyn also reports as abstract), or a <c>virtual</c> member, including a default interface
+    /// member with a body, since it too can be overridden and its nullability inherited. An
+    /// override is deliberately not virtual by this definition - <see cref="IMethodSymbol.IsVirtual"/>
+    /// and <see cref="IPropertySymbol.IsVirtual"/> are true only for a fresh, non-overriding
+    /// declaration - so an override is excluded without a separate check. RSA0009.
+    /// </summary>
+    /// <param name="symbol">The method or property symbol.</param>
+    /// <returns>A value indicating whether the symbol originates the contract.</returns>
+    public static bool IsAbstractionOrigin(ISymbol symbol) => symbol switch
+    {
+        IMethodSymbol method => method.IsAbstract || method.IsVirtual,
+        IPropertySymbol property => property.IsAbstract || property.IsVirtual,
         var _ => false
     };
 

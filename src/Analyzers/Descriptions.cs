@@ -27,6 +27,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "A public or protected member that declares a nullable Task, Task<T>, ValueTask, or ValueTask<T> return type forces every caller to null-check the task itself before awaiting it. Return Task.CompletedTask or Task.FromResult instead. This does not apply to Task<T?>, where only the completed result is nullable.");
 
+    public static DiagnosticDescriptor RSA0009 { get; } = new(
+        id: "RSA0009",
+        title: "Do not declare a nullable reference return type on an abstraction member",
+        messageFormat: "'{0}' is abstract, virtual, or an interface member; its nullable reference return type is forced onto every override and implementation",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Info,
+        isEnabledByDefault: false,
+        description: "An abstract, virtual, or interface member that declares a nullable reference return type forces that nullability onto every override and every implementation, irreversibly - none of them chose it. Disabled by default: locating a layer boundary where a nullable abstraction is genuinely the wrong call requires project-specific configuration this analyzer does not have. A collection-shaped or task-shaped return type is excluded here, since RSA0002 and RSA0003 already report those at Warning severity; this rule covers everything else.");
+
     public static DiagnosticDescriptor RSA1001 { get; } =
         new(
             "RSA1001",
