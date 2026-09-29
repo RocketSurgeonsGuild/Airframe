@@ -45,6 +45,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "A public or protected bool? property is often modeling three states, not two, with true, false, and null each carrying a distinct meaning. A named enum expresses those states explicitly instead of relying on the reader to know what null means here. An override and an explicit interface implementation are excluded, since neither author chose that member's type - the enum change belongs at the origin of the contract instead.");
 
+    public static DiagnosticDescriptor RSA0007 { get; } = new(
+        id: "RSA0007",
+        title: "Use null instead of default for a nullable reference type",
+        messageFormat: "This targets '{0}', a nullable reference type; use 'null' instead of 'default'",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Info,
+        isEnabledByDefault: true,
+        description: "'default' and 'default(T)' evaluate to null for a nullable reference type, but disguise that fact behind a keyword that means something different for a value type - a real, non-null default. Use 'null' directly wherever the target is already a nullable reference type: a parameter default, a field or property initializer, a return, an assignment, or a generic context resolved to a nullable reference type. Adjacent to IDE0034 (simplify default(T) to default), which only simplifies syntax between two forms of default and never suggests null; the two converge on null for a reference-typed target rather than conflicting.");
+
     public static DiagnosticDescriptor RSA0009 { get; } = new(
         id: "RSA0009",
         title: "Do not declare a nullable reference return type on an abstraction member",

@@ -6,6 +6,7 @@
 | RSA0003 | Nullability | Warning     | RSA0003_NullableTaskReturn                 |
 | RSA0004 | Nullability | Info        | RSA0004_NullForgivingOperatorDensity       |
 | RSA0006 | Nullability | Info        | RSA0006_NullableBooleanTriState             |
+| RSA0007 | Nullability | Info        | RSA0007_DefaultLiteralForReferenceType      |
 | RSA0009 | Nullability | Info        | RSA0009_NullableReturnOnAbstraction        |
 | RSA1005 | Usage       | Warning     | RSA1005_SchedulerNotProvided               |
 | RSA1007 | Usage       | Warning     | RSA1005_UseInvokeFunction                  |

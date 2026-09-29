@@ -18,6 +18,7 @@ a defective boundary contract.
 | [RSA0003](RSA0003.md) | Do not return a nullable task | Warning |
 | [RSA0004](RSA0004.md) | Null-forgiving operator used too many times in one member | Info |
 | [RSA0006](RSA0006.md) | Do not use a nullable boolean to model three states | Info |
+| [RSA0007](RSA0007.md) | Use null instead of default for a nullable reference type | Info |
 | [RSA0009](RSA0009.md) | Do not declare a nullable reference return type on an abstraction member | Info (disabled by default) |
 
 ## RSA1XXX — Usage
