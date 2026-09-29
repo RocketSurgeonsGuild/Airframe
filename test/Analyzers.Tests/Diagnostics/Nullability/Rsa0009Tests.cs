@@ -82,6 +82,7 @@ public class Rsa0009Tests
     [InlineData(nameof(VirtualMethodNullableReturn), VirtualMethodNullableReturn)]
     [InlineData(nameof(DefaultInterfaceMemberNullableReturn), DefaultInterfaceMemberNullableReturn)]
     [InlineData(nameof(StaticAbstractInterfaceMemberNullableReturn), StaticAbstractInterfaceMemberNullableReturn)]
+    [InlineData(nameof(AbstractIndexerNullableReturn), AbstractIndexerNullableReturn)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -336,6 +337,18 @@ public class Rsa0009Tests
                 where T : class
             {
                 static abstract T? Parse(string value);
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string AbstractIndexerNullableReturn =
+        """
+        namespace Sample
+        {
+            public abstract class Base
+            {
+                public abstract string? this[int index] { get; }
             }
         }
         """;

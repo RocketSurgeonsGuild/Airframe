@@ -63,6 +63,7 @@ public class Rsa0002Tests
     [InlineData(PublicMethodNullableArrayReturn)]
     [InlineData(ProtectedMethodNullableReturn)]
     [InlineData(PublicPropertyNullableReturn)]
+    [InlineData(PublicIndexerNullableReturn)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
         // Given, When
@@ -331,6 +332,20 @@ public class Rsa0002Tests
             public class Example
             {
                 public IReadOnlyList<string>? Items { get; } = null;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicIndexerNullableReturn =
+        """
+        using System.Collections.Generic;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public IEnumerable<string>? this[int index] => null;
             }
         }
         """;

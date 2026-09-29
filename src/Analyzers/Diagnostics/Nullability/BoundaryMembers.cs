@@ -5,7 +5,7 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 
 /// <summary>
 /// Identifies members that sit on a public boundary and the declared shape of their return type.
-/// Shared by RSA0002, RSA0003, RSA0006, and RSA0009.
+/// Shared by RSA0001, RSA0002, RSA0003, RSA0006, and RSA0009.
 /// </summary>
 internal static class BoundaryMembers
 {

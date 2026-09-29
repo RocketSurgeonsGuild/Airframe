@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
@@ -10,10 +11,10 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// Represents a diagnostic for <see cref="Descriptions.RSA0002"/>.
 /// </summary>
 /// <remarks>
-/// Reports on a public or protected method or property whose declared return type is a nullable
-/// collection - an array, or a type assignable to the non-generic <c>IEnumerable</c>, excluding
-/// <c>string</c>. An override and an explicit interface implementation are excluded, since neither
-/// author chose the nullability of the contract they are fulfilling.
+/// Reports on a public or protected method, property, or indexer whose declared return type is a
+/// nullable collection - an array, or a type assignable to the non-generic <c>IEnumerable</c>,
+/// excluding <c>string</c>. An override and an explicit interface implementation are excluded,
+/// since neither author chose the nullability of the contract they are fulfilling.
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa0002 : Rsa0000
@@ -32,8 +33,19 @@ public class Rsa0002 : Rsa0000
             case PropertyDeclarationSyntax property:
                 Analyze(context, property, property.Type);
                 break;
+            case IndexerDeclarationSyntax indexer:
+                Analyze(context, indexer, indexer.Type);
+                break;
         }
     }
+
+    /// <inheritdoc/>
+    protected override SyntaxKind[] GetSyntaxKind() =>
+    [
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.PropertyDeclaration,
+        SyntaxKind.IndexerDeclaration
+    ];
 
     private static void Analyze(SyntaxNodeAnalysisContext context, MemberDeclarationSyntax member, TypeSyntax typeSyntax)
     {

@@ -58,6 +58,7 @@ public class Rsa0006Tests
     [Theory]
     [InlineData(nameof(PublicNullableBooleanProperty), PublicNullableBooleanProperty)]
     [InlineData(nameof(ProtectedNullableBooleanProperty), ProtectedNullableBooleanProperty)]
+    [InlineData(nameof(PublicNullableBooleanIndexer), PublicNullableBooleanIndexer)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -234,6 +235,18 @@ public class Rsa0006Tests
             public class Example
             {
                 protected bool? Flag { get; set; }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicNullableBooleanIndexer =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public bool? this[int index] => null;
             }
         }
         """;

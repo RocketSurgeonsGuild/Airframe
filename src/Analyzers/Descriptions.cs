@@ -12,7 +12,7 @@ internal static class Descriptions
     public static DiagnosticDescriptor RSA0001 { get; } = new(
         id: "RSA0001",
         title: "Do not expose a plain setter on a non-nullable reference type auto-property",
-        messageFormat: "'{0}' is a non-nullable reference type auto-property with a public setter; use 'init' or a positional record parameter instead",
+        messageFormat: "'{0}' is a non-nullable reference type auto-property with a public setter; use 'init' (or 'required init', or a positional record parameter) instead",
         CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
         defaultSeverity: Info,
         isEnabledByDefault: true,
@@ -79,7 +79,7 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
         defaultSeverity: Warning,
         isEnabledByDefault: true,
-        description: "'#nullable disable' and '#nullable restore' - when either affects annotations, not warnings alone - leave the code that follows in an oblivious nullable context, where a reference type carries no annotation at all rather than a definite nullable or non-nullable one. RSA0002, RSA0003, RSA0006, RSA0007, and RSA0009 all read a type's NullableAnnotation to decide whether to report, and none of them can tell a legitimately non-nullable reference type apart from one whose annotation state was never tracked - so a disabled or restored context silently defeats every one of them for the rest of the file. '#nullable disable warnings' and '#nullable restore warnings' are not reported: they affect only warnings, and leave the annotation context itself untouched.");
+        description: "'#nullable disable' and '#nullable restore' - when either affects annotations, not warnings alone - leave the code that follows in an oblivious nullable context, where a reference type carries no annotation at all rather than a definite nullable or non-nullable one. RSA0001, RSA0002, RSA0003, RSA0005, RSA0006, RSA0007, and RSA0009 all read a type's NullableAnnotation - RSA0005 its flow state as well - to decide whether to report, and none of them can tell a legitimately non-nullable reference type apart from one whose annotation state was never tracked - so a disabled or restored context silently defeats every one of them for the rest of the file. '#nullable disable warnings' and '#nullable restore warnings' are not reported: they affect only warnings, and leave the annotation context itself untouched.");
 
     public static DiagnosticDescriptor RSA0009 { get; } = new(
         id: "RSA0009",

@@ -63,6 +63,7 @@ public class Rsa0003Tests
     [InlineData(nameof(PublicMethodNullableValueTaskReturn), PublicMethodNullableValueTaskReturn)]
     [InlineData(nameof(ProtectedMethodNullableTaskReturn), ProtectedMethodNullableTaskReturn)]
     [InlineData(nameof(PublicPropertyNullableTaskReturn), PublicPropertyNullableTaskReturn)]
+    [InlineData(nameof(PublicIndexerNullableTaskReturn), PublicIndexerNullableTaskReturn)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -335,6 +336,20 @@ public class Rsa0003Tests
             public class Example
             {
                 public Task<string>? Value { get; }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicIndexerNullableTaskReturn =
+        """
+        using System.Threading.Tasks;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public Task<string>? this[int index] => null;
             }
         }
         """;
