@@ -6,6 +6,7 @@
 | RSA0002 | Nullability | Warning     | RSA0002_NullableCollectionReturn           |
 | RSA0003 | Nullability | Warning     | RSA0003_NullableTaskReturn                 |
 | RSA0004 | Nullability | Info        | RSA0004_NullForgivingOperatorDensity       |
+| RSA0005 | Nullability | Info        | RSA0005_RedundantNullConditionalAccess     |
 | RSA0006 | Nullability | Info        | RSA0006_NullableBooleanTriState             |
 | RSA0007 | Nullability | Info        | RSA0007_DefaultLiteralForReferenceType      |
 | RSA0008 | Nullability | Warning     | RSA0008_NullableContextDisabled            |

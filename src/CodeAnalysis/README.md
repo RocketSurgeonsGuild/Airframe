@@ -26,6 +26,7 @@ dotnet_diagnostic.RSA0001.severity = suggestion   # Do not expose a plain setter
 dotnet_diagnostic.RSA0002.severity = warning      # Do not return a nullable collection
 dotnet_diagnostic.RSA0003.severity = warning      # Do not return a nullable task
 dotnet_diagnostic.RSA0004.severity = suggestion   # Null-forgiving operator used too many times in one member
+dotnet_diagnostic.RSA0005.severity = suggestion   # Do not use ?., ??, or ??= where flow analysis already proves the operand non-null
 dotnet_diagnostic.RSA0006.severity = suggestion   # Do not use a nullable boolean to model three states
 dotnet_diagnostic.RSA0007.severity = suggestion   # Use null instead of default for a nullable reference type
 dotnet_diagnostic.RSA0008.severity = warning      # Do not disable or restore the nullable context in source

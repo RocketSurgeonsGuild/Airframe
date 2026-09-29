@@ -45,6 +45,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "The null-forgiving operator overrides the compiler's nullable flow analysis one expression at a time, so no single use is ever wrong on its own; density is the signal. A member relying on it more than the configured threshold - default 3, configurable with the rsa0004_max_null_forgiving_operators editorconfig key - is suppressing a design defect rather than fixing it. A '!' immediately before 'is' or an 'is' pattern is not counted, since a type test ignores nullability and the built-in IDE0080 already reports that exact shape individually. There is no code fix: there is nothing mechanical to apply, since the fix is a design change only the author can make.");
 
+    public static DiagnosticDescriptor RSA0005 { get; } = new(
+        id: "RSA0005",
+        title: "Do not use ?., ??, or ??= where flow analysis already proves the operand non-null",
+        messageFormat: "'{0}' is proven non-null at this point; the null-conditional or null-coalescing operator here is defensive noise",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Info,
+        isEnabledByDefault: true,
+        description: "The null-conditional operator (?.), null-coalescing operator (??), and null-coalescing assignment (??=) exist to handle a value that might be null. When the compiler's own nullable flow analysis has already proven the operand can't be null at this point - typically after an earlier null check, a narrowing assignment, or a pattern match - the operator isn't handling anything; it's defensive code masking that the value's nullability was already resolved. This targets only an operand whose declared type is itself nullable-annotated - not an operand that was never nullable in the first place, and not one in a nullable-oblivious region, where flow state isn't meaningfully tracked. Adjacent to the built-in IDE0031 (use null propagation), which suggests adding ?./?? where a value can be null; this rule looks the opposite direction, at a place one is used where the value provably cannot be.");
+
     public static DiagnosticDescriptor RSA0006 { get; } = new(
         id: "RSA0006",
         title: "Do not use a nullable boolean to model three states",
