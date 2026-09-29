@@ -37,6 +37,10 @@ public class Rsa0004Tests
     [InlineData(nameof(PropertyWithFourNullForgivingAcrossAccessors), PropertyWithFourNullForgivingAcrossAccessors)]
     [InlineData(nameof(ExpressionBodiedPropertyWithFourNullForgiving), ExpressionBodiedPropertyWithFourNullForgiving)]
     [InlineData(nameof(NullForgivingInsideNestedLocalFunctionCountsTowardOuterMethod), NullForgivingInsideNestedLocalFunctionCountsTowardOuterMethod)]
+    [InlineData(nameof(IndexerWithFourNullForgiving), IndexerWithFourNullForgiving)]
+    [InlineData(nameof(OperatorWithFourNullForgiving), OperatorWithFourNullForgiving)]
+    [InlineData(nameof(ConversionOperatorWithFourNullForgiving), ConversionOperatorWithFourNullForgiving)]
+    [InlineData(nameof(PropertyInitializerWithFourNullForgiving), PropertyInitializerWithFourNullForgiving)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -255,6 +259,70 @@ public class Rsa0004Tests
             public class Example
             {
                 public string Read(string? a, string? b, string? c, string? d) => a! + b! + c! + d!;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string IndexerWithFourNullForgiving =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private string? _a, _b, _c, _d;
+
+                public string this[int index] => _a! + _b! + _c! + _d!;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string OperatorWithFourNullForgiving =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private string? _a, _b, _c, _d;
+
+                public static string operator +(Example left, Example right) => left._a! + left._b! + left._c! + left._d!;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string ConversionOperatorWithFourNullForgiving =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private string? _a, _b, _c, _d;
+
+                public static implicit operator string(Example value) => value._a! + value._b! + value._c! + value._d!;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PropertyInitializerWithFourNullForgiving =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private static readonly string? _a, _b, _c, _d;
+
+                public string Combined { get; set; } = _a! + _b! + _c! + _d!;
             }
         }
         """;

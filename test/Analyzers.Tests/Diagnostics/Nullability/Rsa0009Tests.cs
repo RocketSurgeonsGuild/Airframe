@@ -39,6 +39,7 @@ public class Rsa0009Tests
     [InlineData(nameof(SealedDefaultInterfaceMemberNullableReturn), SealedDefaultInterfaceMemberNullableReturn)]
     [InlineData(nameof(PrivateProtectedAbstractMethodNullableReturn), PrivateProtectedAbstractMethodNullableReturn)]
     [InlineData(nameof(PublicAbstractMethodOnInternalNestedType), PublicAbstractMethodOnInternalNestedType)]
+    [InlineData(nameof(PublicAbstractMethodOnPrivateNestedType), PublicAbstractMethodOnPrivateNestedType)]
     [InlineData(nameof(PublicAbstractMethodOnFileScopedType), PublicAbstractMethodOnFileScopedType)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
@@ -59,6 +60,19 @@ public class Rsa0009Tests
 
         // Then. The origin abstract/interface member reports; the override and the explicit
         // implementation do not, since neither is itself abstract or virtual.
+        diagnostics.Should().ContainSingle();
+    }
+
+    [Fact]
+    public async Task GivenReabstractingOverride_WhenAnalyze_ThenOnlyOriginDeclarationReported()
+    {
+        // Given, When. A re-abstracting `abstract override` is both an override
+        // (IsInheritedContract) and, per IsAbstract, an abstraction origin at the same time. Only
+        // the member that actually originated the nullable return - Base.Read - should report;
+        // Middle.Read merely restates the same contract it inherited.
+        var diagnostics = await AnalyzeAsync(ReabstractingOverrideNullableReturn);
+
+        // Then
         diagnostics.Should().ContainSingle();
     }
 
@@ -186,6 +200,21 @@ public class Rsa0009Tests
         """;
 
     // lang=csharp
+    internal const string PublicAbstractMethodOnPrivateNestedType =
+        """
+        namespace Sample
+        {
+            public class Outer
+            {
+                private abstract class Base
+                {
+                    public abstract string? Read();
+                }
+            }
+        }
+        """;
+
+    // lang=csharp
     internal const string PublicAbstractMethodOnFileScopedType =
         """
         file abstract class Base
@@ -205,6 +234,28 @@ public class Rsa0009Tests
             }
 
             public class Example : Base
+            {
+                public override string? Read() => null;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string ReabstractingOverrideNullableReturn =
+        """
+        namespace Sample
+        {
+            public abstract class Base
+            {
+                public abstract string? Read();
+            }
+
+            public abstract class Middle : Base
+            {
+                public abstract override string? Read();
+            }
+
+            public class Derived : Middle
             {
                 public override string? Read() => null;
             }

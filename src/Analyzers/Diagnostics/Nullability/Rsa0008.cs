@@ -27,7 +27,11 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// synthesizes a zero-width <see cref="Microsoft.CodeAnalysis.CSharp.Syntax.NullableDirectiveTriviaSyntax.SettingToken"/>
 /// whose <em>kind</em> is <c>DisableKeyword</c> - not <c>None</c> - with <c>IsMissing</c> set to
 /// <see langword="true"/>. A kind-only check reads that recovery token as a real
-/// <c>#nullable disable</c>.
+/// <c>#nullable disable</c>. A directive inside an inactive <c>#if</c>/<c>#else</c> branch - one
+/// the compiler never actually processes - is also excluded via
+/// <see cref="Microsoft.CodeAnalysis.CSharp.Syntax.DirectiveTriviaSyntax.IsActive"/>: it has no
+/// effect on the compilation, so reporting it would be a false positive on code that isn't even
+/// compiled.
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa0008 : Rsa0000
@@ -52,7 +56,7 @@ public class Rsa0008 : Rsa0000
             var disablesOrRestores = !directive.SettingToken.IsMissing &&
                 (directive.SettingToken.IsKind(SyntaxKind.DisableKeyword) || directive.SettingToken.IsKind(SyntaxKind.RestoreKeyword));
 
-            if (!disablesOrRestores || directive.TargetToken.IsKind(SyntaxKind.WarningsKeyword))
+            if (!directive.IsActive || !disablesOrRestores || directive.TargetToken.IsKind(SyntaxKind.WarningsKeyword))
             {
                 continue;
             }

@@ -13,7 +13,12 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// Reports on an abstract, virtual, or interface method or property whose declared return type is
 /// a nullable reference type. A collection-shaped or task-shaped return type is excluded, since
 /// RSA0002 and RSA0003 already report those at <see cref="DiagnosticSeverity.Warning"/>; this rule
-/// covers everything else. Ships disabled by default - see <see cref="Descriptions.RSA0009"/>.
+/// covers everything else. An override and an explicit interface implementation are excluded via
+/// <see cref="BoundaryMembers.IsInheritedContract"/> - a re-abstracting <c>abstract override</c>
+/// member is both an override and, per <see cref="BoundaryMembers.IsAbstractionOrigin"/>, an
+/// abstraction origin at the same time, and without this check it reported on both the member that
+/// originated the nullable return and the one that merely restates it. Ships disabled by default -
+/// see <see cref="Descriptions.RSA0009"/>.
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa0009 : Rsa0000
@@ -39,7 +44,8 @@ public class Rsa0009 : Rsa0000
     {
         if (context.SemanticModel.GetDeclaredSymbol(member) is not { } symbol ||
             !BoundaryMembers.IsPubliclyVisible(symbol) ||
-            !BoundaryMembers.IsAbstractionOrigin(symbol))
+            !BoundaryMembers.IsAbstractionOrigin(symbol) ||
+            BoundaryMembers.IsInheritedContract(symbol))
         {
             return;
         }

@@ -16,6 +16,8 @@ public class Rsa0008Tests
     [InlineData(nameof(NullableDisableWarningsOnly), NullableDisableWarningsOnly)]
     [InlineData(nameof(NullableRestoreWarningsOnly), NullableRestoreWarningsOnly)]
     [InlineData(nameof(BareNullableDirectiveMissingSetting), BareNullableDirectiveMissingSetting)]
+    [InlineData(nameof(DisableInsideInactiveIfBlock), DisableInsideInactiveIfBlock)]
+    [InlineData(nameof(DisableInsideNotTakenElseBlock), DisableInsideNotTakenElseBlock)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -151,6 +153,43 @@ public class Rsa0008Tests
         """
         #nullable enable
         #nullable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public string? Value { get; set; }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string DisableInsideInactiveIfBlock =
+        """
+        #nullable enable
+
+        #if RSA0008_SYMBOL_NEVER_DEFINED
+        #nullable disable
+        #endif
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public string? Value { get; set; }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string DisableInsideNotTakenElseBlock =
+        """
+        #nullable enable
+
+        #if true
+        #else
+        #nullable disable
+        #endif
 
         namespace Sample
         {

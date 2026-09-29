@@ -17,6 +17,7 @@ public class Rsa0001Tests
     [InlineData(nameof(InternalSetAutoProperty), InternalSetAutoProperty)]
     [InlineData(nameof(PrivateProtectedSetAutoProperty), PrivateProtectedSetAutoProperty)]
     [InlineData(nameof(PublicSetterOnInternalNestedType), PublicSetterOnInternalNestedType)]
+    [InlineData(nameof(PublicSetterOnPrivateNestedType), PublicSetterOnPrivateNestedType)]
     [InlineData(nameof(PublicSetterOnFileScopedType), PublicSetterOnFileScopedType)]
     [InlineData(nameof(HandWrittenSetterAccessor), HandWrittenSetterAccessor)]
     [InlineData(nameof(ValueTypeAutoProperty), ValueTypeAutoProperty)]
@@ -166,6 +167,23 @@ public class Rsa0001Tests
                 {
                     public string Value { get; set; } = string.Empty;
                 }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicSetterOnPrivateNestedType =
+        """
+        namespace Sample
+        {
+            public class Outer
+            {
+                private class Inner
+                {
+                    public string Value { get; set; } = string.Empty;
+                }
+
+                public void Use() => new Inner();
             }
         }
         """;

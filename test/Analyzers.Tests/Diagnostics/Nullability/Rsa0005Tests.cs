@@ -16,6 +16,8 @@ public class Rsa0005Tests
     [InlineData(nameof(NonNullableDeclaredTypeConditionalAccess), NonNullableDeclaredTypeConditionalAccess)]
     [InlineData(nameof(ObliviousContextConditionalAccess), ObliviousContextConditionalAccess)]
     [InlineData(nameof(NarrowedThenReassignedMaybeNullBeforeUse), NarrowedThenReassignedMaybeNullBeforeUse)]
+    [InlineData(nameof(NullableValueTypeCoalesceAfterLiteralAssignment), NullableValueTypeCoalesceAfterLiteralAssignment)]
+    [InlineData(nameof(NullableValueTypeConditionalAccessAfterNullCheck), NullableValueTypeConditionalAccessAfterNullCheck)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -148,6 +150,46 @@ public class Rsa0005Tests
                     }
 
                     return value?.Length;
+                }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string NullableValueTypeCoalesceAfterLiteralAssignment =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public int Read()
+                {
+                    int? value = 1;
+                    return value ?? 0;
+                }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string NullableValueTypeConditionalAccessAfterNullCheck =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public string? Read(int? value)
+                {
+                    if (value.HasValue)
+                    {
+                        return value?.ToString();
+                    }
+
+                    return null;
                 }
             }
         }

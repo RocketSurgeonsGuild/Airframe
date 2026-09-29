@@ -15,11 +15,14 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// <remarks>
 /// <para>
 /// Counts every null-forgiving operator (<c>!</c>) - a <see cref="SyntaxKind.SuppressNullableWarningExpression"/>
-/// - within a method, constructor, or property declaration's body or expression body, and reports
-/// once on the member when the count exceeds the configured threshold. A null-forgiving operator
-/// nested inside a local function or lambda declared within the member is still counted against
-/// that member, rather than tracked separately: the density this rule cares about is per author
-/// unit of code, not per syntactic scope.
+/// - within a method, constructor, property, indexer, operator, or conversion operator
+/// declaration, and reports once on the member when the count exceeds the configured threshold. A
+/// null-forgiving operator nested inside a local function or lambda declared within the member is
+/// still counted against that member, rather than tracked separately: the density this rule cares
+/// about is per author unit of code, not per syntactic scope. For a property, both the accessor
+/// bodies (or the expression body) <em>and</em> the initializer are scanned - a property can have
+/// both at once (<c>public string S { get; set; } = a!.Trim();</c>), and a member with all its
+/// suppressions living in the initializer is exactly as dense as one with them in the accessors.
 /// </para>
 /// <para>
 /// A <c>!</c> immediately to the left of <c>is</c> or an <c>is</c> pattern (e.g. <c>x! is string</c>)
@@ -47,21 +50,31 @@ public class Rsa0004 : Rsa0000
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
-        var (name, nameLocation, body) = context.Node switch
+        var (name, nameLocation, fragments) = context.Node switch
         {
-            MethodDeclarationSyntax method => (method.Identifier.Text, method.Identifier.GetLocation(), (SyntaxNode?)method.Body ?? method.ExpressionBody),
-            ConstructorDeclarationSyntax constructor => (constructor.Identifier.Text, constructor.Identifier.GetLocation(), (SyntaxNode?)constructor.Body ?? constructor.ExpressionBody),
-            PropertyDeclarationSyntax property => (property.Identifier.Text, property.Identifier.GetLocation(), (SyntaxNode?)property.AccessorList ?? property.ExpressionBody),
+            MethodDeclarationSyntax method =>
+                (method.Identifier.Text, method.Identifier.GetLocation(), new SyntaxNode?[] { method.Body, method.ExpressionBody }),
+            ConstructorDeclarationSyntax constructor =>
+                (constructor.Identifier.Text, constructor.Identifier.GetLocation(), new SyntaxNode?[] { constructor.Body, constructor.ExpressionBody }),
+            PropertyDeclarationSyntax property =>
+                (property.Identifier.Text, property.Identifier.GetLocation(), new SyntaxNode?[] { property.AccessorList, property.ExpressionBody, property.Initializer }),
+            IndexerDeclarationSyntax indexer =>
+                ("this[]", indexer.ThisKeyword.GetLocation(), new SyntaxNode?[] { indexer.AccessorList, indexer.ExpressionBody }),
+            OperatorDeclarationSyntax @operator =>
+                ($"operator {@operator.OperatorToken.Text}", @operator.OperatorToken.GetLocation(), new SyntaxNode?[] { @operator.Body, @operator.ExpressionBody }),
+            ConversionOperatorDeclarationSyntax conversion =>
+                ($"operator {conversion.Type}", conversion.OperatorKeyword.GetLocation(), new SyntaxNode?[] { conversion.Body, conversion.ExpressionBody }),
             var _ => (null, null, null)
         };
 
-        if (name is null || body is null)
+        if (name is null || fragments is null)
         {
             return;
         }
 
-        var count = body
-           .DescendantNodes()
+        var count = fragments
+           .Where(fragment => fragment is not null)
+           .SelectMany(fragment => fragment!.DescendantNodes())
            .OfType<PostfixUnaryExpressionSyntax>()
            .Count(expression =>
                 expression.IsKind(SyntaxKind.SuppressNullableWarningExpression) &&
@@ -82,7 +95,10 @@ public class Rsa0004 : Rsa0000
     [
         SyntaxKind.MethodDeclaration,
         SyntaxKind.ConstructorDeclaration,
-        SyntaxKind.PropertyDeclaration
+        SyntaxKind.PropertyDeclaration,
+        SyntaxKind.IndexerDeclaration,
+        SyntaxKind.OperatorDeclaration,
+        SyntaxKind.ConversionOperatorDeclaration
     ];
 
     /// <summary>

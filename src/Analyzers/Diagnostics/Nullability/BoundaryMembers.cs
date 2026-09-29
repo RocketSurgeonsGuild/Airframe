@@ -42,7 +42,8 @@ internal static class BoundaryMembers
     /// <summary>
     /// Determines whether <paramref name="symbol"/>'s signature is dictated by something other
     /// than its own declaration: an override, or an explicit interface implementation. Neither
-    /// author chose the nullability of the contract they are fulfilling. RSA0002, RSA0003, RSA0006.
+    /// author chose the nullability of the contract they are fulfilling. RSA0001, RSA0002, RSA0003,
+    /// RSA0006, RSA0009.
     /// </summary>
     /// <param name="symbol">The method or property symbol.</param>
     /// <returns>A value indicating whether the contract is inherited rather than authored.</returns>
