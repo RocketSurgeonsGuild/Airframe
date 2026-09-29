@@ -27,6 +27,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "A public or protected member that declares a nullable Task, Task<T>, ValueTask, or ValueTask<T> return type forces every caller to null-check the task itself before awaiting it. Return Task.CompletedTask or Task.FromResult instead. This does not apply to Task<T?>, where only the completed result is nullable.");
 
+    public static DiagnosticDescriptor RSA0004 { get; } = new(
+        id: "RSA0004",
+        title: "Null-forgiving operator used too many times in one member",
+        messageFormat: "'{0}' uses the null-forgiving operator (!) {1} times; more than {2} in a single member suggests a suppressed design defect rather than a fix",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Info,
+        isEnabledByDefault: true,
+        description: "The null-forgiving operator overrides the compiler's nullable flow analysis one expression at a time, so no single use is ever wrong on its own; density is the signal. A member relying on it more than the configured threshold - default 3, configurable with the rsa0004_max_null_forgiving_operators editorconfig key - is suppressing a design defect rather than fixing it. There is no code fix: there is nothing mechanical to apply, since the fix is a design change only the author can make.");
+
     public static DiagnosticDescriptor RSA0009 { get; } = new(
         id: "RSA0009",
         title: "Do not declare a nullable reference return type on an abstraction member",
