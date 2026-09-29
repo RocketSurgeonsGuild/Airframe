@@ -15,6 +15,7 @@ public class Rsa0001Tests
     [InlineData(nameof(GetOnlyProperty), GetOnlyProperty)]
     [InlineData(nameof(PrivateSetAutoProperty), PrivateSetAutoProperty)]
     [InlineData(nameof(InternalSetAutoProperty), InternalSetAutoProperty)]
+    [InlineData(nameof(PrivateProtectedSetAutoProperty), PrivateProtectedSetAutoProperty)]
     [InlineData(nameof(HandWrittenSetterAccessor), HandWrittenSetterAccessor)]
     [InlineData(nameof(ValueTypeAutoProperty), ValueTypeAutoProperty)]
     [InlineData(nameof(ReactiveAttributeProperty), ReactiveAttributeProperty)]
@@ -136,6 +137,18 @@ public class Rsa0001Tests
             public class Example
             {
                 public string Value { get; internal set; } = string.Empty;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PrivateProtectedSetAutoProperty =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public string Value { get; private protected set; } = string.Empty;
             }
         }
         """;

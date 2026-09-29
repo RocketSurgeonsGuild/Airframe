@@ -37,6 +37,7 @@ public class Rsa0009Tests
     [InlineData(nameof(NullableCollectionOnAbstractMethod), NullableCollectionOnAbstractMethod)]
     [InlineData(nameof(NullableTaskOnAbstractMethod), NullableTaskOnAbstractMethod)]
     [InlineData(nameof(SealedDefaultInterfaceMemberNullableReturn), SealedDefaultInterfaceMemberNullableReturn)]
+    [InlineData(nameof(PrivateProtectedAbstractMethodNullableReturn), PrivateProtectedAbstractMethodNullableReturn)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -151,6 +152,18 @@ public class Rsa0009Tests
             public interface IReader
             {
                 sealed string? Read() => null;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PrivateProtectedAbstractMethodNullableReturn =
+        """
+        namespace Sample
+        {
+            public abstract class Base
+            {
+                private protected abstract string? Read();
             }
         }
         """;

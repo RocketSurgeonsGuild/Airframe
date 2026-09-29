@@ -15,6 +15,7 @@ public class Rsa0008Tests
     [InlineData(nameof(NullableEnableAnnotationsOnly), NullableEnableAnnotationsOnly)]
     [InlineData(nameof(NullableDisableWarningsOnly), NullableDisableWarningsOnly)]
     [InlineData(nameof(NullableRestoreWarningsOnly), NullableRestoreWarningsOnly)]
+    [InlineData(nameof(BareNullableDirectiveMissingSetting), BareNullableDirectiveMissingSetting)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -135,6 +136,21 @@ public class Rsa0008Tests
         """
         #nullable enable
         #nullable restore warnings
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public string? Value { get; set; }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string BareNullableDirectiveMissingSetting =
+        """
+        #nullable enable
+        #nullable
 
         namespace Sample
         {

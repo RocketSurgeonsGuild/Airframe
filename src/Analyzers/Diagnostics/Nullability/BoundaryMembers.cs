@@ -19,8 +19,7 @@ internal static class BoundaryMembers
         symbol.DeclaredAccessibility is
             Accessibility.Public or
             Accessibility.Protected or
-            Accessibility.ProtectedOrInternal or
-            Accessibility.ProtectedAndInternal;
+            Accessibility.ProtectedOrInternal;
 
     /// <summary>
     /// Determines whether <paramref name="symbol"/>'s signature is dictated by something other

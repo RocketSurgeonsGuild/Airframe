@@ -16,6 +16,7 @@ public class Rsa0003Tests
     [InlineData(NullableResultTaskReturn)]
     [InlineData(PrivateMethodNullableTaskReturn)]
     [InlineData(InternalMethodNullableTaskReturn)]
+    [InlineData(PrivateProtectedMethodNullableTaskReturn)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
         // Given, When
@@ -160,6 +161,22 @@ public class Rsa0003Tests
             internal class Example
             {
                 internal Task<string>? Read() => null;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PrivateProtectedMethodNullableTaskReturn =
+        """
+        using System.Threading.Tasks;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private protected Task<string>? Read() => null;
+
+                public void Use() => Read();
             }
         }
         """;

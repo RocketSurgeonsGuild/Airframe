@@ -77,6 +77,43 @@ public class Rsa0004Tests
            .OnlyContain(diagnostic => diagnostic.Id == RSA0004.Id);
     }
 
+    [Fact]
+    public async Task GivenThresholdConfiguredToZero_WhenAnalyze_ThenAnySingleUseIsReported()
+    {
+        // Given, When. One use, but the configured threshold is zero - banning the operator
+        // outright. "0" must not be silently treated as "not configured" and fall back to the
+        // default of 3, which would leave a single use unreported.
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(MethodWithOneNullForgiving)
+           .WithAnalyzer<Rsa0004>()
+           .AddGlobalOption("rsa0004_max_null_forgiving_operators", "0")
+           .GenerateAsync();
+
+        // Then
+        result
+           .AnalyzerResults[typeof(Rsa0004)]
+           .Diagnostics
+           .Should()
+           .NotBeEmpty(because: "a configured threshold of 0 means any use at all should report")
+           .And
+           .OnlyContain(diagnostic => diagnostic.Id == RSA0004.Id);
+    }
+
+    // lang=csharp
+    internal const string MethodWithOneNullForgiving =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public string Read(string? a) => a!;
+            }
+        }
+        """;
+
     // lang=csharp
     internal const string MethodWithNoNullForgiving =
         """

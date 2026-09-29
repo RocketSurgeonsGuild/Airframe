@@ -15,6 +15,7 @@ public class Rsa0002Tests
     [InlineData(NullableStringReturn)]
     [InlineData(PrivateMethodNullableReturn)]
     [InlineData(InternalMethodNullableReturn)]
+    [InlineData(PrivateProtectedMethodNullableReturn)]
     [InlineData(NullableElementNonNullableCollectionReturn)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
@@ -144,6 +145,22 @@ public class Rsa0002Tests
             internal class Example
             {
                 internal IEnumerable<string>? Read() => null;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PrivateProtectedMethodNullableReturn =
+        """
+        using System.Collections.Generic;
+
+        namespace Sample
+        {
+            public class Example
+            {
+                private protected IEnumerable<string>? Read() => null;
+
+                public void Use() => Read();
             }
         }
         """;

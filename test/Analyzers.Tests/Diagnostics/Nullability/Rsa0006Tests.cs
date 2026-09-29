@@ -13,6 +13,7 @@ public class Rsa0006Tests
     [InlineData(nameof(NonNullableBooleanProperty), NonNullableBooleanProperty)]
     [InlineData(nameof(PrivateNullableBooleanProperty), PrivateNullableBooleanProperty)]
     [InlineData(nameof(InternalNullableBooleanProperty), InternalNullableBooleanProperty)]
+    [InlineData(nameof(PrivateProtectedNullableBooleanProperty), PrivateProtectedNullableBooleanProperty)]
     [InlineData(nameof(NullableIntProperty), NullableIntProperty)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
@@ -107,6 +108,18 @@ public class Rsa0006Tests
             internal class Example
             {
                 internal bool? Flag { get; set; }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PrivateProtectedNullableBooleanProperty =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                private protected bool? Flag { get; set; }
             }
         }
         """;

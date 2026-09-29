@@ -103,7 +103,7 @@ public class Rsa0004 : Rsa0000
 
         return options.TryGetValue(ThresholdOption, out var value) &&
                int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var configured) &&
-               configured > 0
+               configured >= 0
             ? configured
             : DefaultThreshold;
     }
