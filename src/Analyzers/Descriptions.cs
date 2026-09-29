@@ -43,7 +43,7 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
         defaultSeverity: Info,
         isEnabledByDefault: true,
-        description: "The null-forgiving operator overrides the compiler's nullable flow analysis one expression at a time, so no single use is ever wrong on its own; density is the signal. A member relying on it more than the configured threshold - default 3, configurable with the rsa0004_max_null_forgiving_operators editorconfig key - is suppressing a design defect rather than fixing it. There is no code fix: there is nothing mechanical to apply, since the fix is a design change only the author can make.");
+        description: "The null-forgiving operator overrides the compiler's nullable flow analysis one expression at a time, so no single use is ever wrong on its own; density is the signal. A member relying on it more than the configured threshold - default 3, configurable with the rsa0004_max_null_forgiving_operators editorconfig key - is suppressing a design defect rather than fixing it. A '!' immediately before 'is' or an 'is' pattern is not counted, since a type test ignores nullability and the built-in IDE0080 already reports that exact shape individually. There is no code fix: there is nothing mechanical to apply, since the fix is a design change only the author can make.");
 
     public static DiagnosticDescriptor RSA0006 { get; } = new(
         id: "RSA0006",

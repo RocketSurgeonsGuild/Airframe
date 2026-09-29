@@ -13,12 +13,27 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// Represents a diagnostic for <see cref="Descriptions.RSA0004"/>.
 /// </summary>
 /// <remarks>
+/// <para>
 /// Counts every null-forgiving operator (<c>!</c>) - a <see cref="SyntaxKind.SuppressNullableWarningExpression"/>
 /// - within a method, constructor, or property declaration's body or expression body, and reports
 /// once on the member when the count exceeds the configured threshold. A null-forgiving operator
 /// nested inside a local function or lambda declared within the member is still counted against
 /// that member, rather than tracked separately: the density this rule cares about is per author
 /// unit of code, not per syntactic scope.
+/// </para>
+/// <para>
+/// A <c>!</c> immediately to the left of <c>is</c> or an <c>is</c> pattern (e.g. <c>x! is string</c>)
+/// is excluded from the count. Confirmed against the built-in analyzer's decompiled source: the
+/// built-in IDE0080 ("Remove unnecessary suppression operator") is registered <i>only</i> for that
+/// exact shape - <c>CSharpRemoveConfusingSuppressionDiagnosticAnalyzer</c> registers solely on
+/// <see cref="SyntaxKind.IsExpression"/> and <see cref="SyntaxKind.IsPatternExpression"/>, and fires
+/// only when their left-hand expression is a suppression - because a type test ignores nullability
+/// entirely, so the operator suppresses nothing there and IDE0080 already reports it individually.
+/// Every other <c>!</c> site - the overwhelming majority - is outside IDE0080's registration
+/// entirely, so RSA0004's per-member density count and IDE0080's per-site check do not otherwise
+/// overlap: density can be real with zero IDE0080 hits (every use individually justified), and an
+/// IDE0080 hit can exist on a member nowhere near the density threshold.
+/// </para>
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa0004 : Rsa0000
@@ -48,7 +63,9 @@ public class Rsa0004 : Rsa0000
         var count = body
            .DescendantNodes()
            .OfType<PostfixUnaryExpressionSyntax>()
-           .Count(expression => expression.IsKind(SyntaxKind.SuppressNullableWarningExpression));
+           .Count(expression =>
+                expression.IsKind(SyntaxKind.SuppressNullableWarningExpression) &&
+                !IsLeftOfTypeTest(expression));
 
         var threshold = GetThreshold(context);
 
@@ -67,6 +84,18 @@ public class Rsa0004 : Rsa0000
         SyntaxKind.ConstructorDeclaration,
         SyntaxKind.PropertyDeclaration
     ];
+
+    /// <summary>
+    /// Determines whether <paramref name="expression"/> is the left-hand operand of <c>is</c> or an
+    /// <c>is</c> pattern - the one shape IDE0080 already reports on individually, since a type test
+    /// ignores nullability and the operator suppresses nothing there.
+    /// </summary>
+    private static bool IsLeftOfTypeTest(ExpressionSyntax expression) => expression.Parent switch
+    {
+        BinaryExpressionSyntax binary when binary.IsKind(SyntaxKind.IsExpression) => binary.Left == expression,
+        IsPatternExpressionSyntax isPattern => isPattern.Expression == expression,
+        var _ => false
+    };
 
     private static int GetThreshold(SyntaxNodeAnalysisContext context)
     {

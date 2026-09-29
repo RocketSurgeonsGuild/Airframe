@@ -14,6 +14,7 @@ public class Rsa0004Tests
     [InlineData(nameof(MethodWithThreeNullForgiving), MethodWithThreeNullForgiving)]
     [InlineData(nameof(ConstructorWithThreeNullForgiving), ConstructorWithThreeNullForgiving)]
     [InlineData(nameof(PropertyWithThreeNullForgiving), PropertyWithThreeNullForgiving)]
+    [InlineData(nameof(MethodWithFourNullForgivingBeforeIsChecks), MethodWithFourNullForgivingBeforeIsChecks)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -143,6 +144,24 @@ public class Rsa0004Tests
                     get => _a! + _b!;
                     set => _c = value!;
                 }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string MethodWithFourNullForgivingBeforeIsChecks =
+        """
+        #nullable enable
+
+        namespace Sample
+        {
+            public class Example
+            {
+                public bool Check(object? a, object? b, object? c, object? d) =>
+                    a! is string &&
+                    b! is string s &&
+                    c! is not null &&
+                    d! is int;
             }
         }
         """;
