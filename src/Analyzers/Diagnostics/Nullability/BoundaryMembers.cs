@@ -56,6 +56,22 @@ internal static class BoundaryMembers
     };
 
     /// <summary>
+    /// Determines whether <paramref name="property"/> is a bindable view-model member: its
+    /// containing type implements <see cref="System.ComponentModel.INotifyPropertyChanged"/>
+    /// (directly or through a base type, e.g. <c>ReactiveObject</c>), or the property itself
+    /// carries an attribute named <c>Reactive</c> (unqualified, so any <c>[Reactive]</c> - the
+    /// ReactiveUI.Fody and ReactiveUI.SourceGenerators one included - matches regardless of its
+    /// namespace). Either is expected to be externally mutable by design: the binding
+    /// infrastructure, not just the type's own constructor, is what assigns it. RSA0001.
+    /// </summary>
+    /// <param name="property">The property symbol.</param>
+    /// <returns>A value indicating whether the property is exempt as a bindable member.</returns>
+    public static bool IsBindableViewModelMember(IPropertySymbol property) =>
+        property.ContainingType.AllInterfaces.Any(
+            i => i.ToDisplayString() == "System.ComponentModel.INotifyPropertyChanged") ||
+        property.GetAttributes().Any(attribute => attribute.AttributeClass?.Name == "ReactiveAttribute");
+
+    /// <summary>
     /// Determines whether <paramref name="type"/> is a nullable-annotated collection type: an
     /// array, or a type assignable to the non-generic <see cref="System.Collections.IEnumerable"/>,
     /// excluding <see cref="string"/> itself. RSA0002.

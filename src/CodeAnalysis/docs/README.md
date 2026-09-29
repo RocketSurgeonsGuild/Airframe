@@ -14,6 +14,7 @@ a defective boundary contract.
 
 | Rule | Title | Default severity |
 |------|-------|-------------------|
+| [RSA0001](RSA0001.md) | Do not expose a plain setter on a non-nullable reference type auto-property | Info |
 | [RSA0002](RSA0002.md) | Do not return a nullable collection | Warning |
 | [RSA0003](RSA0003.md) | Do not return a nullable task | Warning |
 | [RSA0004](RSA0004.md) | Null-forgiving operator used too many times in one member | Info |

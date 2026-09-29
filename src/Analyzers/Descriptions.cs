@@ -9,6 +9,15 @@ internal static class Descriptions
 {
     private static readonly ConcurrentDictionary<Category, string> CategoryMap = new();
 
+    public static DiagnosticDescriptor RSA0001 { get; } = new(
+        id: "RSA0001",
+        title: "Do not expose a plain setter on a non-nullable reference type auto-property",
+        messageFormat: "'{0}' is a non-nullable reference type auto-property with a public setter; use 'init' or a positional record parameter instead",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Info,
+        isEnabledByDefault: true,
+        description: "A public or protected auto-property of non-nullable reference type with a plain 'set' can be reassigned to null by any external caller at any time after construction, silently invalidating the non-null guarantee the compiler checked only at construction - CS8618 verifies only that a constructor exits with a non-null value, never what happens to the property afterward. Use 'init', 'required init', or a positional record parameter so the property can only be set once, at construction. Excluded: an override or explicit interface implementation, since neither author chose that member's mutability, and any property on a type that implements INotifyPropertyChanged or carries a [Reactive] attribute, since a bindable view-model property is expected to be externally mutable by design.");
+
     public static DiagnosticDescriptor RSA0002 { get; } = new(
         id: "RSA0002",
         title: "Do not return a nullable collection",

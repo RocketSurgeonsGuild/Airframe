@@ -2,6 +2,7 @@
 
 | Rule ID | Category    | Severity    | Notes                                      |
 |---------|-------------|-------------|--------------------------------------------|
+| RSA0001 | Nullability | Info        | RSA0001_MutablePublicPropertySetter        |
 | RSA0002 | Nullability | Warning     | RSA0002_NullableCollectionReturn           |
 | RSA0003 | Nullability | Warning     | RSA0003_NullableTaskReturn                 |
 | RSA0004 | Nullability | Info        | RSA0004_NullForgivingOperatorDensity       |
