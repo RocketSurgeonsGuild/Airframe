@@ -10,16 +10,34 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 internal static class BoundaryMembers
 {
     /// <summary>
-    /// Determines whether <paramref name="symbol"/> is reachable from outside its declaring type:
-    /// public, protected, or protected internal. RSA0002, RSA0003, RSA0009.
+    /// Determines whether <paramref name="symbol"/> is reachable from outside the declaring
+    /// assembly: public, protected, or protected internal, all the way up its containing-type
+    /// chain. A member's own accessibility only ever narrows what its containing type already
+    /// allows - a <c>public</c> method on an <c>internal</c>, a <c>private</c>-nested, or a
+    /// <c>file</c>-scoped type is not reachable from outside the assembly (a <c>file</c> type is
+    /// narrower still: not even reachable from another file in the same assembly) no matter what
+    /// the member itself declares, so every containing type is checked as well as the member.
+    /// RSA0001, RSA0002, RSA0003, RSA0006, RSA0009.
     /// </summary>
     /// <param name="symbol">The method or property symbol.</param>
     /// <returns>A value indicating whether the symbol is publicly or protectedly visible.</returns>
-    public static bool IsPubliclyVisible(ISymbol symbol) =>
-        symbol.DeclaredAccessibility is
-            Accessibility.Public or
-            Accessibility.Protected or
-            Accessibility.ProtectedOrInternal;
+    public static bool IsPubliclyVisible(ISymbol symbol)
+    {
+        if (!IsAccessibleAccessibility(symbol.DeclaredAccessibility))
+        {
+            return false;
+        }
+
+        for (var containingType = symbol.ContainingType; containingType is not null; containingType = containingType.ContainingType)
+        {
+            if (containingType.IsFileLocal || !IsAccessibleAccessibility(containingType.DeclaredAccessibility))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /// <summary>
     /// Determines whether <paramref name="symbol"/>'s signature is dictated by something other
@@ -113,6 +131,11 @@ internal static class BoundaryMembers
     public static bool IsNullableBoolean(ITypeSymbol type) =>
         type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } nullableValueType &&
         nullableValueType.TypeArguments[0].SpecialType == SpecialType.System_Boolean;
+
+    private static bool IsAccessibleAccessibility(Accessibility accessibility) => accessibility is
+        Accessibility.Public or
+        Accessibility.Protected or
+        Accessibility.ProtectedOrInternal;
 
     private static bool IsTaskNamedType(ITypeSymbol type, out string taskName)
     {

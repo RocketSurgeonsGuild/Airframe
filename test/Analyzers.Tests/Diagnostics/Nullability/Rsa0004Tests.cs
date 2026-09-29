@@ -100,6 +100,48 @@ public class Rsa0004Tests
            .OnlyContain(diagnostic => diagnostic.Id == RSA0004.Id);
     }
 
+    [Fact]
+    public async Task GivenThresholdConfiguredToZero_WhenAnalyzeWithNoUses_ThenNoDiagnosticsReported()
+    {
+        // Given, When. Zero uses and a configured threshold of zero: 0 is not > 0, so this must
+        // not false-positive on a member that never uses the operator at all.
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(MethodWithNoNullForgiving)
+           .WithAnalyzer<Rsa0004>()
+           .AddGlobalOption("rsa0004_max_null_forgiving_operators", "0")
+           .GenerateAsync();
+
+        // Then
+        result
+           .AnalyzerResults
+           .Should()
+           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == RSA0004.Id));
+    }
+
+    [Theory]
+    [InlineData("-1")]
+    [InlineData("banana")]
+    [InlineData("")]
+    public async Task GivenInvalidThreshold_WhenAnalyze_ThenDefaultThresholdIsUsed(string invalidValue)
+    {
+        // Given, When. Three uses is at the default threshold of 3 (not > 3), so an invalid
+        // configured value - negative, non-numeric, or empty - must fall back to the default
+        // rather than be treated as "any use reports" the way 0 legitimately is.
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(MethodWithThreeNullForgiving)
+           .WithAnalyzer<Rsa0004>()
+           .AddGlobalOption("rsa0004_max_null_forgiving_operators", invalidValue)
+           .GenerateAsync();
+
+        // Then
+        result
+           .AnalyzerResults
+           .Should()
+           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == RSA0004.Id), because: $"'{invalidValue}' is not a valid threshold and should fall back to the default of 3");
+    }
+
     // lang=csharp
     internal const string MethodWithOneNullForgiving =
         """

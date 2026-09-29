@@ -38,6 +38,8 @@ public class Rsa0009Tests
     [InlineData(nameof(NullableTaskOnAbstractMethod), NullableTaskOnAbstractMethod)]
     [InlineData(nameof(SealedDefaultInterfaceMemberNullableReturn), SealedDefaultInterfaceMemberNullableReturn)]
     [InlineData(nameof(PrivateProtectedAbstractMethodNullableReturn), PrivateProtectedAbstractMethodNullableReturn)]
+    [InlineData(nameof(PublicAbstractMethodOnInternalNestedType), PublicAbstractMethodOnInternalNestedType)]
+    [InlineData(nameof(PublicAbstractMethodOnFileScopedType), PublicAbstractMethodOnFileScopedType)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -165,6 +167,30 @@ public class Rsa0009Tests
             {
                 private protected abstract string? Read();
             }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicAbstractMethodOnInternalNestedType =
+        """
+        namespace Sample
+        {
+            public class Outer
+            {
+                internal abstract class Base
+                {
+                    public abstract string? Read();
+                }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicAbstractMethodOnFileScopedType =
+        """
+        file abstract class Base
+        {
+            public abstract string? Read();
         }
         """;
 

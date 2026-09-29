@@ -14,6 +14,8 @@ public class Rsa0006Tests
     [InlineData(nameof(PrivateNullableBooleanProperty), PrivateNullableBooleanProperty)]
     [InlineData(nameof(InternalNullableBooleanProperty), InternalNullableBooleanProperty)]
     [InlineData(nameof(PrivateProtectedNullableBooleanProperty), PrivateProtectedNullableBooleanProperty)]
+    [InlineData(nameof(PublicPropertyOnInternalNestedType), PublicPropertyOnInternalNestedType)]
+    [InlineData(nameof(PublicPropertyOnFileScopedType), PublicPropertyOnFileScopedType)]
     [InlineData(nameof(NullableIntProperty), NullableIntProperty)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
@@ -121,6 +123,30 @@ public class Rsa0006Tests
             {
                 private protected bool? Flag { get; set; }
             }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicPropertyOnInternalNestedType =
+        """
+        namespace Sample
+        {
+            public class Outer
+            {
+                internal class Inner
+                {
+                    public bool? Flag { get; set; }
+                }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicPropertyOnFileScopedType =
+        """
+        file class Example
+        {
+            public bool? Flag { get; set; }
         }
         """;
 

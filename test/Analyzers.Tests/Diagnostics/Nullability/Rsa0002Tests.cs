@@ -16,6 +16,9 @@ public class Rsa0002Tests
     [InlineData(PrivateMethodNullableReturn)]
     [InlineData(InternalMethodNullableReturn)]
     [InlineData(PrivateProtectedMethodNullableReturn)]
+    [InlineData(PublicMethodOnInternalNestedType)]
+    [InlineData(PublicMethodOnPrivateNestedType)]
+    [InlineData(PublicMethodOnFileScopedType)]
     [InlineData(NullableElementNonNullableCollectionReturn)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string source)
     {
@@ -162,6 +165,53 @@ public class Rsa0002Tests
 
                 public void Use() => Read();
             }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicMethodOnInternalNestedType =
+        """
+        using System.Collections.Generic;
+
+        namespace Sample
+        {
+            public class Outer
+            {
+                internal class Inner
+                {
+                    public IEnumerable<string>? Read() => null;
+                }
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicMethodOnPrivateNestedType =
+        """
+        using System.Collections.Generic;
+
+        namespace Sample
+        {
+            public class Outer
+            {
+                private class Inner
+                {
+                    public IEnumerable<string>? Read() => null;
+                }
+
+                public void Use() => new Inner().Read();
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string PublicMethodOnFileScopedType =
+        """
+        using System.Collections.Generic;
+
+        file class Example
+        {
+            public IEnumerable<string>? Read() => null;
         }
         """;
 
