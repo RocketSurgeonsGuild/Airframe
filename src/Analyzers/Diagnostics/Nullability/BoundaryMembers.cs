@@ -5,7 +5,7 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 
 /// <summary>
 /// Identifies members that sit on a public boundary and the declared shape of their return type.
-/// Shared by RSA0002, RSA0003, and RSA0009.
+/// Shared by RSA0002, RSA0003, RSA0006, and RSA0009.
 /// </summary>
 internal static class BoundaryMembers
 {
@@ -25,7 +25,7 @@ internal static class BoundaryMembers
     /// <summary>
     /// Determines whether <paramref name="symbol"/>'s signature is dictated by something other
     /// than its own declaration: an override, or an explicit interface implementation. Neither
-    /// author chose the nullability of the contract they are fulfilling. RSA0002, RSA0003.
+    /// author chose the nullability of the contract they are fulfilling. RSA0002, RSA0003, RSA0006.
     /// </summary>
     /// <param name="symbol">The method or property symbol.</param>
     /// <returns>A value indicating whether the contract is inherited rather than authored.</returns>
@@ -88,6 +88,16 @@ internal static class BoundaryMembers
         taskName = type.Name;
         return type.NullableAnnotation == NullableAnnotation.Annotated && IsTaskNamedType(type, out taskName);
     }
+
+    /// <summary>
+    /// Determines whether <paramref name="type"/> is <c>bool?</c> - <see cref="System.Nullable{T}"/>
+    /// wrapping <see cref="bool"/>. RSA0006.
+    /// </summary>
+    /// <param name="type">The declared property type.</param>
+    /// <returns>A value indicating whether the type is a nullable boolean.</returns>
+    public static bool IsNullableBoolean(ITypeSymbol type) =>
+        type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } nullableValueType &&
+        nullableValueType.TypeArguments[0].SpecialType == SpecialType.System_Boolean;
 
     private static bool IsTaskNamedType(ITypeSymbol type, out string taskName)
     {

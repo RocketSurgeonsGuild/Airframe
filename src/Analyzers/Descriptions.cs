@@ -36,6 +36,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "The null-forgiving operator overrides the compiler's nullable flow analysis one expression at a time, so no single use is ever wrong on its own; density is the signal. A member relying on it more than the configured threshold - default 3, configurable with the rsa0004_max_null_forgiving_operators editorconfig key - is suppressing a design defect rather than fixing it. There is no code fix: there is nothing mechanical to apply, since the fix is a design change only the author can make.");
 
+    public static DiagnosticDescriptor RSA0006 { get; } = new(
+        id: "RSA0006",
+        title: "Do not use a nullable boolean to model three states",
+        messageFormat: "'{0}' is a nullable bool; a named enum expresses the three states more clearly than true, false, and null",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Info,
+        isEnabledByDefault: true,
+        description: "A public or protected bool? property is often modeling three states, not two, with true, false, and null each carrying a distinct meaning. A named enum expresses those states explicitly instead of relying on the reader to know what null means here. An override and an explicit interface implementation are excluded, since neither author chose that member's type - the enum change belongs at the origin of the contract instead.");
+
     public static DiagnosticDescriptor RSA0009 { get; } = new(
         id: "RSA0009",
         title: "Do not declare a nullable reference return type on an abstraction member",

@@ -25,6 +25,7 @@ don't want to override:
 dotnet_diagnostic.RSA0002.severity = warning      # Do not return a nullable collection
 dotnet_diagnostic.RSA0003.severity = warning      # Do not return a nullable task
 dotnet_diagnostic.RSA0004.severity = suggestion   # Null-forgiving operator used too many times in one member
+dotnet_diagnostic.RSA0006.severity = suggestion   # Do not use a nullable boolean to model three states
 dotnet_diagnostic.RSA0009.severity = none         # Nullable reference return on an abstraction member (disabled by default)
 
 # RSA1XXX — Usage
