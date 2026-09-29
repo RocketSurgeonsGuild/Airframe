@@ -54,6 +54,15 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "'default' and 'default(T)' evaluate to null for a nullable reference type, but disguise that fact behind a keyword that means something different for a value type - a real, non-null default. Use 'null' directly wherever the target is already a nullable reference type: a parameter default, a field or property initializer, a return, an assignment, or a generic context resolved to a nullable reference type. Adjacent to IDE0034 (simplify default(T) to default), which only simplifies syntax between two forms of default and never suggests null; the two converge on null for a reference-typed target rather than conflicting.");
 
+    public static DiagnosticDescriptor RSA0008 { get; } = new(
+        id: "RSA0008",
+        title: "Do not disable or restore the nullable context in source",
+        messageFormat: "'#nullable {0}' leaves the nullable annotation state of the code that follows unknown; enable nullable at file or project scope instead",
+        CategoryMap.GetOrAdd(Nullability, category => category.ToString()),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "'#nullable disable' and '#nullable restore' - when either affects annotations, not warnings alone - leave the code that follows in an oblivious nullable context, where a reference type carries no annotation at all rather than a definite nullable or non-nullable one. RSA0002, RSA0003, RSA0006, RSA0007, and RSA0009 all read a type's NullableAnnotation to decide whether to report, and none of them can tell a legitimately non-nullable reference type apart from one whose annotation state was never tracked - so a disabled or restored context silently defeats every one of them for the rest of the file. '#nullable disable warnings' and '#nullable restore warnings' are not reported: they affect only warnings, and leave the annotation context itself untouched.");
+
     public static DiagnosticDescriptor RSA0009 { get; } = new(
         id: "RSA0009",
         title: "Do not declare a nullable reference return type on an abstraction member",
