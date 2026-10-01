@@ -1,6 +1,5 @@
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 using System.Linq;
 using System.Reflection;
@@ -39,11 +38,17 @@ public class AnalyzerDiscoveryTests
     [Fact]
     public void GivenAbstractAnalyzerBases_WhenInspected_ThenNoneHaveDiagnosticAnalyzerAttribute()
     {
-        // Given
-        var abstractAnalyzerTypes = new[] { typeof(Rsa1000), typeof(Rsa3000) };
+        // Given. Derived by reflection, not hardcoded by name: a hardcoded list silently stops
+        // covering a new band's abstract base (Rsa0000, Rsa2000) the moment one is added and
+        // nobody remembers to update this list too.
+        var analyzerAssembly = typeof(Rsa1000).Assembly;
+        var abstractAnalyzerTypes = analyzerAssembly
+           .GetTypes()
+           .Where(t => typeof(DiagnosticAnalyzer).IsAssignableFrom(t) && t.IsAbstract)
+           .ToList();
 
         // When
-        abstractAnalyzerTypes.Should().OnlyContain(t => t.IsAbstract, "both bases should remain abstract");
+        abstractAnalyzerTypes.Should().NotBeEmpty("at least one abstract analyzer base should exist");
 
         // Then
         abstractAnalyzerTypes

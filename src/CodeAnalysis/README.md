@@ -4,6 +4,7 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 
 ## Analyzers
 
+- **RSA0XXX Nullability** — declaration-site nullability contracts the compiler's own nullable reference type analysis does not evaluate
 - **RSA1XXX Usage** — MVVM patterns and ReactiveUI best practices
 - **RSA2XXX Design** — member layout, file structure, and documentation
 - **RSA3XXX Performance** — subscription lifetime and allocation
@@ -20,6 +21,17 @@ don't want to override:
 
 ```ini
 [*.cs]
+# RSA0XXX — Nullability
+dotnet_diagnostic.RSA0001.severity = suggestion   # Do not expose a plain setter on a non-nullable reference type auto-property
+dotnet_diagnostic.RSA0002.severity = warning      # Do not return a nullable collection
+dotnet_diagnostic.RSA0003.severity = warning      # Do not return a nullable task
+dotnet_diagnostic.RSA0004.severity = suggestion   # Null-forgiving operator used too many times in one member
+dotnet_diagnostic.RSA0005.severity = suggestion   # Do not use ?., ??, or ??= where flow analysis already proves the operand non-null
+dotnet_diagnostic.RSA0006.severity = suggestion   # Do not use a nullable boolean to model three states
+dotnet_diagnostic.RSA0007.severity = suggestion   # Use null instead of default for a nullable reference type
+dotnet_diagnostic.RSA0008.severity = warning      # Do not disable or restore the nullable context in source
+dotnet_diagnostic.RSA0009.severity = none         # Nullable reference return on an abstraction member (disabled by default)
+
 # RSA1XXX — Usage
 dotnet_diagnostic.RSA1001.severity = warning      # Use expression lambda overload for a property
 dotnet_diagnostic.RSA1002.severity = error        # Provide a well-formed lambda expression

@@ -2,6 +2,15 @@
 
 | Rule ID | Category    | Severity    | Notes                                      |
 |---------|-------------|-------------|--------------------------------------------|
+| RSA0001 | Nullability | Info        | RSA0001_MutablePublicPropertySetter        |
+| RSA0002 | Nullability | Warning     | RSA0002_NullableCollectionReturn           |
+| RSA0003 | Nullability | Warning     | RSA0003_NullableTaskReturn                 |
+| RSA0004 | Nullability | Info        | RSA0004_NullForgivingOperatorDensity       |
+| RSA0005 | Nullability | Info        | RSA0005_RedundantNullConditionalAccess     |
+| RSA0006 | Nullability | Info        | RSA0006_NullableBooleanTriState            |
+| RSA0007 | Nullability | Info        | RSA0007_DefaultLiteralForReferenceType     |
+| RSA0008 | Nullability | Warning     | RSA0008_NullableContextDisabled            |
+| RSA0009 | Nullability | Disabled    | RSA0009_NullableReturnOnAbstraction        |
 | RSA1005 | Usage       | Warning     | RSA1005_SchedulerNotProvided               |
 | RSA1007 | Usage       | Warning     | RSA1005_UseInvokeFunction                  |
 | RSA1009 | Usage       | Warning     | RSA1009_AutoRefreshOnObservableClosureOnly |
@@ -22,6 +31,6 @@
 | RSA2014 | Design      | Warning     | RSA2014_MissingAbstractionSummary          |
 | RSA2015 | Design      | Warning     | RSA2015_MissingInheritdoc                  |
 | RSA3002 | Performance | Warning     | RSA3002_LambdaExpressionStatic             |
-| RSA3003 | Performance | Information | RSA3003_Closure                            |
+| RSA3003 | Performance | Info        | RSA3003_Closure                            |
 | RSA3004 | Performance | Warning     | RSA3004_AutoRefreshOnTaskPool              |
 | RSA3005 | Performance | Warning     | RSA3005_AutoRefreshAlreadyApplied          |

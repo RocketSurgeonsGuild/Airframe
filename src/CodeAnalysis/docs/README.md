@@ -6,6 +6,24 @@ docs: cause, rule description, how to fix, when to suppress, and the suppression
 severities, `.editorconfig` defaults, and the broader guidance these pages link back to, see the
 [package README](../README.md).
 
+## RSA0XXX — Nullability
+
+Declaration-site nullability contracts the compiler's own nullable reference type analysis does
+not evaluate: it verifies that flow matches an annotation, never whether that annotation is itself
+a defective boundary contract.
+
+| Rule | Title | Default severity |
+|------|-------|-------------------|
+| [RSA0001](RSA0001.md) | Do not expose a plain setter on a non-nullable reference type auto-property | Info |
+| [RSA0002](RSA0002.md) | Do not return a nullable collection | Warning |
+| [RSA0003](RSA0003.md) | Do not return a nullable task | Warning |
+| [RSA0004](RSA0004.md) | Null-forgiving operator used too many times in one member | Info |
+| [RSA0005](RSA0005.md) | Do not use ?., ??, or ??= where flow analysis already proves the operand non-null | Info |
+| [RSA0006](RSA0006.md) | Do not use a nullable boolean to model three states | Info |
+| [RSA0007](RSA0007.md) | Use null instead of default for a nullable reference type | Info |
+| [RSA0008](RSA0008.md) | Do not disable or restore the nullable context in source | Warning |
+| [RSA0009](RSA0009.md) | Do not declare a nullable reference return type on an abstraction member | Info (disabled by default) |
+
 ## RSA1XXX — Usage
 
 MVVM patterns and ReactiveUI best practices.
