@@ -196,7 +196,7 @@ internal static class Descriptions
         CategoryMap.GetOrAdd(Design, category => category.ToString()),
         defaultSeverity: Warning,
         isEnabledByDefault: true,
-        description: "Lines stay inside the margin set by the max_line_length editorconfig key. The rule is silent where that key is absent or off.");
+        description: "Lines stay inside the margin set by the max_line_length editorconfig key, measured by code content alone — a trailing comment or an XML doc/comment line does not count. The rule is silent where that key is absent or off.");
 
     public static DiagnosticDescriptor RSA2014 { get; } = new(
         id: "RSA2014",

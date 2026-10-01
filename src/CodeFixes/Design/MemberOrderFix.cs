@@ -337,11 +337,7 @@ public class MemberOrderFix : CodeFixProvider
     /// blank line regardless of the field-field exemption.
     /// </summary>
     private static bool HasCommentOrDocTrivia(SyntaxTriviaList trivia) =>
-        trivia.Any(
-            trivium => trivium.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
-                trivium.IsKind(SyntaxKind.MultiLineCommentTrivia) ||
-                trivium.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia) ||
-                trivium.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia));
+        trivia.Any(CommentTrivia.IsCommentOrDoc);
 
     /// <summary>
     /// Gets the line ending the type already uses, so a reorder does not introduce a second

@@ -6,10 +6,10 @@
         Title: Line exceeds the maximum length,
         Severity: Warning,
         WarningLevel: 1,
-        Location: Input0.cs: (4,80)-(4,94),
+        Location: Input0.cs: (4,80)-(4,91),
         Description: Lines stay inside the margin set by the max_line_length editorconfig key, measured by code content alone — a trailing comment or an XML doc/comment line does not count. The rule is silent where that key is absent or off.,
         MessageFormat: Line is {0} characters long; the maximum is {1},
-        Message: Line is 94 characters long; the maximum is 80,
+        Message: Line is 91 characters long; the maximum is 80,
         Category: Design
       }
     ]
