@@ -16,6 +16,7 @@ public class Rsa2013FixTests
     [InlineData(nameof(LongArgumentList), LongArgumentList)]
     [InlineData(nameof(LongCollectionExpression), LongCollectionExpression)]
     [InlineData(nameof(LongExpressionBody), LongExpressionBody)]
+    [InlineData(nameof(LongCodeWithTrailingComment), LongCodeWithTrailingComment)]
     public async Task GivenSource_WhenCodeFix_ThenVerify(string name, string source)
     {
         // Given, When
@@ -108,6 +109,28 @@ public class Rsa2013FixTests
             public class Example
             {
                 public string Combine(string first) => first + "a rather long suffix indeed here";
+            }
+        }
+        """;
+
+    /// <summary>
+    /// The declaration's code content alone is over the margin, before the trailing <c>// trailing
+    /// note</c> comment is even considered — the exact case RSA2013 now measures correctly (see
+    /// Rsa2013Tests.LongCodeWithTrailingComment). The paired fix must still find and chop the
+    /// parameter list; the trailing comment should survive untouched, still attached after the
+    /// closing paren.
+    /// </summary>
+    // lang=csharp
+    internal const string LongCodeWithTrailingComment =
+        """
+        namespace Sample
+        {
+            public class Example
+            {
+                public static string Combine(string first, string second, string third, string fourth) // trailing note
+                {
+                    return first;
+                }
             }
         }
         """;
