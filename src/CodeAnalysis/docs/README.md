@@ -19,6 +19,7 @@ MVVM patterns and ReactiveUI best practices.
 | [RSA1005](RSA1005.md) | Specify a scheduler for better control over execution timing | Suggestion |
 | [RSA1006](RSA1006.md) | `SubscribeOn` only supports a single use per pipeline | Suggestion |
 | [RSA1007](RSA1007.md) | Use `Invoke()` instead of parentheses for function calls | Warning |
+| [RSA1010](RSA1010.md) | Bind DynamicData changesets on the UI thread | Warning |
 
 ## RSA2XXX — Design
 

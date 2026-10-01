@@ -1,3 +1,4 @@
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -26,8 +27,8 @@ internal static class DynamicDataSymbols
 
         var containingNamespace = method.ContainingNamespace?.ToDisplayString();
 
-        return containingNamespace?.StartsWith("DynamicData") == true ||
-               method.ContainingAssembly.Name.Contains("DynamicData");
+        return containingNamespace is "DynamicData" || containingNamespace?.StartsWith("DynamicData.", StringComparison.Ordinal) == true ||
+               method.ContainingAssembly?.Name.Contains("DynamicData") == true;
     }
 
     /// <summary>

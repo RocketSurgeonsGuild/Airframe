@@ -28,6 +28,7 @@ dotnet_diagnostic.RSA1004.severity = error        # Provide a well-formed lambda
 dotnet_diagnostic.RSA1005.severity = suggestion   # Specify a scheduler for better control over execution timing
 dotnet_diagnostic.RSA1006.severity = suggestion   # SubscribeOn only supports a single use per pipeline
 dotnet_diagnostic.RSA1007.severity = warning      # Use Invoke() instead of parentheses for function calls
+dotnet_diagnostic.RSA1010.severity = warning      # Bind DynamicData changesets on the UI thread
 
 # RSA2XXX — Design
 dotnet_diagnostic.RSA2001.severity = warning      # Constructors should appear before other members
