@@ -41,7 +41,7 @@ public class Rsa1010 : Rsa1000
         // Handle extension methods
         var actualMethod = method.ReducedFrom ?? method;
 
-        if (actualMethod.Name != "Bind" || !IsDynamicDataMethod(actualMethod))
+        if (actualMethod.Name != "Bind" || !DynamicDataSymbols.IsDynamicDataMethod(actualMethod))
         {
             return;
         }
@@ -59,10 +59,25 @@ public class Rsa1010 : Rsa1000
     /// leading into <paramref name="invocation"/> (the <c>Bind</c> call).
     /// </summary>
     private static bool HasPrecedingObserveOn(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        GetChainInvocations(invocation, semanticModel)
-           .Any(chainInvocation =>
-                chainInvocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Name.Identifier.Text == "ObserveOn");
+        GetChainInvocations(invocation, semanticModel).Any(chainInvocation => IsObserveOnInvocation(chainInvocation, semanticModel));
+
+    /// <summary>
+    /// Determines whether <paramref name="invocation"/> resolves to <c>System.Reactive.Linq.Observable.ObserveOn</c>,
+    /// rather than merely being named <c>ObserveOn</c> -- so an unrelated method of that name on some
+    /// other type doesn't silently satisfy RSA1010's check.
+    /// </summary>
+    private static bool IsObserveOnInvocation(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+    {
+        if (invocation.Expression is not MemberAccessExpressionSyntax { Name.Identifier.Text: "ObserveOn" })
+        {
+            return false;
+        }
+
+        var method = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+        var actualMethod = method?.ReducedFrom ?? method;
+
+        return actualMethod?.ContainingNamespace?.ToDisplayString() is "System.Reactive.Linq" or "System.Reactive";
+    }
 
     /// <summary>
     /// Walks backward through a fluent invocation chain starting at <paramref name="invocation"/>,
@@ -123,18 +138,5 @@ public class Rsa1010 : Rsa1000
         return declaringSyntax is VariableDeclaratorSyntax { Initializer.Value: { } initializerValue }
             ? initializerValue
             : null;
-    }
-
-    private static bool IsDynamicDataMethod(IMethodSymbol method)
-    {
-        if (!method.IsExtensionMethod)
-        {
-            return false;
-        }
-
-        var containingNamespace = method.ContainingNamespace?.ToDisplayString();
-
-        return containingNamespace?.StartsWith("DynamicData") == true ||
-               method.ContainingAssembly.Name.Contains("DynamicData");
     }
 }
