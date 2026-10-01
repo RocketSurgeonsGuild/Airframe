@@ -42,7 +42,7 @@ public class Rsa0001 : Rsa0000
             return;
         }
 
-        if (context.SemanticModel.GetDeclaredSymbol(property) is not IPropertySymbol symbol ||
+        if (context.SemanticModel.GetDeclaredSymbol(property, context.CancellationToken) is not IPropertySymbol symbol ||
             !BoundaryMembers.IsPubliclyVisible(symbol) ||
             symbol.SetMethod is not { } setMethod ||
             !BoundaryMembers.IsPubliclyVisible(setMethod) ||

@@ -28,9 +28,7 @@ public abstract class Rsa0000 : DiagnosticAnalyzer
     /// Analyze the <see cref="SyntaxNodeAnalysisContext"/>.
     /// </summary>
     /// <param name="context">The context.</param>
-    protected virtual void Analyze(SyntaxNodeAnalysisContext context)
-    {
-    }
+    protected abstract void Analyze(SyntaxNodeAnalysisContext context);
 
     /// <summary>
     /// Get the syntax kind to analyze.

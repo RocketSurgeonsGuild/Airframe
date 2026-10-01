@@ -55,9 +55,7 @@ public class Rsa0004Tests
            .AnalyzerResults[typeof(Rsa0004)]
            .Diagnostics
            .Should()
-           .NotBeEmpty(because: $"{name} should report RSA0004")
-           .And
-           .OnlyContain(diagnostic => diagnostic.Id == RSA0004.Id);
+           .ContainSingle(diagnostic => diagnostic.Id == RSA0004.Id, because: $"{name} should report RSA0004");
     }
 
     [Fact]
@@ -76,9 +74,7 @@ public class Rsa0004Tests
            .AnalyzerResults[typeof(Rsa0004)]
            .Diagnostics
            .Should()
-           .NotBeEmpty(because: "the configured threshold of 1 is lower than the default of 3")
-           .And
-           .OnlyContain(diagnostic => diagnostic.Id == RSA0004.Id);
+           .ContainSingle(diagnostic => diagnostic.Id == RSA0004.Id, because: "the configured threshold of 1 is lower than the default of 3");
     }
 
     [Fact]
@@ -99,9 +95,7 @@ public class Rsa0004Tests
            .AnalyzerResults[typeof(Rsa0004)]
            .Diagnostics
            .Should()
-           .NotBeEmpty(because: "a configured threshold of 0 means any use at all should report")
-           .And
-           .OnlyContain(diagnostic => diagnostic.Id == RSA0004.Id);
+           .ContainSingle(diagnostic => diagnostic.Id == RSA0004.Id, because: "a configured threshold of 0 means any use at all should report");
     }
 
     [Fact]

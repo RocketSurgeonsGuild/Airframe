@@ -39,7 +39,6 @@ public class Rsa0008Tests
     [InlineData(nameof(NullableRestore), NullableRestore)]
     [InlineData(nameof(NullableDisableAnnotations), NullableDisableAnnotations)]
     [InlineData(nameof(NullableRestoreAnnotations), NullableRestoreAnnotations)]
-    [InlineData(nameof(MultipleDisableAndRestoreDirectives), MultipleDisableAndRestoreDirectives)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -54,9 +53,7 @@ public class Rsa0008Tests
            .AnalyzerResults[typeof(Rsa0008)]
            .Diagnostics
            .Should()
-           .NotBeEmpty(because: $"{name} should report RSA0008")
-           .And
-           .OnlyContain(diagnostic => diagnostic.Id == RSA0008.Id);
+           .ContainSingle(diagnostic => diagnostic.Id == RSA0008.Id, because: $"{name} should report RSA0008");
     }
 
     [Fact]

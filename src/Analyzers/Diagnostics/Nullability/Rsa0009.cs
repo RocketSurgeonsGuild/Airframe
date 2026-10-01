@@ -1,7 +1,5 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Rocket.Surgery.Airframe.Analyzers.Descriptions;
 
@@ -22,62 +20,25 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// one that merely restates it. Ships disabled by default - see <see cref="Descriptions.RSA0009"/>.
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class Rsa0009 : Rsa0000
+public class Rsa0009 : BoundaryReturnTypeRule
 {
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [RSA0009];
 
     /// <inheritdoc/>
-    protected override void Analyze(SyntaxNodeAnalysisContext context)
-    {
-        switch (context.Node)
-        {
-            case MethodDeclarationSyntax method:
-                Analyze(context, method, method.ReturnType);
-                break;
-            case PropertyDeclarationSyntax property:
-                Analyze(context, property, property.Type);
-                break;
-            case IndexerDeclarationSyntax indexer:
-                Analyze(context, indexer, indexer.Type);
-                break;
-        }
-    }
+    protected override DiagnosticDescriptor Descriptor => RSA0009;
 
     /// <inheritdoc/>
-    protected override SyntaxKind[] GetSyntaxKind() =>
-    [
-        SyntaxKind.MethodDeclaration,
-        SyntaxKind.PropertyDeclaration,
-        SyntaxKind.IndexerDeclaration
-    ];
+    protected override bool IsEligible(ISymbol symbol) => BoundaryMembers.IsAbstractionOrigin(symbol);
 
-    private static void Analyze(SyntaxNodeAnalysisContext context, MemberDeclarationSyntax member, TypeSyntax typeSyntax)
+    /// <inheritdoc/>
+    protected override bool Matches(ITypeSymbol type, out object?[] extraMessageArgs)
     {
-        if (context.SemanticModel.GetDeclaredSymbol(member) is not { } symbol ||
-            !BoundaryMembers.IsPubliclyVisible(symbol) ||
-            !BoundaryMembers.IsAbstractionOrigin(symbol) ||
-            BoundaryMembers.IsInheritedContract(symbol))
-        {
-            return;
-        }
+        extraMessageArgs = [];
 
-        var type = symbol switch
-        {
-            IMethodSymbol method => method.ReturnType,
-            IPropertySymbol property => property.Type,
-            var _ => null
-        };
-
-        if (type is null ||
-            type.NullableAnnotation != NullableAnnotation.Annotated ||
-            !type.IsReferenceType ||
-            BoundaryMembers.IsNullableCollectionType(type) ||
-            BoundaryMembers.IsNullableTaskType(type, out _))
-        {
-            return;
-        }
-
-        context.ReportDiagnostic(Diagnostic.Create(RSA0009, typeSyntax.GetLocation(), symbol.Name));
+        return type.NullableAnnotation == NullableAnnotation.Annotated &&
+            type.IsReferenceType &&
+            !BoundaryMembers.IsNullableCollectionType(type) &&
+            !BoundaryMembers.IsNullableTaskType(type, out _);
     }
 }

@@ -89,7 +89,7 @@ public class Rsa0009Tests
         var diagnostics = await AnalyzeAsync(source);
 
         // Then
-        diagnostics.Should().NotBeEmpty(because: $"{name} should report RSA0009");
+        diagnostics.Should().ContainSingle(because: $"{name} should report RSA0009");
     }
 
     private static async Task<System.Collections.Generic.IReadOnlyList<Diagnostic>> AnalyzeAsync(string source)

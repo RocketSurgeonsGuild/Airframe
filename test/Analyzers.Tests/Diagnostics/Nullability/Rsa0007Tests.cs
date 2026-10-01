@@ -52,9 +52,7 @@ public class Rsa0007Tests
            .AnalyzerResults[typeof(Rsa0007)]
            .Diagnostics
            .Should()
-           .NotBeEmpty(because: $"{name} should report RSA0007")
-           .And
-           .OnlyContain(diagnostic => diagnostic.Id == RSA0007.Id);
+           .ContainSingle(diagnostic => diagnostic.Id == RSA0007.Id, because: $"{name} should report RSA0007");
     }
 
     // lang=csharp
