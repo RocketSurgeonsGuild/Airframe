@@ -28,6 +28,7 @@ dotnet_diagnostic.RSA1004.severity = error        # Provide a well-formed lambda
 dotnet_diagnostic.RSA1005.severity = suggestion   # Specify a scheduler for better control over execution timing
 dotnet_diagnostic.RSA1006.severity = suggestion   # SubscribeOn only supports a single use per pipeline
 dotnet_diagnostic.RSA1007.severity = warning      # Use Invoke() instead of parentheses for function calls
+dotnet_diagnostic.RSA1010.severity = warning      # Bind DynamicData changesets on the UI thread
 
 # RSA2XXX — Design
 dotnet_diagnostic.RSA2001.severity = warning      # Constructors should appear before other members
@@ -49,6 +50,9 @@ dotnet_diagnostic.RSA2015.severity = warning      # Provide <inheritdoc/> on mem
 # RSA3XXX — Performance
 dotnet_diagnostic.RSA3001.severity = warning      # Subscription not disposed; consider DisposeWith
 dotnet_diagnostic.RSA3002.severity = warning      # Lambda expression can be made static
+dotnet_diagnostic.RSA3003.severity = suggestion   # Lambda expression captures state and allocates a closure
+dotnet_diagnostic.RSA3004.severity = warning      # Provide an explicit scheduler for AutoRefresh
+dotnet_diagnostic.RSA3005.severity = warning      # AutoRefresh already applied for this property
 
 # RSA2013's line-length margin — see "RSA2013 and chop line"
 max_line_length = 160

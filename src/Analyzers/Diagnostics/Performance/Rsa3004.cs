@@ -24,34 +24,20 @@ public class Rsa3004 : Rsa3000
     /// <param name="semanticModel">The semantic model.</param>
     /// <param name="method">The resolved method symbol when the invocation is an AutoRefresh call.</param>
     /// <returns><see langword="true"/> when the invocation is an AutoRefresh call.</returns>
-    internal static bool TryGetAutoRefreshMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel, out IMethodSymbol method)
-    {
-        var symbolInfo = semanticModel.GetSymbolInfo(invocation);
-
-        if (symbolInfo.Symbol is not IMethodSymbol methodSymbol)
-        {
-            method = null!;
-            return false;
-        }
-
-        var actualMethod = methodSymbol.ReducedFrom ?? methodSymbol;
-
-        if (actualMethod.Name != "AutoRefresh" || !IsDynamicDataMethod(actualMethod))
-        {
-            method = null!;
-            return false;
-        }
-
-        method = actualMethod;
-        return true;
-    }
+    /// <remarks>
+    /// Forwards to <see cref="DynamicDataSymbols.TryGetAutoRefreshMethod"/>, the actual ownership
+    /// check, so other bands that need to defer to RSA3004's AutoRefresh surface (e.g. RSA1005) can
+    /// call that shared, band-neutral location directly instead of reaching into this one.
+    /// </remarks>
+    internal static bool TryGetAutoRefreshMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel, out IMethodSymbol method) =>
+        DynamicDataSymbols.TryGetAutoRefreshMethod(invocation, semanticModel, out method);
 
     /// <inheritdoc/>
     protected override void Analyze(SyntaxNodeAnalysisContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
 
-        if (!TryGetAutoRefreshMethod(invocation, context.SemanticModel, out var method))
+        if (!DynamicDataSymbols.TryGetAutoRefreshMethod(invocation, context.SemanticModel, out var method))
         {
             return;
         }
@@ -78,14 +64,6 @@ public class Rsa3004 : Rsa3000
         context.ReportDiagnostic(Diagnostic.Create(RSA3004, GetMethodNameLocation(invocation)));
     }
 
-    private static bool IsDynamicDataMethod(IMethodSymbol method)
-    {
-        var containingNamespace = method.ContainingNamespace?.ToDisplayString();
-
-        return containingNamespace?.StartsWith("DynamicData") == true ||
-               method.ContainingAssembly.Name.Contains("DynamicData");
-    }
-
     private static bool IsSchedulerType(ITypeSymbol? type)
     {
         if (type == null)
@@ -110,11 +88,4 @@ public class Rsa3004 : Rsa3000
             (i.ContainingNamespace?.ToDisplayString() == "System.Reactive.Concurrency" ||
              i.ContainingNamespace?.ToDisplayString() == "System.Reactive"));
     }
-
-    private static Location GetMethodNameLocation(InvocationExpressionSyntax invocation) => invocation.Expression switch
-    {
-        MemberAccessExpressionSyntax memberAccess => memberAccess.Name.GetLocation(),
-        IdentifierNameSyntax identifier => identifier.GetLocation(),
-        var _ => invocation.GetLocation(),
-    };
 }
