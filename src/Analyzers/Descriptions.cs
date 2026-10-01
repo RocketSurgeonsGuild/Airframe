@@ -226,30 +226,33 @@ internal static class Descriptions
             true,
             "Lambda expressions that don't capture local variables or instance state can be marked as static.");
 
-    public static DiagnosticDescriptor RSA3003 { get; } = new(
-        id: "RSA3003",
-        title: "Lambda expression captures state and allocates a closure",
-        messageFormat: "Lambda expression captures state and allocates a closure",
-        CategoryMap.GetOrAdd(Performance, category => category.ToString()),
-        defaultSeverity: Info,
-        isEnabledByDefault: true,
-        description: "Lambda expressions that capture a local variable or instance state, including implicit access to 'this', allocate a closure on every invocation.");
+    public static DiagnosticDescriptor RSA3003 { get; } =
+        new(
+            "RSA3003",
+            "Lambda expression captures state and allocates a closure",
+            "Lambda expression captures state and allocates a closure",
+            CategoryMap.GetOrAdd(Performance, category => category.ToString()),
+            Info,
+            true,
+            "Lambda expressions that capture a local variable or instance state, including implicit access to 'this', allocate a closure on every invocation.");
 
-    public static DiagnosticDescriptor RSA3004 { get; } = new(
-        id: "RSA3004",
-        title: "Provide an explicit scheduler for AutoRefresh",
-        messageFormat: "AutoRefresh re-evaluates on every change; provide an explicit IScheduler to control where that work runs (e.g. off the UI thread on a task pool)",
-        CategoryMap.GetOrAdd(Performance, category => category.ToString()),
-        defaultSeverity: Warning,
-        isEnabledByDefault: true,
-        description: "AutoRefresh re-evaluates its selector on every property change notification. Without an explicit scheduler that work runs wherever the source notifications originate, which is often the UI thread.");
+    public static DiagnosticDescriptor RSA3004 { get; } =
+        new(
+            "RSA3004",
+            "Provide an explicit scheduler for AutoRefresh",
+            "AutoRefresh re-evaluates on every change; provide an explicit IScheduler to control where that work runs (e.g. off the UI thread on a task pool)",
+            CategoryMap.GetOrAdd(Performance, category => category.ToString()),
+            Warning,
+            true,
+            "AutoRefresh re-evaluates its selector on every property change notification. Without an explicit scheduler that work runs wherever the source notifications originate, which is often the UI thread.");
 
-    public static DiagnosticDescriptor RSA3005 { get; } = new(
-        id: "RSA3005",
-        title: "AutoRefresh already applied for this property",
-        messageFormat: "AutoRefresh is already applied for this property earlier in the chain",
-        CategoryMap.GetOrAdd(Performance, category => category.ToString()),
-        defaultSeverity: Warning,
-        isEnabledByDefault: true,
-        description: "Applying AutoRefresh more than once for the same property within the same observable chain re-evaluates that property redundantly.");
+    public static DiagnosticDescriptor RSA3005 { get; } =
+        new(
+            "RSA3005",
+            "AutoRefresh already applied for this property",
+            "AutoRefresh is already applied for this property earlier in the chain",
+            CategoryMap.GetOrAdd(Performance, category => category.ToString()),
+            Warning,
+            true,
+            "Applying AutoRefresh more than once for the same property within the same observable chain re-evaluates that property redundantly.");
 }

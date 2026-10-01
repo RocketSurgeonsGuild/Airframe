@@ -41,6 +41,7 @@
     DynamicData.dll,
     mscorlib.dll,
     netstandard.dll,
+    System.ComponentModel.dll,
     System.Core.dll,
     System.dll,
     System.Linq.Expressions.dll,

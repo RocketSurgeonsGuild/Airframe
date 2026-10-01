@@ -89,6 +89,21 @@
       MessageFormat: AutoRefresh is already applied for this property earlier in the chain,
       Message: AutoRefresh is already applied for this property earlier in the chain,
       Category: Performance
+    },
+    {
+      Id: CS0067,
+      Title: Event is never used,
+      Severity: Warning,
+      WarningLevel: 3,
+      Location: Input0.cs: (23,49)-(23,64),
+      HelpLink: https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0067),
+      MessageFormat: The event '{0}' is never used,
+      Message: The event 'Item.PropertyChanged' is never used,
+      Category: Compiler,
+      CustomTags: [
+        Compiler,
+        Telemetry
+      ]
     }
   ],
   References: [

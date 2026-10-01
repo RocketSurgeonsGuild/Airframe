@@ -1,5 +1,6 @@
 using DynamicData;
 using FluentAssertions;
+using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Linq;
@@ -12,6 +13,34 @@ namespace Rocket.Surgery.Airframe.Analyzers.Tests.Diagnostics.Usage;
 
 public class Rsa1005Tests
 {
+    [Fact]
+    public async Task GivenAutoRefreshMissingScheduler_WhenAnalyzeWithBothRules_ThenOnlyRsa3004Reported()
+    {
+        // Given. When
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(Rsa1005TestData.AutoRefreshMissingScheduler)
+           .WithAnalyzer<Rsa1005>()
+           .WithAnalyzer<Rsa3004>()
+           .AddReferences(
+                typeof(Unit),
+                typeof(System.ComponentModel.INotifyPropertyChanged),
+                typeof(Expression<>),
+                typeof(SourceCache<,>),
+                typeof(DynamicData.Binding.ObservableCollectionExtended<>),
+                typeof(System.Reactive.Linq.Observable))
+           .GenerateAsync();
+
+        // Then — RSA3004 owns AutoRefresh's scheduler surface; RSA1005 must not also fire for it.
+        var diagnostics = result
+           .AnalyzerResults
+           .SelectMany(pair => pair.Value.Diagnostics)
+           .ToList();
+
+        diagnostics.Should().ContainSingle(diagnostic => diagnostic.Id == Descriptions.RSA3004.Id);
+        diagnostics.Should().NotContain(diagnostic => diagnostic.Id == Descriptions.RSA1005.Id);
+    }
+
     [Theory]
     [InlineData(Rsa1005TestData.Incorrect)]
     [InlineData(Rsa1005TestData.Range)]
@@ -218,6 +247,45 @@ public class Rsa1005Tests
                         source
                            .OtherOperator()
                            .Subscribe();
+                }
+            }
+            """;
+
+        // lang=csharp
+        public const string AutoRefreshMissingScheduler = """
+            using System;
+            using System.ComponentModel;
+            using System.Reactive.Linq;
+            using DynamicData;
+
+            namespace Sample
+            {
+                public class Rsa1005Example
+                {
+                    public Rsa1005Example(SourceCache<Item, string> cache) =>
+                        cache
+                           .Connect()
+                           .AutoRefresh(x => x.Thing)
+                           .Subscribe();
+                }
+
+                public class Item : INotifyPropertyChanged
+                {
+                    public string Id { get; set; } = string.Empty;
+
+                    private string _thing = string.Empty;
+
+                    public string Thing
+                    {
+                        get => _thing;
+                        set
+                        {
+                            _thing = value;
+                            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thing)));
+                        }
+                    }
+
+                    public event PropertyChangedEventHandler PropertyChanged;
                 }
             }
             """;

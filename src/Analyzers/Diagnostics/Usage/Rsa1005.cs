@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -35,7 +34,7 @@ public class Rsa1005 : Rsa1000
         var actualMethod = method.ReducedFrom ?? method;
 
         // Check if the method is from System.Reactive namespace
-        if (!IsReactiveExtensionsMethod(actualMethod))
+        if (!IsReactiveExtensionsMethod(invocation, actualMethod, context.SemanticModel))
         {
             return;
         }
@@ -78,8 +77,19 @@ public class Rsa1005 : Rsa1000
         context.ReportDiagnostic(diagnostic);
     }
 
-    private static bool IsReactiveExtensionsMethod(IMethodSymbol method)
+    private static bool IsReactiveExtensionsMethod(InvocationExpressionSyntax invocation, IMethodSymbol method, SemanticModel semanticModel)
     {
+        // RSA3004 owns DynamicData's AutoRefresh scheduler surface specifically; skip it here so a
+        // missing scheduler on AutoRefresh doesn't also double-report as RSA1005. Other DynamicData
+        // methods without a dedicated rule (Batch, BatchIf, BufferInitial, ...) still fall through below.
+        // Deferring to the shared ownership check (rather than re-testing "is this AutoRefresh")
+        // keeps there being exactly one place that decides what AutoRefresh owns, without this
+        // Usage-band rule taking a compile-time dependency on the Performance band.
+        if (DynamicDataSymbols.TryGetAutoRefreshMethod(invocation, semanticModel, out _))
+        {
+            return false;
+        }
+
         // Check if the method has an IObservable<T> parameter
         if (method.Parameters.Any(p => IsObservableType(p.Type)))
         {
@@ -95,8 +105,7 @@ public class Rsa1005 : Rsa1000
 
         return containingNamespace.StartsWith("System.Reactive") ||
                containingNamespace.StartsWith("System.Observable") ||
-               containingNamespace.StartsWith("DynamicData") ||
-               method.ContainingAssembly.Name.Contains("DynamicData");
+               DynamicDataSymbols.IsDynamicDataMethod(method);
     }
 
     private static bool IsObservableType(ITypeSymbol? type)
@@ -154,12 +163,4 @@ public class Rsa1005 : Rsa1000
             (i.ContainingNamespace?.ToDisplayString() == "System.Reactive.Concurrency" ||
              i.ContainingNamespace?.ToDisplayString() == "System.Reactive"));
     }
-
-    [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1025:Code should not contain multiple whitespace in a row", Justification = "Looks better.")]
-    private static Location GetMethodNameLocation(InvocationExpressionSyntax invocation) => invocation.Expression switch
-    {
-        MemberAccessExpressionSyntax memberAccess => memberAccess.Name.GetLocation(),
-        IdentifierNameSyntax identifier => identifier.GetLocation(),
-        var _ => invocation.GetLocation(),
-    };
 }
