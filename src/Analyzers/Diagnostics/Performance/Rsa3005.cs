@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -318,11 +319,4 @@ public class Rsa3005 : Rsa3000
 
         return string.Join(".", segments);
     }
-
-    private static Location GetMethodNameLocation(InvocationExpressionSyntax invocation) => invocation.Expression switch
-    {
-        MemberAccessExpressionSyntax memberAccess => memberAccess.Name.GetLocation(),
-        IdentifierNameSyntax identifier => identifier.GetLocation(),
-        var _ => invocation.GetLocation(),
-    };
 }
