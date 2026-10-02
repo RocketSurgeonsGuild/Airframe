@@ -19,12 +19,12 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - uses: nuget/setup-nuget@v1
+      - uses: nuget/setup-nuget@v4
         with:
           nuget-version: '5.x'
 
       - name: Download artifact
-        uses: dawidd6/action-download-artifact@v6
+        uses: dawidd6/action-download-artifact@v27
         if: github.event.workflow_run.conclusion == 'success'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -36,7 +36,7 @@ jobs:
       # artifact because upload-artifact rejects a second upload under an existing name.
       # if_no_artifact_found: warn — build-apple is skipped on runs that do not touch it.
       - name: Download apple artifact
-        uses: dawidd6/action-download-artifact@v6
+        uses: dawidd6/action-download-artifact@v27
         if: github.event.workflow_run.conclusion == 'success'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
