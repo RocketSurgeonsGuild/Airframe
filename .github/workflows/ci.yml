@@ -48,7 +48,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.4.0
+        uses: actions/checkout@v7.0.1
         with:
           clean: 'false'
           fetch-depth: '0'
@@ -56,7 +56,7 @@ jobs:
         run: |
           git fetch --prune
       - name: 🔨 Use .NET 8 SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.101'
       - name: 🎁 dotnet tool restore
@@ -83,7 +83,7 @@ jobs:
         run: |
           dotnet nuke GitHubActions --skip
       - name: 🐿 Publish Coverage
-        uses: codecov/codecov-action@v3.1.6
+        uses: codecov/codecov-action@v7.1.1
         with:
           name: 'actions-${{ matrix.os }}'
       - name: 🏺 Publish logs
@@ -116,12 +116,12 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.4.0
+        uses: actions/checkout@v7.0.1
         with:
           clean: 'false'
       - name: Detect apple changes
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         with:
           filters: '.github/apple-filter.yml'
   build-apple:
@@ -131,7 +131,7 @@ jobs:
     runs-on: [windows-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.4.0
+        uses: actions/checkout@v7.0.1
         with:
           clean: 'false'
           fetch-depth: '0'
@@ -139,7 +139,7 @@ jobs:
         run: |
           git fetch --prune
       - name: 🔨 Use .NET 8 SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '8.0.101'
       - name: 🎁 dotnet tool restore
