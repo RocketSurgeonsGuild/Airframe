@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.7.0
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -18,7 +18,7 @@ jobs:
         run: git fetch --prune
 
       - name: 📲 Install DotNet
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: |
             7.0.x
@@ -26,18 +26,18 @@ jobs:
             9.0.x
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.13.6
+        uses: gittools/actions/gitversion/setup@v4.7.0
         with:
           versionSpec: '5.x'
 
       - name: Install GitReleaseManager
-        uses: gittools/actions/gitreleasemanager/setup@v0.13.6
+        uses: gittools/actions/gitreleasemanager/setup@v4.7.0
         with:
           versionSpec: '0.17.x'
 
       - name: Use GitVersion
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.13.6
+        uses: gittools/actions/gitversion/execute@v4.7.0
 
       - name: Create Milestone
         uses: WyriHaximus/github-action-create-milestone@v1.2.0
