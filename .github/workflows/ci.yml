@@ -58,7 +58,7 @@ jobs:
       - name: 🔨 Use .NET 8 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.101'
+          dotnet-version: '8.0.425'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
@@ -141,7 +141,7 @@ jobs:
       - name: 🔨 Use .NET 8 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.101'
+          dotnet-version: '8.0.425'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
