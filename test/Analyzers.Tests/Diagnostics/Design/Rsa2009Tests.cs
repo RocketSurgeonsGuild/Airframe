@@ -1,8 +1,6 @@
 using System.Collections.Immutable;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Linq;
@@ -102,21 +100,16 @@ public class Rsa2009Tests
 
     private static async Task<ImmutableArray<Diagnostic>> AnalyzeAsync(string path, string typeName)
     {
-        var tree = CSharpSyntaxTree.ParseText(
-            $"namespace Sample {{ public class {typeName} {{ }} }}",
-            new CSharpParseOptions(LanguageVersion.Latest),
-            path);
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSource(path, $"namespace Sample {{ public class {typeName} {{ }} }}")
+           .WithAnalyzer<Rsa2009>()
+           .GenerateAsync();
 
-        var compilation = CSharpCompilation.Create(
-            "Rsa2009Tests",
-            [tree],
-            [MetadataReference.CreateFromFile(typeof(object).Assembly.Location)],
-            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
-        var diagnostics = await compilation
-           .WithAnalyzers([new Rsa2009()])
-           .GetAnalyzerDiagnosticsAsync();
-
-        return diagnostics.Where(diagnostic => diagnostic.Id == RSA2009.Id).ToImmutableArray();
+        return result
+           .AnalyzerResults[typeof(Rsa2009)]
+           .Diagnostics
+           .Where(diagnostic => diagnostic.Id == RSA2009.Id)
+           .ToImmutableArray();
     }
 }
