@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -19,6 +20,12 @@ public abstract class BoundaryReturnTypeRule : Rsa0000
     /// <inheritdoc/>
     protected sealed override void Analyze(SyntaxNodeAnalysisContext context)
     {
+        if (context.Node is ParameterSyntax parameter)
+        {
+            AnalyzePositionalParameter(context, parameter);
+            return;
+        }
+
         var (member, typeSyntax) = context.Node switch
         {
             MethodDeclarationSyntax method => ((MemberDeclarationSyntax)method, method.ReturnType),
@@ -61,7 +68,8 @@ public abstract class BoundaryReturnTypeRule : Rsa0000
     [
         SyntaxKind.MethodDeclaration,
         SyntaxKind.PropertyDeclaration,
-        SyntaxKind.IndexerDeclaration
+        SyntaxKind.IndexerDeclaration,
+        SyntaxKind.Parameter
     ];
 
     /// <summary>
@@ -85,4 +93,36 @@ public abstract class BoundaryReturnTypeRule : Rsa0000
     /// member's own name, which the base class always supplies as the first argument.</param>
     /// <returns><see langword="true"/> when <paramref name="type"/> violates this rule.</returns>
     protected abstract bool Matches(ITypeSymbol type, out object?[] extraMessageArgs);
+
+    /// <summary>
+    /// A positional record parameter synthesizes a public property that has no
+    /// <see cref="PropertyDeclarationSyntax"/>, so the parameter itself is analyzed, correlated to
+    /// its synthesized property via the semantic model. A parameter whose property the author
+    /// declared explicitly is skipped here; that property is reported through its own declaration.
+    /// </summary>
+    private void AnalyzePositionalParameter(SyntaxNodeAnalysisContext context, ParameterSyntax parameter)
+    {
+        if (parameter is not { Type: { } typeSyntax, Parent.Parent: RecordDeclarationSyntax } ||
+            context.SemanticModel.GetDeclaredSymbol(parameter, context.CancellationToken) is not { ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: { } recordType } } parameterSymbol)
+        {
+            return;
+        }
+
+        var property = recordType
+           .GetMembers(parameterSymbol.Name)
+           .OfType<IPropertySymbol>()
+           .FirstOrDefault(candidate => !candidate.IsStatic && !candidate.DeclaringSyntaxReferences.Any(reference => reference.GetSyntax(context.CancellationToken) is PropertyDeclarationSyntax));
+
+        if (property is null ||
+            !BoundaryMembers.IsPubliclyVisible(property) ||
+            BoundaryMembers.IsInheritedContract(property) ||
+            !IsEligible(property) ||
+            !Matches(property.Type, out var extraMessageArgs))
+        {
+            return;
+        }
+
+        object?[] messageArgs = [property.Name, .. extraMessageArgs];
+        context.ReportDiagnostic(Diagnostic.Create(Descriptor, typeSyntax.GetLocation(), messageArgs));
+    }
 }
