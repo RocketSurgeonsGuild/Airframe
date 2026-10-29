@@ -1,5 +1,8 @@
+using System.Collections.Immutable;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using System.Linq;
@@ -69,5 +72,51 @@ public class Rsa2009Tests
 
         // Then
         await Verifier.Verify(result).HashParameters().UseParameters(name).DisableRequireUniquePrefix();
+    }
+
+    [Theory]
+    [InlineData("Option.Unit.Tests.cs", "OptionUnitTests")]
+    [InlineData("ProcessRunner.Integration.Tests.cs", "ProcessRunnerIntegrationTests")]
+    [InlineData("Thing{T}.Unit.Tests.cs", "ThingUnitTests")]
+    public async Task GivenConventionalTestFileName_WhenAnalyze_ThenNoDiagnosticsReported(string path, string typeName)
+    {
+        // Given, When
+        var diagnostics = await AnalyzeAsync(path, typeName);
+
+        // Then
+        diagnostics.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData("Option.Unit.Tests.cs", "OptionIntegrationTests")]
+    [InlineData("Option.Unit.Tests.cs", "Other")]
+    [InlineData("Option.Integration.Tests.cs", "OptionUnitTests")]
+    public async Task GivenMismatchedTestFileName_WhenAnalyze_ThenDiagnosticReported(string path, string typeName)
+    {
+        // Given, When
+        var diagnostics = await AnalyzeAsync(path, typeName);
+
+        // Then
+        diagnostics.Should().ContainSingle();
+    }
+
+    private static async Task<ImmutableArray<Diagnostic>> AnalyzeAsync(string path, string typeName)
+    {
+        var tree = CSharpSyntaxTree.ParseText(
+            $"namespace Sample {{ public class {typeName} {{ }} }}",
+            new CSharpParseOptions(LanguageVersion.Latest),
+            path);
+
+        var compilation = CSharpCompilation.Create(
+            "Rsa2009Tests",
+            [tree],
+            [MetadataReference.CreateFromFile(typeof(object).Assembly.Location)],
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+        var diagnostics = await compilation
+           .WithAnalyzers([new Rsa2009()])
+           .GetAnalyzerDiagnosticsAsync();
+
+        return diagnostics.Where(diagnostic => diagnostic.Id == RSA2009.Id).ToImmutableArray();
     }
 }
