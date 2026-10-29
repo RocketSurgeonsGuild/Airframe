@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <PackageId>Rocket.Surgery.Airframe.Composition</PackageId>
         <AssemblyName>Rocket.Surgery.Airframe.Composition</AssemblyName>
         <RootNamespace>Rocket.Surgery.Airframe.Composition</RootNamespace>

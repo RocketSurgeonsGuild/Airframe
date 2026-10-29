@@ -1,0 +1,22 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1010: []
+  },
+  FinalDiagnostics: [],
+  References: [
+    DynamicData.dll,
+    DynamicData.dll,
+    mscorlib.dll,
+    netstandard.dll,
+    System.ComponentModel.TypeConverter.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll,
+    System.Threading.dll
+  ]
+}

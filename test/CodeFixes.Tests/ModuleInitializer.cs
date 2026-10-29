@@ -19,6 +19,9 @@ internal static class ModuleInitializer
         VerifyDiffPlex.Initialize(OutputType.Minimal);
         DiffRunner.Disabled = true;
 
+        // Normalize line endings across platforms (raw string literals embed Environment.NewLine)
+        VerifierSettings.AddScrubber(sb => sb.Replace("\r\n", "\n"));
+
         DerivePathInfo((sourceFile, projectDirectory, type, method) =>
         {
             var typeName = GetTypeName(type);

@@ -341,7 +341,16 @@ ASALocalRun/
 # Code Coverage
 coverage/
 test/**/coverage.json
+
+# Nuke
 /.nuke/temp/
 
 # VSCode
 .mono
+# skillfile
+.skillfile/cache/
+.skillfile/conflict
+
+.codex/skills/
+
+.claude/skills/

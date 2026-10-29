@@ -48,7 +48,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.3.0
+        uses: actions/checkout@v7.0.1
         with:
           clean: 'false'
           fetch-depth: '0'
@@ -56,16 +56,12 @@ jobs:
         run: |
           git fetch --prune
       - name: 🔨 Use .NET 8 SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.101'
+          dotnet-version: '8.0.425'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
-      - name: Workloads
-        id: workloads
-        run: |
-          dotnet nuke Workloads --skip
       - name: 🎁 Restore
         id: restore
         run: |
@@ -87,30 +83,83 @@ jobs:
         run: |
           dotnet nuke GitHubActions --skip
       - name: 🐿 Publish Coverage
-        uses: codecov/codecov-action@v3.1.6
+        uses: codecov/codecov-action@v7.1.1
         with:
           name: 'actions-${{ matrix.os }}'
       - name: 🏺 Publish logs
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'logs'
           path: 'artifacts/logs/'
       - name: 🏺 Publish coverage data
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'coverage'
           path: 'coverage/'
       - name: 🏺 Publish test data
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'test data'
           path: 'artifacts/test/'
       - name: 🏺 Publish NuGet Packages
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: 'nuget'
           path: 'artifacts/nuget/'
+  changes:
+    outputs:
+      filterApple: '${{ steps.filter.outputs.apple }}'
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          clean: 'false'
+      - name: Detect apple changes
+        id: filter
+        uses: dorny/paths-filter@v4
+        with:
+          filters: '.github/apple-filter.yml'
+  build-apple:
+    needs:
+      - changes
+    if: ${{ !cancelled() && (needs.changes.outputs.filterApple == 'true' || startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main') }}
+    runs-on: [windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          clean: 'false'
+          fetch-depth: '0'
+      - name: Fetch all history for all tags and branches
+        run: |
+          git fetch --prune
+      - name: 🔨 Use .NET 8 SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '8.0.425'
+      - name: 🎁 dotnet tool restore
+        run: |
+          dotnet tool restore
+      - name: Workloads
+        run: |
+          dotnet nuke Workloads --skip
+      - name: 🎁 Restore
+        run: |
+          dotnet nuke Restore --skip --solution Apple.sln
+      - name: ⚙ Build
+        run: |
+          dotnet nuke Build --skip --solution Apple.sln
+      - name: 📦 Pack
+        run: |
+          dotnet nuke Pack --skip --solution Apple.sln
+      - name: 🏺 Publish Apple NuGet Package
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: 'nuget-apple'
+          path: 'artifacts/nuget/Rocket.Surgery.Airframe.Apple.*'

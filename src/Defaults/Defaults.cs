@@ -1,5 +1,5 @@
 using System.Reflection;
-using Rocket.Surgery.Airframe.Defaults.Generator;
+using Rocket.Surgery.Airframe.Defaults.Property;
 
 namespace Rocket.Surgery.Airframe.Defaults;
 

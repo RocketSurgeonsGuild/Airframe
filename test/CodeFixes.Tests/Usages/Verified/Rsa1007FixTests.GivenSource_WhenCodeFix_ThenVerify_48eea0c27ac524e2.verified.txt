@@ -1,0 +1,64 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage.Rsa1007: [
+      {
+        Id: RSA1007,
+        Title: Use Invoke method for function calls,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (10,25)-(10,31),
+        Description: Functions should be called using the .Invoke() method rather than parentheses.,
+        MessageFormat: Use the Invoke() method to call functions instead of using parentheses: '{0}',
+        Message: Use the Invoke() method to call functions instead of using parentheses: 'func()',
+        Category: Usage
+      }
+    ]
+  },
+  CodeFixes: {
+    Rocket.Surgery.Airframe.CodeFixes.Usage.Rsa1007Fix: [
+      {
+        CodeActions: [
+          {
+            Title: Use Invoke() method,
+            Tags: null,
+            TextChanges: {
+              Input0.cs: [
+                {
+                  Length: 0,
+                  NewText: .Invoke
+                }
+              ]
+            }
+          }
+        ],
+        Diagnostic: {
+          Id: RSA1007,
+          Title: Use Invoke method for function calls,
+          Severity: Warning,
+          WarningLevel: 1,
+          Location: Input0.cs: (10,25)-(10,31),
+          Description: Functions should be called using the .Invoke() method rather than parentheses.,
+          MessageFormat: Use the Invoke() method to call functions instead of using parentheses: '{0}',
+          Message: Use the Invoke() method to call functions instead of using parentheses: 'func()',
+          Category: Usage
+        },
+        Document: Input0.cs
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    ReactiveUI.dll,
+    System.ComponentModel.TypeConverter.dll,
+    System.Core.dll,
+    System.dll,
+    System.Linq.Expressions.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
