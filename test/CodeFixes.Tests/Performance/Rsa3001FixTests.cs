@@ -49,6 +49,9 @@ public class Rsa3001FixTests
            .Contain(testResult => testResult.Diagnostic.Descriptor == Descriptions.RSA3001);
     }
 
+    // Direct provider call on purpose: Rsa3001 only reports on the Name identifier of an invocation's
+    // member access, so GeneratorTestContextBuilder can never produce a diagnostic that reaches the
+    // null Parent/non-invocation path. The diagnostic has to be synthesized on a non-matching node.
     [Theory]
     [InlineData("class C { }", "class C { }")]
     [InlineData("class C { void M() { var x = 1; } }", "var x = 1;")]
