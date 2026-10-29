@@ -66,4 +66,24 @@ public class Rsa2011Tests
         // Then
         await Verifier.Verify(result).HashParameters().UseParameters(name).DisableRequireUniquePrefix();
     }
+
+    [Theory]
+    [InlineData("class { }")]
+    [InlineData("public class Valid { void ; }")]
+    public async Task GivenMemberWithoutIdentifier_WhenAnalyze_ThenNothingReportedWithEmptyName(string source)
+    {
+        // Given, When
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(source)
+           .WithAnalyzer<Rsa2011>()
+           .GenerateAsync();
+
+        // Then
+        result
+           .AnalyzerResults[typeof(Rsa2011)]
+           .Diagnostics
+           .Should()
+           .NotContain(diagnostic => diagnostic.GetMessage(null).Contains("''") || !diagnostic.Location.IsInSource);
+    }
 }
