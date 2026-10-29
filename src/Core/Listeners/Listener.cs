@@ -71,8 +71,7 @@ public abstract class Listener<T> : DisposableBase, IListener<T>
     /// </summary>
     protected ILogger Logger { get; }
 
-    private IObservable<T> StartListening() => Observable.Create<T>(
-        observer =>
+    private IObservable<T> StartListening() => Observable.Create<T>(observer =>
         {
             _stop = Listen().Connect();
 

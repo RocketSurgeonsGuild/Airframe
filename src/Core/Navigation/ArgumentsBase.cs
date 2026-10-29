@@ -126,7 +126,7 @@ public abstract class ArgumentsBase : IArguments
     /// <typeparam name="T">The type of object to be returned.</typeparam>
     /// <param name="key">The key for the value to be returned.</param>
     /// <returns>Returns a matching parameter of <typeparamref name="T"/> if one exists in the Collection.</returns>
-    public T GetValue<T>(string key) => _entries.GetValue<T>(key);
+    public T GetValue<T>(string key) => _entries.GetValue<T>(key) ?? throw new InvalidOperationException();
 
     /// <summary>
     /// Returns an IEnumerable of all parameters.

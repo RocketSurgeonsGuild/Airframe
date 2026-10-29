@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Rocket.Surgery.Airframe.Defaults.Generator;
+using Rocket.Surgery.Airframe.Defaults.Property;
 
 namespace Rocket.Surgery.Airframe.Defaults;
 

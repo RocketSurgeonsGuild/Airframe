@@ -7,6 +7,9 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Rocket.Surgery.Airframe.Defaults.Diagnostics;
 
+/// <summary>
+/// Represents an RSAD 0001 level analyzer.
+/// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsad0001 : DiagnosticAnalyzer
 {

@@ -1,7 +1,7 @@
 namespace Rocket.Surgery.Airframe.Navigation;
 
 /// <summary>
-/// Interface representing an thing™ that gets initialized.
+/// Interface representing a thing™ that gets initialized.
 /// </summary>
 public interface IInitialize
 {

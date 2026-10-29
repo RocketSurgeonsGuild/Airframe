@@ -28,8 +28,7 @@ public class DuckDuckGoService : IDuckDuckGoService, IDisposable
 
     /// <inheritdoc/>
     public IObservable<IChangeSet<RelatedTopic, string>> Query(string query) => Observable
-       .Create<IChangeSet<RelatedTopic, string>>(
-            observer =>
+       .Create<IChangeSet<RelatedTopic, string>>(observer =>
                 _duckDuckGoApiClient
                    .Search(query)
                    .Catch(_queryException)
@@ -39,8 +38,7 @@ public class DuckDuckGoService : IDuckDuckGoService, IDisposable
 
     /// <inheritdoc/>
     public IObservable<IChangeSet<RelatedTopic, string>> Query(string query, bool clearCache) => Observable
-       .Create<IChangeSet<RelatedTopic, string>>(
-            observer =>
+       .Create<IChangeSet<RelatedTopic, string>>(observer =>
                 _duckDuckGoApiClient
                    .Search(query)
                    .Catch(_queryException)

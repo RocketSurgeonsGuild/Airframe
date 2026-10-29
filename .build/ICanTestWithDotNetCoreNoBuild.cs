@@ -4,7 +4,6 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.MSBuild;
 using Nuke.Common.Utilities.Collections;
-using Rocket.Surgery.Nuke;
 using Rocket.Surgery.Nuke.DotNetCore;
 using System;
 using System.IO;
@@ -27,7 +26,7 @@ public interface ICanTestWithDotNetCoreNoBuild : IHaveCollectCoverage,
     /// <summary>
     /// dotnet test
     /// </summary>
-    public Target CoreTest => _ => _
+    public Target CoreTest => d => d
        .Description("Executes all the unit tests.")
        .After(Build)
        .OnlyWhenDynamic(() => TestsDirectory.GlobFiles("**/*.csproj").Count > 0)

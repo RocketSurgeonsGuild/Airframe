@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2007: [
+      {
+        Id: RSA2007,
+        Title: Readonly fields should appear before mutable fields,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (5,29)-(5,38),
+        Description: Readonly fields are declared before mutable fields of the same accessibility, so a reader sees what cannot change first.,
+        MessageFormat: '{0}' ({1}) should appear before '{2}' ({3}),
+        Message: '_readonly' (private readonly field) should appear before '_mutable' (private field),
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

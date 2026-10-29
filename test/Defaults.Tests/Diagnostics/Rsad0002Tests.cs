@@ -1,7 +1,3 @@
-// <copyright file="Rsad0002Tests.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using FluentAssertions;
 using Rocket.Surgery.Airframe.Defaults.Diagnostics;
 using Rocket.Surgery.Airframe.Defaults.Tests.Data;

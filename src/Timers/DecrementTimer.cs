@@ -1,5 +1,4 @@
 using System;
-using JetBrains.Annotations;
 
 namespace Rocket.Surgery.Airframe.Timers;
 
@@ -12,7 +11,7 @@ public class DecrementTimer : ObservableTimer, IDecrement
     /// Initializes a new instance of the <see cref="DecrementTimer"/> class.
     /// </summary>
     /// <param name="schedulerProvider">The scheduler provider.</param>
-    public DecrementTimer([NotNull] ISchedulerProvider schedulerProvider)
+    public DecrementTimer(ISchedulerProvider schedulerProvider)
         : base(schedulerProvider)
     {
     }

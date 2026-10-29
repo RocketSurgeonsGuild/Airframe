@@ -1,7 +1,7 @@
 codecov:
     require_ci_to_pass: no
     bot: rsg-bot
-    strict_yaml_branch: master
+    strict_yaml_branch: main
 
 coverage:
     round: down
@@ -16,4 +16,4 @@ ignore:
   - "test/"  # ignore folders and all its contents        
 
 comment:
-    branch: master
+    branch: main

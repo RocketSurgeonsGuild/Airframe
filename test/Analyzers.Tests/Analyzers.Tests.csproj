@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <AssemblyName>Rocket.Surgery.Airframe.Analyzers.Tests</AssemblyName>
+        <RootNamespace>Rocket.Surgery.Airframe.Analyzers.Tests</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="Rocket.Surgery.Extensions.Testing.SourceGenerators"/>
+        <PackageReference Include="Verify"/>
+        <PackageReference Include="Verify.DiffPlex"/>
+        <PackageReference Include="Verify.SourceGenerators"/>
+        <PackageReference Include="Verify.Xunit"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.analyzers"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Analyzers\Analyzers.csproj" />
+    </ItemGroup>
+
+</Project>

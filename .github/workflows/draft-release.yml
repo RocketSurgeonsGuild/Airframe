@@ -2,7 +2,7 @@ name: Create Milestone and Draft Release
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - '**/*.md'
 jobs:
@@ -10,26 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
       - name: Fetch all history for all tags and branches
         run: git fetch --prune
 
+      - name: 📲 Install DotNet
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            7.0.x
+            8.0.x
+            9.0.x
+
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.10.2
+        uses: gittools/actions/gitversion/setup@v4.7.0
         with:
           versionSpec: '5.x'
 
       - name: Install GitReleaseManager
-        uses: gittools/actions/gitreleasemanager/setup@v0.10.2
+        uses: gittools/actions/gitreleasemanager/setup@v4.7.0
         with:
-          versionSpec: '0.13.x'
+          versionSpec: '0.17.x'
 
       - name: Use GitVersion
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.10.2
+        uses: gittools/actions/gitversion/execute@v4.7.0
 
       - name: Create Milestone
         uses: WyriHaximus/github-action-create-milestone@v1.2.0
@@ -48,7 +56,7 @@ jobs:
           echo "::set-output name=repository::$($parts[1])"
 
       - name: sync milestones
-        uses: RocketSurgeonsGuild/actions/sync-milestone@v0.3.15
+        uses: RocketSurgeonsGuild/actions/sync-milestone@v0.3.19
         with:
           default-label: ':sparkles: mysterious'
           github-token: ${{ secrets.GITHUB_TOKEN }}

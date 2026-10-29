@@ -1,0 +1,26 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2008: [
+      {
+        Id: RSA2008,
+        Title: File should contain a single type,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (6,17)-(6,23),
+        Description: A file declares one top level type, so a type can be found from its file name alone.,
+        MessageFormat: Move '{0}' to its own file,
+        Message: Move 'Second' to its own file,
+        Category: Design
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}

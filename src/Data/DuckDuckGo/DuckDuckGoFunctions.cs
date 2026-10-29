@@ -39,8 +39,7 @@ public static class DuckDuckGoFunctions
         if (clearCache)
         {
             cache
-               .Edit(
-                    updater =>
+               .Edit(updater =>
                     {
                         updater.Clear();
                         updater.AddOrUpdate(duckDuckGoQueryResults);
