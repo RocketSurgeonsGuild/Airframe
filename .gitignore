@@ -347,3 +347,10 @@ test/**/coverage.json
 
 # VSCode
 .mono
+# skillfile
+.skillfile/cache/
+.skillfile/conflict
+
+.codex/skills/
+
+.claude/skills/
