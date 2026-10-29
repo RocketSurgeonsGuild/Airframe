@@ -37,6 +37,12 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Usage
                 return;
             }
 
+            // An invocation that binds to an ordinary method (extension, static, instance) is not a delegate call.
+            if (context.SemanticModel.GetSymbolInfo(invocationExpression, context.CancellationToken).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke })
+            {
+                return;
+            }
+
             if (IsPotentialDelegateInvocation(invocationExpression))
             {
                 context.ReportDiagnostic(

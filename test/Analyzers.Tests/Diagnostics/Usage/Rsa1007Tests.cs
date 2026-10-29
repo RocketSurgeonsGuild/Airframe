@@ -38,6 +38,24 @@ public class Rsa1007Tests
     }
 
     [Theory]
+    [InlineData(Rsa1007TestData.MethodsWithDelegateLikeNames)]
+    public async Task GivenMethodsWithDelegateLikeNames_WhenAnalyze_ThenNoDiagnosticsReported(string source)
+    {
+        // Given. When
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .AddSources(source)
+           .WithAnalyzer<Rsa1007>()
+           .GenerateAsync();
+
+        // Then
+        result
+           .AnalyzerResults
+           .Should()
+           .NotContain(pair => pair.Value.Diagnostics.Any(diagnostic => diagnostic.Id == RSA1007.Id));
+    }
+
+    [Theory]
     [InlineData(Rsa1007TestData.Incorrect)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string source)
     {
@@ -105,6 +123,33 @@ public class Rsa1007Tests
                         var func = (string _) => string.Empty;
                 
                         var result = func.Invoke(string.Empty);
+                    }
+                }
+            }
+            """;
+
+        internal const string MethodsWithDelegateLikeNames =
+
+            // lang=csharp
+            """
+            namespace Sample
+            {
+                public interface IExceptionHandler { }
+                public class GlobalExceptionHandler : IExceptionHandler { }
+                public interface IServices { }
+
+                public static class Extensions
+                {
+                    public static IServices AddExceptionHandler<T>(this IServices services) where T : class, IExceptionHandler => services;
+                    public static void Action() { }
+                }
+
+                public class Usage
+                {
+                    public Usage(IServices services)
+                    {
+                        services.AddExceptionHandler<GlobalExceptionHandler>();
+                        Extensions.Action();
                     }
                 }
             }
