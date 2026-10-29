@@ -1,6 +1,7 @@
 using DynamicData;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeFixes;
 using ReactiveUI;
 using Rocket.Surgery.Airframe.Analyzers;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
@@ -8,9 +9,12 @@ using Rocket.Surgery.Airframe.CodeFixes.Performance;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
 using Splat;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
@@ -43,6 +47,39 @@ public class Rsa3001FixTests
            .Subject
            .Should()
            .Contain(testResult => testResult.Diagnostic.Descriptor == Descriptions.RSA3001);
+    }
+
+    [Theory]
+    [InlineData("class C { }", "class C { }")]
+    [InlineData("class C { void M() { var x = 1; } }", "var x = 1;")]
+    public async Task GivenDiagnosticOnNonInvocationShape_WhenCodeFixApplied_ThenDocumentUnchanged(string source, string spanText)
+    {
+        // Given
+        using var workspace = new AdhocWorkspace();
+        var document = workspace
+                      .AddProject("Test", LanguageNames.CSharp)
+                      .AddDocument("Test.cs", source);
+        var text = await document.GetTextAsync();
+        var start = source.IndexOf(spanText, StringComparison.Ordinal);
+        var diagnostic = Diagnostic.Create(
+            Descriptions.RSA3001,
+            Location.Create(
+                await document.GetSyntaxTreeAsync(),
+                new Microsoft.CodeAnalysis.Text.TextSpan(start, spanText.Length)));
+        var actions = new List<Microsoft.CodeAnalysis.CodeActions.CodeAction>();
+        var context = new CodeFixContext(document, diagnostic, (action, _) => actions.Add(action), CancellationToken.None);
+
+        // When
+        await new Rsa3001Fix().RegisterCodeFixesAsync(context);
+        var operations = await actions.Single().GetOperationsAsync(CancellationToken.None);
+        var changed = operations
+                     .OfType<Microsoft.CodeAnalysis.CodeActions.ApplyChangesOperation>()
+                     .Single()
+                     .ChangedSolution
+                     .GetDocument(document.Id)!;
+
+        // Then
+        (await changed.GetTextAsync()).ToString().Should().Be(text.ToString());
     }
 
     [Theory(Skip = "Verify output seems odd.")]
