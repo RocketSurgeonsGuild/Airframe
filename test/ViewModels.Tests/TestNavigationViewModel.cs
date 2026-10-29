@@ -35,7 +35,7 @@ internal class TestNavigationViewModel : NavigableViewModelBase
 
     public IArguments InitializeParameter => _initializeParameter.Value;
 
-    private readonly ValueBinder<IArguments> _initializeParameter;
-    private readonly ValueBinder<IArguments> _navigatedToParameter;
-    private readonly ValueBinder<IArguments> _navigatedFromParameter;
+    private readonly IValueBinder<IArguments> _initializeParameter;
+    private readonly IValueBinder<IArguments> _navigatedToParameter;
+    private readonly IValueBinder<IArguments> _navigatedFromParameter;
 }
