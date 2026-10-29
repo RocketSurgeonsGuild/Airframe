@@ -261,7 +261,7 @@ body, travels with that member and does not block the fix.
 | Rule    | Description                                                                  | StyleCop equivalent    | Code fix |
 |---------|------------------------------------------------------------------------------|------------------------|----------|
 | RSA2014 | Provide a summary for public abstractions                                    | SA1600 (broader scope) | none     |
-| RSA2015 | Provide `<inheritdoc/>` on members that implement or override an abstraction | none                   | none     |
+| RSA2015 | Provide `<inheritdoc/>` on members that implement or override an abstraction | none                   | yes      |
 
 RSA2014 reports on an interface or an abstract type declaration, and on every member either of them
 declares without a body: an interface member with no default implementation — a `static abstract`
