@@ -65,8 +65,17 @@ public class Rsa2011 : Rsa2000
     {
         foreach (var member in DocumentWalk.Of(context).InaccessibleMembers)
         {
-            context.ReportDiagnostic(
-                Diagnostic.Create(RSA2011, MemberRank.LocationOf(member), MemberRank.NameOf(member)));
+            // A member with no identifier (a parser recovery node, or generated code the analyzer
+            // cannot name) leaves nothing actionable, and without a source location the consumer
+            // could not suppress it either.
+            var name = MemberRank.NameOf(member);
+            var location = MemberRank.LocationOf(member);
+            if (string.IsNullOrEmpty(name) || name == "()" || !location.IsInSource)
+            {
+                continue;
+            }
+
+            context.ReportDiagnostic(Diagnostic.Create(RSA2011, location, name));
         }
     }
 
