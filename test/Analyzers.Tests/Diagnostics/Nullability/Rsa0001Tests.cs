@@ -22,7 +22,7 @@ public class Rsa0001Tests
     [InlineData(nameof(HandWrittenSetterAccessor), HandWrittenSetterAccessor)]
     [InlineData(nameof(ValueTypeAutoProperty), ValueTypeAutoProperty)]
     [InlineData(nameof(ReactiveAttributeProperty), ReactiveAttributeProperty)]
-    [InlineData(nameof(NotifyPropertyChangedTypeProperty), NotifyPropertyChangedTypeProperty)]
+    [InlineData(nameof(ReactiveAttributePropertyOnNotifyPropertyChangedType), ReactiveAttributePropertyOnNotifyPropertyChangedType)]
     public async Task GivenCorrect_WhenAnalyze_ThenNoDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -65,6 +65,7 @@ public class Rsa0001Tests
     [InlineData(nameof(PublicNonNullableAutoPropertyWithSet), PublicNonNullableAutoPropertyWithSet)]
     [InlineData(nameof(ProtectedNonNullableAutoPropertyWithSet), ProtectedNonNullableAutoPropertyWithSet)]
     [InlineData(nameof(RequiredNonNullableAutoPropertyWithSet), RequiredNonNullableAutoPropertyWithSet)]
+    [InlineData(nameof(NotifyPropertyChangedTypeProperty), NotifyPropertyChangedTypeProperty)]
     public async Task GivenIncorrect_WhenAnalyze_ThenDiagnosticsReported(string name, string source)
     {
         // Given, When
@@ -72,6 +73,7 @@ public class Rsa0001Tests
            .Create()
            .AddSources(source)
            .WithAnalyzer<Rsa0001>()
+           .AddReferences(typeof(System.ComponentModel.INotifyPropertyChanged))
            .GenerateAsync();
 
         // Then
@@ -254,6 +256,27 @@ public class Rsa0001Tests
         {
             public class Example : INotifyPropertyChanged
             {
+                public string Value { get; set; } = string.Empty;
+
+                public event PropertyChangedEventHandler? PropertyChanged;
+            }
+        }
+        """;
+
+    // lang=csharp
+    internal const string ReactiveAttributePropertyOnNotifyPropertyChangedType =
+        """
+        using System.ComponentModel;
+
+        namespace Sample
+        {
+            public class ReactiveAttribute : System.Attribute
+            {
+            }
+
+            public class Example : INotifyPropertyChanged
+            {
+                [Reactive]
                 public string Value { get; set; } = string.Empty;
 
                 public event PropertyChangedEventHandler? PropertyChanged;
