@@ -74,19 +74,17 @@ internal static class BoundaryMembers
     };
 
     /// <summary>
-    /// Determines whether <paramref name="property"/> is a bindable view-model member: its
-    /// containing type implements <see cref="System.ComponentModel.INotifyPropertyChanged"/>
-    /// (directly or through a base type, e.g. <c>ReactiveObject</c>), or the property itself
-    /// carries an attribute named <c>Reactive</c> (unqualified, so any <c>[Reactive]</c> - the
+    /// Determines whether <paramref name="property"/> is a bindable view-model member: it carries
+    /// an attribute named <c>Reactive</c> (unqualified, so any <c>[Reactive]</c> - the
     /// ReactiveUI.Fody and ReactiveUI.SourceGenerators one included - matches regardless of its
-    /// namespace). Either is expected to be externally mutable by design: the binding
-    /// infrastructure, not just the type's own constructor, is what assigns it. RSA0001.
+    /// namespace). The exemption is per property: implementing
+    /// <see cref="System.ComponentModel.INotifyPropertyChanged"/> on the containing type says
+    /// nothing about whether this particular property is a binding target, so it does not exempt
+    /// the type's other plain-setter properties. RSA0001.
     /// </summary>
     /// <param name="property">The property symbol.</param>
     /// <returns>A value indicating whether the property is exempt as a bindable member.</returns>
     public static bool IsBindableViewModelMember(IPropertySymbol property) =>
-        property.ContainingType.AllInterfaces.Any(
-            i => i.ToDisplayString() == "System.ComponentModel.INotifyPropertyChanged") ||
         property.GetAttributes().Any(attribute => attribute.AttributeClass?.Name == "ReactiveAttribute");
 
     /// <summary>
