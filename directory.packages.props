@@ -43,7 +43,7 @@
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.32"/>
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.4"/>
         <PackageVersion Include="ReactiveUI" Version="19.6.12" PrivateAssets="All"/>
-        <PackageVersion Include="ReactiveMarbles.Mvvm" Version="1.0.46"/>
+        <PackageVersion Include="ReactiveMarbles.Mvvm" Version="1.0.95"/>
         <PackageVersion Include="ReactiveMarbles.PropertyChanged" Version="2.0.27"/>
         <PackageVersion Include="Refit" Version="5.2.4"/>
         <PackageVersion Include="Serilog.Sinks.AppCenter.Crash" Version="1.2.1"/>
@@ -56,7 +56,7 @@
         <PackageVersion Include="System.Collections.Immutable" Version="1.7.1"/>
         <PackageVersion Include="System.Interactive.Async.Providers" Version="6.0.3"/>
         <PackageVersion Include="System.Interactive.Providers" Version="6.0.3"/>
-        <PackageVersion Include="System.Reactive" Version="6.0.1"/>
+        <PackageVersion Include="System.Reactive" Version="6.1.0"/>
         <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="4.7.0"/>
     </ItemGroup>
     <ItemGroup>
