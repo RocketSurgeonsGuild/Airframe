@@ -51,7 +51,10 @@ public class Rsa3001Fix : CodeFixProvider
             root.FindNode(context.Span)
                .Parent;
 
-        var originalInvocationExpression = diagnosticParent.Parent as InvocationExpressionSyntax;
+        if (diagnosticParent?.Parent is not InvocationExpressionSyntax originalInvocationExpression)
+        {
+            return Task.FromResult(context.Document);
+        }
 
         var closeParenToken =
             ArgumentList(
