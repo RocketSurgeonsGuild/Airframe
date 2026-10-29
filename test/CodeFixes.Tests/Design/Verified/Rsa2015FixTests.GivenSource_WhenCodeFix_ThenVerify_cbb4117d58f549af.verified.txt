@@ -1,0 +1,60 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Design.Rsa2015: [
+      {
+        Id: RSA2015,
+        Title: Provide <inheritdoc/> on members that implement or override an abstraction,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (9,23)-(9,27),
+        Description: A member that implements an interface member or overrides an abstract member restates a contract documented once at its source, so it points back there with <inheritdoc/> instead of duplicating or omitting the documentation.,
+        MessageFormat: '{0}' implements or overrides a documented member; add <inheritdoc/>,
+        Message: 'Read()' implements or overrides a documented member; add <inheritdoc/>,
+        Category: Design
+      }
+    ]
+  },
+  CodeFixes: {
+    Rocket.Surgery.Airframe.CodeFixes.Design.Rsa2015Fix: [
+      {
+        CodeActions: [
+          {
+            Title: Add inheritdoc,
+            Tags: null,
+            TextChanges: {
+              Input0.cs: [
+                {
+                  Length: 0,
+                  NewText:
+/// <inheritdoc />
+        
+                }
+              ]
+            }
+          }
+        ],
+        Diagnostic: {
+          Id: RSA2015,
+          Title: Provide <inheritdoc/> on members that implement or override an abstraction,
+          Severity: Warning,
+          WarningLevel: 1,
+          Location: Input0.cs: (9,23)-(9,27),
+          Description: A member that implements an interface member or overrides an abstract member restates a contract documented once at its source, so it points back there with <inheritdoc/> instead of duplicating or omitting the documentation.,
+          MessageFormat: '{0}' implements or overrides a documented member; add <inheritdoc/>,
+          Message: 'Read()' implements or overrides a documented member; add <inheritdoc/>,
+          Category: Design
+        },
+        Document: Input0.cs
+      }
+    ]
+  },
+  FinalDiagnostics: [],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.Private.CoreLib.dll,
+    System.Runtime.dll
+  ]
+}
