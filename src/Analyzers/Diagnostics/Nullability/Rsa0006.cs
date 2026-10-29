@@ -10,7 +10,7 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// Represents a diagnostic for <see cref="Descriptions.RSA0006"/>.
 /// </summary>
 /// <remarks>
-/// Reports on a public or protected property or indexer declared <c>bool?</c>. An override and an
+/// Reports on a public or protected property, indexer, or positional record parameter declared <c>bool?</c>. An override and an
 /// explicit interface implementation are excluded, since neither author chose that member's type -
 /// a legitimate three-state UI binding contract (e.g. a tri-state checkbox) or wire-format DTO
 /// where absent-versus-false is itself meaningful is not something this analyzer can distinguish
@@ -30,7 +30,8 @@ public class Rsa0006 : BoundaryReturnTypeRule
     protected override SyntaxKind[] GetSyntaxKind() =>
     [
         SyntaxKind.PropertyDeclaration,
-        SyntaxKind.IndexerDeclaration
+        SyntaxKind.IndexerDeclaration,
+        SyntaxKind.Parameter
     ];
 
     /// <inheritdoc/>
