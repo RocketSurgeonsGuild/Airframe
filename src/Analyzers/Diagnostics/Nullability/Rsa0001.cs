@@ -17,11 +17,11 @@ namespace Rocket.Surgery.Airframe.Analyzers.Diagnostics.Nullability;
 /// null itself. The setter's own accessibility must be at least as visible as the property, so a
 /// narrowed <c>private set</c> or <c>internal set</c> is excluded - external code was never able
 /// to reach it in the first place. An override and an explicit interface implementation are
-/// excluded, since neither author chose that member's mutability. A property on a type that implements
-/// <see cref="System.ComponentModel.INotifyPropertyChanged"/>, or one carrying a <c>[Reactive]</c>
-/// attribute, is excluded as well - a bindable view-model property is expected to be externally
-/// mutable by design, and without this exclusion the rule would indict this framework's own
-/// ReactiveObject-derived view models on first run.
+/// excluded, since neither author chose that member's mutability. A property carrying a <c>[Reactive]</c>
+/// attribute is excluded as well - a bindable view-model property is expected to be externally
+/// mutable by design. The exemption is per property: implementing
+/// <see cref="System.ComponentModel.INotifyPropertyChanged"/> on the containing type does not
+/// exempt its other properties.
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class Rsa0001 : Rsa0000
