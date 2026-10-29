@@ -39,7 +39,8 @@ public class Rsa2009 : Rsa2000
         var fileName = Path.GetFileNameWithoutExtension(path);
         var expected = MemberRank.NameOf(first);
 
-        if (Normalize(fileName).Equals(expected, StringComparison.Ordinal))
+        if (Normalize(fileName).Equals(expected, StringComparison.Ordinal)
+            || NormalizeTestTier(fileName)?.Equals(expected, StringComparison.Ordinal) == true)
         {
             return;
         }
@@ -66,6 +67,31 @@ public class Rsa2009 : Rsa2000
         var end = fileName.IndexOfAny(Separators);
         return end >= 0 ? fileName.Substring(0, end) : fileName;
     }
+
+    /// <summary>
+    /// Reduces a co-located test file name to the test type name it claims.
+    /// </summary>
+    /// <remarks>
+    /// <c>Thing.Unit.Tests.cs</c> and <c>Thing.Integration.Tests.cs</c> declare
+    /// <c>ThingUnitTests</c> and <c>ThingIntegrationTests</c>.
+    /// </remarks>
+    /// <param name="fileName">The file name without its extension.</param>
+    /// <returns>The test type name, or <see langword="null"/> when the name carries no test tier suffix.</returns>
+    private static string? NormalizeTestTier(string fileName)
+    {
+        foreach (var tier in TestTiers)
+        {
+            var suffix = "." + tier + ".Tests";
+            if (fileName.Length > suffix.Length && fileName.EndsWith(suffix, StringComparison.Ordinal))
+            {
+                return Normalize(fileName.Substring(0, fileName.Length - suffix.Length)) + tier + "Tests";
+            }
+        }
+
+        return null;
+    }
+
+    private static readonly string[] TestTiers = ["Unit", "Integration"];
 
     private static readonly char[] Separators = ['{', '`', '+', '.'];
 }
