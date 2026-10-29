@@ -10,6 +10,7 @@ using Splat;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive;
 using System.Reactive.Disposables;
@@ -43,6 +44,24 @@ public class Rsa3001FixTests
            .Subject
            .Should()
            .Contain(testResult => testResult.Diagnostic.Descriptor == Descriptions.RSA3001);
+    }
+
+    [Fact]
+    public async Task GivenDiagnosticOnNonInvocationNode_WhenCodeFixApplied_ThenDocumentUnchanged()
+    {
+        // Given, When
+        var result = await GeneratorTestContextBuilder
+           .Create()
+           .WithAnalyzer<NonInvocationRsa3001Analyzer>()
+           .WithCodeFix<Rsa3001Fix>()
+           .AddSources("class C { }")
+           .Build()
+           .GenerateAsync();
+
+        // Then
+        var fixes = result.CodeFixResults[typeof(Rsa3001Fix)].ResolvedFixes;
+        fixes.Should().ContainSingle();
+        fixes.Single().CodeActions.Should().OnlyContain(action => action.TextChanges.Values.All(changes => changes.IsEmpty));
     }
 
     [Theory(Skip = "Verify output seems odd.")]
