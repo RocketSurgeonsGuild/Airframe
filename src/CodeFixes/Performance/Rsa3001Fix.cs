@@ -69,10 +69,11 @@ public class Rsa3001Fix : CodeFixProvider
             originalInvocationExpression
                .ReplaceNode(originalInvocationExpression.ArgumentList, closeParenToken);
 
+        // Single-line sources have no leading whitespace to align against.
         var whitespaceTrivia =
             modifiedInvocationExpression
                .GetLeadingTrivia()
-               .Last(syntaxTrivia => syntaxTrivia.IsKind(SyntaxKind.WhitespaceTrivia));
+               .LastOrDefault(syntaxTrivia => syntaxTrivia.IsKind(SyntaxKind.WhitespaceTrivia));
 
         var expressionStatementSyntax =
             ExpressionStatement(
@@ -85,8 +86,7 @@ public class Rsa3001Fix : CodeFixProvider
                                .WithOperatorToken(
                                     Token(
                                         TriviaList(
-                                            whitespaceTrivia,
-                                            Whitespace("   ")), // HACK: [rlittlesii: March 25, 2023] Whitespace alignment is hard!
+                                            whitespaceTrivia == default ? [Whitespace("   ")] : [whitespaceTrivia, Whitespace("   ")]), // HACK: [rlittlesii: March 25, 2023] Whitespace alignment is hard!
                                         SyntaxKind.DotToken,
                                         TriviaList())))
                        .WithArgumentList(
