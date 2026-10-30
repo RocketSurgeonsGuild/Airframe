@@ -73,7 +73,7 @@
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.NSubstitute" Version="9.0.5"/>
         <PackageVersion Include="Rocket.Surgery.Extensions.Testing.SourceGenerators" Version="9.0.5"/>
         <PackageVersion Include="Verify" Version="28.16.0"/>
-        <PackageVersion Include="Verify.DiffPlex" Version="3.1.2"/>
+        <PackageVersion Include="Verify.DiffPlex" Version="3.4.0"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.XUnit" Version="28.16.0"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
