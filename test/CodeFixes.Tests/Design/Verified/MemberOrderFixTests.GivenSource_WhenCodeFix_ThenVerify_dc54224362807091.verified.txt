@@ -20,41 +20,7 @@
         CodeActions: [
           {
             Title: Reorder members to match the layout,
-            Tags: null,
-            TextChanges: {
-              Input0.cs: [
-                {
-                  Length: 0,
-                  NewText:
-using System;
-using System.Collections.Generic;
-
-                },
-                {
-                  Length: 0,
-                  NewText:
-using static System.Math;
-
-                },
-                {
-                  Length: 74,
-                  NewText: 
-                },
-                {
-                  Length: 0,
-                  NewText:
-ublic Example()
-        {
-        }
-
-        p
-                },
-                {
-                  Length: 46,
-                  NewText: 
-                }
-              ]
-            }
+            Tags: null
           }
         ],
         Diagnostic: {

@@ -20,32 +20,7 @@
         CodeActions: [
           {
             Title: Reorder members to match the layout,
-            Tags: null,
-            TextChanges: {
-              Input0.cs: [
-                {
-                  Length: 131,
-                  NewText:
-ublic Example()
-        {
-        }
-
-        public int Property { get; set; }
-
-        public void Method()
-        {
-        }
-
-        private void Helper()
-        {
-       
-                },
-                {
-                  Length: 46,
-                  NewText: 
-                }
-              ]
-            }
+            Tags: null
           }
         ],
         Diagnostic: {
