@@ -4,15 +4,48 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 
 ## Analyzers
 
-- **RSA0XXX Nullability** — declaration-site nullability contracts the compiler's own nullable reference type analysis does not evaluate
-- **RSA1XXX Usage** — MVVM patterns and ReactiveUI best practices
-- **RSA2XXX Design** — member layout, file structure, and documentation
-- **RSA3XXX Performance** — subscription lifetime and allocation
+- [**RSA0XXX Nullability**](docs/README.md#rsa0xxx--nullability) — declaration-site nullability contracts the compiler's own nullable reference type analysis does not evaluate
+- [**RSA1XXX Usage**](docs/README.md#rsa1xxx--usage) — MVVM patterns and ReactiveUI best practices
+- [**RSA2XXX Design**](docs/README.md#rsa2xxx--design) — member layout, file structure, and documentation
+- [**RSA3XXX Performance**](docs/README.md#rsa3xxx--performance) — subscription lifetime and allocation
 
 Every rule has its own reference page — cause, how to fix, when to suppress — under
 [`docs/`](docs/README.md), styled after the [.NET compiler warning](https://github.com/dotnet/docs/blob/main/docs/csharp/language-reference/compiler-messages/cs0618.md)
 and [style rule](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0079)
 docs.
+
+## Release status
+
+All 37 current rules have shipped in the published `Rocket.Surgery.Airframe.CodeAnalysis`
+packages on NuGet.org. The [package audit](docs/releases.md) records the package contents and
+verification method. The [rule reference](docs/README.md) lists each rule's first CodeAnalysis
+package release, default severity, and detailed guidance. The release tracking files record rule
+additions, removals, and changes to category, severity, or enabled-by-default status:
+
+- [Shipped rules](../Analyzers/AnalyzerReleases.Shipped.md): 22 rules first bundled in
+  [CodeAnalysis 0.12.1](https://www.nuget.org/packages/Rocket.Surgery.Airframe.CodeAnalysis/0.12.1),
+  and 15 added in [0.12.2](https://www.nuget.org/packages/Rocket.Surgery.Airframe.CodeAnalysis/0.12.2).
+  The published 0.12.0 package contained no analyzer assemblies.
+- [Unshipped rules](../Analyzers/AnalyzerReleases.Unshipped.md): no new rules or tracked
+  metadata changes compared with the published 0.12.2 assembly. RSA1009 was a stale tracking
+  entry and has no implementation.
+
+The following behavior and code fix changes are **unshipped**, relative to the source commit
+recorded in the published 0.12.2 package (`131f60f4db1954157c77b2e715b8d91adf3b9f04`):
+
+- [RSA0001](docs/RSA0001.md) exempts only properties marked `[Reactive]`, rather than every
+  property on an `INotifyPropertyChanged` type.
+- [RSA0002](docs/RSA0002.md), [RSA0003](docs/RSA0003.md), and [RSA0006](docs/RSA0006.md)
+  also analyze positional record parameters.
+- [RSA1007](docs/RSA1007.md) ignores invocations that bind to non-delegate methods.
+- [RSA2009](docs/RSA2009.md) accepts co-located test tier file names such as
+  `Thing.Unit.Tests.cs` for `ThingUnitTests`.
+- [RSA2011](docs/RSA2011.md) skips members without an identifier or source location.
+- [RSA2015](docs/RSA2015.md) now offers a code fix that inserts `<inheritdoc />`.
+
+The rule pages describe the current source, including these unshipped fixes. `Info` in the
+release records corresponds to `suggestion` in `.editorconfig`; `Disabled` means the rule is
+off by default (RSA0009).
 
 ## .editorconfig options
 
@@ -76,16 +109,16 @@ Valid severities: `error` | `warning` | `suggestion` | `silent` | `none`.
 
 This package is a development dependency and does not add any runtime dependencies to your project.
 
-## Upgrading from 0.12.0 or earlier: rules that were silent now report
+## Upgrading from CodeAnalysis 0.12.0
 
-Every rule from RSA1001 to RSA3002 was previously inert. `DiagnosticAnalyzerAttribute` sat on the
-abstract base classes, and Roslyn does not inherit that attribute when it discovers analyzers, so
-the compiler loaded none of the concrete rules. RSA1007 was the only rule unaffected.
+The published CodeAnalysis 0.12.0 package contained no analyzer or code fix assemblies. Its
+manifest referenced separate analyzer and code fix packages while excluding their `Analyzers`
+and `Build` assets. It is therefore not a shipped-rule baseline for this package.
 
-That is fixed, which means **upgrading turns on rules that have never reported before**. Across the
-Airframe source tree the fix surfaces 109 RSA3002 and 6 RSA1007 diagnostics that were always true
-and never reportable. Expect a comparable jump in your own build, and expect it to break the build
-outright if you run with `TreatWarningsAsErrors`.
+**CodeAnalysis 0.12.1 is the first release that bundles discoverable analyzers and code fixes**,
+with 22 rules; 0.12.2 adds another 15. Upgrading can surface diagnostics in existing code, and
+warnings can fail the build if you run with `TreatWarningsAsErrors`. See the
+[package audit](docs/releases.md) for the verified contents of each version.
 
 To stage the adoption, set the rules you are not ready for to `none` or `suggestion` in
 `.editorconfig` and raise them as you clear them:
@@ -175,7 +208,8 @@ public int Start() =>
 
 ### RSA2013 and chop line
 
-RSA2013 reports any line past the margin. The limit comes from the `max_line_length` editorconfig
+RSA2013 reports any line whose code content exceeds the margin; trailing comments and XML
+documentation comments do not count. The limit comes from the `max_line_length` editorconfig
 key, the same key Rider and ReSharper read, so the margin the editor draws and the margin the build
 enforces are one number. **Where that key is absent, or set to `off`, the rule reports nothing**
 rather than inventing a limit.

@@ -4,7 +4,12 @@ One page per rule, in the style of the [.NET compiler warning](https://github.co
 and [style rule](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0079)
 docs: cause, rule description, how to fix, when to suppress, and the suppression syntax itself. For
 severities, `.editorconfig` defaults, and the broader guidance these pages link back to, see the
-[package README](../README.md).
+[package README](../README.md). The release column follows the
+[shipped rule history](../../Analyzers/AnalyzerReleases.Shipped.md), verified against the
+published CodeAnalysis assemblies in the [package audit](releases.md). The release column
+means the first CodeAnalysis package that bundled the rule; 0.12.0 contained no analyzer assemblies.
+See [release status](../README.md#release-status) for changes since the published 0.12.2 package.
+All 37 rules below have shipped; there are no unshipped new rules.
 
 ## RSA0XXX — Nullability
 
@@ -12,63 +17,63 @@ Declaration-site nullability contracts the compiler's own nullable reference typ
 not evaluate: it verifies that flow matches an annotation, never whether that annotation is itself
 a defective boundary contract.
 
-| Rule | Title | Default severity |
-|------|-------|-------------------|
-| [RSA0001](RSA0001.md) | Do not expose a plain setter on a non-nullable reference type auto-property | Info |
-| [RSA0002](RSA0002.md) | Do not return a nullable collection | Warning |
-| [RSA0003](RSA0003.md) | Do not return a nullable task | Warning |
-| [RSA0004](RSA0004.md) | Null-forgiving operator used too many times in one member | Info |
-| [RSA0005](RSA0005.md) | Do not use ?., ??, or ??= where flow analysis already proves the operand non-null | Info |
-| [RSA0006](RSA0006.md) | Do not use a nullable boolean to model three states | Info |
-| [RSA0007](RSA0007.md) | Use null instead of default for a nullable reference type | Info |
-| [RSA0008](RSA0008.md) | Do not disable or restore the nullable context in source | Warning |
-| [RSA0009](RSA0009.md) | Do not declare a nullable reference return type on an abstraction member | Info (disabled by default) |
+| Rule | Title | Default severity | Release |
+|------|-------|------------------|---------|
+| [RSA0001](RSA0001.md) | Do not expose a plain setter on a non-nullable reference type auto-property | Info | 0.12.2 |
+| [RSA0002](RSA0002.md) | Do not return a nullable collection | Warning | 0.12.2 |
+| [RSA0003](RSA0003.md) | Do not return a nullable task | Warning | 0.12.2 |
+| [RSA0004](RSA0004.md) | Null-forgiving operator used too many times in one member | Info | 0.12.2 |
+| [RSA0005](RSA0005.md) | Do not use ?., ??, or ??= where flow analysis already proves the operand non-null | Info | 0.12.2 |
+| [RSA0006](RSA0006.md) | Do not use a nullable boolean to model three states | Info | 0.12.2 |
+| [RSA0007](RSA0007.md) | Use null instead of default for a nullable reference type | Info | 0.12.2 |
+| [RSA0008](RSA0008.md) | Do not disable or restore the nullable context in source | Warning | 0.12.2 |
+| [RSA0009](RSA0009.md) | Do not declare a nullable reference return type on an abstraction member | Info (disabled by default) | 0.12.2 |
 
 ## RSA1XXX — Usage
 
 MVVM patterns and ReactiveUI best practices.
 
-| Rule | Title | Default severity |
-|------|-------|-------------------|
-| [RSA1001](RSA1001.md) | Use expression lambda overload for `InvokeCommand` | Warning |
-| [RSA1002](RSA1002.md) | Provide a well-formed lambda expression for `BindTo` | Error |
-| [RSA1003](RSA1003.md) | Use the `out` parameter overload of `ToProperty` | Error |
-| [RSA1004](RSA1004.md) | Provide a well-formed lambda expression for `WhenAnyValue` | Error |
-| [RSA1005](RSA1005.md) | Specify a scheduler for better control over execution timing | Suggestion |
-| [RSA1006](RSA1006.md) | `SubscribeOn` only supports a single use per pipeline | Suggestion |
-| [RSA1007](RSA1007.md) | Use `Invoke()` instead of parentheses for function calls | Warning |
-| [RSA1010](RSA1010.md) | Bind DynamicData changesets on the UI thread | Warning |
+| Rule | Title | Default severity | Release |
+|------|-------|------------------|---------|
+| [RSA1001](RSA1001.md) | Use expression lambda overload for `InvokeCommand` | Warning | 0.12.1 |
+| [RSA1002](RSA1002.md) | Provide a well-formed lambda expression for `BindTo` | Error | 0.12.1 |
+| [RSA1003](RSA1003.md) | Use the `out` parameter overload of `ToProperty` | Error | 0.12.1 |
+| [RSA1004](RSA1004.md) | Provide a well-formed lambda expression for `WhenAnyValue` | Error | 0.12.1 |
+| [RSA1005](RSA1005.md) | Specify a scheduler for better control over execution timing | Suggestion | 0.12.1 |
+| [RSA1006](RSA1006.md) | `SubscribeOn` only supports a single use per pipeline | Suggestion | 0.12.1 |
+| [RSA1007](RSA1007.md) | Use `Invoke()` instead of parentheses for function calls | Warning | 0.12.1 |
+| [RSA1010](RSA1010.md) | Bind DynamicData changesets on the UI thread | Warning | 0.12.2 |
 
 ## RSA2XXX — Design
 
 Member layout and file structure.
 
-| Rule | Title | Default severity |
-|------|-------|-------------------|
-| [RSA2001](RSA2001.md) | Constructors should appear before other members | Warning |
-| [RSA2002](RSA2002.md) | Private members should appear after non-private members | Warning |
-| [RSA2003](RSA2003.md) | Members should be ordered by kind | Warning |
-| [RSA2004](RSA2004.md) | Members should be ordered by access | Warning |
-| [RSA2005](RSA2005.md) | Static members should appear before instance members | Warning |
-| [RSA2006](RSA2006.md) | Constant fields should appear before non-constant fields | Warning |
-| [RSA2007](RSA2007.md) | Readonly fields should appear before mutable fields | Warning |
-| [RSA2008](RSA2008.md) | File should contain a single type | Warning |
-| [RSA2009](RSA2009.md) | File name should match the first type name | Warning |
-| [RSA2010](RSA2010.md) | Do not use regions | Warning |
-| [RSA2011](RSA2011.md) | Declare accessibility explicitly | Warning |
-| [RSA2012](RSA2012.md) | Conditional compilation should not span member declarations | Warning |
-| [RSA2013](RSA2013.md) | Line exceeds the maximum length | Warning |
-| [RSA2014](RSA2014.md) | Provide a summary for public abstractions | Warning |
-| [RSA2015](RSA2015.md) | Provide `<inheritdoc/>` on members that implement or override an abstraction | Warning |
+| Rule | Title | Default severity | Release |
+|------|-------|------------------|---------|
+| [RSA2001](RSA2001.md) | Constructors should appear before other members | Warning | 0.12.1 |
+| [RSA2002](RSA2002.md) | Private members should appear after non-private members | Warning | 0.12.1 |
+| [RSA2003](RSA2003.md) | Members should be ordered by kind | Warning | 0.12.1 |
+| [RSA2004](RSA2004.md) | Members should be ordered by access | Warning | 0.12.1 |
+| [RSA2005](RSA2005.md) | Static members should appear before instance members | Warning | 0.12.1 |
+| [RSA2006](RSA2006.md) | Constant fields should appear before non-constant fields | Warning | 0.12.1 |
+| [RSA2007](RSA2007.md) | Readonly fields should appear before mutable fields | Warning | 0.12.1 |
+| [RSA2008](RSA2008.md) | File should contain a single type | Warning | 0.12.1 |
+| [RSA2009](RSA2009.md) | File name should match the first type name | Warning | 0.12.1 |
+| [RSA2010](RSA2010.md) | Do not use regions | Warning | 0.12.1 |
+| [RSA2011](RSA2011.md) | Declare accessibility explicitly | Warning | 0.12.1 |
+| [RSA2012](RSA2012.md) | Conditional compilation should not span member declarations | Warning | 0.12.1 |
+| [RSA2013](RSA2013.md) | Line exceeds the maximum length | Warning | 0.12.1 |
+| [RSA2014](RSA2014.md) | Provide a summary for public abstractions | Warning | 0.12.2 |
+| [RSA2015](RSA2015.md) | Provide `<inheritdoc/>` on members that implement or override an abstraction | Warning | 0.12.2 |
 
 ## RSA3XXX — Performance
 
 Subscription lifetime and allocation.
 
-| Rule | Title | Default severity |
-|------|-------|-------------------|
-| [RSA3001](RSA3001.md) | Subscription not disposed | Warning |
-| [RSA3002](RSA3002.md) | Lambda expression can be made static | Warning |
-| [RSA3003](RSA3003.md) | Lambda expression captures state and allocates a closure | Suggestion |
-| [RSA3004](RSA3004.md) | Provide an explicit scheduler for AutoRefresh | Warning |
-| [RSA3005](RSA3005.md) | AutoRefresh already applied for this property | Warning |
+| Rule | Title | Default severity | Release |
+|------|-------|------------------|---------|
+| [RSA3001](RSA3001.md) | Subscription not disposed | Warning | 0.12.1 |
+| [RSA3002](RSA3002.md) | Lambda expression can be made static | Warning | 0.12.1 |
+| [RSA3003](RSA3003.md) | Lambda expression captures state and allocates a closure | Suggestion | 0.12.2 |
+| [RSA3004](RSA3004.md) | Provide an explicit scheduler for AutoRefresh | Warning | 0.12.2 |
+| [RSA3005](RSA3005.md) | AutoRefresh already applied for this property | Warning | 0.12.2 |
