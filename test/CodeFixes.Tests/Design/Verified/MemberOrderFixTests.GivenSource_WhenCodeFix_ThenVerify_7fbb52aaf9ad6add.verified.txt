@@ -20,25 +20,7 @@
         CodeActions: [
           {
             Title: Reorder members to match the layout,
-            Tags: null,
-            TextChanges: {
-              Input0.cs: [
-                {
-                  Length: 0,
-                  NewText:
-Creates the example.</summary>
-        public Example()
-        {
-        }
-
-        /// <summary>
-                },
-                {
-                  Length: 98,
-                  NewText: 
-                }
-              ]
-            }
+            Tags: null
           }
         ],
         Diagnostic: {

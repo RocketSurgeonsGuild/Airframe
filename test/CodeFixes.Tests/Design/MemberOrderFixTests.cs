@@ -30,7 +30,13 @@ public class MemberOrderFixTests
            .GenerateAsync();
 
         // Then
-        await Verifier.Verify(result).HashParameters().UseParameters(name).DisableRequireUniquePrefix();
+        // Roslyn can produce different edit scripts for the same fixed source. Verify the
+        // diagnostics and fixed .cs snapshot without depending on its diff algorithm.
+        await Verifier.Verify(result)
+           .IgnoreMembers("TextChanges")
+           .HashParameters()
+           .UseParameters(name)
+           .DisableRequireUniquePrefix();
     }
 
     [Theory]
