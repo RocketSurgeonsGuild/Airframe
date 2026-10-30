@@ -4,10 +4,10 @@ A set of analyzers and code fixes for common patterns found in Airframe based ap
 
 ## Analyzers
 
-- **RSA0XXX Nullability** — declaration-site nullability contracts the compiler's own nullable reference type analysis does not evaluate
-- **RSA1XXX Usage** — MVVM patterns and ReactiveUI best practices
-- **RSA2XXX Design** — member layout, file structure, and documentation
-- **RSA3XXX Performance** — subscription lifetime and allocation
+- [**RSA0XXX Nullability**](docs/README.md#rsa0xxx--nullability) — declaration-site nullability contracts the compiler's own nullable reference type analysis does not evaluate
+- [**RSA1XXX Usage**](docs/README.md#rsa1xxx--usage) — MVVM patterns and ReactiveUI best practices
+- [**RSA2XXX Design**](docs/README.md#rsa2xxx--design) — member layout, file structure, and documentation
+- [**RSA3XXX Performance**](docs/README.md#rsa3xxx--performance) — subscription lifetime and allocation
 
 Every rule has its own reference page — cause, how to fix, when to suppress — under
 [`docs/`](docs/README.md), styled after the [.NET compiler warning](https://github.com/dotnet/docs/blob/main/docs/csharp/language-reference/compiler-messages/cs0618.md)
@@ -76,16 +76,10 @@ Valid severities: `error` | `warning` | `suggestion` | `silent` | `none`.
 
 This package is a development dependency and does not add any runtime dependencies to your project.
 
-## Upgrading from 0.12.0 or earlier: rules that were silent now report
+## Adopting the analyzers
 
-Every rule from RSA1001 to RSA3002 was previously inert. `DiagnosticAnalyzerAttribute` sat on the
-abstract base classes, and Roslyn does not inherit that attribute when it discovers analyzers, so
-the compiler loaded none of the concrete rules. RSA1007 was the only rule unaffected.
-
-That is fixed, which means **upgrading turns on rules that have never reported before**. Across the
-Airframe source tree the fix surfaces 109 RSA3002 and 6 RSA1007 diagnostics that were always true
-and never reportable. Expect a comparable jump in your own build, and expect it to break the build
-outright if you run with `TreatWarningsAsErrors`.
+Enabling or upgrading the package can surface diagnostics in existing code. Warnings can fail
+the build when `TreatWarningsAsErrors` is enabled.
 
 To stage the adoption, set the rules you are not ready for to `none` or `suggestion` in
 `.editorconfig` and raise them as you clear them:
@@ -175,7 +169,8 @@ public int Start() =>
 
 ### RSA2013 and chop line
 
-RSA2013 reports any line past the margin. The limit comes from the `max_line_length` editorconfig
+RSA2013 reports any line whose code content exceeds the margin; trailing comments and XML
+documentation comments do not count. The limit comes from the `max_line_length` editorconfig
 key, the same key Rider and ReSharper read, so the margin the editor draws and the margin the build
 enforces are one number. **Where that key is absent, or set to `off`, the rule reports nothing**
 rather than inventing a limit.
