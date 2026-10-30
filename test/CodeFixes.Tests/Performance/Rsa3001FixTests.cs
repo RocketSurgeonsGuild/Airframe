@@ -82,6 +82,11 @@ public class Rsa3001FixTestData : IEnumerable<object[]>
             Incorrect,
             4
         ];
+        yield return
+        [
+            NoLeadingWhitespace,
+            1
+        ];
     }
 
     /// <inheritdoc/>
@@ -139,6 +144,9 @@ namespace Sample
         private Unit _unit;
     }
 }";
+
+    internal const string NoLeadingWhitespace = @"using System;using System.Reactive;using System.Reactive.Linq;
+namespace Sample { public class C { public C() { Observable.Return(Unit.Default).Subscribe(); } } }";
 
     internal const string Incorrect = @"
 using System;

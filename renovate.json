@@ -29,7 +29,8 @@
       "matchPackagePatterns": [
         "^DynamicData",
         "^Reactive",
-        "^System\\.Reactive"
+        "^System\\.Reactive",
+        "^Microsoft\\.Reactive\\.Testing$"
       ]
     },
     {
