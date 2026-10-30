@@ -1,6 +1,5 @@
 ; Based on published Rocket.Surgery.Airframe.CodeAnalysis packages from NuGet.org.
 ; Version 0.12.0 contained no analyzer assemblies; the first bundled rules shipped in 0.12.1.
-; See ../CodeAnalysis/docs/releases.md for the package audit.
 
 ## Release 0.12.2
 
