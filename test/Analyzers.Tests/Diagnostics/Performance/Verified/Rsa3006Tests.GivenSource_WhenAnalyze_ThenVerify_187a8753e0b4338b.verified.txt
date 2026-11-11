@@ -1,0 +1,41 @@
+﻿{
+  AnalyzerDiagnostics: {
+    Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance.Rsa3006: [
+      {
+        Id: RSA3006,
+        Title: Use Observable.Create instead of Observable.FromEvent,
+        Severity: Warning,
+        WarningLevel: 1,
+        Location: Input0.cs: (10,23)-(10,65),
+        Description: Observable.FromEvent and Observable.FromEventPattern route every subscription through an internal event producer that takes a lock, reference-counts a shared session, captures the current SynchronizationContext for adding and removing the handler, and allocates conversion delegates. Several overloads resolve the event or build the conversion delegate through reflection, which is slow and not trimming or AOT safe. An Observable.Create that adds and removes the handler directly avoids all of that.,
+        MessageFormat: '{0}' is slower than an equivalent Observable.Create; subscribe to the event directly,
+        Message: 'Observable.FromEventPattern' is slower than an equivalent Observable.Create; subscribe to the event directly,
+        Category: Performance
+      }
+    ]
+  },
+  FinalDiagnostics: [
+    {
+      Id: RSA3006,
+      Title: Use Observable.Create instead of Observable.FromEvent,
+      Severity: Warning,
+      WarningLevel: 1,
+      Location: Input0.cs: (10,23)-(10,65),
+      Description: Observable.FromEvent and Observable.FromEventPattern route every subscription through an internal event producer that takes a lock, reference-counts a shared session, captures the current SynchronizationContext for adding and removing the handler, and allocates conversion delegates. Several overloads resolve the event or build the conversion delegate through reflection, which is slow and not trimming or AOT safe. An Observable.Create that adds and removes the handler directly avoids all of that.,
+      MessageFormat: '{0}' is slower than an equivalent Observable.Create; subscribe to the event directly,
+      Message: 'Observable.FromEventPattern' is slower than an equivalent Observable.Create; subscribe to the event directly,
+      Category: Performance
+    }
+  ],
+  References: [
+    mscorlib.dll,
+    netstandard.dll,
+    System.Core.dll,
+    System.dll,
+    System.ObjectModel.dll,
+    System.Private.CoreLib.dll,
+    System.Reactive.dll,
+    System.Reactive.dll,
+    System.Runtime.dll
+  ]
+}
