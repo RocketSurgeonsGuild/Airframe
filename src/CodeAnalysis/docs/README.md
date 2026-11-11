@@ -72,3 +72,4 @@ Subscription lifetime and allocation.
 | [RSA3003](RSA3003.md) | Lambda expression captures state and allocates a closure | Suggestion |
 | [RSA3004](RSA3004.md) | Provide an explicit scheduler for AutoRefresh | Warning |
 | [RSA3005](RSA3005.md) | AutoRefresh already applied for this property | Warning |
+| [RSA3006](RSA3006.md) | Use Observable.Create instead of Observable.FromEvent | Warning |
