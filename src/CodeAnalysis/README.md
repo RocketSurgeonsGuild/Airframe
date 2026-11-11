@@ -65,6 +65,7 @@ dotnet_diagnostic.RSA3002.severity = warning      # Lambda expression can be mad
 dotnet_diagnostic.RSA3003.severity = suggestion   # Lambda expression captures state and allocates a closure
 dotnet_diagnostic.RSA3004.severity = warning      # Provide an explicit scheduler for AutoRefresh
 dotnet_diagnostic.RSA3005.severity = warning      # AutoRefresh already applied for this property
+dotnet_diagnostic.RSA3006.severity = warning      # Use Observable.Create instead of Observable.FromEvent
 
 # RSA2013's line-length margin — see "RSA2013 and chop line"
 max_line_length = 160
