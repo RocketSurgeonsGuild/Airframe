@@ -342,4 +342,14 @@ internal static class Descriptions
             Warning,
             true,
             "Applying AutoRefresh more than once for the same property within the same observable chain re-evaluates that property redundantly.");
+
+    public static readonly DiagnosticDescriptor RSA3006 =
+        new(
+            "RSA3006",
+            "Use Observable.Create instead of Observable.FromEvent",
+            "'{0}' is slower than an equivalent Observable.Create; subscribe to the event directly",
+            nameof(Performance),
+            Warning,
+            true,
+            "Observable.FromEvent and Observable.FromEventPattern route every subscription through an internal event producer that takes a lock, reference-counts a shared session, captures the current SynchronizationContext for adding and removing the handler, and allocates conversion delegates. Several overloads resolve the event or build the conversion delegate through reflection, which is slow and not trimming or AOT safe. An Observable.Create that adds and removes the handler directly avoids all of that.");
 }
