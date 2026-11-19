@@ -23,6 +23,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Include="../../.build/CleanupCommands.cs" Link="Build/CleanupCommands.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\..\src\CodeFixes\CodeFixes.csproj" />
       <ProjectReference Include="..\..\src\CodeAnalysis\CodeAnalysis.csproj" ReferenceOutputAssembly="false" />
     </ItemGroup>

@@ -58,6 +58,7 @@ dotnet_diagnostic.RSA2012.severity = warning      # Conditional compilation shou
 dotnet_diagnostic.RSA2013.severity = warning      # Line exceeds the maximum length
 dotnet_diagnostic.RSA2014.severity = warning      # Provide a summary for public abstractions
 dotnet_diagnostic.RSA2015.severity = warning      # Provide <inheritdoc/> on members that implement or override an abstraction
+dotnet_diagnostic.RSA2016.severity = warning      # Remove redundant type alias
 
 # RSA3XXX — Performance
 dotnet_diagnostic.RSA3001.severity = warning      # Subscription not disposed; consider DisposeWith
@@ -136,6 +137,7 @@ author could satisfy.
 | RSA2011 | Declare accessibility explicitly                            | SA1400              | yes      |
 | RSA2012 | Conditional compilation should not span member declarations | none                | none     |
 | RSA2013 | Line exceeds the maximum length                             | none                | yes      |
+| RSA2016 | Remove redundant type alias                                 | none                | yes      |
 
 RSA2008 accepts types that share a name, so `IListener` beside `IListener<T>` is not a violation.
 RSA2009 accepts a generic arity or a partial suffix, so `Thing{T}.cs`, ``Thing`1.cs`` and
@@ -264,6 +266,20 @@ and a `#pragma warning disable` written between two members, which RSA2012 does 
 which still starts suppressing from wherever it lands. In both cases the diagnostic stands and the
 edit is left to you. A directive pair contained within one member, or a pragma inside a member
 body, travels with that member and does not block the fix.
+
+### Redundant type aliases
+
+[RSA2016](docs/RSA2016.md) removes a same-name type alias when every reference still resolves to
+the same type without the directive. For example, with `using Example.Model;` in scope,
+`using Item = Example.Model.Item;` is redundant if all uses of `Item` still bind to that type.
+Aliases that resolve ambiguity or give a type a different name are retained. Global aliases,
+namespace aliases, unused aliases and nullable reference type aliases are outside this rule's scope.
+
+The code fix preserves comments and supports Fix All:
+
+```bash
+dotnet format analyzers --diagnostics RSA2016
+```
 
 ### Documentation
 

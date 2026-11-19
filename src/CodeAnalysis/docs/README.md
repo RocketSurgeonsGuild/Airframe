@@ -60,6 +60,7 @@ Member layout and file structure.
 | [RSA2013](RSA2013.md) | Line exceeds the maximum length | Warning |
 | [RSA2014](RSA2014.md) | Provide a summary for public abstractions | Warning |
 | [RSA2015](RSA2015.md) | Provide `<inheritdoc/>` on members that implement or override an abstraction | Warning |
+| [RSA2016](RSA2016.md) | Remove redundant type alias | Warning |
 
 ## RSA3XXX — Performance
 
