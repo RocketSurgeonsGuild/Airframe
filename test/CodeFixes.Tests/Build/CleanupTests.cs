@@ -15,6 +15,19 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Tests.Build;
 public class CleanupTests(ITestOutputHelper output)
 {
     [Fact]
+    public void GivenFilesystemRoot_WhenResolvingPhysicalDirectory_ThenRootIsReturned()
+    {
+        // Given
+        var root = new DirectoryInfo(Path.GetPathRoot(Path.GetTempPath())!);
+
+        // When
+        var physical = PhysicalDirectory(root);
+
+        // Then
+        physical.Should().Be(root.FullName);
+    }
+
+    [Fact]
     public async Task GivenScopedCleanup_WhenVerifiedAndApplied_ThenVerificationWritesNothingAndCleanupConverges()
     {
         // Given. The path contains spaces to exercise argument handling, and a second dirty file
@@ -128,9 +141,18 @@ public class CleanupTests(ITestOutputHelper output)
 
     // The SDK resolves include filters from the physical working directory. Match that path
     // when macOS exposes its temporary directory through /var -> /private/var.
-    private static string PhysicalDirectory(DirectoryInfo directory) => directory.ResolveLinkTarget(returnFinalTarget: true) is { } target
-        ? target.FullName
-        : directory.Parent is { } parent ? Path.Combine(PhysicalDirectory(parent), directory.Name) : directory.FullName;
+    private static string PhysicalDirectory(DirectoryInfo directory)
+    {
+        // Windows cannot query link metadata for a drive root such as C:\.
+        if (directory.Parent is not { } parent)
+        {
+            return directory.FullName;
+        }
+
+        return directory.ResolveLinkTarget(returnFinalTarget: true) is { } target
+            ? target.FullName
+            : Path.Combine(PhysicalDirectory(parent), directory.Name);
+    }
 
     private async Task<(int ExitCode, string Output)> RunAsync(string directory, params string[] arguments)
     {
