@@ -18,11 +18,10 @@ using Rocket.Surgery.Nuke.DotNetCore;
 public partial class AirframeBuild : NukeBuild,
                                      ICanRestoreWithDotNetCore,
                                      ICanBuildWithDotNetCore,
-                                     ICanTestWithDotNetCore,
+                                     ICanTestWithDotNetCoreNoBuild,
                                      ICanPackWithDotNetCore,
-                                     IHaveDataCollector,
                                      ICanClean,
-                                     ICanLintStagedFiles,
+                                     ICanLint,
                                      ICanDotNetFormat,
                                      IHavePublicApis,
                                      ICanUpdateReadme,
@@ -40,7 +39,12 @@ public partial class AirframeBuild : NukeBuild,
     ///     - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///     - Microsoft VSCode           https://nuke.build/vscode
     /// </summary>
-    public static int Main() => Execute<AirframeBuild>(build => build.Default);
+    public static int Main()
+    {
+        // Keep the SDK-resolved paths; the older workaround exports empty paths to child builds.
+        Rocket.Surgery.Nuke.Extensions.DisableNet9MsBuildFix = true;
+        return Execute<AirframeBuild>(build => build.Default);
+    }
 
     public Target Default => definition => definition
        .DependsOn(Restore)
@@ -48,12 +52,13 @@ public partial class AirframeBuild : NukeBuild,
        .DependsOn(Test)
        .DependsOn(Pack);
 
-    public Target Clean => definition => definition.Inherit<ICanClean>(canClean => canClean.Clean);
-    public Target Restore => definition => definition.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.CoreRestore);
-    public Target Build => definition => definition.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.CoreBuild);
-    public Target Test => definition => definition.Inherit<ICanTestWithDotNetCore>(dotNetCore => dotNetCore.CoreTest);
-    public Target Pack => definition => definition.Inherit<ICanPackWithDotNetCore>(dotNetCore => dotNetCore.CorePack)
-       .DependsOn(Clean)
+    public Target Lint => definition => definition;
+
+    public Target Clean => definition => definition;
+    public Target Restore => definition => definition;
+    public Target Build => definition => definition;
+    public Target Test => definition => definition;
+    public Target Pack => definition => definition
        .After(Test);
 
     [Solution(GenerateProjects = true)]

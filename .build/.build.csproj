@@ -14,6 +14,7 @@
     <ItemGroup>
         <PackageReference Include="GitVersion.Tool" ExcludeAssets="All"/>
         <PackageReference Include="NuGet.CommandLine"/>
+        <PackageReference Include="NuGet.Frameworks"/>
         <PackageReference Include="Nuke.Common"/>
         <PackageReference Include="Rocket.Surgery.Nuke"/>
         <PackageReference Include="ReportGenerator"/>

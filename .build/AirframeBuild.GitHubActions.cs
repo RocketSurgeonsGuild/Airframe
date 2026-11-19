@@ -21,7 +21,8 @@ using static GitHubActionsTasks;
     NonEntryTargets =
     [
         nameof(ICIEnvironment.CIEnvironment),
-        nameof(ITriggerCodeCoverageReports.TriggerCodeCoverageReports),
+        nameof(ICanTestWithDotNetCoreNoBuild.CoreTest),
+        nameof(ITriggerCodeCoverageReports.CollectCodeCoverage),
         nameof(ITriggerCodeCoverageReports.GenerateCodeCoverageReportCobertura),
         nameof(IGenerateCodeCoverageBadges.GenerateCodeCoverageBadges),
         nameof(IGenerateCodeCoverageReport.GenerateCodeCoverageReport),
@@ -202,7 +203,7 @@ public partial class AirframeBuild
         // lifecycle target at Apple.sln instead of Airframe.sln. there is no Test step: apple has no tests.
         foreach (var target in new[] { nameof(Restore), nameof(Build), nameof(Pack) })
         {
-            job.Steps.Add(new RunStep(target) { Run = $"dotnet nuke {target} --skip --solution {AppleSolution}" });
+            job.Steps.Add(new RunStep(target) { Run = $"dotnet nuke DotnetCore{target} {target} --skip --solution {AppleSolution}" });
         }
 
         job.Steps.Add(
