@@ -1,21 +1,15 @@
-using DynamicData;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using ReactiveUI;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Rocket.Surgery.Airframe.Analyzers;
 using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 using Rocket.Surgery.Airframe.CodeFixes.Performance;
 using Rocket.Surgery.Extensions.Testing.SourceGenerators;
-using Splat;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Reactive;
-using System.Reactive.Disposables;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using VerifyXunit;
 
 namespace Rocket.Surgery.Airframe.CodeFixes.Tests.Performance;
 
@@ -45,32 +39,31 @@ public class Rsa3002FixTests
            .Contain(testResult => testResult.Diagnostic.Descriptor == Descriptions.RSA3002);
     }
 
-    [Theory(Skip = "Verify output seems odd.")]
-    [InlineData(nameof(Rsa3002FixTestData.Incorrect), Rsa3002FixTestData.Incorrect)]
-    [InlineData(nameof(Rsa3002FixTestData.ExtraIncorrect), Rsa3002FixTestData.ExtraIncorrect)]
-    public async Task GivenSource_WhenCodeFix_ThenVerify(string name, string source)
+    [Theory]
+    [ClassData(typeof(Rsa3002FixTestData))]
+    public async Task GivenReactiveSource_WhenFixAllRuns_ThenFunctionsCompileAndConverge(string source, int diagnosticCount)
     {
-        // Given, When
-        var result = await GeneratorTestContextBuilder
-           .Create()
-           .WithAnalyzer<Rsa3002>()
-           .WithCodeFix<Rsa3002Fix>()
-           .AddSources(source)
-           .WithDiagnosticSeverity(DiagnosticSeverity.Error)
-           .AddReferences(
-                typeof(Unit),
-                typeof(ICommand),
-                typeof(ReactiveCommand),
-                typeof(IObservableCache<int, string>),
-                typeof(BindingList<int>),
-                typeof(IEnableLogger),
-                typeof(Expression<>),
-                typeof(CompositeDisposable))
-           .GenerateAsync();
+        // Given
+        using var workspace = new AdhocWorkspace();
+        var document = Rsa3002WorkspaceTests.CreateDocument(workspace, source);
+        var diagnostics = await Rsa3002WorkspaceTests.DiagnosticsAsync(document);
+        diagnostics.Should().HaveCount(diagnosticCount);
+        await Rsa3002WorkspaceTests.AssertCompilesAsync(document);
+
+        // When
+        var changed = await Rsa3002WorkspaceTests.FixAllAsync(document, FixAllScope.Document);
 
         // Then
-        await Verifier.Verify(result).HashParameters().UseParameters(name).DisableRequireUniquePrefix();
+        (await Rsa3002WorkspaceTests.DiagnosticsAsync(changed)).Should().BeEmpty();
+        await Rsa3002WorkspaceTests.AssertCompilesAsync(changed);
+        var originalRoot = (await document.GetSyntaxRootAsync())!;
+        var changedRoot = (await changed.GetSyntaxRootAsync())!;
+        changedRoot.DescendantTokens().Where(token => !token.IsKind(SyntaxKind.StaticKeyword))
+           .Select(token => (token.RawKind, token.Text)).Should()
+           .Equal(originalRoot.DescendantTokens().Where(token => !token.IsKind(SyntaxKind.StaticKeyword))
+               .Select(token => (token.RawKind, token.Text)));
     }
+
 }
 
 public class Rsa3002FixTestData : IEnumerable<object[]>
