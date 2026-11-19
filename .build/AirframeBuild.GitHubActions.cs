@@ -38,8 +38,8 @@ public partial class AirframeBuild
 {
     /// <summary>
     ///     The default pipeline. Deliberately does not depend on <see cref="Workloads" />: every project in
-    ///     <c>Airframe.sln</c> is netstandard2.0 or net9.0, so this leg needs no workload installed. The only
-    ///     project that does — <c>src/Apple</c>, which is net9.0-ios — lives in <c>Apple.sln</c> and is built
+    ///     <c>Airframe.sln</c> is netstandard2.0 or net11.0, so this leg needs no workload installed. The only
+    ///     project that does — <c>src/Apple</c>, which is net11.0-ios — lives in <c>Apple.sln</c> and is built
     ///     by the <c>build-apple</c> job instead.
     /// </summary>
     public Target GitHubActions => definition => definition
@@ -77,9 +77,9 @@ public partial class AirframeBuild
                 {
                     Run = "git fetch --prune"
                 },
-                new SetupDotNetStep("Use .NET 8 SDK")
+                new SetupDotNetStep("Use .NET 11 SDK")
                 {
-                    DotNetVersion = "8.0.427"
+                    DotNetVersion = "11.0.100"
                 }
             }
         );
@@ -189,7 +189,7 @@ public partial class AirframeBuild
         // gitversion has to see the full history or the apple package version drifts from the rest of the suite
         job.Steps.Add(new CheckoutStep("Checkout") { FetchDepth = 0 });
         job.Steps.Add(new RunStep("Fetch all history for all tags and branches") { Run = "git fetch --prune" });
-        job.Steps.Add(new SetupDotNetStep("Use .NET 8 SDK") { DotNetVersion = "8.0.427" });
+        job.Steps.Add(new SetupDotNetStep("Use .NET 11 SDK") { DotNetVersion = "11.0.100" });
 
         // NOTE: no workload pack cache here yet. `with` is emitted as flat `key: value`, so the multi path
         // form actions/cache wants cannot be generated, and restoring into "C:\Program Files\dotnet" needs an

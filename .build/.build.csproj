@@ -2,7 +2,9 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
+        <!-- NUKE expects the invoked path to match the build assembly path. -->
+        <UseAppHost>false</UseAppHost>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <RootNamespace></RootNamespace>
         <IsPackable>False</IsPackable>

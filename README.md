@@ -1,6 +1,18 @@
 # Airframe
 A collection of abstract classes that extend ReactiveUI implementations
 
+## Requirements
+
+Build with the .NET 11 SDK selected by `global.json` (11.0.100 or a later patch in
+the 11.0.1xx feature band). Runtime packages target .NET 11; the analyzer and
+compatibility projects retain their `netstandard2.0` targets.
+
+The main solution requires no workloads. To build and pack the Apple package,
+install the .NET 11 iOS workload with `dotnet workload install ios`, then build
+`Apple.sln`. CI keeps this workload in its separate Apple job.
+
+Benchmarks use BenchmarkDotNet 0.16.0-preview.2 for .NET 11 runtime support.
+
 ## Code cleanup
 
 After restoring the repository, run `./build.sh Cleanup` to apply the selected code fixes, or
@@ -30,7 +42,7 @@ inside a file path. Use the same scope for both
 commands. After a separate restore, `--skip Restore` skips that prerequisite. Cleanup builds
 the current Airframe analyzer and code-fix assemblies and loads them only for these formatter
 processes, so RSA2016 does not depend on a previously published package. The NUKE host requires
-the .NET 8 runtime, and the SDK must support the selected project's target framework. Use the
+the .NET 11 runtime, and the SDK must support the selected project's target framework. Use the
 same SDK version locally and in CI. Existing cleanup debt is left in place until
 an explicit scoped or repository-wide `Cleanup` is requested; CI can adopt `VerifyCleanup` for
 that same scope once it is clean.

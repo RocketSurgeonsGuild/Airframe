@@ -55,10 +55,10 @@ jobs:
       - name: Fetch all history for all tags and branches
         run: |
           git fetch --prune
-      - name: 🔨 Use .NET 8 SDK
+      - name: 🔨 Use .NET 11 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.427'
+          dotnet-version: '11.0.100'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
@@ -138,10 +138,10 @@ jobs:
       - name: Fetch all history for all tags and branches
         run: |
           git fetch --prune
-      - name: 🔨 Use .NET 8 SDK
+      - name: 🔨 Use .NET 11 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.427'
+          dotnet-version: '11.0.100'
       - name: 🎁 dotnet tool restore
         run: |
           dotnet tool restore
