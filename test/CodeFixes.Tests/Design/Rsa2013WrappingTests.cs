@@ -20,10 +20,14 @@ namespace Rocket.Surgery.Airframe.CodeFixes.Tests.Design;
 public class Rsa2013WrappingTests
 {
     [Theory]
-    [InlineData(false, 60, false)]
-    [InlineData(true, 60, false)]
-    [InlineData(false, 84, true)]
-    public async Task GivenLongParameterList_WhenChopped_ThenEveryParameterHasItsOwnLine(bool partiallyWrapped, int margin, bool inlineBrace)
+    [InlineData(false, 60, false, "\n")]
+    [InlineData(true, 60, false, "\n")]
+    [InlineData(false, 84, true, "\n")]
+    [InlineData(false, 60, false, "\r\n")]
+    [InlineData(true, 60, false, "\r\n")]
+    [InlineData(false, 84, true, "\r\n")]
+    public async Task GivenLongParameterList_WhenChopped_ThenEveryParameterHasItsOwnLine(
+        bool partiallyWrapped, int margin, bool inlineBrace, string newLine)
     {
         // Given
         using var workspace = new AdhocWorkspace();
@@ -34,15 +38,15 @@ public class Rsa2013WrappingTests
                 {
                 }
             }
-            """;
+            """.ReplaceLineEndings(newLine);
         if (partiallyWrapped)
         {
-            source = source.Replace("THing(int", "THing(\n        int");
+            source = source.Replace("THing(int", "THing(" + newLine + "        int");
         }
 
         if (inlineBrace)
         {
-            source = source.Replace(")\n    {", ") {");
+            source = source.Replace(")" + newLine + "    {", ") {");
         }
 
         var document = CreateDocument(workspace, source, $"max_line_length = {margin}\n");
@@ -68,13 +72,15 @@ public class Rsa2013WrappingTests
                 {
                 }
             }
-            """);
+            """.ReplaceLineEndings(newLine));
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public async Task GivenLongArgumentList_WhenChopped_ThenEveryArgumentHasTheSameIndentation(bool partiallyWrapped)
+    [InlineData(false, "\n")]
+    [InlineData(true, "\n")]
+    [InlineData(false, "\r\n")]
+    [InlineData(true, "\r\n")]
+    public async Task GivenLongArgumentList_WhenChopped_ThenEveryArgumentHasTheSameIndentation(bool partiallyWrapped, string newLine)
     {
         // Given
         using var workspace = new AdhocWorkspace();
@@ -83,10 +89,10 @@ public class Rsa2013WrappingTests
             {
                 string Value = string.Concat("longthing", "shortThing", "bigThing", "littleThing");
             }
-            """;
+            """.ReplaceLineEndings(newLine);
         if (partiallyWrapped)
         {
-            source = source.Replace("Concat(\"", "Concat(\n        \"");
+            source = source.Replace("Concat(\"", "Concat(" + newLine + "        \"");
         }
 
         var document = CreateDocument(workspace, source);
@@ -104,7 +110,7 @@ public class Rsa2013WrappingTests
                     "bigThing",
                     "littleThing");
             }
-            """);
+            """.ReplaceLineEndings(newLine));
     }
 
     [Theory]
