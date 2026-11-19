@@ -193,6 +193,19 @@ that can carry a break:
 | Collection expression and object initializer | one element per line   |
 | Expression body                              | break after the arrow  |
 
+Additional supported constructs include fluent invocation chains, binary and conditional
+expressions, switch-expression arms, base lists, and generic constraints. Partially wrapped
+lists and nested expressions are handled too.
+
+Wrapping honors `max_line_length`, `indent_style`, `indent_size` (including `tab`), `tab_width`,
+and `end_of_line`. Without an explicit line-ending setting it preserves the document's existing
+convention. `dotnet_style_operator_placement_when_wrapping` selects `beginning_of_line` (the
+default) or `end_of_line` for binary and conditional operators. Line length retains RSA2013's
+character-count measurement; a tab counts as one character, while `tab_width` controls indentation.
+
+Existing tokens, separator comments, block comments, and directives are retained. Only lines
+reported by the analyzer are eligible for wrapping; suppressed code is not swept into Fix All.
+
 ```csharp
 public static string Combine(string first, string second, string third, string fourth)
 ```
@@ -213,10 +226,10 @@ Two things to know.
 right margin, so `dotnet format` will never shorten a line by itself. This fix is that wrapping,
 and it is why RSA2013 is worth having rather than leaving the margin to the formatter.
 
-**One chop per pass.** A line long enough to need two breaks, such as a long signature whose body
-is also long, shortens on the first pass and is reported again on the next, so repeated runs
-converge. Nothing is offered for a line whose length is a string literal or a comment, because
-there is no break to insert that would not change the text.
+**One action reaches a stable layout.** Nested and overlapping wraps are completed inside the
+fix, including Fix All through `dotnet format`. The fix stops when affected lines fit or no
+supported break remains. Unbreakable literals and identifiers can still exceed the margin;
+their text is never split or rewritten. A second formatting run makes no further wrapping changes.
 
 ### Using the ordering fix as a formatter
 

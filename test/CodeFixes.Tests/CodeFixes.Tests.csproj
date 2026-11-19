@@ -28,6 +28,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\CodeFixes\CodeFixes.csproj" />
+      <ProjectReference Include="..\..\src\CodeAnalysis\CodeAnalysis.csproj" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>
