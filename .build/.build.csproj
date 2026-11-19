@@ -2,7 +2,9 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
+        <!-- NUKE expects the invoked path to match the build assembly path. -->
+        <UseAppHost>false</UseAppHost>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <RootNamespace></RootNamespace>
         <IsPackable>False</IsPackable>
@@ -12,6 +14,7 @@
     <ItemGroup>
         <PackageReference Include="GitVersion.Tool" ExcludeAssets="All"/>
         <PackageReference Include="NuGet.CommandLine"/>
+        <PackageReference Include="NuGet.Frameworks"/>
         <PackageReference Include="Nuke.Common"/>
         <PackageReference Include="Rocket.Surgery.Nuke"/>
         <PackageReference Include="ReportGenerator"/>

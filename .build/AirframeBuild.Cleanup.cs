@@ -43,22 +43,18 @@ public partial class AirframeBuild
 
         foreach (var command in CleanupCommands.Create(project, files, verify))
         {
-            // The pinned ICanDotNetFormat exposes severity but no diagnostic-filter or verify-only
-            // hook. Reuse NUKE's formatter tool while keeping its existing lint target unchanged.
+            var arguments = new Arguments();
+            // DotNetFormat supplies "format"; quote the remaining tokens as additional arguments.
+            foreach (var argument in command.Skip(1))
+            {
+                arguments.Add("{value}", argument);
+            }
+
             DotNetTasks.DotNetFormat(settings => settings
                .SetProcessWorkingDirectory(RootDirectory)
                .SetProcessEnvironmentVariable("AirframeCleanup", "true")
                .SetProcessEnvironmentVariable("Configuration", Configuration.ToString())
-               .SetProcessArgumentConfigurator(_ =>
-                {
-                    var arguments = new Arguments();
-                    foreach (var argument in command)
-                    {
-                        arguments.Add("{value}", argument);
-                    }
-
-                    return arguments;
-                }));
+               .SetProcessAdditionalArguments(arguments.RenderForExecution()));
         }
     }
 

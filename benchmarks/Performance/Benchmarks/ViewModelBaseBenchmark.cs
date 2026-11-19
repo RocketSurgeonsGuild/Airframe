@@ -1,12 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 
 namespace Rocket.Surgery.Airframe.Performance.Benchmarks;
 
 /// <summary>
 /// View Model Benchmarks.
 /// </summary>
-[SimpleJob(RuntimeMoniker.NetCoreApp31)]
+[SimpleJob]
 [MemoryDiagnoser]
 [MarkdownExporterAttribute.GitHub]
 public class ViewModelBaseBenchmark

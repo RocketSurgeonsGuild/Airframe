@@ -7,6 +7,7 @@ apple:
   - 'src/Apple/**'
   - 'src/Core/**'
   - 'Apple.sln'
+  - 'global.json'
   - 'directory.build.props'
   - 'directory.build.targets'
   - 'directory.packages.props'

@@ -55,34 +55,34 @@ jobs:
       - name: Fetch all history for all tags and branches
         run: |
           git fetch --prune
-      - name: 🔨 Use .NET 8 SDK
+      - name: 🔨 Use .NET 11 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.427'
-      - name: 🎁 dotnet tool restore
+          dotnet-version: '11.0.100'
+      - name: ⚒️ dotnet tool restore
         run: |
           dotnet tool restore
       - name: 🎁 Restore
         id: restore
         run: |
-          dotnet nuke Restore --skip
-      - name: ⚙ Build
+          dotnet nuke --target DotnetCoreRestore Restore
+      - name: ⚙️ Build
         id: build
         run: |
-          dotnet nuke Build --skip
-      - name: 🚦 Test
+          dotnet .build/bin/Debug/.build.dll --target DotnetCoreBuild Build
+      - name: 💨 Test
         id: test
         run: |
-          dotnet nuke Test TriggerCodeCoverageReports GenerateCodeCoverageReportCobertura GenerateCodeCoverageBadges GenerateCodeCoverageSummary GenerateCodeCoverageReport --skip
+          dotnet .build/bin/Debug/.build.dll --target CoreTest Test CollectCodeCoverage GenerateCodeCoverageReportCobertura GenerateCodeCoverageBadges GenerateCodeCoverageSummary GenerateCodeCoverageReport
       - name: 📦 Pack
         id: pack
         run: |
-          dotnet nuke Pack --skip
+          dotnet .build/bin/Debug/.build.dll --target DotnetCorePack Pack --skip Build
       - name: Git Hub Actions
         id: gitHubActions
         run: |
-          dotnet nuke GitHubActions --skip
-      - name: 🐿 Publish Coverage
+          dotnet .build/bin/Debug/.build.dll --target GitHubActions --skip Restore Build Test Pack
+      - name: 🚀 Publish Coverage
         uses: codecov/codecov-action@v7.1.1
         with:
           name: 'actions-${{ matrix.os }}'
@@ -138,25 +138,25 @@ jobs:
       - name: Fetch all history for all tags and branches
         run: |
           git fetch --prune
-      - name: 🔨 Use .NET 8 SDK
+      - name: 🔨 Use .NET 11 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '8.0.427'
-      - name: 🎁 dotnet tool restore
+          dotnet-version: '11.0.100'
+      - name: ⚒️ dotnet tool restore
         run: |
           dotnet tool restore
-      - name: Workloads
+      - name: 🚒 Workloads
         run: |
           dotnet nuke Workloads --skip
       - name: 🎁 Restore
         run: |
-          dotnet nuke Restore --skip --solution Apple.sln
-      - name: ⚙ Build
+          dotnet nuke DotnetCoreRestore Restore --skip --solution Apple.sln
+      - name: ⚙️ Build
         run: |
-          dotnet nuke Build --skip --solution Apple.sln
+          dotnet nuke DotnetCoreBuild Build --skip --solution Apple.sln
       - name: 📦 Pack
         run: |
-          dotnet nuke Pack --skip --solution Apple.sln
+          dotnet nuke DotnetCorePack Pack --skip --solution Apple.sln
       - name: 🏺 Publish Apple NuGet Package
         if: always()
         uses: actions/upload-artifact@v7.0.2
