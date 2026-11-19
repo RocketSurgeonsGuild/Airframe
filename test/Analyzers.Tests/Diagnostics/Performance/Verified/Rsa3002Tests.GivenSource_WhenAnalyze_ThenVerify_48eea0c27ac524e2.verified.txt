@@ -7,7 +7,7 @@
         Severity: Warning,
         WarningLevel: 1,
         Location: Input0.cs: (14,24)-(14,41),
-        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        Description: Lambda expressions and anonymous methods that do not capture enclosing variables or instance state can be marked as static.,
         MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
         Message: Lambda expression can be made static to prevent accidental variable capture,
         Category: Performance
@@ -18,7 +18,7 @@
         Severity: Warning,
         WarningLevel: 1,
         Location: Input0.cs: (19,24)-(19,40),
-        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        Description: Lambda expressions and anonymous methods that do not capture enclosing variables or instance state can be marked as static.,
         MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
         Message: Lambda expression can be made static to prevent accidental variable capture,
         Category: Performance
@@ -29,7 +29,7 @@
         Severity: Warning,
         WarningLevel: 1,
         Location: Input0.cs: (24,24)-(24,45),
-        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        Description: Lambda expressions and anonymous methods that do not capture enclosing variables or instance state can be marked as static.,
         MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
         Message: Lambda expression can be made static to prevent accidental variable capture,
         Category: Performance
@@ -40,7 +40,7 @@
         Severity: Warning,
         WarningLevel: 1,
         Location: Input0.cs: (27,45)-(27,54),
-        Description: Lambda expressions that don't capture local variables or instance state can be marked as static.,
+        Description: Lambda expressions and anonymous methods that do not capture enclosing variables or instance state can be marked as static.,
         MessageFormat: Lambda expression can be made static to prevent accidental variable capture,
         Message: Lambda expression can be made static to prevent accidental variable capture,
         Category: Performance

@@ -47,8 +47,8 @@ public class Rsa2011FixTests
         // the two fixes must not collapse into one.
         //
         // Only the titles are asserted. When one document carries several diagnostics of the same
-        // rule the harness renders every entry's TextChanges from the first applied fix, which is
-        // the same quirk that leaves Rsa3002FixTests.GivenSource_WhenCodeFix_ThenVerify skipped.
+        // rule the harness renders every entry's TextChanges from the first applied fix. RSA3002
+        // now uses direct workspace tests to verify its edits without this harness limitation.
         // Tracked in https://github.com/RocketSurgeonsGuild/Airframe/issues/359.
         // The text each fix actually inserts is covered by the single diagnostic cases above.
         result

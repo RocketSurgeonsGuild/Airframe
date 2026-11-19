@@ -6,3 +6,5 @@
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 RSA3006 | Performance | Warning | RSA3006_ObservableFromEvent
+
+; RSA3002 now covers anonymous methods and checks captures in the function being changed.
