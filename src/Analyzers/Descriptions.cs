@@ -294,6 +294,16 @@ internal static class Descriptions
         isEnabledByDefault: true,
         description: "A member that implements an interface member or overrides an abstract member restates a contract documented once at its source, so it points back there with <inheritdoc/> instead of duplicating or omitting the documentation.");
 
+    public static readonly DiagnosticDescriptor RSA2016 = new(
+        id: "RSA2016",
+        title: "Remove redundant type alias",
+        messageFormat: "Type alias '{0}' is redundant; remove the using directive",
+        nameof(Design),
+        defaultSeverity: Warning,
+        isEnabledByDefault: true,
+        description: "A same-name type alias is unnecessary when every reference still binds to the same type without it.",
+        helpLinkUri: "https://github.com/RocketSurgeonsGuild/Airframe/blob/main/src/CodeAnalysis/docs/RSA2016.md");
+
     public static readonly DiagnosticDescriptor RSA3001 =
         new(
             "RSA3001",
