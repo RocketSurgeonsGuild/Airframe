@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Rocket.Surgery.Airframe.Analyzers;
+using Rocket.Surgery.Airframe.Analyzers.Diagnostics.Performance;
 
 namespace Rocket.Surgery.Airframe.CodeFixes.Performance;
 
@@ -27,7 +28,8 @@ public class Rsa3002Fix : CodeFixProvider
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-        if (root == null)
+        var model = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+        if (root == null || model == null)
         {
             return;
         }
@@ -36,8 +38,9 @@ public class Rsa3002Fix : CodeFixProvider
         var diagnosticSpan = diagnostic.Location.SourceSpan;
 
         var token = root.FindToken(diagnosticSpan.Start);
-        var lambda = token.Parent?.AncestorsAndSelf().OfType<LambdaExpressionSyntax>().FirstOrDefault();
-        if (lambda == null)
+        var function = token.Parent?.AncestorsAndSelf().OfType<AnonymousFunctionExpressionSyntax>().FirstOrDefault();
+        if (function == null || function.Span != diagnosticSpan
+            || !StaticAnonymousFunctions.CanMakeStatic(model, function, context.CancellationToken))
         {
             return;
         }
@@ -45,17 +48,20 @@ public class Rsa3002Fix : CodeFixProvider
         context.RegisterCodeFix(
             CodeAction.Create(
                 title: Title,
-                createChangedDocument: c => MakeLambdaStaticAsync(context.Document, lambda, c),
+                createChangedDocument: c => MakeFunctionStaticAsync(context.Document, function, c),
                 equivalenceKey: Title),
             diagnostic);
     }
 
-    private static async Task<Document> MakeLambdaStaticAsync(Document document, LambdaExpressionSyntax lambda, CancellationToken cancellationToken)
+    private static async Task<Document> MakeFunctionStaticAsync(Document document, AnonymousFunctionExpressionSyntax function, CancellationToken cancellationToken)
     {
-        var staticKeyword = Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(Space);
+        var first = function.GetFirstToken();
+        var leading = first.LeadingTrivia;
+        var stripped = function.ReplaceToken(first, first.WithLeadingTrivia(TriviaList()));
+        var staticKeyword = Token(leading, SyntaxKind.StaticKeyword, TriviaList(Space));
 
-        var newModifiers = lambda.Modifiers.Add(staticKeyword);
-        var newLambda = lambda.WithModifiers(newModifiers)
+        var newModifiers = stripped.Modifiers.Insert(0, staticKeyword);
+        var newFunction = stripped.WithModifiers(newModifiers)
            .WithAdditionalAnnotations(Formatter.Annotation);
 
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -64,7 +70,7 @@ public class Rsa3002Fix : CodeFixProvider
             return document;
         }
 
-        var newRoot = root.ReplaceNode(lambda, newLambda);
+        var newRoot = root.ReplaceNode(function, newFunction);
         return document.WithSyntaxRoot(newRoot);
     }
 

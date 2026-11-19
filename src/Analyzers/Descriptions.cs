@@ -321,7 +321,7 @@ internal static class Descriptions
             nameof(Performance),
             Warning,
             true,
-            "Lambda expressions that don't capture local variables or instance state can be marked as static.");
+            "Lambda expressions and anonymous methods that do not capture enclosing variables or instance state can be marked as static.");
 
     public static readonly DiagnosticDescriptor RSA3003 =
         new(
