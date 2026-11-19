@@ -10,6 +10,17 @@
           "type": "string",
           "description": "The directory where artifacts are to be dropped"
         },
+        "CleanupFiles": {
+          "type": "array",
+          "description": "Semicolon-separated C# files relative to the repository root; defaults to every source file",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CleanupProject": {
+          "type": "string",
+          "description": "Project or solution for cleanup; defaults to the selected solution"
+        },
         "Configuration": {
           "type": "string",
           "description": "Configuration to build",
@@ -88,7 +99,9 @@
             "type": "string",
             "enum": [
               "Build",
+              "BuildCleanupAnalyzers",
               "Clean",
+              "Cleanup",
               "CoreBuild",
               "CorePack",
               "CoreRestore",
@@ -115,6 +128,7 @@
               "ShipPublicApis",
               "Test",
               "TriggerCodeCoverageReports",
+              "VerifyCleanup",
               "Workloads"
             ]
           }
@@ -130,7 +144,9 @@
             "type": "string",
             "enum": [
               "Build",
+              "BuildCleanupAnalyzers",
               "Clean",
+              "Cleanup",
               "CoreBuild",
               "CorePack",
               "CoreRestore",
@@ -157,6 +173,7 @@
               "ShipPublicApis",
               "Test",
               "TriggerCodeCoverageReports",
+              "VerifyCleanup",
               "Workloads"
             ]
           }
