@@ -27,6 +27,12 @@ max_line_length=160
 dotnet_separate_import_directive_groups=false
 dotnet_sort_system_directives_first=true
 
+# Explicit cleanup includes these native rules at suggestion severity.
+dotnet_diagnostic.IDE0001.severity=suggestion
+dotnet_diagnostic.IDE0002.severity=suggestion
+dotnet_diagnostic.IDE0005.severity=suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent=true:suggestion
+
 # this. and Me. preferences
 dotnet_style_qualification_for_event=false:warning
 dotnet_style_qualification_for_field=false:warning

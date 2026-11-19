@@ -1,6 +1,40 @@
 # Airframe
 A collection of abstract classes that extend ReactiveUI implementations
 
+## Code cleanup
+
+After restoring the repository, run `./build.sh Cleanup` to apply the selected code fixes, or
+`./build.sh VerifyCleanup` to check the same selection without writing source files. The verify
+target returns a nonzero exit code when cleanup is needed and is the entry point for CI.
+
+Both targets use `info` severity so the selected suggestions participate. Their shared selection
+is in `.build/CleanupCommands.cs`: simplify names and member access (IDE0001/IDE0002), remove
+unused imports (IDE0005), prefer `var` (IDE0007), use target-typed construction (IDE0090), and
+remove redundant type aliases (RSA2016). They run the native style and Airframe analyzer passes
+without a general whitespace-formatting pass or unrelated analyzer fixes. The existing NUKE
+`DotNetFormat` lint integration retains its behavior.
+The alias pass runs before unused-import cleanup so the namespace import that makes an alias
+redundant is still available when RSA2016 checks it.
+
+Scope a cleanup while adopting the profile:
+
+```sh
+./build.sh Cleanup --cleanup-project src/Core/Core.csproj --cleanup-files src/Core/Example.cs
+./build.sh VerifyCleanup --cleanup-project src/Core/Core.csproj --cleanup-files src/Core/Example.cs
+```
+
+Omit `--cleanup-files` to check every source file in the selected project/solution. Paths are
+relative to the repository root; separate multiple files with semicolons and quote the list,
+for example `--cleanup-files "src/Core/First.cs;src/Core/Second.cs"`. Quoting also preserves spaces
+inside a file path. Use the same scope for both
+commands. After a separate restore, `--skip Restore` skips that prerequisite. Cleanup builds
+the current Airframe analyzer and code-fix assemblies and loads them only for these formatter
+processes, so RSA2016 does not depend on a previously published package. The NUKE host requires
+the .NET 8 runtime, and the SDK must support the selected project's target framework. Use the
+same SDK version locally and in CI. Existing cleanup debt is left in place until
+an explicit scoped or repository-wide `Cleanup` is requested; CI can adopt `VerifyCleanup` for
+that same scope once it is clean.
+
 # Status
 <!-- badges -->
 [![github-release-badge]][github-release]
